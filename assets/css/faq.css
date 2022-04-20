@@ -1,0 +1,210 @@
+.page-banner {
+    padding-top: 95px!important;
+    padding-bottom: 95px!important;
+    background-position: center center!important;
+    background-size: cover!important;
+}
+
+.page-banner-content .breadcrumb .breadcrumb-item a {
+    color: #222222;
+}
+
+
+    h1 {
+    margin: 0 0 20px 0;
+    font-family: "OpenSans-ExtraBold", sans-serif;
+    font-weight: 800;
+    color: #0f0f0f;
+    text-transform: none;
+    letter-spacing: 2px;
+    font-size: 80px;
+}
+
+hr {
+
+    border-top: 2px solid #F9D744;
+    width: 70%;
+}
+
+.accordion {
+    width: 100%;
+}
+
+.accordion-button:not(.collapsed) {
+    color: #2A3151;
+    background-color: #FEFBEB;
+    box-shadow: inset 0 -1px 0 rgb(0 0 0 / 13%);
+}
+
+
+.row {
+    padding: 20px;
+}
+
+.section-header {
+    text-align: center;
+}
+
+--------------------------------------
+
+body {
+    background-color: blue
+}
+
+.card {
+    border: none;
+    background: #eee
+}
+
+/*.search {
+    width: 100%;
+    margin-bottom: auto;
+    margin-top: 20px;
+    height: 50px;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px
+}
+
+.search-input {
+    color: white;
+    border: 0;
+    outline: 0;
+    background: none;
+    width: 0;
+    margin-top: 5px;
+    caret-color: transparent;
+    line-height: 20px;
+    transition: width 0.4s linear
+}
+
+.search .search-input {
+    padding: 0 10px;
+    width: 100%;
+    caret-color: #536bf6;
+    font-size: 19px;
+    font-weight: 300;
+    color: black;
+    transition: width 0.4s linear
+}
+
+.search-icon {
+    height: 34px;
+    width: 34px;
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: #536bf6;
+    font-size: 10px;
+    bottom: 30px;
+    position: relative;
+    border-radius: 5px
+}
+
+.search-icon:hover {
+    color: #fff !important
+}*/
+
+a:link {
+    text-decoration: none
+}
+
+.card-inner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, .125);
+    border-radius: .25rem;
+    border: none;
+    cursor: pointer;
+    transition: all 2s
+}
+
+.card-inner:hover {
+    transform: scale(1.1)
+}
+
+.mg-text span {
+    font-size: 14px
+}
+
+.mg-text {
+    line-height: 18px
+}
+
+-----------------------------
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:weight@100;200;300;400;500;600;700;800&display=swap");
+
+body {
+    background-color: #eee;
+    font-family: "Poppins", sans-serif;
+    font-weight: 300
+}
+
+/*.height {
+    height: 100vh
+}*/
+
+.search {
+    position: relative;
+    box-shadow: 0 0 40px rgba(51, 51, 51, .1)
+}
+
+.search input {
+    height: 50px;
+    text-indent: 25px;
+    border: 2px solid #d6d4d4
+}
+
+.search input:focus {
+    box-shadow: none;
+    border: 2px solid #2A3151
+}
+
+.search .fa-search {
+    position: absolute;
+    top: 20px;
+    left: 16px
+}
+
+.search button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    height: 40px;
+    width: 110px;
+    background: #2A3151;
+    border: 2px solid #2A3151
+    
+
+}
+
+.search button:hover {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    height: 40px;
+    width: 110px;
+    background: #F9D744;
+    color: black;
+    border: 2px solid #F9D744
+}
+
+---------------------------------------
+.page-banner {
+    padding-top: 95px;
+    padding-bottom: 95px;
+    background-position: center center;
+    background-size: cover;
+}
+
+.page-banner-content .breadcrumb .breadcrumb-item a {
+    color: #222222;
+}

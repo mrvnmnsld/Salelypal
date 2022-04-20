@@ -1,0 +1,35 @@
+{
+  "name": "smsglobal/smsglobal-php",
+  "description": "SMSGlobal PHP Client Library",
+  "type": "library",
+  "keywords": ["smsglobal", "restapi", "rest", "api", "php", "sms", "sdk", "library"],
+  "homepage": "https://www.smsglobal.com/developers/?utm_source=dev&utm_medium=packagist&utm_campaign=php_sdk",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Sahil Saggar"
+    },
+    {
+      "name": "SMSGlobal Dev Team",
+      "email": "developers@smsglobal.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.3",
+    "guzzlehttp/guzzle": "^7.2"
+  },
+  "require-dev": {
+    "phpunit/phpunit": ">=8.0",
+    "php-http/guzzle7-adapter": "^0.1.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "SMSGlobal\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "SMSGlobal\\Tests\\": "tests/"
+    }
+  }
+}

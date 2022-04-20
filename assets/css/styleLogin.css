@@ -1,0 +1,23 @@
+.btn-login {
+	width: 100%;
+	background: #57838d !important;
+	color: #ffffff !important;
+}
+.resetp-text {
+	text-align: center !important;
+	border: 1px solid red !important;
+	width: 100%;
+}
+.animate > img {
+	margin-top: 50px !important;
+	height: 140px !important;
+}
+.reset_pass {
+	float: none !important;
+	text-align: center !important;
+	cursor: pointer !important;
+}
+
+#forgotPass {
+	display: none;
+}

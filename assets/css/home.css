@@ -1,0 +1,73 @@
+
+.menu-icon .cart li {
+
+	
+	border-radius: 8px;
+	border: 1px solid black;
+
+	background: linear-gradient(to right, #ffff99 9%, #ffffcc 69%);
+	padding: 8px 5px 8px 5px;
+		text-align: center;
+}
+
+.menu-icon .cart li:hover {
+  background: linear-gradient(to right, #ffffff 9%, #ffff99 69%);
+  color: black;
+}
+
+.menu-icon .cart li a{
+
+
+	/*border: 2px solid green;*/
+	/*text-align: center;*/
+	padding: 0;
+
+
+}
+
+.menu-icon .cart li b{
+
+
+	/*border: 2px solid red;*/
+	text-align: center;
+
+
+}
+
+#logo img {
+
+	position: relative;
+	/*border: 2px solid black;*/
+	width: 100%;
+	height: 100px;
+	/*margin-top: .5px;*/
+	/*padding-top: 6px;*/
+}
+
+.product-views .carousel-item .item img {
+
+		display: block;
+    width: 100%;
+    border-top-right-radius: 240px;
+    border-bottom-left-radius: 240px;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+
+#testimonial-section .entry-summary h3{
+    color: white;
+    font-size: 30px;
+    font-family: 'Raleway-Regular', sans-serif;
+    letter-spacing: 1px;
+    line-height: 35px;
+    margin-bottom: 17px;
+    margin-top: 22px;
+    text-transform: uppercase;
+}
+
+#testimonial-section .entry-summary p{
+    color: white;
+
+}
+
+
