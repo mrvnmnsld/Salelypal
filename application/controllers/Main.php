@@ -613,8 +613,8 @@ class main extends MY_Controller {
 			$this->_getRecordsData($selectfields = array("*"), 
 			$tables = array('notif_center'), 
 			$fieldName = array('userID','isViewed'),  $where = array($userID,0), 
-			$join = null, $joinType = null, $sortBy = null, 
-			$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+			$join = null, $joinType = null, $sortBy = array('id'), 
+			$sortOrder = array('desc'), $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
 		);
 
 		foreach ($notif as $key => $value) {

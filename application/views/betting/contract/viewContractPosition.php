@@ -97,28 +97,37 @@
 
 	<div class="d-flex flex-row-reverse">
 		<button class="btn btn-danger ml-2 closeBtn">Close</button>
-		<button class="btn btn-success ml-2" id="set_lose_btn" disabled>Set Lose</button>
-		<button class="btn btn-success" id="set_win_btn" disabled>Set Win</button>
+		<button class="btn btn-success ml-2" id="resolve_position_btn" disabled>Resolve Position</button>
 	</div>
 </div>
 
 <div id="price_set_container" style="display:none">
 	<form id="resolveForm" class="form-group">
-		<label>Please Indicate Resolved Price</label>
-		<input type="number" class="form-control form-control-sm" id="resolvedPrice_input" required>
+		<div class="form-group">
+			<label>Please Set Status</label>
+			<select class="form-control form-control-sm" id="status_input" name="status_input">
+				<option>WIN</option>
+				<option>LOSE</option>
+			</select>
+		</div>
+
+		<div class="form-group">
+			<label>Please Indicate Resolved Price</label>
+			<input type="number" class="form-control form-control-sm" id="resolvedPrice_input" name="resolvedPrice_input">
+		</div>
+
 		<div id="errorReporter" class="error"></div>
+
+		<div>
+			<b>Risk Price: </b><span id="riskPrice_container_2nd"></span><br>
+			<b>Current Price: </b><span id="currentPrice_container_2nd"></span>
+		</div>
+
+		<div class="float-right">
+			<button type="submit"	class="btn btn-success" id="confirm_btn">Confirm</button>
+			<button type="button" class="btn btn-danger back_btn">Back</button>
+		</div>
 	</form>
-
-	
-	<div>
-		Risk Price: <span id="riskPrice_container_2nd"></span><br>
-		Current Price: <span id="currentPrice_container_2nd"></span>
-	</div>
-
-	<div class="float-right">
-		<button class="btn btn-success" id="confirm_btn">Confirm</button>
-		<button class="btn btn-danger back_btn">Back</button>
-	</div>
 </div>
 
 <script type="text/javascript">
@@ -138,8 +147,7 @@
 		$("#dateCreated_container").text(selectedData["dateCreated"]);
 
 		if (selectedData["status"]=="PENDING") {
-			$("#set_win_btn").removeAttr('disabled');
-			$("#set_lose_btn").removeAttr('disabled');
+			$("#resolve_position_btn").removeAttr('disabled');
 		}
 	// init text setting
 
@@ -154,43 +162,31 @@
 			$("#price_set_container").toggle();
 		});
 
-		$("#set_win_btn").on('click', function(){
-			$("#errorReporter").text("");
-			var currentPriceInner = parseFloat(selectedData.currentPrice);
+		$("#resolve_position_btn").on('click', function(){
 			$("#main_modal_container").toggle();
 			$("#price_set_container").toggle();
+			$('#currentPrice_container_2nd').text(parseFloat(selectedData.currentPrice));
+			$('#buyType_container_2nd').text(selectedData.buyType);
 
-			$('#resolvedPrice_input').attr("readonly",'readonly')
-			$('#resolvedPrice_input').val(selectedData.riskPrice)
-
-			$('#riskPrice_container_2nd').text(selectedData.riskPrice)
-			$('#currentPrice_container_2nd').text(currentPriceInner);
-			statusSet = "WIN";
+			$("#status_input").val("WIN").change();
 		});
+	//btn Events
 
-		$("#set_lose_btn").on('click', function(){
-			$("#errorReporter").text("");
-			var currentPriceInner = parseFloat(selectedData.currentPrice);
-			$("#main_modal_container").toggle();
-			$("#price_set_container").toggle();
+	$("#resolveForm").validate({
+	  	errorClass: 'error',
+	  	rules: {
+				status_input: "required",
+				resolvedPrice_input: "required",
+	  	},
+	  	submitHandler: function(form){
+		    var resolvedPrice = $("#resolvedPrice_input").val();
+		    var statusSet = $("#status_input").val();
+		    var newIncome = selectedData.amount*2;
 
-			$('#resolvedPrice_input').removeAttr("readonly")
-			$('#resolvedPrice_input').val(currentPriceInner)
+	    	console.log(selectedData.id,resolvedPrice,statusSet,newIncome);
 
-			$('#riskPrice_container_2nd').text(selectedData.riskPrice)
-			$('#currentPrice_container_2nd').text(currentPriceInner);
-			statusSet = "LOSE";
-		});
-
-		$("#confirm_btn").on('click', function(){
-			var resolvedPrice = $("#resolvedPrice_input").val();
-			var isValid = $("#resolveForm").valid();
-			var newIncome = selectedData.amount*2;
-
-			if (isValid) {
-				if (statusSet=="LOSE") {
+	    	if (statusSet=="LOSE") {
 					if (resolvedPrice==selectedData.riskPrice) {
-						console.log("dont resolve put error msg");
 						$("#errorReporter").text("Resolved Price can't be equal with Risk Price if set to losing");
 					}else{
 						var res = ajaxShortLink('userWallet/future/resolvePosition', {
@@ -198,6 +194,11 @@
 							'resolvedPrice':resolvedPrice,
 							'status':statusSet
 						});
+
+						var setRes = ajaxShortLink('userWallet/future/setContractPosition', {
+			    		'id':selectedData.id,
+			    		'userID':selectedData.userID,
+			    	});
 
 						loadDatatable('userWallet/future/admin/getAllContractPositions');
 						bootbox.hideAll();
@@ -210,6 +211,11 @@
 						'resolvedPrice':resolvedPrice,
 						'status':statusSet
 					});
+
+					var setRes = ajaxShortLink('userWallet/future/setContractPosition', {
+		    		'id':selectedData.id,
+		    		'userID':selectedData.userID,
+		    	});
 
 					// test-platform
 						amountUsdt = ajaxShortLink('test-platform/getTokenBalanceBySmartAddress', {
@@ -227,13 +233,29 @@
 
 					loadDatatable('userWallet/future/admin/getAllContractPositions');
 					bootbox.hideAll();
-				}
+	  		}
+		}
+	});
 
-				
+	$("#status_input").on('change', function(){
+		var statusInputValue = $(this).val();
+		var currentPriceInner = parseFloat(selectedData.currentPrice);
 
-				
-			}
+		$('#resolvedPrice_input').removeAttr("max");
+		$('#resolvedPrice_input').removeAttr("min");
 
-		});
-	//btn Events
+		if(statusInputValue == "WIN"){
+			$("#errorReporter").text("");
+			$('#resolvedPrice_input').attr("readonly",'readonly')
+			$('#resolvedPrice_input').val(selectedData.riskPrice)
+			$('#riskPrice_container_2nd').text(selectedData.riskPrice)
+			$('#currentPrice_container_2nd').text(currentPriceInner);
+		}else if(statusInputValue == "LOSE"){
+			$("#errorReporter").text("");
+			$('#resolvedPrice_input').removeAttr("readonly")
+			$('#resolvedPrice_input').val(currentPriceInner)
+			$('#riskPrice_container_2nd').text(selectedData.riskPrice)
+			$('#currentPrice_container_2nd').text(currentPriceInner);
+		}
+	});
 </script>

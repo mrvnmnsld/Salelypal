@@ -66,6 +66,13 @@
 
 	<link rel="stylesheet" type="text/css" href="assets/vendor/slick-1.8.1/slick/slick.css"/>
 	<script type="text/javascript" src="assets/vendor/slick-1.8.1/slick/slick.min.js"></script>
+
+
+	<!-- NEW -->
+
+		<script src="assets/lib/jquery.countdown-2.2.0/jquery.countdown.js"></script>
+
+	<!-- NEW -->
 					
 	
 
@@ -182,6 +189,13 @@
 				<div style="font-size:.8em">Withdraw</div>
 			</button>
 
+			<button id="buy_btn_option" class="btn" style="background-color:transparent">
+				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(0, 0, 0, 50%);padding: 5px;">
+					<i class="fa fa-usd" aria-hidden="true"></i>
+				</div>
+				<div style="font-size:.8em">Purchase</div>
+			</button>
+
 			<button id="future_btn" class="btn" style="background-color:transparent">
 				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(0, 0, 0, 50%);padding: 5px;">
 					<i class="fa fa-bar-chart" aria-hidden="true"></i>
@@ -195,14 +209,26 @@
 				</div>
 				<div style="font-size:.8em">Rise Fall</div>
 			</button>
+		</div>
 
-			<button id="buy_btn_option" class="btn" style="background-color:transparent">
+		<div id="btn_option_container_lower" class="d-flex justify-content-center mt-1">
+			<button id="regular_mining_btn" class="btn" style="background-color:transparent">
 				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(0, 0, 0, 50%);padding: 5px;">
-					<i class="fa fa-usd" aria-hidden="true"></i>
+					<img style="width:1.3em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">					
 				</div>
-				<div style="font-size:.8em">Purchase</div>
+				<div style="font-size:.8em">Regular Mining</div>
+			</button>
+
+			<button id="daily_mining_btn" class="btn" style="background-color:transparent">
+				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(0, 0, 0, 50%);padding: 5px;">
+					<img style="width:1.3em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining2.png">
+				</div>
+				<div style="font-size:.8em">Daily Mining</div>
 			</button>
 		</div>
+
+
+		
 
 		<!-- <hr style="
 		    height: 1.5px;
@@ -286,7 +312,7 @@
 			    }
 
 			    console.log(notifList);
-			}, 15000);	
+			}, 30000);	
 		//initial
 
 		// function checkValidityLocalStorageValidity(){
@@ -494,6 +520,53 @@
 				  	});
 				});
 			});
+
+			$('#regular_mining_btn').on('click',function(){
+				clearTimeout(tokenLoadTimer);
+				$("#tittle_container").text('Regular Mining');
+				$.when(closeNav()).then(function() {
+					$('#topNavBar').toggle();
+			  		$("#container").fadeOut(animtionSpeed, function() {
+					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
+				  			$("#container").empty();
+				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/regular_mining'}));
+
+				  			setTimeout(function(){
+				  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
+				  					$('#topNavBar').toggle();
+				  					$("#container").fadeIn(animtionSpeed);
+				  				});
+				  			}, 2000);
+					  		
+				    	});
+				  	});
+				});
+			});
+
+			$('#daily_mining_btn').on('click',function(){
+				clearTimeout(tokenLoadTimer);
+				$("#tittle_container").text('Daily Income Mining');
+				$.when(closeNav()).then(function() {
+					$('#topNavBar').toggle();
+			  		$("#container").fadeOut(animtionSpeed, function() {
+					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
+				  			$("#container").empty();
+				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/daily_mining'}));
+
+				  			setTimeout(function(){
+				  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
+				  					$('#topNavBar').toggle();
+				  					$("#container").fadeIn(animtionSpeed);
+				  				});
+				  			}, 2000);
+					  		
+				    	});
+				  	});
+				});
+			});
+
+			
+	
 		// buttonEvents	
 
 		function openNav(){

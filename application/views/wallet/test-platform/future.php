@@ -3,6 +3,10 @@
     table{
         overflow-x:auto;
     }
+
+    .btn-group-vertical>.btn.active, .btn-group-vertical>.btn:active, .btn-group-vertical>.btn:focus, .btn-group>.btn.active, .btn-group>.btn:active, .btn-group>.btn:focus {
+        z-index: 0;
+    }
 </style>
 <!-- 
 <div class="text-danger p-2" id="testNotes">
@@ -15,10 +19,20 @@
 </div> -->
 
 <div id="innerContainer" class="p-2">
-    <div id="token_pair_select" class="text-muted h4">
-        <!-- <i class="fa fa-list" aria-hidden="true"></i>  -->
-        <span id="token_pair_name_container">ETH/USDT</span>
+    <div>
+        <span id="token_pair_name_container" class="text-muted h5 d-none">ETH/USDT</span>
     </div>
+
+    <label>Select Trade Pair:</label><br>
+
+    <select id="token_pair_select">
+        <option>ETH/USDT</option>
+        <option selected>BTC/USDT</option>
+        <option>XRP/USDT</option>
+        <option>BNB/USDT</option>
+        <option>DOGE/USDT</option>
+        <option>TRX/USDT</option>
+    </select>
 
     <div id="changeContainer">
         <span class="h5" id="token_pair_value_container"></span>
@@ -92,6 +106,11 @@
             <span>Availble Amount:</span>
             <span id="available_amount_container">20 USDT</span>
         </div>
+
+        <div class="text-center text-success">
+            <span>Availble Gas:</span>
+            <span id="available_gas_container"></span>
+        </div>
     </small>
 
     <div class="d-flex justify-content-center mt-2">
@@ -106,6 +125,8 @@
         </button>
     </div>
 </div>
+
+<hr class="bg-dark">
 
 <div class="mt-3 headers">
     <div class="h4 text-dark text-center">Positions</div>
@@ -196,12 +217,22 @@
 <!-- TradingView Widget BEGIN -->
 <script type="text/javascript">
 
+    var pendingPositionChecker;
+    var tokenPriceInterval;
+    var tokenPriceBinanceLastPrice;
+
+    var totalAmountPending = 0;
+    var tokenPairArray = {
+        'tokenPairID':'BTCUSDT',
+        'tokenPairDescription':'BTC/USDT'
+    };
+
     //setChart
         setTimeout(function() {
             new TradingView.widget({
                 "autosize": true,
                 // "symbol": "BINANCE:ETHUSDT",
-                "symbol": "BINANCE:ETHUSDT",
+                "symbol": tokenPairArray.tokenPairID,
                 "interval": "1",
                 "timezone": Intl.DateTimeFormat().resolvedOptions().timeZone,
                 "theme": "dark",
@@ -212,13 +243,158 @@
                 "save_image": false,
                 "container_id": "tradingview"
             });
-        }, 1500);
+
+            // continuous
+                tokenPriceInterval = setInterval(function() {
+                    tokenPriceBinanceLastPrice = parseFloat(ajaxShortLinkNoParse("https://api.binance.com/api/v3/ticker/24hr?symbol="+tokenPairArray.tokenPairID).lastPrice).toFixed(2);
+                    var ethPriceBinancePriceChangePercent = parseFloat(ajaxShortLinkNoParse("https://api.binance.com/api/v3/ticker/24hr?symbol="+tokenPairArray.tokenPairID).priceChangePercent).toFixed(2);
+                    var signContainer;
+
+                    if(ethPriceBinancePriceChangePercent.includes("-")){
+                        $("#changeContainer").removeClass('text-success');
+                        $("#changeContainer").addClass('text-danger');
+                        signContainer = "";
+
+                    }else{
+                        $("#changeContainer").addClass('text-success');
+                        $("#changeContainer").removeClass('text-danger');
+                        signContainer = "+";
+                    }
+
+                    $("#token_pair_value_container").html(tokenPriceBinanceLastPrice);
+                    $("#token_pair_value_percentage_container").html(signContainer+ethPriceBinancePriceChangePercent);
+                }, 1000);
+
+                pendingPositionChecker = setInterval(function() {
+
+                    var checkSet = ajaxShortLink('userWallet/future/getFuturePositionSet',{
+                        'userID':currentUser.userID,
+                    });
+
+                    console.log(checkSet);
+
+                    if(checkSet.length>=1){
+                        var statusClass;
+                        // console.log(checkSet);
+
+                        for (var i = 0; i < checkSet.length; i++) {
+                            var futureDetails = ajaxShortLink('userWallet/future/getFuturePositionDetailsByID',{
+                                'id':checkSet[i].id
+                            })
+
+                            if(futureDetails.status == "WIN"){
+                                var newIncome = (futureDetails.amount*2).toFixed(2);
+
+                                statusClass = 'text-success';
+                                pushNewNotif("Position Won!(TESTING)","You have won "+newIncome+" USDT",15)
+
+                                $.toast({
+                                    heading: '<h6>WON!</h6>',
+                                    text: 'You have won '+newIncome+' USDT',
+                                    showHideTransition: 'slide',
+                                    icon: 'success',
+                                    position: 'bottom-center'
+                                })
+
+                                balanceUsdt = ajaxShortLink('test-platform/getTokenBalanceBySmartAddress',{
+                                    // 'trc20Address':currentUser['trc20_wallet'],
+                                    'contractaddress':'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t',
+                                })['balance'];
+
+                                $("#available_amount_container").html(parseFloat(balanceUsdt).toFixed(2)+" USDT");
+                            }else{
+                                statusClass = 'text-danger';
+                                $.toast({
+                                    heading: '<h6>LOST!</h6>',
+                                    text: 'You have lost '+futureDetails.amount+' USDT',
+                                    showHideTransition: 'slide',
+                                    icon: 'error',
+
+                                    position: 'bottom-center'
+                                })
+                            }
+            
+                            reloadPositions()
+                        }
+                    }else{
+                        positionsOpened = ajaxShortLink(
+                            "userWallet/future/getPendingPositions",
+                            {
+                                'userID':15,
+                                'status':"PENDING",
+                                'tradePair':tokenPairArray.tokenPairDescription
+                            }
+                        );
+
+                        for (var i = 0; i < positionsOpened.length; i++) {
+                            var timeNow = Date.parse(getTimeDateNonFormated());
+                            var positionOpenedTimeStamp = Date.parse(positionsOpened[i].timeStamp);
+                            var riskPrice = positionsOpened[i].riskPrice;
+
+
+                            // console.log(positionOpenedTimeStamp,timeNow);
+
+                            if(timeNow>=positionOpenedTimeStamp){
+                                var ohlcTimeStamp = ajaxShortLinkNoParse("https://api.binance.com/api/v3/klines?symbol="+tokenPairArray.tokenPairID+"&interval=1m&limit=1&startTime="+(positionOpenedTimeStamp-60000)+"&endTime="+Date.parse(getTimeDateNonFormated()));
+                                var closeTokenValue = ohlcTimeStamp[0][4];
+                                var status = '';
+                                var statusClass = "";
+                                var balanceUsdtInner = float2DecimalPoints($("#available_amount_container").text().split(' ')[0])
+
+                                if(riskPrice==closeTokenValue){
+                                    status = "WIN";
+                                    statusClass = 'text-success';
+                                    $.toast({
+                                        heading: '<h6>WON!</h6>',
+                                        text: 'You have won '+positionsOpened[i].amount+' USDT',
+                                        showHideTransition: 'slide',
+                                        icon: 'success',
+                                        position: 'bottom-center'
+                                    })
+
+                                    ajaxShortLink('test-platform/future/winPosition',{
+                                        'amountStaked':positionsOpened[i].amount,
+                                        'amountUsdt':balanceUsdtInner,
+                                    });
+
+                                    pushNewNotif("Position Won!(TESTING)","You have won "+positionsOpened[i].amount+" USDT")
+
+                                    addToAmountAvailable(parseFloat(positionsOpened[i].amount)*2)
+                                }else{
+                                    status = "LOSE";
+                                    statusClass = 'text-danger';
+                                    $.toast({
+                                        heading: '<h6>LOST!</h6>',
+                                        text: 'You have lost '+positionsOpened[i].amount+' USDT',
+                                        showHideTransition: 'slide',
+                                        icon: 'error',
+                                        position: 'bottom-center'
+                                    })
+                                }
+
+                                console.log("Remove Index #"+i,positionsOpened[i]);
+
+                                ajaxShortLink("userWallet/future/resolvePosition",{
+                                    'id':positionsOpened[i].id,
+                                    'resolvedPrice':closeTokenValue,
+                                    'status':status,
+                                });
+
+                                reloadPositions()
+                            }
+                        }
+                    }
+
+                    
+
+                    console.log("No logs")
+                }, 5000)
+            // continuous
+
+        }, 2000);
     //setChart
 
-
     var customRiskArray = [];
-    var ethPriceBinanceLastPrice;
-    var totalAmountPending = 0;
 
     //callBackEnd
         var balanceUsdt = ajaxShortLink('test-platform/getTokenBalanceBySmartAddress',{
@@ -228,288 +404,11 @@
 
         $("#available_amount_container").html(parseFloat(balanceUsdt).toFixed(2)+" USDT");
 
+        var gasSupply = getGasSupplyTestPlatform('trx');
+        $("#available_gas_container").html(parseFloat(gasSupply.amount).toFixed(2)+' '+gasSupply.gasTokenName);
 
-        var positionsOpened = ajaxShortLink(
-            "userWallet/future/getPendingPositions",
-            {
-                'userID':15
-            }
-        );
-
-        var positionsClosed = ajaxShortLink(
-            "userWallet/future/getClosedPositions",
-            {
-                'userID':15
-            }
-        );
-
-        if (positionsOpened.length>=1) {
-            $("#positions_container").empty();
-
-            for (var i = 0; i < positionsOpened.length; i++) {
-                $("#positions_container").append(
-                    '<tr>'+
-                        '<td class="font-weight-bold">'+(i+1)+'. </td>'+
-                        '<td>'+positionsOpened[i].riskPrice+' @'+positionsOpened[i].timeStamp+'</td>'+
-                        '<td>'+positionsOpened[i].amount+'</td>'+
-                        '<td>'+positionsOpened[i].positionType+'</td>'+
-                        '<td><button onclick="cancelPosition('+positionsOpened[i].id+',this,'+positionsOpened[i].amount+')" class="btn btn-danger btn-sm">X</button></td>'+
-                    '</tr>'
-                );  
-            }
-        }   
-
-        if (positionsClosed.length>=1) {
-            $("#positions_closed_container").empty();
-
-            for (var i = 0; i < positionsClosed.length; i++) {
-                if(positionsClosed[i].status=="WIN"){
-                    statusClass = 'text-success';
-                }else{
-                    statusClass = 'text-danger';
-                }
-
-                $("#positions_closed_container").append(
-                    '<tr class="'+statusClass+'">'+
-                        '<td class="">'+positionsClosed[i].riskPrice+'</td>'+
-                        '<td class="">'+positionsClosed[i].amount+'</td>'+
-                        '<td class="">'+parseFloat(positionsClosed[i].resolvedPrice).toFixed(2)+'</td>'+
-                        '<td class="">'+(positionsClosed[i].resolvedPrice-positionsClosed[i].riskPrice).toFixed(2)+'</td>'+
-                        '<td class="">'+positionsClosed[i].status+' </td>'+
-                    '</tr>'
-                );  
-            }        
-        }   
+        reloadPositions()
     //callBackEnd
-    
-    // continuous
-        const ethPriceInterval = setInterval(function() {
-            ethPriceBinanceLastPrice = parseFloat(ajaxShortLinkNoParse("https://api.binance.com/api/v3/ticker/24hr?symbol=ETHUSDT").lastPrice).toFixed(2);
-            var ethPriceBinancePriceChangePercent = parseFloat(ajaxShortLinkNoParse("https://api.binance.com/api/v3/ticker/24hr?symbol=ETHUSDT").priceChangePercent).toFixed(2);
-            var signContainer;
-
-            if(ethPriceBinancePriceChangePercent.includes("-")){
-                $("#changeContainer").removeClass('text-success');
-                $("#changeContainer").addClass('text-danger');
-                signContainer = "";
-
-            }else{
-                $("#changeContainer").addClass('text-success');
-                $("#changeContainer").removeClass('text-danger');
-                signContainer = "+";
-            }
-
-            $("#token_pair_value_container").html(ethPriceBinanceLastPrice);
-            $("#token_pair_value_percentage_container").html(signContainer+ethPriceBinancePriceChangePercent);
-        }, 1000);
-
-        const pendingPositionChecker = setInterval(function() {
-            var oldPositionsOpened = positionsOpened;
-            
-            positionsOpened = ajaxShortLink(
-                "userWallet/future/getPendingPositions",
-                {
-                    'userID':15
-                }
-            );
-
-            var changes = getChanges(positionsOpened,oldPositionsOpened,changes);
-
-            console.log(positionsOpened,oldPositionsOpened);
-
-            if(changes.length>=1){
-                var statusClass;
-                console.log(changes);
-
-                for (var i = 0; i < changes.length; i++) {
-                    var futureDetails = ajaxShortLink('userWallet/future/getFuturePositionDetailsByID',{
-                        'id':changes[i].id
-                    })
-
-                    console.log(futureDetails);
-
-                    if(futureDetails.status == "WIN"){
-                        var newIncome = (futureDetails.amount*2).toFixed(2);
-
-                        statusClass = 'text-success';
-                        pushNewNotif("Position Won!(TESTING)","You have won "+newIncome+" USDT",15)
-
-                        $.toast({
-                            heading: '<h6>WON!</h6>',
-                            text: 'You have won '+newIncome+' USDT',
-                            showHideTransition: 'slide',
-                            icon: 'success',
-                            position: 'bottom-center'
-                        })
-
-                        balanceUsdt = ajaxShortLink('test-platform/getTokenBalanceBySmartAddress',{
-                            // 'trc20Address':currentUser['trc20_wallet'],
-                            'contractaddress':'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t',
-                        })['balance'];
-
-                        $("#available_amount_container").html(parseFloat(balanceUsdt).toFixed(2)+" USDT");
-                    }else{
-                        statusClass = 'text-danger';
-                        $.toast({
-                            heading: '<h6>LOST!</h6>',
-                            text: 'You have lost '+futureDetails.amount+' USDT',
-                            showHideTransition: 'slide',
-                            icon: 'error',
-
-                            position: 'bottom-center'
-                        })
-                    }
-
-                    $("#positions_container").empty();
-
-                    console.log(positionsOpened);
-
-                    if(positionsOpened.length==0){
-                        $("#positions_container").append(
-                            '<tr class="text-center text-danger" id="no_position_flag_container">'+
-                               '<td colspan="5"><b>No positions opened</b></td>'+
-                            '</tr>'
-                        ); 
-                    }else{
-                        for (var x = 1; x < positionsOpened.length; x++) {
-                            $("#positions_container").append(
-                                '<tr>'+
-                                    '<td class="font-weight-bold">'+($('#positions_container tr').length+1)+'. </td>'+
-                                    '<td>'+positionsOpened[x].riskPrice+"@"+positionsOpened[x].timeStamp+'</td>'+
-                                    '<td>'+positionsOpened[x].amount+'</td>'+
-                                    '<td>'+positionsOpened[x].positionType+'</td>'+
-                                    '<td><button onclick="cancelPosition('+positionsOpened[x].id+',this,'+positionsOpened[x].amount+')" class="btn btn-danger btn-sm">X</button></td>'+
-                                '</tr>'
-                            );
-                        } 
-                    }
-
-                    if($("#no_history_position_flag_container").length!=0){
-                        $("#positions_closed_container").empty()
-                    }
-                    
-                    $("#positions_closed_container").prepend(
-                        '<tr class="'+statusClass+'">'+
-                            '<td class="">'+futureDetails.riskPrice+'</td>'+
-                            '<td class="">'+futureDetails.amount+'</td>'+
-                            '<td class="">'+futureDetails.resolvedPrice+'</td>'+
-                            '<td class="">'+(futureDetails.resolvedPrice-futureDetails.riskPrice).toFixed(2)+'</td>'+
-                            '<td class="">'+futureDetails.status+' </td>'+
-                        '</tr>'
-                    ); 
-                }
-            }else{
-                for (var i = 0; i < positionsOpened.length; i++) {
-                    var timeNow = Date.parse(getTimeDateNonFormated());
-                    var positionOpenedTimeStamp = Date.parse(positionsOpened[i].timeStamp);
-                    var riskPrice = positionsOpened[i].riskPrice;
-
-
-                    // console.log(positionOpenedTimeStamp,timeNow);
-
-                    if(timeNow>=positionOpenedTimeStamp){
-                        var ohlcTimeStamp = ajaxShortLinkNoParse("https://api.binance.com/api/v3/klines?symbol=ETHUSDT&interval=1m&limit=1&startTime="+(positionOpenedTimeStamp-60000)+"&endTime="+Date.parse(getTimeDateNonFormated()));
-                        var closeTokenValue = ohlcTimeStamp[0][4];
-                        var status = '';
-                        var statusClass = "";
-                        var balanceUsdtInner = float2DecimalPoints($("#available_amount_container").text().split(' ')[0])
-
-                        if(riskPrice==closeTokenValue){
-                            status = "WIN";
-                            statusClass = 'text-success';
-                            $.toast({
-                                heading: '<h6>WON!</h6>',
-                                text: 'You have won '+positionsOpened[i].amount+' USDT',
-                                showHideTransition: 'slide',
-                                icon: 'success',
-                                position: 'bottom-center'
-                            })
-
-                            ajaxShortLink('test-platform/future/winPosition',{
-                                'amountStaked':positionsOpened[i].amount,
-                                'amountUsdt':balanceUsdtInner,
-                            });
-
-                            pushNewNotif("Position Won!(TESTING)","You have won "+positionsOpened[i].amount+" USDT")
-
-                            addToAmountAvailable(parseFloat(positionsOpened[i].amount)*2)
-                        }else{
-                            status = "LOSE";
-                            statusClass = 'text-danger';
-                            $.toast({
-                                heading: '<h6>LOST!</h6>',
-                                text: 'You have lost '+positionsOpened[i].amount+' USDT',
-                                showHideTransition: 'slide',
-                                icon: 'error',
-                                position: 'bottom-center'
-                            })
-                        }
-
-                        console.log("Remove Index #"+i,positionsOpened[i]);
-
-                        ajaxShortLink("userWallet/future/resolvePosition",{
-                            'id':positionsOpened[i].id,
-                            'resolvedPrice':closeTokenValue,
-                            'status':status,
-                        });
-
-                        positionsOpened = ajaxShortLink(
-                            "userWallet/future/getPendingPositions",
-                            {
-                                'userID':15
-                            }
-                        );
-
-                        $("#positions_container").empty();
-                        if(positionsOpened.length-1==0){
-                            if ($("#positions_container tr").length == 0) {
-                                $("#positions_container").append(
-                                    '<tr class="text-center text-danger" id="no_position_flag_container">'+
-                                       '<td colspan="5"><b>No positions opened</b></td>'+
-                                    '</tr>'
-                                ); 
-                            }
-                        }else{
-                            for (var i = 0; i < positionsOpened.length; i++) {
-                                $("#positions_container").append(
-                                    '<tr>'+
-                                        '<td class="font-weight-bold">'+(i+1)+'. </td>'+
-                                        '<td>'+positionsOpened[i].riskPrice+' @'+positionsOpened[i].timeStamp+'</td>'+
-                                        '<td>'+positionsOpened[i].amount+'</td>'+
-                                        '<td>'+positionsOpened[i].positionType+'</td>'+
-                                        '<td><button onclick="cancelPosition('+positionsOpened[i].id+',this,'+positionsOpened[i].amount+')" class="btn btn-danger btn-sm">X</button></td>'+
-                                    '</tr>'
-                                );  
-                            }  
-                        }
-
-                        if ($("#positions_closed_container tr").length == 0) {
-                            $("#positions_container").append(
-                                '<tr class="text-center text-danger" id="no_history_position_flag_container">'+
-                                   '<td colspan="5"><b>No positions opened</b></td>'+
-                                '</tr>'
-                            ); 
-                        }else{
-                            $("#positions_closed_container").append(
-                                '<tr class="'+statusClass+'">'+
-                                    '<td class="">'+positionsOpened[i].riskPrice+'</td>'+
-                                    '<td class="">'+positionsOpened[i].amount+'</td>'+
-                                    '<td class="">'+closeTokenValue+'</td>'+
-                                    '<td class="">'+(closeTokenValue-positionsOpened[i].riskPrice).toFixed(2)+'</td>'+
-                                    '<td class="">'+status+' </td>'+
-                                '</tr>'
-                            );  
-                        }
-                    }
-                }
-            }
-
-            
-
-            console.log("No logs")
-        }, 5000);
-    // continuous
-            console.log("TEST")
 
     // buy
         $("#buy_short_btn").on("click", function(){
@@ -517,6 +416,7 @@
             var riskPrice = $("#risk_value_predicted_short").text();
             var timeStamp = $("#risk_timestamp_predicted").text();
             var availableAmount = float2DecimalPoints($("#available_amount_container").text().split(' ')[0])
+            var isGasEnough = 0;
 
             if($("#risk_value_predicted_short").text()=="Please select risk option"||$("#amount_input_container").val()==""){
                 $.alert("Please Select Amount and Risks first");
@@ -524,46 +424,40 @@
                 if(Date.parse(timeStamp)<=Date.parse(getTimeDateNonFormated())){
                     $.alert("Please Change your predicted time.");
                 }else{
-                    if($("#amount_input_container").val()<=availableAmount){
+                    // test-platform
+                        gasSupply = getGasSupplyTestPlatform('trx')
+
+                        if(parseFloat(gasSupply.amount) >= parseFloat(gasSupply.amount-5)){
+                            isGasEnough = 1;
+
+                            var minusGasFee = ajaxShortLink("test-platform/minusBalance",{
+                                'tokenName':'trx',
+                                'smartAddress':null,
+                                'newAmount':parseFloat(gasSupply.amount)-5,
+                            })
+
+                            gasSupply = getGasSupplyTestPlatform('trx')
+
+                            $("#available_gas_container").html(parseFloat(gasSupply.amount).toFixed(2)+' '+gasSupply.gasTokenName);
+                        }
+                    // test-platform
+
+                    if($("#amount_input_container").val()<=availableAmount&&isGasEnough==1){
                         $.confirm({
                             title: 'Buy Short?',
                             content: 'Are you sure you want to proceed with these risks?',
                             buttons: {
                                 confirm: function () {
                                     var res = ajaxShortLink("userWallet/future/savePosition",{
-                                        'currentPrice':ethPriceBinanceLastPrice,
+                                        'currentPrice':tokenPriceBinanceLastPrice,
                                         'positionType':'short',
                                         'riskPrice':riskPrice,
                                         'timeStamp':timeStamp,
                                         'amount':amount,
                                         'userID':15,
                                         'status':'PENDING',
-                                        'tradePair':$("#token_pair_name_container").text(),
+                                        'tradePair':tokenPairArray.tokenPairDescription,
                                     });
-
-                                    if($("#no_position_flag_container").length){
-                                        $("#positions_container").empty();
-
-                                        $("#positions_container").append(
-                                            '<tr>'+
-                                                '<td class="font-weight-bold">'+($('#positions_container tr').length+1)+'. </td>'+
-                                                '<td>'+riskPrice+' @'+timeStamp+'</td>'+
-                                                '<td>'+amount+'</td>'+
-                                                '<td>short</td>'+
-                                                '<td><button onclick="cancelPosition('+res+',this,'+amount+')" class="btn btn-danger btn-sm">X</button></td>'+
-                                            '</tr>'
-                                        );  
-                                    }else{
-                                        $("#positions_container").append(
-                                            '<tr>'+
-                                                '<td class="font-weight-bold">'+($('#positions_container tr').length+1)+'. </td>'+
-                                                '<td>'+riskPrice+' @'+timeStamp+'</td>'+
-                                                '<td>'+amount+'</td>'+
-                                                '<td>short</td>'+
-                                                '<td><button onclick="cancelPosition('+res+',this,'+amount+')" class="btn btn-danger btn-sm">X</button></td>'+
-                                            '</tr>'
-                                        );
-                                    }
 
                                     balanceUsdtInner = float2DecimalPoints($("#available_amount_container").text().split(' ')[0])
 
@@ -583,6 +477,8 @@
                                     })
                                     
                                     console.log(res);
+
+                                    reloadPositions()
                                 },
                                 cancel: function () {
 
@@ -590,7 +486,7 @@
                             }
                         });
                     }else{
-                        $.alert("USDT Balance is not enough");
+                        $.alert("Please Input Enough USDT to be Staked & make sure GAS(trx) is enough");
                     }
                 }
                
@@ -609,46 +505,44 @@
                 if(Date.parse(timeStamp)<=Date.parse(getTimeDateNonFormated())){
                     $.alert("Please Change your predicted time.");
                 }else{
-                    if($("#amount_input_container").val()<=availableAmount){
+                    // test-platform
+                        gasSupply = getGasSupplyTestPlatform('trx')
+
+                        if(parseFloat(gasSupply.amount) >= parseFloat(gasSupply.amount-5)){
+                            isGasEnough = 1;
+                        }
+                    // test-platform
+
+                    if($("#amount_input_container").val()<=availableAmount&&isGasEnough==1){
                         $.confirm({
                             title: 'Buy Long?',
                             content: 'Are you sure you want to proceed with these risks?',
                             buttons: {
                                 confirm: function () {
+
+                                    // test-platform
+                                        var minusGasFee = ajaxShortLink("test-platform/minusBalance",{
+                                            'tokenName':'trx',
+                                            'smartAddress':null,
+                                            'newAmount':parseFloat(gasSupply.amount)-5,
+                                        })
+
+                                        gasSupply = getGasSupplyTestPlatform('trx')
+
+                                        $("#available_gas_container").html(parseFloat(gasSupply.amount).toFixed(2)+' '+gasSupply.gasTokenName);
+                                    // test-platform
+
                                     var res = ajaxShortLink("userWallet/future/savePosition",{
-                                        'currentPrice':ethPriceBinanceLastPrice,
+                                        'currentPrice':tokenPriceBinanceLastPrice,
                                         'positionType':'long',
                                         'riskPrice':riskPrice,
                                         'timeStamp':timeStamp,
                                         'amount':amount,
                                         'userID':15,
                                         'status':'PENDING',
-                                        'tradePair':$("#token_pair_name_container").text(),
+                                        'tradePair':tokenPairArray.tokenPairDescription,
                                     });
 
-                                    if($("#no_position_flag_container").length){
-                                        $("#positions_container").empty();
-
-                                        $("#positions_container").append(
-                                            '<tr>'+
-                                                '<td class="font-weight-bold">'+($('#positions_container tr').length+1)+'. </td>'+
-                                                '<td>'+riskPrice+' @'+timeStamp+'</td>'+
-                                                '<td>'+amount+'</td>'+
-                                                '<td>long</td>'+
-                                                '<td><button onclick="cancelPosition('+res+',this,'+amount+')" class="btn btn-danger btn-sm">X</button></td>'+
-                                            '</tr>'
-                                        );  
-                                    }else{
-                                        $("#positions_container").append(
-                                            '<tr>'+
-                                                '<td class="font-weight-bold">'+($('#positions_container tr').length+1)+'. </td>'+
-                                                '<td>'+riskPrice+' @'+timeStamp+'</td>'+
-                                                '<td>'+amount+'</td>'+
-                                                '<td>long</td>'+
-                                                '<td><button onclick="cancelPosition('+res+',this,'+amount+')" class="btn btn-danger btn-sm">X</button></td>'+
-                                            '</tr>'
-                                        );  
-                                    }
 
                                     balanceUsdtInner = float2DecimalPoints($("#available_amount_container").text().split(' ')[0])
 
@@ -668,6 +562,8 @@
                                     })
 
                                     console.log(res);
+                                    reloadPositions()
+
                                 },
                                 cancel: function () {
 
@@ -675,7 +571,7 @@
                             }
                         });
                     }else{
-                        $.alert("USDT Balance is not enough");
+                        $.alert("Please Input Enough USDT to be Staked & make sure GAS(trx) is enough");
                     }
                 }  
             }
@@ -695,27 +591,82 @@
         var riskTaken = $(this).val();
 
         if(riskTaken=="1Min"){
-            var ethPriceBinance = parseFloat(ethPriceBinanceLastPrice);
+            var ethPriceBinance = parseFloat(tokenPriceBinanceLastPrice);
             var risk_timestamp_predicted = addMinutes(getTimeDateNonFormated(), 1);
 
             $("#risk_value_predicted_long").text(parseFloat(ethPriceBinance+(ethPriceBinance*0.05)).toFixed(2));
             $("#risk_value_predicted_short").text(parseFloat(ethPriceBinance-(ethPriceBinance*0.05)).toFixed(2));
             $("#risk_timestamp_predicted").text(formatDateObject(risk_timestamp_predicted).replace(/,/g, ''));
         }else if(riskTaken=="3Min"){
-            var ethPriceBinance = parseFloat(ethPriceBinanceLastPrice);
+            var ethPriceBinance = parseFloat(tokenPriceBinanceLastPrice);
             var risk_timestamp_predicted = addMinutes(getTimeDateNonFormated(), 3);
 
             $("#risk_value_predicted_long").text(parseFloat(ethPriceBinance+(ethPriceBinance*0.10)).toFixed(2));
             $("#risk_value_predicted_short").text(parseFloat(ethPriceBinance-(ethPriceBinance*0.10)).toFixed(2));
             $("#risk_timestamp_predicted").text(formatDateObject(risk_timestamp_predicted).replace(/,/g, ''));
         }else if(riskTaken=="5Min"){
-            var ethPriceBinance = parseFloat(ethPriceBinanceLastPrice);
+            var ethPriceBinance = parseFloat(tokenPriceBinanceLastPrice);
             var risk_timestamp_predicted = addMinutes(getTimeDateNonFormated(), 5);
 
             $("#risk_value_predicted_long").text(parseFloat(ethPriceBinance+(ethPriceBinance*0.15)).toFixed(2));
             $("#risk_value_predicted_short").text(parseFloat(ethPriceBinance-(ethPriceBinance*0.15)).toFixed(2));
             $("#risk_timestamp_predicted").text(formatDateObject(risk_timestamp_predicted).replace(/,/g, ''));
         }
+    });
+
+    $('#token_pair_select').selectpicker({search : true});
+
+    $('#token_pair_select').change(function(){
+        var selectedPair = $(this).val();
+        var location;
+
+        if(selectedPair=='BTC/USDT'){
+            location = 'btcusdt_contract';
+        }
+
+        if(selectedPair=='ETH/USDT'){
+            location = 'ethusdt_contract';
+        }
+
+        if(selectedPair=='XRP/USDT'){
+            location = 'xrpusdt_contract';
+        }
+
+        if(selectedPair=='BNB/USDT'){
+            location = 'bnbusdt_contract';
+        }
+
+        if(selectedPair=='DOGE/USDT'){
+            location = 'dogeusdt_contract';
+        }
+
+        if(selectedPair=='TRX/USDT'){
+            location = 'trxusdt_contract';
+        }
+
+        clearInterval(tokenPriceInterval);
+        clearInterval(pendingPositionChecker);
+
+
+        $.when(closeNav()).then(function() {
+            $('#topNavBar').toggle();
+            $("#container").fadeOut(animtionSpeed, function() {
+                $("#loadSpinner").fadeIn(animtionSpeed,function(){
+                    $("#container").empty();
+                    $("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/contract_trade_pairs/'+location}));
+
+                    console.log('wallet/test-platform/contract_trade_pairs/'+location);
+
+                    setTimeout(function(){
+                        $("#loadSpinner").fadeOut(animtionSpeed,function(){
+                            $('#topNavBar').toggle();
+                            $("#container").fadeIn(animtionSpeed);
+                        });
+                    }, 2000);
+                    
+                });
+            });
+        });
     });
 
     function cancelPosition(id,element,amount){
@@ -768,6 +719,88 @@
         // console.log(typeof newAmountAvail, newAmountAvail);
 
         $("#available_amount_container").html(newAmountAvail+" USDT");
+    }
+
+    function reloadPositions(){
+        $("#positions_container").empty();
+
+        // pendings
+            positionsOpened = ajaxShortLink(
+                "userWallet/future/getPendingPositions",
+                {
+                    'userID':15,
+                    'status':"PENDING",
+                    'tradePair':tokenPairArray.tokenPairDescription
+                }
+            );
+
+
+            console.log(positionsOpened.length,positionsOpened);
+
+            if(positionsOpened.length==0){
+                if ($("#positions_container tr").length == 0) {
+                    $("#positions_container").append(
+                        '<tr class="text-center text-danger" id="no_position_flag_container">'+
+                           '<td colspan="5"><b>No positions opened</b></td>'+
+                        '</tr>'
+                    ); 
+                }
+            }else{
+                for (var i = 0; i < positionsOpened.length; i++) {
+                    $("#positions_container").append(
+                        '<tr>'+
+                            '<td class="font-weight-bold">'+(i+1)+'. </td>'+
+                            '<td>'+positionsOpened[i].riskPrice+' @<span data-countdown="'+positionsOpened[i].timeStamp+'"></span></td>'+
+                            '<td>'+positionsOpened[i].amount+'</td>'+
+                            '<td>'+positionsOpened[i].positionType+'</td>'+
+                            '<td><button onclick="cancelPosition('+positionsOpened[i].id+',this,'+positionsOpened[i].amount+')" class="btn btn-danger btn-sm">X</button></td>'+
+                        '</tr>'
+                    );  
+                }  
+
+                $('[data-countdown]').each(function() {
+                  var $this = $(this), finalDate = $(this).data('countdown');
+                  $this.countdown(finalDate, function(event) {
+                    $this.html(event.strftime('%H:%M:%S'));
+                  });
+                });
+            }
+        // pendings
+
+        // closed
+            var positionsClosed = ajaxShortLink(
+                "userWallet/future/getClosedPositions",
+                {
+                    'userID':15,
+                    'tradePair':tokenPairArray.tokenPairDescription
+                }
+            );
+
+            if (positionsClosed.length>=1) {
+                $("#positions_closed_container").empty();
+
+                for (var i = 0; i < positionsClosed.length; i++) {
+                    if(positionsClosed[i].status=="WIN"){
+                        statusClass = 'text-success';
+                    }else{
+                        statusClass = 'text-danger';
+                    }
+
+                    $("#positions_closed_container").append(
+                        '<tr class="'+statusClass+'">'+
+                            '<td class="">'+positionsClosed[i].riskPrice+'</td>'+
+                            '<td class="">'+positionsClosed[i].amount+'</td>'+
+                            '<td class="">'+parseFloat(positionsClosed[i].resolvedPrice).toFixed(2)+'</td>'+
+                            '<td class="">'+(positionsClosed[i].resolvedPrice-positionsClosed[i].riskPrice).toFixed(2)+'</td>'+
+                            '<td class="">'+positionsClosed[i].status+' </td>'+
+                        '</tr>'
+                    );  
+                }        
+            }   
+        // closed
+
+        
+
     }
 
     

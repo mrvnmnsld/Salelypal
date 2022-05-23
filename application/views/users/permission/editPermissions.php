@@ -4,7 +4,12 @@
 	}
 </style>
 
-<h3 class="mb-3 display-4">Permission adding</h3>
+<div class="pagetitle">
+  <h1>Permission adding</h1>
+  <sub>Change Permissions for user type selected</sub>
+</div>
+
+<h3 class="mb-3 display-4"></h3>
 
 <hr>
 
@@ -12,12 +17,14 @@
 	<div class="p-2">
 		<div class="form-group">
 			<div class="col-md"><b>User Type:</b></div>	
-			<label id="userTypeContainer"></label>
+			<div class="col-md" id="userTypeContainer"></div>	
 		</div>
 
 		<div class="form-group">
 			<div class="col-md"><b>Tasks:</b></div>	
-			<small class="text-success">NOTE: TYPE | DESC | DESC CODE | PARENT - GRP Are dependents to its SYS. if sys parent is not added it will not show to the sidebar</small>
+			<div class="col-md">NOTE: TYPE | DESC | DESC CODE | PARENT - GRP Are dependents to its SYS. if sys parent is not added it will not show to the sidebar</div>
+
+			<br>
 			<select class="form-control selectpicker" multiple id="permissionContainer">
 			</select>
 	  	</div>
@@ -25,9 +32,9 @@
 
 	<hr>
 
-	<div class="row m-2">
-		<button type="button" class="ml-1 col-md btn btn-success" id="saveBtn">Save Changes</button>
-		<button type="button" class="ml-1 col-md btn btn-danger" id="closeBtn">Close</button>
+	<div class="float-right">
+		<button type="button" class="ml-1 btn btn-success" id="saveBtn">Save Changes</button>
+		<button type="button" class="ml-1 btn btn-danger" id="closeBtn">Close</button>
 	</div>
 </form>
 

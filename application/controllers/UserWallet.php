@@ -824,7 +824,16 @@ class userWallet extends MY_Controller {
 		$result = curl_exec($ch);
 		curl_close($ch);
 
-		echo $result;
+		$resultDecoded = json_decode($result);
+
+		if ($resultDecoded->ok==false) {
+			echo json_encode(array(
+				// 'gasprice'=>0.0056
+				'gasprice'=>40
+			));
+		}else{
+			echo $result;
+		}
 	}
 
 	public function getBscGasPrice(){
@@ -847,7 +856,16 @@ class userWallet extends MY_Controller {
 		$result = curl_exec($ch);
 		curl_close($ch);
 
-		echo $result;
+		$resultDecoded = json_decode($result);
+
+		if ($resultDecoded->ok==false) {
+			echo json_encode(array(
+				// 'gasprice'=>0.0010
+				'gasprice'=>7.385
+			));
+		}else{
+			echo $result;
+		}
 	}
 
 	public function getErc20Transactions(){
@@ -1155,7 +1173,7 @@ class userWallet extends MY_Controller {
 		$res = $this->_getRecordsData(
 			$selectfields = array("*"), 
 	   		$tables = array('future_positions'),
-	   		$fieldName = array('userID','status'), $where = array($_GET['userID'],'PENDING'), 
+	   		$fieldName = array('userID','status','tradePair'), $where = array($_GET['userID'],'PENDING',$_GET['tradePair']), 
 	   		$join = null, $joinType = null,
 	   		$sortBy = null, $sortOrder = null, 
 	   		$limit = null, 
@@ -1194,7 +1212,7 @@ class userWallet extends MY_Controller {
 		$res = $this->_getRecordsData(
 			$selectfields = array("*"), 
 	   		$tables = array('future_positions'),
-	   		$fieldName = array('userID'), $where = array($_GET['userID']), 
+	   		$fieldName = array('userID','tradePair'), $where = array($_GET['userID'],$_GET['tradePair']), 
 	   		$join = null, $joinType = null,
 	   		$sortBy = array('id'), $sortOrder = array('desc'), 
 	   		$limit = null, 
@@ -1251,7 +1269,7 @@ class userWallet extends MY_Controller {
 		$res = $this->_getRecordsData(
 			$selectfields = array("*"), 
 	   		$tables = array('future_risefall_positions'),
-	   		$fieldName = array('userID','status'), $where = array($_GET['userID'],'PENDING'), 
+	   		$fieldName = array('userID','status','tradePair'), $where = array($_GET['userID'],'PENDING',$_GET['tradePair'],), 
 	   		$join = null, $joinType = null,
 	   		$sortBy = null, $sortOrder = null, 
 	   		$limit = null, 
@@ -1300,7 +1318,7 @@ class userWallet extends MY_Controller {
 		$res = $this->_getRecordsData(
 			$selectfields = array("*"), 
 	   		$tables = array('future_risefall_positions'),
-	   		$fieldName = array('userID'), $where = array($_GET['userID']), 
+	   		$fieldName = array('userID','tradePair'), $where = array($_GET['userID'],$_GET['tradePair']), 
 	   		$join = null, $joinType = null,
 	   		$sortBy = array('id'), $sortOrder = array('desc'), 
 	   		$limit = null, 
@@ -1565,7 +1583,6 @@ class userWallet extends MY_Controller {
 	}
 
 	public function getFuturePositionDetailsByID(){
-
 		$res = $this->_getRecordsData(
 			$selectfields = array("future_positions.*,user_tbl.email"), 
 	   		$tables = array('future_positions','user_tbl'),
@@ -1584,6 +1601,101 @@ class userWallet extends MY_Controller {
 
 		echo json_encode($res[0]);
 	}
+
+	public function getRiseFallPositionSet(){
+		$res = $this->_getRecordsData(
+			$selectfields = array("future_risefall_positions.*,set_risefall_position.id AS setID"), 
+	   		$tables = array('set_risefall_position','future_risefall_positions'),
+	   		$fieldName = array('set_risefall_position.userID'), 
+	   		$where = array($_GET['userID']), 
+	   		$join = array('set_risefall_position.position_id = future_risefall_positions.id'), 
+	   		$joinType = array("inner"),
+	   		$sortBy = null, 
+	   		$sortOrder = null, 
+	   		$limit = null, 
+	   		$fieldNameLike = null, 
+	   		$like = null,
+	   		$whereSpecial = null, 
+	   		$groupBy = null 
+		);
+
+		if (count($res)==0) {
+			echo json_encode(false);
+		}else{
+
+			for ($i=0; $i < count($res); $i++) { 
+				$deleteQuery = $this->_deleteRecords(
+					$tableName = "set_risefall_position",
+				 	$fieldName = array("id"),
+				  	$where = array($res[$i]->setID)
+				);
+			}
+
+			echo json_encode($res);
+		}
+	}
+
+	public function setRiseFallPosition(){
+		$insertRecord = array(
+			'position_id'=>$_GET['id'],
+			'userID'=>$_GET['userID'],
+			'dateCreated'=>$this->_getTimeStamp24Hours(),
+		);
+
+		$saveQueryNotif = $this->_insertRecords($tableName = 'set_risefall_position', $insertRecord);
+	}
+
+	public function setContractPosition(){
+		$insertRecord = array(
+			'position_id'=>$_GET['id'],
+			'userID'=>$_GET['userID'],
+			'dateCreated'=>$this->_getTimeStamp24Hours(),
+		);
+
+		$saveQueryNotif = $this->_insertRecords($tableName = 'set_contract_position', $insertRecord);
+	}
+
+	public function getFuturePositionSet(){
+		$res = $this->_getRecordsData(
+			$selectfields = array("future_positions.*,set_contract_position.id AS setID"), 
+	   		$tables = array('set_contract_position','future_positions'),
+	   		$fieldName = array('set_contract_position.userID'), 
+	   		$where = array($_GET['userID']), 
+	   		$join = array('set_contract_position.position_id = future_positions.id'), 
+	   		$joinType = array("inner"),
+	   		$sortBy = null, 
+	   		$sortOrder = null, 
+	   		$limit = null, 
+	   		$fieldNameLike = null, 
+	   		$like = null,
+	   		$whereSpecial = null, 
+	   		$groupBy = null 
+		);
+
+		if (count($res)==0) {
+			echo json_encode(false);
+		}else{
+
+			for ($i=0; $i < count($res); $i++) { 
+				$deleteQuery = $this->_deleteRecords(
+					$tableName = "set_contract_position",
+				 	$fieldName = array("id"),
+				  	$where = array($res[$i]->setID)
+				);
+			}
+
+			echo json_encode($res);
+		}
+	}
+
+
+	
+
+	
+
+	
+
+	
 
 
 

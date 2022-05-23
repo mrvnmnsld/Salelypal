@@ -64,7 +64,6 @@ $route['main/getCurrentPrice'] = 'main/getCurrentPrice';
 	$route['saveCredentialEdit'] = 'main/saveCredentialEdit';
 // Admin
 
-
 // MainWallet
 	$route['generateNewMainWallet'] = 'mainWallet/generateNewMainWallet';		
 	$route['getBalance'] = 'mainWallet/getBalance';	
@@ -170,27 +169,53 @@ $route['main/getCurrentPrice'] = 'main/getCurrentPrice';
 		$route['userWallet/riseFall/admin/getAllRiseFall'] = 'userWallet/getAllRiseFall';
 		$route['userWallet/future/getClosedRiseFallPositions'] = 'userWallet/futureGetClosedRiseFallPositions';
 		$route['userWallet/risefall/getRiseFallDetailsByID'] = 'userWallet/getRiseFallDetailsByID';
+
+		$route['userWallet/risefall/getPositionSet'] = 'userWallet/getRiseFallPositionSet';
+		$route['userWallet/future/setRiseFallPosition'] = 'userWallet/setRiseFallPosition';
 		
+		$route['userWallet/future/setContractPosition'] = 'userWallet/setContractPosition';
+		$route['userWallet/future/getFuturePositionSet'] = 'userWallet/getFuturePositionSet';
 	//riseFall
 
-	
+	//mining
+		//Regular
+			$route['getRegularMiningSettings'] = 'mining/getRegularMiningSettings';
+			$route['mining/saveNewToken'] = 'mining/saveNewToken';
+			$route['mining/saveEditToken'] = 'mining/saveEditToken';
+			$route['mining/regular/deleteToken'] = 'mining/deleteRegularToken';
 
+			$route['mining/getMyMiningEntries'] = 'mining/getMyMiningEntries';
+			$route['mining/saveMiningEntry'] = 'mining/saveMiningEntry';
+			$route['mining/claimLockTokensAndIncome'] = 'mining/claimLockTokensAndIncome';
 
-	
+			$route['mining/getAllRegularMiningEntries'] = 'mining/getAllRegularMiningEntries';		
+			$route['mining/editMiningEntry'] = 'mining/editMiningEntry';		
+		//Regular
+
+		// daily
+			$route['mining/daily/getDailySettings'] = 'mining/getDailySettings';	
+			$route['mining/daily/saveNewToken'] = 'mining/saveNewDailyToken';
+			$route['mining/daily/saveEditToken'] = 'mining/saveEditDailyToken';
+			$route['mining/daily/deleteToken'] = 'mining/deleteDailyToken';
+
+			$route['mining/daily/getDailyEntries'] = 'mining/getDailyEntries';
+			$route['mining/daily/saveMiningEntry'] = 'mining/saveDailyMiningEntry';
+			$route['mining/daily/getClaimEntriesByEntryID'] = 'mining/getClaimEntriesByEntryID';
+			$route['mining/daily/claimIncome'] = 'mining/claimDailyIncome';
+			$route['mining/daily/compoundIncome'] = 'mining/compoundDailyIncome';
+
+			$route['mining/daily/getAllDailyEntries'] = 'mining/getAllDailyEntries';
+			$route['mining/daily/editMiningEntry'] = 'mining/editDailyMiningEntry';
+		// daily
+	//mining
+
 
 	$route['userWallet/loadUserWithdrawal'] = 'userWallet/loadUserWithdrawal';
-
 	$route['userWallet/getAllSelectedTokensInfo'] = 'userWallet/getAllSelectedTokensInfo';
-
 	$route['userWallet/getPriceAlert'] = 'userWallet/getPriceAlert';
 	$route['userWallet/updatePriceAlert'] = 'userWallet/updatePriceAlert';
 	$route['userWallet/triggerPriceAlerts'] = 'userWallet/triggerPriceAlerts';
 	$route['userWallet/setTokenPriceAlerted'] = 'userWallet/setTokenPriceAlerted';
-
-	
-
-
-
 // userWallet
 
 // bitKeep
@@ -205,30 +230,28 @@ $route['getCountries'] = 'main/getCountries';
 $route['testing'] = 'main/testing';
 
 // testing platform
-		$route['test-platform'] = 'testPlatform/indexView';
-		$route['test-platform/getTronBalance'] = 'testPlatform/getTronBalance';
-		$route['test-platform/getBinancecoinBalance'] = 'testPlatform/getBinancecoinBalance';
-		$route['test-platform/getEthereumBalance'] = 'testPlatform/getEthereumBalance';
-		$route['test-platform/getTokenBalanceBySmartAddress'] = 'testPlatform/getTokenBalanceBySmartAddress';
+	$route['test-platform'] = 'testPlatform/indexView';
+	$route['test-platform/getTronBalance'] = 'testPlatform/getTronBalance';
+	$route['test-platform/getBinancecoinBalance'] = 'testPlatform/getBinancecoinBalance';
+	$route['test-platform/getEthereumBalance'] = 'testPlatform/getEthereumBalance';
+	$route['test-platform/getTokenBalanceBySmartAddress'] = 'testPlatform/getTokenBalanceBySmartAddress';
 
-		$route['test-platform/risefall/openPosition'] = 'testPlatform/riseFallOpenPosition';
-		$route['test-platform/risefall/winPosition'] = 'testPlatform/riseFallWinPosition';
+	$route['test-platform/risefall/openPosition'] = 'testPlatform/riseFallOpenPosition';
+	$route['test-platform/risefall/winPosition'] = 'testPlatform/riseFallWinPosition';
 
-		$route['test-platform/future/openPosition'] = 'testPlatform/riseFallOpenPosition';
-		$route['test-platform/future/winPosition'] = 'testPlatform/futureWinPosition';
-
-
-		$route['test-platform/getUserPurchase'] = 'testPlatform/getUserPurchase';
-		$route['test-platform/buyCrypto'] = 'testPlatform/buyCrypto';
-		
+	$route['test-platform/future/openPosition'] = 'testPlatform/riseFallOpenPosition';
+	$route['test-platform/future/winPosition'] = 'testPlatform/futureWinPosition';
 
 
-		
+	$route['test-platform/getUserPurchase'] = 'testPlatform/getUserPurchase';
+	$route['test-platform/buyCrypto'] = 'testPlatform/buyCrypto';
 
-		
+	$route['test-platform/minusBalance'] = 'testPlatform/minusBalance';
 
+	//arl_05-19-22 Router
+		$route['test-platformV2'] = 'testPlatform/indexV2View'; 
+	//arl_05-19-22
 // testing platform
-
 
 
 $route['paypal-test'] = 'main/paypaltest';

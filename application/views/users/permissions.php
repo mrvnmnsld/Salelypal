@@ -30,34 +30,45 @@
 	    border: 1px solid #ced4da;
 	    border-radius: 0.25rem;
 	}
-
 </style>
 
-<div class="text-center">
-	<div class="display-3">Admin User Type Permission</div>
-	<sub>Edit Admin Permissions</sub>
+
+<div id="innerContainer" style="display:none" class="card pt-3">
+  <div class="card-body">
+    <div class="pagetitle">
+      <h1>Admin User Type Permission</h1>
+      <sub>Edit Admin Permissions</sub>
+    </div>
+
+	<div class="d-flex">
+    	<button class="btn btn-success mb-2" id="addNewAdminType">
+    		<i class="bi bi-plus-circle-fill"></i>
+    		 Add New Admin Type
+    	</button>
+    </div>
+
+    <table id="tableContainer" class="table">
+    	<thead>
+            <tr>
+                <th></th>
+                <th>ID</th>
+                <th>User Type</th>
+                <th>Date Created</th>
+            </tr>
+        </thead>
+    </table>
 </div>
-
-<button class="btn btn-success" id="addNewAdminType">Add New Admin Type</button>
-<br>
-<br>
-
-<table id="tableContainer" class="table table-hover">
-	<thead>
-        <tr>
-            <th></th>
-            <th>ID</th>
-            <th>User Type</th>
-            <th>Date Created</th>
-        </tr>
-    </thead>
-</table>
 
 <script type="text/javascript">
 	var consulatationArray = [];
 
 	$(document).ready(function() {
+
 		loadDatatable('admin/getAllUserTypes');
+
+		$("#loading").toggle();
+		$("#footer").toggle();
+		$("#innerContainer").toggle();
 
 		$("#addNewAdminType").on('click',function(){
 			$.confirm({
@@ -116,49 +127,38 @@
 		});
 	});
 
-	function loadDatatable(url,data){
-		var callDataViaURLVal = ajaxShortLink(url,data);
+	function loadDatatable(url){
+		var dataRes = ajaxShortLink(url);
+		console.log(dataRes);
+
 		$('#tableContainer').DataTable().destroy();
 
-		$('#tableContainer').DataTable({
-			dom: 'Bfrtip',
-	        buttons: [
-	            'copyHtml5',
-	            {
-                    extend: 'excelHtml5',
-	                title: 'data_export'
-	            },
-	            {
-                    extend: 'csvHtml5',
-	                title: 'data_export'
-	            },
-	            {
-	                extend: 'pdfHtml5',
-	                title: 'data_export'
-	            }
-	        ],
-			data: callDataViaURLVal,
+		var dt = $('#tableContainer').DataTable({
+			data: dataRes,
 			columns: [
-				{ data:''},
+				{ 
+					"class":"details-control",
+					"orderable":false,
+					"data":null,
+					'width':'5%',
+					"defaultContent":
+						 '<button type="button" class="btn btn-primary rounded btn-sm" onClick="viewThis(this)"><i class="bi bi-pencil"></i> Edit</button>&nbsp;'
+				},
 				{ data:'id'},
 				{ data:'userType'},
 				{ data:'dateCreated'},
-	        ],
-			"columnDefs": [
-				{
-					"targets": 0,
-					"width": "1%",
-	            	"data": null,
-		            "defaultContent": '<button type="button" class="close edit" onClick="viewThis(this)"><i class="fa fa-pencil" aria-hidden="true"></i></button>',
-	                "orderable": false,
-	                "sortable": false
-		        }
-			],"createdRow": function( row, data, dataIndex){
-				if (data['isBlocked'] == 1) {
-					console.log($(row).addClass('bg-danger text-light'));
+			],
+			"order": [[1, 'asc']],
+			"createdRow": function( row, data, dataIndex){
+				if (data['lastLoginDate'] == null) {
+					$(row).find("td:eq(4)").text("No data available");
 				}
-	        }
-			// "autoWidth": true,
+
+				if (data['isBlocked'] == 1) {
+					$(row).addClass('bg-danger text-light');
+				}
+      },
+	    autoWidth: false
 		});
 	}
 
@@ -167,6 +167,7 @@
 		selectedData = table.row($(element).closest('tr')).data();
 
 		bootbox.alert({
+		    // message: ajaxLoadPage('quickLoadPage',{'pagename':'userWallets/userListWalletView'}),
 		    message: ajaxLoadPage('quickLoadPage',{'pagename':'users/permission/editPermissions'}),
 		    size: 'large',
 		    centerVertical: true,

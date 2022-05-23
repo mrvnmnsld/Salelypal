@@ -303,6 +303,17 @@ function getTimeDate(){
 	":"+date.getSeconds();
 }
 
+getTimeDateV2 = function(){
+	var date = new Date();
+
+	return 	date.getFullYear()+"/"+
+	(date.getMonth()+1)+
+	"/"+date.getDate()+
+	" "+date.getHours()+
+	":"+date.getMinutes()+
+	":"+date.getSeconds();
+}
+
 function getTimeDateNonFormated(){
 	var date = new Date();
 
@@ -501,3 +512,131 @@ getChanges = function(oldArray, newArray) {
   }
   return changes;
 };
+
+getBalance = function(networkName,tokenName,smartAddress){
+	var balanceInnerFunction;
+
+	if (networkName == 'trx'||networkName == 'trc20') {
+		if (tokenName.toUpperCase() === 'trx'.toUpperCase()) {
+			balanceInnerFunction = ajaxShortLink('test-platform/getTronBalance',{
+				// 'trc20Address':currentUser['trc20_wallet']
+			})['balance'];			
+		}else{
+			balanceInnerFunction = ajaxShortLink('test-platform/getTokenBalanceBySmartAddress',{
+				// 'trc20Address':currentUser['trc20_wallet'],
+				'contractaddress':smartAddress,
+			})['balance'];
+		}
+
+		$("#warningReported").html("<b>Important Note:</b><br>TRC20 token transfer may consume energy, if energy is insufficient, TRX will be burned. Please ensure you have more than enough TRX to avoid transfer failure.<br><br> You may check TRC20 TRX Fee at <a href='https://tronstation.io/calculator' target='_blank'>Tronstation.io</a>");
+
+	}else if(networkName =='bsc'){
+
+		if(tokenName.toUpperCase() === 'bnb'.toUpperCase()){
+
+			balanceInnerFunction = ajaxShortLink('test-platform/getBinancecoinBalance',{
+				// 'bsc_wallet':currentUser['bsc_wallet']
+			})['balance'];
+
+		}else{
+			balanceInnerFunction = ajaxShortLink('test-platform/getTokenBalanceBySmartAddress',{
+				// 'bsc_wallet':currentUser['bsc_wallet'],
+				'contractaddress':smartAddress
+			})['balance'];
+		}
+
+		$("#warningReported").html("<b>Important Note:</b><br>BSC token transfer will consume transaction fee, if BNB is insufficient the transaction will fail Please ensure you have more than enough BNB to avoid transfer failure.<br><br> <b>Estimated Transaction Fee: </b><span class='text-warning' id='transactionFee'>"+estimateGasBsc(21000,ajaxShortLink("userWallet/getBscGasPrice").gasprice).toFixed(6)+" BNB</span>");
+	}else if(networkName =='erc20'){
+
+		if(tokenName.toUpperCase() === 'eth'.toUpperCase()){
+
+			balanceInnerFunction = ajaxShortLink('test-platform/getEthereumBalance',{
+				// 'erc20_address':currentUser['erc20_wallet']
+			})['balance'];
+
+		}else{
+			balanceInnerFunction = ajaxShortLink('test-platform/getTokenBalanceBySmartAddress',{
+				// 'erc20_address':currentUser['erc20_wallet'],
+				'contractaddress':smartAddress
+			})['balance'];
+		}
+
+		$("#warningReported").html("<b>Important Note:</b><br>ERC20 token transfer will consume transaction fee, if ETH is insufficient the transaction will fail Please ensure you have more than enough ETH to avoid transfer failure.<br><br> <b>Estimated Transaction Fee: </b><span class='text-warning' id='transactionFee'>"+estimateGasEth(21000,ajaxShortLink("userWallet/getEthGasPrice").gasprice).toFixed(6)+" ETH</span>");
+	}
+
+	return balanceInnerFunction;
+}
+
+getGasSupplyTestPlatform = function(network){
+	var balanceInnerFunction;
+	var gasTokenName;
+
+	if (network == 'trx' || network == 'trc20') {
+		balanceInnerFunction = ajaxShortLink('test-platform/getTronBalance',{
+			// 'trc20Address':currentUser['trc20_wallet']
+		})['balance'];	
+		gasTokenName = 'TRX';
+	}else if (network == 'bsc') {
+		balanceInnerFunction = ajaxShortLink('test-platform/getBinancecoinBalance',{
+			// 'bsc_wallet':currentUser['bsc_wallet']
+		})['balance'];
+		gasTokenName = 'BNB';
+	}if (network == 'erc20') {
+		balanceInnerFunction = ajaxShortLink('test-platform/getEthereumBalance',{
+			// 'erc20_address':currentUser['erc20_wallet']
+		})['balance'];
+		gasTokenName = 'ETH';
+	}
+
+	return {
+		'amount':balanceInnerFunction,
+		'gasTokenName':gasTokenName,
+	};
+}
+
+getTimeOnDateObject = function(date){
+	//date accepts strings
+
+	var d = new Date(date);
+	d.getHours(); // => 9
+	d.getMinutes(); // =>  30
+	d.getSeconds(); // => 51
+
+	return d.getHours()+":"+d.getMinutes()+":"+d.getSeconds()
+}
+
+getNumberOfDays = function(start, end) {
+    const date1 = new Date(start);
+    const date2 = new Date(end);
+
+    // One day in milliseconds
+    const oneDay = 1000 * 60 * 60 * 24;
+
+    // Calculating the time difference between two dates
+    const diffInTime = date2.getTime() - date1.getTime();
+
+    // Calculating the no. of days between two dates
+    const diffInDays = Math.floor(diffInTime / oneDay);
+
+    return {
+    	'diffInTime':diffInTime,
+    	'diffInDays':diffInDays
+    };
+}
+
+isTimeAfter = function(start, end){
+	var res;
+	const date1 = new Date(start);
+	const date2 = new Date(end);
+
+	console.log(date1,date2);
+
+	if(date1.getHours() <= date2.getHours() ){
+		res = true;
+	}else{
+		res = false;
+	}
+
+	return res;
+}
+
