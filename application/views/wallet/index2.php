@@ -153,11 +153,11 @@
 		</div>
 
 	<div id="topNavBar" style="display:none;">
-		<span style="float: left;" onclick="backButton()"><i class="fa fa-home" aria-hidden="true"></i></span>
+		<span style="float: left;" onclick="backButton()"><i class="fa fa-home fa-lg" aria-hidden="true"></i></span>
 		<span id="tittle_container" class="text-center font-weight-bold" data-page-url="wallet/index">Security Wallet</span>
 
 		<span id="notif_btn" class="" style="float:right; " onclick="notif_btn()">
-			<i id="notif_logo" class="fa fa-bell fa-md fa-inverse"  aria-hidden="true">
+			<i id="notif_logo" class="fa fa-bell fa-md fa-inverse" style="color:#D9E9E8;" aria-hidden="true">
 				<span id="notif_counter_number" style="font-size:.45em; right:.4em; top:1.5em; display:none" class="position-absolute badge bg-danger">0</span>
 			</i>
 		</span>
@@ -175,21 +175,21 @@
 
 		<div id="btn_option_container" class="d-flex justify-content-center mt-1">
 			<button id="deposit_btn_option" class="btn" style="background-color:transparent">
-				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(0, 0, 0, 50%);padding: 5px;">
+				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(34 34 34);padding: 5px;">
 					<i class="fa fa-arrow-circle-down fa-lg" aria-hidden="true"></i>
 				</div>
 				<div style="font-size:.8em">Deposit</div>
 			</button>
 
 			<button id="withdraw_btn_option" class="btn" style="background-color:transparent">
-				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(0, 0, 0, 50%);padding: 5px;">
+				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(34 34 34);padding: 5px;">
 					<i class="fa fa-arrow-circle-up fa-lg" aria-hidden="true"></i>
 				</div>
 				<div style="font-size:.8em">Withdraw</div>
 			</button>
 
 			<button id="buy_btn_option" class="btn" style="background-color:transparent">
-				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(0, 0, 0, 50%);padding: 5px;">
+				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(34 34 34);padding: 5px;">
 					<i class="fa fa-usd fa-lg" aria-hidden="true"></i>
 				</div>
 				<div style="font-size:.8em;">Purchase</div>
@@ -209,13 +209,14 @@
 
 		<div class="d-flex justify-content-center fixed-bottom" style="border:2px solid; background: rgb(34 34 34);">
             <button id="addToken_btn" class="btn btn-outline-link btn-block text-white mt-2">
-            	<i class="fa fa-sliders" aria-hidden="true"></i>
-            	Manage Tokens
+            	<i class="fa fa-sliders fa-lg" aria-hidden="true"></i>
+				<div style="font-size:.8em; color:#D9E9E8;">Manage Tokens</div>
             </button>
 
             <button id="settings_btn" class="btn btn-outline-link btn-block text-white mt-2">
-				<i class="fa fa-cog" aria-hidden="true"></i>
-				Settings
+				<i class="fa fa-cog fa-lg" aria-hidden="true"></i>
+				
+				<div style="font-size:.8em; color:#D9E9E8;">Settings</div>
 			</button>	
         </div>
 

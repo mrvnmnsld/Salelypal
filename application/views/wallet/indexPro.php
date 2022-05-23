@@ -141,7 +141,7 @@
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 		<a class="" href="#" id="notif_btn">Notifications (<span id="new_notif_counter">0</span>)</a>
 		<!-- <a class="" href="#" id="profile_btn">Profile</a> -->
-		<a class="" href="#" id="settings_btn">Settings</a>
+		<!-- <a class="" href="#" id="settings_btn">Settings</a> -->
 		<!-- <a class="" href="#" id="buyCrypto_btn">Buy Crypto</a> -->
 		<!-- <a class="" href="#" id="purchaseHistory_btn">Purchase History</a> -->
 		<!-- <a class="" href="#" id="purchaseAppeals_btn">Purchase Appeals</a> -->
@@ -150,7 +150,7 @@
 		<!-- <a class="" href="#" id="withdraw_btn">Withdraw</a> -->
 		<!-- <a class="" href="#" id="exportWallet_btn">Export Wallet</a> -->
 		<hr class="bg-light" style="width:60%">
-  		<a class="text-danger" href="#" id="logOut_btn">Logout</a>
+  		<!-- <a class="text-danger" href="#" id="logOut_btn">Logout</a> -->
 	</div>
 
 	<div id="topNavBar" style="display:none;">
@@ -160,7 +160,7 @@
 		<!-- arl_05-19-22 notification icon and count -->
 		
 		<span id="notif_btn" class="" style="float:right; " onclick="notif_btn()">
-			<i id="notif_logo" class="fa fa-bell fa-md fa-inverse"  aria-hidden="true">
+			<i id="notif_logo" class="fa fa-bell fa-md fa-inverse" style="color:#D9E9E8;"  aria-hidden="true">
 				<span id="notif_counter_number" style="font-size:.45em; right:.4em; top:1.5em; display:none" class="position-absolute badge bg-danger">0</span>
 			</i>
 		</span>
@@ -179,28 +179,28 @@
 
 		<div id="btn_option_container" class="d-flex justify-content-center mt-1">
 			<button id="deposit_btn_option" class="btn" style="background-color:transparent">
-				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(0, 0, 0, 50%);padding: 5px;">
+				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(34 34 34);padding: 5px;">
 					<i class="fa fa-arrow-circle-down fa-lg" aria-hidden="true"></i>
 				</div>
 				<div style="font-size:.8em">Deposit</div>
 			</button>
 
 			<button id="withdraw_btn_option" class="btn" style="background-color:transparent">
-				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(0, 0, 0, 50%);padding: 5px;">
+				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(34 34 34);padding: 5px;">
 					<i class="fa fa-arrow-circle-up fa-lg" aria-hidden="true"></i>
 				</div>
 				<div style="font-size:.8em">Withdraw</div>
 			</button>
 
 			<button id="buy_btn_option" class="btn" style="background-color:transparent">
-				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(0, 0, 0, 50%);padding: 5px;">
+				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(34 34 34);padding: 5px;">
 					<i class="fa fa-usd fa-lg" aria-hidden="true"></i>
 				</div>
 				<div style="font-size:.8em;">Purchase</div>
 			</button>
 
 			<button id="future_btn" class="btn" style="background-color:transparent">
-				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.31em;background-color: rgb(0, 0, 0, 50%);padding-top: 5px;">
+				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.31em;background-color: rgb(34 34 34);padding-top: 5px;">
 					<i class="fa fa-bar-chart fa-lg" aria-hidden="true"></i>
 				</div>
 				<div style="font-size:.8em">Contract</div>
@@ -244,7 +244,7 @@
 					<li class="nav-item">
 						<div id="btn_option_container" class="">
 							<button id="rise_fall_btn" class="btn" style="background-color:transparent">
-								<div class="" style="font-size:1.5em;">
+								<div class="" style="">
 								<i class="fa fa-bar-chart fa-inverse fa-lg" aria-hidden="true"></i>
 								</div>
 								<div style="font-size:.8em; color:#D9E9E8;">Rise Fall</div>
@@ -254,7 +254,7 @@
 					<li class="nav-item">
 						<div id="btn_option_container" class="">
 							<button id="daily_mining_btn" class="btn" style="background-color:transparent">
-								<div class="" style="font-size:1.5em;">
+								<div class="" style="">
 								<img style="width:1em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining2.png">
 								</div>
 								<div style="font-size:.8em; color:#D9E9E8;">Daily Mining</div>
@@ -264,7 +264,7 @@
 					<li class="nav-item">
 						<div id="btn_option_container" class="">
 							<button id="regular_mining_btn" class="btn" style="background-color:transparent">
-								<div class="" style="font-size:1.5em;">
+								<div class="" style="">
 								<img style="width:1.25em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">	
 								</div>
 								<div style="font-size:.8em; color:#D9E9E8;">Regular Mining</div>
@@ -273,8 +273,8 @@
 					</li>
 					<li class="nav-item">
 						<div id="btn_option_container" class="">
-							<button id="settings_btn" class="btn" style="background-color:transparent" onclick="openNav()">
-								<div class="" style="font-size:1.5em;">
+							<button id="settings_btn" class="btn" style="background-color:transparent">
+								<div class="" style="">
 								<i class="fa fa-cog fa-lg fa-inverse" aria-hidden="true"></i>
 								</div>
 								<div style="font-size:.8em; color:#D9E9E8;">Settings</div>
@@ -583,24 +583,6 @@
 				});
 			});		
 
-			$('#logOut_btn').on('click',function(){
-				$.confirm({
-					icon: 'fa fa-sign-out',
-				    title: 'Logging out?',
-				    columnClass: 'col-md-6 col-md-offset-6',
-				    content: 'Are you sure you want to <b>logout</b>?',
-				    buttons: {
-				        confirm: function () {
-							deleteLocalStorageByKey('currentUser');
-							window.location.href = 'index';//local
-				        },
-				        cancel: function () {
-
-				        },
-				    }
-				});
-			});
-
 			$('#future_btn').on('click',function(){
 				clearTimeout(tokenLoadTimer);
 				$("#tittle_container").text('Contract Trade');
@@ -673,8 +655,7 @@
 			$('#settings_btn').on('click',function(){
 				clearTimeout(tokenLoadTimer);
 				$("#tittle_container").text('Settings');
-				$.when(closeNav()).then(function() {
-					$('#topNavBar').toggle();
+				$('#topNavBar').toggle();
 			  		$("#container").fadeOut(animtionSpeed, function() {
 					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
 				  			$("#container").empty();
@@ -686,7 +667,6 @@
 			  				});
 				    	});
 				  	});
-				});
 			});
 
 			

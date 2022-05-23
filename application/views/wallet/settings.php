@@ -43,6 +43,14 @@
 	</button>
 </div>
 
+<div>
+	<button id="logOut_btn" class="btn text-danger btn-block text-center" style="font-size: 20px;margin-left:3px;">
+		<span class="" >&nbsp;Logout</span>
+	</button>
+
+	<!-- <a class="text-danger" href="#" id="">Logout</a> -->
+</div>
+
 <script type="text/javascript">
 	$('#exportWallet_btn').on('click',function(){
 		$("#tittle_container").text('Export Wallet');
@@ -110,6 +118,24 @@
     	    	});
     	  	});
     	});
+	});
+
+	$('#logOut_btn').on('click',function(){
+		$.confirm({
+			icon: 'fa fa-sign-out',
+			title: 'Logging out?',
+			columnClass: 'col-md-6 col-md-offset-6',
+			content: 'Are you sure you want to <b>logout</b>?',
+			buttons: {
+				confirm: function () {
+					deleteLocalStorageByKey('currentUser');
+					window.location.href = 'index';//local
+				},
+				cancel: function () {
+
+				},
+			}
+		});
 	});
 
 
