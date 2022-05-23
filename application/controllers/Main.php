@@ -27,6 +27,11 @@ class main extends MY_Controller {
 		$this->load->view('wallet/index');
 	}
 
+	//arl_05-22-22 homeViewPro
+	public function homeViewPro(){
+		$this->load->view('wallet/indexPro');
+	}
+
 	public function error(){
 		$this->load->view('404Error');
 	}
