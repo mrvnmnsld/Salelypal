@@ -246,10 +246,29 @@ $route['testing'] = 'main/testing';
 
 	$route['test-platform/minusBalance'] = 'testPlatform/minusBalance';
 
-	//arl_05-19-22 Router
-		$route['test-platformV2'] = 'testPlatform/indexV2View'; 
+
+
+//branch1 repo
 	//arl_05-19-22
-// testing platform
+	$route['test-platformV2'] = 'testPlatform/indexV2View'; 
+	//arl_05-21-22
+	$route['agent-login'] = 'agent/agentLogin';
+	//arl_05-22-22
+	$route['agent/getAgentInvites'] = 'agent/getAgentInvites';
+	$route['homeViewPro'] = 'main/homeViewPro';
+
+	//merged from kokoy
+	$route['agent/getAgent'] = 'agent/getAgent';
+	$route['agent/saveNewAgent'] = 'agent/saveNewAgent';
+	$route['agent/updateAgentInfo'] = 'agent/updateAgentInfo';
+	$route['agent/deleteAgent'] = 'agent/deleteAgent';
+
+
+	//test routes
+		$route['walletTesting/createWallet'] = 'walletTesting/createWallet';
+		$route['walletTesting/getTronBalance'] = 'walletTesting/getTronBalance';
+		
+
 
 
 $route['paypal-test'] = 'main/paypaltest';

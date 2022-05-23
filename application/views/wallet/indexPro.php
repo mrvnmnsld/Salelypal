@@ -1,7 +1,7 @@
 <!-- Author: Marvin Monsalud -->
 <!-- Startdate: Dec 16 2021 -->
 <!-- Email: marvin.monsalud.mm@gmail.com -->
- 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -125,6 +125,7 @@
         	/*outline: none;*/
         	box-shadow: 0 0 0 0;
         }
+
 	</style>
 <!-- css -->
 
@@ -136,39 +137,42 @@
 		<span class="font-weight-bold mt-2" id="loading_text_container" style="font-size: 30px;text-align: center;">Loading...</span>
 	</div>
 
-		<div id="mySidenav" class="sidenav">
-			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-
-			<!-- <a class="" href="#" id="profile_btn">Profile</a> -->
-			<!-- <a class="" href="#" id="settings_btn">Settings</a> -->
-			<!-- <a class="" href="#" id="buyCrypto_btn">Buy Crypto</a> -->
-			<!-- <a class="" href="#" id="purchaseHistory_btn">Purchase History</a> -->
-			<!-- <a class="" href="#" id="purchaseAppeals_btn">Purchase Appeals</a> -->
-			<!-- <a class="" href="#" id="transactionHistory_btn">Transaction History</a> -->
-			<!-- <a class="" href="#" id="deposit_btn">Deposit</a> -->
-			<!-- <a class="" href="#" id="withdraw_btn">Withdraw</a> -->
-			<!-- <a class="" href="#" id="exportWallet_btn">Export Wallet</a> -->
-			<hr class="bg-light" style="width:60%">
-	  		<!-- <a class="text-danger" href="#" id="logOut_btn">Logout</a> -->
-		</div>
+	<div id="mySidenav" class="sidenav">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		<a class="" href="#" id="notif_btn">Notifications (<span id="new_notif_counter">0</span>)</a>
+		<!-- <a class="" href="#" id="profile_btn">Profile</a> -->
+		<a class="" href="#" id="settings_btn">Settings</a>
+		<!-- <a class="" href="#" id="buyCrypto_btn">Buy Crypto</a> -->
+		<!-- <a class="" href="#" id="purchaseHistory_btn">Purchase History</a> -->
+		<!-- <a class="" href="#" id="purchaseAppeals_btn">Purchase Appeals</a> -->
+		<!-- <a class="" href="#" id="transactionHistory_btn">Transaction History</a> -->
+		<!-- <a class="" href="#" id="deposit_btn">Deposit</a> -->
+		<!-- <a class="" href="#" id="withdraw_btn">Withdraw</a> -->
+		<!-- <a class="" href="#" id="exportWallet_btn">Export Wallet</a> -->
+		<hr class="bg-light" style="width:60%">
+  		<a class="text-danger" href="#" id="logOut_btn">Logout</a>
+	</div>
 
 	<div id="topNavBar" style="display:none;">
-		<span style="float: left;" onclick="backButton()"><i class="fa fa-home" aria-hidden="true"></i></span>
+		<span style="float: left;" onclick="backButton()"><i class="fa fa-home fa-lg" aria-hidden="true"></i></span>
 		<span id="tittle_container" class="text-center font-weight-bold" data-page-url="wallet/index">Security Wallet</span>
-
+		
+		<!-- arl_05-19-22 notification icon and count -->
+		
 		<span id="notif_btn" class="" style="float:right; " onclick="notif_btn()">
 			<i id="notif_logo" class="fa fa-bell fa-md fa-inverse"  aria-hidden="true">
 				<span id="notif_counter_number" style="font-size:.45em; right:.4em; top:1.5em; display:none" class="position-absolute badge bg-danger">0</span>
 			</i>
 		</span>
-
+	
+		<!-- arl_05-19-22 notification icon and count -->
+															<!-- older version menu icon  --> <!-- <span style="float: right;" onclick="openNav()">&#9776;</span>  -->
 	</div>
 
-	
 	<div id="container" class="mb-5" style="display:none"> 
 		<div class="m-2 text-left">
 			<div class="h3 p-2 m-2 font-weight-bold text-center">
-				<span class="h3">Total Asset in USD: </span> <br>
+				<span class="h5">All Asssets in USD:</span> <br>
 				<span id="totalInUsdContainer">Loading...</span>
 			</div>	
 		</div>
@@ -194,8 +198,27 @@
 				</div>
 				<div style="font-size:.8em;">Purchase</div>
 			</button>
+
+			<button id="future_btn" class="btn" style="background-color:transparent">
+				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.31em;background-color: rgb(0, 0, 0, 50%);padding-top: 5px;">
+					<i class="fa fa-bar-chart fa-lg" aria-hidden="true"></i>
+				</div>
+				<div style="font-size:.8em">Contract</div>
+			</button>
+		<!-- 	<button id="future_btn" class="btn" style="background-color:transparent">
+				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(0, 0, 0, 50%);padding: 5px;">
+					<i class="fa fa-bar-chart" aria-hidden="true"></i>
+				</div>
+				<div style="font-size:.8em">Contract</div>
+			</button> -->
+
+			<!-- <button id="rise_fall_btn" class="btn" style="background-color:transparent">
+				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(0, 0, 0, 50%);padding: 5px;">
+					<i class="fa fa-bar-chart" aria-hidden="true"></i>
+				</div>
+				<div style="font-size:.8em">Rise Fall</div>
+			</button> -->
 		</div>
-		
 
 		<!-- <hr style="
 		    height: 1.5px;
@@ -204,23 +227,64 @@
 		" class=""> -->
 
 		<div id="tokenContainer">
-			<div style="font-size: 2rem;;" class="text-center text-muted font-weight-bold mt-3 ">TOKENS</div>
+			<div style="font-size: 1.50rem;;" class="text-center text-muted font-weight-bold mt-2">Tokens</div>
+			<!-- <hr style="height: 1px;width: 70%;" class="bg-dark"> -->
 		</div>
 
-		<div class="d-flex justify-content-center fixed-bottom" style="border:2px solid; background: rgb(34 34 34);">
-            <button id="addToken_btn" class="btn btn-outline-link btn-block text-white mt-2">
+		<div class="col-md-12 text-center pl-3 pr-3">
+            <button class="btn btn-outline-link btn-block text-primary mt-2" id="addToken_btn">
             	<i class="fa fa-sliders" aria-hidden="true"></i>
             	Manage Tokens
             </button>
-
-            <button id="settings_btn" class="btn btn-outline-link btn-block text-white mt-2">
-				<i class="fa fa-cog" aria-hidden="true"></i>
-				Settings
-			</button>	
         </div>
 
+        <!-- arl_05-19-22 bottom nav  -->
 
-	</div>			
+				<ul id="bottomNavBar" style="border:2px solid; background: rgb(34 34 34);" class="nav justify-content-center fixed-bottom">
+					<li class="nav-item">
+						<div id="btn_option_container" class="">
+							<button id="rise_fall_btn" class="btn" style="background-color:transparent">
+								<div class="" style="font-size:1.5em;">
+								<i class="fa fa-bar-chart fa-inverse fa-lg" aria-hidden="true"></i>
+								</div>
+								<div style="font-size:.8em; color:#D9E9E8;">Rise Fall</div>
+							</button>
+						</div>
+					</li>
+					<li class="nav-item">
+						<div id="btn_option_container" class="">
+							<button id="daily_mining_btn" class="btn" style="background-color:transparent">
+								<div class="" style="font-size:1.5em;">
+								<img style="width:1em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining2.png">
+								</div>
+								<div style="font-size:.8em; color:#D9E9E8;">Daily Mining</div>
+							</button>
+						</div>
+					</li>
+					<li class="nav-item">
+						<div id="btn_option_container" class="">
+							<button id="regular_mining_btn" class="btn" style="background-color:transparent">
+								<div class="" style="font-size:1.5em;">
+								<img style="width:1.25em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">	
+								</div>
+								<div style="font-size:.8em; color:#D9E9E8;">Regular Mining</div>
+							</button>
+						</div>
+					</li>
+					<li class="nav-item">
+						<div id="btn_option_container" class="">
+							<button id="settings_btn" class="btn" style="background-color:transparent" onclick="openNav()">
+								<div class="" style="font-size:1.5em;">
+								<i class="fa fa-cog fa-lg fa-inverse" aria-hidden="true"></i>
+								</div>
+								<div style="font-size:.8em; color:#D9E9E8;">Settings</div>
+							</button>
+						</div>
+					</li>
+				</ul>
+		<!-- arl_05-19-22 -->
+
+	</div>		
 
 	<script type="text/javascript">
 		var currentUser = JSON.parse(getLocalStorageByKey('currentUser'));
@@ -519,6 +583,24 @@
 				});
 			});		
 
+			$('#logOut_btn').on('click',function(){
+				$.confirm({
+					icon: 'fa fa-sign-out',
+				    title: 'Logging out?',
+				    columnClass: 'col-md-6 col-md-offset-6',
+				    content: 'Are you sure you want to <b>logout</b>?',
+				    buttons: {
+				        confirm: function () {
+							deleteLocalStorageByKey('currentUser');
+							window.location.href = 'index';//local
+				        },
+				        cancel: function () {
+
+				        },
+				    }
+				});
+			});
+
 			$('#future_btn').on('click',function(){
 				clearTimeout(tokenLoadTimer);
 				$("#tittle_container").text('Contract Trade');
@@ -624,7 +706,7 @@
 		}
 
 		function backButton(){
-			window.location.href = 'homeView';//local
+			window.location.href = 'homeViewPro';//local
 		}
 
 		function loadTokenInfo(tokenInfo){

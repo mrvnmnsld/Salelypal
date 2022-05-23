@@ -221,65 +221,80 @@
 				</div>
 			</div>
 
-		<script type="text/javascript">
-			var currentUser = JSON.parse(getLocalStorageByKey('currentUser'));
-			var referalCode = getUrlParameter('referalCode')
+<script type="text/javascript">
+	var currentUser = JSON.parse(getLocalStorageByKey('currentUser'));
+	var referalCode = getUrlParameter('referalCode')
 
-			if (getLocalStorageByKey('currentUser')!=null) {
-				console.log(currentUser);
-				window.location.replace("homeView");
-			}else{
-				console.log("no active user")
-			}
+	if (getLocalStorageByKey('currentUser')!=null) {
+		console.log(currentUser);
+		if(currentUser.isPro == 0){
+			window.location.replace("homeView");
+		}
+		else {
+			window.location.replace("homeViewPro");
+		}
+		
 
-			if (referalCode != false) {
-				var res = ajaxLoadPage('quickLoadPage',{'pagename':'signUpPage'});
+	}else{
+		console.log("no active user")
+	}
 
-				$("#container").empty();
-				$("#container").append(res);
-			}	
+	if (referalCode != false) {
+		var res = ajaxLoadPage('quickLoadPage',{'pagename':'signUpPage'});
 
-			// $.validator.addMethod("captchaCheck",function(value, element) {
-			// 		return value==captchaRight;
-			// 	},
-			// 	"Captcha value does not match"
-			// );
-			
-			$("#loginForm").validate({
-			  	errorClass: 'is-invalid',
-			  	rules: {
-					emailAddress: "required",
-					password: "required",
-			  	},
-			  	submitHandler: function(form){
-				    var data = $('#loginForm').serializeArray();
-			    	data.push({"name":'ip','value':getIpAddress()["ip"]});
+		$("#container").empty();
+		$("#container").append(res);
+	}	
 
-			    	slider.reset()
-			    	
-				    var loginRes = ajaxShortLink('checkLoginCredentials',data);
+	// $.validator.addMethod("captchaCheck",function(value, element) {
+	// 		return value==captchaRight;
+	// 	},
+	// 	"Captcha value does not match"
+	// );
 
-			  		if (loginRes['wrongFlag'] == 2 || loginRes['wrongFlag'] == 1) {
-			  		  $('#errorReporter').text("Wrong Credentials.");
-			  		}else if(loginRes['wrongFlag'] == 3){
-			  		  $('#errorReporter').html("Account Blocked.");
-			  		}else if(loginRes['wrongFlag'] == 0){
-			  			setLocalStorageByKey('currentUser',JSON.stringify(loginRes['data']));
-			  			window.location.replace("homeView");
-			  		}
-			  	}
-			});
+	$("#loginForm").validate({
+	  	errorClass: 'is-invalid',
+	  	rules: {
+			emailAddress: "required",
+			password: "required",
+	  	},
+	  	submitHandler: function(form){
+		    var data = $('#loginForm').serializeArray();
+	    	data.push({"name":'ip','value':getIpAddress()["ip"]});
 
-			$("#signUpBtn").on("click",function(){
-				var res = ajaxLoadPage('quickLoadPage',{'pagename':'signUpPage'});
 
-				$("#container").empty();
-				$("#container").append(res);
+		    var loginRes = ajaxShortLink('checkLoginCredentials',data);
 
-			});
+	  		if (loginRes['wrongFlag'] == 2 || loginRes['wrongFlag'] == 1) {
+	  		  $('#errorReporter').text("Wrong Credentials.");
+	  		}else if(loginRes['wrongFlag'] == 3){
+	  		  $('#errorReporter').html("Account Blocked.");
+	  		}else if(loginRes['wrongFlag'] == 0){
+	  			setLocalStorageByKey('currentUser',JSON.stringify(loginRes['data']));
 
-			// sliderCatpcha JS menu
-			var slider = sliderCaptcha({
+	  				if(loginRes.data.isPro == 0){
+						window.location.replace("homeView");
+					}
+					else {
+						window.location.replace("homeViewPro");
+					}
+
+	  		}
+	  	}
+	});
+
+	$("#signUpBtn").on("click",function(){
+		var res = ajaxLoadPage('quickLoadPage',{'pagename':'signUpPage'});
+
+		$("#container").empty();
+		$("#container").append(res);
+
+	});
+
+	// sliderCatpcha JS menu
+
+
+	sliderCaptcha({
 				id: 'captcha',
 				width: 280,
 				height: 155,
@@ -313,6 +328,15 @@
 				}
 			});
 
-		</script>
-	</body>
+			
+	// submit_login_btn
+	$("#submit_login_btn").on("click",function(){
+		// binance slider validation
+		// if success continue to validate
+		// validation 
+		// $("#loginForm").submit();
+	});
+
+</script>
+</body>
 </html>

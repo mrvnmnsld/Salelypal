@@ -132,7 +132,7 @@ if (!isset($_SESSION["currentUser"])) {
     <div class="d-flex align-items-center justify-content-between">
       <a href="index.html" class="logo d-flex align-items-center">
         <img src="assets/imgs/logo_main.png" alt="">
-        <span class="d-none d-lg-block" style="font-size: 21px;">Security Wallet Admin</span>
+        <span class="d-none d-lg-block" style="font-size: 21px;">Security Wallet <span id="userTypeTitle" style="text-transform: capitalize;"></span></span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
@@ -141,13 +141,13 @@ if (!isset($_SESSION["currentUser"])) {
       <ul class="d-flex align-items-center">
         <li class="nav-item dropdown pe-3">
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <span class="d-none d-md-block dropdown-toggle ps-2">Admin</span>
+            <span id="userNameLogged" class="d-none d-md-block dropdown-toggle ps-2">Admin</span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>Admin</h6>
-              <span>Admin User</span>
+              <h6 id="userNameLoggedInner">Admin</h6>
+              <span id="userType">Admin User</span>
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -486,6 +486,12 @@ if (!isset($_SESSION["currentUser"])) {
 <script type="text/javascript">
   var currentUser = JSON.parse('<?php echo json_encode($_SESSION['currentUser'])?>');
   console.log(currentUser, "hello");
+
+  $('#userNameLogged').text(currentUser.username);
+  $('#userNameLoggedInner').text(currentUser.username);
+  $('#userType').text(currentUser.userType);
+  $('#userTypeTitle').text(currentUser.userType);
+  
 
   jQuery.ajax({
       url: 'getUserTypePriv',
