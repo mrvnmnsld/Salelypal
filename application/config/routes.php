@@ -245,7 +245,7 @@ $route['testing'] = 'main/testing';
 	$route['test-platform/buyCrypto'] = 'testPlatform/buyCrypto';
 
 	$route['test-platform/minusBalance'] = 'testPlatform/minusBalance';
-
+// testing platform
 
 
 //branch1 repo
