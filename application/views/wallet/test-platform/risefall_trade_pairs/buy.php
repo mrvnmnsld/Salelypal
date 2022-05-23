@@ -10,56 +10,62 @@
 
 <hr>
 
-<div class="btn-group btn-group-toggle d-flex justify-content-center mt-2" data-toggle="buttons">
-  <label class="btn btn-secondary active">
-    <input type="radio" name="risk_option_radio" value="30/30" autocomplete="off" checked="checked"> 30 Sec <br>
-    <small style="font-size: 12px;">30% Income</small>
-  </label>
+<div id="main_modal_container">
+    <div class="btn-group btn-group-toggle d-flex justify-content-center mt-2" data-toggle="buttons">
+      <label class="btn btn-secondary active">
+        <input type="radio" name="risk_option_radio" value="30/30" autocomplete="off" checked="checked"> 30 Sec <br>
+        <small style="font-size: 12px;">30% Income</small>
+      </label>
 
-  <label class="btn btn-secondary">
-    <input type="radio" name="risk_option_radio" value="60/50" autocomplete="off"> 60 Sec <br>
-    <small style="font-size: 12px;">50% Income</small>
-  </label>
+      <label class="btn btn-secondary">
+        <input type="radio" name="risk_option_radio" value="60/50" autocomplete="off"> 60 Sec <br>
+        <small style="font-size: 12px;">50% Income</small>
+      </label>
 
-  <label class="btn btn-secondary">
-    <input type="radio" name="risk_option_radio" value="120/70" autocomplete="off"> 120 Sec <br>
-    <small style="font-size: 12px;">70% Income</small>
-  </label>
+      <label class="btn btn-secondary">
+        <input type="radio" name="risk_option_radio" value="120/70" autocomplete="off"> 120 Sec <br>
+        <small style="font-size: 12px;">70% Income</small>
+      </label>
 
-  <label class="btn btn-secondary">
-    <input type="radio" name="risk_option_radio" value="180/90" autocomplete="off"> 180 Sec <br>
-    <small style="font-size: 12px;">90% Income</small>
-  </label>
-</div>
-
-<div class="d-flex mt-1 flex-basis: fit-content;">
-    <div>
-        <label class="mt-1">Amount:</label>
+      <label class="btn btn-secondary">
+        <input type="radio" name="risk_option_radio" value="180/90" autocomplete="off"> 180 Sec <br>
+        <small style="font-size: 12px;">90% Income</small>
+      </label>
     </div>
 
-    <div style="flex-basis: 100%;">
-        <input type="number" class="ml-1 form-control form-control-sm" id="amount_input_container">
-    </div>      
-</div>
+    <div class="d-flex mt-1 flex-basis: fit-content;">
+        <div>
+            <label class="mt-1">Amount:</label>
+        </div>
 
-<small>
-    <div class="text-center">
-        <span>Availble Amount:</span>
-        <span id="available_amount_container"></span>
+        <div style="flex-basis: 100%;">
+            <input type="number" class="ml-1 form-control form-control-sm" id="amount_input_container">
+        </div>      
     </div>
 
-    <div class="text-center">
-        <span>Availble Gas:</span>
-        <span id="available_gas_container"></span>
+    <small>
+        <div class="text-center">
+            <span>Availble Amount:</span>
+            <span id="available_amount_container"></span>
+        </div>
+
+        <div class="text-center">
+            <span>Availble Gas:</span>
+            <span id="available_gas_container"></span>
+        </div>
+    </small>
+
+    <hr>
+
+    <div class="mt-3">
+        <button class="btn btn-success btn-block" id="buy_rise_submit_btn">Submit Position</button>
+        <button class="btn btn-danger btn-block" id="close_btn">Cancel</button>
     </div>
-</small>
 
-<hr>
-
-<div class="mt-3">
-    <button class="btn btn-success btn-block" id="buy_rise_submit_btn">Submit Position</button>
-    <button class="btn btn-danger btn-block" id="close_btn">Cancel</button>
 </div>
+
+
+
 
 <script type="text/javascript">
     $("#available_amount_container").html(parseFloat(balanceUsdt).toFixed(2)+" USDT");

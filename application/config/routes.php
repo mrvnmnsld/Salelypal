@@ -157,9 +157,7 @@ $route['main/getCurrentPrice'] = 'main/getCurrentPrice';
 		$route['userWallet/future/cancelPosition'] = 'userWallet/futureCancelPosition';
 		$route['userWallet/future/admin/getAllContractPositions'] = 'userWallet/getAllContractPositions';
 		$route['userWallet/future/getFuturePositionDetailsByID'] = 'userWallet/getFuturePositionDetailsByID';
-
 	//contract
-
 
 	//riseFall
 		$route['userWallet/future/saveRiseFallPosition'] = 'userWallet/futureSaveRiseFallPosition';

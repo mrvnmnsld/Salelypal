@@ -17,6 +17,18 @@
         color: whitesmoke !important;
         background: #bf5279 !important;
      }
+
+     .nav .nav-tabs .nav-fill{
+        
+     }
+
+    .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link {
+        background-color: rgba(0, 0, 0, .10);
+    }
+
+    .make_me_dark{
+        background-color: rgba(0, 0, 0, .05);
+    }
 </style>
 
 <!-- <div class="text-danger p-2" id="testNotes">
@@ -31,7 +43,7 @@
 
 <div id="innerContainer">
 
-    <div class="text-light p-1" style="background-color:#131722">
+    <div class="text-light p-1 m-1 rounded" style="background-color:#131722">
 
         <div class="p-2 text-light">
             <label>Select Token Pair: </label>
@@ -56,7 +68,7 @@
           <div id="tradingview" style="height: 400px;"></div>
         </div>
 
-        <div class="d-flex justify-content-center pt-1">
+        <div class="d-flex justify-content-center pt-1 mb-2 mt-2">
             <button class="btn btn-success col-md" id="buy_rise_btn">
                 <img style="width:25px;" src="assets/imgs/icons/growth-graph.png">
                 Buy Rise
@@ -70,13 +82,9 @@
     </div>
 </div>
 
-<!-- <hr style="width:90%;" class="bg-dark"> -->
 
-<div class="mt-3 headers">
-    <div class="h4 text-dark text-center">Positions</div>
-</div class="text-success">
 
-<div>
+<div class="mt-2 make_me_dark"> 
     <ul class="nav nav-tabs nav-fill">
       <li class="nav-item">
         <a class="nav-link text-dark active" aria-current="page" data-toggle="tab" href="#pending_tab_btn">Pending</a>
@@ -111,23 +119,28 @@
         </div>
 
         <div id="history_tab_btn" class="tab-pane fade">
-          <table class="table" style="font-size: 11.5px;">
-            <thead>
-              <tr>
-                <th scope="col">Type</th>
-                <th scope="col">Resolve Time</th>
-                <th scope="col">Amount</th>
-                <th scope="col">Price/Resolved</th>
-                <!-- <th scope="col"></th> -->
-                <th scope="col">Status</th>
-              </tr>
-            </thead>
-            <tbody id="positions_closed_container">
-                <tr class="text-center text-danger" id="no_history_position_flag_container">
-                  <td colspan="5"><b>No positions opened</b></td>
-                </tr>
-            </tbody>
-          </table>
+            <table style="font-size: 13px;width: 100%;" cellpadding="5">
+                <thead>
+                  <tr>
+                    <th scope="col">Type</th>
+                    <th scope="col">Resolve Time</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Price/Resolved</th>
+                    <!-- <th scope="col"></th> -->
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <tbody id="positions_closed_container">
+                    <tr class="text-center text-danger" id="no_history_position_flag_container">
+                      <td colspan="5"><b>No positions opened</b></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="text-center">
+                Showing 5 latest history<br>
+                <button class="btn btn-link" id="viewMore_history_btn">View More</button>
+            </div>
         </div>
 
         <div id="instructions_tab_btn" class="tab-pane fade p-2">
@@ -270,7 +283,7 @@
                 var checkSet = ajaxShortLink('userWallet/risefall/getPositionSet',{
                     'userID':currentUser.userID,
                 });
-                
+
                 if(checkSet.length>=1){
                     console.log(checkSet);
 
@@ -630,7 +643,7 @@
                 }
             );
 
-            closedPositions.slice(0,10)
+            closedPositions = closedPositions.slice(0,5).reverse()
 
             if (closedPositions.length == 0) {
                 $("#no_history_position_flag_container").append(
