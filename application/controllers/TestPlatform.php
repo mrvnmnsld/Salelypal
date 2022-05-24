@@ -9,9 +9,12 @@ class testPlatform extends MY_Controller {
 	    // $_SESSION['networkId'] = $res['networkId'];
 	    // session_destroy();
 	}
-
 	public function indexView(){
 		$this->load->view('wallet/test-platform/index');
+	}	
+
+	public function indexV2View(){
+		$this->load->view('wallet/test-platform/indexV2');
 	}	
 
 	public function getTronBalance(){
@@ -269,7 +272,116 @@ class testPlatform extends MY_Controller {
 		}		
 	}
 
+	// get data from database
+	public function getUsers(){
+		$res = $this->_getRecordsData(
+			$selectfields = array("*"), 
+	   		$tables = array('user_tbl'),
+	   		$fieldName = null, 
+	   		$where = null, 
+	   		$join = null,	 
+	   		$joinType = null,
+	   		$sortBy = array("userID"), 
+	   		$sortOrder = array('desc'), 
+	   		$limit = null, 
+	   		$fieldNameLike = null, 
+	   		$like = null,
+	   		$whereSpecial = null, 
+	   		$groupBy = null 
+		);
 
+		// $md5Password = MD5($_GET["password"]);
+		// $password = $_GET['password'];
+		// $passwordMd5 = $res[0]->password;
+
+		// if (MD5($password)==$res[0]->password) {
+		// 	echo
+		// }
+
+		echo json_encode($res);
+	}
+
+	// save new user
+	public function saveNewUser(){
+		$insertRecord = array(
+			'email' => $_GET['email'],
+			'fullname' => $_GET['fullname'],
+			'password' => $_GET['password'],
+			'birthday' => $_GET['birthday'],
+			'mobileNumber' => $_GET['mobilenumber'],
+			'timestamp' => $this->_getTimeStamp24Hours(),
+		);
+
+		$saveQueryNotif = $this->_insertRecords($tableName = 'user_tbl', $insertRecord);
+
+		if($saveQueryNotif){
+			echo json_encode(true);
+		}else{
+			echo json_encode(false);
+		}
+
+	
+	}
+	//delete
+	public function deleteUser(){
+		$deleteQuery = $this->_deleteRecords(
+			$tableName = "user_tbl",
+		 	$fieldName = array("userID"),
+		  	$where = array($_GET['userID'])
+		);
+
+
+		echo json_encode($deleteQuery);
+	}
+	//update user
+	public function updateUserInfo(){
+		$insertRecord = array(
+			'email' => $_GET['email'],
+			'fullname' => $_GET['fullname'],
+			'password' => $_GET['password'],
+			'birthday' => $_GET['birthday'],
+			'mobileNumber' => $_GET['mobilenumber']
+		);
+
+		$tableName="user_tbl";
+		$fieldName='userID';
+		$where= $_GET['userID'];
+
+		$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
+
+		if($updateRecordsRes){
+			echo json_encode(true);
+		}else{
+			echo json_encode(false);
+		}
+	}
+	//compare email
+	public function compareEmailUpdate(){
+   		$email = $_GET['email'];
+   		$currentEmail = $_GET['currentEmail'];
+
+   		// echo json_encode(array($email,$currentEmail,$email == $currentEmail));
+
+   		if ($email == $currentEmail){
+   			echo true;
+   		}else{
+	   		$test = $this->_getRecordsData(
+	   			$selectfields = array("*"), 
+		   		$tables = array('user_tbl'), 
+		   		$fieldName = array('email'), $where = array($email), 
+		   		$join = null, $joinType = null, $sortBy = null, 
+		   		$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+	   		);
+
+	   		if (count($test)==0) {
+	   			echo true;
+	   		}else{
+	   			echo false;
+	   		}
+   		}
+
+   		
+	}
 	
 
 
