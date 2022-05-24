@@ -1,3 +1,4 @@
+<link href="assets/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 <style type="text/css">
 	.is-invalid{
 		text-align:center;
@@ -5,7 +6,9 @@
 	.modal-footer{
 		display: none;
 	}
-
+	.is-invalid{
+		text-align: center;
+	}
 	.error{
 		color: red;
 	}

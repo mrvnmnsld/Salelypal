@@ -1,10 +1,17 @@
+<link href="assets/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 <style type="text/css">
 	.modal-footer{
 		display: none;
 	}
-
+	.is-invalid{
+		text-align: center;
+	}
 	.error{
 		color: red;
+	}
+	.icon-size{
+		font-size: 1.4em;
+		max-width: 2em;
 	}
 </style>
 
@@ -16,23 +23,34 @@
 
 <div id="main_modal_container">
 	<form id="addUserForm">
-		<div class="mb-3">
+
+		<label class="fw-bold">Email</label>
+		<div class="input-group row m-1 mb-3">
+			<i class="input-group-text fa fa-envelope icon-size" aria-hidden="true"></i>
 		  <input type="email" class="form-control" id="email" name="email" placeholder="Email">
 		</div>
-
-		<div class="mb-3">
+		
+		<label class="fw-bold">Fullname</label>		
+		<div class="input-group row m-1 mb-3">
+			<i class="input-group-text fa fa-user icon-size" aria-hidden="true"></i>
 		  <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Fullname">
 		</div>
-
-		<div class="mb-3">
+		
+		<label class="fw-bold">Password</label>
+		<div class="input-group row m-1 mb-3">
+			<i class="input-group-text fa fa-key icon-size" aria-hidden="true"></i>
 		  <input type="password" class="form-control" id="password" name="password" placeholder="Password">
 		</div>
-
-		<div class="mb-3">
+		
+		<label class="fw-bold">Birthday</label>
+		<div class="input-group row m-1 mb-3">
+			<i class="input-group-text fa fa-calendar icon-size" aria-hidden="true"></i>
 		  <input type="date" class="form-control" id="birthday" name="birthday" placeholder="Birthday">
 		</div>
-
-		<div class="mb-3">
+		
+		<label class="fw-bold">Mobile Number</label>
+		<div class="input-group row m-1 mb-3">
+			<i class="input-group-text fa fa-phone icon-size" aria-hidden="true"></i>
 		  <input type="text" class="form-control" id="mobilenumber" name="mobilenumber" placeholder="Mobile Number">
 		</div>
 	</form>

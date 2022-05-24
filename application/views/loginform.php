@@ -125,38 +125,38 @@
 
 
 	sliderCaptcha({
-				id: 'captcha',
-				width: 280,
-				height: 155,
-				sliderL: 42,
-				sliderR: 9,
-				offset: 5,
-				loadingText: 'Loading...',
-				failedText: 'Try again',
-				barText: 'Slide right to fill',
-				repeatIcon: 'fa fa-redo',
+		id: 'captcha',
+		width: 280,
+		height: 155,
+		sliderL: 42,
+		sliderR: 9,
+		offset: 5,
+		loadingText: 'Loading...',
+		failedText: 'Try again',
+		barText: 'Slide right to fill',
+		repeatIcon: 'fa fa-redo',
 
-				// localImages: function () { // uses local images instead
-					
-				// },
-				// setSrc: function () {
-				
-				// },
+		// localImages: function () { // uses local images instead
+			
+		// },
+		// setSrc: function () {
+		
+		// },
 
-				onSuccess: function () {
-					$("#sliderCaptchaModal").css("display", 'none')
-					$(".modal-backdrop").css("display", 'none')
-					console.log("captcha slider success");
+		onSuccess: function () {
+			$("#sliderCaptchaModal").css("display", 'none')
+			$(".modal-backdrop").css("display", 'none')
+			console.log("captcha slider success");
 
-					$("#loginForm").submit();
-				},
-				onFail: function () {
+			$("#loginForm").submit();
+		},
+		onFail: function () {
 
-				},
-				onRefresh: function () {
-				
-				}
-			});
+		},
+		onRefresh: function () {
+		
+		}
+	});
 
 			
 	// submit_login_btn
