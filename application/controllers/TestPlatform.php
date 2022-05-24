@@ -14,6 +14,13 @@ class testPlatform extends MY_Controller {
 		$this->load->view('wallet/test-platform/index');
 	}	
 
+	//arl_05-19-22
+
+		public function indexV2View(){
+			$this->load->view('wallet/test-platform/indexV2');
+		}
+	//arl_05-19-22	
+
 	public function getTronBalance(){
 		$selectedTokens = $this->_getRecordsData(
 			$selectfields = array("*"), 
