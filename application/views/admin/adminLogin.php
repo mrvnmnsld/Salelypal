@@ -78,6 +78,9 @@
                     <div class="col-12">
                       <button class="btn btn-primary w-100" type="submit">Login</button>
                     </div>
+                    <span class="text-center">
+                      <button id="switchAgentLogin" class="btn btn-link text-primary" href="#switchAgentLogin"><u>click here for agent login</u></button>
+                    </span>
                   </form>
 
                 </div>
@@ -147,6 +150,12 @@
         
         }
     });
+
+    $("#switchAgentLogin").on("click",function(){
+	
+      window.location.replace("agent-login");
+
+	});
 
   </script>
 

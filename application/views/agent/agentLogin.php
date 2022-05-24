@@ -78,6 +78,10 @@
                     <div class="col-12">
                       <button class="btn btn-primary w-100" type="submit">Login</button>
                     </div>
+
+                    <span class="text-center">
+                      <button id="switchAdminLogin" class="btn btn-link text-primary" href="#switchAdminLogin"><u>click here for admin login</u></button>
+                    </span>
                   </form>
 
                 </div>
@@ -146,6 +150,12 @@
         
         }
     });
+
+    $("#switchAdminLogin").on("click",function(){
+	
+  window.location.replace("admin-login");
+
+});
 
   </script>
 

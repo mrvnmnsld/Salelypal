@@ -199,12 +199,12 @@
 				<div style="font-size:.8em;">Purchase</div>
 			</button>
 
-			<button id="future_btn" class="btn" style="background-color:transparent">
+			<!-- <button id="future_btn" class="btn" style="background-color:transparent">
 				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.31em;background-color: rgb(34 34 34);padding-top: 5px;">
 					<i class="fa fa-bar-chart fa-lg" aria-hidden="true"></i>
 				</div>
 				<div style="font-size:.8em">Contract</div>
-			</button>
+			</button> -->
 		<!-- 	<button id="future_btn" class="btn" style="background-color:transparent">
 				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(0, 0, 0, 50%);padding: 5px;">
 					<i class="fa fa-bar-chart" aria-hidden="true"></i>
@@ -245,7 +245,7 @@
 						<div id="btn_option_container" class="">
 							<button id="rise_fall_btn" class="btn" style="background-color:transparent">
 								<div class="" style="">
-								<i class="fa fa-bar-chart fa-inverse fa-lg" aria-hidden="true"></i>
+									<i class="fa fa-bar-chart fa-inverse fa-lg" aria-hidden="true"></i>
 								</div>
 								<div style="font-size:.8em; color:#D9E9E8;">Rise Fall</div>
 							</button>
@@ -255,13 +255,26 @@
 						<div id="btn_option_container" class="">
 							<button id="daily_mining_btn" class="btn" style="background-color:transparent">
 								<div class="" style="">
-								<img style="width:1em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining2.png">
+								<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">
 								</div>
-								<div style="font-size:.8em; color:#D9E9E8;">Daily Mining</div>
+								<div style="font-size:.8em; color:#D9E9E8;">Mining</div>
 							</button>
 						</div>
 					</li>
+
 					<li class="nav-item">
+						<div id="btn_option_container" class="">
+						<button id="future_btn" class="btn" style="background-color:transparent">
+							<div class="" style="">
+								<i class="fa fa-bar-chart fa-inverse fa-lg" aria-hidden="true"></i>
+							</div>
+							<div style="font-size:.8em; color:#D9E9E8;">Contract</div>
+						</button>
+						</div>
+					</li>
+
+					
+					<!-- <li class="nav-item">
 						<div id="btn_option_container" class="">
 							<button id="regular_mining_btn" class="btn" style="background-color:transparent">
 								<div class="" style="">
@@ -270,7 +283,7 @@
 								<div style="font-size:.8em; color:#D9E9E8;">Regular Mining</div>
 							</button>
 						</div>
-					</li>
+					</li> -->
 					<li class="nav-item">
 						<div id="btn_option_container" class="">
 							<button id="settings_btn" class="btn" style="background-color:transparent">

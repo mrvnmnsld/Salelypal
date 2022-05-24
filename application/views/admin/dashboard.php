@@ -487,10 +487,21 @@ if (!isset($_SESSION["currentUser"])) {
   var currentUser = JSON.parse('<?php echo json_encode($_SESSION['currentUser'])?>');
   console.log(currentUser, "hello");
 
+
+  //User Type text UI
+
   $('#userNameLogged').text(currentUser.username);
   $('#userNameLoggedInner').text(currentUser.username);
+
+  if (currentUser.userType == 'superAdmin'){
+  $('#userType').text('Admin S');
+  $('#userTypeTitle').text('Admin S');
+  }else{
   $('#userType').text(currentUser.userType);
   $('#userTypeTitle').text(currentUser.userType);
+  }
+  
+  //User Type text UI
   
 
   jQuery.ajax({
