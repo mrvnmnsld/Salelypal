@@ -173,6 +173,13 @@ $route['main/getCurrentPrice'] = 'main/getCurrentPrice';
 		
 		$route['userWallet/future/setContractPosition'] = 'userWallet/setContractPosition';
 		$route['userWallet/future/getFuturePositionSet'] = 'userWallet/getFuturePositionSet';
+
+		$route['userWallet/riseFall/checkIfSet'] = 'userWallet/checkIfRisefallSet';
+		$route['userWallet/riseFall/getPositionDetails'] = 'userWallet/risefallGetPositionDetails';
+
+
+
+		
 	//riseFall
 
 	//mining
@@ -244,7 +251,7 @@ $route['testing'] = 'main/testing';
 	$route['test-platform/getUserPurchase'] = 'testPlatform/getUserPurchase';
 	$route['test-platform/buyCrypto'] = 'testPlatform/buyCrypto';
 
-	$route['test-platform/minusBalance'] = 'testPlatform/minusBalance';
+	$route['test-platform/newBalance'] = 'testPlatform/newBalance';
 // testing platform
 
 

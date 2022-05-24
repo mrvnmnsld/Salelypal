@@ -296,23 +296,23 @@
 				$("#new_notif_counter").text(initialNotifList.length);
 			}
 
-			const newNotifChecker = setInterval(function() {
-			    var notifList = ajaxShortLink("getNewNotifs",{
-			    	'userID':15
-			    });
+			// const newNotifChecker = setInterval(function() {
+			//     var notifList = ajaxShortLink("getNewNotifs",{
+			//     	'userID':15
+			//     });
 
-			    if(notifList.length>=1){
-			    	$.toast({
-			    	    text: 'You have '+notifList.length+' Unread Notifications',
-			    	    position: 'bottom-center',
-			    	    stack: false
-			    	})
+			//     if(notifList.length>=1){
+			//     	$.toast({
+			//     	    text: 'You have '+notifList.length+' Unread Notifications',
+			//     	    position: 'bottom-center',
+			//     	    stack: false
+			//     	})
 
-			    	$("#new_notif_counter").text(notifList.length);
-			    }
+			//     	$("#new_notif_counter").text(notifList.length);
+			//     }
 
-			    console.log(notifList);
-			}, 30000);	
+			//     console.log(notifList);
+			// }, 30000);	
 		//initial
 
 		// function checkValidityLocalStorageValidity(){

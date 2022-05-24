@@ -1424,8 +1424,6 @@ class userWallet extends MY_Controller {
 
 			echo $updateRecordsRes;
 		}
-
-		
 	}
 
 	public function triggerPriceAlerts(){
@@ -1686,6 +1684,54 @@ class userWallet extends MY_Controller {
 
 			echo json_encode($res);
 		}
+	}
+
+	public function checkIfRisefallSet(){
+		$res = $this->_getRecordsData(
+			$selectfields = array("future_risefall_positions.*,set_risefall_position.id AS setID"), 
+	   		$tables = array('set_risefall_position','future_risefall_positions'),
+	   		$fieldName = array('set_risefall_position.position_id'), 
+	   		$where = array($_GET['id']), 
+	   		$join = array('set_risefall_position.position_id = future_risefall_positions.id'), 
+	   		$joinType = array("inner"),
+	   		$sortBy = null, 
+	   		$sortOrder = null, 
+	   		$limit = null, 
+	   		$fieldNameLike = null, 
+	   		$like = null,
+	   		$whereSpecial = null, 
+	   		$groupBy = null 
+		);
+
+		if (count($res)==0) {
+			echo json_encode(false);
+		}else{
+			for ($i=0; $i < count($res); $i++) { 
+				$deleteQuery = $this->_deleteRecords(
+					$tableName = "set_risefall_position",
+				 	$fieldName = array("id"),
+				  	$where = array($res[$i]->setID)
+				);
+			}
+
+			echo json_encode($res);
+		}
+	}
+
+	public function risefallGetPositionDetails(){
+		$res = $this->_getRecordsData(
+			$selectfields = array("*"), 
+	   		$tables = array('future_risefall_positions'),
+	   		$fieldName = array('id'), $where = array($_GET['id']), 
+	   		$join = null, $joinType = null,
+	   		$sortBy = null, $sortOrder = null, 
+	   		$limit = null, 
+	   		$fieldNameLike = null, $like = null,
+	   		$whereSpecial = null, 
+	   		$groupBy = null 
+		);
+
+		echo json_encode($res);
 	}
 
 

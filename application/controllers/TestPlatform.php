@@ -74,7 +74,6 @@ class testPlatform extends MY_Controller {
 		echo json_encode($selectedTokens[0]);
 	}
 
-
 	public function getTokenBalanceBySmartAddress(){
 		$selectedTokens = $this->_getRecordsData(
 			$selectfields = array("*"), 
@@ -231,11 +230,47 @@ class testPlatform extends MY_Controller {
 
 			$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
 		}
-
-
-
-
 	}
+
+	public function newBalance(){
+		// echo $_GET['tokenName']."<br>";
+		if ($_GET['smartAddress']==null||$_GET['smartAddress']=='null') {
+			$tableName="test_platform_token_balance";
+			$fieldName='token';
+			$where=$_GET['tokenName'];
+
+			$insertRecord = array(
+				'balance'=>$_GET['newAmount'],
+			);
+
+			$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
+
+			if ($updateRecordsRes) {
+				echo true;
+			}else{
+				echo false;
+			}
+		}else if($_GET['smartAddress']!=null){
+			$tableName="test_platform_token_balance";
+			$fieldName='smartContract';
+			$where=$_GET['smartAddress'];
+
+			$insertRecord = array(
+				'balance'=>$_GET['newAmount'],
+			);
+
+			$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
+
+			if ($updateRecordsRes) {
+				echo true;
+			}else{
+				echo false;
+			}
+		}		
+	}
+
+
+	
 
 
 	

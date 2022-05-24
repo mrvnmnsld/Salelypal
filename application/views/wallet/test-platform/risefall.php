@@ -43,7 +43,7 @@
 
 <div id="innerContainer">
 
-    <div class="text-light p-1 m-1 rounded" style="background-color:#131722">
+    <div class="text-light p-1" style="background-color:#131722">
 
         <div class="p-2 text-light">
             <label>Select Token Pair: </label>
@@ -82,15 +82,10 @@
     </div>
 </div>
 
-
-
 <div class="mt-2 make_me_dark"> 
     <ul class="nav nav-tabs nav-fill">
       <li class="nav-item">
-        <a class="nav-link text-dark active" aria-current="page" data-toggle="tab" href="#pending_tab_btn">Pending</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link text-dark" data-toggle="tab" href="#history_tab_btn">History</a>
+        <a class="nav-link text-dark active" aria-current="page" data-toggle="tab" href="#history_tab_btn">History</a>
       </li>
       <li class="nav-item">
         <a class="nav-link text-dark" data-toggle="tab" href="#instructions_tab_btn">Instructions</a>
@@ -98,27 +93,8 @@
     </ul>
 
     <div class="tab-content">
-        <div id="pending_tab_btn" class="tab-pane active">
-          <table class="table" style="font-size: 13px;">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Type</th>
-                <th scope="col">Resolve Time</th>
-                <th scope="col">Amount</th>
-                <th scope="col">Price</th>
-                <th scope="col"></th>
-              </tr>
-            </thead>
-            <tbody id="positions_container">
-              <tr class="text-center text-danger" id="no_position_flag_container">
-                  <td colspan="5"><b>No positions opened</b></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
 
-        <div id="history_tab_btn" class="tab-pane fade">
+        <div id="history_tab_btn" class="tab-pane active">
             <table style="font-size: 13px;width: 100%;" cellpadding="5">
                 <thead>
                   <tr>
@@ -139,7 +115,7 @@
 
             <div class="text-center">
                 Showing 5 latest history<br>
-                <button class="btn btn-link" id="viewMore_history_btn">View More</button>
+                <!-- <button class="btn btn-link" id="viewMore_history_btn">View More</button> -->
             </div>
         </div>
 
@@ -173,7 +149,6 @@
     </div>
 </div>
 
-<!-- TradingView Widget BEGIN -->
 <script type="text/javascript">
     var tokenPriceBinanceLastPrice;
     var totalAmountPending = 0;
@@ -184,8 +159,6 @@
 
     var pendingPositionChecker;
     var tokenPriceInterval;
-
-    // $('#token_pair_select').selectpicker({search : true});
 
     $('#token_pair_select').change(function(){
         var selectedPair = $(this).val();
@@ -279,178 +252,6 @@
                 $("#token_pair_value_percentage_container").html(signContainer+tokenPriceBinancePriceChangePercent);
             }, 1000);
 
-            pendingPositionChecker = setInterval(function() {
-                var checkSet = ajaxShortLink('userWallet/risefall/getPositionSet',{
-                    'userID':currentUser.userID,
-                });
-
-                if(checkSet.length>=1){
-                    console.log(checkSet);
-
-                    for (var i = 0; i < checkSet.length; i++) {
-                        var newIncome;
-                        var statusClass;
-                        var timing;
-
-                        if(checkSet[i].status == "WIN"){
-                            newIncome = ((checkSet[i].income/100)*checkSet[i].amount).toFixed(4);
-                            statusClass = 'text-success';
-
-                            $.toast({
-                                heading: '<h6>WON!</h6>',
-                                text: 'You have won '+newIncome+' USDT',
-                                showHideTransition: 'slide',
-                                icon: 'success',
-                                position: 'bottom-center'
-                            })
-
-                            pushNewNotif("Position Won!(TESTING)","You have won "+newIncome+" USDT",15)
-
-                            // test-platform
-                                balanceUsdt = ajaxShortLink('test-platform/getTokenBalanceBySmartAddress',{
-                                    // 'trc20Address':currentUser['trc20_wallet'],
-                                    'contractaddress':'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t',
-                                })['balance'];
-
-                                $("#available_amount_container").html(parseFloat(balanceUsdt).toFixed(4)+" USDT");
-                            // test-platform
-
-                            //this is to show new balance once resolved
-                        }else if(checkSet[i].status == "LOSE"){
-                            statusClass = 'text-danger';
-
-                            $.toast({
-                                heading: '<h6>LOST!</h6>',
-                                text: 'You have lost '+positionsOpened[i].amount+' USDT',
-                                showHideTransition: 'slide',
-                                icon: 'error',
-                                position: 'bottom-center'
-                            })
-                        }
-
-                        innerPositionsOpened = ajaxShortLink(
-                            "userWallet/future/getPendingRiseFallPositions",
-                            {
-                                'userID':15,
-                                'tradePair':tokenPairArray.tokenPairDescription,
-                            }
-                        );  
-
-                        reloadPositions()
-                    }
-                }else{
-                    positionsOpened = ajaxShortLink(
-                        "userWallet/future/getPendingRiseFallPositions",
-                        {
-                            'userID':15,
-                            'tradePair':tokenPairArray.tokenPairDescription,
-                        }
-                    );
-                    
-                    for (var i = 0; i < positionsOpened.length; i++) {
-                        var timeNow = Date.parse(getTimeDateNonFormated());
-                        var positionOpenedTimeStamp = Date.parse(positionsOpened[i].timeStamp);
-                        var currentPrice = positionsOpened[i].currentPrice;
-                        var buyType = positionsOpened[i].buyType;
-                        var statusClass = "";
-
-                        if(timeNow>=positionOpenedTimeStamp){
-                            
-                            var ohlcTimeStamp = ajaxShortLinkNoParse("https://api.binance.com/api/v3/klines?symbol="+tokenPairArray.tokenPairID+"&interval=1m&limit=1&startTime="+(positionOpenedTimeStamp-60000)+"&endTime="+Date.parse(getTimeDateNonFormated()));
-                            var closeTokenValue = ohlcTimeStamp[0][4];
-                            var status = '';
-                            var newIncome = ((positionsOpened[i].income/100)*positionsOpened[i].amount).toFixed(4);
-                            var balanceUsdtInner = float2DecimalPoints($("#available_amount_container").text().split(' ')[0])
-
-                            console.log(currentPrice,closeTokenValue);
-
-                            if(buyType=='rise'){
-                                console.log();
-                                if (parseFloat(currentPrice)<parseFloat(closeTokenValue)) {
-                                    status = "WIN";
-                                    statusClass = 'text-success';
-
-                                    $.toast({
-                                        heading: '<h6>WON!</h6>',
-                                        text: 'You have won '+newIncome+' USDT',
-                                        showHideTransition: 'slide',
-                                        icon: 'success',
-                                        position: 'bottom-center'
-                                    })
-
-                                    ajaxShortLink('test-platform/risefall/winPosition',{
-                                        'newIncome':newIncome,
-                                        'amountStaked':positionsOpened[i].amount,
-                                        'amountUsdt':balanceUsdtInner,
-                                    });
-
-                                    addToAmountAvailable(parseFloat(newIncome)+parseFloat(positionsOpened[i].amount))
-
-                                    pushNewNotif("Position Won!(TESTING)","You have won "+newIncome+" USDT",15)
-                                }else{
-                                    status = "LOSE";
-                                    statusClass = 'text-danger';
-
-                                    $.toast({
-                                        heading: '<h6>LOST!</h6>',
-                                        text: 'You have lost '+positionsOpened[i].amount+' USDT',
-                                        showHideTransition: 'slide',
-                                        icon: 'error',
-                                        position: 'bottom-center'
-                                    })
-                                }
-                            }else if (buyType=='fall'){
-                                if (parseFloat(currentPrice)>parseFloat(closeTokenValue)) {
-                                    status = "WIN";
-                                    statusClass = 'text-success';
-
-                                    $.toast({
-                                        heading: '<h6>WON!</h6>',
-                                        text: 'You have won '+newIncome+' USDT',
-                                        showHideTransition: 'slide',
-                                        icon: 'success',
-                                        position: 'bottom-center'
-                                    })
-
-                                    // test-platform
-                                        ajaxShortLink('test-platform/risefall/winPosition',{
-                                            'newIncome':newIncome,
-                                            'amountStaked':positionsOpened[i].amount,
-                                            'amountUsdt':balanceUsdtInner,
-                                        });
-                                    // test-platform
-
-                                    addToAmountAvailable(parseFloat(newIncome)+parseFloat(positionsOpened[i].amount))
-
-                                    pushNewNotif("Position Won!(TESTING)","You have won "+newIncome+" USDT",15)    
-                                }else{
-                                    status = "LOSE";
-                                    statusClass = 'text-danger';
-
-                                    $.toast({
-                                        heading: '<h6>LOST!</h6>',
-                                        text: 'You have lost '+positionsOpened[i].amount+' USDT',
-                                        showHideTransition: 'slide',
-                                        icon: 'error',
-                                        position: 'bottom-center'
-                                    })
-                                }
-                            }
-
-                            // resolve here
-                                ajaxShortLink("userWallet/future/resolveRiseFallPosition",{
-                                    'id':positionsOpened[i].id,
-                                    'resolvedPrice':closeTokenValue,
-                                    'status':status,
-                                });
-
-                                reloadPositions()
-                            // resolve here                    
-                        }
-                    }
-                }
-            }, 5000);
-        //continous
     }, 2000);
 
     //callBackEnd
@@ -466,7 +267,7 @@
         $("#buy_rise_btn").on("click", function(){
 
             bootbox.alert({
-                message: ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/risefall_trade_pairs/buy'}),
+                message: ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/risefall_trade_pairs/buyrise'}),
                 size: 'large',
                 centerVertical: true,
                 closeButton: false
@@ -475,64 +276,12 @@
         });
 
         $("#buy_fall_btn").on("click", function(){
-            var riskOptionVal = $('input[name="risk_option_radio"]:checked').val().split('/');
-            var availableAmount = float2DecimalPoints($("#available_amount_container").text().split(' ')[0])
-            var buyType = 'fall';
-            var currentPrice = tokenPriceBinanceLastPrice;
-            var amountInput = $('#amount_input_container').val();
-            var timer = riskOptionVal[0];
-            var income = riskOptionVal[1];
-            var date = getEpochCurrentTime13Digit()
-            var timeStamp = formatDateObject(unixTimeToDate13CharNonFormated(date+(timer*1000)))
-
-            if(amountInput!=""&&amountInput<=availableAmount){
-                $.confirm({
-                    title: 'Buy Fall?',
-                    content: 'Are you sure you want to proceed with these risks?',
-                    buttons: {
-                        confirm: function () {
-                            var res = ajaxShortLink("userWallet/future/saveRiseFallPosition",{
-                                'currentPrice':currentPrice,
-                                'buyType':buyType,
-                                'income':income,
-                                'timeStamp':timeStamp,
-                                'amount':amountInput,
-                                'userID':15,
-                                'status':'PENDING',
-                                'tradePair':tokenPairArray.tokenPairDescription
-                            });
-
-                            balanceUsdtInner = float2DecimalPoints($("#available_amount_container").text().split(' ')[0])
-
-                            ajaxShortLink('test-platform/risefall/openPosition',{
-                                'amountStaked':amountInput,
-                                'totalAvailAmount':balanceUsdtInner,
-                            });
-
-                            minusToAmountAvailable(amountInput)
-
-                            $.toast({
-                                heading: '<h6>Success</h6>',
-                                text: 'Position Opened',
-                                showHideTransition: 'slide',
-                                icon: 'success',
-                                position: 'bottom-center'
-                            })
-
-                            reloadPositions();
-
-                            console.log(res);
-                        },
-                        cancel: function () {
-
-                        },
-                    }
-                });
-
-                // console.log(amountInput,buyType,timer,income,currentPrice,timeStamp);
-            }else{
-                $.alert("Please Input Enough USDT to be Staked");
-            }
+            bootbox.alert({
+                message: ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/risefall_trade_pairs/buyfall'}),
+                size: 'large',
+                centerVertical: true,
+                closeButton: false
+            });
         });
     //buy
 
@@ -590,51 +339,10 @@
 
     function reloadPositions(){
         var timing = '';
-        
-        $("#positions_container").empty();
-        $("#no_history_position_flag_container").empty();
-
-        // pendings
-            var innerPositionsOpened = ajaxShortLink(
-                "userWallet/future/getPendingRiseFallPositions",
-                {
-                    'userID':15,
-                    'tradePair':tokenPairArray.tokenPairDescription,
-                }
-            );
-
-            if (innerPositionsOpened.length == 0) {
-                $("#positions_container").append(
-                    '<tr class="text-center text-danger" id="no_position_flag_container">'+
-                       '<td colspan="5"><b>No positions opened</b></td>'+
-                    '</tr>'
-                ); 
-            }else{
-                console.log('HERE');
-
-                for (var x = 0; x < innerPositionsOpened.length; x++) {
-                    $("#positions_container").append(
-                        '<tr>'+
-                            '<td class="font-weight-bold">'+($('#positions_container tr').length+1)+'. </td>'+
-                            '<td>'+innerPositionsOpened[x].buyType+' @ '+timing+'</td>'+
-                            '<td data-countdown="'+innerPositionsOpened[x].timeStamp+'"></td>'+
-                            '<td>'+innerPositionsOpened[x].amount+'</td>'+
-                            '<td>'+parseFloat(innerPositionsOpened[x].currentPrice).toFixed(2)+'</td>'+
-                            '<td><button onclick="cancelPosition('+innerPositionsOpened[x].id+',this,'+innerPositionsOpened[x].amount+')" class="btn btn-danger btn-sm">X</button></td>'+
-                        '</tr>'
-                    );
-                } 
-            }
-
-            $('[data-countdown]').each(function() {
-              var $this = $(this), finalDate = $(this).data('countdown');
-              $this.countdown(finalDate, function(event) {
-                $this.html(event.strftime('%H:%M:%S'));
-              });
-            });
-        // pendings
-
         // closed
+
+            $("#positions_closed_container").empty();
+
             var closedPositions = ajaxShortLink(
                 "userWallet/future/getClosedRiseFallPositions",
                 {
@@ -682,9 +390,11 @@
                         '</tr>'
                     ); 
                 } 
-
-
             } 
         // closed
+    }
+
+    window.onbeforeunload = function() {
+        return "Dude, are you sure you want to leave? Think of the kittens!";
     }
 </script>
