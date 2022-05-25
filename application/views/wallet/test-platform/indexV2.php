@@ -207,33 +207,7 @@
 				</div>
 				<div style="font-size:.8em;">Purchase</div>
 			</button>
-
-			<!-- <button id="future_btn" class="btn" style="background-color:transparent">
-				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.31em;background-color: rgb(34 34 34);padding-top: 5px;">
-					<i class="fa fa-bar-chart fa-lg" aria-hidden="true"></i>
-				</div>
-				<div style="font-size:.8em">Contract</div>
-			</button> -->
-		<!-- 	<button id="future_btn" class="btn" style="background-color:transparent">
-				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(0, 0, 0, 50%);padding: 5px;">
-					<i class="fa fa-bar-chart" aria-hidden="true"></i>
-				</div>
-				<div style="font-size:.8em">Contract</div>
-			</button> -->
-
-			<!-- <button id="rise_fall_btn" class="btn" style="background-color:transparent">
-				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(0, 0, 0, 50%);padding: 5px;">
-					<i class="fa fa-bar-chart" aria-hidden="true"></i>
-				</div>
-				<div style="font-size:.8em">Rise Fall</div>
-			</button> -->
 		</div>
-
-		<!-- <hr style="
-		    height: 1.5px;
-		    width: 100%;
-		    background-color: #a0abaf;
-		" class=""> -->
 
 		<div id="tokenContainer">
 			<div style="font-size: 1.50rem;;" class="text-center text-muted font-weight-bold mt-2">Tokens</div>
@@ -247,56 +221,53 @@
             </button>
         </div>
 
-        <!-- arl_05-19-22 bottom nav  -->
+		<ul id="bottomNavBar" style="border:2px solid; background: rgb(34 34 34);" class="nav justify-content-center fixed-bottom">
+			<li class="nav-item">
+				<div id="btn_option_container" class="">
+					<button id="rise_fall_btn" class="btn" style="background-color:transparent">
+						<div class="" style="">
+							<i class="fa fa-bar-chart fa-inverse fa-lg" aria-hidden="true"></i>
+						</div>
+						<div style="font-size:.8em; color:#D9E9E8;">Rise Fall</div>
+					</button>
+				</div>
+			</li>
 
-				<ul id="bottomNavBar" style="border:2px solid; background: rgb(34 34 34);" class="nav justify-content-center fixed-bottom">
-					<li class="nav-item">
-						<div id="btn_option_container" class="">
-							<button id="rise_fall_btn" class="btn" style="background-color:transparent">
-								<div class="" style="">
-									<i class="fa fa-bar-chart fa-inverse fa-lg" aria-hidden="true"></i>
-								</div>
-								<div style="font-size:.8em; color:#D9E9E8;">Rise Fall</div>
-							</button>
+			<li class="nav-item">
+				<div id="btn_option_container" class="">
+				<button id="future_btn" class="btn" style="background-color:transparent">
+					<div class="" style="">
+						<i class="fa fa-bar-chart fa-inverse fa-lg" aria-hidden="true"></i>
+					</div>
+					<div style="font-size:.8em; color:#D9E9E8;">Contract</div>
+				</button>
+				</div>
+			</li>
+			
+			<li class="nav-item">
+				<div id="btn_option_container" class="">
+					<button id="modal_mining_btn" data-toggle="modal" data-target="#modal_mining" class="btn" style="background-color:transparent">
+						<div class="" style="">
+						<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">
 						</div>
-					</li>
-					<li class="nav-item">
-						<div id="btn_option_container" class="">
-							<button id="modal_mining_btn" data-toggle="modal" data-target="#modal_mining" class="btn" style="background-color:transparent">
-								<div class="" style="">
-								<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">
-								</div>
-								<div style="font-size:.8em; color:#D9E9E8;">Mine</div>
-							</button>
-						</div>
-					</li>
+						<div style="font-size:.8em; color:#D9E9E8;">Mine</div>
+					</button>
+				</div>
+			</li>
 
-					<li class="nav-item">
-						<div id="btn_option_container" class="">
-						<button id="future_btn" class="btn" style="background-color:transparent">
-							<div class="" style="">
-								<i class="fa fa-bar-chart fa-inverse fa-lg" aria-hidden="true"></i>
-							</div>
-							<div style="font-size:.8em; color:#D9E9E8;">Contract</div>
-						</button>
+			<li class="nav-item">
+				<div id="btn_option_container" class="">
+					<button id="settings_btn" class="btn" style="background-color:transparent">
+						<div class="" style="">
+						<i class="fa fa-cog fa-inverse" aria-hidden="true"></i>
 						</div>
-					</li>
-
-					<li class="nav-item">
-						<div id="btn_option_container" class="">
-							<button id="settings_btn" class="btn" style="background-color:transparent">
-								<div class="" style="">
-								<i class="fa fa-cog fa-inverse" aria-hidden="true"></i>
-								</div>
-								<div style="font-size:.8em; color:#D9E9E8;">Settings</div>
-							</button>
-						</div>
-					</li>
-				</ul>
-		<!-- arl_05-19-22 -->
+						<div style="font-size:.8em; color:#D9E9E8;">Settings</div>
+					</button>
+				</div>
+			</li>
+		</ul>
 
 		<style>
-
 			#modal_mining .modal-content{
 				background:transparent;
 			}
@@ -313,7 +284,6 @@
 			}
 
 			#modal_mining .btn-modal {
-
 				background: rgb(34 34 34);
 
 				border:.2px solid;
@@ -325,44 +295,42 @@
 				min-width: 100%;
 				padding:2em;
 			}
-			
-			
 		</style>
 
-				<div class="modal fade" id="modal_mining">
-					<div class="modal-dialog modal-dialog-centered">
-					<div class="modal-content" style="background-color: rgb(0 0 0 / 79%);">
-					
-						<div class="modal-header">
-						<!-- <h4 class="modal_mining modal-title"></h4> -->
-						<button type="button" class="close" data-dismiss="modal">
-							<i class="fa fa-close fa-inverse" aria-hidden="true"></i>
+		<div class="modal fade" id="modal_mining">
+			<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content" style="background-color: rgb(0 0 0 / 79%);">
+			
+				<div class="modal-header">
+				<!-- <h4 class="modal_mining modal-title"></h4> -->
+				<button type="button" class="close" data-dismiss="modal">
+					<i class="fa fa-close fa-inverse" aria-hidden="true"></i>
+				</button>
+				</div>
+				
+				<div class="modal-body" style="">
+						<div class="m-1 justify-content-center">
+						<button id="daily_mining_btn" type="button" class="btn btn-modal" data-dismiss="modal">
+						<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">
+						Daily Mining
+						</button>
+						</div>
+						<div class="m-1 justify-content-center">
+						<button type="regular_mining_btn" class="btn btn-modal" data-dismiss="modal">
+						<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">
+						Regular Mining
 						</button>
 						</div>
 						
-						<div class="modal-body" style="">
-								<div class="m-1 justify-content-center">
-								<button id="daily_mining_btn" type="button" class="btn btn-modal" data-dismiss="modal">
-								<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">
-								Daily Mining
-								</button>
-								</div>
-								<div class="m-1 justify-content-center">
-								<button type="regular_mining_btn" class="btn btn-modal" data-dismiss="modal">
-								<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">
-								Regular Mining
-								</button>
-								</div>
-								
-						</div>
-
-						<!-- <div class="modal_mining modal-footer">
-						<button type="button" class="btn" data-dismiss="modal">Close</button>
-						</div> -->
-						
-					</div>
-					</div>
 				</div>
+
+				<!-- <div class="modal_mining modal-footer">
+				<button type="button" class="btn" data-dismiss="modal">Close</button>
+				</div> -->
+				
+			</div>
+			</div>
+		</div>
 
 	</div>		
 
