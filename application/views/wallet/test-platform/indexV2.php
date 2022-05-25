@@ -139,7 +139,7 @@
 <!-- css -->
 
 <body>
-	<div id="loadSpinner" class="text-center text-primary" style="margin-top: 30vh;">
+<div id="loadSpinner" class="text-center text-primary" style="margin-top: 30vh;">
 	  	<div class="spinner-border" role="status" style="width: 5rem; height: 5rem;">
 	    	<span class="sr-only"></span>
 	  	</div><br>
@@ -148,9 +148,9 @@
 
 	<div id="mySidenav" class="sidenav">
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-
+		<a class="" href="#" id="notif_btn">Notifications (<span id="new_notif_counter">0</span>)</a>
 		<!-- <a class="" href="#" id="profile_btn">Profile</a> -->
-		<a class="" href="#" id="settings_btn">Settings</a>
+		<!-- <a class="" href="#" id="settings_btn">Settings</a> -->
 		<!-- <a class="" href="#" id="buyCrypto_btn">Buy Crypto</a> -->
 		<!-- <a class="" href="#" id="purchaseHistory_btn">Purchase History</a> -->
 		<!-- <a class="" href="#" id="purchaseAppeals_btn">Purchase Appeals</a> -->
@@ -159,19 +159,17 @@
 		<!-- <a class="" href="#" id="withdraw_btn">Withdraw</a> -->
 		<!-- <a class="" href="#" id="exportWallet_btn">Export Wallet</a> -->
 		<hr class="bg-light" style="width:60%">
-  		<a class="text-danger" href="#" id="logOut_btn">Logout</a>
+  		<!-- <a class="text-danger" href="#" id="logOut_btn">Logout</a> -->
 	</div>
 
 	<div id="topNavBar" style="display:none;">
-		<span style="float: left;" onclick="backButton()"><i class="fa fa-home fa-lg fa-inverse" aria-hidden="true"></i></span>
+		<span style="float: left;" onclick="backButton()"><i class="fa fa-home fa-lg" aria-hidden="true"></i></span>
 		<span id="tittle_container" class="text-center font-weight-bold" data-page-url="wallet/index">Security Wallet</span>
-
-
 		
 		<!-- arl_05-19-22 notification icon and count -->
 		
 		<span id="notif_btn" class="" style="float:right; " onclick="notif_btn()">
-			<i id="notif_logo" class="fa fa-bell fa-md fa-inverse"  aria-hidden="true">
+			<i id="notif_logo" class="fa fa-bell fa-md fa-inverse" style="color:#D9E9E8;"  aria-hidden="true">
 				<span id="notif_counter_number" style="font-size:.45em; right:.4em; top:1.5em; display:none" class="position-absolute badge bg-danger">0</span>
 			</i>
 		</span>
@@ -183,68 +181,53 @@
 	<div id="container" class="mb-5" style="display:none"> 
 		<div class="m-2 text-left">
 			<div class="h3 p-2 m-2 font-weight-bold text-center">
-				<span class="h3">Total Asset in USD: </span> <br>
+				<span class="h5">All Asssets in USD:</span> <br>
 				<span id="totalInUsdContainer">Loading...</span>
 			</div>	
 		</div>
 
 		<div id="btn_option_container" class="d-flex justify-content-center mt-1">
 			<button id="deposit_btn_option" class="btn" style="background-color:transparent">
-				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(0, 0, 0, 50%);padding: 5px;">
+				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(34 34 34);padding: 5px;">
 					<i class="fa fa-arrow-circle-down fa-lg" aria-hidden="true"></i>
 				</div>
 				<div style="font-size:.8em">Deposit</div>
 			</button>
 
 			<button id="withdraw_btn_option" class="btn" style="background-color:transparent">
-				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(0, 0, 0, 50%);padding: 5px;">
+				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(34 34 34);padding: 5px;">
 					<i class="fa fa-arrow-circle-up fa-lg" aria-hidden="true"></i>
 				</div>
 				<div style="font-size:.8em">Withdraw</div>
 			</button>
 
 			<button id="buy_btn_option" class="btn" style="background-color:transparent">
-				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(0, 0, 0, 50%);padding: 5px;">
+				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(34 34 34);padding: 5px;">
 					<i class="fa fa-usd fa-lg" aria-hidden="true"></i>
 				</div>
 				<div style="font-size:.8em;">Purchase</div>
 			</button>
 
-			<button id="future_btn" class="btn" style="background-color:transparent">
-				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.31em;background-color: rgb(0, 0, 0, 50%);padding-top: 5px;">
+			<!-- <button id="future_btn" class="btn" style="background-color:transparent">
+				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.31em;background-color: rgb(34 34 34);padding-top: 5px;">
 					<i class="fa fa-bar-chart fa-lg" aria-hidden="true"></i>
 				</div>
 				<div style="font-size:.8em">Contract</div>
-			</button>
+			</button> -->
+		<!-- 	<button id="future_btn" class="btn" style="background-color:transparent">
+				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(0, 0, 0, 50%);padding: 5px;">
+					<i class="fa fa-bar-chart" aria-hidden="true"></i>
+				</div>
+				<div style="font-size:.8em">Contract</div>
+			</button> -->
 
-			<!-- arl_05-19-22 transfer links to bottom  -->
-			
-						<!-- <button id="rise_fall_btn" class="btn" style="background-color:transparent">
-							<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(0, 0, 0, 50%);padding: 5px;">
-								<i class="fa fa-bar-chart" aria-hidden="true"></i>
-							</div>
-							<div style="font-size:.8em">Rise Fall</div>
-						</button> -->
+			<!-- <button id="rise_fall_btn" class="btn" style="background-color:transparent">
+				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(0, 0, 0, 50%);padding: 5px;">
+					<i class="fa fa-bar-chart" aria-hidden="true"></i>
+				</div>
+				<div style="font-size:.8em">Rise Fall</div>
+			</button> -->
 		</div>
-
-					<!-- <div id="btn_option_container_lower" class="d-flex justify-content-center mt-1">
-						<button id="regular_mining_btn" class="btn" style="background-color:transparent">
-							<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(0, 0, 0, 50%);padding: 5px;">
-								<img style="width:1.3em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">					
-							</div>
-							<div style="font-size:.8em">Regular Mining</div>
-						</button>
-
-						<button id="daily_mining_btn" class="btn" style="background-color:transparent">
-							<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(0, 0, 0, 50%);padding: 5px;">
-								<img style="width:1.3em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining2.png">
-							</div>
-							<div style="font-size:.8em">Daily Mining</div>
-						</button>
-					</div> -->
-
-						<!-- arl_05-19-22 transfer links to bottom  -->
-		
 
 		<!-- <hr style="
 		    height: 1.5px;
@@ -253,7 +236,7 @@
 		" class=""> -->
 
 		<div id="tokenContainer">
-			<div style="font-size: 2rem;;" class="text-center text-muted font-weight-bold mt-3 ">TOKENS</div>
+			<div style="font-size: 1.50rem;;" class="text-center text-muted font-weight-bold mt-2">Tokens</div>
 			<!-- <hr style="height: 1px;width: 70%;" class="bg-dark"> -->
 		</div>
 
@@ -264,15 +247,14 @@
             </button>
         </div>
 
-		<!-- arl_05-19-22 -->
+        <!-- arl_05-19-22 bottom nav  -->
 
-			
 				<ul id="bottomNavBar" style="border:2px solid; background: rgb(34 34 34);" class="nav justify-content-center fixed-bottom">
 					<li class="nav-item">
 						<div id="btn_option_container" class="">
 							<button id="rise_fall_btn" class="btn" style="background-color:transparent">
-								<div class="" style="font-size:1.5em;">
-								<i class="fa fa-bar-chart fa-inverse fa-lg" aria-hidden="true"></i>
+								<div class="" style="">
+									<i class="fa fa-bar-chart fa-inverse fa-lg" aria-hidden="true"></i>
 								</div>
 								<div style="font-size:.8em; color:#D9E9E8;">Rise Fall</div>
 							</button>
@@ -280,29 +262,31 @@
 					</li>
 					<li class="nav-item">
 						<div id="btn_option_container" class="">
-							<button id="daily_mining_btn" class="btn" style="background-color:transparent">
-								<div class="" style="font-size:1.5em;">
-								<img style="width:1em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining2.png">
+							<button id="modal_mining_btn" data-toggle="modal" data-target="#modal_mining" class="btn" style="background-color:transparent">
+								<div class="" style="">
+								<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">
 								</div>
-								<div style="font-size:.8em; color:#D9E9E8;">Daily Mining</div>
+								<div style="font-size:.8em; color:#D9E9E8;">Mine</div>
 							</button>
 						</div>
 					</li>
+
 					<li class="nav-item">
 						<div id="btn_option_container" class="">
-							<button id="regular_mining_btn" class="btn" style="background-color:transparent">
-								<div class="" style="font-size:1.5em;">
-								<img style="width:1.25em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">	
-								</div>
-								<div style="font-size:.8em; color:#D9E9E8;">Regular Mining</div>
-							</button>
+						<button id="future_btn" class="btn" style="background-color:transparent">
+							<div class="" style="">
+								<i class="fa fa-bar-chart fa-inverse fa-lg" aria-hidden="true"></i>
+							</div>
+							<div style="font-size:.8em; color:#D9E9E8;">Contract</div>
+						</button>
 						</div>
 					</li>
+
 					<li class="nav-item">
 						<div id="btn_option_container" class="">
-							<button id="settings_btn" class="btn" style="background-color:transparent" onclick="openNav()">
-								<div class="" style="font-size:1.5em;">
-								<i class="fa fa-cog fa-lg fa-inverse" aria-hidden="true"></i>
+							<button id="settings_btn" class="btn" style="background-color:transparent">
+								<div class="" style="">
+								<i class="fa fa-cog fa-inverse" aria-hidden="true"></i>
 								</div>
 								<div style="font-size:.8em; color:#D9E9E8;">Settings</div>
 							</button>
@@ -311,6 +295,74 @@
 				</ul>
 		<!-- arl_05-19-22 -->
 
+		<style>
+
+			#modal_mining .modal-content{
+				background:transparent;
+			}
+
+			#modal_mining .modal-header{
+				padding:.3em;
+
+			}
+
+			#modal_mining .modal-body{
+				
+				padding:0em!important;
+
+			}
+
+			#modal_mining .btn-modal {
+
+				background: rgb(34 34 34);
+
+				border:.2px solid;
+				border-radius : .5em;
+				
+				color: #D9E9E8;
+
+				min-height: 100%;
+				min-width: 100%;
+				padding:2em;
+			}
+			
+			
+		</style>
+
+				<div class="modal fade" id="modal_mining">
+					<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content" style="">
+					
+						<div class="modal-header">
+						<!-- <h4 class="modal_mining modal-title"></h4> -->
+						<button type="button" class="close" data-dismiss="modal">
+							<i class="fa fa-close fa-inverse" aria-hidden="true"></i>
+						</button>
+						</div>
+						
+						<div class="modal-body" style="">
+								<div class="m-1 justify-content-center">
+								<button id="daily_mining_btn" type="button" class="btn btn-modal" data-dismiss="modal">
+								<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">
+								Daily Mining
+								</button>
+								</div>
+								<div class="m-1 justify-content-center">
+								<button type="regular_mining_btn" class="btn btn-modal" data-dismiss="modal">
+								<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">
+								Regular Mining
+								</button>
+								</div>
+								
+						</div>
+
+						<!-- <div class="modal_mining modal-footer">
+						<button type="button" class="btn" data-dismiss="modal">Close</button>
+						</div> -->
+						
+					</div>
+					</div>
+				</div>
 
 	</div>		
 
@@ -636,6 +688,28 @@
 				});
 			});
 
+			$('#regular_mining_btn').on('click',function(){
+				clearTimeout(tokenLoadTimer);
+				$("#tittle_container").text('Regular Income Mining');
+				$.when(closeNav()).then(function() {
+					$('#topNavBar').toggle();
+			  		$("#container").fadeOut(animtionSpeed, function() {
+					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
+				  			$("#container").empty();
+				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/regular_mining'}));
+
+				  			setTimeout(function(){
+				  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
+				  					$('#topNavBar').toggle();
+				  					$("#container").fadeIn(animtionSpeed);
+				  				});
+				  			}, 2000);
+					  		
+				    	});
+				  	});
+				});
+			});
+
 			$('#daily_mining_btn').on('click',function(){
 				clearTimeout(tokenLoadTimer);
 				$("#tittle_container").text('Daily Income Mining');
@@ -674,7 +748,7 @@
 		}
 
 		function backButton(){
-			window.location.href = 'test-platform';//local
+			window.location.href = 'test-platformV2';//local
 		}
 
 		function loadTokenInfo(tokenInfo){

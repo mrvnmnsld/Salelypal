@@ -1,3 +1,4 @@
+<link href="assets/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 <style type="text/css">
 	.modal-footer{
 		display: none;
@@ -19,12 +20,11 @@
 	}
 
 </style>
-
 <div class="pagetitle">
   <h1>Add New User</h1> 
 </div>
 
-<hr>
+<hr> 
 
 <div id="main_modal_container">
 
@@ -49,6 +49,7 @@
 
 		<label class="fw-bold">Username</label>
 		<div class="input-group row m-1 mb-3">
+			
 			<i class="input-group-text fa fa-user-circle icon-size" aria-hidden="true"></i>	
 			<input type="text" class="form-control" id="username" name="username" placeholder="Username">	
 		</div>

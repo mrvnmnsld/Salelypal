@@ -264,12 +264,31 @@ $route['testing'] = 'main/testing';
 	$route['agent/getAgentInvites'] = 'agent/getAgentInvites';
 	$route['homeViewPro'] = 'main/homeViewPro';
 
-	//merged from kokoy
+	//pancho_05-24-2022
+
+	//agent management
 	$route['agent/getAgent'] = 'agent/getAgent';
 	$route['agent/saveNewAgent'] = 'agent/saveNewAgent';
 	$route['agent/updateAgentInfo'] = 'agent/updateAgentInfo';
 	$route['agent/deleteAgent'] = 'agent/deleteAgent';
+	//agent management
 
+	//users management
+	$route['getUsers'] = 'testPlatform/getUsers';
+	$route['saveNewUser'] = 'testPlatform/saveNewUser';
+	$route['deleteUser'] = 'testPlatform/deleteUser';
+	$route['updateUserInfo'] = 'testPlatform/updateUserInfo';
+	$route['compareEmailUpdate'] = 'testPlatform/compareEmailUpdate';
+	//users management
+
+	//create wallet
+	$route['walletTesting/walletView'] = 'walletTesting/walletView';
+	$route['walletTesting/createWallet'] = 'walletTesting/createWallet';
+	$route['walletTesting/getTronBalance'] = 'walletTesting/getTronBalance';
+	$route['walletTesting/sendTron'] = 'walletTesting/sendTron';
+	//create wallet
+
+	//pancho_05-24-2022	
 
 	//test routes
 		$route['walletTesting/createWallet'] = 'walletTesting/createWallet';

@@ -137,97 +137,72 @@
 <!-- css -->
 
 <body>
-	<div id="loadSpinner" class="text-center text-primary" style="margin-top: 30vh;">
+<div id="loadSpinner" class="text-center text-primary" style="margin-top: 30vh;">
 	  	<div class="spinner-border" role="status" style="width: 5rem; height: 5rem;">
 	    	<span class="sr-only"></span>
 	  	</div><br>
 		<span class="font-weight-bold mt-2" id="loading_text_container" style="font-size: 30px;text-align: center;">Loading...</span>
 	</div>
 
-	<div id="mySidenav" class="sidenav">
-		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-		<a class="" href="#" id="notif_btn">Notifications (<span id="new_notif_counter">0</span>)</a>
-		<!-- <a class="" href="#" id="profile_btn">Profile</a> -->
-		<a class="" href="#" id="settings_btn">Settings</a>
-		<!-- <a class="" href="#" id="buyCrypto_btn">Buy Crypto</a> -->
-		<!-- <a class="" href="#" id="purchaseHistory_btn">Purchase History</a> -->
-		<!-- <a class="" href="#" id="purchaseAppeals_btn">Purchase Appeals</a> -->
-		<!-- <a class="" href="#" id="transactionHistory_btn">Transaction History</a> -->
-		<!-- <a class="" href="#" id="deposit_btn">Deposit</a> -->
-		<!-- <a class="" href="#" id="withdraw_btn">Withdraw</a> -->
-		<!-- <a class="" href="#" id="exportWallet_btn">Export Wallet</a> -->
-		<hr class="bg-light" style="width:60%">
-  		<a class="text-danger" href="#" id="logOut_btn">Logout</a>
-	</div>
+		<div id="mySidenav" class="sidenav">
+			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+			<!-- <a class="" href="#" id="profile_btn">Profile</a> -->
+			<!-- <a class="" href="#" id="settings_btn">Settings</a> -->
+			<!-- <a class="" href="#" id="buyCrypto_btn">Buy Crypto</a> -->
+			<!-- <a class="" href="#" id="purchaseHistory_btn">Purchase History</a> -->
+			<!-- <a class="" href="#" id="purchaseAppeals_btn">Purchase Appeals</a> -->
+			<!-- <a class="" href="#" id="transactionHistory_btn">Transaction History</a> -->
+			<!-- <a class="" href="#" id="deposit_btn">Deposit</a> -->
+			<!-- <a class="" href="#" id="withdraw_btn">Withdraw</a> -->
+			<!-- <a class="" href="#" id="exportWallet_btn">Export Wallet</a> -->
+			<hr class="bg-light" style="width:60%">
+	  		<!-- <a class="text-danger" href="#" id="logOut_btn">Logout</a> -->
+		</div>
 
 	<div id="topNavBar" style="display:none;">
-		<span style="float: left;" onclick="backButton()"><i class="fa fa-home" aria-hidden="true"></i></span>
+		<span style="float: left;" onclick="backButton()"><i class="fa fa-home fa-lg" aria-hidden="true"></i></span>
 		<span id="tittle_container" class="text-center font-weight-bold" data-page-url="wallet/index">Security Wallet</span>
-		<span style="float: right;" onclick="openNav()">&#9776;</span>
+
+		<span id="notif_btn" class="" style="float:right; " onclick="notif_btn()">
+			<i id="notif_logo" class="fa fa-bell fa-md fa-inverse" style="color:#D9E9E8;" aria-hidden="true">
+				<span id="notif_counter_number" style="font-size:.45em; right:.4em; top:1.5em; display:none" class="position-absolute badge bg-danger">0</span>
+			</i>
+		</span>
+
 	</div>
 
+	
 	<div id="container" class="mb-5" style="display:none"> 
 		<div class="m-2 text-left">
 			<div class="h3 p-2 m-2 font-weight-bold text-center">
-				<span class="h5">All Asssets in USD:</span> <br>
+				<span class="h3">Total Asset in USD: </span> <br>
 				<span id="totalInUsdContainer">Loading...</span>
 			</div>	
 		</div>
 
 		<div id="btn_option_container" class="d-flex justify-content-center mt-1">
 			<button id="deposit_btn_option" class="btn" style="background-color:transparent">
-				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(0, 0, 0, 50%);padding: 5px;">
-					<i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
+				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(34 34 34);padding: 5px;">
+					<i class="fa fa-arrow-circle-down fa-lg" aria-hidden="true"></i>
 				</div>
 				<div style="font-size:.8em">Deposit</div>
 			</button>
 
 			<button id="withdraw_btn_option" class="btn" style="background-color:transparent">
-				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(0, 0, 0, 50%);padding: 5px;">
-					<i class="fa fa-arrow-circle-o-up" aria-hidden="true"></i>
+				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(34 34 34);padding: 5px;">
+					<i class="fa fa-arrow-circle-up fa-lg" aria-hidden="true"></i>
 				</div>
 				<div style="font-size:.8em">Withdraw</div>
 			</button>
 
 			<button id="buy_btn_option" class="btn" style="background-color:transparent">
-				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(0, 0, 0, 50%);padding: 5px;">
-					<i class="fa fa-usd" aria-hidden="true"></i>
+				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(34 34 34);padding: 5px;">
+					<i class="fa fa-usd fa-lg" aria-hidden="true"></i>
 				</div>
-				<div style="font-size:.8em">Purchase</div>
-			</button>
-
-			<button id="future_btn" class="btn" style="background-color:transparent">
-				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(0, 0, 0, 50%);padding: 5px;">
-					<i class="fa fa-bar-chart" aria-hidden="true"></i>
-				</div>
-				<div style="font-size:.8em">Contract</div>
-			</button>
-
-			<button id="rise_fall_btn" class="btn" style="background-color:transparent">
-				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(0, 0, 0, 50%);padding: 5px;">
-					<i class="fa fa-bar-chart" aria-hidden="true"></i>
-				</div>
-				<div style="font-size:.8em">Rise Fall</div>
+				<div style="font-size:.8em;">Purchase</div>
 			</button>
 		</div>
-
-		<div id="btn_option_container_lower" class="d-flex justify-content-center mt-1">
-			<button id="regular_mining_btn" class="btn" style="background-color:transparent">
-				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(0, 0, 0, 50%);padding: 5px;">
-					<img style="width:1.3em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">					
-				</div>
-				<div style="font-size:.8em">Regular Mining</div>
-			</button>
-
-			<button id="daily_mining_btn" class="btn" style="background-color:transparent">
-				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(0, 0, 0, 50%);padding: 5px;">
-					<img style="width:1.3em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining2.png">
-				</div>
-				<div style="font-size:.8em">Daily Mining</div>
-			</button>
-		</div>
-
-
 		
 
 		<!-- <hr style="
@@ -237,18 +212,21 @@
 		" class=""> -->
 
 		<div id="tokenContainer">
-			<div style="font-size: 1.50rem;;" class="text-center text-muted font-weight-bold mt-2">Tokens</div>
-			<!-- <hr style="height: 1px;width: 70%;" class="bg-dark"> -->
+			<div style="font-size: 2rem;;" class="text-center text-muted font-weight-bold mt-3 ">TOKENS</div>
 		</div>
 
-		<div class="col-md-12 text-center pl-3 pr-3">
-            <button class="btn btn-outline-link btn-block text-primary mt-2" id="addToken_btn">
-            	<i class="fa fa-sliders" aria-hidden="true"></i>
-            	Manage Tokens
+		<div class="d-flex justify-content-center fixed-bottom" style="border:2px solid; background: rgb(34 34 34);">
+            <button id="addToken_btn" class="btn btn-outline-link btn-block text-white mt-2">
+            	<i class="fa fa-sliders fa-lg" aria-hidden="true"></i>
+				<div style="font-size:.8em; color:#D9E9E8;">Manage Tokens</div>
             </button>
-        </div>
 
-	</div>		
+            <button id="settings_btn" class="btn btn-outline-link btn-block text-white mt-2">
+				<i class="fa fa-cog fa-lg" aria-hidden="true"></i>
+				
+				<div style="font-size:.8em; color:#D9E9E8;">Settings</div>
+			</button>	
+        </div>
 
 	<script type="text/javascript">
 
@@ -482,7 +460,10 @@
 				});
 			});
 
-			$('#notif_btn').on('click',function(){
+			function notif_btn(){
+				$("#notif_counter_number").text("");
+				$("#notif_counter_number").removeClass("animate__animated animate__bounce animate__repeat-2");
+				$("#notif_counter_number").css("display", "none");
 				clearTimeout(tokenLoadTimer);
 				clearTimeout(newNotifChecker);
 				$("#tittle_container").text('Notification Center');
@@ -500,7 +481,7 @@
 				    	});
 				  	});
 				});
-			});
+			}
 
 			$('#settings_btn').on('click',function(){
 				clearTimeout(tokenLoadTimer);
