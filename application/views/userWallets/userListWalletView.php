@@ -1,3 +1,9 @@
+<style type="text/css">
+	.modal-footer{
+		display: none;
+	}
+</style>
+
 <div class="pagetitle">
   <h1>User Wallet View</h1>
   <sub>Viewing of main wallet settings</sub>
@@ -63,45 +69,42 @@
 	  <!-- <button class="btn btn-primary btn-sm mt-1" disabled>View Purchased Crypto</button> -->
 	  <button class="btn btn-primary btn-sm mt-1" id="view_transactions_btn">View Transactions</button>
 	  <button class="btn btn-primary btn-sm mt-1" id="view_balance_btn">View Balance</button>
+	  <button class="btn btn-danger btn-sm mt-1" id="close_modal_btn">Close</button>
 	  <!-- <button class="btn btn-primary"></div> -->
 	</div>
 </div>
 
 <div id="second_page_modal_container" style="display:none">
-	<div class="row mb-2">
-	  	<label for="inputEmail3" class="col-sm-1 col-form-label fw-bold">TRX:</label>
-	  	<div class="col-md pt-1" id="trx_balance_container">TEST </div>
-	</div>	
+	<div class="form-group">
+      <label>Please select token</label>
+      <select id="token_select" name="token_select" class="form-control">
+          <option value="">Select Token...</option>
+      </select>
 
-	<div class="row mb-2">
-	  	<label for="inputEmail3" class="col-sm-1 col-form-label fw-bold">USDT:</label>
-	  	<div class="col-md pt-1" id="usdt_balance_container">TEST </div>
-	</div>	
+      <br>
 
-	<div class="row mb-2">
-	  	<label for="inputEmail3" class="col-sm-1 col-form-label fw-bold">BNB:</label>
-	  	<div class="col-md pt-1" id="bnb_balance_container">TEST </div>
-	</div>	
+      <div>Token Name: <span id="token"></span></div>
+      <div>Network: <span id="network"></span></div>
+      <div>Available Balance: <span id="balance"></span></div>
 
-	<!-- <div class="form-group">
-  	<label for="inputEmail3" class="col-form-label fw-bold">Select which token to load:</label>
-		<select class="form-control form-control-sm">
-			<option>Select ...</option>
-			<option>Token1</option>
-			<option>Token1</option>
-			<option>Token1</option>
-		</select>
-	</div> -->
+      <hr>
 
-	<!-- 	<div class="row mb-2">
-	  	<label for="inputEmail3" class="col-sm-3 col-form-label fw-bold">Token selected:</label>
-	  	<div class="col-md-9" id="selected_balance_container">TEST </div>
-	</div>
+      <form>
+      	<div class="form-group">
+      		<label>Receiver's Address:</label>
+      		<input class="form-control" type="text" name="">
+      	</div>
 
-	<div class="mb-1 font-weight-bold text-center">Options:</div> -->
+      	<div class="form-group">
+      		<label>Amount:</label>
+      		<input class="form-control" type="number" name="">
+      	</div>
+      </form>
+  </div>
 
 	<div class="d-flex flex-column">
-	  <button class="btn btn-success btn-sm mt-1" id="back_btn">Back to overview</button>
+		<button class="btn btn-success btn-sm mt-1" id="proceed_withdraw_btn">Send</button>
+	  <button class="btn btn-danger btn-sm mt-1" id="back_btn">Back to overview</button>
 	  <!-- <button class="btn btn-primary"></div> -->
 	</div>
 </div>
@@ -138,6 +141,17 @@
 	$("#bsc_wallet_container").val(selectedData["trc20_wallet"]);
 	$("#erc20_wallet_container").val(selectedData["erc20_wallet"]);
 
+	var allTokens = ajaxShortLink('userWallet/getAllTokensV2');
+
+    for (var i = 0; i < allTokens.length; i++) {
+        $("#token_select").append(
+            '<option value="'+allTokens[i].tokenName+'_'+allTokens[i].networkName+'_'+allTokens[i].smartAddress+'_'+allTokens[i].coingeckoTokenId+'">'+
+                allTokens[i].description+' ('+allTokens[i].networkName.toUpperCase()+')'+
+            '</option>'
+        );
+    }
+    console.log(allTokens);
+
 	if (selectedData["isStrict"] == 1) {
 		$('#block_btn').addClass('disabled');
 		$('#strictStatus_container').addClass('text-danger font-weight-bold');
@@ -146,6 +160,92 @@
 		$('#strictStatus_container').text('No');
 		$('#unblock_btn').addClass('disabled');
 	}
+
+	$("#view_balance_btn").on('click',function(){
+		$("#main_modal_container").toggle();
+		$("#second_page_modal_container").toggle();
+
+		// console.log("test");
+		// edit here
+	});
+
+	$("#proceed_withdraw_btn").on('click',function(){
+    $('#second_page_modal_container').toggle();
+		$("#withdraw_modal_container").toggle();
+		// edit here
+	});
+
+	$("#token_select").on('change', function(){
+        var tokenInfoWithdraw = $(this).val().split("_");
+
+        console.log(tokenInfoWithdraw);
+
+        if (tokenInfoWithdraw[1] == 'trx'||tokenInfoWithdraw[1] == 'trc20') {
+            if (tokenInfoWithdraw[0].toUpperCase() === 'trx'.toUpperCase()) {
+            	// console.log('tron');
+                // availBalance = ajaxShortLink('mainWallet/getTronBalance')['balance'];          
+            }else{
+                // availBalance = ajaxShortLink('mainWallet/getTRC20Balance',{
+                //     'contractaddress':tokenInfoWithdraw[2]
+                // })['balance'];
+            }
+
+            $('#token').text(tokenInfoWithdraw[0]);
+            $('#network').text(tokenInfoWithdraw[1].toUpperCase());
+
+            $("#amount").rules( "remove", "min max" );
+
+            $( "#amount" ).rules( "add", {
+              min: 5
+            });
+
+        }else if(tokenInfoWithdraw[1] =='bsc'){
+            if(tokenInfoWithdraw[0].toUpperCase() === 'bnb'.toUpperCase()){
+            	console.log('bsc');
+                // availBalance = ajaxShortLink('mainWallet/getBinancecoinBalance')['balance'];
+            }else{
+                // availBalance = ajaxShortLink('mainWallet/getBscTokenBalance',{
+                //     'contractaddress':tokenInfoWithdraw[2]
+                // })['balance'];
+            	console.log('bsc');
+
+	            	$('#token').text(tokenInfoWithdraw[0]);
+	           		$('#network').text(tokenInfoWithdraw[1].toUpperCase());
+
+                $("#amount").rules( "remove", "min max" );
+
+                $( "#amount" ).rules( "add", {
+                  min: 0.01
+                });
+            }
+        }else if(tokenInfoWithdraw[1] =='erc20'){
+
+            if(tokenInfoWithdraw[0].toUpperCase() === 'eth'.toUpperCase()){
+                // availBalance = ajaxShortLink('mainWallet/getEthereumBalance')['balance'];
+            	console.log('erc');
+            }else{
+                // availBalance = ajaxShortLink('mainWallet/getBscTokenBalance',{
+                //     'contractaddress':tokenInfoWithdraw[2]
+                // })['balance'];
+            	console.log('erc');
+
+            		$('#token').text(tokenInfoWithdraw[0]);
+	           		$('#network').text(tokenInfoWithdraw[1].toUpperCase());
+
+                $("#amount").rules( "remove", "min max" );
+
+                $( "#amount" ).rules( "add", {
+                  min: 0.01
+                });
+            }
+
+            $("#amount").rules( "remove", "min max" );
+
+            $( "#amount" ).rules( "add", {
+              min: 0.00001
+            });
+        }
+    });
 
 	$("#copy_tron_btn").on('click',function(){
 		$('#tron_wallet_container').select();
@@ -247,46 +347,17 @@
 		});
 	});
 
-	$("#view_balance_btn").on('click',function(){
-		$("#loading").toggle()
-
-		setTimeout(function(){
-			$.when(loadBalances()).then(function(){
-				$("#main_modal_container").toggle();
-				$("#second_page_modal_container").toggle();
-				$("#loading").toggle();
-			});
-		}, 1000);
-	
-		function loadBalances(){
-			var trxValueNow = ajaxShortLink("main/getCurrentPrice",{'token':'TRX','currency':'USD'}).USD;
-			var usdtValueNow = ajaxShortLink("main/getCurrentPrice",{'token':'USDT','currency':'USD'}).USD;
-			var bnbValueNow = ajaxShortLink("main/getCurrentPrice",{'token':'BNB','currency':'USD'}).USD;
-
-			var walletDetails = postShortLink('getAddressDetails',{'address':selectedData.trc20_wallet});
-			var bnbBalance = weiToBnb(ajaxPostLink('getBscBalance',{'currentUser':selectedData.bsc_wallet}).result);
-			var trxBalance = roundTron(searchObjectByValue(walletDetails['tokens'],'trx')['balance']).toFixed(2);
-			var usdtBalance;
-
-			
-			console.log(walletDetails);
-
-			if (searchObjectByValue(walletDetails['tokens'],"Tether USD")) {
-				usdtBalance = roundTron(searchObjectByValue(walletDetails['tokens'],"Tether USD")['balance']).toFixed(2);
-			}else{
-				usdtBalance = 0.00;
-			}
-
-			console.log(trxBalance,usdtBalance,bnbBalance);
-
-			$("#trx_balance_container").text(trxBalance+' With value of '+parseFloat(trxBalance*trxValueNow).toFixed(2));
-			$("#usdt_balance_container").text(usdtBalance+' With value of '+parseFloat(usdtBalance*usdtValueNow).toFixed(2));
-			$("#bnb_balance_container").text(bnbBalance+' With value of '+parseFloat(bnbBalance*bnbValueNow).toFixed(2));
-		}
-	});
-
 	$("#back_btn").on('click', function(){
 		$("#main_modal_container").toggle();
+		$("#second_page_modal_container").toggle();
+	});
+
+	$("#close_modal_btn").on('click', function(){
+		bootbox.hideAll();
+	});
+
+	$("#withdraw_back_btn").on('click', function(){
+		$("#withdraw_modal_container").toggle();
 		$("#second_page_modal_container").toggle();
 	});
 

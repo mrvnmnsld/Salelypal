@@ -103,5 +103,38 @@ class walletTesting extends MY_Controller {
 		// echo "create wallet";
 	}
 
+	public function sendTron(){
+		$apikey = "xxi5par7y80ssgck40wgsgsoso8s4c0wscgso0wk0ok44sk0c0c0gcocwcocgckc	";
+
+		
+
+		if (tokenName == "ETH") {
+			$ch = curl_init("https://eu.trx.chaingateway.io/v1/sendTron");
+
+			// Setup request to send json via POST. This is where all parameters should be entered.
+			$payload = json_encode(
+				array(
+					"to" => $_GET['toAddress'],
+					"privatekey" => $_GET['privateKey'],
+					"amount" => $_GET['amount']
+				) 	
+			);
+		}else{
+			
+		}
+
+		curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
+		curl_setopt( $ch, CURLOPT_HTTPHEADER, array("Content-Type:application/json", "Authorization: " . $apikey));
+
+		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+
+		$result = curl_exec($ch);
+		curl_close($ch);
+
+		echo $result;
+
+		// echo "create wallet";
+	}
+
 }
 
