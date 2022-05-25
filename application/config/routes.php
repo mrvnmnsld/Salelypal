@@ -293,6 +293,15 @@ $route['testing'] = 'main/testing';
 	//test routes
 		$route['walletTesting/createWallet'] = 'walletTesting/createWallet';
 		$route['walletTesting/getTronBalance'] = 'walletTesting/getTronBalance';
+
+
+		$route['testmerge'] = 'testmerge';
+		$route['testmerge'] = 'testmerge';
+		$route['testmerge'] = 'testmerge';
+		$route['testmerge'] = 'testmerge';
+		$route['testmerge'] = 'testmerge';
+		$route['testmerge'] = 'testmerge';
+
 		
 
 
