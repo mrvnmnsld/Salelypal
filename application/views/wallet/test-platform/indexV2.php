@@ -331,7 +331,7 @@
 
 				<div class="modal fade" id="modal_mining">
 					<div class="modal-dialog modal-dialog-centered">
-					<div class="modal-content" style="">
+					<div class="modal-content" style="background-color: rgb(0 0 0 / 79%);">
 					
 						<div class="modal-header">
 						<!-- <h4 class="modal_mining modal-title"></h4> -->
