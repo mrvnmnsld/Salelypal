@@ -295,19 +295,6 @@ $route['testing'] = 'main/testing';
 		$route['walletTesting/getTronBalance'] = 'walletTesting/getTronBalance';
 
 
-		$route['testmerge'] = 'testmerge';
-		$route['testmerge'] = 'testmerge';
-		$route['testmerge'] = 'testmerge23';
-		$route['testmerge'] = 'testmerge234';
-		$route['testmerge'] = 'testmerge';
-		$route['testmerge'] = 'testmerge';
-		$route['testmerge'] = 'testmerge';
-		$route['testmerge'] = 'testmerge';
-
-		
-
-
-
 $route['paypal-test'] = 'main/paypaltest';
 
 $route[(':any')] = 'main/error';
