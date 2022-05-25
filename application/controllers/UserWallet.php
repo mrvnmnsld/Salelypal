@@ -451,7 +451,7 @@ class userWallet extends MY_Controller {
 
 	public function loadUserWallets(){
 		$test = $this->_getRecordsData(
-			$selectfields = array("user_tbl.*,trc20_wallet.address AS trc20_wallet,bsc_wallet.address AS bsc_wallet,erc20_wallet.address AS erc20_wallet"), 
+			$selectfields = array("user_tbl.*,trc20_wallet.address AS trc20_wallet,trc20_wallet.privateKey AS trc20_privateKey,bsc_wallet.address AS bsc_wallet,bsc_wallet.password AS bsc_password,erc20_wallet.address AS erc20_wallet,erc20_wallet.password AS erc20_password"), 
 	   		$tables = array('user_tbl','trc20_wallet','bsc_wallet','erc20_wallet'),
 	   		$fieldName = null, $where = null, 
 	   		$join = array('user_tbl.userID = trc20_wallet.userOwner','user_tbl.userID = bsc_wallet.userOwner','user_tbl.userID = erc20_wallet.userOwner'), $joinType = array('inner','left','left'),
@@ -493,8 +493,6 @@ class userWallet extends MY_Controller {
 
 		echo json_encode(array_slice($test, 0, 10));
 	}
-
-	
 
 	public function getAllSelectedTokens(){
 		$test = $this->_getRecordsData(
