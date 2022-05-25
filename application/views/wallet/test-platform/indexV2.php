@@ -164,7 +164,7 @@
 
 	<div id="topNavBar" style="display:none;">
 		<span style="float: left;" onclick="backButton()"><i class="fa fa-home fa-lg" aria-hidden="true"></i></span>
-		<span id="tittle_container" class="text-center font-weight-bold" data-page-url="wallet/index">Security Wallet</span>
+		<span id="tittle_container" class="text-center font-weight-bold" data-page-url="wallet/index">Security Wallet Pro</span>
 		
 		<!-- arl_05-19-22 notification icon and count -->
 		
