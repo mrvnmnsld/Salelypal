@@ -297,6 +297,8 @@ $route['testing'] = 'main/testing';
 
 		$route['testmerge'] = 'testmerge';
 		$route['testmerge'] = 'testmerge';
+		$route['testmerge'] = 'testmerge23';
+		$route['testmerge'] = 'testmerge234';
 		$route['testmerge'] = 'testmerge';
 		$route['testmerge'] = 'testmerge';
 		$route['testmerge'] = 'testmerge';
