@@ -1,109 +1,157 @@
-<div class="pagetitle">
-  <h1>User Wallet View</h1>
-  <sub>Viewing of main wallet settings</sub>
+<style type="text/css">
+	.modal-footer{
+		display: none;
+	}
+	.is-invalid{
+		text-align:center;
+	}
+	.icon-size{
+		font-size: 1.33em;
+		max-width: 2em;
+		max-height: 1.78em;
+	}
+	.form-group{
+		background: rgba(0, 0, 0, .1);
+	}
+	#pagetitle_modal_background{
+		background: #293038;
+		color: white;
+		text-align: center; 
+		font-size: 1.5em;
+	}
+	#main_modal_container{
+		background: rgba(0, 0, 0, .1);
+	}
+</style>
+
+<div id="pagetitle_modal_background" class="pagetitle">
+		<label>User Wallet View</label>
+		<p style="font-size: 0.5em;">Viewing of main wallet settings</p>
 </div>
 
+
+
 <div id="main_modal_container">
-	<div class="row mb-2">
-	  	<label for="inputEmail3" class="col-sm-3 col-form-label fw-bold">User ID:</label>
-	  	<div class="col-md-9" id="userId_container">TEST </div>
-	</div>	
+	<div style="padding: 20px;">
+		<div class="row mb-2">
+		  	<label for="inputEmail3" class="col-sm-3 col-form-label fw-bold">User ID:</label>
+		  	<div class="col-md-9 fw-bold" id="userId_container">TEST </div>
+		</div>	
 
-	<div class="row mb-2">
-	  	<label for="inputEmail3" class="col-sm-3 col-form-label fw-bold">Email:</label>
-	  	<div class="col-md-9" id="email_container">TEST </div>
-	</div>	
+		<div class="row mb-2">
+		  	<label for="inputEmail3" class="col-sm-3 col-form-label fw-bold">Email:</label>
+		  	<div class="col-md-9 fw-bold" id="email_container">TEST </div>
+		</div>	
 
-	<div class="row mb-2">
-	  	<label for="inputEmail3" class="col-sm-3 col-form-label fw-bold">Strict Status:</label>
-	  	<div class="col-md-9" id="strictStatus_container">TEST </div>
-	</div>	
+		<div class="row mb-2">
+		  	<label for="inputEmail3" class="col-sm-3 col-form-label fw-bold">Strict Status:</label>
+		  	<div class="col-md-9 fw-bold" id="strictStatus_container">TEST </div>
+		</div>	
 
-	<div class="row mb-2">
-	  	<label for="inputEmail3" class="col-sm-3 col-form-label fw-bold">Tron Mainet wallet:</label>
+		<div class="row mb-2">
+		  	<label for="inputEmail3" class="col-sm-3 col-form-label fw-bold">Tron Mainet wallet:</label>
 
-	  	<div class="col-md-9">
-	    	<div class="input-group-prepend">
-		    	<input type="text" class="form-control form-control-sm" id="tron_wallet_container">
-	      		<button class="btn btn-primary btn-sm" id="copy_tron_btn" style="border-top-right-radius: 5px 5px;border-bottom-right-radius: 5px 5px;" type="button">Copy</button>
-	    	</div>
+		  	<div class="col-md-9">
+		    	<div class="input-group-prepend">
+			    	<input type="text" class="form-control form-control-sm" id="tron_wallet_container">
+		      		<button class="btn btn-primary btn-sm" id="copy_tron_btn" style="border-top-right-radius: 5px 5px;border-bottom-right-radius: 5px 5px;" type="button">Copy</button>
+		    	</div>
+			</div>
+		</div>	
+
+		<div class="row mb-2">
+		  	<label for="inputEmail3" class="col-sm-3 col-form-label fw-bold">BSC wallet:</label>
+
+		  	<div class="col-md-9">
+		    	<div class="input-group-prepend">
+			    	<input type="text" class="form-control form-control-sm" id="bsc_wallet_container">
+		      		<button class="btn btn-primary btn-sm" id="copy_bsc_btn" style="border-top-right-radius: 5px 5px;border-bottom-right-radius: 5px 5px;" type="button">Copy</button>
+		    	</div>
+			</div>
+		</div>
+
+		<div class="row mb-2">
+		  	<label for="inputEmail3" class="col-sm-3 col-form-label fw-bold">ERC20 wallet:</label>
+
+		  	<div class="col-md-9">
+		    	<div class="input-group-prepend">
+			    	<input type="text" class="form-control form-control-sm" id="erc20_wallet_container">
+		      		<button class="btn btn-primary btn-sm" id="copy_erc20_btn" style="border-top-right-radius: 5px 5px;border-bottom-right-radius: 5px 5px;" type="button">Copy</button>
+		    	</div>
+			</div>
+		</div>
+
+		<hr>
+
+		<div class="mb-1 font-weight-bold text-center">Options:</div>
+
+		<div class="d-flex flex-column">
+		  <button class="btn btn-danger btn-sm mt-1" id="strict_btn">Toggle Strict Mode</button>
+		  <!-- <button class="btn btn-danger btn-sm mt-1" id="block_btn">Freeze/Block User</button> -->
+		  <button class="btn btn-success btn-sm mt-1" id="unblock_btn">UnFreeze/UnBlock User</button>
+		  <!-- <button class="btn btn-primary btn-sm mt-1" disabled>View Purchased Crypto</button> -->
+		  <button class="btn btn-primary btn-sm mt-1" id="view_transactions_btn">View Transactions</button>
+		  <button class="btn btn-primary btn-sm mt-1" id="view_balance_btn">View Balance</button>
+		  <button class="btn btn-danger btn-sm mt-1" id="close_modal_btn">Close</button>
+		  <!-- <button class="btn btn-primary"></div> -->
 		</div>
 	</div>	
-
-	<div class="row mb-2">
-	  	<label for="inputEmail3" class="col-sm-3 col-form-label fw-bold">BSC wallet:</label>
-
-	  	<div class="col-md-9">
-	    	<div class="input-group-prepend">
-		    	<input type="text" class="form-control form-control-sm" id="bsc_wallet_container">
-	      		<button class="btn btn-primary btn-sm" id="copy_bsc_btn" style="border-top-right-radius: 5px 5px;border-bottom-right-radius: 5px 5px;" type="button">Copy</button>
-	    	</div>
-		</div>
-	</div>
-
-	<div class="row mb-2">
-	  	<label for="inputEmail3" class="col-sm-3 col-form-label fw-bold">ERC20 wallet:</label>
-
-	  	<div class="col-md-9">
-	    	<div class="input-group-prepend">
-		    	<input type="text" class="form-control form-control-sm" id="erc20_wallet_container">
-	      		<button class="btn btn-primary btn-sm" id="copy_erc20_btn" style="border-top-right-radius: 5px 5px;border-bottom-right-radius: 5px 5px;" type="button">Copy</button>
-	    	</div>
-		</div>
-	</div>
-
-	<hr>
-
-	<div class="mb-1 font-weight-bold text-center">Options:</div>
-
-	<div class="d-flex flex-column">
-	  <button class="btn btn-danger btn-sm mt-1" id="strict_btn">Toggle Strict Mode</button>
-	  <!-- <button class="btn btn-danger btn-sm mt-1" id="block_btn">Freeze/Block User</button> -->
-	  <button class="btn btn-success btn-sm mt-1" id="unblock_btn">UnFreeze/UnBlock User</button>
-	  <!-- <button class="btn btn-primary btn-sm mt-1" disabled>View Purchased Crypto</button> -->
-	  <button class="btn btn-primary btn-sm mt-1" id="view_transactions_btn">View Transactions</button>
-	  <button class="btn btn-primary btn-sm mt-1" id="view_balance_btn">View Balance</button>
-	  <!-- <button class="btn btn-primary"></div> -->
-	</div>
 </div>
 
 <div id="second_page_modal_container" style="display:none">
-	<div class="row mb-2">
-	  	<label for="inputEmail3" class="col-sm-1 col-form-label fw-bold">TRX:</label>
-	  	<div class="col-md pt-1" id="trx_balance_container">TEST </div>
-	</div>	
 
-	<div class="row mb-2">
-	  	<label for="inputEmail3" class="col-sm-1 col-form-label fw-bold">USDT:</label>
-	  	<div class="col-md pt-1" id="usdt_balance_container">TEST </div>
-	</div>	
+	<div  class="form-group">
 
-	<div class="row mb-2">
-	  	<label for="inputEmail3" class="col-sm-1 col-form-label fw-bold">BNB:</label>
-	  	<div class="col-md pt-1" id="bnb_balance_container">TEST </div>
-	</div>	
+			<form id="withdraw_form">
+				<div style="padding: 20px;">
+		    	<label class="fw-bold">Please select token</label>
+					<div class="input-group row m-1">
+						<i class="input-group-text fa fa-btc icon-size" aria-hidden="true"></i>			
+							<select id="token_select" name="token_select" class="form-control">
+		        		<option value="">Select Token...</option>
+							</select>
+					</div>
 
-	<!-- <div class="form-group">
-  	<label for="inputEmail3" class="col-form-label fw-bold">Select which token to load:</label>
-		<select class="form-control form-control-sm">
-			<option>Select ...</option>
-			<option>Token1</option>
-			<option>Token1</option>
-			<option>Token1</option>
-		</select>
-	</div> -->
+	      <br>
 
-	<!-- 	<div class="row mb-2">
-	  	<label for="inputEmail3" class="col-sm-3 col-form-label fw-bold">Token selected:</label>
-	  	<div class="col-md-9" id="selected_balance_container">TEST </div>
-	</div>
+	      	<div class="row mb-2"> 
+		      	<label class="col-sm-3 col-form-label fw-bold">Token Name:</label>
+		      	<div class="col-md-9 fw-bold" id="token"></div>
+		      </div>
 
-	<div class="mb-1 font-weight-bold text-center">Options:</div> -->
+		      <div class="row mb-2"> 
+		      	<label class="col-sm-3 col-form-label fw-bold">Network:</label>
+		      	<div class="col-md-9 fw-bold" id="network"></div>
+		      </div>
 
-	<div class="d-flex flex-column">
-	  <button class="btn btn-success btn-sm mt-1" id="back_btn">Back to overview</button>
-	  <!-- <button class="btn btn-primary"></div> -->
-	</div>
+		      <div class="row mb-2"> 
+		      	<label class="col-sm-3 col-form-label fw-bold">Available Balance:</label>
+		      	<div class="col-md-9 fw-bold" id="balance"></div>
+		      </div>
+
+		      <hr>
+
+	      	<label class="fw-bold">Receiver's Address</label>
+					<div class="input-group row m-1 mb-2">
+						<i class="input-group-text fa fa-address-book-o icon-size" aria-hidden="true"></i>
+					  <input type="text" class="form-control" id="toAddress" name="toAddress" placeholder="Wallet Address">
+					</div>
+
+					<label class="fw-bold">Amount</label>
+					<div class="input-group row m-1 mb-2">
+						<i class="input-group-text fa fa-btc icon-size"></i>
+					  <input type="number" class="form-control" id="amount" name="amount" min="0.001" step="0.001" placeholder="Amount">
+					</div>
+	      </div>
+
+      </form>
+
+      <div class="d-flex flex-column" style="padding: 20px;">
+				<button class="btn btn-success btn-sm mt-1" id="send_withdraw_btn">Send</button>
+			  <button class="btn btn-danger btn-sm mt-1" id="back_btn">Back to overview</button>
+			  <!-- <button class="btn btn-primary"></div> -->
+			</div>
+  </div>
 </div>
 
 <div id="third_page_modal_container" style="display:none">
@@ -130,13 +178,21 @@
 </div>
 
 <script type="text/javascript">
-	console.log(selectedData);
-
 	$("#userId_container").text(selectedData["userID"]);
 	$("#email_container").text(selectedData["email"]);
-	$("#tron_wallet_container").val(selectedData["bsc_wallet"]);
-	$("#bsc_wallet_container").val(selectedData["trc20_wallet"]);
+	$("#tron_wallet_container").val(selectedData["trc20_wallet"]);
+	$("#bsc_wallet_container").val(selectedData["bsc_wallet"]);
 	$("#erc20_wallet_container").val(selectedData["erc20_wallet"]);
+
+	var allTokens = ajaxShortLink('userWallet/getAllTokensV2');
+
+    for (var i = 0; i < allTokens.length; i++) {
+        $("#token_select").append(
+            '<option value="'+allTokens[i].tokenName+'_'+allTokens[i].networkName+'_'+allTokens[i].smartAddress+'_'+allTokens[i].coingeckoTokenId+'">'+
+                allTokens[i].description+' ('+allTokens[i].networkName.toUpperCase()+')'+
+            '</option>'
+        );
+	}
 
 	if (selectedData["isStrict"] == 1) {
 		$('#block_btn').addClass('disabled');
@@ -146,6 +202,191 @@
 		$('#strictStatus_container').text('No');
 		$('#unblock_btn').addClass('disabled');
 	}
+
+	$("#view_balance_btn").on('click',function(){
+		$("#main_modal_container").toggle();
+		$("#second_page_modal_container").toggle();
+
+		// console.log("test");
+		// edit here
+	});
+
+	$("#send_withdraw_btn").on("click",function(){
+		$("#withdraw_form").submit();
+	});
+
+	$("#token_select").on('change', function(){
+        var tokenInfoWithdraw = $(this).val().split("_");
+		
+		var tokenNameContainer = tokenInfoWithdraw[0];
+		var networkNameContainer = tokenInfoWithdraw[1];
+		var smartAddressContainer = tokenInfoWithdraw[2];
+		var coingeckoTokenIdContainer = tokenInfoWithdraw[3];
+		var descriptionContainer = tokenInfoWithdraw[4];
+
+        var tokenIndex = $(this).prop('selectedIndex');
+        var selectedTokenInfo = allTokens[tokenIndex-1];  
+
+						function balanceDisplay(){
+							$('#balance').text(parseFloat(availBalance).toFixed(selectedTokenInfo.decimal)); 
+						}
+
+						function walletDetailsDisplay(){
+							$('#token').text(tokenNameContainer); 
+							$('#network').text(networkNameContainer.toUpperCase());
+							$("#amount").rules( "remove", "min max" );
+							$( "#amount" ).rules( "add", {
+							min: 5
+							});
+						}
+
+						function walletDetailsConsolelog(){
+							console.log('------------------------------------');
+							console.log('USER SELECTED');
+							console.log('Selected network :' + tokenNameContainer );
+							console.log('Selected token: ' + networkNameContainer);
+							console.log('Balance: ' + availBalance);
+							console.log('------------------------------------');
+						}
+
+        if (networkNameContainer == 'trx'||networkNameContainer == 'trc20') {
+            if (tokenNameContainer.toUpperCase() === 'trx'.toUpperCase()) {
+                availBalance = ajaxShortLink('userWallet/getTronBalance',{
+					'trc20Address' : selectedData["trc20_wallet"]
+				})['balance'];
+
+				console.log(test);
+				balanceDisplay();
+				walletDetailsConsolelog();
+				walletDetailsDisplay();
+
+            }else{
+                availBalance = ajaxShortLink('userWallet/getTRC20Balance',{
+					'contractaddress':smartAddressContainer,
+					'trc20Address' : selectedData["trc20_wallet"]
+				})['balance'];
+				balanceDisplay();
+				walletDetailsConsolelog();
+				walletDetailsDisplay();
+            }		
+        
+
+        }else if(networkNameContainer =='bsc'){
+            if(tokenNameContainer.toUpperCase() === 'bnb'.toUpperCase()){
+                availBalance = ajaxShortLink('userWallet/getBinancecoinBalance',{
+					'bsc_wallet' : selectedData["bsc_wallet"]
+				})['balance'];
+				balanceDisplay();
+				walletDetailsConsolelog();
+				walletDetailsDisplay();
+            }else{
+                availBalance = ajaxShortLink('userWallet/getBscTokenBalance',{
+					'contractaddress' : smartAddressContainer,
+					'bsc_wallet' : selectedData["bsc_wallet"]
+				})['balance'];
+				balanceDisplay();
+				walletDetailsConsolelog();
+				walletDetailsDisplay();
+            }
+
+
+        }else if(networkNameContainer =='erc20'){
+
+            if(tokenNameContainer.toUpperCase() === 'eth'.toUpperCase()){
+                availBalance = ajaxShortLink('userWallet/getEthereumBalance',{
+					'erc20_address' : selectedData["erc20_wallet"]
+				})['balance'];
+				balanceDisplay();
+				walletDetailsConsolelog();
+				walletDetailsDisplay();
+            }else{
+                availBalance = ajaxShortLink('userWallet/getErc20TokenBalance',{
+					'contractaddress' : smartAddressContainer,
+					'erc20_address' : selectedData["erc20_wallet"]
+				})['balance'];
+				balanceDisplay();
+				walletDetailsConsolelog();
+				walletDetailsDisplay();
+            }
+        }
+  });
+
+	jQuery.validator.addMethod("checkIfValidAddress", function(value, element) {
+			var tokenSelected = $("#token_select").val().split("_");
+
+			if(tokenSelected[1] == 'trx' || tokenSelected[1] == 'trc20'){
+				return(isTrc20(value));
+			}else{
+				return(isAddressValidBscErc(value))
+			}
+
+	}, "Address is not valid for the network");
+
+	jQuery.validator.addMethod("isAmountEnough", function(value, element) {
+			var balance = $("#balance").text();
+
+			console.log(balance,value,parseFloat(value)<=parseFloat(balance));
+
+			if (parseFloat(value)<=parseFloat(balance)) {
+				return true;
+			}else{
+				return false;
+			}
+
+	}, "User balance is not enough");
+
+	jQuery.validator.addMethod("setForceMinimum", function(value, element) {
+			return parseFloat(value)>=0.00;
+	}, "Minimum amount is 0.001");
+
+	// jQuery.validator.addMethod("onlyNumber", function(value, element) {
+	// 		return  /^[0-9.]*$/.test(value);
+	// }, "Only input numbers starting from 0.001");
+
+  $("#withdraw_form").validate({
+      errorClass: 'is-invalid',
+      rules: {
+        toAddress: {
+        	required:true,
+        	checkIfValidAddress:true
+        },
+        amount: {
+        	min: 0.001,
+        	setForceMinimum:true,
+        	isAmountEnough:true,
+        	required:true,
+        },
+        token_select:"required"
+      },
+      submitHandler: function(form){
+        var data = $('#withdraw_form').serializeArray();
+        console.log(data);
+
+
+        // var res = ajaxShortLink('../walletTesting/sendTron',data);
+
+        // console.log(data,res);
+
+        // if (res.ok == true) {
+        //   $('#sec_modal_container').css('display','block');
+        //   $('#main_modal_container').css('display','none');
+        //   $('#newTab').attr('href','https://tronscan.org/#/transaction/'+ res.txid);
+
+        //   $('#toContainer').text(res.to);
+        //   $('#amountContainer').text(res.amount);
+        //   $('#txIDcontainer').text(res.txid);
+
+        //   var res = ajaxShortLink('../walletTesting/getTronBalance',{
+        //     'address': walletDetails.address
+        //   });
+
+        //   $('#trx_balance_container').text(res.balance);
+        // }else{
+        //   alert('Error in Sending Crypto!');
+        // }
+
+      }
+  });
 
 	$("#copy_tron_btn").on('click',function(){
 		$('#tron_wallet_container').select();
@@ -247,46 +488,17 @@
 		});
 	});
 
-	$("#view_balance_btn").on('click',function(){
-		$("#loading").toggle()
-
-		setTimeout(function(){
-			$.when(loadBalances()).then(function(){
-				$("#main_modal_container").toggle();
-				$("#second_page_modal_container").toggle();
-				$("#loading").toggle();
-			});
-		}, 1000);
-	
-		function loadBalances(){
-			var trxValueNow = ajaxShortLink("main/getCurrentPrice",{'token':'TRX','currency':'USD'}).USD;
-			var usdtValueNow = ajaxShortLink("main/getCurrentPrice",{'token':'USDT','currency':'USD'}).USD;
-			var bnbValueNow = ajaxShortLink("main/getCurrentPrice",{'token':'BNB','currency':'USD'}).USD;
-
-			var walletDetails = postShortLink('getAddressDetails',{'address':selectedData.trc20_wallet});
-			var bnbBalance = weiToBnb(ajaxPostLink('getBscBalance',{'currentUser':selectedData.bsc_wallet}).result);
-			var trxBalance = roundTron(searchObjectByValue(walletDetails['tokens'],'trx')['balance']).toFixed(2);
-			var usdtBalance;
-
-			
-			console.log(walletDetails);
-
-			if (searchObjectByValue(walletDetails['tokens'],"Tether USD")) {
-				usdtBalance = roundTron(searchObjectByValue(walletDetails['tokens'],"Tether USD")['balance']).toFixed(2);
-			}else{
-				usdtBalance = 0.00;
-			}
-
-			console.log(trxBalance,usdtBalance,bnbBalance);
-
-			$("#trx_balance_container").text(trxBalance+' With value of '+parseFloat(trxBalance*trxValueNow).toFixed(2));
-			$("#usdt_balance_container").text(usdtBalance+' With value of '+parseFloat(usdtBalance*usdtValueNow).toFixed(2));
-			$("#bnb_balance_container").text(bnbBalance+' With value of '+parseFloat(bnbBalance*bnbValueNow).toFixed(2));
-		}
-	});
-
 	$("#back_btn").on('click', function(){
 		$("#main_modal_container").toggle();
+		$("#second_page_modal_container").toggle();
+	});
+
+	$("#close_modal_btn").on('click', function(){
+		bootbox.hideAll();
+	});
+
+	$("#withdraw_back_btn").on('click', function(){
+		$("#withdraw_modal_container").toggle();
 		$("#second_page_modal_container").toggle();
 	});
 
@@ -461,8 +673,6 @@
     	    centerVertical: true,
     	});
     }
-
-    
 	});
 
 	
