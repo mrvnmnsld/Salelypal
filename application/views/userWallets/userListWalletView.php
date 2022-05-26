@@ -241,10 +241,12 @@
 						}
 
 						function walletDetailsConsolelog(){
+							console.log('------------------------------------');
 							console.log('USER SELECTED');
 							console.log('Selected network :' + tokenNameContainer );
 							console.log('Selected token: ' + networkNameContainer);
 							console.log('Balance: ' + availBalance);
+							console.log('------------------------------------');
 						}
 
         if (networkNameContainer == 'trx'||networkNameContainer == 'trc20') {
