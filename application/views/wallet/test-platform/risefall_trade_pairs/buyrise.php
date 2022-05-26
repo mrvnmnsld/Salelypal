@@ -5,8 +5,8 @@
 </style>
 
 <div class="pagetitle text-center text-primary" style="display:none">
-  <h4>Buy Rise</h4>
-  <small>Opening Position</small>
+    <h4>Buy Rise</h4>
+    <small>Opening Position</small>
 
     <hr>
 </div>
@@ -264,12 +264,18 @@
         }else{
            $.alert("Please Input Enough USDT to be Staked & make sure GAS(trx) is enough");
         }
-
-
     })
 
     function resolveThisID(id){
-        var balanceUsdtInner = float2DecimalPoints($("#available_amount_container").text().split(' ')[0]);
+        // test-platform
+            var balanceUsdtInner = ajaxShortLink('test-platform/getTokenBalanceBySmartAddress',{
+                // 'trc20Address':currentUser['trc20_wallet'],
+                'contractaddress':'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t',
+            })['balance'];
+
+        // test-platform
+
+        console.log(balanceUsdtInner);
 
         var checkSet = ajaxShortLink('userWallet/riseFall/checkIfSet',{'id':id});
         console.log(checkSet);
@@ -296,6 +302,7 @@
                 $("#2_amount_staked_container").text(checkSet[0].amount);
                 $("#2_trade_pair_container").text(checkSet[0].tradePair);
                 $("#resolved_price_container").text(checkSet[0].resolvedPrice);
+                $("#token_pair_value_container").text(checkSet[0].resolvedPrice);
                
                 pushNewNotif("Position Won!(TESTING)","You have won "+newIncome+" USDT",15); 
 
@@ -304,7 +311,7 @@
                     var newBalanceRes = ajaxShortLink("test-platform/newBalance",{
                        'tokenName':'usdt',
                        'smartAddress':null,
-                       'newAmount':parseFloat(balanceUsdtInner)+parseFloat(newIncome)+checkSet[0].amount,
+                       'newAmount':parseFloat(balanceUsdtInner)+parseFloat(newIncome)+parseFloat(checkSet[0].amount),
                     })    
                 // test-platform
 
@@ -324,16 +331,7 @@
                 $("#2_trade_pair_container").text(checkSet[0].tradePair);
                 $("#resolved_price_container").text(checkSet[0].resolvedPrice);
 
-                pushNewNotif("Position Won!(TESTING)","You have lost "+amount+" USDT",15);  
-
-                // sendTransaction Wallet
-                // test-platform
-                    var newBalanceRes = ajaxShortLink("test-platform/newBalance",{
-                       'tokenName':'usdt',
-                       'smartAddress':null,
-                       'newAmount':parseFloat(balanceUsdtInner)-amount,
-                    })    
-                // test-platform                            
+                pushNewNotif("Position Won!(TESTING)","You have lost "+checkSet[0].amount+" USDT",15);                            
             }
 
             reloadPositions()
@@ -351,7 +349,6 @@
             var closeTokenValue = ohlcTimeStamp[0][4];
             var status = '';
             var newIncome = ((positionsOpened[0].income/100)*positionsOpened[0].amount).toFixed(2);
-            var balanceUsdtInner = float2DecimalPoints($("#available_amount_container").text().split(' ')[0])
 
             console.log(currentPrice,closeTokenValue);
 
@@ -377,7 +374,7 @@
                     var newBalanceRes = ajaxShortLink("test-platform/newBalance",{
                        'tokenName':'usdt',
                        'smartAddress':null,
-                       'newAmount':parseFloat(balanceUsdtInner)+parseFloat(newIncome)+positionsOpened[0].amount,
+                       'newAmount':parseFloat(balanceUsdtInner)+parseFloat(newIncome)+parseFloat(positionsOpened[0].amount),
                     })    
                 // test-platform 
 
@@ -400,15 +397,6 @@
                 $("#2_amount_staked_container").text(positionsOpened[0].amount);
                 $("#2_trade_pair_container").text(positionsOpened[0].tradePair);
                 $("#resolved_price_container").text(positionsOpened[0].resolvedPrice);
-
-                // sendTransaction Wallet
-                // test-platform
-                    var newBalanceRes = ajaxShortLink("test-platform/newBalance",{
-                       'tokenName':'usdt',
-                       'smartAddress':null,
-                       'newAmount':parseFloat(balanceUsdtInner)-parseFloat(positionsOpened[0].amount),
-                    })    
-                // test-platform 
             }
            
             // resolve here

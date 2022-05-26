@@ -1745,6 +1745,8 @@ class userWallet extends MY_Controller {
 		);
 
 		$saveQueryNotif = $this->_insertRecords($tableName = 'set_contract_position', $insertRecord);
+
+		echo $saveQueryNotif;
 	}
 
 	public function getFuturePositionSet(){
@@ -1827,6 +1829,57 @@ class userWallet extends MY_Controller {
 
 		echo json_encode($res);
 	}
+
+	public function futureCheckIfSet(){
+		$res = $this->_getRecordsData(
+			$selectfields = array("future_positions.*,set_contract_position.id AS setID"), 
+	   		$tables = array('set_contract_position','future_positions'),
+	   		$fieldName = array('set_contract_position.position_id'), 
+	   		$where = array($_GET['id']),
+	   		$join = array('set_contract_position.position_id = future_positions.id'), 
+	   		$joinType = array("inner"),
+	   		$sortBy = null, 
+	   		$sortOrder = null, 
+	   		$limit = null, 
+	   		$fieldNameLike = null, 
+	   		$like = null,
+	   		$whereSpecial = null, 
+	   		$groupBy = null 
+		);
+
+		if (count($res)==0) {
+			echo json_encode(false);
+		}else{
+			for ($i=0; $i < count($res); $i++) { 
+				$deleteQuery = $this->_deleteRecords(
+					$tableName = "set_contract_position",
+				 	$fieldName = array("id"),
+				  	$where = array($res[$i]->setID)
+				);
+			}
+
+			echo json_encode($res);
+		}
+	}
+
+	public function futureGetPositionDetails(){
+		$res = $this->_getRecordsData(
+			$selectfields = array("*"), 
+	   		$tables = array('future_positions'),
+	   		$fieldName = array('id'), $where = array($_GET['id']), 
+	   		$join = null, $joinType = null,
+	   		$sortBy = null, $sortOrder = null, 
+	   		$limit = null, 
+	   		$fieldNameLike = null, $like = null,
+	   		$whereSpecial = null, 
+	   		$groupBy = null 
+		);
+
+		echo json_encode($res);
+	}
+
+	
+	
 
 
 	

@@ -106,11 +106,37 @@ if (!isset($_SESSION["currentUser"])) {
     <link href="assets/vendor-admin/simple-datatables/style.css" rel="stylesheet">
   <!-- Vendor CSS Files -->
 
-
-
   <!-- Template Main CSS File -->
     <link href="assets/css-admin/style.css" rel="stylesheet">
   <!-- Template Main CSS File -->
+  <style type="text/css">
+
+    /*google translate*/
+      .goog-te-banner-frame.skiptranslate, .goog-te-gadget-icon {
+         display: none !important;
+      }
+
+      body {
+         top: 0px !important;
+      }
+
+      .goog-tooltip {
+         display: none !important;
+      }
+
+      .goog-tooltip:hover {
+         display: none !important;
+      }
+
+      .goog-text-highlight {
+         background-color: transparent !important;
+         border: none !important;
+         box-shadow: none !important;
+      }
+
+      #google_translate_element{
+          display: none !important;
+      }
   </style>
 </head>
 
@@ -124,7 +150,6 @@ if (!isset($_SESSION["currentUser"])) {
 
       </div>
   </div>
-  
 
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
@@ -154,9 +179,35 @@ if (!isset($_SESSION["currentUser"])) {
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+              <a class="dropdown-item d-flex align-items-center" href="#">
                 <i class="bi bi-gear"></i>
                 <span>Account Settings</span>
+              </a>
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex bd-highlight">
+                
+
+                <!-- <div class="bd-highlight">Flex item</div> -->
+
+                <div class="align-middle">
+                  <i class="bi bi-translate"></i>
+                </div>
+
+                <div class="form-group w-100 align-middle">
+                    <select id="language_selector" class="form-control form-control-sm">
+                        <option value="">Select language...</option>
+                        <option value="en">English</option>
+                        <option value="zh-CN">Chinese (Simplified)</option>
+                        <option value="zh-TW">Chinese (Traditional)</option>
+                        <option value="ceb">Cebuano</option>
+                        <option value="ja">Japanese</option>
+
+
+                    </select>
+                </div>
+
               </a>
             </li>
             <li>
@@ -474,7 +525,6 @@ if (!isset($_SESSION["currentUser"])) {
     </div>
     <div class="credits">
       Designed by <a href="#">Curious Computer</a>
-    </div>
   </footer>
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
@@ -483,26 +533,58 @@ if (!isset($_SESSION["currentUser"])) {
     <script src="assets/js-admin/main.js"></script>
   <!-- Template Main JS File -->
 </body>
+
+<!-- google translate -->
+  <script type="text/javascript">
+      // var currentUserLanguage = {
+      //     'lang':"/en/zh-TW"
+      // }
+
+      function setCookie(key, value, expiry) {
+        var expires = new Date();
+        expires.setTime(expires.getTime() + (expiry * 24 * 60 * 60 * 1000));
+        document.cookie = key + '=' + value + ';expires=' + expires.toUTCString();
+      }
+
+      function googleTranslateElementInit() {
+          // setCookie('googtrans', currentUserLanguage.lang,1);
+          new google.translate.TranslateElement({
+              pageLanguage: 'en',
+              // includedLanguages: 'en,zh-CN,zh-TW',
+              // layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+              autoDisplay: true
+          }, 'google_translate_element');
+      }
+
+      $("#language_selector").on('change',function(){
+        if ($(this).val()!="") {
+          var lang = "/en/"+$(this).val()
+          setCookie('googtrans',lang ,1);
+          location.reload();
+        }
+      })
+  </script>
+
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
+<!-- google translate -->
+
 <script type="text/javascript">
   var currentUser = JSON.parse('<?php echo json_encode($_SESSION['currentUser'])?>');
   console.log(currentUser, "hello");
 
-
   //User Type text UI
-
-  $('#userNameLogged').text(currentUser.username);
-  $('#userNameLoggedInner').text(currentUser.username);
+  $('#userNameLogged').text(capitalizeFirstLetter(currentUser.username));
+  $('#userNameLoggedInner').text(capitalizeFirstLetter(currentUser.username));
 
   if (currentUser.userType == 'superAdmin'){
-  $('#userType').text('Admin S');
-  $('#userTypeTitle').text('Admin S');
+    $('#userType').text('Super Admin');
+    $('#userTypeTitle').text('Admin');
   }else{
-  $('#userType').text(currentUser.userType);
-  $('#userTypeTitle').text(currentUser.userType);
+    $('#userType').text();
+    // $('#userTypeTitle').text(currentUser.userType);
   }
   
   //User Type text UI
-  
 
   jQuery.ajax({
       url: 'getUserTypePriv',

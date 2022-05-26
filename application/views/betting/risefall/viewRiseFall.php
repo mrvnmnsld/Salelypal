@@ -193,23 +193,7 @@
 	    		'id':selectedData.id,
 	    		'userID':selectedData.userID,
 	    	});
-
-	    	if (statusSet=="WIN") {
-	    		// test-platform
-	    			amountUsdt = ajaxShortLink('test-platform/getTokenBalanceBySmartAddress', {
-	    				'contractaddress':'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t',
-	    			}).balance;
-
-	    			var resWinPosition = ajaxShortLink('test-platform/risefall/winPosition', {
-	    				'newIncome':newIncome,
-	    				'amountStaked':selectedData.amount,
-	    				'amountUsdt':amountUsdt,
-	    			});
-	    		// test-platform
-
-	    		console.log(amountUsdt,newIncome);
-	    	}
-
+	    	
 	    	loadDatatable('userWallet/riseFall/admin/getAllRiseFall');
 	    	bootbox.hideAll();
 
