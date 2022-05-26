@@ -217,23 +217,13 @@
 		    		'userID':selectedData.userID,
 		    	});
 
-					// test-platform
-						amountUsdt = ajaxShortLink('test-platform/getTokenBalanceBySmartAddress', {
-							'contractaddress':'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t',
-						}).balance;
-
-						var resWinPosition = ajaxShortLink('test-platform/risefall/winPosition', {
-							'newIncome':newIncome,
-							'amountStaked':0,
-							'amountUsdt':amountUsdt,
-						});
-					// test-platform
-
-					console.log(amountUsdt,newIncome);
+					// console.log(amountUsdt,newIncome);
 
 					loadDatatable('userWallet/future/admin/getAllContractPositions');
 					bootbox.hideAll();
 	  		}
+
+	  		event.preventDefault();
 		}
 	});
 
