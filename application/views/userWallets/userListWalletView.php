@@ -240,6 +240,7 @@
 	});
 
 	$("#token_select").on('change', function(){
+
         var tokenInfoWithdraw = $(this).val().split("_");
 		
 		var tokenNameContainer = tokenInfoWithdraw[0];
@@ -719,8 +720,5 @@
     	});
     }
 	});
-
 	
-
-
 </script>
