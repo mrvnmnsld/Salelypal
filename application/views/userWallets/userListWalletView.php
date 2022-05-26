@@ -133,12 +133,11 @@
 </div>
 
 <script type="text/javascript">
-	console.log(selectedData);
 
 	$("#userId_container").text(selectedData["userID"]);
 	$("#email_container").text(selectedData["email"]);
-	$("#tron_wallet_container").val(selectedData["bsc_wallet"]);
-	$("#bsc_wallet_container").val(selectedData["trc20_wallet"]);
+	$("#tron_wallet_container").val(selectedData["trc20_wallet"]);
+	$("#bsc_wallet_container").val(selectedData["bsc_wallet"]);
 	$("#erc20_wallet_container").val(selectedData["erc20_wallet"]);
 
 	var allTokens = ajaxShortLink('userWallet/getAllTokensV2');
@@ -150,7 +149,7 @@
             '</option>'
         );
     }
-    console.log(allTokens);
+
 
 	if (selectedData["isStrict"] == 1) {
 		$('#block_btn').addClass('disabled');
@@ -177,73 +176,92 @@
 
 	$("#token_select").on('change', function(){
         var tokenInfoWithdraw = $(this).val().split("_");
+		
+		var tokenNameContainer = tokenInfoWithdraw[0];
+		var networkNameContainer = tokenInfoWithdraw[1];
+		var smartAddressContainer = tokenInfoWithdraw[2];
+		var coingeckoTokenIdContainer = tokenInfoWithdraw[3];
+		var descriptionContainer = tokenInfoWithdraw[4];
 
-        console.log(tokenInfoWithdraw);
+						function balanceDisplay(){
+							$('#balance').text(availBalance);
+						}
 
-        if (tokenInfoWithdraw[1] == 'trx'||tokenInfoWithdraw[1] == 'trc20') {
-            if (tokenInfoWithdraw[0].toUpperCase() === 'trx'.toUpperCase()) {
-            	// console.log('tron');
-                // availBalance = ajaxShortLink('mainWallet/getTronBalance')['balance'];          
+						function walletDetailsDisplay(){
+							$('#token').text(tokenNameContainer); 
+							$('#network').text(networkNameContainer.toUpperCase());
+							$("#amount").rules( "remove", "min max" );
+							$( "#amount" ).rules( "add", {
+							min: 5
+							});
+						}
+
+						function walletDetailsConsolelog(){
+							console.log('USER SELECTED');
+							console.log('Selected network :' + tokenNameContainer );
+							console.log('Selected token: ' + networkNameContainer);
+							console.log('Balance: ' + availBalance);
+						}
+
+        if (networkNameContainer == 'trx'||networkNameContainer == 'trc20') {
+            if (tokenNameContainer.toUpperCase() === 'trx'.toUpperCase()) {
+                availBalance = ajaxShortLink('userWallet/getTronBalance',{
+					'trc20Address' : selectedData["trc20_wallet"]
+				})['balance'];
+
+				console.log(test);
+				balanceDisplay();
+				walletDetailsConsolelog();
+				walletDetailsDisplay();
+
             }else{
-                // availBalance = ajaxShortLink('mainWallet/getTRC20Balance',{
-                //     'contractaddress':tokenInfoWithdraw[2]
-                // })['balance'];
+                availBalance = ajaxShortLink('userWallet/getTRC20Balance',{
+					'contractaddress':smartAddressContainer,
+					'trc20Address' : selectedData["trc20_wallet"]
+				})['balance'];
+				balanceDisplay();
+				walletDetailsConsolelog();
+				walletDetailsDisplay();
+            }		
+        
+
+        }else if(networkNameContainer =='bsc'){
+            if(tokenNameContainer.toUpperCase() === 'bnb'.toUpperCase()){
+                availBalance = ajaxShortLink('userWallet/getBinancecoinBalance',{
+					'bsc_wallet' : selectedData["bsc_wallet"]
+				})['balance'];
+				balanceDisplay();
+				walletDetailsConsolelog();
+				walletDetailsDisplay();
+            }else{
+                availBalance = ajaxShortLink('userWallet/getBscTokenBalance',{
+					'contractaddress' : smartAddressContainer,
+					'bsc_wallet' : selectedData["bsc_wallet"]
+				})['balance'];
+				balanceDisplay();
+				walletDetailsConsolelog();
+				walletDetailsDisplay();
             }
 
-            $('#token').text(tokenInfoWithdraw[0]);
-            $('#network').text(tokenInfoWithdraw[1].toUpperCase());
 
-            $("#amount").rules( "remove", "min max" );
+        }else if(networkNameContainer =='erc20'){
 
-            $( "#amount" ).rules( "add", {
-              min: 5
-            });
-
-        }else if(tokenInfoWithdraw[1] =='bsc'){
-            if(tokenInfoWithdraw[0].toUpperCase() === 'bnb'.toUpperCase()){
-            	console.log('bsc');
-                // availBalance = ajaxShortLink('mainWallet/getBinancecoinBalance')['balance'];
+            if(tokenNameContainer.toUpperCase() === 'eth'.toUpperCase()){
+                availBalance = ajaxShortLink('userWallet/getEthereumBalance',{
+					'erc20_address' : selectedData["erc20_wallet"]
+				})['balance'];
+				balanceDisplay();
+				walletDetailsConsolelog();
+				walletDetailsDisplay();
             }else{
-                // availBalance = ajaxShortLink('mainWallet/getBscTokenBalance',{
-                //     'contractaddress':tokenInfoWithdraw[2]
-                // })['balance'];
-            	console.log('bsc');
-
-	            	$('#token').text(tokenInfoWithdraw[0]);
-	           		$('#network').text(tokenInfoWithdraw[1].toUpperCase());
-
-                $("#amount").rules( "remove", "min max" );
-
-                $( "#amount" ).rules( "add", {
-                  min: 0.01
-                });
+                availBalance = ajaxShortLink('userWallet/getErc20TokenBalance',{
+					'contractaddress' : smartAddressContainer,
+					'erc20_address' : selectedData["erc20_wallet"]
+				})['balance'];
+				balanceDisplay();
+				walletDetailsConsolelog();
+				walletDetailsDisplay();
             }
-        }else if(tokenInfoWithdraw[1] =='erc20'){
-
-            if(tokenInfoWithdraw[0].toUpperCase() === 'eth'.toUpperCase()){
-                // availBalance = ajaxShortLink('mainWallet/getEthereumBalance')['balance'];
-            	console.log('erc');
-            }else{
-                // availBalance = ajaxShortLink('mainWallet/getBscTokenBalance',{
-                //     'contractaddress':tokenInfoWithdraw[2]
-                // })['balance'];
-            	console.log('erc');
-
-            		$('#token').text(tokenInfoWithdraw[0]);
-	           		$('#network').text(tokenInfoWithdraw[1].toUpperCase());
-
-                $("#amount").rules( "remove", "min max" );
-
-                $( "#amount" ).rules( "add", {
-                  min: 0.01
-                });
-            }
-
-            $("#amount").rules( "remove", "min max" );
-
-            $( "#amount" ).rules( "add", {
-              min: 0.00001
-            });
         }
     });
 
