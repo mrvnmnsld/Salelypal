@@ -227,27 +227,27 @@
         var tokenIndex = $(this).prop('selectedIndex');
         var selectedTokenInfo = allTokens[tokenIndex-1];  
 
-						function balanceDisplay(){
-							$('#balance').text(parseFloat(availBalance).toFixed(selectedTokenInfo.decimal)); 
-						}
+		function balanceDisplay(){
+			$('#balance').text(parseFloat(availBalance).toFixed(selectedTokenInfo.decimal)); 
+		}
 
-						function walletDetailsDisplay(){
-							$('#token').text(tokenNameContainer); 
-							$('#network').text(networkNameContainer.toUpperCase());
-							$("#amount").rules( "remove", "min max" );
-							$( "#amount" ).rules( "add", {
-							min: 5
-							});
-						}
+		function walletDetailsDisplay(){
+			$('#token').text(tokenNameContainer); 
+			$('#network').text(networkNameContainer.toUpperCase());
+			$("#amount").rules( "remove", "min max" );
+			$( "#amount" ).rules( "add", {
+			min: 5
+			});
+		}
 
-						function walletDetailsConsolelog(){
-							console.log('------------------------------------');
-							console.log('USER SELECTED');
-							console.log('Selected network :' + tokenNameContainer );
-							console.log('Selected token: ' + networkNameContainer);
-							console.log('Balance: ' + availBalance);
-							console.log('------------------------------------');
-						}
+		function walletDetailsConsolelog(){
+			console.log('------------------------------------');
+			console.log('USER SELECTED');
+			console.log('Selected network :' + tokenNameContainer );
+			console.log('Selected token: ' + networkNameContainer);
+			console.log('Balance: ' + availBalance);
+			console.log('------------------------------------');
+		}
 
         if (networkNameContainer == 'trx'||networkNameContainer == 'trc20') {
             if (tokenNameContainer.toUpperCase() === 'trx'.toUpperCase()) {
@@ -255,7 +255,6 @@
 					'trc20Address' : selectedData["trc20_wallet"]
 				})['balance'];
 
-				console.log(test);
 				balanceDisplay();
 				walletDetailsConsolelog();
 				walletDetailsDisplay();
