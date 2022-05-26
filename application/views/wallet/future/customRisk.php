@@ -155,16 +155,14 @@
 </div>
 
 <script>
+  var tokenValueInnerContainer = $("#token_pair_value_container").text();
+  $("#value_predicted_input").val(tokenValueInnerContainer);
+  $("#predicted_value_long_text").text(tokenValueInnerContainer);
+  $("#predicted_value_short_text").text(tokenValueInnerContainer);
 
-  var ethPriceBinance = parseFloat(ajaxShortLinkNoParse("https://api.binance.com/api/v3/ticker/price?symbol=ETHUSDT").price).toFixed(2);
-
-  $("#value_predicted_input").val(ethPriceBinance);
-  $("#predicted_value_long_text").text(ethPriceBinance);
-  $("#predicted_value_short_text").text(ethPriceBinance);
-
-  $("#value_predicted_input").val(getPercentageIncrease(0.05,ethPriceBinance));
-  $("#predicted_value_long_text").text(getPercentageIncrease(0.05,ethPriceBinance));
-  $("#predicted_value_short_text").text(getPercentageDecrease(0.05,ethPriceBinance));
+  $("#value_predicted_input").val(getPercentageIncrease(0.05,tokenValueInnerContainer));
+  $("#predicted_value_long_text").text(getPercentageIncrease(0.05,tokenValueInnerContainer));
+  $("#predicted_value_short_text").text(getPercentageDecrease(0.05,tokenValueInnerContainer));
 
 
   if (customRiskArray.length >= 1) {
@@ -195,8 +193,8 @@
   $("#percentage_range").on('input',function(){
     $("#percentage_input").val($(this).val());
 
-    $("#predicted_value_long_text").text(getPercentageIncrease($(this).val(),ethPriceBinance));
-    $("#predicted_value_short_text").text(getPercentageDecrease($(this).val(),ethPriceBinance));
+    $("#predicted_value_long_text").text(getPercentageIncrease($(this).val(),tokenValueInnerContainer));
+    $("#predicted_value_short_text").text(getPercentageDecrease($(this).val(),tokenValueInnerContainer));
   });
 
   $("#percentage_input").on('input',function(){
@@ -207,12 +205,12 @@
       $("#predicted_value_short_text").text("Enter a valid number");
       $("#percentage_range").val($(this).attr('min'));
     }else{
-      $("#predicted_value_long_text").text(getPercentageIncrease(currentValue,ethPriceBinance));
-      $("#predicted_value_short_text").text(getPercentageDecrease(currentValue,ethPriceBinance));
+      $("#predicted_value_long_text").text(getPercentageIncrease(currentValue,tokenValueInnerContainer));
+      $("#predicted_value_short_text").text(getPercentageDecrease(currentValue,tokenValueInnerContainer));
       $("#percentage_range").val(currentValue);
     }
 
-    console.log(getPercentageDecrease($(this).val(),ethPriceBinance));
+    console.log(getPercentageDecrease($(this).val(),tokenValueInnerContainer));
   });
 
   $('#percentage_toggle').change(function() {
@@ -251,11 +249,10 @@
         var timestampPredicted = unixTimeToDatetime(getEpochCurrentTime()+parseInt(minutes_input)*60);
         console.log(timestampPredicted);
 
-        $("#risk_value_predicted_long").text(value_predicted_input);
-        $("#risk_value_predicted_short").text(value_predicted_input);
+        $("#risk_value_predicted").text(value_predicted_input);
         $("#risk_timestamp_predicted").text(timestampPredicted);
 
-        bootbox.hideAll();
+        $('.bootbox.modal:eq(1)').modal('hide')
       }else{
         $.alert({
             title: 'Encountered an error!',
@@ -281,7 +278,7 @@
         $("#risk_timestamp_predicted").text(timestampPredicted);
 
 
-        bootbox.hideAll();
+        $('.bootbox.modal:eq(1)').modal('hide')
       }else{
         $.alert({
             title: 'Encountered an error!',
@@ -308,7 +305,7 @@
     $('#customRisk_btn').removeClass('active');
 
     // customRiskArray = [];
-    bootbox.hideAll();
+    $('.bootbox.modal:eq(1)').modal('hide')
   });
 
 

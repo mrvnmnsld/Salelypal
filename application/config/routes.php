@@ -177,6 +177,8 @@ $route['main/getCurrentPrice'] = 'main/getCurrentPrice';
 		$route['userWallet/riseFall/checkIfSet'] = 'userWallet/checkIfRisefallSet';
 		$route['userWallet/riseFall/getPositionDetails'] = 'userWallet/risefallGetPositionDetails';
 
+		$route['userWallet/future/checkIfSet'] = 'userWallet/futureCheckIfSet';
+		$route['userWallet/future/getPositionDetails'] = 'userWallet/futureGetPositionDetails';
 
 
 		

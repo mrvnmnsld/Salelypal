@@ -146,29 +146,13 @@
 		<span class="font-weight-bold mt-2" id="loading_text_container" style="font-size: 30px;text-align: center;">Loading...</span>
 	</div>
 
-	<div id="mySidenav" class="sidenav">
-		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-		<a class="" href="#" id="notif_btn">Notifications (<span id="new_notif_counter">0</span>)</a>
-		<!-- <a class="" href="#" id="profile_btn">Profile</a> -->
-		<!-- <a class="" href="#" id="settings_btn">Settings</a> -->
-		<!-- <a class="" href="#" id="buyCrypto_btn">Buy Crypto</a> -->
-		<!-- <a class="" href="#" id="purchaseHistory_btn">Purchase History</a> -->
-		<!-- <a class="" href="#" id="purchaseAppeals_btn">Purchase Appeals</a> -->
-		<!-- <a class="" href="#" id="transactionHistory_btn">Transaction History</a> -->
-		<!-- <a class="" href="#" id="deposit_btn">Deposit</a> -->
-		<!-- <a class="" href="#" id="withdraw_btn">Withdraw</a> -->
-		<!-- <a class="" href="#" id="exportWallet_btn">Export Wallet</a> -->
-		<hr class="bg-light" style="width:60%">
-  		<!-- <a class="text-danger" href="#" id="logOut_btn">Logout</a> -->
-	</div>
-
 	<div id="topNavBar" style="display:none;">
 		<span style="float: left;" onclick="backButton()"><i class="fa fa-home fa-lg" aria-hidden="true"></i></span>
 		<span id="tittle_container" class="text-center font-weight-bold" data-page-url="wallet/index">Security Wallet Pro</span>
 		
 		<!-- arl_05-19-22 notification icon and count -->
 		
-		<span id="notif_btn" class="" style="float:right; " onclick="notif_btn()">
+		<span id="notif_btn" class="" style="float:right;">
 			<i id="notif_logo" class="fa fa-bell fa-md fa-inverse" style="color:#D9E9E8;"  aria-hidden="true">
 				<span id="notif_counter_number" style="font-size:.45em; right:.4em; top:1.5em; display:none" class="position-absolute badge bg-danger">0</span>
 			</i>
@@ -570,27 +554,7 @@
 				});
 			});
 
-			// $('#notif_btn').on('click',function(){
-			// 	clearTimeout(tokenLoadTimer);
-			// 	clearTimeout(newNotifChecker);
-			// 	$("#tittle_container").text('Notification Center');
-			// 	$.when(closeNav()).then(function() {
-			// 		$('#topNavBar').toggle();
-			//   		$("#container").fadeOut(animtionSpeed, function() {
-			// 		  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
-			// 	  			$("#container").empty();
-			// 	  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/notificationCenter'}));
-
-			// 	  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
-			// 	  					$('#topNavBar').toggle();
-			// 	  					$("#container").fadeIn(animtionSpeed);
-			// 	  				});
-			// 	    	});
-			// 	  	});
-			// 	});
-			// });
-
-			function notif_btn(){
+			$('#notif_btn').on('click',function(){
 				$("#notif_counter_number").text("");
 				$("#notif_counter_number").removeClass("animate__animated animate__bounce animate__repeat-2");
 				$("#notif_counter_number").css("display", "none");
@@ -611,10 +575,8 @@
 				    	});
 				  	});
 				});
-			}
-
-			
-			
+			});
+	
 			$('#settings_btn').on('click',function(){
 				clearTimeout(tokenLoadTimer);
 				$("#tittle_container").text('Settings');
@@ -705,14 +667,14 @@
 		// buttonEvents	
 
 		function openNav(){
-	  		document.getElementById("mySidenav").style.width = "102%";
-	  		document.getElementById("mySidenav").style.width = "102%";
-	  		document.getElementById("mySidenav").style.opacity = "1";
+	  		// document.getElementById("mySidenav").style.width = "102%";
+	  		// document.getElementById("mySidenav").style.width = "102%";
+	  		// document.getElementById("mySidenav").style.opacity = "1";
 		}
 
 		function closeNav(){
-	  		document.getElementById("mySidenav").style.width = "0";
-	  		document.getElementById("mySidenav").style.opacity = "0%";
+	  		// document.getElementById("mySidenav").style.width = "0";
+	  		// document.getElementById("mySidenav").style.opacity = "0%";
 		}
 
 		function backButton(){
