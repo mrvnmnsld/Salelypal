@@ -193,7 +193,8 @@
         <br>
         <hr>
 
-        <button type="button" class="btn btn-block btn-danger" id="closeBtn_transaction">Close</button>
+        <button type="button" class="btn btn-block btn-primary" id="back_to_withdrawForm">Back to Withdraw Page</button>
+        <button type="button" class="btn btn-block btn-danger" id="closeBtn_withdrawPage">Close</button>
 </div>
 
 <div id="third_page_modal_container" style="display:none">
@@ -256,13 +257,6 @@
 		// console.log("test");
 		// edit here
 	});
-
-	// $("#send_withdraw_btn").on("click",function(){
-	// 	$("#withdraw_form").submit();
-	// 	$("#second_page_modal_container").toggle();
-	// 	$("#success_page_modal_container").toggle();
-	// 	$("#pagetitle_modal_background").toggle();
-	// });
 
 	$("#token_select").on('change', function(){
 
@@ -577,6 +571,13 @@
 		});
 	});
 
+	
+	$("#back_to_withdrawForm").on('click', function(){
+		$("#success_page_modal_container").toggle();
+		$("#second_page_modal_container").toggle();
+		// $("#pagetitle_modal_background").toggle();
+	});
+
 	$("#back_btn").on('click', function(){
 		$("#main_modal_container").toggle();
 		$("#second_page_modal_container").toggle();
@@ -586,7 +587,7 @@
 		bootbox.hideAll();
 	});
 
-	$("#closeBtn_transaction").on('click', function(){
+	$("#closeBtn_withdrawPage").on('click', function(){
 		bootbox.hideAll();
 	});
 
