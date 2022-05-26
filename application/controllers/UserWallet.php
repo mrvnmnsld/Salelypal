@@ -82,7 +82,7 @@ class userWallet extends MY_Controller {
 		}elseif ($tokenArray[1] == "bsc"){
 			$fromBscNetwork = $_POST['fromBscNetwork'];
 
-			if ($tokenArray[0]=="bnb") {
+			if ($tokenArray[2] == null || $tokenArray[2] == "null") {
 				$ch = curl_init("https://eu.bsc.chaingateway.io/v1/sendBinancecoin");
 
 				$payload = json_encode(array(
@@ -105,7 +105,7 @@ class userWallet extends MY_Controller {
 		}elseif ($tokenArray[1] == "erc20") {
 			$erc20_address = $_POST['erc20_address'];
 
-			if ($tokenArray[0] == null) {
+			if ($tokenArray[2] == null || $tokenArray[2] == "null") {
 				$ch = curl_init("https://eu.eth.chaingateway.io/v1/sendEthereum");
 
 				$payload = json_encode(array(
@@ -153,6 +153,102 @@ class userWallet extends MY_Controller {
 		}
 
 		echo json_encode($resultDecoded);
+		// var_dump($resultDecoded);
+	}
+
+	public function sendWithdrawalV2(){
+		$apikey = "4h7896o0ujoskkwk84wo0848wo0o0w4wg8sw84wwcs80kwcg4kc8ogwg44s4ocw8";
+		// POST Varialbles
+			$to = $_GET["addressToInput"];
+			$amount = $_GET["amountInput"];
+			$tokenArray = explode('_', $_GET['tokenContainerSelect']);
+			$currentUserID = $_GET['currentUserID'];
+			$userAddress = $_GET['userAddress'];
+			$accountPassword = $_GET['accountPassword'];
+
+			// $to = 'TCyRBGnjMSLsPos5RJxVfC7fjcWk1vaUqS';
+			// $amount = 1;
+			// $tokenArray = explode('_', 'usdt_trc20_TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t');
+		// POST Varialbles
+
+		if ($tokenArray[1] == "trc20") {
+			$ch = curl_init("https://eu.trx.chaingateway.io/v1/sendTRC20");
+
+			$payload = json_encode(
+				array(
+					"contractaddress" => $tokenArray[2],
+					"from" => $userAddress,
+					"to" => $to,
+					"privatekey" => $accountPassword,
+					"amount" => $amount,
+				) 
+			);
+		}elseif ($tokenArray[1] == "trx") {		
+			$ch = curl_init("https://eu.trx.chaingateway.io/v1/sendTron");
+
+			$payload = json_encode(
+				array(
+					"to" => $to,
+					"privatekey" => $accountPassword,
+					"amount" => $amount,
+				) 
+			);
+		}elseif ($tokenArray[1] == "bsc"){
+			if ($tokenArray[2] == null || $tokenArray[2] == "null") {
+				$ch = curl_init("https://eu.bsc.chaingateway.io/v1/sendBinancecoin");
+
+				$payload = json_encode(array(
+					"from" => $userAddress,
+					"to" => $to,
+					"password" => $accountPassword,
+					"amount" => $amount
+				));
+			}else{
+				$ch = curl_init("https://eu.bsc.chaingateway.io/v1/sendToken");
+
+				$payload = json_encode(array(
+					"from" => $userAddress,
+					"to" => $to,
+					"password" => $accountPassword,
+					"contractaddress" => $tokenArray[2],
+					"amount" => $amount
+				));
+			}
+		}elseif ($tokenArray[1] == "erc20") {
+			if ($tokenArray[2] == null || $tokenArray[2] == "null") {
+				$ch = curl_init("https://eu.eth.chaingateway.io/v1/sendEthereum");
+
+				$payload = json_encode(array(
+					"from" => $userAddress,
+					"to" => $to,
+					"password" => $accountPassword,
+					"amount" => $amount
+					// 'nonce' => '4'
+				));
+			}else{
+				$ch = curl_init("https://eu.eth.chaingateway.io/v1/sendToken");
+
+				$payload = json_encode(array(
+					"from" => $userAddress,
+					"to" => $to,
+					"password" => $accountPassword,
+					"contractaddress" => $tokenArray[2],
+					"amount" => $amount
+				));
+			}
+		}
+
+		curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
+		curl_setopt( $ch, CURLOPT_HTTPHEADER, array("Content-Type:application/json", "Authorization: " . $apikey));
+
+		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+
+		$result = curl_exec($ch);
+		curl_close($ch);
+		echo $result;
+
+		// echo json_encode($_GET);
+
 		// var_dump($resultDecoded);
 	}
 

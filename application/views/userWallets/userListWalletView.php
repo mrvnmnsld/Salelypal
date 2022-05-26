@@ -98,61 +98,82 @@
 	</div>	
 </div>
 
-<div id="second_page_modal_container" style="display:none">
-
+<div id="second_page_modal_container" style="display: none;">
 	<div  class="form-group">
+		<form id="withdraw_form">
+			<div style="padding: 20px;">
 
-			<form id="withdraw_form">
-				<div style="padding: 20px;">
 		    	<label class="fw-bold">Please select token</label>
-					<div class="input-group row m-1">
-						<i class="input-group-text fa fa-btc icon-size" aria-hidden="true"></i>			
-							<select id="token_select" name="token_select" class="form-control">
-		        		<option value="">Select Token...</option>
-							</select>
-					</div>
+				<div class="input-group row m-1">
+					<i class="input-group-text fa fa-btc icon-size" aria-hidden="true"></i>
+								
+					<select id="token_select" name="token_select" class="form-control">
+	    				<option value="">Select Token...</option>
+					</select>
+				</div>
 
-	      <br>
+		      	<div> 
+					<label class="fw-bold">Token Name:</label>
+					<span class="align-middle" id="token"></span>
+				</div>
 
-	      	<div class="row mb-2"> 
-		      	<label class="col-sm-3 col-form-label fw-bold">Token Name:</label>
-		      	<div class="col-md-9 fw-bold" id="token"></div>
-		      </div>
+				<div> 
+					<label class="fw-bold">Network:</label>
+					<span class="align-middle" id="network"></span>
+				</div>
 
-		      <div class="row mb-2"> 
-		      	<label class="col-sm-3 col-form-label fw-bold">Network:</label>
-		      	<div class="col-md-9 fw-bold" id="network"></div>
-		      </div>
+				<div> 
+					<label class="fw-bold">Available Balance:</label>
+					<span class="align-middle" id="balance"></span>
+				</div>
 
-		      <div class="row mb-2"> 
-		      	<label class="col-sm-3 col-form-label fw-bold">Available Balance:</label>
-		      	<div class="col-md-9 fw-bold" id="balance"></div>
-		      </div>
+		      	<hr>
 
-		      <hr>
+		      	<label class="fw-bold">Receiver's Address</label>
+				<div class="input-group row m-1 mb-2">
+					<i class="input-group-text fa fa-address-book-o icon-size" aria-hidden="true"></i>
+				  <input type="text" class="form-control" id="toAddress" name="toAddress" placeholder="Wallet Address">
+				</div>
 
-	      	<label class="fw-bold">Receiver's Address</label>
-					<div class="input-group row m-1 mb-2">
-						<i class="input-group-text fa fa-address-book-o icon-size" aria-hidden="true"></i>
-					  <input type="text" class="form-control" id="toAddress" name="toAddress" placeholder="Wallet Address">
-					</div>
+				<label class="fw-bold">Amount</label>
 
-					<label class="fw-bold">Amount</label>
-					<div class="input-group row m-1 mb-2">
-						<i class="input-group-text fa fa-btc icon-size"></i>
-					  <input type="number" class="form-control" id="amount" name="amount" min="0.001" step="0.001" placeholder="Amount">
-					</div>
-	      </div>
+				<div class="input-group row m-1 mb-2">
+					<i class="input-group-text fa fa-btc icon-size"></i>
+				  <input type="number" class="form-control" id="amount" name="amount" min="0.001" step="0.001" placeholder="Amount">
+				</div>
+	      	</div>
 
-      </form>
+      	</form>
 
-      <div class="d-flex flex-column" style="padding: 20px;">
-				<button class="btn btn-success btn-sm mt-1" id="send_withdraw_btn">Send</button>
-			  <button class="btn btn-danger btn-sm mt-1" id="back_btn">Back to overview</button>
-			  <!-- <button class="btn btn-primary"></div> -->
-			</div>
+      	<div class="d-flex flex-column" style="padding: 20px;">
+			<button class="btn btn-success btn-sm mt-1" id="send_withdraw_btn">Send</button>
+		  	<button class="btn btn-danger btn-sm mt-1" id="back_btn">Back to overview</button>
+		</div>
   </div>
 </div>
+
+<!-- <div id="success_page_modal_container" class="text-center" style="display: block;">
+		<i style="font-size:150px" class="fa fa-check-circle-o text-success" aria-hidden="true"></i><br>
+		<span style="font-size:30px" class="text-success">Success!</span>
+		<br>
+
+		<span>Transaction for withdrawal successfully submited</span>
+
+		<div class="text-left" style="font-size:17px">
+			<div><b>Amount: </b><span id="amountSendContainer">1</span></div>
+			<div><b>Address sent: </b><span id="addressSendContainer">1</span></div>
+			<div><b>Transaction address: </b><br><input id="txidSendContainer" type="text" class="form-control">32132132</div>
+		</div>
+
+		<br>
+
+		<span>You can view your complete transaction details in by clicking <a href="#" id="txidLinkSendContainer" target="_blank">tronscan.org</a>(It might take a few seconds to register the transaction)</span>
+		
+		<br>
+		<hr>
+
+		<button type="button" class="btn btn-block btn-danger" id="closeBtn_transaction">Close</button>
+</div> -->
 
 <div id="third_page_modal_container" style="display:none">
 	<div class="h2 text-center">Transaction history</div>
@@ -183,6 +204,9 @@
 	$("#tron_wallet_container").val(selectedData["trc20_wallet"]);
 	$("#bsc_wallet_container").val(selectedData["bsc_wallet"]);
 	$("#erc20_wallet_container").val(selectedData["erc20_wallet"]);
+
+	var walletPasswordContainerGlobal;
+	var userAddressGlobal;
 
 	var allTokens = ajaxShortLink('userWallet/getAllTokensV2');
 
@@ -227,6 +251,10 @@
         var tokenIndex = $(this).prop('selectedIndex');
         var selectedTokenInfo = allTokens[tokenIndex-1];  
 
+        var availBalance;
+
+        walletPasswordContainerGlobal = networkNameContainer;
+
 						function balanceDisplay(){
 							$('#balance').text(parseFloat(availBalance).toFixed(selectedTokenInfo.decimal)); 
 						}
@@ -234,10 +262,10 @@
 						function walletDetailsDisplay(){
 							$('#token').text(tokenNameContainer); 
 							$('#network').text(networkNameContainer.toUpperCase());
-							$("#amount").rules( "remove", "min max" );
-							$( "#amount" ).rules( "add", {
-							min: 5
-							});
+							// $("#amount").rules( "remove", "min max" );
+							// $( "#amount" ).rules( "add", {
+							// min: 5
+							// });
 						}
 
 						function walletDetailsConsolelog(){
@@ -255,7 +283,6 @@
 					'trc20Address' : selectedData["trc20_wallet"]
 				})['balance'];
 
-				console.log(test);
 				balanceDisplay();
 				walletDetailsConsolelog();
 				walletDetailsDisplay();
@@ -268,7 +295,10 @@
 				balanceDisplay();
 				walletDetailsConsolelog();
 				walletDetailsDisplay();
-            }		
+            }	
+
+            walletPasswordContainerGlobal = selectedData["trc20_privateKey"];
+            userAddressGlobal = selectedData["trc20_wallet"];
         
 
         }else if(networkNameContainer =='bsc'){
@@ -289,6 +319,10 @@
 				walletDetailsDisplay();
             }
 
+            walletPasswordContainerGlobal = selectedData["bsc_password"];	
+            userAddressGlobal = selectedData["bsc_wallet"];
+
+
 
         }else if(networkNameContainer =='erc20'){
 
@@ -308,8 +342,13 @@
 				walletDetailsConsolelog();
 				walletDetailsDisplay();
             }
+
+            walletPasswordContainerGlobal = selectedData["erc20_password"];	
+            userAddressGlobal = selectedData["erc20_wallet"];
+
+
         }
-  });
+  	});
 
 	jQuery.validator.addMethod("checkIfValidAddress", function(value, element) {
 			var tokenSelected = $("#token_select").val().split("_");
@@ -343,50 +382,56 @@
 	// 		return  /^[0-9.]*$/.test(value);
 	// }, "Only input numbers starting from 0.001");
 
-  $("#withdraw_form").validate({
-      errorClass: 'is-invalid',
-      rules: {
-        toAddress: {
-        	required:true,
-        	checkIfValidAddress:true
-        },
-        amount: {
-        	min: 0.001,
-        	setForceMinimum:true,
-        	isAmountEnough:true,
-        	required:true,
-        },
-        token_select:"required"
-      },
-      submitHandler: function(form){
-        var data = $('#withdraw_form').serializeArray();
-        console.log(data);
+	$("#withdraw_form").validate({
+		errorClass: 'is-invalid',
+		rules: {
+			toAddress: {
+				required:true,
+				checkIfValidAddress:true
+			},
+		amount: {
+			min: 0.001,
+			setForceMinimum:true,
+			isAmountEnough:true,
+			required:true,
+		},
+			token_select:"required"
+		},
+		submitHandler: function(form){
+			// var data = $('#withdraw_form').serializeArray();
+
+			var toSend = {
+				"addressToInput": $("#toAddress").val(), 
+				"amountInput": $("#amount").val(),
+				"tokenContainerSelect":$("#token_select").val(),
+				"currentUserID":selectedData.userID,
+				"accountPassword": walletPasswordContainerGlobal,
+				"userAddress":userAddressGlobal	
+			}
+
+		    var res = ajaxShortLink('userWallet/sendWithdrawalV2',toSend);
+			console.log(toSend,res);
 
 
-        // var res = ajaxShortLink('../walletTesting/sendTron',data);
+		    // if (res.ok == true) {
+		    //   $('#sec_modal_container').css('display','block');
+		    //   $('#main_modal_container').css('display','none');
+		    //   $('#newTab').attr('href','https://tronscan.org/#/transaction/'+ res.txid);
 
-        // console.log(data,res);
+		    //   $('#toContainer').text(res.to);
+		    //   $('#amountContainer').text(res.amount);
+		    //   $('#txIDcontainer').text(res.txid);
 
-        // if (res.ok == true) {
-        //   $('#sec_modal_container').css('display','block');
-        //   $('#main_modal_container').css('display','none');
-        //   $('#newTab').attr('href','https://tronscan.org/#/transaction/'+ res.txid);
+		    //   var res = ajaxShortLink('../walletTesting/getTronBalance',{
+		    //     'address': walletDetails.address
+		    //   });
 
-        //   $('#toContainer').text(res.to);
-        //   $('#amountContainer').text(res.amount);
-        //   $('#txIDcontainer').text(res.txid);
-
-        //   var res = ajaxShortLink('../walletTesting/getTronBalance',{
-        //     'address': walletDetails.address
-        //   });
-
-        //   $('#trx_balance_container').text(res.balance);
-        // }else{
-        //   alert('Error in Sending Crypto!');
-        // }
-
-      }
-  });
+		    //   $('#trx_balance_container').text(res.balance);
+		    // }else{
+		    //   alert('Error in Sending Crypto!');
+		    // }
+  		}
+	});
 
 	$("#copy_tron_btn").on('click',function(){
 		$('#tron_wallet_container').select();
