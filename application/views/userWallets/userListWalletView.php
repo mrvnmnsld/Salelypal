@@ -159,7 +159,7 @@
   </div>
 </div>
 
-<div id="success_page_modal_container" class="text-center" style="display: none;"> 
+<div id="success_page_modal_container" class="text-center" style="display:none;"> 
         <i style="font-size:150px" class="fa fa-check-circle-o text-success" aria-hidden="true"></i><br>
         <span style="font-size:30px" class="text-success">Success!</span>
         <br>
