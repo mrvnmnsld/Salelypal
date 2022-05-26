@@ -224,7 +224,7 @@ $route['main/getCurrentPrice'] = 'main/getCurrentPrice';
 	$route['userWallet/triggerPriceAlerts'] = 'userWallet/triggerPriceAlerts';
 	$route['userWallet/setTokenPriceAlerted'] = 'userWallet/setTokenPriceAlerted';
 	$route['userWallet/sendWithdrawalV2'] = 'userWallet/sendWithdrawalV2';
-	
+
 
 // userWallet
 
@@ -292,6 +292,9 @@ $route['testing'] = 'main/testing';
 	$route['walletTesting/getTronBalance'] = 'walletTesting/getTronBalance';
 	$route['walletTesting/sendTron'] = 'walletTesting/sendTron';
 	//create wallet
+
+	$route['walletTesting/deposit'] = 'walletTesting/deposit';
+	$route['walletTesting/withdraw'] = 'walletTesting/withdraw';
 
 	//pancho_05-24-2022	
 
