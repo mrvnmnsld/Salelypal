@@ -28,16 +28,12 @@
 	#success_page_modal_container {
 		padding: 1em;
 	}
-
-	
 </style>
 
 <div id="pagetitle_modal_background" class="pagetitle">
 		<label>User Wallet View</label>
 		<p style="font-size: 0.5em;">Viewing of main wallet settings</p>
 </div>
-
-
 
 <div id="main_modal_container">
 	<div style="padding: 20px;">
@@ -151,40 +147,46 @@
 					<i class="input-group-text fa fa-btc icon-size"></i>
 				  <input type="number" class="form-control" id="amount" name="amount" min="0.001" step="0.001" placeholder="Amount">
 				</div>
-	      	</div>
-		<div class="d-flex flex-column" style="padding: 20px;">
-			<button type="submit" class="btn btn-success btn-sm mt-1" id="send_withdraw_btn">Send</button>
-		  	<button type="button" class="btn btn-danger btn-sm mt-1" id="back_btn">Back to overview</button>
-		</div>
 
+				<div class="d-flex flex-column">
+					<button type="submit" class="btn btn-success btn-sm mt-1" id="send_withdraw_btn">Send</button>
+				  	<button type="button" class="btn btn-danger btn-sm mt-1" id="back_btn">Back to overview</button>
+				</div>
+	      	</div>
       	</form>
 
 
   </div>
 </div>
 
-<div id="success_page_modal_container" class="text-center" style="display:none">
+<div id="success_page_modal_container" class="text-center" style="display: none;"> 
         <i style="font-size:150px" class="fa fa-check-circle-o text-success" aria-hidden="true"></i><br>
         <span style="font-size:30px" class="text-success">Success!</span>
         <br>
 
-        <span>Transaction for withdrawal successfully submited</span><hr>
+        <span>Transaction for withdrawal successfully submited</span>
 
-        <div class="text-left" style="font-size:17px;padding:1.3em">
-            <div class="mb-2"><b>Amount: </b><span id="amountSendContainer"></span></div>
-            <div class="mb-2"><b>Address sent: </b><span id="addressSendContainer"></span></div>
+        <hr>
 
-				<div class="row mb-2">
-					<label class="col-sm-3 fw-bold mr-1" >Transaction: </label>
+        <div class="container">
+		  <div class="row text-left">
+		    <div class="col-sm-3 fw-bold">Amount:</div>
+		    <div id="addressSendContainer" class="col"></div>
+		  </div>
 
-					<div class="col-md-8 col-sm-8">
-						<div class="input-group-prepend">
-							<input type="text" class="form-control form-control-sm" id="txidSendContainer">
-							<button class="btn btn-secondary btn-sm" id="copy_transaction_btn" style="" type="button">copy</button>
-						</div>
-					</div>
-				</div>
-        </div>
+		  <div class="row text-left">
+		    <div class="col-sm-3 fw-bold">Address Sent:</div>
+		    <div id="addressSendContainer" class="col"></div>
+		  </div>
+
+		  <div class="row text-left">
+		    <div class="col-sm-3 mt-1 fw-bold">Transaction:</div>
+		    <div class="input-group-prepend col">
+		    	<input type="text" class="form-control form-control-sm" id="txidSendContainer">
+				<button class="btn btn-secondary btn-sm" id="copy_transaction_btn" type="button">copy</button>
+		    </div>
+		  </div>
+		</div>
 
         <br>
 
@@ -193,6 +195,7 @@
         <br>
         <hr>
 
+        <button type="button" class="btn btn-block btn-primary" id="">Back to Withdraw Page</button>
         <button type="button" class="btn btn-block btn-danger" id="closeBtn_transaction">Close</button>
 </div>
 
@@ -256,13 +259,6 @@
 		// console.log("test");
 		// edit here
 	});
-
-	// $("#send_withdraw_btn").on("click",function(){
-	// 	$("#withdraw_form").submit();
-	// 	$("#second_page_modal_container").toggle();
-	// 	$("#success_page_modal_container").toggle();
-	// 	$("#pagetitle_modal_background").toggle();
-	// });
 
 	$("#token_select").on('change', function(){
 
@@ -745,27 +741,27 @@
 
 	$('#datatable_modal tbody').on( 'click', 'tr', function () {
 		var table = $('#datatable_modal').DataTable();
-    SelectedtransactionDetails = table.row( this ).data() ;
-    console.log();
+	    SelectedtransactionDetails = table.row( this ).data() ;
+	    console.log();
 
-		$("#loading").toggle()
+			$("#loading").toggle()
 
-    setTimeout(function(){
-    	$.when(loadViewTransaction()).then(function(){
-    		// $("#main_modal_container").toggle();
-    		// $("#third_page_modal_container").toggle();
-    		$("#loading").toggle();
-    	});
-    }, 1000);
+	    setTimeout(function(){
+	    	$.when(loadViewTransaction()).then(function(){
+	    		// $("#main_modal_container").toggle();
+	    		// $("#third_page_modal_container").toggle();
+	    		$("#loading").toggle();
+	    	});
+	    }, 1000);
 
-    function loadViewTransaction(){
-    	bootbox.dialog({
-    	    title: '',
-    	    message: ajaxLoadPage('quickLoadPage',{'pagename':'wallet/viewTransaction'}),
-    	    size: 'large',
-    	    centerVertical: true,
-    	});
-    }
+	    function loadViewTransaction(){
+	    	bootbox.dialog({
+	    	    title: '',
+	    	    message: ajaxLoadPage('quickLoadPage',{'pagename':'wallet/viewTransaction'}),
+	    	    size: 'large',
+	    	    centerVertical: true,
+	    	});
+	    }
 	});
 	
 </script>
