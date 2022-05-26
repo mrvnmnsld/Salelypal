@@ -2,7 +2,6 @@
   .modal-footer{
     display: none;
   }
-
   .error{
     color: red;
   }
