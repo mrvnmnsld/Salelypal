@@ -14,7 +14,6 @@
 		max-width: 2em;
 		max-height: 2em;
 	}
-
 	 .form-control { /* seems working on other ui bugs, no changes on current ui screens */
 		height: 2.7em; 
 	}
