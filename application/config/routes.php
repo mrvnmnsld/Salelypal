@@ -226,6 +226,9 @@ $route['main/getCurrentPrice'] = 'main/getCurrentPrice';
 	$route['userWallet/updatePriceAlert'] = 'userWallet/updatePriceAlert';
 	$route['userWallet/triggerPriceAlerts'] = 'userWallet/triggerPriceAlerts';
 	$route['userWallet/setTokenPriceAlerted'] = 'userWallet/setTokenPriceAlerted';
+	$route['userWallet/sendWithdrawalV2'] = 'userWallet/sendWithdrawalV2';
+
+
 // userWallet
 
 // bitKeep
