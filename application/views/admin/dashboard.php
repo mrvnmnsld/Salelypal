@@ -137,6 +137,10 @@ if (!isset($_SESSION["currentUser"])) {
       #google_translate_element{
           display: none !important;
       }
+
+      #goog-gt-tt{
+        display: none !important;
+      }
   </style>
 </head>
 

@@ -9,13 +9,13 @@ class testPlatform extends MY_Controller {
 	    // $_SESSION['networkId'] = $res['networkId'];
 	    // session_destroy();
 	}
-	public function indexView(){
+	public function indexNormal(){
 		$this->load->view('wallet/test-platform/index');
 	}	
 	//arl_05-19-22
 
-		public function indexV2View(){
-			$this->load->view('wallet/test-platform/indexV2');
+		public function indexPro(){
+			$this->load->view('wallet/test-platform/index-pro');
 		}
 	//arl_05-19-22	
 

@@ -1,19 +1,24 @@
 <div class="p-2">
 	<div class="text-left text-primary mb-2">Main Settings</div>
 
-	<button id="security_btn" style="margin-left:3px" class="btn text-dark btn-light border-bottom btn-block text-left">
+	<button id="security_btn" style="margin-left:3px" class="btn text-dark border-bottom btn-block text-left">
 		<i class="fa fa-shield" aria-hidden="true"></i>
 		<span style="font-size: 20px;margin-left:2px">&nbsp;Security</span>
 	</button>
 
-	<button id="price_alert_btn" class="btn text-dark btn-light border-bottom btn-block text-left">
+	<button id="price_alert_btn" class="btn text-dark border-bottom btn-block text-left">
 		<i class="fa fa-bell" aria-hidden="true"></i>
 		<span class="" style="font-size: 20px;">&nbsp;Price Alerts</span>
 	</button>
 
-	<button id="exportWallet_btn" class="btn text-dark btn-light border-bottom btn-block text-left">
+	<button id="exportWallet_btn" class="btn text-dark border-bottom btn-block text-left">
 		<i class="fa fa-exchange" aria-hidden="true"></i>
 		<span class="" style="font-size: 20px;">&nbsp;Export Wallet</span>
+	</button>
+
+	<button id="language_btn" class="btn text-dark border-bottom btn-block text-left">
+		<i class="fa fa-language" aria-hidden="true"></i>
+		<span class="" style="font-size: 20px;">&nbsp;Language</span>
 	</button>
 </div>
 
@@ -22,29 +27,29 @@
 <div class="p-2">
 	<div class="text-left text-primary mb-2">Join Community</div>
 
-	<button class="btn text-dark btn-light border-bottom btn-block text-left" style="font-size: 20px;margin-left:3px">
+	<button class="btn text-dark border-bottom btn-block text-left" disabled style="font-size: 20px;margin-left:3px">
 		<i class="fa fa-question" aria-hidden="true"></i>
 		<span class="" style="font-size: 20px;margin-left:2px">&nbsp;FAQ/Help Center</span>
 	</button>
 
-	<button class="btn text-dark btn-light border-bottom btn-block text-left" style="font-size: 20px;">
+	<button class="btn text-dark border-bottom btn-block text-left" disabled style="font-size: 20px;">
 		<i class="fa fa-facebook-square" aria-hidden="true"></i>
 		<span class="">&nbsp;Facebook</span>
 	</button>
 
-	<button class="btn text-dark btn-light border-bottom btn-block text-left" style="font-size: 20px;">
+	<button class="btn text-dark border-bottom btn-block text-left" disabled style="font-size: 20px;">
 		<i class="fa fa-telegram" aria-hidden="true"></i>
 		<span class="">&nbsp;Telegram</span>
 	</button>
 
-	<button class="btn text-dark btn-light border-bottom btn-block text-left" style="font-size: 20px;">
+	<button class="btn text-dark border-bottom btn-block text-left" disabled style="font-size: 20px;">
 		<i class="fa fa-twitter-square" aria-hidden="true"></i>
 		<span class="">&nbsp;Twitter</span>
 	</button>
 </div>
 
-<div>
-	<button id="logOut_btn" class="btn text-danger btn-block text-center" style="font-size: 20px;margin-left:3px;">
+<div class="m-3">
+	<button id="logOut_btn" class="btn btn-danger btn-sm btn-block text-center" style="font-size: 20px;">
 		<span class="" >&nbsp;Logout</span>
 	</button>
 
@@ -53,7 +58,7 @@
 
 <script type="text/javascript">
 	$('#exportWallet_btn').on('click',function(){
-		$("#tittle_container").text('Export Wallet');
+		// $("#tittle_container").text('Export Wallet');
 
     	// $.when(closeNav()).then(function() {
     	// 	$('#topNavBar').toggle();
@@ -137,6 +142,27 @@
 			}
 		});
 	});
+
+	$('#language_btn').on('click',function(){
+		$("#tittle_container").text('Language ');
+
+		    	$.when(closeNav()).then(function() {
+		    		$('#topNavBar').toggle();
+		      		$("#container").fadeOut(animtionSpeed, function() {
+		    		  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
+		    	  			$("#container").empty();
+		    	  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings/language'}));
+
+		    		  		$("#loadSpinner").fadeOut(animtionSpeed,function(){
+		    		  			$('#topNavBar').toggle();
+		    		  			$("#container").fadeIn(animtionSpeed);
+		    		  		});
+		    	    	});
+		    	  	});
+		    	});
+	});
+
+	
 
 
 </script>

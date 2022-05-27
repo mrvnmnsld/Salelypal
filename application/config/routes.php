@@ -13,16 +13,17 @@ $route['saveSignUpForm'] = 'main/saveSignUpForm';
 $route['sendOtp'] = 'main/sendOtp';
 
 $route['homeView'] = 'main/homeView2';
+$route['homeViewPro'] = 'main/homeViewPro';
+
+$route['paypal-test'] = 'main/paypaltest';
+
 // $route['homeView'] = 'main/homeView';
 
-
 $route['loadAnnouncement'] = 'main/loadAnnouncement';
-
 $route['editProfile'] = 'main/editProfile';
 $route['saveNewProfilePic'] = 'main/saveNewProfilePic';
-
+$route['confirmPassword'] = 'main/confirmPassword';
 $route['main/getCurrentPrice'] = 'main/getCurrentPrice';
-// $route['quickLoadPage'] = 'main/adminLogout';
 
 // Admin
 	$route['admin-login'] = 'admin/adminLogin';
@@ -62,6 +63,8 @@ $route['main/getCurrentPrice'] = 'main/getCurrentPrice';
 	$route['makeMeMd5'] = 'main/makeMeMd5';
 
 	$route['saveCredentialEdit'] = 'main/saveCredentialEdit';
+
+
 // Admin
 
 // MainWallet
@@ -232,12 +235,41 @@ $route['main/getCurrentPrice'] = 'main/getCurrentPrice';
 	$route['phoneToPng'] = 'bitkeep/phoneToPng';
 // bitKeep
 
-$route['confirmPassword'] = 'main/confirmPassword';
+//agent management
+	$route['agent-login'] = 'agent/agentLogin';
+	$route['agent/getAgent'] = 'agent/getAgent';
+	$route['agent/saveNewAgent'] = 'agent/saveNewAgent';
+	$route['agent/updateAgentInfo'] = 'agent/updateAgentInfo';
+	$route['agent/deleteAgent'] = 'agent/deleteAgent';
+	$route['agent/getAgentInvites'] = 'agent/getAgentInvites';
+//agent management
+
+//users management
+	$route['getUsers'] = 'testPlatform/getUsers';
+	$route['saveNewUser'] = 'testPlatform/saveNewUser';
+	$route['deleteUser'] = 'testPlatform/deleteUser';
+	$route['updateUserInfo'] = 'testPlatform/updateUserInfo';
+	$route['compareEmailUpdate'] = 'testPlatform/compareEmailUpdate';
+//users management
+
+//create wallet
+	$route['walletTesting/walletView'] = 'walletTesting/walletView';
+	$route['walletTesting/createWallet'] = 'walletTesting/createWallet';
+	$route['walletTesting/getTronBalance'] = 'walletTesting/getTronBalance';
+	$route['walletTesting/sendTron'] = 'walletTesting/sendTron';
+
+	// $route['walletTesting/createWallet'] = 'walletTesting/createWallet';
+	// $route['walletTesting/getTronBalance'] = 'walletTesting/getTronBalance';
+//create wallet
+
+
 $route['getCountries'] = 'main/getCountries';
 $route['testing'] = 'main/testing';
 
 // testing platform
-	$route['test-platform'] = 'testPlatform/indexView';
+	$route['test-platform'] = 'testPlatform/indexNormal';
+	$route['test-platform-pro'] = 'testPlatform/indexPro'; 
+
 	$route['test-platform/getTronBalance'] = 'testPlatform/getTronBalance';
 	$route['test-platform/getBinancecoinBalance'] = 'testPlatform/getBinancecoinBalance';
 	$route['test-platform/getEthereumBalance'] = 'testPlatform/getEthereumBalance';
@@ -255,48 +287,5 @@ $route['testing'] = 'main/testing';
 
 	$route['test-platform/newBalance'] = 'testPlatform/newBalance';
 // testing platform
-
-
-//branch1 repo
-	//arl_05-19-22
-	$route['test-platformV2'] = 'testPlatform/indexV2View'; 
-	//arl_05-21-22
-	$route['agent-login'] = 'agent/agentLogin';
-	//arl_05-22-22
-	$route['agent/getAgentInvites'] = 'agent/getAgentInvites';
-	$route['homeViewPro'] = 'main/homeViewPro';
-
-	//pancho_05-24-2022
-
-	//agent management
-	$route['agent/getAgent'] = 'agent/getAgent';
-	$route['agent/saveNewAgent'] = 'agent/saveNewAgent';
-	$route['agent/updateAgentInfo'] = 'agent/updateAgentInfo';
-	$route['agent/deleteAgent'] = 'agent/deleteAgent';
-	//agent management
-
-	//users management
-	$route['getUsers'] = 'testPlatform/getUsers';
-	$route['saveNewUser'] = 'testPlatform/saveNewUser';
-	$route['deleteUser'] = 'testPlatform/deleteUser';
-	$route['updateUserInfo'] = 'testPlatform/updateUserInfo';
-	$route['compareEmailUpdate'] = 'testPlatform/compareEmailUpdate';
-	//users management
-
-	//create wallet
-	$route['walletTesting/walletView'] = 'walletTesting/walletView';
-	$route['walletTesting/createWallet'] = 'walletTesting/createWallet';
-	$route['walletTesting/getTronBalance'] = 'walletTesting/getTronBalance';
-	$route['walletTesting/sendTron'] = 'walletTesting/sendTron';
-	//create wallet
-
-	//pancho_05-24-2022	
-
-	//test routes
-		$route['walletTesting/createWallet'] = 'walletTesting/createWallet';
-		$route['walletTesting/getTronBalance'] = 'walletTesting/getTronBalance';
-
-
-$route['paypal-test'] = 'main/paypaltest';
 
 $route[(':any')] = 'main/error';

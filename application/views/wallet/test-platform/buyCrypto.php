@@ -19,6 +19,12 @@
     #paypal-button-container{
         position: relative;
     }
+
+    .dataTables_length{
+        display: none;
+    }
+
+    
 </style>
 
 <div id="innerContainer" class="p-3">
@@ -54,12 +60,12 @@
             To buy crypto please select which token to buy then confirm the price (Price should be confirmed every 5 seconds to preview the convertion rate of the token), then hit paypal or debit card after confirming the the payment please wait for a few minutes to transfer the coin purchased to your account
         </div>
 
-        <hr style="height: 1px;width: 70%;" class="bg-dark">
-
         <div class="form-group">
             <label>Please select token</label>
-            <select id="token_select" name="token_select" class="form-control">
-                <option value="">Select Token...</option>
+            <select id="token_select" name="token_select" class="js-example-basic-single form-control" data-live-search="true">
+                <optgroup id="erc20_tokens_container" label="Ethereum Mainet"></optgroup>
+                <optgroup id="bsc_tokens_container" label="Binance Smart Chain"></optgroup>
+                <optgroup id="tron_tokens_container" label="Tron Mainet"></optgroup>
             </select>
         </div>
 
@@ -112,20 +118,19 @@
     .dataTables_info {
         float:;
     }
-
 </style>
 
-<div class="p-2 m-2 text-dark">
+<div class="p-1 m-2 mb-2 text-dark bg-light rounded">
     <div class="text-center">
         <h4>Purchase History</h4>
     </div>
 
-    <table id="tableContainer" class="table table-hover table-striped table-borderless table-sm" style="width: 98%!important;">  
+    <table id="tableContainer" class="table table-sm" style="width: 98%!important;">  
         <thead>
             <tr>
                 <th>Token</th>
                 <!-- <th>Value</th> -->
-                <th>Amount</th>
+                <th width="10%">Amount</th>
                 <th>Date</th>
             </tr>
         </thead>
@@ -138,6 +143,12 @@
 <script>
     $(document).ready(function() {
         loadDatatable('test-platform/getUserPurchase',{'userID':15});
+
+        $('#token_select').selectpicker({
+            style: 'border',
+            size: 8,
+            showSubtext :true
+        });
     });
 
     $('#purchaseAppeals_inner_btn').on('click',function(){
@@ -187,11 +198,29 @@
     var allTokens = ajaxShortLink('userWallet/getAllTokensV2');
 
     for (var i = 0; i < allTokens.length; i++) {
-        $("#token_select").append(
-            '<option value="'+allTokens[i].tokenName+'_'+allTokens[i].networkName+'_'+allTokens[i].smartAddress+'_'+allTokens[i].coingeckoTokenId+'_'+allTokens[i].id+'">'+
-                allTokens[i].description+' ('+allTokens[i].networkName.toUpperCase()+')'+
-            '</option>'
-        );
+        if(allTokens[i].networkName=="erc20"){
+            $("#erc20_tokens_container").append(
+                '<option data-subtext="'+allTokens[i].networkName+'" value="'+allTokens[i].tokenName+'_'+allTokens[i].networkName+'_'+allTokens[i].smartAddress+'_'+allTokens[i].coingeckoTokenId+'_'+allTokens[i].id+'">'+
+                    allTokens[i].tokenName+' ('+allTokens[i].description+')'+
+                '</option>'
+            );
+        }
+
+        if(allTokens[i].networkName=="bsc"){
+            $("#bsc_tokens_container").append(
+                '<option data data-subtext="'+allTokens[i].networkName+'" value="'+allTokens[i].tokenName+'_'+allTokens[i].networkName+'_'+allTokens[i].smartAddress+'_'+allTokens[i].coingeckoTokenId+'_'+allTokens[i].id+'">'+
+                    allTokens[i].tokenName+' ('+allTokens[i].description+')'+
+                '</option>'
+            );
+        }
+
+        if(allTokens[i].networkName=="trx"||allTokens[i].networkName=="trc20"){
+            $("#tron_tokens_container").append(
+                '<option data-subtext="'+allTokens[i].networkName+'" value="'+allTokens[i].tokenName+'_'+allTokens[i].networkName+'_'+allTokens[i].smartAddress+'_'+allTokens[i].coingeckoTokenId+'_'+allTokens[i].id+'">'+
+                    allTokens[i].tokenName+' ('+allTokens[i].description+')'+
+                '</option>'
+            );
+        }
     }
     console.log(allTokens);
 
