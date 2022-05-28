@@ -2,8 +2,9 @@
   <div class="card-body">
     <div class="pagetitle">
       <h1>Data Tables</h1>
-      <sub>Data table testing</sub>
     </div>
+
+    <hr>
 
     <div class="d-flex">
     	<button class="btn btn-success mb-2" id="addNewUser_btn"><i class="bi bi-plus"></i> Add New User</button>

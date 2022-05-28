@@ -2,13 +2,14 @@
 	.modal-footer{
 		display: none;
 	}
-
 	#qrcode img{
 		/*border: solid 1px;*/
 		outline: 2px solid black;
 	  	outline-offset: 5px;
 	}
-
+	label .is-invalid .text-danger{
+		text-align:center;
+	}
 	.filter-option-inner-inner .mainTokenSelectedLogo img{
 		width: 10%!important;
 	}
@@ -20,81 +21,118 @@
 	.bootbox-close-button{
 		display: none;
 	}
+	#pagetitle_background{
+		background: #293038;
+		color: white;
+	}
+	#withdraw_form_container{
+		background: rgba(0, 0, 0, .1); 
+		padding: 20px;
+	}
+	.is-invalid{
+		width: 100%;
+	}
 </style>
 
-<div class="h2 text-center">Withdrawal</div>
-
-
-<div id="successContainer" class="text-center" style="display: none;">
-	<i style="font-size:150px" class="fa fa-check-circle-o text-success" aria-hidden="true"></i><br>
-	<span style="font-size:30px" class="text-success">Success!</span>
-	<br>
-
-	<span>Transaction for withdrawal successfully submited</span>
-
-	<div class="text-left" style="font-size:17px">
-		<div><b>Amount: </b><span id="amountSendContainer">1</span></div>
-		<div><b>Address sent: </b><span id="addressSendContainer">1</span></div>
-		<div><b>Transaction address: </b><br><input id="txidSendContainer" type="text" class="form-control"></div>
+	<div id="pagetitle_background" class="text-center">
+		<label class="h2 mt-2">Withdrawal</label>
 	</div>
 
-	<br>
+	<div id="successContainer" class="text-center" style="display:none">
+		<i style="font-size:150px" class="fa fa-check-circle-o text-success" aria-hidden="true"></i><br>
+		<span style="font-size:30px" class="text-success">Success!</span>
+		<br>
 
-	<span>You can view your complete transaction details in by clicking <a href="#" id="txidLinkSendContainer" target="_blank">tronscan.org</a> (It might take a few seconds to register the transaction)</span>
-	
-	<br>
-	<hr>
-
-	<button type="button" class="btn btn-block btn-danger" id="closeBtn_transaction">Close</button>
-
-</div>
-
-<form id="mainForm" style="display:;">
-	<div class="p-2">
-  		<small class="font-weight-bold text-success">Available Amount on wallet: <span id="availableAmountContainer">Not Set</span></small>
-
-  		<div>
-  			<b>Token:</b>
-  			<span id="token_container">Not Set</span>
-  		</div>
-
-		<div>
-			<b>Network:</b>
-			<span id="network_container">Not Set</span>
-		</div>
+		<span>Transaction for withdrawal successfully submited</span>
 
 		<hr>
+		<div class="container">
+		  <div class="row text-left">
+		    <div class="col-sm-3 fw-bold">Amount:</div>
+		    <div id="amountSendContainer" class="col"></div>
+		  </div>
 
-		<div class="form-group">
-			<div><b>Recieving Address:</b></div>
-			<input class="form-control mt-2" id="addressToInput" name="addressToInput" placeholder="Enter Address">
-	  	</div>
+		  <div class="row text-left">
+		    <div class="col-sm-3 fw-bold">Address Sent:</div>
+		    <div id="addressSendContainer" class="col"></div>
+		  </div>
 
-  		<div class="form-group">
-  			<div><b>Amount:</b></div>
+		  <div class="row text-left">
+		    <div class="col-sm-3 mt-1 fw-bold">Transaction:</div>
+		    <div class="input-group-prepend col">
+		    	<input type="text" class="form-control form-control-sm" id="txidSendContainer">
+				<button class="btn btn-secondary btn-sm" id="copy_transaction_btn" type="button">copy</button>
+		    </div>
+		  </div>
+		</div>
+		<hr>
+		<br>
 
-  			<!-- <div class="input-group mb-3"> -->
-			<input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" class="form-control" id="amountInput" name="amountInput" placeholder="Enter amount" />
+		<span>You can view your complete transaction details in by clicking <a href="#" id="txidLinkSendContainer" target="_blank">tronscan.org</a> (It might take a few seconds to register the transaction)</span>
+		
+		<br><br>
 
-			<!-- <div class="input-group-append">
-				<button class="btn btn-primary" type="button" id="maxBtn" style="border-top-right-radius: 5px 5px;border-bottom-right-radius: 5px 5px;">Max</button>
-			</div> -->
-  	  	</div>
-
-	  		<div class="form-group">
-	  			<div><b>Account Password:</b></div>
-	  			<input type="password" class="form-control mt-2" id="accountPassword" name="accountPassword" placeholder="Enter password">
-	  	  	</div>
+		<button type="button" class="btn btn-block btn-danger" id="closeBtn_transaction">Close</button>
 	</div>
 
-	<div id="errorReporter" class="text-center text-danger"></div>
-	<div id="warningReported" class="text-center"></div>
+	<div id="withdraw_form_container">
+		<form id="mainForm">
+			<div class="p-2">
+		  		<small class="font-weight-bold text-success">Available Amount on Wallet: <span id="availableAmountContainer">Not Set</span></small>
 
-	<div class="d-flex flex-row-reverse">
-		<button type="button" class="btn btn-danger m-1" id="closeBtn">Cancel</button>
-		<button type="submit" class="btn btn-success m-1" id="confirmBtn">Confirm</button>
+		  		<div>
+		  			<b>Token:</b>
+		  			<span id="token_container">Not Set</span>
+		  		</div>
+
+				<div>
+					<b>Network:</b>
+					<span id="network_container">Not Set</span>
+				</div>
+
+				<hr>
+
+				<div class="form-group">
+					<b>Recieving Address:</b>
+					<div class="input-group">
+						<i class="input-group-text fa fa-address-book-o" aria-hidden="true"></i>
+						<input class="form-control" id="addressToInput" name="addressToInput" placeholder="Enter Address">
+					</div>
+			  	</div>
+
+		  		<div class="form-group">
+		  			<b>Amount:</b>
+		  			<div class="input-group">
+						<i class="input-group-text fa fa-btc icon-size" aria-hidden="true"></i>
+						<input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" class="form-control" id="amountInput" name="amountInput" placeholder="Enter amount" />
+
+						<!-- <div class="input-group-append">
+							<button class="btn btn-primary" type="button" id="maxBtn" style="border-top-right-radius: 5px 5px;border-bottom-right-radius: 5px 5px;">Max</button>
+						</div> -->
+		  	  		</div>
+		  	  	</div>
+
+			  		<div class="form-group">
+			  			<b>Account Password:</b>
+			  			<div class="input-group">
+							<i class="input-group-text fa fa-key" aria-hidden="true"></i>
+				  			<input type="password" class="form-control" id="accountPassword" name="accountPassword" placeholder="Enter password">
+				  		</div>
+			  	  	</div>
+			  	 <hr>
+
+				<div id="errorReporter" class="text-center text-danger"></div>
+				<div id="warningReported" class="text-center"></div>
+
+				<div class="d-flex flex-row-reverse">
+					<button type="button" class="btn btn-danger m-1" id="closeBtn">Cancel</button>
+					<button type="submit" class="btn btn-success m-1" id="confirmBtn">Confirm</button>
+				</div>
+			</div>
+		</form>
 	</div>
-</form>
+	
+		
 
 
 <script type="text/javascript">
@@ -196,6 +234,11 @@
 				required:true,
 				checkPassword:true
 			}
+	  	},
+	  	errorPlacement: function(error, element) {
+	  	    error.insertAfter(element.parent("div"));
+
+	  	    console.log(error, element);
 	  	},
 	  	submitHandler: function(form){
 	  		var data = $('#mainForm').serializeArray();

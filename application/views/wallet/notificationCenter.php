@@ -1,7 +1,4 @@
 <style type="text/css">
-	body{
-	  background: rgba(0, 0, 0, .3);
-	}
 	.alert-simple.alert-custom{
 	  background-color: rgba(52, 55, 67, 0.5);
 	  color: white;
@@ -28,11 +25,11 @@
 </style> 
 
 <div class="p-2">
-	<div class="text-center h5 text-dark" id="notification_counter_string_container"></div>
+	<div class="text-center h5 text-dark font-weight-bold" id="notification_counter_string_container"></div>
 
 	<div id="new_notification_container"></div>
 
-	<div class="text-center text-dark"> Nothing follows</div>
+	<div class="text-center text-dark font-weight-bold"> Nothing follows</div>
 </div>
 
 		<div id="" class="new-notif notif border-bottom border-dark m-3">

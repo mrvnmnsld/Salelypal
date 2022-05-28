@@ -560,4 +560,19 @@ class mainWallet extends MY_Controller {
 		echo $result;
 	}
 
+	public function getAllTokensV2(){
+		$selectedTokens = $this->_getRecordsData(
+			$selectfields = array("token_reference.*,network_reference.network as networkName"), 
+	   		$tables = array('token_reference','network_reference'),
+	   		$fieldName = null, $where = null, 
+	   		$join = array('token_reference.networkID = network_reference.id'), $joinType = array('inner'),
+	   		$sortBy = array('token_reference.networkID'), $sortOrder = array('desc'), 
+	   		$limit = null, 
+	   		$fieldNameLike = null, $like = null,
+	   		$whereSpecial = null, $groupBy = null 
+		);
+
+		echo json_encode($selectedTokens);
+	}
+
 }

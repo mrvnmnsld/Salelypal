@@ -1,5 +1,5 @@
 <div class="p-2">
-	<div class="text-left text-primary mb-2">Main Settings</div>
+	<div class="text-center text-primary mb-2 font-weight-bold">Main Settings</div>
 
 	<button id="security_btn" style="margin-left:3px" class="btn text-dark border-bottom btn-block text-left">
 		<i class="fa fa-shield" aria-hidden="true"></i>
@@ -25,7 +25,7 @@
 <hr>
 
 <div class="p-2">
-	<div class="text-left text-primary mb-2">Join Community</div>
+	<div class="text-center text-primary mb-2 font-weight-bold">Join Community</div>
 
 	<button class="btn text-dark border-bottom btn-block text-left" disabled style="font-size: 20px;margin-left:3px">
 		<i class="fa fa-question" aria-hidden="true"></i>
@@ -46,14 +46,10 @@
 		<i class="fa fa-twitter-square" aria-hidden="true"></i>
 		<span class="">&nbsp;Twitter</span>
 	</button>
-</div>
 
-<div class="m-3">
-	<button id="logOut_btn" class="btn btn-danger btn-sm btn-block text-center" style="font-size: 20px;">
-		<span class="" >&nbsp;Logout</span>
-	</button>
-
-	<!-- <a class="text-danger" href="#" id="">Logout</a> -->
+	<hr>
+	
+	<button id="logOut_btn" type="button" class="btn btn-block btn-danger" style="font-size: 20px;">LOGOUT</button>
 </div>
 
 <script type="text/javascript">

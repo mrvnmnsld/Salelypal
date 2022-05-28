@@ -87,7 +87,8 @@ $route['main/getCurrentPrice'] = 'main/getCurrentPrice';
 	$route['mainWallet/createErc20Wallet'] = 'mainWallet/createErc20Wallet';
 	$route['mainWallet/getEthereumBalance'] = 'mainWallet/getEthereumBalance';
 	$route['mainWallet/getErc20TokenBalance'] = 'mainWallet/getErc20TokenBalance';
-	
+
+	$route['mainWallet/getAllTokensV2'] = 'mainWallet/getAllTokensV2';
 // MainWallet
 
 // userWallet

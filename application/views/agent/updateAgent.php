@@ -16,21 +16,28 @@
 		font-size: 1.4em;
 		max-width: 2em;
 	}
-
 	.form-control { /* seems working on other ui bugs, no changes on current ui screens */
 		height: 2.7em; 
 	}
+	#pagetitle_background{
+		background: #293038;
+		color: white;
+	}
+	#main_modal_container{
+		background: rgba(0, 0, 0, .1);
+	}
+	#update_agent_form{
+		padding: 20px;
+	}
 </style>
 
-<div class="pagetitle">
-  <h1>Update Agent Information</h1>    
+<div id="pagetitle_background" class="text-center">
+		<label class="h2 mt-2">Update Agent Information</label>
 </div>
-
-<hr>
 
 <div id="main_modal_container">
 
-	<form id="updateAgentForm">
+	<form id="update_agent_form">
 
 		<label class="fw-bold">Fullname</label>
 		<div class="input-group row m-1 mb-3">
@@ -61,13 +68,13 @@
 		  <input type="password" class="form-control" id="password" name="password" placeholder="*Note: Only enter value if changing">
 		</div>
 
-	</form>
+		<div class="d-flex flex-row-reverse">
+			<button type="button" class="btn btn-danger mr-1" id="back_btn">Back</button>
+			<button type="button" class="btn btn-warning mr-1" id="delete_btn">Delete</button>
+			<button type="button" class="btn btn-success mr-1" id="save_btn">Save Changes</button>
+		</div>
 
-	<div class="float-right">
-		<button type="button" class="btn btn-success" id="save_btn">Save Changes</button>
-		<button type="button" class="btn btn-warning" id="delete_btn">Delete</button>
-		<button type="button" class="btn btn-danger" id="back_btn">Back</button>
-	</div>
+	</form>
 </div>
 
 <script type="text/javascript">
@@ -80,7 +87,7 @@
 	// console.log(selectedData.email)
 
 	$("#save_btn").on("click",function(){
-		$("#updateAgentForm").submit();
+		$("#update_agent_form").submit();
 	});
 
 	$("#delete_btn").on("click",function(){
@@ -132,7 +139,7 @@
 	//     return (ajaxShortLinkNoParse("compareEmailUpdate",{'email':value, "currentEmail": selectedData.email}))
 	// }, "Email already taken");
 
-	$("#updateAgentForm").validate({
+	$("#update_agent_form").validate({
 	  	errorClass: 'is-invalid',
 	  	rules: {
 				fullname: "required",
@@ -141,7 +148,7 @@
 				// password: "required",
 	  	},
 	  	submitHandler: function(form){
-		    var data = $('#updateAgentForm').serializeArray();
+		    var data = $('#update_agent_form').serializeArray();
 		    data.push({
 		    		"name":"id",
 		    		"value":selectedData.id
