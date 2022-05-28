@@ -224,7 +224,27 @@
 	</div>			
 
 	<script type="text/javascript">
-		var currentUser = JSON.parse(getLocalStorageByKey('currentUser'));
+		var currentUser = {
+			'birthday': "2022-01-22",
+			'bsc_wallet': "0x719951c1ff1974fd3879606d08d20e43f03de275",
+			'email': "marvs@gmail.com",
+			'erc20_wallet': "0x46ce96dcc69a5da456c7dfd9b6eacb78d62c84e3",
+			'fullname': "Testing Joe",
+			'ip_lastLogin': "45.202.21.86",
+			'isBlocked': "0",
+			'isPro': "0",
+			'isStrict': "0",
+			'lastLoginDate': "2022-05-23 09:16:28",
+			'mobileNumber': "09613002479",
+			'password': "ceb6c970658f31504a901b89dcd3e461",
+			'profile_pic': null,
+			'refer_type': null,
+			'referred_user_id': null,
+			'timestamp': "2022-01-15 07:17:04",
+			'trc20_wallet': "TZHibxZsFo5WJLokAgaZQUKAjkynrmoP2G",
+			'userID': "15",
+			'verified': "1"
+		}
 		var animtionSpeed = 250;
 		var	SelectedtransactionDetails = [];
 		var totalInUsd = 0;
