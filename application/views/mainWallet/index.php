@@ -20,8 +20,10 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text text fa fa-btc" aria-hidden="true"></span>
                 </div>
-                <select id="token_select" name="token_select" class="form-control">
-                    <option value="">Select Token...</option>
+                <select id="token_select" name="token_select" class="js-example-basic-single form-control" data-live-search="true">
+                    <optgroup id="erc20_tokens_container" label="Ethereum Mainet"></optgroup>
+                    <optgroup id="bsc_tokens_container" label="Binance Smart Chain"></optgroup>
+                    <optgroup id="tron_tokens_container" label="Tron Mainet"></optgroup>
                 </select>
               </div>
 
@@ -59,16 +61,46 @@
   $("#innerContainer").css('display','block')
   $("#footer").toggle();
 
-  var allTokens = ajaxShortLink('mainWallet/getAllTokensV2');
   var selectedData;
 
+  var allTokens = ajaxShortLink('userWallet/getAllTokensV2');
+
   for (var i = 0; i < allTokens.length; i++) {
-    $("#token_select").append(
-      '<option value="'+allTokens[i].tokenName+'_'+allTokens[i].networkName+'_'+allTokens[i].smartAddress+'_'+allTokens[i].coingeckoTokenId+'_'+allTokens[i].description+'">'+
-        allTokens[i].description+' ('+allTokens[i].networkName.toUpperCase()+')'+
-      '</option>'
-    );
+      if(allTokens[i].networkName=="erc20"){
+          $("#erc20_tokens_container").append(
+              '<option data-subtext="'+allTokens[i].networkName+'" value="'+allTokens[i].tokenName+'_'+allTokens[i].networkName+'_'+allTokens[i].smartAddress+'_'+allTokens[i].coingeckoTokenId+'_'+allTokens[i].id+'">'+
+                  allTokens[i].tokenName+' ('+allTokens[i].description+')'+
+              '</option>'
+          );
+      }
+
+      if(allTokens[i].networkName=="bsc"){
+          $("#bsc_tokens_container").append(
+              '<option data data-subtext="'+allTokens[i].networkName+'" value="'+allTokens[i].tokenName+'_'+allTokens[i].networkName+'_'+allTokens[i].smartAddress+'_'+allTokens[i].coingeckoTokenId+'_'+allTokens[i].id+'">'+
+                  allTokens[i].tokenName+' ('+allTokens[i].description+')'+
+              '</option>'
+          );
+      }
+
+      if(allTokens[i].networkName=="trx"||allTokens[i].networkName=="trc20"){
+          $("#tron_tokens_container").append(
+              '<option data-subtext="'+allTokens[i].networkName+'" value="'+allTokens[i].tokenName+'_'+allTokens[i].networkName+'_'+allTokens[i].smartAddress+'_'+allTokens[i].coingeckoTokenId+'_'+allTokens[i].id+'">'+
+                  allTokens[i].tokenName+' ('+allTokens[i].description+')'+
+              '</option>'
+          );
+      }
   }
+
+  $('#token_select').selectpicker({
+      style: 'border',
+      size: 8,
+      showSubtext :true
+  });
+
+  setTimeout(function(){
+    $("#token_select").change();
+  },1000)
+
 
   $("#token_select").on('change', function(){
     var tokenInfoWithdraw = $(this).val().split("_");
@@ -78,10 +110,8 @@
     var coingeckoTokenIdContainer = tokenInfoWithdraw[3];
     var descriptionContainer = tokenInfoWithdraw[4];
     var tokenIndex = $(this).prop('selectedIndex');
-    var selectedTokenInfo = allTokens[tokenIndex-1];  
+    var selectedTokenInfo = allTokens[tokenIndex];  
     var availBalance;
-
-    
 
     function balanceDisplay(){
       $('#balance').text(parseFloat(availBalance).toFixed(selectedTokenInfo.decimal)); 

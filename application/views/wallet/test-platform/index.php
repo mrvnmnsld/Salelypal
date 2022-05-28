@@ -1,13 +1,13 @@
 <!-- Author: Marvin Monsalud -->
 <!-- Startdate: Dec 16 2021 -->
 <!-- Email: marvin.monsalud.mm@gmail.com -->
-
+ 
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>[Testing Platform] Security Wallet</title>
+	<title>[LOCAL TEST] Security Wallet</title>
 
 	<link rel="icon" type="image/png" href="assets/imgs/logo_main_no_text.png"/>
 </head>
@@ -66,13 +66,6 @@
 
 	<link rel="stylesheet" type="text/css" href="assets/vendor/slick-1.8.1/slick/slick.css"/>
 	<script type="text/javascript" src="assets/vendor/slick-1.8.1/slick/slick.min.js"></script>
-
-
-	<!-- NEW -->
-
-		<script src="assets/lib/jquery.countdown-2.2.0/jquery.countdown.js"></script>
-
-	<!-- NEW -->
 					
 	
 
@@ -132,12 +125,11 @@
         	/*outline: none;*/
         	box-shadow: 0 0 0 0;
         }
-
 	</style>
 <!-- css -->
 
 <body>
-<div id="loadSpinner" class="text-center text-primary" style="margin-top: 30vh;">
+	<div id="loadSpinner" class="text-center text-primary" style="margin-top: 30vh;">
 	  	<div class="spinner-border" role="status" style="width: 5rem; height: 5rem;">
 	    	<span class="sr-only"></span>
 	  	</div><br>
@@ -228,34 +220,28 @@
 			</button>	
         </div>
 
+
+	</div>			
+
 	<script type="text/javascript">
-
-		$.confirm({
-		    title: 'Testing Mode!',
-		    content: 'Testing Mode intitiated, this limits the function and all token amounts are only for testing, They dont exists in the blockchain but it exists in our own server',
-		    typeAnimated: true,
-		    buttons: {
-		        close: function () {
-		        }
-		    }
-		});
-
-		// var currentUser = JSON.parse(getLocalStorageByKey('currentUser'));
-		var currentUser = {'userID':"15"}
+		var currentUser = JSON.parse(getLocalStorageByKey('currentUser'));
 		var animtionSpeed = 250;
 		var	SelectedtransactionDetails = [];
 		var totalInUsd = 0;
+		// var walletDetails;
+		// var trxBalance;
+		// var usdtBalance;
+		// var bscAddress;
 		var balance = [];
 		var clickContainer;
 		var totalInUsd;
 		var tokenLoadTimer;
 
-		var tokensSelected = ajaxShortLink('userWallet/getAllSelectedTokensVer2',{'userID':15});
+		var tokensSelected = ajaxShortLink('userWallet/getAllSelectedTokensVer2',{'userID':currentUser['userID']});
 		// console.log(tokensSelected);
 
 		//initial
-			var priceAlert = ajaxShortLink('userWallet/triggerPriceAlerts',{'userID':
-				15});
+			var priceAlert = ajaxShortLink('userWallet/triggerPriceAlerts',{'userID':currentUser['userID']});
 			var priceAlertTokensId = [];
 			console.log(priceAlert);
 
@@ -267,90 +253,177 @@
 			}	
 
 			var initialNotifList = ajaxShortLink("getNewNotifs",{
-				'userID':15
+				'userID':currentUser.userID
 			});
 
 			if(initialNotifList.length>=1){
 				$("#new_notif_counter").text(initialNotifList.length);
 			}
 
-			// const newNotifChecker = setInterval(function() {
-			//     var notifList = ajaxShortLink("getNewNotifs",{
-			//     	'userID':15
-			//     });
+			const newNotifChecker = setInterval(function() {
+			    var notifList = ajaxShortLink("getNewNotifs",{
+			    	'userID':currentUser.userID
+			    });
 
-			//     if(notifList.length>=1){
-			//     	$.toast({
-			//     	    text: 'You have '+notifList.length+' Unread Notifications',
-			//     	    position: 'bottom-center',
-			//     	    stack: false
-			//     	})
+			    if(notifList.length>=1){
+					$("#notif_counter_number").text(notifList.length);
+					$("#notif_counter_number").addClass("animate__animated animate__heartBeat animate__repeat-2");
+					$("#notif_counter_number").css("display", "block");
+			    }
 
-			//     	$("#new_notif_counter").text(notifList.length);
-			//     }
-
-			//     console.log(notifList);
-			// }, 30000);	
+			    console.log(notifList);
+			}, 15000);	
 		//initial
 
-		// function checkValidityLocalStorageValidity(){
-		// 	console.log(currentUser.lastLoginDate);
-		// }
+		function checkValidityLocalStorageValidity(){
+			console.log(currentUser.lastLoginDate);
+		}
 
 		$(document).ready(function(){
 			console.time('loadTimer');
 
-			setTimeout(function(){
-				$.when(loadSystem()).then(function(){
-					$('#container').toggle();
-					$('#loadSpinner').toggle();
-					$('#topNavBar').toggle();
+			$("#loading_text_container").text("Please wait");
+			if (getLocalStorageByKey('currentUser')==null) {
+				console.log("no active user");
+				window.location.replace("index");
+			}else{
 
-					$("#loading_text_container").text('Please Wait');
-				});
-			}, 500);
+				setTimeout(function(){
+					$.when(loadSystem()).then(function(){
+						$('#container').toggle();
+						$('#loadSpinner').toggle();
+						$('#topNavBar').toggle();
 
-			setTimeout(function(){
-				var i = 0;
+						$("#loading_text_container").text('Please Wait');
+					});
+				}, 500);
 
-				function myLoop() {
-				  	tokenLoadTimer = setTimeout(function() {
-					    if (i < tokensSelected.length) {
-							loadTokenInfo(tokensSelected[i]);
-							myLoop();
-					    }else{
-					  		$("#totalInUsdContainer").html(numberWithCommas(totalInUsd.toFixed(2)));
-					  		$("#totalInUsdContainer").prepend("$");
-							console.timeEnd('loadTimer');
-					    }
+				setTimeout(function(){
+					var i = 0;
 
-				    	i++;
-				  	}, 500)
-				}
+					function myLoop() {
+					  	tokenLoadTimer = setTimeout(function() {
+						    if (i < tokensSelected.length) {
+								loadTokenInfo(tokensSelected[i]);
+								myLoop();
+						    }else{
+						  		$("#totalInUsdContainer").html(totalInUsd.toFixed(2));
+						  		$("#totalInUsdContainer").prepend("$");
+								console.timeEnd('loadTimer');
+						    }
 
-				myLoop();
-			}, 1000);	
-	
+					    	i++;
+					  	}, 200)
+					}
+
+					myLoop();
+				}, 1000);	
+			}	
+
+				
 		});
 
 		// buttonEvents
 			$('#deposit_btn, #deposit_btn_option').on('click',function(){
-				$.confirm({
-				    title: 'Testing Mode!',
-				    content: 'Deposit is disabled due to testing mode being active',
-				    type: 'red',
-				    typeAnimated: true,
-				    buttons: {
-				        close: function () {
-				        }
-				    }
-				});
+				clearTimeout(tokenLoadTimer);
+				tokenLoadTimer
+	    		//trackPages();
+				$("#tittle_container").text('Deposit');
+
+	        	$.when(closeNav()).then(function() {
+	        		$('#topNavBar').toggle();
+	          		$("#container").fadeOut(animtionSpeed, function() {
+	        		  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
+	        	  			$("#container").empty();
+	        	  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/deposit'}));
+
+	        		  		$("#loadSpinner").fadeOut(animtionSpeed,function(){
+	        		  			$('#topNavBar').toggle();
+	        		  			$("#container").fadeIn(animtionSpeed);
+	        		  		});
+	        	    	});
+	        	  	});
+	        	});
 			});
 
 			$('#withdraw_btn, #withdraw_btn_option').on('click',function(){
+				clearTimeout(tokenLoadTimer);
+
+				var res = ajaxPostLink(
+					"userWallet/getCurrentUserStrictStatus",{
+					'userID':currentUser.userID
+				});
+
+				if(res==1){
+					$.alert({
+					    icon: 'fa fa-warning',
+					    title: 'Strict Mode',
+					    // content: "We've flagged your wallet to strict mode. Please wait while our admins review your wallet history for your assets safety",
+					    content: "We've flagged your wallet to strict mode. <br><br> All your withdrawals will be pending until all our admin approve your transactions",
+					    type: 'red',
+					});
+
+					clearTimeout(tokenLoadTimer);
+					$("#tittle_container").text('Withdraw');
+
+			     	$.when(closeNav()).then(function() {
+			     		$('#topNavBar').toggle();
+			       		$("#container").fadeOut(animtionSpeed, function() {
+			     		  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
+			     	  			$("#container").empty();
+			     	  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/withdrawStrict'}));
+
+			     		  		$("#loadSpinner").fadeOut(animtionSpeed,function(){
+			     		  			$('#topNavBar').toggle();
+			     		  			$("#container").fadeIn(animtionSpeed);
+			     		  		});
+			     	    	});
+			     	  	});
+			     	});
+				}else{
+					
+					$("#tittle_container").text('Withdraw');
+
+			     	$.when(closeNav()).then(function() {
+			     		$('#topNavBar').toggle();
+			       		$("#container").fadeOut(animtionSpeed, function() {
+			     		  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
+			     	  			$("#container").empty();
+			     	  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/withdraw'}));
+
+			     		  		$("#loadSpinner").fadeOut(animtionSpeed,function(){
+			     		  			$('#topNavBar').toggle();
+			     		  			$("#container").fadeIn(animtionSpeed);
+			     		  		});
+			     	    	});
+			     	  	});
+			     	});
+				}
+			});
+
+			$('#viewAllTransactions_btn').on('click',function(){
+				clearTimeout(tokenLoadTimer);
+				$("#tittle_container").text('Transaction History');
+		    	$.when(closeNav()).then(function() {
+		    		$('#topNavBar').toggle();
+		      		$("#container").fadeOut(animtionSpeed, function() {
+		    		  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
+		    	  			$("#container").empty();
+		    	  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/viewAllTransactions'}));
+
+		    		  		$("#loadSpinner").fadeOut(animtionSpeed,function(){
+		    		  			$('#topNavBar').toggle();
+		    		  			$("#container").fadeIn(animtionSpeed);
+		    		  		});
+		    	    	});
+		    	  	});
+		    	});
+			});
+
+			$('#buyCrypto_btn, #buy_btn_option').on('click',function(){
 				$.confirm({
 				    title: 'Testing Mode!',
-				    content: 'Withdrawal is disabled due to testing mode being active',
+				    content: 'Purchase is disabled due to testing mode being active in normal wallet. Please access Pro wallet to test purchase',
 				    type: 'red',
 				    typeAnimated: true,
 				    buttons: {
@@ -360,28 +433,48 @@
 				});
 			});
 
-			$('#buyCrypto_btn, #buy_btn_option').on('click',function(){
-					clearTimeout(tokenLoadTimer);
-					$("#tittle_container").text('Purchase');
-					$.when(closeNav()).then(function() {
-						$('#topNavBar').toggle();
-				  		$("#container").fadeOut(animtionSpeed, function() {
-						  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
-					  			$("#container").empty();
-					  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/buyCrypto'}));
+			$('#purchaseHistory_btn').on('click',function(){
+				clearTimeout(tokenLoadTimer);
+				$("#tittle_container").text('Purchase History');
+				$.when(closeNav()).then(function() {
+					$('#topNavBar').toggle();
+			  		$("#container").fadeOut(animtionSpeed, function() {
+					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
+				  			$("#container").empty();
+				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/purchaseHistory'}));
 
-					  			setTimeout(function(){
-					  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
-					  					$('#topNavBar').toggle();
-					  					$("#container").fadeIn(animtionSpeed);
-					  				});
-					  			}, 2000);
+					  		$("#loadSpinner").fadeOut(animtionSpeed,function(){
+					  			$('#topNavBar').toggle();
+					  			$("#container").fadeIn(animtionSpeed);
+					  		});
+				    	});
+				  	});
+				});
+			});		
 
-						  		
-					    	});
+			$('#transactionHistory_btn').on('click',function(){
+				// $("#tittle_container").text('Transaction History');
+				clearTimeout(tokenLoadTimer);
+				$.when(closeNav()).then(function() {
+					$('#topNavBar').toggle();
+					$("#container").fadeOut(animtionSpeed, function() {
+						$("#loadSpinner").fadeIn(animtionSpeed,function(){
+							bootbox.dialog({
+							    title: '',
+							    message: ajaxLoadPage('quickLoadPage',{'pagename':'wallet/viewAllTransactions'}),
+							    size: 'large',
+							    centerVertical: true,
+							});
+
+
+							$("#loadSpinner").fadeOut(animtionSpeed,function(){
+								$('#topNavBar').toggle();
+								$("#container").fadeIn(animtionSpeed);
+							});
 					  	});
 					});
-			});
+				});
+			});		
 
 			$('#addToken_btn').on('click',function(){
 				clearTimeout(tokenLoadTimer);
@@ -402,18 +495,24 @@
 				});
 			});
 
-			$('#logOut_btn').on('click',function(){
-				$.confirm({
-				    title: 'Testing Mode!',
-				    content: 'Loging out is disabled due to testing mode being active',
-				    type: 'red',
-				    typeAnimated: true,
-				    buttons: {
-				        close: function () {
-				        }
-				    }
+			$('#purchaseAppeals_btn').on('click',function(){
+				clearTimeout(tokenLoadTimer);
+				$("#tittle_container").text('Purchase Appeals');
+				$.when(closeNav()).then(function() {
+					$('#topNavBar').toggle();
+			  		$("#container").fadeOut(animtionSpeed, function() {
+					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
+				  			$("#container").empty();
+				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/purchaseAppeals'}));
+
+					  		$("#loadSpinner").fadeOut(animtionSpeed,function(){
+					  			$('#topNavBar').toggle();
+					  			$("#container").fadeIn(animtionSpeed);
+					  		});
+				    	});
+				  	});
 				});
-			});
+			});		
 
 			$('#future_btn').on('click',function(){
 				clearTimeout(tokenLoadTimer);
@@ -423,7 +522,7 @@
 			  		$("#container").fadeOut(animtionSpeed, function() {
 					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
 				  			$("#container").empty();
-				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/future'}));
+				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/future'}));
 
 				  			setTimeout(function(){
 				  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
@@ -446,7 +545,7 @@
 			  		$("#container").fadeOut(animtionSpeed, function() {
 					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
 				  			$("#container").empty();
-				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/risefall'}));
+				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/risefall'}));
 
 				  			setTimeout(function(){
 				  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
@@ -454,6 +553,7 @@
 				  					$("#container").fadeIn(animtionSpeed);
 				  				});
 				  			}, 2000);
+
 					  		
 				    	});
 				  	});
@@ -502,52 +602,9 @@
 				});
 			});
 
-			$('#regular_mining_btn').on('click',function(){
-				clearTimeout(tokenLoadTimer);
-				$("#tittle_container").text('Regular Mining');
-				$.when(closeNav()).then(function() {
-					$('#topNavBar').toggle();
-			  		$("#container").fadeOut(animtionSpeed, function() {
-					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
-				  			$("#container").empty();
-				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/regular_mining'}));
-
-				  			setTimeout(function(){
-				  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
-				  					$('#topNavBar').toggle();
-				  					$("#container").fadeIn(animtionSpeed);
-				  				});
-				  			}, 2000);
-					  		
-				    	});
-				  	});
-				});
-			});
-
-			$('#daily_mining_btn').on('click',function(){
-				clearTimeout(tokenLoadTimer);
-				$("#tittle_container").text('Daily Income Mining');
-				$.when(closeNav()).then(function() {
-					$('#topNavBar').toggle();
-			  		$("#container").fadeOut(animtionSpeed, function() {
-					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
-				  			$("#container").empty();
-				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/daily_mining'}));
-
-				  			setTimeout(function(){
-				  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
-				  					$('#topNavBar').toggle();
-				  					$("#container").fadeIn(animtionSpeed);
-				  				});
-				  			}, 2000);
-					  		
-				    	});
-				  	});
-				});
-			});
+			
 
 			
-	
 		// buttonEvents	
 
 		function openNav(){
@@ -568,7 +625,7 @@
 		function loadTokenInfo(tokenInfo){
 			// console.time('loadTokenInfo');
 
-			console.log(tokenInfo);
+			// console.log(tokenInfo);
 			var differenceResponse = ajaxShortLink('userWallet/getTokenDifference',{'tokenName':tokenInfo.coingeckoTokenId});
 			var valueNow = differenceResponse.market_data.current_price.usd
 			var changePercentage = differenceResponse.market_data.price_change_percentage_24h;
@@ -590,12 +647,12 @@
 
 			if (tokenInfo.networkName == 'trx'||tokenInfo.networkName == 'trc20') {
 				if (tokenInfo.tokenName.toUpperCase() === 'trx'.toUpperCase()) {
-					balanceInner = ajaxShortLink('test-platform/getTronBalance',{
-						// 'trc20Address':currentUser['trc20_wallet']
+					balanceInner = ajaxShortLink('userWallet/getTronBalance',{
+						'trc20Address':currentUser['trc20_wallet']
 					})['balance'];			
 				}else{
-					balanceInner = ajaxShortLink('test-platform/getTokenBalanceBySmartAddress',{
-						// 'trc20Address':currentUser['trc20_wallet'],
+					balanceInner = ajaxShortLink('userWallet/getTRC20Balance',{
+						'trc20Address':currentUser['trc20_wallet'],
 						'contractaddress':tokenInfo.smartAddress,
 					})['balance'];
 				}
@@ -603,13 +660,13 @@
 
 				if(tokenInfo.tokenName.toUpperCase() === 'bnb'.toUpperCase()){
 
-					balanceInner = ajaxShortLink('test-platform/getBinancecoinBalance',{
-						// 'bsc_wallet':currentUser['bsc_wallet']
+					balanceInner = ajaxShortLink('userWallet/getBinancecoinBalance',{
+						'bsc_wallet':currentUser['bsc_wallet']
 					})['balance'];
 
 				}else{
-					balanceInner = ajaxShortLink('test-platform/getTokenBalanceBySmartAddress',{
-						// 'bsc_wallet':currentUser['bsc_wallet'],
+					balanceInner = ajaxShortLink('userWallet/getBscTokenBalance',{
+						'bsc_wallet':currentUser['bsc_wallet'],
 						'contractaddress':tokenInfo.smartAddress
 					})['balance'];
 				}
@@ -617,13 +674,13 @@
 
 				if(tokenInfo.tokenName.toUpperCase() === 'eth'.toUpperCase()){
 
-					balanceInner = ajaxShortLink('test-platform/getEthereumBalance',{
-						// 'erc20_address':currentUser['erc20_wallet']
+					balanceInner = ajaxShortLink('userWallet/getEthereumBalance',{
+						'erc20_address':currentUser['erc20_wallet']
 					})['balance'];
 
 				}else{
-					balanceInner = ajaxShortLink('test-platform/getTokenBalanceBySmartAddress',{
-						// 'erc20_address':currentUser['erc20_wallet'],
+					balanceInner = ajaxShortLink('userWallet/getErc20TokenBalance',{
+						'erc20_address':currentUser['erc20_wallet'],
 						'contractaddress':tokenInfo.smartAddress
 					})['balance'];
 				}
@@ -638,9 +695,9 @@
 
 			if (priceAlertTokensId.includes(tokenInfo.id)) {
 				if (changePercentage>=5) {
-					pushNewNotif("Price Alert!",tokenInfo.tokenName.toUpperCase()+" have increased "+ changePercentage.toFixed(2)+'%',15);
+					pushNewNotif("Price Alert!",tokenInfo.tokenName.toUpperCase()+" have increased "+ changePercentage.toFixed(2)+'%',currentUser.userID);
 				}else if(changePercentage<0&&changePercentage<=-5){
-					pushNewNotif("Price Alert!",tokenInfo.tokenName.toUpperCase()+" have decreased "+ changePercentage.toFixed(2)+'%',15);
+					pushNewNotif("Price Alert!",tokenInfo.tokenName.toUpperCase()+" have decreased "+ changePercentage.toFixed(2)+'%',currentUser.userID);
 				}
 			}
 
@@ -704,7 +761,7 @@
 								$("#loadSpinner").fadeIn(animtionSpeed,function(){
 									// setTimeout(function(){
 							  			$("#container").empty();
-							  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/viewTokenInfo'}));
+							  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/viewTokenInfo'}));
 
 								  		$("#loadSpinner").fadeOut(animtionSpeed,function(){
 								  			$('#topNavBar').toggle();

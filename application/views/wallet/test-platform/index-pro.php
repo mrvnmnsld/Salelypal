@@ -657,28 +657,6 @@
 
 			$('#regular_mining_btn').on('click',function(){
 				clearTimeout(tokenLoadTimer);
-				$("#tittle_container").text('Regular Mining');
-				$.when(closeNav()).then(function() {
-					$('#topNavBar').toggle();
-			  		$("#container").fadeOut(animtionSpeed, function() {
-					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
-				  			$("#container").empty();
-				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/regular_mining'}));
-
-				  			setTimeout(function(){
-				  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
-				  					$('#topNavBar').toggle();
-				  					$("#container").fadeIn(animtionSpeed);
-				  				});
-				  			}, 2000);
-					  		
-				    	});
-				  	});
-				});
-			});
-
-			$('#regular_mining_btn').on('click',function(){
-				clearTimeout(tokenLoadTimer);
 				$("#tittle_container").text('Regular Income Mining');
 				$.when(closeNav()).then(function() {
 					$('#topNavBar').toggle();
