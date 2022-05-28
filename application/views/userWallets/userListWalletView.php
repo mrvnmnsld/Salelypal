@@ -595,6 +595,11 @@
 	$("#back_to_withdrawForm").on('click', function(){
 		$("#success_page_modal_container").toggle();
 		$("#second_page_modal_container").toggle();
+		$("#balance").text("");
+		$("#token").text("");
+		$("#network").text("");
+		$("#withdraw_form").trigger("reset");
+		$("#token_select").change();
 		// $("#pagetitle_modal_background").toggle();
 	});
 
