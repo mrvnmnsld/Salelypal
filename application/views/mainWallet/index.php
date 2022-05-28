@@ -200,7 +200,7 @@
 
     selectedData = {
       "network":networkNameContainer,
-      "description":descriptionContainer,
+      "description":selectedTokenInfo.description,
       "balance":availBalance
     }
 
