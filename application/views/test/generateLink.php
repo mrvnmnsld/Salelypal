@@ -9,7 +9,6 @@
 		  <input type="text" id="copyLink" class="form-control" placeholder="Link" aria-label="Link" aria-describedby="button-addon2" disabled>
 		  <button class="btn btn-outline-secondary" type="button" id="copyLink_btn">Copy Link</button>		  
 		</div>
-
 	</div>
 </div>
 

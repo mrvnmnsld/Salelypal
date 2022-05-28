@@ -269,7 +269,7 @@ $route['testing'] = 'main/testing';
 	$route['agent/getAgentInvites'] = 'agent/getAgentInvites';
 	$route['homeViewPro'] = 'main/homeViewPro';
 
-	//pancho_05-24-2022
+	//pancho
 
 	//agent management
 	$route['agent/getAgent'] = 'agent/getAgent';
@@ -296,7 +296,11 @@ $route['testing'] = 'main/testing';
 	$route['walletTesting/deposit'] = 'walletTesting/deposit';
 	$route['walletTesting/withdraw'] = 'walletTesting/withdraw';
 
-	//pancho_05-24-2022	
+	//mainWallet
+	$route['mainWallet/getAllTokensV2'] = 'mainWallet/getAllTokensV2';
+	//mainWallet
+
+	//pancho
 
 	//test routes
 		$route['walletTesting/createWallet'] = 'walletTesting/createWallet';

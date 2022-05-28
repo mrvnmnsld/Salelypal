@@ -17,18 +17,25 @@
 	 .form-control { /* seems working on other ui bugs, no changes on current ui screens */
 		height: 2.7em; 
 	}
-
+	#pagetitle_background{
+		background: #293038;
+		color: white;
+	}
+	#main_modal_container{
+		background: rgba(0, 0, 0, .1);
+	}
+	#add_agent_form{
+		padding: 20px;
+	}
 </style>
-<div class="pagetitle">
-  <h1>Add New User</h1> 
-</div>
 
-<hr> 
+<div id="pagetitle_background" class="text-center">
+		<label class="h2 mt-2">Add New Agent</label>
+</div>
 
 <div id="main_modal_container">
 
-	<form id="addAgentForm">
-
+	<form id="add_agent_form">
 		<label class="fw-bold">Fullname</label>
 		<div class="input-group row m-1 mb-3">
 			<i class="input-group-text fa fa-user-o icon-size" aria-hidden="true"></i>
@@ -60,18 +67,18 @@
 		  <input type="password" class="form-control" id="password" name="password" placeholder="Password">
 		</div>
 
-		<div class="float-right">
-			<button type="button" class="btn btn-success" id="save_btn">Save</button>
-			<button type="button" class="btn btn-danger" id="back_btn">Back</button>
+		<div class="d-flex flex-row-reverse">
+			<button type="button" class="btn btn-danger mr-1" id="back_btn">Back</button>
+			<button type="button" class="btn btn-success mr-1" id="save_btn">Save</button>
 		</div>
-		
+
 	</form>
 
 </div>
 
 <script type="text/javascript">
 	$("#save_btn").on("click",function(){
-		$("#addAgentForm").submit();
+		$("#add_agent_form").submit();
 	});
 
 	$("#back_btn").on("click", function(){
@@ -82,7 +89,7 @@
 	//     return (ajaxShortLinkNoParse("checkEmailAvailability",{'email':value}))
 	// }, "Email already taken");
 
-	$("#addAgentForm").validate({
+	$("#add_agent_form").validate({
 	  	errorClass: 'is-invalid',
 	  	rules: {
 				fullname: "required",
@@ -91,7 +98,7 @@
 				password: "required",
 	  	},
 	  	submitHandler: function(form){
-		    var data = $('#addAgentForm').serializeArray();
+		    var data = $('#add_agent_form').serializeArray();
 
 		    data.push({
 		    		"name":"id",

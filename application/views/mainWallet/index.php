@@ -1,140 +1,211 @@
+<style type="text/css">
+  .is-invalid{
+    text-align:center;
+  }
+</style>
 <div id="innerContainer" style="display:none" class="card">.
-  <div class="card-body">
-    <div class="pagetitle">
-      <h1>Main Wallet</h1>
-      <sub>Viewing of main wallet settings</sub>
-    </div>
+      <div class="card-body">
+        <div class="pagetitle">
+          <h1>Main Wallet</h1>
+          <sub class="fw-bold">Viewing of Main Wallet Settings</sub>
+        </div>
+        <hr>
 
-    <table id="tableContainer" class="table table-hover table-striped datatable" style="width:100%">
-      <thead>
-            <tr>
-                <th>Options test</th>
-                <th>Token</th>
-                <th>Network</th>
-                <th>Balance</th>
-            </tr>
-        </thead>
-    </table>
-  </div>
+        <div  class="form-group">
+          <form id="withdraw_deposit_form">
+            <div style="padding: 20px;">
+
+              <label class="fw-bold">Please Select Token</label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text text fa fa-btc" aria-hidden="true"></span>
+                </div>
+                <select id="token_select" name="token_select" class="form-control">
+                    <option value="">Select Token...</option>
+                </select>
+              </div>
+
+              <div> 
+                <label class="fw-bold">Token Name:</label>
+                <span class="align-middle" id="token"></span>
+              </div>
+
+              <div> 
+                <label class="fw-bold">Network:</label>
+                <span class="align-middle" id="network"></span>
+              </div>
+
+              <div> 
+                <label class="fw-bold">Available Balance:</label>
+                <span class="align-middle" id="balance"></span>
+              </div>
+
+              <hr>
+
+              <div class="d-flex">
+                <button type="button" class="btn btn-success flex-fill ml-2 btn-sm" id="deposit_btn">Deposit</button>
+                <button type="button" class="btn btn-primary flex-fill ml-2 btn-sm" id="withdraw_btn">Withdraw</button>
+              </div>
+
+            </div>
+          </form>
+        </div>
+      </div>
 </div>
 
+
 <script type="text/javascript">
-  var totalInUsd;
-  $(document).ready(function() {
-    $.when(loadBalances(),).then(loadDatatable);
-  });
+  $("#loading").css('display','none')
+  $("#innerContainer").css('display','block')
+  $("#footer").toggle();
 
-  function loadBalances(){
-    var tokensSelected = ajaxShortLink('userWallet/getAllTokensV2');
-    var balance = [];
+  var allTokens = ajaxShortLink('mainWallet/getAllTokensV2');
+  var selectedData;
 
-    for (var i = 0; i < tokensSelected.length; i++) {
-      var balanceInner;
+  for (var i = 0; i < allTokens.length; i++) {
+    $("#token_select").append(
+      '<option value="'+allTokens[i].tokenName+'_'+allTokens[i].networkName+'_'+allTokens[i].smartAddress+'_'+allTokens[i].coingeckoTokenId+'_'+allTokens[i].description+'">'+
+        allTokens[i].description+' ('+allTokens[i].networkName.toUpperCase()+')'+
+      '</option>'
+    );
+  }
 
-      if (tokensSelected[i].networkName == 'trx'||tokensSelected[i].networkName == 'trc20') {
-        if (tokensSelected[i].tokenName.toUpperCase() === 'trx'.toUpperCase()) {
-          balanceInner = ajaxShortLink('userWallet/getTronBalance',{'trc20Address':'TCyRBGnjMSLsPos5RJxVfC7fjcWk1vaUqS'})['balance'];            
-        }else{
-          balanceInner = ajaxShortLink('userWallet/getTRC20Balance',{
-            'trc20Address':'TCyRBGnjMSLsPos5RJxVfC7fjcWk1vaUqS',
-            'contractaddress':tokensSelected[i].smartAddress,
-          })['balance'];
-        }
-      }else if(tokensSelected[i].networkName =='bsc'){
-        if(tokensSelected[i].tokenName.toUpperCase() === 'bnb'.toUpperCase()){
-          balanceInner = ajaxShortLink('userWallet/getBinancecoinBalance',{'bsc_wallet':'0xc81441e9529f6c94b4cf9a3de5ddeb16ffbda312'})['balance'];
-        }else{
-          balanceInner = ajaxShortLink('userWallet/getBscTokenBalance',{
-            'bsc_wallet':'0xc81441e9529f6c94b4cf9a3de5ddeb16ffbda312',
-            'contractaddress':tokensSelected[i].smartAddress
-          })['balance'];
-        }
-      }else if(tokensSelected[i].networkName =='erc20'){
-        if(tokensSelected[i].tokenName.toUpperCase() === 'eth'.toUpperCase()){
-          balanceInner = ajaxShortLink('userWallet/getEthereumBalance',{
-           'erc20_address':'0xaccef84f39a21ce8f04e9ca31c215359af0ad030',
-          })['balance'];
-        }else{
-          balanceInner = ajaxShortLink('userWallet/getErc20TokenBalance',{
-            'erc20_address':'0xc81441e9529f6c94b4cf9a3de5ddeb16ffbda312',
-            'contractaddress':tokensSelected[i].smartAddress
-          })['balance'];
-        }
-        
-      }
+  $("#token_select").on('change', function(){
+    var tokenInfoWithdraw = $(this).val().split("_");
+    var tokenNameContainer = tokenInfoWithdraw[0];
+    var networkNameContainer = tokenInfoWithdraw[1];
+    var smartAddressContainer = tokenInfoWithdraw[2];
+    var coingeckoTokenIdContainer = tokenInfoWithdraw[3];
+    var descriptionContainer = tokenInfoWithdraw[4];
+    var tokenIndex = $(this).prop('selectedIndex');
+    var selectedTokenInfo = allTokens[tokenIndex-1];  
+    var availBalance;
 
-      // var differenceResponse = ajaxShortLink('userWallet/getTokenDifference',{'tokenName':tokensSelected[i].tokenName}).Data.Data;
-      // var valueNow = ajaxShortLink('userWallet/getTokenValue',{'tokenName':tokensSelected[i].tokenName}).USD;
+    
 
-      balance.push(
-        {
-          'description':tokensSelected[i].description,
-          'network':tokensSelected[i].networkName,
-          'smartAddress':tokensSelected[i].smartAddress,
-          'balance':balanceInner,
-          'tokenName':tokensSelected[i].tokenName,
-        }
-      )
-
-
-      // console.log(balanceInner);
+    function balanceDisplay(){
+      $('#balance').text(parseFloat(availBalance).toFixed(selectedTokenInfo.decimal)); 
     }
 
-    return balance;
-  }
+    function walletDetailsDisplay(){
+      $('#token').text(tokenNameContainer); 
+      $('#network').text(networkNameContainer.toUpperCase());
+      // $("#amount").rules( "remove", "min max" );
+      // $( "#amount" ).rules( "add", {
+      // min: 5
+      // });
+    }
 
-  function loadDatatable(balanceArray){
-    $('#tableContainer').DataTable().destroy();
+    function walletDetailsConsolelog(){
+      console.log('------------------------------------');
+      console.log('USER SELECTED');
+      console.log('Selected network :' + tokenNameContainer );
+      console.log('Selected token: ' + networkNameContainer);
+      console.log('Balance: ' + availBalance);
+      console.log('------------------------------------');
+    }
 
-    $('#tableContainer').DataTable({
-      data: balanceArray,
-      columns: [
-        { 
-          "class":"details-control",
-          "orderable":false,
-          "data":null,
-          // 'width':'1%',
-          "defaultContent":
-             '<button type="button" class="btn btn-success rounded btn-sm" onClick="deposit(this)">Deposit</button>&nbsp;'+
-             '<button type="button" class="btn btn-primary rounded btn-sm" onClick="withdraw(this)">Withdraw</button>',
-        },
-        { data:'description'},
-        { data:'network'},
-        { data:'balance'},
-      ],"createdRow": function( row, data, dataIndex){
-          if (data['isBlocked'] == 1) {
-            console.log($(row).addClass('bg-danger text-light'));
-          }
-      },
-      "autoWidth": true,
-    });
+    if (networkNameContainer == 'trx'||networkNameContainer == 'trc20') {
+        if (tokenNameContainer.toUpperCase() === 'trx'.toUpperCase()) {
+            availBalance = ajaxShortLink('mainWallet/getTronBalance',{
+            'trc20Address' : 'TCyRBGnjMSLsPos5RJxVfC7fjcWk1vaUqS'
+          })['balance'];
 
-    $("#loading").css('display','none')
-    $("#innerContainer").css('display','block')
-    $("#footer").toggle();
-  }
+          balanceDisplay();
+          walletDetailsConsolelog();
+          walletDetailsDisplay();
 
-  function deposit(element){
-    var table = $('#tableContainer').DataTable();
-    selectedData = table.row($(element).closest('tr')).data();
+        }else{
+            availBalance = ajaxShortLink('mainWallet/getTRC20Balance',{
+            'contractaddress':smartAddressContainer,
+            'trc20Address' : 'TCyRBGnjMSLsPos5RJxVfC7fjcWk1vaUqS'
+          })['balance'];
 
-    bootbox.alert({
+          balanceDisplay();
+          walletDetailsConsolelog();
+          walletDetailsDisplay();
+        } 
+
+        selectedNetworkGlobal = networkNameContainer;
+    }else if(networkNameContainer =='bsc'){
+        if(tokenNameContainer.toUpperCase() === 'bnb'.toUpperCase()){
+            availBalance = ajaxShortLink('mainWallet/getBinancecoinBalance',{
+            'bsc_wallet' : '0xc81441e9529f6c94b4cf9a3de5ddeb16ffbda312'
+          })['balance'];
+          balanceDisplay();
+          walletDetailsConsolelog();
+          walletDetailsDisplay();
+        }else{
+            availBalance = ajaxShortLink('mainWallet/getBscTokenBalance',{
+            'contractaddress' : smartAddressContainer,
+            'bsc_wallet' : '0xc81441e9529f6c94b4cf9a3de5ddeb16ffbda312'
+          })['balance'];
+          balanceDisplay();
+          walletDetailsConsolelog();
+          walletDetailsDisplay();
+        }
+
+        selectedNetworkGlobal = networkNameContainer;
+    }else if(networkNameContainer =='erc20'){
+
+        if(tokenNameContainer.toUpperCase() === 'eth'.toUpperCase()){
+            availBalance = ajaxShortLink('mainWallet/getEthereumBalance',{
+            'erc20_address' : '0xaccef84f39a21ce8f04e9ca31c215359af0ad030'
+          })['balance'];
+          balanceDisplay();
+          walletDetailsConsolelog();
+          walletDetailsDisplay();
+        }else{
+            availBalance = ajaxShortLink('mainWallet/getErc20TokenBalance',{
+            'contractaddress' : smartAddressContainer,
+            'erc20_address' : '0xaccef84f39a21ce8f04e9ca31c215359af0ad030'
+          })['balance'];
+          balanceDisplay();
+          walletDetailsConsolelog();
+          walletDetailsDisplay();
+        }
+
+        selectedNetworkGlobal = networkNameContainer;
+    }
+
+    selectedData = {
+      "network":networkNameContainer,
+      "description":descriptionContainer,
+      "balance":availBalance
+    }
+
+    
+  });
+   
+  $("#deposit_btn").on('click',function(){
+    // console.log(selectedData);
+    if ($("#token_select").val()=="") {
+      $.alert("Select Token First!")
+    }else{
+      bootbox.alert({
         message: ajaxLoadPage('quickLoadPage',{'pagename':'mainWallet/deposit'}),
         size: 'large',
         centerVertical: true,
         closeButton: false
-    });
-  }
+      });
+    }   
+  });
 
-  function withdraw(element){
-    var table = $('#tableContainer').DataTable();
-    selectedData = table.row($(element).closest('tr')).data();
-
-    bootbox.alert({
+  $("#withdraw_btn").on('click',function(){
+    // console.log(selectedData);
+    if ($("#token_select").val()=="") {
+      $.alert("Select Token First!")
+    }else{
+      bootbox.alert({
         message: ajaxLoadPage('quickLoadPage',{'pagename':'mainWallet/withdraw'}),
         size: 'large',
         centerVertical: true,
         closeButton: false
-    });
-  }
+      });
+    }   
+  });
+
+
+
 </script>
+

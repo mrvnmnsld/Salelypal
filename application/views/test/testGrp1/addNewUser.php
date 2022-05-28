@@ -13,16 +13,24 @@
 		font-size: 1.4em;
 		max-width: 2em;
 	}
+	#pagetitle_background{
+		background: #293038;
+		color: white;
+	}
+	#main_modal_container{
+		background: rgba(0, 0, 0, .1);
+	}
+	#add_user_form{
+		padding: 20px;
+	}
 </style>
 
-<div class="pagetitle">
-  <h1>Add New User</h1> 
+<div id="pagetitle_background" class="text-center">
+		<label class="h2 mt-2">Add New User</label>
 </div>
 
-<hr>
-
 <div id="main_modal_container">
-	<form id="addUserForm">
+	<form id="add_user_form">
 
 		<label class="fw-bold">Email</label>
 		<div class="input-group row m-1 mb-3">
@@ -53,19 +61,20 @@
 			<i class="input-group-text fa fa-phone icon-size" aria-hidden="true"></i>
 		  <input type="text" class="form-control" id="mobilenumber" name="mobilenumber" placeholder="Mobile Number">
 		</div>
+
+		<div class="d-flex flex-row-reverse">
+			<button type="button" class="btn btn-danger mr-1" id="back_btn">Back</button>
+			<button type="button" class="btn btn-success mr-1" id="save_btn">Save</button>
+		</div>
 	</form>
 
-	<div class="float-right">
-		<button type="button" class="btn btn-success" id="save_btn">Save</button>
-		<button type="button" class="btn btn-danger" id="back_btn">Back</button>
-	</div>
 </div>
 
 <script type="text/javascript">
 	$("#birthday").val(getCurrentDateV3());
 	
 	$("#save_btn").on("click",function(){
-		$("#addUserForm").submit();
+		$("#add_user_form").submit();
 	});
 
 	$("#back_btn").on("click", function(){
@@ -76,7 +85,7 @@
 	    return (ajaxShortLinkNoParse("checkEmailAvailability",{'email':value}))
 	}, "Email already taken");
 
-	$("#addUserForm").validate({
+	$("#add_user_form").validate({
 	  	errorClass: 'is-invalid',
 	  	rules: {
 				email: {
@@ -89,7 +98,7 @@
 				mobilenumber: "required",
 	  	},
 	  	submitHandler: function(form){
-		    var data = $('#addUserForm').serializeArray();
+		    var data = $('#add_user_form').serializeArray();
 		    var res = ajaxShortLink('saveNewUser',data);
 
 		    console.log(data,res);

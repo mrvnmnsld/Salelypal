@@ -3,6 +3,7 @@
     <div class="pagetitle">
       <h1>List of Agent</h1>
     </div>
+    <hr>
 
     <div class="d-flex">
     	<button class="btn btn-success mb-2" id="addAgent_btn"><i class="bi bi-plus"></i> Add New Agent</button>

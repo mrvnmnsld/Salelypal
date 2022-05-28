@@ -13,77 +13,67 @@
 	.form-group{
 		background: rgba(0, 0, 0, .1);
 	}
-	#pagetitle_modal_background{
+	#pagetitle_background{
 		background: #293038;
 		color: white;
 		text-align: center; 
 		font-size: 1.5em;
-
 		padding:.5em;
 	}
 	#main_modal_container{
 		background: rgba(0, 0, 0, .1);
 	}
-
 	#success_page_modal_container {
 		padding: 1em;
 	}
 </style>
 
-<div id="pagetitle_modal_background" class="pagetitle">
+<div id="pagetitle_background" class="pagetitle">
 		<label>User Wallet View</label>
-		<p style="font-size: 0.5em;">Viewing of main wallet settings</p>
+		<p style="font-size: 0.5em;">Viewing of Main Wallet Settings</p>
 </div>
 
 <div id="main_modal_container">
 	<div style="padding: 20px;">
-		<div class="row mb-2">
-		  	<label for="inputEmail3" class="col-sm-3 col-form-label fw-bold">User ID:</label>
-		  	<div class="col-md-9" id="userId_container">TEST </div>
-		</div>	
+ 
+		<div class="row text-left">
+			<div class="col-sm-3 fw-bold">User ID:</div>
+			<div id="userId_container" class="col"></div>
+		</div>
 
-		<div class="row mb-2">
-		  	<label for="inputEmail3" class="col-sm-3 col-form-label fw-bold">Email:</label>
-		  	<div class="col-md-9 " id="email_container">TEST </div>
-		</div>	
+		<div class="row text-left">
+			<div class="col-sm-3 fw-bold">Email:</div>
+			<div id="email_container" class="col"></div>
+		</div>
 
-		<div class="row mb-2">
-		  	<label for="inputEmail3" class="col-sm-3 col-form-label fw-bold">Strict Status:</label>
-		  	<div class="col-md-9 " id="strictStatus_container">TEST </div>
-		</div>	
+		<div class="row text-left">
+			<div class="col-sm-3 fw-bold">Transaction:</div>
+			<div id="strictStatus_container" class="col"></div>
+		</div>
 
 		<hr>
 
-		<div class="row mb-2">
-		  	<label for="inputEmail3" class="col-sm-3 col-form-label fw-bold">Tron Mainet wallet:</label>
-
-		  	<div class="col-md-9">
-		    	<div class="input-group-prepend">
-			    	<input type="text" class="form-control form-control-sm" id="tron_wallet_container">
-		      		<button class="btn btn-secondary btn-sm" id="copy_tron_btn" style="border-top-right-radius: 5px 5px;border-bottom-right-radius: 5px 5px;" type="button">copy</button>
-		    	</div>
+		<div class="row text-left">
+			<div class="col-sm-3 mt-1 fw-bold">Tron Mainet Wallet:</div>
+			<div class="input-group-prepend col">
+				<input type="text" class="form-control form-control-sm" id="tron_wallet_container">
+				<button class="btn btn-secondary btn-sm" id="copy_tron_btn" type="button">copy</button>
 			</div>
-		</div>	
+		</div><br>
 
-		<div class="row mb-2">
-		  	<label for="inputEmail3" class="col-sm-3 col-form-label fw-bold">BSC wallet:</label>
-
-		  	<div class="col-md-9">
-		    	<div class="input-group-prepend">
-			    	<input type="text" class="form-control form-control-sm" id="bsc_wallet_container">
-		      		<button class="btn btn-secondary btn-sm" id="copy_bsc_btn" style="border-top-right-radius: 5px 5px;border-bottom-right-radius: 5px 5px;" type="button">copy</button>
-		    	</div>
+		<div class="row text-left">
+			<div class="col-sm-3 mt-1 fw-bold">BSC Wallet:</div>
+			<div class="input-group-prepend col">
+				<input type="text" class="form-control form-control-sm" id="bsc_wallet_container">
+				<button class="btn btn-secondary btn-sm" id="copy_bsc_btn" type="button">copy</button>
 			</div>
-		</div>
+		</div><br>
 
-		<div class="row mb-2">
-		  	<label for="inputEmail3" class="col-sm-3 col-form-label fw-bold">ERC20 wallet:</label>
-
-		  	<div class="col-md-9">
-		    	<div class="input-group-prepend">
-			    	<input type="text" class="form-control form-control-sm" id="erc20_wallet_container">
-		      		<button class="btn btn-secondary btn-sm" id="copy_erc20_btn" style="border-top-right-radius: 5px 5px;border-bottom-right-radius: 5px 5px;" type="button">copy</button>
-		    	</div>
+		<div class="row text-left">
+			<div class="col-sm-3 mt-1 fw-bold">ERC20 Wallet:</div>
+			<div class="input-group-prepend col">
+				<input type="text" class="form-control form-control-sm" id="erc20_wallet_container">
+				<button class="btn btn-secondary btn-sm" id="copy_erc20_btn" type="button">copy</button>
 			</div>
 		</div>
 
@@ -109,10 +99,9 @@
 		<form id="withdraw_form">
 			<div style="padding: 20px;">
 
-		    	<label class="fw-bold">Please select token</label>
+		    	<label class="fw-bold">Please Select Token</label>
 				<div class="input-group row m-1">
 					<i class="input-group-text fa fa-btc icon-size" aria-hidden="true"></i>
-								
 					<select id="token_select" name="token_select" class="form-control">
 	    				<option value="">Select Token...</option>
 					</select>
@@ -142,7 +131,6 @@
 				</div>
 
 				<label class="fw-bold">Amount</label>
-
 				<div class="input-group row m-1 mb-2">
 					<i class="input-group-text fa fa-btc icon-size"></i>
 				  <input type="number" class="form-control" id="amount" name="amount" min="0.001" step="0.001" placeholder="Amount">
@@ -150,7 +138,7 @@
 
 				<div class="d-flex flex-column">
 					<button type="submit" class="btn btn-success btn-sm mt-1" id="send_withdraw_btn">Send</button>
-				  	<button type="button" class="btn btn-danger btn-sm mt-1" id="back_btn">Back to overview</button>
+				  	<button type="button" class="btn btn-danger btn-sm mt-1" id="back_btn">Back to Overview</button>
 				</div>
 	      	</div>
       	</form>
@@ -161,10 +149,10 @@
 
 <div id="success_page_modal_container" class="text-center" style="display:none;"> 
         <i style="font-size:150px" class="fa fa-check-circle-o text-success" aria-hidden="true"></i><br>
-        <span style="font-size:30px" class="text-success">Success!</span>
+        <span style="font-size:30px" class="text-success">Success!!</span>
         <br>
 
-        <span>Transaction for withdrawal successfully submited</span>
+        <span>Transaction for Withdrawal Successfully Submitted</span>
 
         <hr>
 
@@ -200,7 +188,7 @@
 </div>
 
 <div id="third_page_modal_container" style="display:none">
-	<div class="h2 text-center">Transaction history</div>
+	<div class="h2 text-center">Transaction History</div>
 	<div class="text-center">NOTE: Click row to view transaction details</div>
 
 	<table class="table table-striped table-bordered table-sm datatable" id="datatable_modal">
@@ -217,7 +205,7 @@
 	</table>
 
 	<div class="d-flex flex-column">
-	  <button class="btn btn-success btn-sm mt-1" id="back_btn_transactions">Back to overview</button>
+	  <button class="btn btn-success btn-sm mt-1" id="back_btn_transactions">Back to Overview</button>
 	  <!-- <button class="btn btn-primary"></div> -->
 	</div>
 </div>
