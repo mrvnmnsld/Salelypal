@@ -303,10 +303,10 @@
 			console.time('loadTimer');
 
 			$("#loading_text_container").text("Please wait");
-			if (getLocalStorageByKey('currentUser')==null) {
-				console.log("no active user");
-				window.location.replace("index");
-			}else{
+			// if (getLocalStorageByKey('currentUser')==null) {
+			// 	console.log("no active user");
+			// 	// window.location.replace("index");
+			// }else{
 
 				setTimeout(function(){
 					$.when(loadSystem()).then(function(){
@@ -338,7 +338,7 @@
 
 					myLoop();
 				}, 1000);	
-			}	
+			// }	
 
 				
 		});
