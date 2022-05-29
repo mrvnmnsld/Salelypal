@@ -303,16 +303,17 @@
 			console.time('loadTimer');
 
 			$("#loading_text_container").text("Please wait");
-			// if (getLocalStorageByKey('currentUser')==null) {
-			// 	console.log("no active user");
-			// 	// window.location.replace("index");
-			// }else{
+			if (getLocalStorageByKey('currentUser')==null) {
+				console.log("no active user");
+				// window.location.replace("index");
+			}else{
 
 				setTimeout(function(){
 					$.when(loadSystem()).then(function(){
 						$('#container').toggle();
 						$('#loadSpinner').toggle();
 						$('#topNavBar').toggle();
+						$('#bottomNavBar').toggle();
 
 						$("#loading_text_container").text('Please Wait');
 					});
@@ -338,7 +339,7 @@
 
 					myLoop();
 				}, 1000);	
-			// }	
+			}	
 
 				
 		});
@@ -352,6 +353,7 @@
 
 	        	$.when(closeNav()).then(function() {
 	        		$('#topNavBar').toggle();
+	        		$('#bottomNavBar').toggle();
 	          		$("#container").fadeOut(animtionSpeed, function() {
 	        		  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
 	        	  			$("#container").empty();
@@ -388,6 +390,7 @@
 
 			     	$.when(closeNav()).then(function() {
 			     		$('#topNavBar').toggle();
+			     		$('#bottomNavBar').toggle();
 			       		$("#container").fadeOut(animtionSpeed, function() {
 			     		  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
 			     	  			$("#container").empty();
@@ -395,6 +398,7 @@
 
 			     		  		$("#loadSpinner").fadeOut(animtionSpeed,function(){
 			     		  			$('#topNavBar').toggle();
+			     		  			$('#bottomNavBar').toggle();
 			     		  			$("#container").fadeIn(animtionSpeed);
 			     		  		});
 			     	    	});
@@ -406,6 +410,7 @@
 
 			     	$.when(closeNav()).then(function() {
 			     		$('#topNavBar').toggle();
+			     		$('#bottomNavBar').toggle();
 			       		$("#container").fadeOut(animtionSpeed, function() {
 			     		  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
 			     	  			$("#container").empty();
@@ -413,6 +418,7 @@
 
 			     		  		$("#loadSpinner").fadeOut(animtionSpeed,function(){
 			     		  			$('#topNavBar').toggle();
+			     		  			$('#bottomNavBar').toggle();
 			     		  			$("#container").fadeIn(animtionSpeed);
 			     		  		});
 			     	    	});
@@ -426,6 +432,7 @@
 				$("#tittle_container").text('Transaction History');
 		    	$.when(closeNav()).then(function() {
 		    		$('#topNavBar').toggle();
+		    		$('#bottomNavBar').toggle();
 		      		$("#container").fadeOut(animtionSpeed, function() {
 		    		  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
 		    	  			$("#container").empty();
@@ -433,6 +440,7 @@
 
 		    		  		$("#loadSpinner").fadeOut(animtionSpeed,function(){
 		    		  			$('#topNavBar').toggle();
+		    		  			$('#bottomNavBar').toggle();
 		    		  			$("#container").fadeIn(animtionSpeed);
 		    		  		});
 		    	    	});
@@ -458,6 +466,7 @@
 				$("#tittle_container").text('Purchase History');
 				$.when(closeNav()).then(function() {
 					$('#topNavBar').toggle();
+					$('#bottomNavBar').toggle();
 			  		$("#container").fadeOut(animtionSpeed, function() {
 					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
 				  			$("#container").empty();
@@ -465,6 +474,7 @@
 
 					  		$("#loadSpinner").fadeOut(animtionSpeed,function(){
 					  			$('#topNavBar').toggle();
+					  			$('#bottomNavBar').toggle();
 					  			$("#container").fadeIn(animtionSpeed);
 					  		});
 				    	});
@@ -477,6 +487,7 @@
 				clearTimeout(tokenLoadTimer);
 				$.when(closeNav()).then(function() {
 					$('#topNavBar').toggle();
+					$('#bottomNavBar').toggle();
 					$("#container").fadeOut(animtionSpeed, function() {
 						$("#loadSpinner").fadeIn(animtionSpeed,function(){
 							bootbox.dialog({
@@ -489,6 +500,7 @@
 
 							$("#loadSpinner").fadeOut(animtionSpeed,function(){
 								$('#topNavBar').toggle();
+								$('#bottomNavBar').toggle();
 								$("#container").fadeIn(animtionSpeed);
 							});
 					  	});
@@ -501,6 +513,7 @@
 				$("#tittle_container").text('Token Management');
 				$.when(closeNav()).then(function() {
 					$('#topNavBar').toggle();
+					$('#bottomNavBar').toggle();
 			  		$("#container").fadeOut(animtionSpeed, function() {
 					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
 				  			$("#container").empty();
@@ -508,6 +521,7 @@
 
 					  		$("#loadSpinner").fadeOut(animtionSpeed,function(){
 					  			$('#topNavBar').toggle();
+					  			$('#bottomNavBar').toggle();
 					  			$("#container").fadeIn(animtionSpeed);
 					  		});
 				    	});
@@ -520,6 +534,7 @@
 				$("#tittle_container").text('Purchase Appeals');
 				$.when(closeNav()).then(function() {
 					$('#topNavBar').toggle();
+					$('#bottomNavBar').toggle();
 			  		$("#container").fadeOut(animtionSpeed, function() {
 					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
 				  			$("#container").empty();
@@ -527,6 +542,7 @@
 
 					  		$("#loadSpinner").fadeOut(animtionSpeed,function(){
 					  			$('#topNavBar').toggle();
+					  			$('#bottomNavBar').toggle();
 					  			$("#container").fadeIn(animtionSpeed);
 					  		});
 				    	});
@@ -539,6 +555,7 @@
 				$("#tittle_container").text('Contract Trade');
 				$.when(closeNav()).then(function() {
 					$('#topNavBar').toggle();
+					$('#bottomNavBar').toggle();
 			  		$("#container").fadeOut(animtionSpeed, function() {
 					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
 				  			$("#container").empty();
@@ -547,6 +564,7 @@
 				  			setTimeout(function(){
 				  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
 				  					$('#topNavBar').toggle();
+				  					$('#bottomNavBar').toggle();
 				  					$("#container").fadeIn(animtionSpeed);
 				  				});
 				  			}, 2000);
@@ -562,6 +580,7 @@
 				$("#tittle_container").text('Rise Fall');
 				$.when(closeNav()).then(function() {
 					$('#topNavBar').toggle();
+					$('#bottomNavBar').toggle();
 			  		$("#container").fadeOut(animtionSpeed, function() {
 					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
 				  			$("#container").empty();
@@ -570,6 +589,7 @@
 				  			setTimeout(function(){
 				  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
 				  					$('#topNavBar').toggle();
+				  					$('#bottomNavBar').toggle();
 				  					$("#container").fadeIn(animtionSpeed);
 				  				});
 				  			}, 2000);
@@ -589,6 +609,7 @@
 				$("#tittle_container").text('Notification Center');
 				$.when(closeNav()).then(function() {
 					$('#topNavBar').toggle();
+					$('#bottomNavBar').toggle();
 			  		$("#container").fadeOut(animtionSpeed, function() {
 					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
 				  			$("#container").empty();
@@ -596,6 +617,7 @@
 
 				  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
 				  					$('#topNavBar').toggle();
+				  					$('#bottomNavBar').toggle();
 				  					$("#container").fadeIn(animtionSpeed);
 				  				});
 				    	});
@@ -608,6 +630,7 @@
 				$("#tittle_container").text('Settings');
 				$.when(closeNav()).then(function() {
 					$('#topNavBar').toggle();
+					$('#bottomNavBar').toggle();
 			  		$("#container").fadeOut(animtionSpeed, function() {
 					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
 				  			$("#container").empty();
@@ -615,6 +638,7 @@
 
 			  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
 			  					$('#topNavBar').toggle();
+			  					$('#bottomNavBar').toggle();
 			  					$("#container").fadeIn(animtionSpeed);
 			  				});
 				    	});

@@ -156,6 +156,7 @@
         $("#tittle_container").text('Purchase Appeals');
         $.when(closeNav()).then(function() {
             $('#topNavBar').toggle();
+            $('#bottomNavBar').toggle();
             $("#container").fadeOut(animtionSpeed, function() {
                 $("#loadSpinner").fadeIn(animtionSpeed,function(){
                     $("#container").empty();
@@ -163,6 +164,7 @@
 
                     $("#loadSpinner").fadeOut(animtionSpeed,function(){
                         $('#topNavBar').toggle();
+                        $('#bottomNavBar').toggle();
                         $("#container").fadeIn(animtionSpeed);
                     });
                 });

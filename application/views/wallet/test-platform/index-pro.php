@@ -68,8 +68,8 @@
 	<link rel="stylesheet" type="text/css" href="assets/vendor/slick-1.8.1/slick/slick.css"/>
 	<script type="text/javascript" src="assets/vendor/slick-1.8.1/slick/slick.min.js"></script>
 
-	<link href="assets/lib/select2/dist/css/select2.min.css" rel="stylesheet" />
-	<script src="assets/lib/select2/dist/js/select2.min.js"></script>
+	<!-- <link href="assets/lib/select2/dist/css/select2.min.css" rel="stylesheet" /> -->
+	<!-- <script src="assets/lib/select2/dist/js/select2.min.js"></script> -->
 
 
 	<!-- NEW -->
@@ -174,7 +174,7 @@
 <!-- css -->
 
 <body>
-<div id="loadSpinner" class="text-center text-primary" style="margin-top: 30vh;">
+	<div id="loadSpinner" class="text-center text-primary" style="margin-top: 30vh;">
 	  	<div class="spinner-border" role="status" style="width: 5rem; height: 5rem;">
 	    	<span class="sr-only"></span>
 	  	</div><br>
@@ -200,7 +200,7 @@
 															<!-- older version menu icon  --> <!-- <span style="float: right;" onclick="openNav()">&#9776;</span>  -->
 	</div>
 
-	<div id="container" class="mb-5" style="display:none"> 
+	<div id="container" class="mb-5" style="display:none;min-height: 100%;"> 
 		<div class="m-2 text-left">
 			<div class="h3 p-2 m-2 font-weight-bold text-center">
 				<span class="h5">All Asssets in USD:</span> <br>
@@ -242,58 +242,15 @@
             	Manage Tokens
             </button>
         </div>
+	</div>	
 
-        <br>
-        <br>
-        <br>
-        <br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
 
-		<ul id="bottomNavBar" style="border:2px solid; background: rgb(34 34 34);" class="nav justify-content-center fixed-bottom">
-			<li class="nav-item">
-				<div id="btn_option_container" class="">
-					<button id="rise_fall_btn" class="btn" style="background-color:transparent">
-						<div class="" style="">
-							<i class="fa fa-bar-chart fa-inverse fa-lg" aria-hidden="true"></i>
-						</div>
-						<div style="font-size:.8em; color:#D9E9E8;">Rise Fall</div>
-					</button>
-				</div>
-			</li>
-
-			<li class="nav-item">
-				<div id="btn_option_container" class="">
-				<button id="future_btn" class="btn" style="background-color:transparent">
-					<div class="" style="">
-						<i class="fa fa-bar-chart fa-inverse fa-lg" aria-hidden="true"></i>
-					</div>
-					<div style="font-size:.8em; color:#D9E9E8;">Contract</div>
-				</button>
-				</div>
-			</li>
-			
-			<li class="nav-item">
-				<div id="btn_option_container" class="">
-					<button id="modal_mining_btn" data-toggle="modal" data-target="#modal_mining" class="btn" style="background-color:transparent">
-						<div class="" style="">
-						<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">
-						</div>
-						<div style="font-size:.8em; color:#D9E9E8;">Mine</div>
-					</button>
-				</div>
-			</li>
-
-			<li class="nav-item">
-				<div id="btn_option_container" class="">
-					<button id="settings_btn" class="btn" style="background-color:transparent">
-						<div class="" style="">
-						<i class="fa fa-cog fa-inverse" aria-hidden="true"></i>
-						</div>
-						<div style="font-size:.8em; color:#D9E9E8;">Settings</div>
-					</button>
-				</div>
-			</li>
-		</ul>
-
+	<!-- modal-mining -->
 		<style>
 			#modal_mining .modal-content{
 				background:transparent;
@@ -358,7 +315,53 @@
 			</div>
 			</div>
 		</div>
-	</div>		
+	<!-- modal-mining -->
+
+	<ul id="bottomNavBar" style="border:2px solid; background: rgb(34 34 34);display:none;" class="nav justify-content-center fixed-bottom">
+		<li class="nav-item">
+			<div id="btn_option_container" class="">
+				<button id="rise_fall_btn" class="btn" style="background-color:transparent">
+					<div class="" style="">
+						<i class="fa fa-bar-chart fa-inverse fa-lg" aria-hidden="true"></i>
+					</div>
+					<div style="font-size:.8em; color:#D9E9E8;">Rise Fall</div>
+				</button>
+			</div>
+		</li>
+
+		<li class="nav-item">
+			<div id="btn_option_container" class="">
+			<button id="future_btn" class="btn" style="background-color:transparent">
+				<div class="" style="">
+					<i class="fa fa-bar-chart fa-inverse fa-lg" aria-hidden="true"></i>
+				</div>
+				<div style="font-size:.8em; color:#D9E9E8;">Contract</div>
+			</button>
+			</div>
+		</li>
+		
+		<li class="nav-item">
+			<div id="btn_option_container" class="">
+				<button id="modal_mining_btn" data-toggle="modal" data-target="#modal_mining" class="btn" style="background-color:transparent">
+					<div class="" style="">
+					<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">
+					</div>
+					<div style="font-size:.8em; color:#D9E9E8;">Mine</div>
+				</button>
+			</div>
+		</li>
+
+		<li class="nav-item">
+			<div id="btn_option_container" class="">
+				<button id="settings_btn" class="btn" style="background-color:transparent">
+					<div class="" style="">
+					<i class="fa fa-cog fa-inverse" aria-hidden="true"></i>
+					</div>
+					<div style="font-size:.8em; color:#D9E9E8;">Settings</div>
+				</button>
+			</div>
+		</li>
+	</ul>	
 
 	<!-- translate -->
 		<script type="text/javascript">
@@ -458,6 +461,7 @@
 					$('#container').toggle();
 					$('#loadSpinner').toggle();
 					$('#topNavBar').toggle();
+					$('#bottomNavBar').toggle();
 
 					$("#loading_text_container").text('Please Wait');
 				});
@@ -518,6 +522,7 @@
 					$("#tittle_container").text('Purchase');
 					$.when(closeNav()).then(function() {
 						$('#topNavBar').toggle();
+						$('#bottomNavBar').toggle();
 				  		$("#container").fadeOut(animtionSpeed, function() {
 						  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
 					  			$("#container").empty();
@@ -526,6 +531,7 @@
 					  			setTimeout(function(){
 					  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
 					  					$('#topNavBar').toggle();
+					  					$('#bottomNavBar').toggle();
 					  					$("#container").fadeIn(animtionSpeed);
 					  				});
 					  			}, 2000);
@@ -541,6 +547,7 @@
 				$("#tittle_container").text('Token Management');
 				$.when(closeNav()).then(function() {
 					$('#topNavBar').toggle();
+					$('#bottomNavBar').toggle();
 			  		$("#container").fadeOut(animtionSpeed, function() {
 					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
 				  			$("#container").empty();
@@ -548,6 +555,7 @@
 
 					  		$("#loadSpinner").fadeOut(animtionSpeed,function(){
 					  			$('#topNavBar').toggle();
+					  			$('#bottomNavBar').toggle();
 					  			$("#container").fadeIn(animtionSpeed);
 					  		});
 				    	});
@@ -573,6 +581,7 @@
 				$("#tittle_container").text('Contract Trade');
 				$.when(closeNav()).then(function() {
 					$('#topNavBar').toggle();
+					$('#bottomNavBar').toggle();
 			  		$("#container").fadeOut(animtionSpeed, function() {
 					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
 				  			$("#container").empty();
@@ -581,6 +590,7 @@
 				  			setTimeout(function(){
 				  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
 				  					$('#topNavBar').toggle();
+				  					$('#bottomNavBar').toggle();
 				  					$("#container").fadeIn(animtionSpeed);
 				  				});
 				  			}, 2000);
@@ -596,6 +606,7 @@
 				$("#tittle_container").text('Rise Fall');
 				$.when(closeNav()).then(function() {
 					$('#topNavBar').toggle();
+					$('#bottomNavBar').toggle();
 			  		$("#container").fadeOut(animtionSpeed, function() {
 					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
 				  			$("#container").empty();
@@ -604,6 +615,7 @@
 				  			setTimeout(function(){
 				  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
 				  					$('#topNavBar').toggle();
+				  					$('#bottomNavBar').toggle();
 				  					$("#container").fadeIn(animtionSpeed);
 				  				});
 				  			}, 2000);
@@ -622,6 +634,7 @@
 				$("#tittle_container").text('Notification Center');
 				$.when(closeNav()).then(function() {
 					$('#topNavBar').toggle();
+					$('#bottomNavBar').toggle();
 			  		$("#container").fadeOut(animtionSpeed, function() {
 					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
 				  			$("#container").empty();
@@ -629,6 +642,7 @@
 
 				  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
 				  					$('#topNavBar').toggle();
+				  					$('#bottomNavBar').toggle();
 				  					$("#container").fadeIn(animtionSpeed);
 				  				});
 				    	});
@@ -641,6 +655,7 @@
 				$("#tittle_container").text('Settings');
 				$.when(closeNav()).then(function() {
 					$('#topNavBar').toggle();
+					$('#bottomNavBar').toggle();
 			  		$("#container").fadeOut(animtionSpeed, function() {
 					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
 				  			$("#container").empty();
@@ -648,6 +663,7 @@
 
 			  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
 			  					$('#topNavBar').toggle();
+			  					$('#bottomNavBar').toggle();
 			  					$("#container").fadeIn(animtionSpeed);
 			  				});
 				    	});
@@ -660,6 +676,7 @@
 				$("#tittle_container").text('Regular Income Mining');
 				$.when(closeNav()).then(function() {
 					$('#topNavBar').toggle();
+					$('#bottomNavBar').toggle();
 			  		$("#container").fadeOut(animtionSpeed, function() {
 					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
 				  			$("#container").empty();
@@ -668,6 +685,7 @@
 				  			setTimeout(function(){
 				  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
 				  					$('#topNavBar').toggle();
+				  					$('#bottomNavBar').toggle();
 				  					$("#container").fadeIn(animtionSpeed);
 				  				});
 				  			}, 2000);
@@ -682,6 +700,7 @@
 				$("#tittle_container").text('Daily Income Mining');
 				$.when(closeNav()).then(function() {
 					$('#topNavBar').toggle();
+					$('#bottomNavBar').toggle();
 			  		$("#container").fadeOut(animtionSpeed, function() {
 					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
 				  			$("#container").empty();
@@ -690,6 +709,7 @@
 				  			setTimeout(function(){
 				  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
 				  					$('#topNavBar').toggle();
+				  					$('#bottomNavBar').toggle();
 				  					$("#container").fadeIn(animtionSpeed);
 				  				});
 				  			}, 2000);
@@ -853,6 +873,7 @@
 						$("#tittle_container").text('Token Information');
 						$.when(closeNav()).then(function() {
 							$('#topNavBar').toggle();
+							$('#bottomNavBar').toggle();$('#bottomNavBar').toggle();
 							$("#container").fadeOut(animtionSpeed, function() {
 								$("#loadSpinner").fadeIn(animtionSpeed,function(){
 									// setTimeout(function(){
@@ -861,6 +882,7 @@
 
 								  		$("#loadSpinner").fadeOut(animtionSpeed,function(){
 								  			$('#topNavBar').toggle();
+								  			$('#bottomNavBar').toggle();
 								  			$("#container").fadeIn(animtionSpeed);
 								  		});
 									// }, 1000)

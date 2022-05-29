@@ -261,6 +261,7 @@
 
         $.when(closeNav()).then(function() {
             $('#topNavBar').toggle();
+            $('#bottomNavBar').toggle();
             $("#container").fadeOut(animtionSpeed, function() {
                 $("#loadSpinner").fadeIn(animtionSpeed,function(){
                     $("#container").empty();
@@ -271,6 +272,7 @@
                     setTimeout(function(){
                         $("#loadSpinner").fadeOut(animtionSpeed,function(){
                             $('#topNavBar').toggle();
+                            $('#bottomNavBar').toggle();
                             $("#container").fadeIn(animtionSpeed);
                         });
                     }, 2000);
