@@ -1,9 +1,11 @@
-<div id="innerContainer" style="display:none" class="card">.
+<div id="innerContainer" style="display:none" class="card"><br>
   <div class="card-body">
     <div class="pagetitle">
       <h1>Pending Withdrawal Transactions</h1>
-      <sub>Viewing of all stricted wallet transactions</sub>
+      <sub class="fw-bold">Viewing of all stricted wallet transactions</sub>
     </div>
+
+    <hr>
 
     <table id="tableContainer" class="table table-hover table-striped datatable" style="width:100%">
       <thead>

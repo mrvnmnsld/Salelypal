@@ -1,9 +1,11 @@
-<div id="innerContainer" style="display:none" class="card">.
+<div id="innerContainer" style="display:none" class="card"><br>
   <div class="card-body">
     <div class="pagetitle">
       <h1>Regular Mining Settings</h1>
-      <sub>Configure Tokens listings in regular mining</sub>
+      <sub class="fw-bold">Configure Tokens listings in regular mining</sub>
     </div>
+
+    <hr>
 
     <div class="d-flex">
     	<button class="btn btn-success mb-2" id="addToken_btn"><i class="bi bi-plus"></i> Add Token to Mine</button>

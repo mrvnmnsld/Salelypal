@@ -1,9 +1,11 @@
-<div id="innerContainer" style="display:none" class="card">.
+<div id="innerContainer" style="display:none" class="card"><br>
   <div class="card-body">
     <div class="pagetitle">
       <h1>User (Client) List</h1>
-      <sub>Clients who signed up</sub>
+      <sub class="fw-bold">Clients who signed up</sub>
     </div>
+
+    <hr>
 
     <table id="tableContainer" class="table table-hover" style="width:100%">
     	<thead>
