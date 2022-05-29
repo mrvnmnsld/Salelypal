@@ -1,7 +1,8 @@
-<div id="innerContainer" style="display:none" class="card">.
+<div id="innerContainer" style="display:none" class="card"><br>
   <div class="card-body">
     <div class="pagetitle">
-      <h1>List of Agent</h1>
+      <h1>Agent Data Table</h1>
+      <sub class="fw-bold">List of Agents</sub>
     </div>
     <hr>
 

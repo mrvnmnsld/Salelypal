@@ -24,12 +24,14 @@
   </div>
 </div> -->
 
-<div id="innerContainer" style="display:none" class="card">.
+<div id="innerContainer" style="display:none" class="card"><br>
   <div class="card-body">
     <div class="pagetitle">
       <h1>Admin User List</h1>
-      <sub>List of all admin users</sub>
+      <sub class="fw-bold">List of all admin users</sub>
     </div>
+
+    <hr>
 
     <div class="d-flex">
     	<button class="btn btn-success mb-2" id="addNewAdmin"><i class="bi bi-plus"></i> Add Admin User</button>

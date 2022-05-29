@@ -24,12 +24,14 @@
   </div>
 </div> -->
 
-<div id="innerContainer" style="display:none" class="card">.
+<div id="innerContainer" style="display:none" class="card"><br>
   <div class="card-body">
     <div class="pagetitle">
       <h1>Rise Fall</h1>
-      <sub>List of rise fall positions</sub>
+      <sub class="fw-bold">List of rise fall positions</sub>
     </div>
+
+    <hr>
 
     <div class="d-flex">
     	<button class="btn btn-success mb-2" id="refresh_btn">

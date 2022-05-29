@@ -1,9 +1,11 @@
-<div id="innerContainer" style="display:none" class="card">.
+<div id="innerContainer" style="display:none" class="card"><br>
   <div class="card-body">
     <div class="pagetitle">
       <h1>Transaction List</h1>
-      <sub>List view for all withdrawal transaction made by users</sub>
+      <sub class="fw-bold">List view for all withdrawal transaction made by users</sub>
     </div>
+
+    <hr>
 
     <div class="text-warning mb-2">*Note: To view deposits, please navigate to <u>User Wallets <i class="bi bi-arrow-right"></i> Click User <i class="bi bi-arrow-right"></i> View all transaction button </u></div>
 

@@ -1,9 +1,11 @@
-<div id="innerContainer" style="display:none" class="card">.
+<div id="innerContainer" style="display:none" class="card"><br>
   <div class="card-body">
     <div class="pagetitle">
       <h1>User Wallets</h1>
-      <sub>Viewing of main wallet settings</sub>
+      <sub class="fw-bold">Viewing of Main Wallet Settings</sub>
     </div>
+
+    <hr>
 
     <table id="tableContainer" class="table table-hover table-striped datatable" style="width:100%">
       <thead>

@@ -1,9 +1,11 @@
-<div id="innerContainer" style="display:none" class="card">.
+<div id="innerContainer" style="display:none" class="card"><br>
   <div class="card-body">
     <div class="pagetitle">
       <h1>Token Listings</h1>
-      <sub>Configure Tokens listed in our platform</sub>
+      <sub class="fw-bold">Configure Tokens listed in our platform</sub>
     </div>
+
+    <hr>
 
     <div class="text-primary">*NOTE: Click row to view. Adding tokens should have correct parameters or else error will pop up on user side of the wallet</div>
 

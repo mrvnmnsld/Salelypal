@@ -24,12 +24,14 @@
   </div>
 </div> -->
 
-<div id="innerContainer" style="display:none" class="card">.
+<div id="innerContainer" style="display:none" class="card"><br>
   <div class="card-body">
     <div class="pagetitle">
       <h1>Contract/Double or Nothing</h1>
-      <sub>List of Contract positions</sub>
+      <sub class="fw-bold">List of Contract positions</sub>
     </div>
+
+    <hr>
 
     <div class="d-flex">
     	<button class="btn btn-success mb-2" id="refresh_btn">

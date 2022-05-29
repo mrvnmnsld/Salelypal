@@ -1,9 +1,11 @@
-<div id="innerContainer" style="display:none" class="card">.
+<div id="innerContainer" style="display:none" class="card"><br>
   <div class="card-body">
     <div class="pagetitle">
       <h1>Appeal List</h1>
-      <sub>List Appeal/Error in 'Buy Crypto'</sub>
+      <sub class="fw-bold">List Appeal/Error in 'Buy Crypto'</sub>
     </div>
+
+    <hr>
 
     <div class="text-primary">*NOTE: Click row to view</div>
 

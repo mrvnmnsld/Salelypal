@@ -1,9 +1,11 @@
-<div id="innerContainer" style="display:none" class="card">.
+<div id="innerContainer" style="display:none" class="card"><br>
   <div class="card-body">
     <div class="pagetitle">
       <h1>Puchase List</h1>
-      <sub>List of all purchased made in our platform powered by paypal</sub>
+      <sub class="fw-bold">List of all purchased made in our platform powered by paypal</sub>
     </div>
+
+    <hr>
 
     <table id="tableContainer" class="table table-hover table-striped" style="width:100%">
     	<thead>
