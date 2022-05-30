@@ -293,18 +293,19 @@
 				</div>
 				
 				<div class="modal-body" style="">
-						<div class="m-1 justify-content-center">
+					<div class="m-1 justify-content-center">
 						<button id="daily_mining_btn" type="button" class="btn btn-modal" data-dismiss="modal">
-						<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">
+							<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">
 						Daily Mining
 						</button>
-						</div>
-						<div class="m-1 justify-content-center">
-						<button type="regular_mining_btn" class="btn btn-modal" data-dismiss="modal">
-						<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">
+					</div>
+
+					<div class="m-1 justify-content-center">
+						<button id="regular_mining_btn" class="btn btn-modal" data-dismiss="modal">
+							<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">
 						Regular Mining
 						</button>
-						</div>
+					</div>
 						
 				</div>
 
@@ -696,27 +697,28 @@
 			});
 
 			$('#daily_mining_btn').on('click',function(){
-				clearTimeout(tokenLoadTimer);
-				$("#tittle_container").text('Daily Income Mining');
-				$.when(closeNav()).then(function() {
-					$('#topNavBar').toggle();
-					$('#bottomNavBar').toggle();
-			  		$("#container").fadeOut(animtionSpeed, function() {
-					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
-				  			$("#container").empty();
-				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/daily_mining'}));
+				$.alert("This part is still under development")
+				// clearTimeout(tokenLoadTimer);
+				// $("#tittle_container").text('Daily Income Mining');
+				// $.when(closeNav()).then(function() {
+				// 	$('#topNavBar').toggle();
+				// 	$('#bottomNavBar').toggle();
+			 //  		$("#container").fadeOut(animtionSpeed, function() {
+				// 	  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
+				//   			$("#container").empty();
+				//   			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/daily_mining'}));
 
-				  			setTimeout(function(){
-				  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
-				  					$('#topNavBar').toggle();
-				  					$('#bottomNavBar').toggle();
-				  					$("#container").fadeIn(animtionSpeed);
-				  				});
-				  			}, 2000);
+				//   			setTimeout(function(){
+				//   				$("#loadSpinner").fadeOut(animtionSpeed,function(){
+				//   					$('#topNavBar').toggle();
+				//   					$('#bottomNavBar').toggle();
+				//   					$("#container").fadeIn(animtionSpeed);
+				//   				});
+				//   			}, 2000);
 					  		
-				    	});
-				  	});
-				});
+				//     	});
+				//   	});
+				// });
 			});
 
 			

@@ -101,7 +101,7 @@
 		<h4>Transaction History</h4>
 	</div>
 
-	<table class="table table-sm table-borderless text-center">
+	<table class="table table-sm table-borderless text-center" cellpadding="5" style="font-size:12px">
 	  <thead>
 	    <tr>
 	      <th scope="col">Token</th>

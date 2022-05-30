@@ -104,7 +104,7 @@
 						// test-platform
 							pushNewNotif("Mining Entry(TESTING)","Successfully added "+amount+" to mining balance at "+token_name_combo+" for "+selectedData.cycleSelected+" Day(s)",15)
 
-							var minusBalanceRes = ajaxShortLink("test-platform/minusBalance",{
+							var newBalanceRes = ajaxShortLink("test-platform/newBalance",{
 								'tokenName':selectedData.tokenName.toLowerCase(),
 								'smartAddress':selectedData.smartAddress,
 								'newAmount':parseFloat(balanceInner)-parseFloat(amount),
@@ -113,13 +113,13 @@
 							gasSupply = getGasSupplyTestPlatform(selectedData.networkName)
 
 							if (selectedData.networkName == 'erc20') {
-								var minusGasFee = ajaxShortLink("test-platform/minusBalance",{
+								var minusGasFee = ajaxShortLink("test-platform/newBalance",{
 									'tokenName':'eth',
 									'smartAddress':null,
 									'newAmount':parseFloat(gasSupply.amount)-transactionFee,
 								})
 							}else{
-								var minusGasFee = ajaxShortLink("test-platform/minusBalance",{
+								var minusGasFee = ajaxShortLink("test-platform/newBalance",{
 									'tokenName':'bnb',
 									'smartAddress':null,
 									'newAmount':parseFloat(gasSupply.amount)-transactionFee,
@@ -186,7 +186,7 @@
 					// test-platform
 						pushNewNotif("Mining Entry(TESTING)","Successfully added "+amount+" to mining balance at "+token_name_combo+" for "+selectedData.cycleSelected+" Day(s)",15)
 
-						var minusBalanceRes = ajaxShortLink("test-platform/minusBalance",{
+						var newBalanceRes = ajaxShortLink("test-platform/newBalance",{
 							'tokenName':selectedData.tokenName.toLowerCase(),
 							'smartAddress':selectedData.smartAddress,
 							'newAmount':parseFloat(balanceInner)-parseFloat(amount),
@@ -196,7 +196,7 @@
 						// setTimeout(function(){
 							gasSupply = getGasSupplyTestPlatform(selectedData.networkName)
 
-							var minusGasFee = ajaxShortLink("test-platform/minusBalance",{
+							var minusGasFee = ajaxShortLink("test-platform/newBalance",{
 								'tokenName':'trx',
 								'smartAddress':null,
 								'newAmount':parseFloat(gasSupply.amount)-5,

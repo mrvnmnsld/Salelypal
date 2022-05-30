@@ -153,6 +153,8 @@
 				'</div>'
 			);
 
+			console.log(income);
+
 			if (releaseDate <= new Date()) {
 				$("#"+mining_id+"_mine_btn").removeAttr('disabled')
 			}
@@ -207,7 +209,7 @@
 				var balanceInnerClaimIncome = parseFloat(getBalance(networkName,tokenName,smartAddress));
 
 
-    			var resMinusBalance = ajaxShortLink(url = 'test-platform/minusBalance', data = {
+    			var resMinusBalance = ajaxShortLink(url = 'test-platform/newBalance', data = {
     				'newAmount':balanceInnerClaimIncome+claimIncomeValue,
     				'smartAddress':smartAddress,
     				'tokenName':tokenName

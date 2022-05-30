@@ -21,8 +21,6 @@
 	
 </div>
 
-
-
 <!-- google translate -->
   <script type="text/javascript">
 
@@ -40,6 +38,7 @@
 				buttons: {
 					confirm: function () {
 						var lang = "/en/"+$("#language_selector").val()
+						deleteAllCookies();
 						setCookie('googtrans',lang ,1);
 						location.reload();
 					},
@@ -93,6 +92,18 @@
 		expires.setTime(expires.getTime() + (expiry * 24 * 60 * 60 * 1000));
 		document.cookie = key + '=' + value + ';expires=' + expires.toUTCString();
 	}
+
+	function deleteAllCookies() {
+	    var cookies = document.cookie.split(";");
+
+	    for (var i = 0; i < cookies.length; i++) {
+	        var cookie = cookies[i];
+	        var eqPos = cookie.indexOf("=");
+	        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+	        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+	    }
+	}
+
 
   </script>
 <!-- google translate -->

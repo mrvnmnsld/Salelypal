@@ -30,8 +30,8 @@
 		</div>
 
 		<div class="row m-1">
-			<div class="col-md-2 pl-3"><b>APY:</b></div>	
-			<input type="number" name="apy_container" id="apy_container" class="col-md form-control form-control-sm" placeholder="Contract address of the token in network"></input>	
+			<div class="col-md-2 pl-3"><b>Daily Rate:</b></div>	
+			<input type="number" name="apy_container" id="apy_container" class="col-md form-control form-control-sm" placeholder="Set starting daily rate"></input>	
 		</div>
 
 		<div class="row m-1">

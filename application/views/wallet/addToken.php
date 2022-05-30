@@ -60,7 +60,7 @@
 
     <div class="d-flex justify-content-center">
     	<button class="btn col-md btn-success m-1" id="save_token_mngmt_btn">Save</button>
-    	<!-- <button class="btn col-md btn-danger m-1" onclick="backButton()">Cancel</button> -->
+    	<button class="btn col-md btn-danger m-1" onclick="backButton()">Cancel</button>
     </div>
 
 </div>

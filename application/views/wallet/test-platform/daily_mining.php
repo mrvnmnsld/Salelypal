@@ -114,8 +114,10 @@
 			var timeAvailable = getTimeOnDateObject(foundEntry.date_created);
 			var lock_period = foundEntry.lock_period;
 			var claimsCount = claims.length;
+			
 			var daysUnclaimed = parseFloat(getNumberOfDays(foundEntry.date_created,getTimeDateV2()).diffInDays-claimsCount);
 			var year = 365;
+
 			var availableClaimCount = (balance*(parseFloat(apy)/100)/year) * daysUnclaimed;
 			var incomeRaw = (balance*(parseFloat(apy)/100)/year);
 			var isTimeAfterRes = isTimeAfter(foundEntry.date_created,getTimeDateV2());
@@ -263,7 +265,7 @@
 
 				console.log(income,balance,claimIncomeValue);
 
-    			var resMinusBalance = ajaxShortLink(url = 'test-platform/minusBalance', data = {
+    			var resMinusBalance = ajaxShortLink(url = 'test-platform/newBalance', data = {
     				'newAmount':balanceInnerClaimIncome+parseFloat(income)*daysUnclaimed,
     				'smartAddress':smartAddress,
     				'tokenName':tokenName

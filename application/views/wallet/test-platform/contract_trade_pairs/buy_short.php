@@ -63,12 +63,13 @@
     <div class="mt-2">
         <div>
             <span>Value Predicted:</span>
-            <span id="risk_value_predicted">Please select risk option</span>
+            <span id="risk_value_predicted"></span>
         </div>
 
         <div>
             <span>Timestamp Trigger:</span>
-            <span id="risk_timestamp_predicted">Please select risk option</span>
+            <span id="risk_timestamp_predicted" class="notranslate"></span>
+
         </div>
     </div>
 
@@ -170,7 +171,7 @@
         var availableAmount = float2DecimalPoints($("#available_amount_container").text().split(' ')[0])
         var isGasEnough = 0;
 
-        if(riskPrice=="Please select risk option"||$("#amount_input_container").val()==""){
+        if($("input[type=radio]:checked").length==0||$("#amount_input_container").val()==""){
             $.alert("Please Select Amount and Risks first");
         }else{
             if(Date.parse(timeStamp)<=Date.parse(getTimeDateNonFormated())){

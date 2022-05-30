@@ -219,9 +219,24 @@
 				<div style="font-size:.8em; color:#D9E9E8;">Settings</div>
 			</button>	
         </div>
-
-
 	</div>			
+
+	<!-- translate -->
+		<script type="text/javascript">
+			function googleTranslateElementInit() {
+			    // setCookie('googtrans', currentUserLanguage.lang,1);
+			    new google.translate.TranslateElement({
+			        pageLanguage: 'en',
+			        includedLanguages: 'en,zh-CN,zh-TW',
+			        // layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+			        autoDisplay: true
+			    }, 'google_translate_element');
+			}
+			
+		</script>
+
+		<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
+	<!-- translate -->
 
 	<script type="text/javascript">
 		var currentUser = {
@@ -303,10 +318,10 @@
 			console.time('loadTimer');
 
 			$("#loading_text_container").text("Please wait");
-			if (getLocalStorageByKey('currentUser')==null) {
-				console.log("no active user");
-				// window.location.replace("index");
-			}else{
+			// if (getLocalStorageByKey('currentUser')==null) {
+			// 	console.log("no active user");
+			// 	// window.location.replace("index");
+			// }else{
 
 				setTimeout(function(){
 					$.when(loadSystem()).then(function(){
@@ -339,7 +354,7 @@
 
 					myLoop();
 				}, 1000);	
-			}	
+			// }	
 
 				
 		});
