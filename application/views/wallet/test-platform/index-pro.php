@@ -356,7 +356,7 @@
 			<div id="btn_option_container" class="">
 				<button id="settings_btn" class="btn" style="background-color:transparent">
 					<div class="" style="">
-					<i class="fa fa-cog fa-inverse" aria-hidden="true"></i>
+					<i class="fa fa-user fa-inverse fa-lg" aria-hidden="true"></i>
 					</div>
 					<div style="font-size:.8em; color:#D9E9E8;">Settings</div>
 				</button>

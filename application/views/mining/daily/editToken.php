@@ -2,17 +2,24 @@
 	.modal-footer{
 		display: none;
 	}
-
 	.is-invalid{
 		text-align: center;
 	}
+	#pagetitle_background{
+		background: #293038;
+		color: white;
+	}
+	#mainQuestionModal{
+		background: rgba(0, 0, 0, .1);
+	}
+	#mainForm{
+		padding: 20px;
+	}
 </style>
 
-<div class="pagetitle">
-  <h1>Add New Token</h1>
+<div id="pagetitle_background" class="text-center">
+		<label class="h2 mt-2">Edit Token(Daily Income Mining)</label>
 </div>
-
-<hr>
 
 <div id="mainQuestionModal">
 	<form id="mainForm">
@@ -38,18 +45,16 @@
 			<div class="col-md-2 pl-3"><b>Cycle days:</b></div>	
 			<input type="text" name="cycle_day_container" id="cycle_day_container" class="col-md form-control form-control-sm" placeholder="Add comma to separate cycles days ex. 1,3,7"></input>	
 		</div>
+
+		<hr>
+
+		<div class="d-flex flex-row-reverse">
+			<button class="ml-2 btn btn-danger" id="closeBtn">Close</button>
+			<button class="ml-2 btn btn-warning" id="delete_btn">Delete</button>
+			<button class="ml-2 btn btn-success" id="save_edit_btn">Save Token to Mine</button>
+		</div>
+
 	</form>
-
-	<hr>
-
-	<div class="d-flex flex-row-reverse">
-		<button class="ml-2 btn btn-danger" id="closeBtn">Close</button>
-		<button class="ml-2 btn btn-warning" id="delete_btn">Delete</button>
-		<button class="ml-2 btn btn-success" id="save_edit_btn">Save Token to Mine</button>
-
-
-	</div>
-
 
 </div>
 

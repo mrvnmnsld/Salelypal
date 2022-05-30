@@ -2,25 +2,31 @@
 	.modal-footer{
 		display: none;
 	}
-
 	#qrcode img{
 		/*border: solid 1px;*/
 		outline: 2px solid black;
 	  	outline-offset: 5px;
 	}
+	#pagetitle_background{
+		background: #293038;
+		color: white;
+	}
+	#mainForm{
+		background: rgba(0, 0, 0, .1);
+		padding: 20px;
+	}
 </style>
 
-<div class="h2 text-center"></div>
-
-<div class="pagetitle">
-  <h1>Transaction Details</h1>
+<div id="pagetitle_background" class="text-center">
+	<label class="h2 mt-1">Transaction Details</label><br>
+	<label style="font-size: 1em;">Scan this qr code to deposit to your wallet</label>
 </div>
 
 <form id="mainForm">
 	<div class="">
 
-		<div class="text-center text-primary">Scan this qr code to view transaction details</div>
-		<div class="thumbnail d-flex justify-content-center m-3 pt-3 pb-3 img-thumbnail">
+		<!-- <div class="text-center text-primary">Scan this qr code to view transaction details</div> -->
+		<div class="thumbnail d-flex justify-content-center m-3 pt-3 pb-3">
 			<div id="qrcode"></div>
 		</div>
 
@@ -62,10 +68,11 @@
 
 	<hr>
 
-	<div class="d-flex flex-row float-right">
-		<a class="btn btn-success" id="viewInTronScan" href="" target="_blank">View in Tronscan.org</a>
+	<div class="d-flex flex-row-reverse">
 		<button type="button" class="btn btn-danger ml-2" id="closeBtn">Close</button>
+		<a class="btn btn-success" id="viewInTronScan" href="" target="_blank">View in Tronscan.org</a>
 	</div>
+
 </form>
 
 <script type="text/javascript">

@@ -85,7 +85,7 @@
 
 					'<div class="m-2">'+
 						"<button type='button' class='btn btn-warning btn-block' onClick='"+
-							'openEntryForm("'+smartAddress+'","'+mining_id+'","'+token_name_combo+'","'+networkName+'","'+tokenName+'")'+
+							'openEntryForm("'+smartAddress+'","'+mining_id+'","'+token_name_combo+'","'+networkName+'","'+tokenName+'","'+miningSettings[i].apy+'")'+
 						"'>Mine Now!</button>"+
 					'</div>'+
 				'</div>'
@@ -169,7 +169,7 @@
 		}
 	}
 
-	function openEntryForm(smartAddress,mining_id,token_name_combo,networkName,tokenName){		
+	function openEntryForm(smartAddress,mining_id,token_name_combo,networkName,tokenName,apy){		
 		selectedData = {
 			'cycleSelected':$('input[name="'+mining_id+'_cycle_selector"]:checked').val(),
 			'smartAddress':smartAddress,
@@ -177,6 +177,7 @@
 			'token_name_combo':token_name_combo,
 			'networkName':networkName,
 			'tokenName':tokenName,
+			'apy' : apy
 		}
 
 		bootbox.alert({

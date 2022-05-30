@@ -214,7 +214,7 @@
             </button>
 
             <button id="settings_btn" class="btn btn-outline-link btn-block text-white mt-2">
-				<i class="fa fa-cog fa-lg" aria-hidden="true"></i>
+				<i class="fa fa-user fa-lg" aria-hidden="true"></i>
 				
 				<div style="font-size:.8em; color:#D9E9E8;">Settings</div>
 			</button>	

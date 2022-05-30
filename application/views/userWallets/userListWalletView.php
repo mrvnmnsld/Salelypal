@@ -138,9 +138,9 @@
 				  <input type="number" class="form-control" id="amount" name="amount" min="0.001" step="0.001" placeholder="Amount">
 				</div>
 
-				<div class="d-flex flex-column">
-					<button type="submit" class="btn btn-success btn-sm mt-1" id="send_withdraw_btn">Send</button>
-				  	<button type="button" class="btn btn-danger btn-sm mt-1" id="back_btn">Back to Overview</button>
+				<div class="d-flex flex-row-reverse">
+				  	<button type="button" class="btn btn-danger ml-2" id="back_btn">Back to Overview</button>
+					<button type="submit" class="btn btn-success" id="send_withdraw_btn">Send</button>
 				</div>
 	      	</div>
       	</form>
@@ -149,7 +149,7 @@
   </div>
 </div>
 
-<div id="success_page_modal_container" class="text-center" style="display:none;"> 
+<div id="success_page_modal_container" class="text-center" style="display: none;"> 
         <i style="font-size:150px" class="fa fa-check-circle-o text-success" aria-hidden="true"></i><br>
         <span style="font-size:30px" class="text-success">Success!!</span>
         <br>
@@ -185,8 +185,10 @@
         <br>
         <hr>
 
-        <button type="button" class="btn btn-block btn-primary" id="back_to_withdrawForm">Back to Withdraw Page</button>
-        <button type="button" class="btn btn-block btn-danger" id="closeBtn_withdrawPage">Close</button>
+		<div class="d-flex flex-row-reverse">
+	        <button type="button" class="btn btn-danger ml-2" id="closeBtn_withdrawPage">Close</button>
+	        <button type="button" class="btn btn-primary" id="back_to_withdrawForm">Back to Withdraw Page</button>
+		</div>        
 </div>
 
 <div id="third_page_modal_container" style="display:none">

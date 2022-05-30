@@ -2,11 +2,19 @@
 	.modal-footer{
 		display: none;
 	}
+	#pagetitle_background{
+		background: #293038;
+		color: white;
+	}
+	#mainQuestionModal{
+		background: rgba(0, 0, 0, .1);
+		padding: 20px;
+	}
 </style>
 
-<h3 class="mb-3 h5">Admin User Details</h3>
-
-<hr>
+<div id="pagetitle_background" class="text-center">
+		<label class="h2 mt-2">Admin User Details</label>
+</div>
 
 <div id="mainQuestionModal">
 	<div class="row m-1">
