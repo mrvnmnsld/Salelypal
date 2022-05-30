@@ -31,6 +31,13 @@
 		</div>	
 	</div>
 
+	<div class="m-1">
+		<div>
+			<b>Maturity Income:</b>
+			<span id="maturity_container_bootbox"></span>
+		</div>	
+	</div>
+
 	<div class="m-1 form-group">
 		<label><b>Amount:</b></label>
 
@@ -59,8 +66,19 @@
 <button class="col-md-12 btn btn-danger btn-block" id="closeBtn">Close</button>
 
 <script type="text/javascript">
+	// console.log(selectedData)
 	$("#closeBtn").on('click', function(){
 		bootbox.hideAll();
+		selectedData = '';
+	});
+
+	$("#amount_input_container_bootbox").on('change', function(){
+		// bootbox.hideAll();
+		var amount = $(this).val();
+		var maturity = ((amount*(selectedData.apy/100)/365)).toFixed(6);
+
+		$("#maturity_container_bootbox").text(maturity+" "+selectedData.token_name_combo);
+		// console.log(selectedData)
 	});
 
 	$("#save_mining_entry_btn").on('click', function(){	
@@ -228,6 +246,15 @@
 			}
 		}
 	});
+
+	$("#mainForm").submit(function(e){
+		e.preventDefault()
+		console.log('tets');
+	})
+
+	// $("#form").submit(function(){
+	//                 return false;
+	//             });
 
 
 	var balanceInner = getBalance(selectedData.networkName,selectedData.tokenName,selectedData.smartAddress);
