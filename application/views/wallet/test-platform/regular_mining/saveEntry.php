@@ -63,6 +63,10 @@
 		bootbox.hideAll();
 	});
 
+	$("#amount_input_container_bootbox").on('click', function(){
+		console.log($(this).val());
+	});
+
 	$("#save_mining_entry_btn").on('click', function(){	
 		var amount = $("#amount_input_container_bootbox").val();
 		$("#errorReporter").css('display','none');

@@ -189,7 +189,7 @@
 	    	  		timeleft -= 1;
 	    		}, 1000);
 		    }else{
-		    	alert("error in signing up: pleasse contact system admin !errorCode 3322!");
+		    	alert("error in signing up: please contact system admin !errorCode 3322!");
 		    }
 
 	  	}

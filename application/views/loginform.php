@@ -31,25 +31,25 @@
 
 		  	<div class="text-center bg-dark text-danger mb-3" id="errorReporter"></div>
 
-		  	<button id="submit_login_btn" type="button" data-toggle="modal" data-target="#sliderCaptchaModal" class="btn btn-success col-md-12">Login</button>
+		  	<button type="button" data-toggle="modal" data-target="#sliderCaptchaModal" class="btn btn-success col-md-12">Login</button>
 
 		  	<br>
 		  	
 		  	<span>
-		  		<button id="signUpBtn" class="btn btn-link text-primary" href="#signUp"><u>Not yet a member? Click here</u></button>
+		  		<button type="button" id="signUpBtn" class="btn btn-link text-primary"><u>Not yet a member? Click here</u></button>
 		  	</span>
 		</form>
 	</div>
 </div>
 
-			<!-- sliderCaptchaModal -->
-			<div class="modal fade" id="sliderCaptchaModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-				<div class="modal-dialog modal-dialog-centered">
-					<div class="modal-content" style="background-color:transparent; border:none;">
-						<div id="captcha"></div>
-					</div>
-				</div>
-			</div>
+<!-- sliderCaptchaModal -->
+<div class="modal fade" id="sliderCaptchaModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content" style="background-color:transparent; border:none;">
+			<div id="captcha"></div>
+		</div>
+	</div>
+</div>
 
 <script type="text/javascript">
 	var currentUser = JSON.parse(getLocalStorageByKey('currentUser'));

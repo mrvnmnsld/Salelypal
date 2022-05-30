@@ -130,109 +130,114 @@ class main extends MY_Controller {
 
 		$saveQueryNotifUserId = $this->_insertRecords($tableName = 'user_tbl', $insertRecord);
 
+		$insertRecord = array(
+			'tokenIDSelected' => '1,3,4,19',
+			'userID' => $saveQueryNotifUserId,
+			'timestamp_edit' => $this->_getTimeStamp(),
+		);
+
+		$saveQueryNotifUserId = $this->_insertRecords($tableName = 'token_selected', $insertRecord);
+
 		if ($saveQueryNotifUserId) {
 			$apikey = "4h7896o0ujoskkwk84wo0848wo0o0w4wg8sw84wwcs80kwcg4kc8ogwg44s4ocw8"; // API Key in your account panel
 			$password = md5($data['password']);
 
+			// //TRX
+			// 	$ch = curl_init("https://eu.trx.chaingateway.io/v1/newAddress");
 
-			//TRX
-				$ch = curl_init("https://eu.trx.chaingateway.io/v1/newAddress");
+			// 	curl_setopt( $ch, CURLOPT_HTTPHEADER, 
+			// 		array(
+			// 			"Content-Type:application/json",
+			// 			"Authorization:".$apikey
+			// 		)
+			// 	);
 
-				curl_setopt( $ch, CURLOPT_HTTPHEADER, 
-					array(
-						"Content-Type:application/json",
-						"Authorization:".$apikey
-					)
-				);
+			// 	curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
 
-				curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+			// 	$result = curl_exec($ch);
+			// 	$resultdecoded = json_decode($result, true);
+			// 	curl_close($ch);
 
-				$result = curl_exec($ch);
-				$resultdecoded = json_decode($result, true);
-				curl_close($ch);
+			// 	if ($resultdecoded['ok']==true) {
+			// 		$insertRecord = array(
+			// 			'privateKey' => $resultdecoded['privatekey'],
+			// 			'hexAddress' => $resultdecoded['hexaddress'],
+			// 			'address' => $resultdecoded['address'],
+			// 			'dateCreated' => $this->_getTimeStamp(),
+			// 			'userOwner' => $saveQueryNotifUserId,
+			// 		);
 
-				if ($resultdecoded['ok']==true) {
-					$insertRecord = array(
-						'privateKey' => $resultdecoded['privatekey'],
-						'hexAddress' => $resultdecoded['hexaddress'],
-						'address' => $resultdecoded['address'],
-						'dateCreated' => $this->_getTimeStamp(),
-						'userOwner' => $saveQueryNotifUserId,
-					);
+			// 		$saveQueryNotif = $this->_insertRecords($tableName = 'trc20_wallet', $insertRecord);
+			// 	}else{
+			// 		echo json_encode(false);
+			// 	}
+			// //TRX
 
-					$saveQueryNotif = $this->_insertRecords($tableName = 'trc20_wallet', $insertRecord);
-				}else{
-					echo json_encode(false);
-				}
-			//TRX
+			// //BSC
+			// 	$ch = curl_init("https://eu.bsc.chaingateway.io/v1/newAddress");
+			// 	$payload = json_encode(
+			// 		array(
+			// 			"password" => $password,
+			// 		) 
+			// 	);
 
-			//BSC
-				$ch = curl_init("https://eu.bsc.chaingateway.io/v1/newAddress");
-				$payload = json_encode(
-					array(
-						"password" => $password,
-					) 
-				);
+			// 	curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
+			// 	curl_setopt( $ch, CURLOPT_HTTPHEADER, array("Content-Type:application/json", "Authorization: " . $apikey));
 
-				curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
-				curl_setopt( $ch, CURLOPT_HTTPHEADER, array("Content-Type:application/json", "Authorization: " . $apikey));
+			// 	# Return response instead of printing.
+			// 	curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
 
-				# Return response instead of printing.
-				curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+			// 	$result = curl_exec($ch);
+			// 	$resultdecoded = json_decode($result, true);
+			// 	curl_close($ch);
 
-				$result = curl_exec($ch);
-				$resultdecoded = json_decode($result, true);
-				curl_close($ch);
+			// 	if ($resultdecoded['ok']==true) {
+			// 		$insertRecord = array(
+			// 			'password' => $resultdecoded['password'],
+			// 			'address' => $resultdecoded['binancecoinaddress'],
+			// 			'dateCreated' => $this->_getTimeStamp(),
+			// 			'userOwner' => $saveQueryNotifUserId,
+			// 		);
 
-				if ($resultdecoded['ok']==true) {
-					$insertRecord = array(
-						'password' => $resultdecoded['password'],
-						'address' => $resultdecoded['binancecoinaddress'],
-						'dateCreated' => $this->_getTimeStamp(),
-						'userOwner' => $saveQueryNotifUserId,
-					);
+			// 		$saveQueryNotif = $this->_insertRecords($tableName = 'bsc_wallet', $insertRecord);
+			// 	}else{
+			// 		echo json_encode(false);
+			// 	}
+			// //BSC
 
-					$saveQueryNotif = $this->_insertRecords($tableName = 'bsc_wallet', $insertRecord);
+			// //ETHER
+			// 	$ch = curl_init("https://eu.eth.chaingateway.io/v1/newAddress");
+			// 	$payload = json_encode(
+			// 		array(
+			// 			"password" => $password,
+			// 		) 
+			// 	);
 
-					echo json_encode(true);
-				}else{
-					echo json_encode(false);
-				}
-			//BSC
+			// 	curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
+			// 	curl_setopt( $ch, CURLOPT_HTTPHEADER, array("Content-Type:application/json", "Authorization: " . $apikey));
 
-			//ETHER
-				$ch = curl_init("https://eu.eth.chaingateway.io/v1/newAddress");
-				$payload = json_encode(
-					array(
-						"password" => $password,
-					) 
-				);
+			// 	# Return response instead of printing.
+			// 	curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
 
-				curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
-				curl_setopt( $ch, CURLOPT_HTTPHEADER, array("Content-Type:application/json", "Authorization: " . $apikey));
+			// 	$result = curl_exec($ch);
+			// 	$resultdecoded = json_decode($result, true);
+			// 	curl_close($ch);
 
-				# Return response instead of printing.
-				curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+			// 	if ($resultdecoded['ok']==true) {
+			// 		$insertRecord = array(
+			// 			'password' => $resultdecoded['password'],
+			// 			'address' => $resultdecoded['ethereumaddress'],
+			// 			'dateCreated' => $this->_getTimeStamp(),
+			// 			'userOwner' => $saveQueryNotifUserId,
+			// 		);
 
-				$result = curl_exec($ch);
-				$resultdecoded = json_decode($result, true);
-				curl_close($ch);
+			// 		$saveQueryNotif = $this->_insertRecords($tableName = 'erc20_wallet', $insertRecord);
+			// 	}else{
+			// 		echo json_encode(false);
+			// 	}
+			// //ETHER
 
-				if ($resultdecoded['ok']==true) {
-					$insertRecord = array(
-						'password' => $resultdecoded['password'],
-						'address' => $resultdecoded['binancecoinaddress'],
-						'dateCreated' => $this->_getTimeStamp(),
-						'userOwner' => $saveQueryNotifUserId,
-					);
-
-					$saveQueryNotif = $this->_insertRecords($tableName = 'erc20_wallet', $insertRecord);
-
-					echo json_encode(true);
-				}else{
-					echo json_encode(false);
-				}
-			//ETHER
+			echo json_encode(true);
 		}else{
 			echo json_encode(false);
 		}
