@@ -2,13 +2,22 @@
 	.modal-footer{
 		display: none;
 	}
+	#pagetitle_background{
+		background: #293038;
+		color: white;
+	}
+	#mainQuestionModal{
+		background: rgba(0, 0, 0, .1);
+		padding: 20px;
+	}
 </style>
 
-<h3 class="mb-3 display-4">User Details</h3>
-
-<hr>
+<div id="pagetitle_background" class="text-center">
+		<label class="h2 mt-2">User Details</label>
+</div>
 
 <div id="mainQuestionModal">
+
 	<div class="row m-1">
 		<div class="col-md-2 pl-3"><b>Email:</b></div>	
 		<div class="col-md" id="emailContainer"></div>	
@@ -51,12 +60,11 @@
 
 	<hr>
 
-	<div class="row float-right mr-2">
-		<!-- <button class="ml-1 btn btn-primary float-right" id="topUpBtn">Top Up History</button> -->
-		<button class="ml-1 btn btn-primary float-right" id="blockBtn">Block User</button>
-		<button class="ml-1 btn btn-primary float-right" id="unblockBtn">Unblock User</button>
-		<button class="ml-1 btn btn-success float-right" id="resetBtn">Reset Password</button>
-		<button class="ml-1 btn btn-danger float-right" id="closeBtn">Close</button>
+	<div class="row">
+		<button class="col-sm ml-1 btn btn-primary" id="blockBtn">Block User</button>
+		<button class="col-sm ml-1 btn btn-primary" id="unblockBtn">Unblock User</button>
+		<button class="col-sm ml-1 btn btn-success" id="resetBtn">Reset Password</button>
+		<button class="col-sm ml-1 btn btn-danger" id="closeBtn">Close</button>
 	</div>
 
 </div>

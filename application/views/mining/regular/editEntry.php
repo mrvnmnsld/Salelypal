@@ -2,17 +2,24 @@
 	.modal-footer{
 		display: none;
 	}
-
 	.is-invalid{
 		text-align: center;
 	}
+	#pagetitle_background{
+		background: #293038;
+		color: white;
+	}
+	#main_bootbox_cointainer{
+		background: rgba(0, 0, 0, .1);
+	}
+	#mainForm{
+		padding: 20px;
+	}
 </style>
 
-<div class="pagetitle">
-  <h1>Manipulate Entry</h1>
+<div id="pagetitle_background" class="text-center">
+		<label class="h2 mt-2">Manipulate Entry</label>
 </div>
-
-<hr>
 
 <div id="main_bootbox_cointainer">
 	<form id="mainForm">
@@ -36,13 +43,19 @@
 				</div>
 			</div>
 		</div>
+
+		<hr>
+
+		<div class="d-flex flex-row-reverse">
+			<button class="btn btn-danger ml-2" id="closeBtn">Close</button>
+			<button class="btn btn-success" id="save_edit_btn">Save Changes</button>
+		</div>
+
 	</form>
+	
 </div>
 
-<div class="d-flex flex-row-reverse">
-	<button class="btn btn-danger ml-2" id="closeBtn">Close</button>
-	<button class="btn btn-success" id="save_edit_btn">Save Changes</button>
-</div>
+
 
 
 

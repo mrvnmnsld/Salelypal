@@ -2,7 +2,7 @@
 	button:focus { outline-style: none; }
 </style>
 
-<button class="btn text-white font-weight-bold" onclick="backPage()">
+<button class="btn text-dark font-weight-bold" onclick="backPage()">
 	<i class="fa fa-chevron-circle-left" aria-hidden="true"></i>
 	Back
 </button>
@@ -10,21 +10,21 @@
 <div id="innerContainer" class="p-3">
 	<form>
 		<div class="form-group">
-			<label class="text-white font-weight-bold" for="exampleInputEmail1">Email address</label>
+			<label class="text-dark font-weight-bold" for="exampleInputEmail1">Email address</label>
 			<input type="email" class="form-control" name="email_container" id="email_container" aria-describedby="emailHelp" placeholder="Enter email">
 		</div>
 
 		<div class="form-group">
-			<label class="text-white font-weight-bold" for="exampleInputPassword1">Password</label>
+			<label class="text-dark font-weight-bold" for="exampleInputPassword1">Password</label>
 			<input type="password" class="form-control" name="password_container" id="password_container" placeholder="Password">
 		</div>
 
 		<div class="form-group">
-			<label class="text-white font-weight-bold" for="exampleInputPassword1">Old Password</label>
+			<label class="text-dark font-weight-bold" for="exampleInputPassword1">Old Password</label>
 			<input type="password" class="form-control" name="old_password_container" id="old_password_container" placeholder="Password">
 		</div>
 
-		<small class="text-white font-weight-bold">Change your login credentials, just input new values and make sure your old password is correct. After changing you will be logged out</small>
+		<small class="text-dark font-weight-bold">Change your login credentials, just input new values and make sure your old password is correct. After changing you will be logged out</small>
 
 		<br><br>
 

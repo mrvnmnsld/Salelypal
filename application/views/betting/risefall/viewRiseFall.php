@@ -2,17 +2,26 @@
 	.modal-footer{
 		display: none;
 	}
-
 	.error{
 		color: red;
 	}
+	#pagetitle_background{
+		background: #293038;
+		color: white;
+	}
+	#main_modal_container{
+		background: rgba(0, 0, 0, .1);
+		padding: 20px;
+	}
+	#resolveForm{
+		background: rgba(0, 0, 0, .1);
+		padding: 20px;
+	}
 </style>
 
-<div class="pagetitle">
-  <h1>Rise Fall Position Details</h1>
+<div id="pagetitle_background" class="text-center">
+		<label class="h2 mt-1">Contract Position Details</label>
 </div>
-
-<hr>
 
 <div id="main_modal_container">
 	<div class="row">
@@ -100,7 +109,7 @@
 	</div>
 </div>
 
-<div id="price_set_container" style="display:none">
+<div id="price_set_container" style="display: none;">
 	<form id="resolveForm">
 
 		<div class="form-group">
@@ -122,9 +131,9 @@
 			<b>Buy type: </b><span id="buyType_container_2nd"></span>
 		</div>
 
-		<div class="float-right">
+		<div class="d-flex flex-row-reverse">
+			<button type="button" class="btn btn-danger back_btn ml-2">Back</button>
 			<button type="submit"	class="btn btn-success" id="confirm_btn">Confirm</button>
-			<button type="button" class="btn btn-danger back_btn">Back</button>
 		</div>
 		
 	</form>

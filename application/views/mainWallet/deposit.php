@@ -7,7 +7,7 @@
 		outline: 2px solid black;
 	  	outline-offset: 5px;
 	}
-	#page_title{
+	#pagetitle_background{
 		background: #293038;
 		color: white;
 	}
@@ -17,7 +17,7 @@
 	}
 </style>
 
-	<div id="page_title" class="text-center">
+	<div id="pagetitle_background" class="text-center">
 		<label class="h2">Deposit</label><br>
 		<label style="font-size: 1em;">Scan this qr code to deposit to your wallet</label>
 	</div>

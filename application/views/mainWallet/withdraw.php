@@ -38,7 +38,7 @@
 		<label class="h2 mt-2">Withdrawal</label>
 	</div>
 
-	<div id="successContainer" class="text-center" style="display:none">
+	<div id="successContainer" class="text-center" style="display: none;">
 		<i style="font-size:150px" class="fa fa-check-circle-o text-success" aria-hidden="true"></i><br>
 		<span style="font-size:30px" class="text-success">Success!</span>
 		<br>
@@ -71,8 +71,10 @@
 		<span>You can view your complete transaction details in by clicking <a href="#" id="txidLinkSendContainer" target="_blank">tronscan.org</a> (It might take a few seconds to register the transaction)</span>
 		
 		<br><br>
-
-		<button type="button" class="btn btn-block btn-danger" id="closeBtn_transaction">Close</button>
+		<div class="d-flex flex-row-reverse">
+			<button type="button" class="btn btn-danger ml-2" id="closeBtn_transaction">Close</button>
+		</div>      
+		
 	</div>
 
 	<div id="withdraw_form_container">

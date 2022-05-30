@@ -2,50 +2,62 @@
 	.modal-footer{
 		display: none;
 	}
-
 	.is-invalid{
 		text-align: center;
 	}
+	#pagetitle_background{
+		background: #293038;
+		color: white;
+	}
+	#mainQuestionModal{
+		background: rgba(0, 0, 0, .1);
+	}
+	#mainForm{
+		padding: 20px;
+	}
 </style>
 
-<div class="pagetitle">
-  <h1>Add New Token</h1>
+
+<div id="pagetitle_background" class="text-center">
+		<label class="h2 mt-2">Add New Token (Regular Mining)</label>
 </div>
 
-<hr>
-
 <div id="mainQuestionModal">
+
 	<form id="mainForm">
 
 		<div class="row m-1">
-			<div class="col-md-2 pl-3"><b>Token:</b></div>	
-			<select type="text" name="token_name_container" id="token_name_container" data-live-search="true" class="col-md form-control form-control-sm">
-				<option value="">Please select...</option>
-			</select>
-		</div>
+				<div class="col-md-2 pl-3"><b>Token:</b></div>	
+					<select type="text" name="token_name_container" id="token_name_container" data-live-search="true" class="col-md form-control form-control-sm">
+						<option value="">Please select...</option>
+					</select>
+			</div>
 
-		<div class="row m-1">
-			<div class="col-md-2 pl-3"><b>Network:</b></div>	
-			<input type="text" name="network_container" id="network_container" class="col-md form-control form-control-sm" placeholder="Please select token first" readonly></input>
-		</div>
+			<div class="row m-1">
+				<div class="col-md-2 pl-3"><b>Network:</b></div>	
+					<input type="text" name="network_container" id="network_container" class="col-md form-control form-control-sm" placeholder="Please select token first" readonly></input>
+			</div>
 
-		<div class="row m-1">
-			<div class="col-md-2 pl-3"><b>Daily Rate:</b></div>	
-			<input type="number" name="apy_container" id="apy_container" class="col-md form-control form-control-sm" placeholder="Set starting daily rate"></input>	
-		</div>
+			<div class="row m-1">
+				<div class="col-md-2 pl-3"><b>Daily Rate:</b></div>	
+				<input type="number" name="apy_container" id="apy_container" class="col-md form-control form-control-sm" placeholder="Set starting daily rate"></input>
+			</div>
 
-		<div class="row m-1">
-			<div class="col-md-2 pl-3"><b>Cycle days:</b></div>	
-			<input type="text" name="cycle_day_container" id="cycle_day_container" class="col-md form-control form-control-sm" placeholder="Add comma to separate cycles days ex. 1,3,7"></input>	
-		</div>
+			<div class="row m-1">
+				<div class="col-md-2 pl-3"><b>Cycle days:</b></div>	
+				<input type="text" name="cycle_day_container" id="cycle_day_container" class="col-md form-control form-control-sm" placeholder="Add comma to separate cycles days ex. 1,3,7"></input>
+			</div>
+
+			<hr>
+
+			<div class="d-flex flex-row-reverse">
+				<button class="btn btn-danger ml-2" id="closeBtn">Close</button>
+				<button class="btn btn-success" id="save_edit_btn">Save Token to Mine</button>
+			</div>		
 	</form>
 
-	<hr>
-
-	<button class="col-md-12 btn btn-success btn-block" id="save_edit_btn">Save Token to Mine</button>
-	<button class="col-md-12 btn btn-danger btn-block" id="closeBtn">Close</button>
-
 </div>
+
 
 <script type="text/javascript">
 	var tokenListArray = ajaxShortLink('userWallet/getAllTokensV2');

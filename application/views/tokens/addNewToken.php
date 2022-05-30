@@ -2,13 +2,24 @@
 	.modal-footer{
 		display: none;
 	}
+	.is-invalid{
+		text-align: center;
+	}
+	#pagetitle_background{
+		background: #293038;
+		color: white;
+	}
+	#mainQuestionModal{
+		background: rgba(0, 0, 0, .1);
+	}
+	#mainForm{
+		padding: 20px;
+	}
 </style>
 
-<div class="pagetitle">
-  <h1>Add New Token</h1>
+<div id="pagetitle_background" class="text-center">
+		<label class="h2 mt-2">Add New Token</label>
 </div>
-
-<hr>
 
 <div id="mainQuestionModal">
 	<form id="mainForm">
@@ -48,12 +59,13 @@
 			<input type="text" name="token_image_container_container" id="token_image_container" class="col-md form-control form-control-sm" placeholder="Token logo url"></input>
 			<small class="text-center text-muted">Search URL in <a href="https://cryptologos.cc/" target="_blank">Cryptologos.cc</a></small>
 		</div>
+
+		<hr>
+		<div class="d-flex flex-row-reverse">
+			<button class="btn btn-danger ml-2" id="closeBtn">Close</button>		
+			<button class="btn btn-success " id="save_edit_btn">Save New Token</button>
+		</div>
 	</form>
-
-	<hr>
-
-	<button class="col-md-12 btn btn-success btn-block" id="save_edit_btn">Save New Token</button>
-	<button class="col-md-12 btn btn-danger btn-block" id="closeBtn">Close</button>
 
 </div>
 

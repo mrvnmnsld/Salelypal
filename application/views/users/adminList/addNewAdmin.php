@@ -2,11 +2,22 @@
 	.modal-footer{
 		display: none;
 	}
+	.is-invalid{
+		text-align: center;
+	}
+	#pagetitle_background{
+		background: #293038;
+		color: white;
+	}
+	#mainForm{
+		background: rgba(0, 0, 0, .1);
+		padding: 20px;
+	}
 </style>
 
-<h3 class="mb-3 display-4">Add New Admin User</h3>
-
-<hr>
+<div id="pagetitle_background" class="text-center">
+		<label class="h2 mt-2">Add New Admin User</label>
+</div>
 
 <form id="mainForm">
 	<div class="form-group">
@@ -30,14 +41,16 @@
 	  		<button class="btn btn-success" id="generatePassword" style="border-top-right-radius: 5px 5px;border-bottom-right-radius: 5px 5px;" type="button">Generate</button>
 		</div>
 	</div>
+
+	<hr>
+
+	<div class="d-flex flex-row-reverse">
+		<button class="btn btn-danger ml-2" id="closeBtn">Close</button>
+		<button class="btn btn-success" id="saveBtn">Save New User</button>
+	</div>
+
 </form>
 
-<hr>
-
-<div class="row m-2">
-	<button class="ml-1 col-md btn btn-success" id="saveBtn">Save New User</button>
-	<button class="ml-1 col-md btn btn-danger" id="closeBtn">Close</button>
-</div>
 
 <script type="text/javascript">
 
