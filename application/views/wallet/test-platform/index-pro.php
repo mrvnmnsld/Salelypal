@@ -182,25 +182,20 @@
 	</div>
 
 	<div id="topNavBar" style="display:none;">
-		<span style="float: left;" onclick="backButton()"><i class="fa fa-user fa-md" aria-hidden="true"></i></span>
-		<span id="tittle_container" class="text-center font-weight-bold" data-page-url="wallet/index">
-			<span>(Profile and Username Pro)</span>
-		</span>
+		<span style="float: left;" onclick="backButton()"><i class="fa fa-user fa-md" aria-hidden="true"></i><span class="ml-2" id="username_container"></span></span>
 
 		<span id="notif_btn" class="" style="float:right;">
 			<i id="notif_logo" class="fa fa-bell fa-md fa-inverse" style="color:#D9E9E8;"  aria-hidden="true">
 				<span id="notif_counter_number" style="font-size:.45em; right:.4em; top:1.5em; display:none" class="position-absolute badge bg-danger">0</span>
 			</i>
 		</span>
-															<!-- older version menu icon  --> <!-- <span style="float: right;" onclick="openNav()">&#9776;</span>  -->
 	</div>
 
 	<div id="container" class="mb-5" style="display:none;min-height: 100%;"> 
 		<div class="m-2 text-left">
 			<div class="h3 p-2 m-2 font-weight-bold text-center">
-				<span class="h3">Total Balance:</span><br>
+				<span class="h3 text-muted">Total Balance:</span><br>
 				<span id="totalInUsdContainer">Loading...</span>
-				<span id="displayCurrencyContainer">USD</span>
 			</div>	
 		</div>
 
@@ -228,7 +223,7 @@
 		</div>
 
 		<div id="tokenContainer" class="notranslate">
-			<div style="font-size: 1.50rem;;" class="text-center text-muted font-weight-bold mt-2">Tokens</div>
+			<!-- <div style="font-size: 1.50rem;;" class="text-center text-muted font-weight-bold mt-2">Tokens</div> -->
 			<!-- <hr style="height: 1px;width: 70%;" class="bg-dark"> -->
 		</div>
 
@@ -390,7 +385,7 @@
 		});
 
 		// var currentUser = JSON.parse(getLocalStorageByKey('currentUser'));
-		var currentUser = {'userID':"15"}
+		var currentUser = {'userID':"15","displayCurrency":"USD"}
 		var animtionSpeed = 250;
 		var	SelectedtransactionDetails = [];
 		var totalInUsd = 0;
@@ -403,6 +398,9 @@
 		// console.log(tokensSelected);
 
 		//initial
+			$("#username_container").text("Marvin");
+			$("#email_container").text("marvin@gmail.com");
+
 			var priceAlert = ajaxShortLink('userWallet/triggerPriceAlerts',{'userID':
 				15});
 			var priceAlertTokensId = [];
@@ -474,7 +472,7 @@
 							myLoop();
 					    }else{
 					  		$("#totalInUsdContainer").html(numberWithCommas(totalInUsd.toFixed(2)));
-					  		$("#totalInUsdContainer").prepend("$");
+					  		$("#totalInUsdContainer").append(" "+currentUser.displayCurrency);
 							console.timeEnd('loadTimer');
 					    }
 
