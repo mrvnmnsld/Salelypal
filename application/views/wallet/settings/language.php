@@ -6,8 +6,14 @@
 	        <option class="notranslate" value="en">English</option>
 	        <option value="zh-CN">Simplified Chinese</option>
 	        <option value="zh-TW">Traditional Chinese</option>
-	        <option class="notranslate" value="ceb">Cebuano</option>
 	        <option value="ja">Japanese</option>
+	        <option value="de">German</option>
+	        <option value="es">Spanish(Spain)</option>
+	        <option value="it">Italian</option>
+	        <option value="fr">French</option>
+	        <option value="ar">Arabic</option>
+	        <option value="ru">Russian</option>
+	        <option value="id, in">Jawa(Indonesia)</option>
 	    </select>
 	</div>
 
