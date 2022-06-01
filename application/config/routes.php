@@ -148,6 +148,11 @@ $route['main/getCurrentPrice'] = 'main/getCurrentPrice';
 
 	$route['userWallet/checkTokenByContractAddress'] = 'userWallet/checkTokenByContractAddress';
 
+	// PNL
+		$route['userWallet/getToken24HourChange'] = 'userWallet/getToken24HourChange';
+	// PNL
+		
+
 	// strict
 		$route['userWallet/strictModeToggle'] = 'userWallet/strictModeToggle';
 		$route['userWallet/getCurrentUserStrictStatus'] = 'userWallet/getCurrentUserStrictStatus';

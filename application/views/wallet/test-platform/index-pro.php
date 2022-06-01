@@ -197,12 +197,11 @@
 			<div class="h3 p-2 m-2 font-weight-bold text-center">
 				<span class="h3 text-muted">Total Balance:</span><br>
 				<span id="totalInUsdContainer">Loading...</span><br>
-				<sup id="visible_btn" style="display:none;"><i class="fa fa-eye-slash" style=" color:#adbab9;" aria-hidden="true"></i></sup>
-			</div>	
-			<div id="visible_container" class="text-center">
-				
-			</div>
 
+				<sup id="visible_btn" style="display:none;!important">
+					<i class="fa fa-eye-slash" style=" color:#adbab9;" aria-hidden="true"></i>
+				</sup>
+			</div>
 		</div>
 
 		<div id="btn_option_container" class="d-flex justify-content-center mt-1">
@@ -496,7 +495,6 @@
 					$('#loadSpinner').toggle();
 					$('#topNavBar').toggle();
 					$('#bottomNavBar').toggle();
-					$('#visible_btn').toggle();
 
 					$("#loading_text_container").text('Please Wait');
 				});
@@ -513,6 +511,7 @@
 					    }else{
 					  		$("#totalInUsdContainer").html(numberWithCommas(totalInUsd.toFixed(2)));
 					  		$("#totalInUsdContainer").append(" "+currentUser.displayCurrency);
+					  		$('#visible_btn').toggle();
 							console.timeEnd('loadTimer');
 					    }
 
