@@ -222,43 +222,105 @@
 			</button>
 		</div>
 
-		<div id="tokenContainer" class="notranslate">
-			<!-- <div style="font-size: 1.50rem;;" class="text-center text-muted font-weight-bold mt-2">Tokens</div> -->
-			<!-- <hr style="height: 1px;width: 70%;" class="bg-dark"> -->
-		</div>
-
-		<div class="col-md-12 text-center pl-3 pr-3" >
-            <button class="btn btn-outline-link btn-block text-primary mt-2" id="addToken_btn">
-            	<i class="fa fa-sliders" aria-hidden="true"></i>
-            	Add More
-            </button>
-        </div>
-	</div>	
-
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-
-	<!-- modal-mining -->
 		<style>
-			#modal_mining .modal-content{
+			#asset_tab_container{
+				background-color:rgba(34,34,34,.1);
+				padding-bottom:5em;
+			}
+			#asset_tabs a{
+				color: #777;
+			}
+			.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
+			font-size:1.3em;
+			color:black!important;
+			background-color:rgba(0,0,0,.03);
+			border-color: transparent;
+			}
+		</style>
+
+		<div id="asset_tab_container" class="shadow mt-3">
+			<ul id="asset_tabs" class="nav nav-tabs nav-justified" role="tablist">
+				<li class="nav-item">
+					<a class="nav-link active" data-toggle="tab" href="#balance_tab">BALANCE</a>
+				</li>
+
+				<li class="nav-item">
+					<a class="nav-link" data-toggle="tab" href="#portfolio_tab">PORTFOLIO</a>
+				</li>
+			</ul>	
+
+			<div class="asset-tab-content tab-content shadow">
+				<div id="balance_tab" class="container tab-pane active"><br>
+					<div id="tokenContainer"></div>
+					<div class="col-md-12 text-center pl-3 pr-3">
+						<button class="btn btn-outline-link btn-block text-primary mt-2" id="addToken_btn">
+							<i class="fa fa-sliders" aria-hidden="true"></i>
+							Add more
+						</button>
+					</div>
+				</div>
+
+				<div id="portfolio_tab" class="container tab-pane fade"><br>
+					<h3>Menu 1</h3>
+					<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+				</div>
+			</div>
+		</div><!-- asset_tab_container -->
+		
+
+		<style>
+			.nav-tabs {
+				border-bottom: transparent;
+			}
+			
+			.test1{
+				color: #D9E9E8 !important;
+			}
+		</style>
+
+
+	</div>		
+
+	<ul id="bottomNavBar" style="background:rgb(34 34 34); display:none;" class="nav fixed-bottom justify-content-center row pt-2">
+			<li class="nav-item col-3 text-center">
+				<i class="fa fa-money fa-inverse fa-lg" aria-hidden="true"></i>
+				<a onclick="backButton()" class="botnavlink nav-link active" style="font-size:.8em; color:#D9E9E8;"><span class="test1">Asset</span></a>
+			</li>
+
+			<li class="nav-item col-3 text-center">
+				<i class="fa fa-bar-chart fa-inverse fa-lg" style="" aria-hidden="true"></i>
+				<a class="nav-link" id="modal_mining_btn" data-toggle="modal" data-target="#modal_trade" style="font-size:.8em; color:#D9E9E8;"  href="#">Trade</a>
+			</li>
+
+			<li class="nav-item col-3 text-center">
+				<i class="fa fa-bar-chart fa-inverse fa-lg" aria-hidden="true"></i>
+				<a class="nav-link" style="font-size:.8em; color:#D9E9E8;" href="#">Discover</a>
+			</li>
+
+			<li class="nav-item col-3 text-center">
+				<i class="fa fa-cogs fa-inverse fa-lg" aria-hidden="true"></i>
+				<a id="settings_btn" class="nav-link" style="font-size:.8em; color:#D9E9E8;"  href="#">Settings</a>
+			</li>
+		</ul>
+
+		<!-- modal-mining -->
+		<style>
+			#modal_trade .modal-content{
 				background:transparent;
 			}
 
-			#modal_mining .modal-header{
+			#modal_trade .modal-header{
 				padding:.3em;
 
 			}
 
-			#modal_mining .modal-body{
+			#modal_trade .modal-body{
 				
 				padding:0em!important;
 
 			}
 
-			#modal_mining .btn-modal {
+			#modal_trade .btn-modal {
 				background: rgb(34 34 34);
 
 				border:.2px solid;
@@ -272,88 +334,52 @@
 			}
 		</style>
 
-		<div class="modal fade" id="modal_mining">
+		<div class="modal fade" id="modal_trade">
 			<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content" style="background-color: rgb(0 0 0 / 79%);">
-			
-				<div class="modal-header">
-				<!-- <h4 class="modal_mining modal-title"></h4> -->
-				<button type="button" class="close" data-dismiss="modal">
-					<i class="fa fa-close fa-inverse" aria-hidden="true"></i>
-				</button>
-				</div>
+				<div class="modal-content" style="background-color: rgb(0 0 0 / 79%);">
 				
-				<div class="modal-body" style="">
-					<div class="m-1 justify-content-center">
-						<button id="daily_mining_btn" type="button" class="btn btn-modal" data-dismiss="modal">
-							<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">
-						Daily Mining
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">
+							<i class="fa fa-close fa-inverse" aria-hidden="true"></i>
 						</button>
 					</div>
+					
+					<div class="modal-body" style="">
 
-					<div class="m-1 justify-content-center">
-						<button id="regular_mining_btn" class="btn btn-modal" data-dismiss="modal">
-							<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">
-						Regular Mining
-						</button>
+						<div class="m-1 justify-content-center">
+							<button id="rise_fall_btn" type="button" class="btn btn-modal" data-dismiss="modal">
+								<!-- <img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png"> -->
+								<i class="fa fa-bar-chart fa-inverse fa-lg" style="" aria-hidden="true"></i>
+								Contract Rise Fall
+							</button>
+						</div>
+
+						<div class="m-1 justify-content-center">
+							<button id="future_btn" class="btn btn-modal" data-dismiss="modal">
+								<!-- <img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png"> -->
+								<i class="fa fa-bar-chart fa-inverse fa-lg" style="" aria-hidden="true"></i>
+								Contract Long Short
+							</button>
+						</div>					
+
+						<div class="m-1 justify-content-center">
+							<button id="daily_mining_btn" type="button" class="btn btn-modal" data-dismiss="modal">
+								<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">
+								Daily Mining
+							</button>
+						</div>
+
+						<div class="m-1 justify-content-center">
+							<button id="regular_mining_btn" class="btn btn-modal" data-dismiss="modal">
+								<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">
+								Regular Mining
+							</button>
+						</div>
+							
 					</div>
-						
-				</div>
-
-				<!-- <div class="modal_mining modal-footer">
-				<button type="button" class="btn" data-dismiss="modal">Close</button>
-				</div> -->
-				
-			</div>
+				</div>	
 			</div>
 		</div>
-	<!-- modal-mining -->
-
-	<ul id="bottomNavBar" style="border:2px solid; background: rgb(34 34 34);display:none;" class="nav justify-content-center fixed-bottom">
-		<li class="nav-item">
-			<div id="btn_option_container" class="">
-				<button id="rise_fall_btn" class="btn" style="background-color:transparent">
-					<div class="" style="">
-						<i class="fa fa-bar-chart fa-inverse fa-lg" aria-hidden="true"></i>
-					</div>
-					<div style="font-size:.8em; color:#D9E9E8;">Rise Fall</div>
-				</button>
-			</div>
-		</li>
-
-		<li class="nav-item">
-			<div id="btn_option_container" class="">
-			<button id="future_btn" class="btn" style="background-color:transparent">
-				<div class="" style="">
-					<i class="fa fa-bar-chart fa-inverse fa-lg" aria-hidden="true"></i>
-				</div>
-				<div style="font-size:.8em; color:#D9E9E8;">Contract</div>
-			</button>
-			</div>
-		</li>
-		
-		<li class="nav-item">
-			<div id="btn_option_container" class="">
-				<button id="modal_mining_btn" data-toggle="modal" data-target="#modal_mining" class="btn" style="background-color:transparent">
-					<div class="" style="">
-					<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">
-					</div>
-					<div style="font-size:.8em; color:#D9E9E8;">Mine</div>
-				</button>
-			</div>
-		</li>
-
-		<li class="nav-item">
-			<div id="btn_option_container" class="">
-				<button id="settings_btn" class="btn" style="background-color:transparent">
-					<div class="" style="">
-					<i class="fa fa-cogs fa-inverse fa-lg" aria-hidden="true"></i>
-					</div>
-					<div style="font-size:.8em; color:#D9E9E8;">Settings</div>
-				</button>
-			</div>
-		</li>
-	</ul>	
 
 	<!-- translate -->
 		<script type="text/javascript">

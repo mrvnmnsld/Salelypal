@@ -154,25 +154,19 @@
 	</div>
 
 	<div id="topNavBar" style="display:none;">
-		<span style="float: left;" onclick="backButton()"><i class="fa fa-home fa-lg" aria-hidden="true"></i></span>
-		<span id="tittle_container" class="text-center font-weight-bold" data-page-url="wallet/index">Security Wallet</span>
-		
-		<!-- arl_05-19-22 notification icon and count -->
-		
-		<span id="notif_btn" class="" style="float:right; " onclick="notif_btn()">
+		<span style="float: left;" onclick="backButton()"><i class="fa fa-user fa-md" aria-hidden="true"></i><span class="ml-2" id="username_container"></span></span>
+
+		<span id="notif_btn" class="" style="float:right;">
 			<i id="notif_logo" class="fa fa-bell fa-md fa-inverse" style="color:#D9E9E8;"  aria-hidden="true">
 				<span id="notif_counter_number" style="font-size:.45em; right:.4em; top:1.5em; display:none" class="position-absolute badge bg-danger">0</span>
 			</i>
 		</span>
-	
-		<!-- arl_05-19-22 notification icon and count -->
-															<!-- older version menu icon  --> <!-- <span style="float: right;" onclick="openNav()">&#9776;</span>  -->
 	</div>
 
-	<div id="container" class="mb-5" style="display:none"> 
+	<div id="container" class="mb-5" style="display:none;min-height: 100%;"> 
 		<div class="m-2 text-left">
 			<div class="h3 p-2 m-2 font-weight-bold text-center">
-				<span class="h5">All Asssets in USD:</span> <br>
+				<span class="h3">Total Balance:</span><br>
 				<span id="totalInUsdContainer">Loading...</span>
 			</div>	
 		</div>
@@ -182,42 +176,22 @@
 				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(34 34 34);padding: 5px;">
 					<i class="fa fa-arrow-circle-down fa-lg" aria-hidden="true"></i>
 				</div>
-				<div style="font-size:.8em">Deposit</div>
+				<div style="font-size:.8em"><b>Deposit</b></div>
 			</button>
 
 			<button id="withdraw_btn_option" class="btn" style="background-color:transparent">
 				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(34 34 34);padding: 5px;">
 					<i class="fa fa-arrow-circle-up fa-lg" aria-hidden="true"></i>
 				</div>
-				<div style="font-size:.8em">Withdraw</div>
+				<div style="font-size:.8em"><b>Withdraw</b></div>
 			</button>
 
 			<button id="buy_btn_option" class="btn" style="background-color:transparent">
 				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(34 34 34);padding: 5px;">
 					<i class="fa fa-usd fa-lg" aria-hidden="true"></i>
 				</div>
-				<div style="font-size:.8em;">Purchase</div>
+				<div style="font-size:.8em;"><b>Buy</b></div>
 			</button>
-
-			<!-- <button id="future_btn" class="btn" style="background-color:transparent">
-				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.31em;background-color: rgb(34 34 34);padding-top: 5px;">
-					<i class="fa fa-bar-chart fa-lg" aria-hidden="true"></i>
-				</div>
-				<div style="font-size:.8em">Contract</div>
-			</button> -->
-		<!-- 	<button id="future_btn" class="btn" style="background-color:transparent">
-				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(0, 0, 0, 50%);padding: 5px;">
-					<i class="fa fa-bar-chart" aria-hidden="true"></i>
-				</div>
-				<div style="font-size:.8em">Contract</div>
-			</button> -->
-
-			<!-- <button id="rise_fall_btn" class="btn" style="background-color:transparent">
-				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(0, 0, 0, 50%);padding: 5px;">
-					<i class="fa fa-bar-chart" aria-hidden="true"></i>
-				</div>
-				<div style="font-size:.8em">Rise Fall</div>
-			</button> -->
 		</div>
 
 		<!-- <hr style="
@@ -225,78 +199,87 @@
 		    width: 100%;
 		    background-color: #a0abaf;
 		" class=""> -->
+		<style>
+			#asset_tab_container{
+				background-color:rgba(34,34,34,.1);
+				padding-bottom:5em;
+			}
+			#asset_tabs a{
+				color: #777;
+			}
+			.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
+			font-size:1.3em;
+			color:black!important;
+			background-color:rgba(0,0,0,.03);
+			border-color: transparent;
+			}
+		</style>
 
-		<div id="tokenContainer">
-			<div style="font-size: 1.50rem;;" class="text-center text-muted font-weight-bold mt-2">Tokens</div>
-			<!-- <hr style="height: 1px;width: 70%;" class="bg-dark"> -->
-		</div>
+		<div id="asset_tab_container" class="shadow mt-3">
+			<ul id="asset_tabs" class="nav nav-tabs nav-justified" role="tablist">
+				<li class="nav-item">
+					<a class="nav-link active" data-toggle="tab" href="#balance_tab">BALANCE</a>
+				</li>
 
-		<div class="col-md-12 text-center pl-3 pr-3">
-            <button class="btn btn-outline-link btn-block text-primary mt-2" id="addToken_btn">
-            	<i class="fa fa-sliders" aria-hidden="true"></i>
-            	Manage Tokens
-            </button>
-        </div>
+				<li class="nav-item">
+					<a class="nav-link" data-toggle="tab" href="#portfolio_tab">PORTFOLIO</a>
+				</li>
+			</ul>	
 
-        <!-- arl_05-19-22 bottom nav  -->
-
-				<ul id="bottomNavBar" style="border:2px solid; background: rgb(34 34 34);" class="nav justify-content-center fixed-bottom">
-					<li class="nav-item">
-						<div id="btn_option_container" class="">
-							<button id="rise_fall_btn" class="btn" style="background-color:transparent">
-								<div class="" style="">
-									<i class="fa fa-bar-chart fa-inverse fa-lg" aria-hidden="true"></i>
-								</div>
-								<div style="font-size:.8em; color:#D9E9E8;">Rise Fall</div>
-							</button>
-						</div>
-					</li>
-					<li class="nav-item">
-						<div id="btn_option_container" class="">
-							<button id="daily_mining_btn" class="btn" style="background-color:transparent">
-								<div class="" style="">
-								<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">
-								</div>
-								<div style="font-size:.8em; color:#D9E9E8;">Mining</div>
-							</button>
-						</div>
-					</li>
-
-					<li class="nav-item">
-						<div id="btn_option_container" class="">
-						<button id="future_btn" class="btn" style="background-color:transparent">
-							<div class="" style="">
-								<i class="fa fa-bar-chart fa-inverse fa-lg" aria-hidden="true"></i>
-							</div>
-							<div style="font-size:.8em; color:#D9E9E8;">Contract</div>
+			<div class="asset-tab-content tab-content shadow">
+				<div id="balance_tab" class="container tab-pane active"><br>
+					<div id="tokenContainer"></div>
+					<div class="col-md-12 text-center pl-3 pr-3">
+						<button class="btn btn-outline-link btn-block text-primary mt-2" id="addToken_btn">
+							<i class="fa fa-sliders" aria-hidden="true"></i>
+							Add more
 						</button>
-						</div>
-					</li>
+					</div>
+				</div>
 
-					
-					<!-- <li class="nav-item">
-						<div id="btn_option_container" class="">
-							<button id="regular_mining_btn" class="btn" style="background-color:transparent">
-								<div class="" style="">
-								<img style="width:1.25em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">	
-								</div>
-								<div style="font-size:.8em; color:#D9E9E8;">Regular Mining</div>
-							</button>
-						</div>
-					</li> -->
-					<li class="nav-item">
-						<div id="btn_option_container" class="">
-							<button id="settings_btn" class="btn" style="background-color:transparent">
-								<div class="" style="">
-								<i class="fa fa-user fa-inverse fa-lg" aria-hidden="true"></i>
-								</div>
-								<div style="font-size:.8em; color:#D9E9E8;">Settings</div>
-							</button>
-						</div>
-					</li>
-				</ul>
-		<!-- arl_05-19-22 -->
+				<div id="portfolio_tab" class="container tab-pane fade"><br>
+					<h3>Menu 1</h3>
+					<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+				</div>
+			</div>
+		</div><!-- asset_tab_container -->
+		
+
+		<style>
+			.nav-tabs {
+				border-bottom: transparent;
+			}
+			
+			.test1{
+				color: #D9E9E8 !important;
+			}
+		</style>
+
+		<ul id="bottomNavBar" style="background:rgb(34 34 34);" class="nav nav-tabs fixed-bottom justify-content-center row pt-2" role="tablist">
+			<li class="nav-item col-3 text-center">
+				<i class="fa fa-money fa-inverse fa-lg" aria-hidden="true"></i>
+				<a class="botnavlink nav-link active" style="font-size:.8em; color:#D9E9E8;" data-toggle="tab" href="#asset_tab_container"><span class="test1">Asset</span></a>
+			</li>
+
+			<li class="nav-item col-3 text-center">
+				<i class="fa fa-bar-chart fa-inverse fa-lg" style="" aria-hidden="true"></i>
+				<a class="nav-link" style="font-size:.8em; color:#D9E9E8;"  href="#">Trade</a>
+			</li>
+
+			<li class="nav-item col-3 text-center">
+				<i class="fa fa-bar-chart fa-inverse fa-lg" aria-hidden="true"></i>
+				<a class="nav-link" style="font-size:.8em; color:#D9E9E8;" href="#">Discover</a>
+			</li>
+
+			<li class="nav-item col-3 text-center">
+				<i class="fa fa-bar-chart fa-inverse fa-lg" aria-hidden="true"></i>
+				<a class="nav-link" style="font-size:.8em; color:#D9E9E8;"  href="#">Settings</a>
+			</li>
+		</ul>
 	</div>		
+
+	
+	
 
 	<!-- translate -->
 		<script type="text/javascript">
@@ -334,6 +317,9 @@
 		// console.log(tokensSelected);
 
 		//initial
+		$("#username_container").text("Marvin");
+		$("#email_container").text("marvin@gmail.com");
+
 			var priceAlert = ajaxShortLink('userWallet/triggerPriceAlerts',{'userID':currentUser['userID']});
 			var priceAlertTokensId = [];
 			console.log(priceAlert);
@@ -368,6 +354,7 @@
 			}, 15000);	
 		//initial
 
+
 		function checkValidityLocalStorageValidity(){
 			console.log(currentUser.lastLoginDate);
 		}
@@ -400,8 +387,9 @@
 								loadTokenInfo(tokensSelected[i]);
 								myLoop();
 						    }else{
-						  		$("#totalInUsdContainer").html(totalInUsd.toFixed(2));
-						  		$("#totalInUsdContainer").prepend("$");
+					  			$("#totalInUsdContainer").html(numberWithCommas(totalInUsd.toFixed(2)));
+								// $("#totalInUsdContainer").append(" "+currentUser.displayCurrency);
+								$("#totalInUsdContainer").append(" USD");
 								console.timeEnd('loadTimer');
 						    }
 
