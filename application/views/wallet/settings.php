@@ -3,8 +3,10 @@
 	<button id="security_btn" style="margin-left:3px" class="btn text-dark border-bottom btn-block text-left">
 		<i class="fa fa-shield" aria-hidden="true"></i>
 		<span style="font-size: 18px;margin-left:2px">&nbsp;Reset Password</span>
-	</button><br>
+	</button>
+</div>	
 
+<div class="p-2">
 	<div class="text-primary mb-2 font-weight-bold h5">Preference</div>
 	<button id="display_currency_btn" disabled class="btn text-dark border-bottom btn-block text-left">
 		<i class="fa fa-money" aria-hidden="true"></i>
@@ -15,7 +17,7 @@
 		<i class="fa fa-language" aria-hidden="true"></i>
 		<span class="" style="font-size: 18px;">&nbsp;Language</span>
 	</button>
-
+</div>
 	
 	<!-- <button id="price_alert_btn" class="btn text-dark border-bottom btn-block text-left">
 		<i class="fa fa-bell" aria-hidden="true"></i>
@@ -27,7 +29,7 @@
 		<span class="" style="font-size: 15px;">&nbsp;Export Wallet</span>
 	</button> -->
 
-</div>
+
 
 <div class="p-2">
 	<div class="text-primary mb-2 font-weight-bold h5">Follow Us</div>
@@ -56,6 +58,9 @@
 		<i class="fa fa-reddit" aria-hidden="true"></i>
 		<span class="">&nbsp;Reddit</span>
 	</button>
+</div>
+
+<div class="p-2">
 
 	<div class="text-primary mb-2 font-weight-bold h5">Support</div>
 	<button class="btn text-dark border-bottom btn-block text-left" disabled style="font-size: 20px;margin-left:3px">
@@ -66,7 +71,10 @@
 	<hr>
 	
 	<button id="logOut_btn" type="button" class="btn btn-block btn-danger" style="font-size: 20px;">LOGOUT</button>
+	
 </div>
+
+	
 
 <script type="text/javascript">
 	$('#exportWallet_btn').on('click',function(){
