@@ -144,6 +144,7 @@
 
     	    body {
     	       top: 0px !important;
+
     	    }
 
     	    .goog-tooltip {
@@ -173,7 +174,7 @@
 	</style>
 <!-- css -->
 
-<body>
+<body style="min-height: 130%;">
 	<div id="loadSpinner" class="text-center text-primary" style="margin-top: 30vh;">
 	  	<div class="spinner-border" role="status" style="width: 5rem; height: 5rem;">
 	    	<span class="sr-only"></span>
@@ -182,7 +183,7 @@
 	</div>
 
 	<div id="topNavBar" style="display:none;">
-		<span style="float: left;" onclick="backButton()"><i class="fa fa-user fa-md" aria-hidden="true"></i><span class="ml-2" id="username_container"></span></span>
+		<span style="float: left;" onclick="$.alert('This function is still under development')"><i class="fa fa-user fa-md" aria-hidden="true"></i><span class="ml-2" id="username_container"></span></span>
 
 		<span id="notif_btn" class="" style="float:right;">
 			<i id="notif_logo" class="fa fa-bell fa-md fa-inverse" style="color:#D9E9E8;"  aria-hidden="true">
@@ -191,7 +192,7 @@
 		</span>
 	</div>
 
-	<div id="container" class="mb-5" style="display:none;min-height: 100%;"> 
+	<div id="container" class="mb-5" style="display:none;min-height: 120%; margin-bottom: ;"> 
 		<div class="m-2 text-left">
 			<div class="h3 p-2 m-2 font-weight-bold text-center">
 				<span class="h3 text-muted">Total Balance:</span><br>
@@ -231,14 +232,14 @@
 				color: #777;
 			}
 			.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
-			font-size:1.3em;
-			color:black!important;
-			background-color:rgba(0,0,0,.03);
-			border-color: transparent;
+				font-size:1.3em;
+				color:black!important;
+				background-color:rgba(0,0,0,.03);
+				border-color: transparent;
 			}
 		</style>
 
-		<div id="asset_tab_container" class="shadow mt-3">
+		<div id="asset_tab_container" class="mt-3">
 			<ul id="asset_tabs" class="nav nav-tabs nav-justified" role="tablist">
 				<li class="nav-item">
 					<a class="nav-link active" data-toggle="tab" href="#balance_tab">BALANCE</a>
@@ -249,7 +250,7 @@
 				</li>
 			</ul>	
 
-			<div class="asset-tab-content tab-content shadow">
+			<div class="asset-tab-content tab-content">
 				<div id="balance_tab" class="container tab-pane active"><br>
 					<div id="tokenContainer"></div>
 					<div class="col-md-12 text-center pl-3 pr-3">
@@ -261,8 +262,11 @@
 				</div>
 
 				<div id="portfolio_tab" class="container tab-pane fade"><br>
-					<h3>Menu 1</h3>
-					<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+					<div class="text-center">
+						<h3>This part is still under development</h3>
+					</div>
+					
+					
 				</div>
 			</div>
 		</div><!-- asset_tab_container -->
@@ -278,108 +282,112 @@
 			}
 		</style>
 
+		<!-- modal-mining -->
+			<style>
+				#modal_trade .modal-content{
+					background:transparent;
+				}
 
-	</div>		
+				#modal_trade .modal-header{
+					padding:.3em;
+
+				}
+
+				#modal_trade .modal-body{
+					
+					padding:0em!important;
+
+				}
+
+				#modal_trade .btn-modal {
+					background: rgb(34 34 34);
+
+					border:.2px solid;
+					border-radius : .5em;
+					
+					color: #D9E9E8;
+
+					min-height: 100%;
+					min-width: 100%;
+					padding:2em;
+				}
+			</style>
+
+			<div class="modal fade" id="modal_trade">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content" style="background-color: rgb(0 0 0 / 79%);">
+					
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">
+								<i class="fa fa-close fa-inverse" aria-hidden="true"></i>
+							</button>
+						</div>
+						
+						<div class="modal-body" style="">
+
+							<div class="m-1 justify-content-center">
+								<button id="rise_fall_btn" type="button" class="btn btn-modal" data-dismiss="modal">
+									<!-- <img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png"> -->
+									<i class="fa fa-bar-chart fa-inverse fa-lg" style="" aria-hidden="true"></i>
+									Contract Rise Fall
+								</button>
+							</div>
+
+							<div class="m-1 justify-content-center">
+								<button id="future_btn" class="btn btn-modal" data-dismiss="modal">
+									<!-- <img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png"> -->
+									<i class="fa fa-bar-chart fa-inverse fa-lg" style="" aria-hidden="true"></i>
+									Contract Long Short
+								</button>
+							</div>					
+
+							<div class="m-1 justify-content-center">
+								<button id="daily_mining_btn" type="button" class="btn btn-modal" data-dismiss="modal">
+									<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">
+									Daily Mining
+								</button>
+							</div>
+
+							<div class="m-1 justify-content-center">
+								<button id="regular_mining_btn" class="btn btn-modal" data-dismiss="modal">
+									<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">
+									Regular Mining
+								</button>
+							</div>
+								
+						</div>
+					</div>	
+				</div>
+			</div>
+		<!-- modal-mining -->
+	</div>
+
+	<br>
+	<br>
+	<br>
+	<br>
 
 	<ul id="bottomNavBar" style="background:rgb(34 34 34); display:none;" class="nav fixed-bottom justify-content-center row pt-2">
-			<li class="nav-item col-3 text-center">
-				<i class="fa fa-money fa-inverse fa-lg" aria-hidden="true"></i>
-				<a onclick="backButton()" class="botnavlink nav-link active" style="font-size:.8em; color:#D9E9E8;"><span class="test1">Asset</span></a>
-			</li>
+		<li class="nav-item col-3 text-center">
+			<i class="fa fa-money fa-inverse fa-lg" aria-hidden="true"></i>
+			<a onclick="backButton()" class="botnavlink nav-link active" style="font-size:.8em; color:#D9E9E8;"><span class="test1">Asset</span></a>
+		</li>
 
-			<li class="nav-item col-3 text-center">
-				<i class="fa fa-bar-chart fa-inverse fa-lg" style="" aria-hidden="true"></i>
-				<a class="nav-link" id="modal_mining_btn" data-toggle="modal" data-target="#modal_trade" style="font-size:.8em; color:#D9E9E8;"  href="#">Trade</a>
-			</li>
+		<li class="nav-item col-3 text-center">
+			<i class="fa fa-bar-chart fa-inverse fa-lg" style="" aria-hidden="true"></i>
+			<a class="nav-link" id="modal_mining_btn" data-toggle="modal" data-target="#modal_trade" style="font-size:.8em; color:#D9E9E8;"  href="#">Trade</a>
+		</li>
 
-			<li class="nav-item col-3 text-center">
-				<i class="fa fa-bar-chart fa-inverse fa-lg" aria-hidden="true"></i>
-				<a class="nav-link" style="font-size:.8em; color:#D9E9E8;" href="#">Discover</a>
-			</li>
+		<li class="nav-item col-3 text-center">
+			<i class="fa fa-globe fa-inverse fa-lg" aria-hidden="true"></i>
+			<a id="discover_btn" class="nav-link" style="font-size:.8em; color:#D9E9E8;" href="#">Discover</a>
+		</li>
 
-			<li class="nav-item col-3 text-center">
-				<i class="fa fa-cogs fa-inverse fa-lg" aria-hidden="true"></i>
-				<a id="settings_btn" class="nav-link" style="font-size:.8em; color:#D9E9E8;"  href="#">Settings</a>
-			</li>
-		</ul>
-
-		<!-- modal-mining -->
-		<style>
-			#modal_trade .modal-content{
-				background:transparent;
-			}
-
-			#modal_trade .modal-header{
-				padding:.3em;
-
-			}
-
-			#modal_trade .modal-body{
-				
-				padding:0em!important;
-
-			}
-
-			#modal_trade .btn-modal {
-				background: rgb(34 34 34);
-
-				border:.2px solid;
-				border-radius : .5em;
-				
-				color: #D9E9E8;
-
-				min-height: 100%;
-				min-width: 100%;
-				padding:2em;
-			}
-		</style>
-
-		<div class="modal fade" id="modal_trade">
-			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content" style="background-color: rgb(0 0 0 / 79%);">
-				
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">
-							<i class="fa fa-close fa-inverse" aria-hidden="true"></i>
-						</button>
-					</div>
-					
-					<div class="modal-body" style="">
-
-						<div class="m-1 justify-content-center">
-							<button id="rise_fall_btn" type="button" class="btn btn-modal" data-dismiss="modal">
-								<!-- <img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png"> -->
-								<i class="fa fa-bar-chart fa-inverse fa-lg" style="" aria-hidden="true"></i>
-								Contract Rise Fall
-							</button>
-						</div>
-
-						<div class="m-1 justify-content-center">
-							<button id="future_btn" class="btn btn-modal" data-dismiss="modal">
-								<!-- <img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png"> -->
-								<i class="fa fa-bar-chart fa-inverse fa-lg" style="" aria-hidden="true"></i>
-								Contract Long Short
-							</button>
-						</div>					
-
-						<div class="m-1 justify-content-center">
-							<button id="daily_mining_btn" type="button" class="btn btn-modal" data-dismiss="modal">
-								<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">
-								Daily Mining
-							</button>
-						</div>
-
-						<div class="m-1 justify-content-center">
-							<button id="regular_mining_btn" class="btn btn-modal" data-dismiss="modal">
-								<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">
-								Regular Mining
-							</button>
-						</div>
-							
-					</div>
-				</div>	
-			</div>
-		</div>
+		<li class="nav-item col-3 text-center">
+			<i class="fa fa-cogs fa-inverse fa-lg" aria-hidden="true"></i>
+			<a id="settings_btn" class="nav-link" style="font-size:.8em; color:#D9E9E8;"  href="#">Settings</a>
+		</li>
+	</ul>
 
 	<!-- translate -->
 		<script type="text/javascript">
@@ -741,8 +749,30 @@
 				// });
 			});
 
-			
-	
+			$('#discover_btn').on('click',function(){
+				$.alert("This part is still under development")
+				// clearTimeout(tokenLoadTimer);
+				// $("#tittle_container").text('Daily Income Mining');
+				// $.when(closeNav()).then(function() {
+				// 	$('#topNavBar').toggle();
+				// 	$('#bottomNavBar').toggle();
+			 //  		$("#container").fadeOut(animtionSpeed, function() {
+				// 	  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
+				//   			$("#container").empty();
+				//   			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/daily_mining'}));
+
+				//   			setTimeout(function(){
+				//   				$("#loadSpinner").fadeOut(animtionSpeed,function(){
+				//   					$('#topNavBar').toggle();
+				//   					$('#bottomNavBar').toggle();
+				//   					$("#container").fadeIn(animtionSpeed);
+				//   				});
+				//   			}, 2000);
+					  		
+				//     	});
+				//   	});
+				// });
+			});
 		// buttonEvents	
 
 		function openNav(){
