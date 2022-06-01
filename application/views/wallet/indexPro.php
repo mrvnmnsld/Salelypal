@@ -165,8 +165,6 @@
 			</i>
 		</span>
 	
-		<!-- arl_05-19-22 notification icon and count -->
-															<!-- older version menu icon  --> <!-- <span style="float: right;" onclick="openNav()">&#9776;</span>  -->
 	</div>
 
 	<div id="container" class="mb-5" style="display:none"> 
@@ -198,26 +196,6 @@
 				</div>
 				<div style="font-size:.8em;">Purchase</div>
 			</button>
-
-			<!-- <button id="future_btn" class="btn" style="background-color:transparent">
-				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.31em;background-color: rgb(34 34 34);padding-top: 5px;">
-					<i class="fa fa-bar-chart fa-lg" aria-hidden="true"></i>
-				</div>
-				<div style="font-size:.8em">Contract</div>
-			</button> -->
-		<!-- 	<button id="future_btn" class="btn" style="background-color:transparent">
-				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(0, 0, 0, 50%);padding: 5px;">
-					<i class="fa fa-bar-chart" aria-hidden="true"></i>
-				</div>
-				<div style="font-size:.8em">Contract</div>
-			</button> -->
-
-			<!-- <button id="rise_fall_btn" class="btn" style="background-color:transparent">
-				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(0, 0, 0, 50%);padding: 5px;">
-					<i class="fa fa-bar-chart" aria-hidden="true"></i>
-				</div>
-				<div style="font-size:.8em">Rise Fall</div>
-			</button> -->
 		</div>
 
 		<!-- <hr style="
@@ -225,78 +203,73 @@
 		    width: 100%;
 		    background-color: #a0abaf;
 		" class=""> -->
+		<style>
+			#asset_tab_container{
+				background-color:rgba(0,0,0,.08);
+				padding-bottom:5em;
+			}
+			#asset_tabs a{
+				color: #777;
+			}
+			#asset_tabs .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
+			font-size:1.3em;
+			color:black!important;
+			background-color:rgba(0,0,0,.03);
+			border-color: transparent;
+			}
+		</style>
+		
+		<div id="asset_tab_container" class="shadow mt-3">
+			<ul id="asset_tabs" class="nav nav-tabs nav-justified" role="tablist">
+				<li class="nav-item">
+				<a class="nav-link active" data-toggle="tab" href="#balance_tab">Balance</a>
+				</li>
+				<li class="nav-item">
+				<a class="nav-link" data-toggle="tab" href="#portfolio_tab">Portfolio</a>
+				</li>
+			</ul>	
 
-		<div id="tokenContainer">
-			<div style="font-size: 1.50rem;;" class="text-center text-muted font-weight-bold mt-2">Tokens</div>
-			<!-- <hr style="height: 1px;width: 70%;" class="bg-dark"> -->
-		</div>
-
-		<div class="col-md-12 text-center pl-3 pr-3">
-            <button class="btn btn-outline-link btn-block text-primary mt-2" id="addToken_btn">
-            	<i class="fa fa-sliders" aria-hidden="true"></i>
-            	Manage Tokens
-            </button>
-        </div>
-
-        <!-- arl_05-19-22 bottom nav  -->
-
-				<ul id="bottomNavBar" style="border:2px solid; background: rgb(34 34 34);" class="nav justify-content-center fixed-bottom">
-					<li class="nav-item">
-						<div id="btn_option_container" class="">
-							<button id="rise_fall_btn" class="btn" style="background-color:transparent">
-								<div class="" style="">
-									<i class="fa fa-bar-chart fa-inverse fa-lg" aria-hidden="true"></i>
-								</div>
-								<div style="font-size:.8em; color:#D9E9E8;">Rise Fall</div>
-							</button>
-						</div>
-					</li>
-					<li class="nav-item">
-						<div id="btn_option_container" class="">
-							<button id="daily_mining_btn" class="btn" style="background-color:transparent">
-								<div class="" style="">
-								<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">
-								</div>
-								<div style="font-size:.8em; color:#D9E9E8;">Mining</div>
-							</button>
-						</div>
-					</li>
-
-					<li class="nav-item">
-						<div id="btn_option_container" class="">
-						<button id="future_btn" class="btn" style="background-color:transparent">
-							<div class="" style="">
-								<i class="fa fa-bar-chart fa-inverse fa-lg" aria-hidden="true"></i>
-							</div>
-							<div style="font-size:.8em; color:#D9E9E8;">Contract</div>
+			<div class="asset-tab-content tab-content">
+				<div id="balance_tab" class="container tab-pane active"><br>
+					<div id="tokenContainer">
+						<div style="font-size: 1.50rem;;" class="text-center text-muted font-weight-bold mt-2">Tokens</div>
+						<!-- <hr style="height: 1px;width: 70%;" class="bg-dark"> -->
+					</div>
+					<div class="col-md-12 text-center pl-3 pr-3">
+						<button class="btn btn-outline-link btn-block text-primary mt-2" id="addToken_btn">
+							<i class="fa fa-sliders" aria-hidden="true"></i>
+							Add more
 						</button>
-						</div>
-					</li>
-
-					
-					<!-- <li class="nav-item">
-						<div id="btn_option_container" class="">
-							<button id="regular_mining_btn" class="btn" style="background-color:transparent">
-								<div class="" style="">
-								<img style="width:1.25em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">	
-								</div>
-								<div style="font-size:.8em; color:#D9E9E8;">Regular Mining</div>
-							</button>
-						</div>
-					</li> -->
-					<li class="nav-item">
-						<div id="btn_option_container" class="">
-							<button id="settings_btn" class="btn" style="background-color:transparent">
-								<div class="" style="">
-								<i class="fa fa-user fa-inverse fa-lg" aria-hidden="true"></i>
-								</div>
-								<div style="font-size:.8em; color:#D9E9E8;">Settings</div>
-							</button>
-						</div>
-					</li>
-				</ul>
-		<!-- arl_05-19-22 -->
+					</div>
+				</div>
+				<div id="portfolio_tab" class="container tab-pane fade"><br>
+					<h3>Menu 1</h3>
+					<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+				</div>
+			</div><!-- asset-tab-content -->
+		</div><!-- asset_tab_container -->
+		<ul id="bottomNavBar" style="background:rgb(34 34 34);" class="nav fixed-bottom justify-content-center row p-1" role="tablist">
+				<li class="nav-item col-3 text-center">
+					<i class="fa fa-bar-chart fa-inverse fa-lg" aria-hidden="true"></i>
+					<a class="nav-link active"  href="#">Asset</a>
+				</li>
+				<li class="nav-item col-3 text-center">
+					<i class="fa fa-bar-chart fa-inverse fa-lg" style="" aria-hidden="true"></i>
+					<a class="nav-link"  href="#">Trade</a>
+				</li>
+				<li class="nav-item col-3 text-center">
+					<i class="fa fa-bar-chart fa-inverse fa-lg" aria-hidden="true"></i>
+					<a class="nav-link"  href="#">Discover</a>
+				</li>
+				<li class="nav-item col-3 text-center">
+					<i class="fa fa-bar-chart fa-inverse fa-lg" aria-hidden="true"></i>
+					<a class="nav-link"  href="#">Settings</a>
+				</li>
+		</ul>
 	</div>		
+
+	
+	
 
 	<!-- translate -->
 		<script type="text/javascript">
