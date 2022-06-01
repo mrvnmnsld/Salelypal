@@ -196,8 +196,13 @@
 		<div class="m-2 text-left">
 			<div class="h3 p-2 m-2 font-weight-bold text-center">
 				<span class="h3 text-muted">Total Balance:</span><br>
-				<span id="totalInUsdContainer">Loading...</span>
+				<span id="totalInUsdContainer">Loading...</span><br>
+				<sup id="visible_btn" style="display:none;"><i class="fa fa-eye-slash" style=" color:#adbab9;" aria-hidden="true"></i></sup>
 			</div>	
+			<div id="visible_container" class="text-center">
+				
+			</div>
+
 		</div>
 
 		<div id="btn_option_container" class="d-flex justify-content-center mt-1">
@@ -491,6 +496,7 @@
 					$('#loadSpinner').toggle();
 					$('#topNavBar').toggle();
 					$('#bottomNavBar').toggle();
+					$('#visible_btn').toggle();
 
 					$("#loading_text_container").text('Please Wait');
 				});
@@ -604,6 +610,34 @@
 				    }
 				});
 			});
+
+			var tokenValuesContainer = []; // this is global
+			var visible = 1;
+			$('#visible_btn').on('click',function(){
+				console.log('visible_btn click',visible);
+
+				if(visible==1){
+					tokenValuesContainer = []; // this is start of onclick event
+					$("#tokenContainer > div").find("div:nth-child(3)").each(function(){
+						tokenValuesContainer.push($(this).html());
+						$(this).html("<h3>*****</h3>")
+					})
+					$('#totalInUsdContainer').html('*****');
+					$('#visible_icon').removeClass('fa-eye-slash').addClass('fa-eye');
+					visible = 0;
+				}else{
+					$("#tokenContainer > div").find("div:nth-child(3)").each(function(i){
+						$(this).html(tokenValuesContainer[i]);
+						i+1
+					})
+					$('#totalInUsdContainer').html(numberWithCommas(totalInUsd.toFixed(2)));
+					$("#totalInUsdContainer").append(" "+currentUser.displayCurrency);
+					$('#visible_icon').removeClass('fa-eye').addClass('fa-eye-slash');
+					visible = 1;
+				}
+				
+			});
+			
 
 			$('#future_btn').on('click',function(){
 				clearTimeout(tokenLoadTimer);
@@ -876,7 +910,7 @@
 
 		function loadSystem(){
 			for (var i = 0; i < tokensSelected.length; i++) {
-				
+		
 				$("#tokenContainer").append(
 					'<div id="'+tokensSelected[i].tokenName+'_container" class="flex-container">'+
 						'<div class="flex-child" style="flex-basis:10%">'+
@@ -944,8 +978,8 @@
 							});
 						});
 				});	
+				
 			}
-
 			// $('#totalInUsdContainer').text(totalInUsd.toFixed(2));
 		}
 	</script>
