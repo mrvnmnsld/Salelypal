@@ -125,6 +125,38 @@
         	/*outline: none;*/
         	box-shadow: 0 0 0 0;
         }
+
+      	/*google translate*/
+    	    .goog-te-banner-frame.skiptranslate, .goog-te-gadget-icon {
+    	       display: none !important;
+    	    }
+
+    	    body {
+    	       top: 0px !important;
+    	    }
+
+    	    .goog-tooltip {
+    	       display: none !important;
+    	    }
+
+    	    .goog-tooltip:hover {
+    	       display: none !important;
+    	    }
+
+    	    .goog-text-highlight {
+    	       background-color: transparent !important;
+    	       border: none !important;
+    	       box-shadow: none !important;
+    	    }
+
+    	    #google_translate_element{
+    	        display: none !important;
+    	    }
+
+    	    #goog-gt-tt{
+    	    	display: none !important;
+    	    }
+        /*google translate*/
 	</style>
 <!-- css -->
 
@@ -153,8 +185,8 @@
 		</div>
 
 	<div id="topNavBar" style="display:none;">
-		<span style="float: left;" onclick="backButton()"><i class="fa fa-home fa-lg" aria-hidden="true"></i></span>
-		<span id="tittle_container" class="text-center font-weight-bold" data-page-url="wallet/index">Security Wallet</span>
+		<span style="float: left;" onclick="backButton()"><i class="fa fa-user fa-md" aria-hidden="true"></i></span>
+		<span id="tittle_container" class="text-center font-weight-bold" data-page-url="wallet/index">(Profile and Username)</span>
 
 		<span id="notif_btn" class="" style="float:right; " onclick="notif_btn()">
 			<i id="notif_logo" class="fa fa-bell fa-md fa-inverse" style="color:#D9E9E8;" aria-hidden="true">
@@ -168,8 +200,9 @@
 	<div id="container" class="mb-5" style="display:none"> 
 		<div class="m-2 text-left">
 			<div class="h3 p-2 m-2 font-weight-bold text-center">
-				<span class="h3">Total Asset in USD: </span> <br>
+				<span class="h3">Total Balance: </span> <br>
 				<span id="totalInUsdContainer">Loading...</span>
+				<span id="displayCurrencyContainer">USD</span>
 			</div>	
 		</div>
 
@@ -178,21 +211,21 @@
 				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(34 34 34);padding: 5px;">
 					<i class="fa fa-arrow-circle-down fa-lg" aria-hidden="true"></i>
 				</div>
-				<div style="font-size:.8em">Deposit</div>
+				<div style="font-size:.8em"><b>Deposit</b></div>
 			</button>
 
 			<button id="withdraw_btn_option" class="btn" style="background-color:transparent">
 				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(34 34 34);padding: 5px;">
 					<i class="fa fa-arrow-circle-up fa-lg" aria-hidden="true"></i>
 				</div>
-				<div style="font-size:.8em">Withdraw</div>
+				<div style="font-size:.8em"><b>Withdraw</b></div>
 			</button>
 
 			<button id="buy_btn_option" class="btn" style="background-color:transparent">
 				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(34 34 34);padding: 5px;">
 					<i class="fa fa-usd fa-lg" aria-hidden="true"></i>
 				</div>
-				<div style="font-size:.8em;">Purchase</div>
+				<div style="font-size:.8em;"><b>Buy</b></div>
 			</button>
 		</div>
 		
@@ -210,11 +243,11 @@
 		<div class="d-flex justify-content-center fixed-bottom" style="border:2px solid; background: rgb(34 34 34);">
             <button id="addToken_btn" class="btn btn-outline-link btn-block text-white mt-2">
             	<i class="fa fa-sliders fa-lg" aria-hidden="true"></i>
-				<div style="font-size:.8em; color:#D9E9E8;">Manage Tokens</div>
+				<div style="font-size:.8em; color:#D9E9E8;">Add More</div>
             </button>
 
             <button id="settings_btn" class="btn btn-outline-link btn-block text-white mt-2">
-				<i class="fa fa-user fa-lg" aria-hidden="true"></i>
+				<i class="fa fa-cogs fa-lg" aria-hidden="true"></i>
 				
 				<div style="font-size:.8em; color:#D9E9E8;">Settings</div>
 			</button>	
@@ -227,7 +260,7 @@
 			    // setCookie('googtrans', currentUserLanguage.lang,1);
 			    new google.translate.TranslateElement({
 			        pageLanguage: 'en',
-			        includedLanguages: 'en,zh-CN,zh-TW',
+			        // includedLanguages: 'en,zh-CN,zh-TW',
 			        // layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
 			        autoDisplay: true
 			    }, 'google_translate_element');
@@ -686,7 +719,7 @@
 
 			// console.log(tokenInfo);
 			var differenceResponse = ajaxShortLink('userWallet/getTokenDifference',{'tokenName':tokenInfo.coingeckoTokenId});
-			var valueNow = differenceResponse.market_data.current_price.usd
+			var valueNow = differenceResponse.market_data.current_price.usd;
 			var changePercentage = differenceResponse.market_data.price_change_percentage_24h;
 
 			var balanceInner;

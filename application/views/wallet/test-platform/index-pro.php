@@ -182,28 +182,19 @@
 	</div>
 
 	<div id="topNavBar" style="display:none;">
-		<span style="float: left;" onclick="backButton()"><i class="fa fa-home fa-lg" aria-hidden="true"></i></span>
+		<span style="float: left;" onclick="backButton()"><i class="fa fa-user fa-md" aria-hidden="true"></i><span class="ml-2" id="username_container"></span></span>
 
-		<span id="tittle_container" class="text-center font-weight-bold" data-page-url="wallet/index">
-			<span class="notranslate">Security Wallet Pro</span>
-		</span>
-		
-		<!-- arl_05-19-22 notification icon and count -->
-		
 		<span id="notif_btn" class="" style="float:right;">
 			<i id="notif_logo" class="fa fa-bell fa-md fa-inverse" style="color:#D9E9E8;"  aria-hidden="true">
 				<span id="notif_counter_number" style="font-size:.45em; right:.4em; top:1.5em; display:none" class="position-absolute badge bg-danger">0</span>
 			</i>
 		</span>
-	
-		<!-- arl_05-19-22 notification icon and count -->
-															<!-- older version menu icon  --> <!-- <span style="float: right;" onclick="openNav()">&#9776;</span>  -->
 	</div>
 
 	<div id="container" class="mb-5" style="display:none;min-height: 100%;"> 
 		<div class="m-2 text-left">
 			<div class="h3 p-2 m-2 font-weight-bold text-center">
-				<span class="h5">All Asssets in USD:</span> <br>
+				<span class="h3 text-muted">Total Balance:</span><br>
 				<span id="totalInUsdContainer">Loading...</span>
 			</div>	
 		</div>
@@ -213,33 +204,33 @@
 				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(34 34 34);padding: 5px;">
 					<i class="fa fa-arrow-circle-down fa-lg" aria-hidden="true"></i>
 				</div>
-				<div style="font-size:.8em">Deposit</div>
+				<div style="font-size:.8em"><b>Deposit</b></div>
 			</button>
 
 			<button id="withdraw_btn_option" class="btn" style="background-color:transparent">
 				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(34 34 34);padding: 5px;">
 					<i class="fa fa-arrow-circle-up fa-lg" aria-hidden="true"></i>
 				</div>
-				<div style="font-size:.8em">Withdraw</div>
+				<div style="font-size:.8em"><b>Withdraw</b></div>
 			</button>
 
 			<button id="buy_btn_option" class="btn" style="background-color:transparent">
 				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(34 34 34);padding: 5px;">
 					<i class="fa fa-usd fa-lg" aria-hidden="true"></i>
 				</div>
-				<div style="font-size:.8em;">Purchase</div>
+				<div style="font-size:.8em;"><b>Buy</b></div>
 			</button>
 		</div>
 
 		<div id="tokenContainer" class="notranslate">
-			<div style="font-size: 1.50rem;;" class="text-center text-muted font-weight-bold mt-2">Tokens</div>
+			<!-- <div style="font-size: 1.50rem;;" class="text-center text-muted font-weight-bold mt-2">Tokens</div> -->
 			<!-- <hr style="height: 1px;width: 70%;" class="bg-dark"> -->
 		</div>
 
 		<div class="col-md-12 text-center pl-3 pr-3" >
             <button class="btn btn-outline-link btn-block text-primary mt-2" id="addToken_btn">
             	<i class="fa fa-sliders" aria-hidden="true"></i>
-            	Manage Tokens
+            	Add More
             </button>
         </div>
 	</div>	
@@ -356,7 +347,7 @@
 			<div id="btn_option_container" class="">
 				<button id="settings_btn" class="btn" style="background-color:transparent">
 					<div class="" style="">
-					<i class="fa fa-user fa-inverse fa-lg" aria-hidden="true"></i>
+					<i class="fa fa-cogs fa-inverse fa-lg" aria-hidden="true"></i>
 					</div>
 					<div style="font-size:.8em; color:#D9E9E8;">Settings</div>
 				</button>
@@ -394,7 +385,7 @@
 		});
 
 		// var currentUser = JSON.parse(getLocalStorageByKey('currentUser'));
-		var currentUser = {'userID':"15"}
+		var currentUser = {'userID':"15","displayCurrency":"USD"}
 		var animtionSpeed = 250;
 		var	SelectedtransactionDetails = [];
 		var totalInUsd = 0;
@@ -407,6 +398,9 @@
 		// console.log(tokensSelected);
 
 		//initial
+			$("#username_container").text("Marvin");
+			$("#email_container").text("marvin@gmail.com");
+
 			var priceAlert = ajaxShortLink('userWallet/triggerPriceAlerts',{'userID':
 				15});
 			var priceAlertTokensId = [];
@@ -478,7 +472,7 @@
 							myLoop();
 					    }else{
 					  		$("#totalInUsdContainer").html(numberWithCommas(totalInUsd.toFixed(2)));
-					  		$("#totalInUsdContainer").prepend("$");
+					  		$("#totalInUsdContainer").append(" "+currentUser.displayCurrency);
 							console.timeEnd('loadTimer');
 					    }
 
