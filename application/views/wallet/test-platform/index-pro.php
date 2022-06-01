@@ -257,6 +257,7 @@
 			<div class="asset-tab-content tab-content">
 				<div id="balance_tab" class="container tab-pane active"><br>
 					<div id="tokenContainer"></div>
+
 					<div class="col-md-12 text-center pl-3 pr-3">
 						<button class="btn btn-outline-link btn-block text-primary mt-2" id="addToken_btn">
 							<i class="fa fa-sliders" aria-hidden="true"></i>
@@ -911,12 +912,45 @@
 			for (var i = 0; i < tokensSelected.length; i++) {
 		
 				$("#tokenContainer").append(
-					'<div id="'+tokensSelected[i].tokenName+'_container" class="flex-container">'+
-						'<div class="flex-child" style="flex-basis:10%">'+
-							'<img class="" style="width: 45px;" src="'+tokensSelected[i].tokenImage+'">'+
+					// '<div id="'+tokensSelected[i].tokenName+'_container" class="flex-container">'+
+					// 	'<div class="flex-child" style="flex-basis:10%">'+
+					// 		'<img class="" style="width: 45px;" src="'+tokensSelected[i].tokenImage+'">'+
+					// 	'</div>'+
+
+					// 	'<div class="flex-child"  style="flex-basis:70%">'+
+					// 		'<span class="font-weight-bold">'+
+					// 			'<span id="'+tokensSelected[i].tokenName+'_name_container">'+
+					// 				tokensSelected[i].description+" ("+tokensSelected[i].networkName.toUpperCase()+")"+
+					// 			'</span>'+
+					// 		'</span>'+
+
+					// 		'<br>'+
+
+					// 		'<span class="h5">'+
+					// 			// '<span style="font-size: 15px;" id="'+tokensSelected[i].tokenName+'_change_container">'+
+					// 				// valueNow+' | <span class="'+color+'">'+changePercentage+'%</span>'+
+					// 			'<span style="font-size: 15px;" id="'+tokensSelected[i].tokenName+'_change_container">Loading...</span>'+
+					// 		'</span>'+
+					// 	'</div>'+
+
+					// 	'<div class="flex-child text-center" style="flex-basis:20%">'+
+					// 		'<span class="h5">'+
+					// 			// '<span style="font-size: 14px;text-align: center;" id="'+tokensSelected[i].tokenName+'_amount_container">'+
+					// 				// parseFloat(balanceInner).toFixed(3)+' '+tokensSelected[i].tokenName.toUpperCase()+
+
+					// 			'<span style="font-size: 14px;text-align: center;" id="'+tokensSelected[i].tokenName+'_amount_container">Loading...</span>'+
+					// 		'</span>'+
+					// 	'</div>'+
+					// '</div>'
+
+					'<div id="'+tokensSelected[i].tokenName+'_container" class="row border-bottom border-muted mb-2">'+
+						'<div class="col-2 row" style="flex-basis:10%">'+
+							'<div class="col-12 mt-2">'+
+								'<img  style="width: 40px;" src="'+tokensSelected[i].tokenImage+'">'+
+							'</div>'+
 						'</div>'+
 
-						'<div class="flex-child"  style="flex-basis:70%">'+
+						'<div class="col-7 ml-4">'+
 							'<span class="font-weight-bold">'+
 								'<span id="'+tokensSelected[i].tokenName+'_name_container">'+
 									tokensSelected[i].description+" ("+tokensSelected[i].networkName.toUpperCase()+")"+
@@ -932,13 +966,11 @@
 							'</span>'+
 						'</div>'+
 
-						'<div class="flex-child text-center" style="flex-basis:20%">'+
-							'<span class="h5">'+
+						'<div class="col-3 text-center font-weight-bold">'+
 								// '<span style="font-size: 14px;text-align: center;" id="'+tokensSelected[i].tokenName+'_amount_container">'+
 									// parseFloat(balanceInner).toFixed(3)+' '+tokensSelected[i].tokenName.toUpperCase()+
 
-								'<span style="font-size: 14px;text-align: center;" id="'+tokensSelected[i].tokenName+'_amount_container">Loading...</span>'+
-							'</span>'+
+								'<span style="font-size: 13px;" id="'+tokensSelected[i].tokenName+'_amount_container">Loading...</span>'+
 						'</div>'+
 					'</div>'
 				);
