@@ -36,20 +36,23 @@
 <div id="main_modal_container">
 	<div style="padding: 20px;">
  
-		<div class="row text-left">
-			<div class="col-sm-3 fw-bold">User ID:</div>
-			<div id="userId_container" class="col"></div>
-		</div>
+			<div>
+				<span class="fw-bold">User ID:</span>
+				<span id="userId_container"></span>
+			</div>
+			
 
-		<div class="row text-left">
-			<div class="col-sm-3 fw-bold">Email:</div>
-			<div id="email_container" class="col"></div>
-		</div>
+			<div>
+				<span class="fw-bold">Email:</span>
+				<span id="email_container"></span>
+			</div>
+			
 
-		<div class="row text-left">
-			<div class="col-sm-3 fw-bold">Transaction:</div>
-			<div id="strictStatus_container" class="col"></div>
-		</div>
+			<div>
+				<span class="fw-bold">Strict Mode:</span>
+				<span id="strictStatus_container"></span>
+			</div>
+			
 
 		<hr>
 

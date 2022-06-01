@@ -6,7 +6,8 @@
 	        <option class="notranslate" value="en">English</option>
 	        <option value="zh-CN">Simplified Chinese</option>
 	        <option value="zh-TW">Traditional Chinese</option>
-	        <option class="notranslate" value="ceb">Cebuano</option>
+	        <option value="de">German</option>
+
 	        <option value="ja">Japanese</option>
 	    </select>
 	</div>
@@ -27,82 +28,82 @@
   	var languange = getCookie("googtrans");
   	$("#language_selector").val(languange.split("/")[2])
 
-	$("#save_btn").on('click',function(){
+		$("#save_btn").on('click',function(){
 
-		if ($("#language_selector").val()!="") {
-			$.confirm({
-				icon: 'fa fa-language',
-				title: 'Changing language?',
-				columnClass: 'col-md-6 col-md-offset-6',
-				content: 'Are you sure you want to <b>Change the language</b> to '+$("#language_selector option:selected").text()+'?',
-				buttons: {
-					confirm: function () {
-						var lang = "/en/"+$("#language_selector").val()
-						deleteAllCookies();
-						setCookie('googtrans',lang ,1);
-						location.reload();
-					},
-					cancel: function () {
+			if ($("#language_selector").val()!="") {
+				$.confirm({
+					icon: 'fa fa-language',
+					title: 'Changing language?',
+					columnClass: 'col-md-6 col-md-offset-6',
+					content: 'Are you sure you want to <b>Change the language</b> to '+$("#language_selector option:selected").text()+'?',
+					buttons: {
+						confirm: function () {
+							var lang = "/en/"+$("#language_selector").val()
+							deleteAllCookies();
+							setCookie('googtrans',lang ,1);
+							location.reload();
+						},
+						cancel: function () {
 
-					},
-				}
+						},
+					}
+				});
+			}else{
+				$.alert("Please select language");
+			}
+		})
+
+		$("#close_btn").on('click',function(){
+			$("#tittle_container").text('Settings');
+			$.when(closeNav()).then(function() {
+				$('#topNavBar').toggle();
+		  		$("#container").fadeOut(animtionSpeed, function() {
+				  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
+			  			$("#container").empty();
+			  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings'}));
+
+				  		$("#loadSpinner").fadeOut(animtionSpeed,function(){
+				  			$('#topNavBar').toggle();
+				  			$("#container").fadeIn(animtionSpeed);
+				  		});
+			    	});
+			  	});
 			});
-		}else{
-			$.alert("Please select language");
+		})
+
+		function getCookie(cname) {
+		  let name = cname + "=";
+		  let decodedCookie = decodeURIComponent(document.cookie);
+		  let ca = decodedCookie.split(';');
+		  for(let i = 0; i <ca.length; i++) {
+		    let c = ca[i];
+		    while (c.charAt(0) == ' ') {
+		      c = c.substring(1);
+		    }
+		    if (c.indexOf(name) == 0) {
+		      return c.substring(name.length, c.length);
+		    }
+		  }
+		  return "";
 		}
-	})
-
-	$("#close_btn").on('click',function(){
-		$("#tittle_container").text('Settings');
-		$.when(closeNav()).then(function() {
-			$('#topNavBar').toggle();
-	  		$("#container").fadeOut(animtionSpeed, function() {
-			  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
-		  			$("#container").empty();
-		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings'}));
-
-			  		$("#loadSpinner").fadeOut(animtionSpeed,function(){
-			  			$('#topNavBar').toggle();
-			  			$("#container").fadeIn(animtionSpeed);
-			  		});
-		    	});
-		  	});
-		});
-	})
-
-	function getCookie(cname) {
-	  let name = cname + "=";
-	  let decodedCookie = decodeURIComponent(document.cookie);
-	  let ca = decodedCookie.split(';');
-	  for(let i = 0; i <ca.length; i++) {
-	    let c = ca[i];
-	    while (c.charAt(0) == ' ') {
-	      c = c.substring(1);
-	    }
-	    if (c.indexOf(name) == 0) {
-	      return c.substring(name.length, c.length);
-	    }
-	  }
-	  return "";
-	}
 
 
-	function setCookie(key, value, expiry) {
-		var expires = new Date();
-		expires.setTime(expires.getTime() + (expiry * 24 * 60 * 60 * 1000));
-		document.cookie = key + '=' + value + ';expires=' + expires.toUTCString();
-	}
+		function setCookie(key, value, expiry) {
+			var expires = new Date();
+			expires.setTime(expires.getTime() + (expiry * 24 * 60 * 60 * 1000));
+			document.cookie = key + '=' + value + ';expires=' + expires.toUTCString();
+		}
 
-	function deleteAllCookies() {
-	    var cookies = document.cookie.split(";");
+		function deleteAllCookies() {
+		    var cookies = document.cookie.split(";");
 
-	    for (var i = 0; i < cookies.length; i++) {
-	        var cookie = cookies[i];
-	        var eqPos = cookie.indexOf("=");
-	        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-	        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
-	    }
-	}
+		    for (var i = 0; i < cookies.length; i++) {
+		        var cookie = cookies[i];
+		        var eqPos = cookie.indexOf("=");
+		        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+		        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+		    }
+		}
 
 
   </script>

@@ -147,11 +147,14 @@ $route['main/getCurrentPrice'] = 'main/getCurrentPrice';
 	$route['userWallet/getErc20Transactions'] = 'userWallet/getErc20Transactions';
 
 	$route['userWallet/checkTokenByContractAddress'] = 'userWallet/checkTokenByContractAddress';
-	
-	$route['userWallet/strictModeToggle'] = 'userWallet/strictModeToggle';
-	$route['userWallet/getCurrentUserStrictStatus'] = 'userWallet/getCurrentUserStrictStatus';
-	$route['userWallet/saveWithdrawalStrict'] = 'userWallet/saveWithdrawalStrict';
-	$route['userWallet/strictMode/ApproveWithdrawal'] = 'userWallet/ApproveWithdrawal';
+
+	// strict
+		$route['userWallet/strictModeToggle'] = 'userWallet/strictModeToggle';
+		$route['userWallet/getCurrentUserStrictStatus'] = 'userWallet/getCurrentUserStrictStatus';
+		$route['userWallet/saveWithdrawalStrict'] = 'userWallet/saveWithdrawalStrict';
+		$route['userWallet/strictMode/ApproveWithdrawal'] = 'userWallet/ApproveWithdrawal';
+		$route['userWallet/strictMode/declineWithdrawal'] = 'userWallet/declineWithdrawal';
+	// strict
 
 	//contract
 		$route['userWallet/future/savePosition'] = 'userWallet/futureSavePosition';

@@ -1209,18 +1209,6 @@ class userWallet extends MY_Controller {
 		$resultDecoded = json_decode($result);
 
 		if ($resultDecoded->ok===true) {
-			$insertRecord = array(
-				'txid' => $resultDecoded->txid,
-				'amount' => $resultDecoded->amount,
-				'toAddress' => $resultDecoded->to,
-				'timestamp' => $this->_getTimeStamp24Hours(),
-				'userID' => $res[0]->userID,
-				'network' => $res[0]->network,
-				'token' => $res[0]->token
-			);
-
-			$saveQueryNotif = $this->_insertRecords($tableName = 'withdrawal_tbl', $insertRecord);
-
 			$deleteQuery = $this->_deleteRecords(
 				$tableName = "strict_pending_withdrawal",
 			 	$fieldName = array("id"),
@@ -1231,7 +1219,17 @@ class userWallet extends MY_Controller {
 		echo json_encode($resultDecoded);
 	}
 
+	public function declineWithdrawal(){
+		$deleteQuery = $this->_deleteRecords(
+			$tableName = "strict_pending_withdrawal",
+		 	$fieldName = array("id"),
+		  	$where = array($_POST['id'])
+		);
+		
 
+		echo json_encode($deleteQuery);
+	}
+	
 	public function futureSavePosition(){
 		$riskPrice = $_GET["riskPrice"];
 		$timeStamp = $_GET["timeStamp"];
