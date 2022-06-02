@@ -68,14 +68,9 @@
 	<link rel="stylesheet" type="text/css" href="assets/vendor/slick-1.8.1/slick/slick.css"/>
 	<script type="text/javascript" src="assets/vendor/slick-1.8.1/slick/slick.min.js"></script>
 
-	<!-- <link href="assets/lib/select2/dist/css/select2.min.css" rel="stylesheet" /> -->
-	<!-- <script src="assets/lib/select2/dist/js/select2.min.js"></script> -->
-
 
 	<!-- NEW -->
-	
 		<script src="assets/lib/jquery.countdown-2.2.0/jquery.countdown.js"></script>
-
 	<!-- NEW -->
 					
 	
