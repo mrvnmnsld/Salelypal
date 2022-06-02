@@ -178,11 +178,13 @@
 		$(".back_btn").on('click', function(){
 			$("#main_modal_container").toggle();
 			$("#price_set_container").toggle();
+			$("#pagetitle_background").toggle();
 		});
 
 		$("#resolve_position_btn").on('click', function(){
 			$("#main_modal_container").toggle();
 			$("#price_set_container").toggle();
+			$("#pagetitle_background").toggle();
 			$('#currentPrice_container_2nd').text(parseFloat(selectedData.currentPrice));
 			$('#buyType_container_2nd').text(selectedData.buyType);
 
