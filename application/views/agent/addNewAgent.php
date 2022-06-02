@@ -74,6 +74,8 @@
 		  <input type="password" class="form-control" id="password" name="password" placeholder="Password">
 		</div>
 
+		<hr>
+
 		<div class="d-flex flex-row-reverse">
 			<button type="button" class="btn btn-danger mr-1" id="back_btn">Back</button>
 			<button type="button" class="btn btn-success mr-1" id="save_btn">Save</button>

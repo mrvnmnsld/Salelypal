@@ -75,6 +75,8 @@
 		  <input type="password" class="form-control" id="password" name="password" placeholder="*Note: Only enter value if changing">
 		</div>
 
+		<hr>
+
 		<div class="d-flex flex-row-reverse">
 			<button type="button" class="btn btn-danger mr-1" id="back_btn">Back</button>
 			<button type="button" class="btn btn-warning mr-1" id="delete_btn">Delete</button>
