@@ -168,42 +168,26 @@
 		<span class="font-weight-bold mt-2" id="loading_text_container" style="font-size: 30px;text-align: center;">Loading...</span>
 	</div>
 
-		<div id="mySidenav" class="sidenav">
-			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-
-			<!-- <a class="" href="#" id="profile_btn">Profile</a> -->
-			<!-- <a class="" href="#" id="settings_btn">Settings</a> -->
-			<!-- <a class="" href="#" id="buyCrypto_btn">Buy Crypto</a> -->
-			<!-- <a class="" href="#" id="purchaseHistory_btn">Purchase History</a> -->
-			<!-- <a class="" href="#" id="purchaseAppeals_btn">Purchase Appeals</a> -->
-			<!-- <a class="" href="#" id="transactionHistory_btn">Transaction History</a> -->
-			<!-- <a class="" href="#" id="deposit_btn">Deposit</a> -->
-			<!-- <a class="" href="#" id="withdraw_btn">Withdraw</a> -->
-			<!-- <a class="" href="#" id="exportWallet_btn">Export Wallet</a> -->
-			<hr class="bg-light" style="width:60%">
-	  		<!-- <a class="text-danger" href="#" id="logOut_btn">Logout</a> -->
-		</div>
-
 	<div id="topNavBar" style="display:none;">
-		<span style="float: left;" onclick="backButton()"><i class="fa fa-user fa-md" aria-hidden="true"></i></span>
-		<span id="tittle_container" class="text-center font-weight-bold" data-page-url="wallet/index">(Profile and Username)</span>
+		<span style="float: left;" onclick="$.alert('This function is still under development')"><i class="fa fa-user fa-md" aria-hidden="true"></i><span class="ml-2" id="username_container"></span></span>
 
-		<span id="notif_btn" class="" style="float:right; " onclick="notif_btn()">
-			<i id="notif_logo" class="fa fa-bell fa-md fa-inverse" style="color:#D9E9E8;" aria-hidden="true">
+		<span id="notif_btn" class="" style="float:right;">
+			<i id="notif_logo" class="fa fa-bell fa-md fa-inverse" style="color:#D9E9E8;"  aria-hidden="true">
 				<span id="notif_counter_number" style="font-size:.45em; right:.4em; top:1.5em; display:none" class="position-absolute badge bg-danger">0</span>
 			</i>
 		</span>
-
 	</div>
 
-	
-	<div id="container" class="mb-5" style="display:none"> 
+	<div id="container" class="mb-5" style="display:none;min-height: 120%; margin-bottom: ;"> 
 		<div class="m-2 text-left">
 			<div class="h3 p-2 m-2 font-weight-bold text-center">
-				<span class="h3">Total Balance: </span> <br>
-				<span id="totalInUsdContainer">Loading...</span>
-				<span id="displayCurrencyContainer">USD</span>
-			</div>	
+				<span class="h3 text-muted">Total Balance:</span><br>
+				<span id="totalInUsdContainer">Loading...</span><br>
+
+				<sup id="visible_btn" style="display:none;!important">
+					<i class="fa fa-eye-slash" style=" color:#adbab9;" aria-hidden="true"></i>
+				</sup>
+			</div>
 		</div>
 
 		<div id="btn_option_container" class="d-flex justify-content-center mt-1">
@@ -228,31 +212,173 @@
 				<div style="font-size:.8em;"><b>Buy</b></div>
 			</button>
 		</div>
+
+		<style>
+			#asset_tab_container{
+				background-color:rgba(34,34,34,.1);
+				padding-bottom:5em;
+			}
+			#asset_tabs a{
+				color: #777;
+			}
+			.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
+				font-size:1.3em;
+				color:black!important;
+				background-color:rgba(0,0,0,.03);
+				border-color: transparent;
+			}
+		</style>
+
+		<div id="asset_tab_container" class="mt-3">
+			<ul id="asset_tabs" class="nav nav-tabs nav-justified" role="tablist">
+				<li class="nav-item">
+					<a class="nav-link active" data-toggle="tab" href="#balance_tab">BALANCE</a>
+				</li>
+
+				<li class="nav-item">
+					<a class="nav-link" data-toggle="tab" href="#portfolio_tab">PORTFOLIO</a>
+				</li>
+			</ul>	
+
+			<div class="asset-tab-content tab-content">
+				<div id="balance_tab" class="container tab-pane active"><br>
+					<div id="tokenContainer"></div>
+
+					<div class="col-md-12 text-center pl-3 pr-3">
+						<button class="btn btn-outline-link btn-block text-primary mt-2" id="addToken_btn">
+							<i class="fa fa-sliders" aria-hidden="true"></i>
+							Add more
+						</button>
+					</div>
+				</div>
+
+				<div id="portfolio_tab" class="container tab-pane fade"><br>
+					<div class="text-center">
+						<h3>This part is still under development</h3>
+					</div>
+					
+					
+				</div>
+			</div>
+		</div><!-- asset_tab_container -->
 		
 
-		<!-- <hr style="
-		    height: 1.5px;
-		    width: 100%;
-		    background-color: #a0abaf;
-		" class=""> -->
+		<style>
+			.nav-tabs {
+				border-bottom: transparent;
+			}
+			
+			.test1{
+				color: #D9E9E8 !important;
+			}
+		</style>
 
-		<div id="tokenContainer">
-			<div style="font-size: 2rem;;" class="text-center text-muted font-weight-bold mt-3 ">TOKENS</div>
-		</div>
+		<!-- modal-mining -->
+			<style>
+				#modal_trade .modal-content{
+					background:transparent;
+				}
 
-		<div class="d-flex justify-content-center fixed-bottom" style="border:2px solid; background: rgb(34 34 34);">
-            <button id="addToken_btn" class="btn btn-outline-link btn-block text-white mt-2">
-            	<i class="fa fa-sliders fa-lg" aria-hidden="true"></i>
-				<div style="font-size:.8em; color:#D9E9E8;">Add More</div>
-            </button>
+				#modal_trade .modal-header{
+					padding:.3em;
 
-            <button id="settings_btn" class="btn btn-outline-link btn-block text-white mt-2">
-				<i class="fa fa-cogs fa-lg" aria-hidden="true"></i>
-				
-				<div style="font-size:.8em; color:#D9E9E8;">Settings</div>
-			</button>	
-        </div>
-	</div>			
+				}
+
+				#modal_trade .modal-body{
+					
+					padding:0em!important;
+
+				}
+
+				#modal_trade .btn-modal {
+					background: rgb(34 34 34);
+
+					border:.2px solid;
+					border-radius : .5em;
+					
+					color: #D9E9E8;
+
+					min-height: 100%;
+					min-width: 100%;
+					padding:2em;
+				}
+			</style>
+
+			<div class="modal fade" id="modal_trade">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content" style="background-color: rgb(0 0 0 / 79%);">
+					
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">
+								<i class="fa fa-close fa-inverse" aria-hidden="true"></i>
+							</button>
+						</div>
+						
+						<div class="modal-body" style="">
+
+							<div class="m-1 justify-content-center">
+								<button id="rise_fall_btn" type="button" class="btn btn-modal" data-dismiss="modal">
+									<!-- <img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png"> -->
+									<i class="fa fa-bar-chart fa-inverse fa-lg" style="" aria-hidden="true"></i>
+									Contract Rise Fall
+								</button>
+							</div>
+
+							<div class="m-1 justify-content-center">
+								<button id="future_btn" class="btn btn-modal" data-dismiss="modal">
+									<!-- <img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png"> -->
+									<i class="fa fa-bar-chart fa-inverse fa-lg" style="" aria-hidden="true"></i>
+									Contract Long Short
+								</button>
+							</div>					
+
+							<div class="m-1 justify-content-center">
+								<button id="daily_mining_btn" type="button" class="btn btn-modal" data-dismiss="modal">
+									<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">
+									Daily Mining
+								</button>
+							</div>
+
+							<div class="m-1 justify-content-center">
+								<button id="regular_mining_btn" class="btn btn-modal" data-dismiss="modal">
+									<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">
+									Regular Mining
+								</button>
+							</div>
+								
+						</div>
+					</div>	
+				</div>
+			</div>
+		<!-- modal-mining -->
+	</div>
+
+	<br>
+	<br>
+	<br>
+	<br>
+
+	<ul id="bottomNavBar" style="background:rgb(34 34 34); display:none;" class="nav fixed-bottom justify-content-center row pt-2">
+		<li class="nav-item col-3 text-center">
+			<i class="fa fa-money fa-inverse fa-lg" aria-hidden="true"></i>
+			<a onclick="backButton()" class="botnavlink nav-link active" style="font-size:.8em; color:#D9E9E8;"><span class="test1">Asset</span></a>
+		</li>
+
+		<li class="nav-item col-3 text-center">
+			<i class="fa fa-bar-chart fa-inverse fa-lg" style="" aria-hidden="true"></i>
+			<a class="nav-link" id="modal_mining_btn" data-toggle="modal" data-target="#modal_trade" style="font-size:.8em; color:#D9E9E8;"  href="#">Trade</a>
+		</li>
+
+		<li class="nav-item col-3 text-center">
+			<i class="fa fa-globe fa-inverse fa-lg" aria-hidden="true"></i>
+			<a id="discover_btn" class="nav-link" style="font-size:.8em; color:#D9E9E8;" href="#">Discover</a>
+		</li>
+
+		<li class="nav-item col-3 text-center">
+			<i class="fa fa-cogs fa-inverse fa-lg" aria-hidden="true"></i>
+			<a id="settings_btn" class="nav-link" style="font-size:.8em; color:#D9E9E8;"  href="#">Settings</a>
+		</li>
+	</ul>		
 
 	<!-- translate -->
 		<script type="text/javascript">
@@ -308,7 +434,10 @@
 		var tokensSelected = ajaxShortLink('userWallet/getAllSelectedTokensVer2',{'userID':currentUser['userID']});
 		// console.log(tokensSelected);
 
-		//initial
+			//initial
+			$("#username_container").text("Marvin");
+			$("#email_container").text("marvin@gmail.com");
+			
 			var priceAlert = ajaxShortLink('userWallet/triggerPriceAlerts',{'userID':currentUser['userID']});
 			var priceAlertTokensId = [];
 			console.log(priceAlert);

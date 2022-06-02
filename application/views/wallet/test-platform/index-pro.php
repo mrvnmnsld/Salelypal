@@ -912,37 +912,6 @@
 			for (var i = 0; i < tokensSelected.length; i++) {
 		
 				$("#tokenContainer").append(
-					// '<div id="'+tokensSelected[i].tokenName+'_container" class="flex-container">'+
-					// 	'<div class="flex-child" style="flex-basis:10%">'+
-					// 		'<img class="" style="width: 45px;" src="'+tokensSelected[i].tokenImage+'">'+
-					// 	'</div>'+
-
-					// 	'<div class="flex-child"  style="flex-basis:70%">'+
-					// 		'<span class="font-weight-bold">'+
-					// 			'<span id="'+tokensSelected[i].tokenName+'_name_container">'+
-					// 				tokensSelected[i].description+" ("+tokensSelected[i].networkName.toUpperCase()+")"+
-					// 			'</span>'+
-					// 		'</span>'+
-
-					// 		'<br>'+
-
-					// 		'<span class="h5">'+
-					// 			// '<span style="font-size: 15px;" id="'+tokensSelected[i].tokenName+'_change_container">'+
-					// 				// valueNow+' | <span class="'+color+'">'+changePercentage+'%</span>'+
-					// 			'<span style="font-size: 15px;" id="'+tokensSelected[i].tokenName+'_change_container">Loading...</span>'+
-					// 		'</span>'+
-					// 	'</div>'+
-
-					// 	'<div class="flex-child text-center" style="flex-basis:20%">'+
-					// 		'<span class="h5">'+
-					// 			// '<span style="font-size: 14px;text-align: center;" id="'+tokensSelected[i].tokenName+'_amount_container">'+
-					// 				// parseFloat(balanceInner).toFixed(3)+' '+tokensSelected[i].tokenName.toUpperCase()+
-
-					// 			'<span style="font-size: 14px;text-align: center;" id="'+tokensSelected[i].tokenName+'_amount_container">Loading...</span>'+
-					// 		'</span>'+
-					// 	'</div>'+
-					// '</div>'
-
 					'<div id="'+tokensSelected[i].tokenName+'_container" class="row border-bottom border-muted mb-2">'+
 						'<div class="col-2 row" style="flex-basis:10%">'+
 							'<div class="col-12 mt-2">'+
@@ -981,16 +950,12 @@
 						clearTimeout(tokenLoadTimer);
 						$("#loading_text_container").text("Please wait while we load your recent activities");
 
-						clickContainer = tokensSelected[$(this).index()-1];
-						// clickContainer["tokenAmount"] = $("#"+clickContainer.tokenName+"_amount_container").text().split(" ")[0];
-						// clickContainer["tokenAmount"] = ;
-
-						console.log(clickContainer);
+						clickContainer = tokensSelected[$(this).index()];
 
 						$("#tittle_container").text('Token Information');
 						$.when(closeNav()).then(function() {
 							$('#topNavBar').toggle();
-							$('#bottomNavBar').toggle();$('#bottomNavBar').toggle();
+							$('#bottomNavBar').toggle();
 							$("#container").fadeOut(animtionSpeed, function() {
 								$("#loadSpinner").fadeIn(animtionSpeed,function(){
 									// setTimeout(function(){
