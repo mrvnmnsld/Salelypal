@@ -605,6 +605,21 @@ class userWallet extends MY_Controller {
 		echo json_encode($test);
 	}
 
+	public function getProfileDetails(){
+		$test = $this->_getRecordsData(
+			$selectfields = array("*"), 
+	   		$tables = array('user_tbl'),
+	   		$fieldName = array('userID'), $where = array($_GET['userID']), 
+	   		$join = null, $joinType = null,
+	   		$sortBy = null, $sortOrder = null, 
+	   		$limit = null, 
+	   		$fieldNameLike = null, $like = null,
+	   		$whereSpecial = null, $groupBy = null 
+		);
+
+		echo json_encode($test);
+	}
+
 	public function getAllSelectedTokensVer2(){
 		$tokenSelectedTable = $this->_getRecordsData(
 			$selectfields = array("*"), 

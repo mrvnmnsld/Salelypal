@@ -183,8 +183,8 @@
 	</div>
 
 	<div id="topNavBar" style="display:none;">
-		<span style="float: left;" onclick="$.alert('This function is still under development')"><i class="fa fa-user fa-md" aria-hidden="true"></i><span class="ml-2" id="username_container"></span></span>
-
+		<span id="profile_btn" style="float: left;" ><i class="fa fa-user fa-md" aria-hidden="true"></i><span class="ml-2" id="username_container"></span></span>
+		<!-- onclick="$.alert('This function is still under development')" -->
 		<span id="notif_btn" class="" style="float:right;">
 			<i id="notif_logo" class="fa fa-bell fa-md fa-inverse" style="color:#D9E9E8;"  aria-hidden="true">
 				<span id="notif_counter_number" style="font-size:.45em; right:.4em; top:1.5em; display:none" class="position-absolute badge bg-danger">0</span>
@@ -434,7 +434,7 @@
 		var tokenLoadTimer;
 
 		var tokensSelected = ajaxShortLink('userWallet/getAllSelectedTokensVer2',{'userID':15});
-		// console.log(tokensSelected);
+
 
 		//initial
 			$("#username_container").text("Marvin");
@@ -674,6 +674,32 @@
 					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
 				  			$("#container").empty();
 				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/risefall'}));
+
+				  			setTimeout(function(){
+				  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
+				  					$('#topNavBar').toggle();
+				  					$('#bottomNavBar').toggle();
+				  					$("#container").fadeIn(animtionSpeed);
+				  				});
+				  			}, 2000);
+					  		
+				    	});
+				  	});
+				});
+			});
+
+			$('#profile_btn').on('click',function(){
+				clearTimeout(tokenLoadTimer);
+				$("#username_container").text("Marvin");
+				$("#email_container").text("marvin@gmail.com");
+				$.when(closeNav()).then(function() {
+					$('#topNavBar').toggle();
+					$('#bottomNavBar').toggle();
+			  		$("#container").fadeOut(animtionSpeed, function() {
+					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
+				  			$("#container").empty();
+				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/profile'}));
+							console.log('profile_btn clicked');
 
 				  			setTimeout(function(){
 				  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
