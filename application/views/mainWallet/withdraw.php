@@ -21,60 +21,42 @@
 	.bootbox-close-button{
 		display: none;
 	}
-	#pagetitle_background{
-		background: #293038;
-		color: white;
-	}
-	#withdraw_form_container{
-		background: rgba(0, 0, 0, .1); 
-		padding: 20px;
-	}
 	.is-invalid{
 		width: 100%;
 	}
+	.modal-content{
+		background: transparent;
+		border: 0;
+	}
+	#pagetitle_background{
+		background: #293038;
+		color: white;
+		padding: 15px;
+		border-radius: 20px 20px 0px 0px;
+		box-shadow: 10px 15px 25px rgba(0, 0, 0, .8);
+		text-align: center;
+	}
+	#withdraw_form_container{
+		background-color: #F2F4F4;
+		border-radius:0px 0px 20px 20px;
+		box-shadow: 10px 15px 25px rgba(0, 0, 0, .8);
+		padding: 20px;
+	}
+	#success_page_title{
+		padding: 15px;
+		border-radius: 20px 20px 0px 0px;
+		box-shadow: 10px 15px 25px rgba(0, 0, 0, .8);
+	}
+	#success_page_content {
+		background-color: #F2F4F4;
+		border-radius:0px 0px 20px 20px;
+		box-shadow: 10px 15px 25px rgba(0, 0, 0, .8);
+		padding: 20px;
+	}
 </style>
 
-	<div id="pagetitle_background" class="text-center">
-		<label class="h2 mt-2">Withdrawal</label>
-	</div>
-
-	<div id="successContainer" class="text-center" style="display: none;">
-		<i style="font-size:150px" class="fa fa-check-circle-o text-success" aria-hidden="true"></i><br>
-		<span style="font-size:30px" class="text-success">Success!</span>
-		<br>
-
-		<span>Transaction for withdrawal successfully submited</span>
-
-		<hr>
-		<div class="container">
-		  <div class="row text-left">
-		    <div class="col-sm-3 fw-bold">Amount:</div>
-		    <div id="amountSendContainer" class="col"></div>
-		  </div>
-
-		  <div class="row text-left">
-		    <div class="col-sm-3 fw-bold">Address Sent:</div>
-		    <div id="addressSendContainer" class="col"></div>
-		  </div>
-
-		  <div class="row text-left">
-		    <div class="col-sm-3 mt-1 fw-bold">Transaction:</div>
-		    <div class="input-group-prepend col">
-		    	<input type="text" class="form-control form-control-sm" id="txidSendContainer">
-				<button class="btn btn-secondary btn-sm" id="copy_transaction_btn" type="button">copy</button>
-		    </div>
-		  </div>
-		</div>
-		<hr>
-		<br>
-
-		<span>You can view your complete transaction details in by clicking <a href="#" id="txidLinkSendContainer" target="_blank">tronscan.org</a> (It might take a few seconds to register the transaction)</span>
-		
-		<br><br>
-		<div class="d-flex flex-row-reverse">
-			<button type="button" class="btn btn-danger ml-2" id="closeBtn_transaction">Close</button>
-		</div>      
-		
+	<div id="pagetitle_background" class="pagetitle">
+		<label class="h2 mt-2 fw-bold">Withdrawal</label>
 	</div>
 
 	<div id="withdraw_form_container">
@@ -127,11 +109,58 @@
 				<div id="warningReported" class="text-center"></div>
 
 				<div class="d-flex flex-row-reverse">
-					<button type="button" class="btn btn-danger m-1" id="closeBtn">Cancel</button>
-					<button type="submit" class="btn btn-success m-1" id="confirmBtn">Confirm</button>
+					<button type="button" class="btn btn-danger ml-2" id="closeBtn">Cancel</button>
+					<button type="submit" class="btn btn-success" id="confirmBtn">Confirm</button>
 				</div>
 			</div>
 		</form>
+	</div>
+
+	<div id="successContainer" class="text-center" style="display:none;">
+
+		<div id="success_page_title" class="bg-success">
+			<i style="font-size:50px" class="fa fa-check-circle text-light" aria-hidden="true"></i>
+		</div>
+
+		<div id="success_page_content">		
+
+		<span style="font-size:30px" class="text-success fw-bold">Success!</span>
+		<br>
+
+		<span>Transaction for withdrawal successfully submited</span>
+		<hr>
+
+		<div class="container">
+			<div class="row text-left">
+				<div class="col-sm-3 fw-bold">Amount:</div>
+				<div id="amountSendContainer" class="col"></div>
+			</div>
+
+			<div class="row text-left">
+				<div class="col-sm-3 fw-bold">Address Sent:</div>
+				<div id="addressSendContainer" class="col"></div>
+			</div>
+
+			<div class="row text-left">
+				<div class="col-sm-3 mt-1 fw-bold">Transaction:</div>
+				<div class="input-group-prepend col">
+					<input type="text" class="form-control form-control-sm" id="txidSendContainer">
+					<button class="btn btn-secondary btn-sm" id="copy_transaction_btn" type="button">copy</button>
+				</div>
+			</div>
+		</div>
+
+		<hr>
+		<br>
+
+		<span>You can view your complete transaction details in by clicking <a href="#" id="txidLinkSendContainer" target="_blank">tronscan.org</a> (It might take a few seconds to register the transaction)</span>
+
+		<br><br>
+		<div class="d-flex flex-row-reverse">
+		<button type="button" class="btn btn-danger ml-2" id="closeBtn_transaction">Close</button>
+		</div>   
+		</div>	
+			   	
 	</div>
 	
 		

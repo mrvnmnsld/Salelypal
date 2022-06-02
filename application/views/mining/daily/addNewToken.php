@@ -5,20 +5,28 @@
 	.is-invalid{
 		text-align: center;
 	}
+	.modal-content{
+		background: transparent;
+		border: 0;
+	}
 	#pagetitle_background{
 		background: #293038;
 		color: white;
+		padding: 15px;
+		border-radius: 20px 20px 0px 0px;
+		box-shadow: 10px 15px 25px rgba(0, 0, 0, .8);
+		text-align: center;
 	}
 	#mainQuestionModal{
-		background: rgba(0, 0, 0, .1);
-	}
-	#mainForm{
+		background-color: #F2F4F4;
+		border-radius:0px 0px 20px 20px;
+		box-shadow: 10px 15px 25px rgba(0, 0, 0, .8);
 		padding: 20px;
 	}
 </style>
 
-<div id="pagetitle_background" class="text-center">
-		<label class="h2 mt-2">Add New Token(Daily Income Mining)</label>
+<div id="pagetitle_background" class="pagetitle">
+	<label class="h2 mt-2 fw-bold">Add New Token (Daily Income Mining)</label>
 </div>
 
 <div id="mainQuestionModal">
