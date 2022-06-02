@@ -17,26 +17,33 @@
 	 .form-control { /* seems working on other ui bugs, no changes on current ui screens */
 		height: 2.7em; 
 	}
+	.modal-content{
+		background: transparent;
+		border: 0;
+	}
 	#pagetitle_background{
 		background: #293038;
 		color: white;
+		padding: 15px;
+		border-radius: 20px 20px 0px 0px;
+		box-shadow: 10px 15px 25px rgba(0, 0, 0, .8);
 	}
 	#main_modal_container{
-		background: rgba(0, 0, 0, .1);
-	}
-	#add_agent_form{
+		background-color: #F2F4F4;
+		border-radius:0px 0px 20px 20px;
+		box-shadow: 10px 15px 25px rgba(0, 0, 0, .8);
 		padding: 20px;
 	}
 </style>
 
 <div id="pagetitle_background" class="text-center">
-		<label class="h2 mt-2">Add New Agent</label>
+	<label class="h2 mt-2 fw-bold">Add New Agent</label>
 </div>
 
 <div id="main_modal_container">
 
 	<form id="add_agent_form">
-		<label class="fw-bold">Fullname</label>
+		<label class="fw-bold mt-3">Fullname</label>
 		<div class="input-group row m-1 mb-3">
 			<i class="input-group-text fa fa-user-o icon-size" aria-hidden="true"></i>
 		  <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Fullname">
@@ -66,6 +73,8 @@
 			<i class="input-group-text fa fa-key icon-size" aria-hidden="true"></i>
 		  <input type="password" class="form-control" id="password" name="password" placeholder="Password">
 		</div>
+
+		<hr>
 
 		<div class="d-flex flex-row-reverse">
 			<button type="button" class="btn btn-danger mr-1" id="back_btn">Back</button>

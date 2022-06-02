@@ -5,22 +5,34 @@
 	.error{
 		color: red;
 	}
+	.modal-content{
+		background: transparent;
+		border: 0;
+	}
 	#pagetitle_background{
 		background: #293038;
 		color: white;
+		padding: 15px;
+		border-radius: 20px 20px 0px 0px;
+		box-shadow: 10px 15px 25px rgba(0, 0, 0, .8);
+		text-align: center;
 	}
 	#main_modal_container{
-		background: rgba(0, 0, 0, .1);
+		background-color: #F2F4F4;
+		border-radius:0px 0px 20px 20px;
+		box-shadow: 10px 15px 25px rgba(0, 0, 0, .8);
 		padding: 20px;
 	}
 	#resolveForm{
-		background: rgba(0, 0, 0, .1);
+		background-color: #F2F4F4;
+		border-radius:20px;
+		box-shadow: 10px 15px 25px rgba(0, 0, 0, .8);
 		padding: 20px;
 	}
 </style>
 
-<div id="pagetitle_background" class="text-center">
-		<label class="h2 mt-1">Contract Position Details</label>
+<div id="pagetitle_background" class="pagetitle">
+	<label class="h2 mt-2 fw-bold">Risefall Position Details</label>
 </div>
 
 <div id="main_modal_container">
@@ -109,7 +121,7 @@
 	</div>
 </div>
 
-<div id="price_set_container" style="display: none;">
+<div id="price_set_container" style="display:none">
 	<form id="resolveForm">
 
 		<div class="form-group">
@@ -137,8 +149,6 @@
 		</div>
 		
 	</form>
-
-	
 </div>
 
 <script type="text/javascript">
@@ -168,11 +178,13 @@
 		$(".back_btn").on('click', function(){
 			$("#main_modal_container").toggle();
 			$("#price_set_container").toggle();
+			$("#pagetitle_background").toggle();
 		});
 
 		$("#resolve_position_btn").on('click', function(){
 			$("#main_modal_container").toggle();
 			$("#price_set_container").toggle();
+			$("#pagetitle_background").toggle();
 			$('#currentPrice_container_2nd').text(parseFloat(selectedData.currentPrice));
 			$('#buyType_container_2nd').text(selectedData.buyType);
 

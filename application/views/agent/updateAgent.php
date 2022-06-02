@@ -19,20 +19,27 @@
 	.form-control { /* seems working on other ui bugs, no changes on current ui screens */
 		height: 2.7em; 
 	}
+	.modal-content{
+		background: transparent;
+		border: 0;
+	}
 	#pagetitle_background{
 		background: #293038;
 		color: white;
+		padding: 15px;
+		border-radius: 20px 20px 0px 0px;
+		box-shadow: 10px 15px 25px rgba(0, 0, 0, .8);
 	}
 	#main_modal_container{
-		background: rgba(0, 0, 0, .1);
-	}
-	#update_agent_form{
+		background-color: #F2F4F4;
+		border-radius:0px 0px 20px 20px;
+		box-shadow: 10px 15px 25px rgba(0, 0, 0, .8);
 		padding: 20px;
 	}
 </style>
 
 <div id="pagetitle_background" class="text-center">
-		<label class="h2 mt-2">Update Agent Information</label>
+	<label class="h2 mt-2 fw-bold">Update Agent Information</label>
 </div>
 
 <div id="main_modal_container">
@@ -67,6 +74,8 @@
 			<i class="input-group-text fa fa-key icon-size" aria-hidden="true"></i>
 		  <input type="password" class="form-control" id="password" name="password" placeholder="*Note: Only enter value if changing">
 		</div>
+
+		<hr>
 
 		<div class="d-flex flex-row-reverse">
 			<button type="button" class="btn btn-danger mr-1" id="back_btn">Back</button>

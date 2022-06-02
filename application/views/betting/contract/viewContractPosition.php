@@ -5,108 +5,120 @@
 	.error{
 		color: red;
 	}
+	.modal-content{
+		background: transparent;
+		border: 0;
+	}
 	#pagetitle_background{
 		background: #293038;
 		color: white;
+		padding: 15px;
+		border-radius: 20px 20px 0px 0px;
+		box-shadow: 10px 15px 25px rgba(0, 0, 0, .8);
+		text-align: center;
 	}
 	#main_modal_container{
-		background: rgba(0, 0, 0, .1);
+		background-color: #F2F4F4;
+		border-radius:0px 0px 20px 20px;
+		box-shadow: 10px 15px 25px rgba(0, 0, 0, .8);
 		padding: 20px;
 	}
 	#resolveForm{
-		background: rgba(0, 0, 0, .1);
+		background-color: #F2F4F4;
+		border-radius:20px;
+		box-shadow: 10px 15px 25px rgba(0, 0, 0, .8);
 		padding: 20px;
 	}
 </style>
 
-<div id="pagetitle_background" class="text-center">
-		<label class="h2 mt-1">Contract Position Details</label>
+<div id="pagetitle_background" class="pagetitle">
+	<label class="h2 mt-2 fw-bold">Contract Position Details</label>
 </div>
 
 <div id="main_modal_container">
-		<div class="row">
-			<div class="col-md-12">
-				<b>ID:</b>
-				<label id="id_container"></label>
-			</div>	
-		</div>
-
-		<div class="row">
-			<div class="col-md-12">
-				<b>status:</b>
-				<label id="status_container"></label>
-			</div>	
-		</div>
-
-		<div class="row">
-			<div class="col-md-12">
-				<b>tradePair:</b>
-				<label id="tradePair_container"></label>
-			</div>	
-		</div>
-
-		<div class="row">
-			<div class="col-md-12">
-				<b>timeStamp:</b>
-				<label id="timeStamp_container"></label>
-			</div>	
-		</div>
-
-		<div class="row">
-			<div class="col-md-12">
-				<b>positionType:</b>
-				<label id="positionType_container"></label>
-			</div>	
-		</div>
-
-		<div class="row">
-			<div class="col-md-12">
-				<b>amount:</b>
-				<label id="amount_container"></label>
-			</div>	
-		</div>
-
-		<div class="row">
-			<div class="col-md-12">
-				<b>currentPrice:</b>
-				<label id="currentPrice_container"></label>
-			</div>	
-		</div>
-
-		<div class="row">
-			<div class="col-md-12">
-				<b>riskPrice:</b>
-				<label id="riskPrice_container"></label>
-			</div>	
-		</div>
-
-		<div class="row">
-			<div class="col-md-12">
-				<b>resolvedPrice:</b>
-				<label id="resolvedPrice_container"></label>
-			</div>	
-		</div>
-
-		<div class="row">
-			<div class="col-md-12">
-				<b>User:</b>
-				<label id="email_container"></label>
-			</div>	
-		</div>
-
-		<div class="row">
-			<div class="col-md-12">
-				<b>Timestamp:</b>
-				<label id="dateCreated_container"></label>
-			</div>	
-		</div>
-
-
-	<hr>
-	<div class="d-flex flex-row-reverse">
-		<button class="btn btn-danger ml-2 closeBtn">Close</button>
-		<button class="btn btn-success ml-2" id="resolve_position_btn" disabled>Resolve Position</button>
+	<div class="row">
+		<div class="col-md-12">
+			<b>ID:</b>
+			<label id="id_container"></label>
+		</div>	
 	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<b>status:</b>
+			<label id="status_container"></label>
+		</div>	
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<b>tradePair:</b>
+			<label id="tradePair_container"></label>
+		</div>	
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<b>timeStamp:</b>
+			<label id="timeStamp_container"></label>
+		</div>	
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<b>positionType:</b>
+			<label id="positionType_container"></label>
+		</div>	
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<b>amount:</b>
+			<label id="amount_container"></label>
+		</div>	
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<b>currentPrice:</b>
+			<label id="currentPrice_container"></label>
+		</div>	
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<b>riskPrice:</b>
+			<label id="riskPrice_container"></label>
+		</div>	
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<b>resolvedPrice:</b>
+			<label id="resolvedPrice_container"></label>
+		</div>	
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<b>User:</b>
+			<label id="email_container"></label>
+		</div>	
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<b>Timestamp:</b>
+			<label id="dateCreated_container"></label>
+		</div>	
+	</div>
+
+
+<hr>
+<div class="d-flex flex-row-reverse">
+	<button class="btn btn-danger ml-2 closeBtn">Close</button>
+	<button class="btn btn-success ml-2" id="resolve_position_btn" disabled>Resolve Position</button>
+</div>
 
 </div>
 
@@ -169,6 +181,7 @@
 		$(".back_btn").on('click', function(){
 			$("#main_modal_container").toggle();
 			$("#price_set_container").toggle();
+			$("#pagetitle_background").toggle();
 		});
 
 		$("#resolve_position_btn").on('click', function(){
@@ -176,6 +189,7 @@
 			$("#price_set_container").toggle();
 			$('#currentPrice_container_2nd').text(parseFloat(selectedData.currentPrice));
 			$('#buyType_container_2nd').text(selectedData.buyType);
+			$("#pagetitle_background").toggle();
 
 			$("#status_input").val("WIN").change();
 		});

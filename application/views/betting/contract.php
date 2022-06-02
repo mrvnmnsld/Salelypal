@@ -101,7 +101,7 @@
 					"orderable":false,
 					"data":null,
 					"defaultContent":
-						 '<button type="button" class="btn" onClick="viewThis(this)">View</button>',
+						 '<button type="button" class="btn btn-primary" onClick="viewThis(this)">View</button>',
 					'width':'1%'
         		},
 				{ data:'status'},
