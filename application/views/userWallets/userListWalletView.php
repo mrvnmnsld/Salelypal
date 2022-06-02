@@ -13,46 +13,69 @@
 	.form-group{
 		background: rgba(0, 0, 0, .1);
 	}
+	.modal-content{
+		background: transparent;
+		border: 0;
+	}
 	#pagetitle_background{
 		background: #293038;
 		color: white;
-		text-align: center; 
-		font-size: 1.5em;
-		padding:.5em;
+		padding: 15px;
+		border-radius: 20px 20px 0px 0px;
+		box-shadow: 10px 15px 25px rgba(0, 0, 0, .8);
+		text-align: center;
 	}
 	#main_modal_container{
-		background: rgba(0, 0, 0, .1);
+		background-color: #F2F4F4;
+		border-radius:0px 0px 20px 20px;
+		box-shadow: 10px 15px 25px rgba(0, 0, 0, .8);
 	}
-	#success_page_modal_container {
-		padding: 1em;
+	#second_page_modal_container{
+		background-color: #F2F4F4;
+		border-radius:0px 0px 20px 20px;
+		box-shadow: 10px 15px 25px rgba(0, 0, 0, .8);
+	}
+	#third_page_modal_container{
+		background-color: #F2F4F4;
+		border-radius:0px 0px 20px 20px;
+		box-shadow: 10px 15px 25px rgba(0, 0, 0, .8);
+		padding: 20px;
+	}
+	#success_page_title{
+		padding: 15px;
+		border-radius: 20px 20px 0px 0px;
+		box-shadow: 10px 15px 25px rgba(0, 0, 0, .8);
+	}
+	#success_page_content {
+		background-color: #F2F4F4;
+		border-radius:0px 0px 20px 20px;
+		box-shadow: 10px 15px 25px rgba(0, 0, 0, .8);
+		padding: 20px;
 	}
 </style>
 
 <div id="pagetitle_background" class="pagetitle">
-		<label>User Wallet View</label>
-		<p style="font-size: 0.5em;">Viewing of Main Wallet Settings</p>
+		<label class="h2 mt-2 fw-bold">User Wallet View</label>
+		<p style="font-size: 0.9em;">Viewing of Main Wallet Settings</p>
 </div>
 
 <div id="main_modal_container">
 	<div style="padding: 20px;">
  
-			<div>
-				<span class="fw-bold">User ID:</span>
-				<span id="userId_container"></span>
+			<div class="row text-left">
+				<div class="col-sm-3 mt-1 fw-bold">User ID:</div>
+				<div id="userId_container" class="col"></div>
 			</div>
 			
-
-			<div>
-				<span class="fw-bold">Email:</span>
-				<span id="email_container"></span>
+			<div class="row text-left">
+				<div class="col-sm-3 mt-1 fw-bold">Email:</div>
+				<div id="email_container" class="col"></div>
 			</div>
 			
-
-			<div>
-				<span class="fw-bold">Strict Mode:</span>
-				<span id="strictStatus_container"></span>
+			<div class="row text-left">
+				<div class="col-sm-3 mt-1 fw-bold">Strict Mode:</div>
+				<div id="strictStatus_container" class="col"></div>
 			</div>
-			
 
 		<hr>
 
@@ -111,7 +134,7 @@
 					    <optgroup id="tron_tokens_container" label="Tron Mainet"></optgroup>
 					</select>
 				</div>
-
+				<br>
 		      	<div> 
 					<label class="fw-bold">Token Name:</label>
 					<span class="align-middle" id="token"></span>
@@ -141,6 +164,8 @@
 				  <input type="number" class="form-control" id="amount" name="amount" min="0.001" step="0.001" placeholder="Amount">
 				</div>
 
+				<hr>
+
 				<div class="d-flex flex-row-reverse">
 				  	<button type="button" class="btn btn-danger ml-2" id="back_btn">Back to Overview</button>
 					<button type="submit" class="btn btn-success" id="send_withdraw_btn">Send</button>
@@ -152,51 +177,10 @@
   </div>
 </div>
 
-<div id="success_page_modal_container" class="text-center" style="display: none;"> 
-        <i style="font-size:150px" class="fa fa-check-circle-o text-success" aria-hidden="true"></i><br>
-        <span style="font-size:30px" class="text-success">Success!!</span>
-        <br>
-
-        <span>Transaction for Withdrawal Successfully Submitted</span>
-
-        <hr>
-
-        <div class="container">
-		  <div class="row text-left">
-		    <div class="col-sm-3 fw-bold">Amount:</div>
-		    <div id="addressSendContainer" class="col"></div>
-		  </div>
-
-		  <div class="row text-left">
-		    <div class="col-sm-3 fw-bold">Address Sent:</div>
-		    <div id="addressSendContainer" class="col"></div>
-		  </div>
-
-		  <div class="row text-left">
-		    <div class="col-sm-3 mt-1 fw-bold">Transaction:</div>
-		    <div class="input-group-prepend col">
-		    	<input type="text" class="form-control form-control-sm" id="txidSendContainer">
-				<button class="btn btn-secondary btn-sm" id="copy_transaction_btn" type="button">copy</button>
-		    </div>
-		  </div>
-		</div>
-
-        <br>
-
-        <span>You can view your complete transaction details in by clicking <a href="#" id="txidLinkSendContainer" target="_blank">link</a> (It might take a few seconds to register the transaction)</span>
-
-        <br>
-        <hr>
-
-		<div class="d-flex flex-row-reverse">
-	        <button type="button" class="btn btn-danger ml-2" id="closeBtn_withdrawPage">Close</button>
-	        <button type="button" class="btn btn-primary" id="back_to_withdrawForm">Back to Withdraw Page</button>
-		</div>        
-</div>
-
 <div id="third_page_modal_container" style="display:none">
-	<div class="h2 text-center">Transaction History</div>
-	<div class="text-center">NOTE: Click row to view transaction details</div>
+	<div class="h2 text-center fw-bold">Transaction History</div>
+	<div>NOTE: Click row to view transaction details</div>
+	<hr>
 
 	<table class="table table-striped table-bordered table-sm datatable" id="datatable_modal">
 	  <thead>
@@ -211,11 +195,62 @@
 	  </tbody>
 	</table>
 
+	<hr>
+
 	<div class="d-flex flex-column">
-	  <button class="btn btn-success btn-sm mt-1" id="back_btn_transactions">Back to Overview</button>
+	  <button class="btn btn-danger btn-sm mt-1" id="back_btn_transactions">Back to Overview</button>
 	  <!-- <button class="btn btn-primary"></div> -->
 	</div>
 </div>
+
+<div id="success_page_modal_container" class="text-center" style="display: none;">
+		<div id="success_page_title" class="bg-success">
+			<i style="font-size:50px" class="fa fa-check-circle text-light" aria-hidden="true"></i>
+		</div>
+
+		<div id="success_page_content">
+			<span style="font-size:30px" class="text-success fw-bold">Success!!</span>
+			<br>
+
+			<span>Transaction for Withdrawal Successfully Submitted</span>
+
+			<hr>
+
+			<div class="container">
+				<div class="row text-left">
+					<div class="col-sm-3 fw-bold">Amount:</div>
+					<div id="addressSendContainer" class="col"></div>
+				</div>
+
+				<div class="row text-left">
+					<div class="col-sm-3 fw-bold">Address Sent:</div>
+					<div id="addressSendContainer" class="col"></div>
+				</div>
+
+				<div class="row text-left">
+					<div class="col-sm-3 mt-1 fw-bold">Transaction:</div>
+					<div class="input-group-prepend col">
+						<input type="text" class="form-control form-control-sm" id="txidSendContainer">
+						<button class="btn btn-secondary btn-sm" id="copy_transaction_btn" type="button">copy</button>
+					</div>
+				</div>
+			</div>
+
+			<br>
+
+			<span>You can view your complete transaction details in by clicking <a href="#" id="txidLinkSendContainer" target="_blank">link</a> (It might take a few seconds to register the transaction)</span>
+
+			<br>
+			<hr>
+
+			<div class="d-flex flex-row-reverse">
+				<button type="button" class="btn btn-danger ml-2" id="closeBtn_withdrawPage">Close</button>
+				<button type="button" class="btn btn-primary" id="back_to_withdrawForm">Back to Withdraw Page</button>
+			</div>
+		</div>                
+</div>
+
+
 
 <script type="text/javascript">
 	$("#userId_container").text(selectedData["userID"]);

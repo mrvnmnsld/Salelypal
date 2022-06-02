@@ -13,20 +13,28 @@
 		font-size: 1.4em;
 		max-width: 2em;
 	}
+	.modal-content{
+		background: transparent;
+		border: 0;
+	}
 	#pagetitle_background{
 		background: #293038;
 		color: white;
+		padding: 15px;
+		border-radius: 20px 20px 0px 0px;
+		box-shadow: 10px 15px 25px rgba(0, 0, 0, .8);
+		text-align: center;
 	}
 	#main_modal_container{
-		background: rgba(0, 0, 0, .1);
-	}
-	#update_user_form{
+		background-color: #F2F4F4;
+		border-radius:0px 0px 20px 20px;
+		box-shadow: 10px 15px 25px rgba(0, 0, 0, .8);
 		padding: 20px;
 	}
 </style>
 
-<div id="pagetitle_background" class="text-center">
-		<label class="h2 mt-2">Update User Information</label>
+<div id="pagetitle_background" class="pagetitle">
+	<label class="h2 mt-2 fw-bold">Update User Information</label>
 </div>
 
 <div id="main_modal_container">

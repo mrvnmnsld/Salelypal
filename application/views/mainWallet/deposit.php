@@ -7,48 +7,57 @@
 		outline: 2px solid black;
 	  	outline-offset: 5px;
 	}
+	.modal-content{
+		background: transparent;
+		border: 0;
+	}
 	#pagetitle_background{
 		background: #293038;
 		color: white;
+		padding: 15px;
+		border-radius: 20px 20px 0px 0px;
+		box-shadow: 10px 15px 25px rgba(0, 0, 0, .8);
+		text-align: center;
 	}
 	#deposit_form_container{
-		background: rgba(0, 0, 0, .1); 
+		background-color: #F2F4F4;
+		border-radius:0px 0px 20px 20px;
+		box-shadow: 10px 15px 25px rgba(0, 0, 0, .8);
 		padding: 20px;
 	}
 </style>
 
-	<div id="pagetitle_background" class="text-center">
-		<label class="h2">Deposit</label><br>
-		<label style="font-size: 1em;">Scan this qr code to deposit to your wallet</label>
+	<div id="pagetitle_background" class="pagetitle">
+		<label class="h2 mt-2 fw-bold">Deposit</label>
+		<p style="font-size: 0.9em;">Scan this qr code to deposit to your wallet</p>
 	</div>
 
 	<div id="deposit_form_container">
 		<form id="mainForm">
-				<div class="thumbnail d-flex justify-content-center m-3 pt-3 pb-3">
-					<div id="qrcode"></div>
-				</div>
+			<div class="thumbnail d-flex justify-content-center m-3 pt-3 pb-3">
+				<div id="qrcode"></div>
+			</div>
 
-				<label class="fw-bold">Address</label>
-				<div class="input-group mb-3">
-					<i class="input-group-text fa fa-address-book-o icon-size" aria-hidden="true"></i>
-					<input type="text" class="form-control" id="addressContainer" aria-describedby="emailHelp" placeholder="">
-					<div class="input-group-prepend">
-				  		<button class="btn btn-secondary" id="copyBtn" style="border-top-right-radius: 5px 5px;border-bottom-right-radius: 5px 5px;" type="button">Copy link</button>
-					</div>
+			<label class="fw-bold">Address</label>
+			<div class="input-group mb-3">
+				<i class="input-group-text fa fa-address-book-o icon-size" aria-hidden="true"></i>
+				<input type="text" class="form-control" id="addressContainer" aria-describedby="emailHelp" placeholder="">
+				<div class="input-group-prepend">
+			  		<button class="btn btn-secondary" id="copyBtn" style="border-top-right-radius: 5px 5px;border-bottom-right-radius: 5px 5px;" type="button">Copy link</button>
 				</div>
+			</div>
 
-				<hr>
+			<hr>
 
-				<div class="text-center">
-					<div class="h5 ">NOTE:
-						<span class="font-weight-bold" id="importantNotes">This wallet supports Tron Mainet, TRC10, TRC20: USDT & TRX</span>
-					</div>
-					<span class="text-danger">To view other tokens in wallet, export this wallet to a capable wallet link. </span>
+			<div class="text-center">
+				<div class="h5 ">NOTE:
+					<span class="font-weight-bold" id="importantNotes">This wallet supports Tron Mainet, TRC10, TRC20: USDT & TRX</span>
 				</div>
+				<span class="text-danger">To view other tokens in wallet, export this wallet to a capable wallet link. </span>
+			</div>
 
-				<div class="d-flex flex-row-reverse">
-					<button type="button" class="btn btn-danger" id="closeBtn">Close</button>
-				</div>
+			<div class="d-flex flex-row-reverse">
+				<button type="button" class="btn btn-danger" id="closeBtn">Close</button>
 			</div>
 		</form>
 	</div>
