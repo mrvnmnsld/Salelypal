@@ -726,7 +726,7 @@
 			  		$("#container").fadeOut(animtionSpeed, function() {
 					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
 				  			$("#container").empty();
-				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/profile'}));
+				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/user_profile/profile'}));
 							console.log('profile_btn clicked');
 
 				  			setTimeout(function(){

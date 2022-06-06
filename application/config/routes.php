@@ -21,6 +21,7 @@ $route['paypal-test'] = 'main/paypaltest';
 
 $route['loadAnnouncement'] = 'main/loadAnnouncement';
 $route['editProfile'] = 'main/editProfile';
+$route['main/editProfileV2'] = 'main/editProfileV2';
 $route['saveNewProfilePic'] = 'main/saveNewProfilePic';
 $route['confirmPassword'] = 'main/confirmPassword';
 $route['main/getCurrentPrice'] = 'main/getCurrentPrice';
