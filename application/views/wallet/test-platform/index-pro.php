@@ -187,7 +187,7 @@
 		</span>
 	</div>
 
-	<div id="container" class="mb-5" style="display:none;min-height: 120%; margin-bottom: ;"> 
+	<div id="assets_container" style="display:none;">
 		<div class="m-2 text-left">
 			<div class="h3 p-2 m-2 font-weight-bold text-center">
 				<span class="h3 text-muted">Total Balance:</span><br>
@@ -281,85 +281,10 @@
 				color: #D9E9E8 !important;
 			}
 		</style>
+	</div>
 
-		<!-- modal-mining -->
-			<style>
-				#modal_trade .modal-content{
-					background:transparent;
-				}
-
-				#modal_trade .modal-header{
-					padding:.3em;
-
-				}
-
-				#modal_trade .modal-body{
-					
-					padding:0em!important;
-
-				}
-
-				#modal_trade .btn-modal {
-					background: rgb(34 34 34);
-
-					border:.2px solid;
-					border-radius : .5em;
-					
-					color: #D9E9E8;
-
-					min-height: 100%;
-					min-width: 100%;
-					padding:2em;
-				}
-			</style>
-
-			<div class="modal fade" id="modal_trade">
-				<div class="modal-dialog modal-dialog-centered">
-					<div class="modal-content" style="background-color: rgb(0 0 0 / 79%);">
-					
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">
-								<i class="fa fa-close fa-inverse" aria-hidden="true"></i>
-							</button>
-						</div>
-						
-						<div class="modal-body" style="">
-
-							<div class="m-1 justify-content-center">
-								<button id="rise_fall_btn" type="button" class="btn btn-modal" data-dismiss="modal">
-									<!-- <img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png"> -->
-									<i class="fa fa-bar-chart fa-inverse fa-lg" style="" aria-hidden="true"></i>
-									Contract Rise Fall
-								</button>
-							</div>
-
-							<div class="m-1 justify-content-center">
-								<button id="future_btn" class="btn btn-modal" data-dismiss="modal">
-									<!-- <img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png"> -->
-									<i class="fa fa-bar-chart fa-inverse fa-lg" style="" aria-hidden="true"></i>
-									Contract Long Short
-								</button>
-							</div>					
-
-							<div class="m-1 justify-content-center">
-								<button id="daily_mining_btn" type="button" class="btn btn-modal" data-dismiss="modal">
-									<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">
-									Daily Mining
-								</button>
-							</div>
-
-							<div class="m-1 justify-content-center">
-								<button id="regular_mining_btn" class="btn btn-modal" data-dismiss="modal">
-									<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">
-									Regular Mining
-								</button>
-							</div>
-								
-						</div>
-					</div>	
-				</div>
-			</div>
-		<!-- modal-mining -->
+	<div id="container" class="mb-5" style="display:none;min-height: 120%;">
+		
 	</div>
 
 	<br>
@@ -367,25 +292,104 @@
 	<br>
 	<br>
 
+	<!-- modal-mining -->
+		<style>
+			#modal_trade .modal-content{
+				background:transparent;
+			}
+
+			#modal_trade .modal-header{
+				padding:.3em;
+
+			}
+
+			#modal_trade .modal-body{
+				
+				padding:0em!important;
+
+			}
+
+			#modal_trade .btn-modal {
+				background: rgb(34 34 34);
+
+				border:.2px solid;
+				border-radius : .5em;
+				
+				color: #D9E9E8;
+
+				min-height: 100%;
+				min-width: 100%;
+				padding:2em;
+			}
+		</style>
+
+		<div class="modal fade" id="modal_trade">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content" style="background-color: rgb(0 0 0 / 79%);">
+				
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">
+							<i class="fa fa-close fa-inverse" aria-hidden="true"></i>
+						</button>
+					</div>
+					
+					<div class="modal-body" style="">
+
+						<div class="m-1 justify-content-center">
+							<button id="rise_fall_btn" type="button" class="btn btn-modal" data-dismiss="modal">
+								<!-- <img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png"> -->
+								<i class="fa fa-bar-chart fa-inverse fa-lg" style="" aria-hidden="true"></i>
+								Contract Rise Fall
+							</button>
+						</div>
+
+						<div class="m-1 justify-content-center">
+							<button id="future_btn" class="btn btn-modal" data-dismiss="modal">
+								<!-- <img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png"> -->
+								<i class="fa fa-bar-chart fa-inverse fa-lg" style="" aria-hidden="true"></i>
+								Contract Long Short
+							</button>
+						</div>					
+
+						<div class="m-1 justify-content-center">
+							<button id="daily_mining_btn" type="button" class="btn btn-modal" data-dismiss="modal">
+								<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">
+								Daily Mining
+							</button>
+						</div>
+
+						<div class="m-1 justify-content-center">
+							<button id="regular_mining_btn" class="btn btn-modal" data-dismiss="modal">
+								<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">
+								Regular Mining
+							</button>
+						</div>
+							
+					</div>
+				</div>	
+			</div>
+		</div>
+	<!-- modal-mining -->
+
 	<ul id="bottomNavBar" style="background:rgb(34 34 34); display:none;" class="nav fixed-bottom justify-content-center row pt-2">
-		<li class="nav-item col-3 text-center">
+		<li id="assets_btn" class="nav-item col-3 text-center">
 			<i class="fa fa-money fa-inverse fa-lg" aria-hidden="true"></i>
-			<a onclick="backButton()" class="botnavlink nav-link active" style="font-size:.8em; color:#D9E9E8;"><span class="test1">Asset</span></a>
+			<a class="botnavlink nav-link active" style="font-size:.8em; color:#D9E9E8;"><span class="test1">Asset</span></a>
 		</li>
 
-		<li class="nav-item col-3 text-center">
+		<li id="modal_mining_btn" data-toggle="modal" data-target="#modal_trade" class="nav-item col-3 text-center">
 			<i class="fa fa-bar-chart fa-inverse fa-lg" style="" aria-hidden="true"></i>
-			<a class="nav-link" id="modal_mining_btn" data-toggle="modal" data-target="#modal_trade" style="font-size:.8em; color:#D9E9E8;"  href="#">Trade</a>
+			<a class="nav-link" style="font-size:.8em; color:#D9E9E8;"  href="#">Trade</a>
 		</li>
 
-		<li class="nav-item col-3 text-center">
+		<li id="discover_btn" class="nav-item col-3 text-center">
 			<i class="fa fa-globe fa-inverse fa-lg" aria-hidden="true"></i>
-			<a id="discover_btn" class="nav-link" style="font-size:.8em; color:#D9E9E8;" href="#">Discover</a>
+			<a  class="nav-link" style="font-size:.8em; color:#D9E9E8;" href="#">Discover</a>
 		</li>
 
-		<li class="nav-item col-3 text-center">
+		<li id="settings_btn" class="nav-item col-3 text-center">
 			<i class="fa fa-cogs fa-inverse fa-lg" aria-hidden="true"></i>
-			<a id="settings_btn" class="nav-link" style="font-size:.8em; color:#D9E9E8;"  href="#">Settings</a>
+			<a class="nav-link" style="font-size:.8em; color:#D9E9E8;"  href="#">Settings</a>
 		</li>
 	</ul>
 
@@ -427,7 +431,7 @@
 		var clickContainer;
 		var totalInUsd;
 		var tokenLoadTimer;
-
+		var assetsHtmlContainer;
 		var tokensSelected = ajaxShortLink('userWallet/getAllSelectedTokensVer2',{'userID':15});
 
 
@@ -461,14 +465,6 @@
 			    });
 
 			    if(notifList.length>=1){
-
-			    	// $.toast({
-			    	//     text: 'You have '+notifList.length+' Unread Notifications',
-			    	//     position: 'bottom-center',
-			    	//     stack: false
-			    	// })
-
-			    	// $("#new_notif_counter").text(notifList.length);
 					$("#notif_counter_number").text(notifList.length);
 					$("#notif_counter_number").addClass("animate__animated animate__heartBeat animate__repeat-2");
 					$("#notif_counter_number").css("display", "block");
@@ -488,6 +484,7 @@
 			setTimeout(function(){
 				$.when(loadSystem()).then(function(){
 					$('#container').toggle();
+					$('#assets_container').css("display","block");
 					$('#loadSpinner').toggle();
 					$('#topNavBar').toggle();
 					$('#bottomNavBar').toggle();
@@ -521,6 +518,36 @@
 		});
 
 		// buttonEvents
+			// visible
+				var tokenValuesContainer = []; // this is global
+				var visible = 1;
+
+				$('#visible_btn').on('click',function(){
+					console.log('visible_btn click',visible);
+
+					if(visible==1){
+						tokenValuesContainer = []; // this is start of onclick event
+						$("#tokenContainer > div").find("div:nth-child(3)").each(function(){
+							tokenValuesContainer.push($(this).html());
+							$(this).html("<h3>*****</h3>")
+						})
+						$('#totalInUsdContainer').html('*****');
+						$('#visible_icon').removeClass('fa-eye-slash').addClass('fa-eye');
+						visible = 0;
+					}else{
+						$("#tokenContainer > div").find("div:nth-child(3)").each(function(i){
+							$(this).html(tokenValuesContainer[i]);
+							i+1
+						})
+						$('#totalInUsdContainer').html(numberWithCommas(totalInUsd.toFixed(2)));
+						$("#totalInUsdContainer").append(" "+currentUser.displayCurrency);
+						$('#visible_icon').removeClass('fa-eye').addClass('fa-eye-slash');
+						visible = 1;
+					}
+					
+				});
+			// visible
+
 			$('#deposit_btn, #deposit_btn_option').on('click',function(){
 				$.confirm({
 				    title: 'Testing Mode!',
@@ -547,10 +574,40 @@
 				});
 			});
 
-			$('#buyCrypto_btn, #buy_btn_option').on('click',function(){
-					clearTimeout(tokenLoadTimer);
+			$('#assets_btn').on('click',function(){
+				if ($('#assets_container').css("display") == 'none') {
 					$("#tittle_container").text('Purchase');
 					$.when(closeNav()).then(function() {
+						$('#topNavBar').toggle();
+						$('#bottomNavBar').toggle();
+				  		$("#container").fadeOut(animtionSpeed, function() {
+						  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
+					  			$("#container").empty();
+					  			// $("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/buyCrypto'}));
+
+					  			setTimeout(function(){
+					  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
+										$('#assets_container').fadeIn(animtionSpeed);
+					  					$('#topNavBar').toggle();
+					  					$('#bottomNavBar').toggle();
+					  					$("#container").fadeIn(animtionSpeed);
+					  				});
+					  			}, 1000);
+
+						  		
+					    	});
+					  	});
+					});
+				}
+					
+					
+			});
+
+			$('#buyCrypto_btn, #buy_btn_option').on('click',function(){
+					
+					$("#tittle_container").text('Purchase');
+					$.when(closeNav()).then(function() {
+						$('#assets_container').css("display","none");
 						$('#topNavBar').toggle();
 						$('#bottomNavBar').toggle();
 				  		$("#container").fadeOut(animtionSpeed, function() {
@@ -564,7 +621,7 @@
 					  					$('#bottomNavBar').toggle();
 					  					$("#container").fadeIn(animtionSpeed);
 					  				});
-					  			}, 2000);
+					  			}, 1000);
 
 						  		
 					    	});
@@ -573,9 +630,10 @@
 			});
 
 			$('#addToken_btn').on('click',function(){
-				clearTimeout(tokenLoadTimer);
+				
 				$("#tittle_container").text('Token Management');
 				$.when(closeNav()).then(function() {
+					$('#assets_container').css("display","none");
 					$('#topNavBar').toggle();
 					$('#bottomNavBar').toggle();
 			  		$("#container").fadeOut(animtionSpeed, function() {
@@ -606,38 +664,11 @@
 				});
 			});
 
-			var tokenValuesContainer = []; // this is global
-			var visible = 1;
-			$('#visible_btn').on('click',function(){
-				console.log('visible_btn click',visible);
-
-				if(visible==1){
-					tokenValuesContainer = []; // this is start of onclick event
-					$("#tokenContainer > div").find("div:nth-child(3)").each(function(){
-						tokenValuesContainer.push($(this).html());
-						$(this).html("<h3>*****</h3>")
-					})
-					$('#totalInUsdContainer').html('*****');
-					$('#visible_icon').removeClass('fa-eye-slash').addClass('fa-eye');
-					visible = 0;
-				}else{
-					$("#tokenContainer > div").find("div:nth-child(3)").each(function(i){
-						$(this).html(tokenValuesContainer[i]);
-						i+1
-					})
-					$('#totalInUsdContainer').html(numberWithCommas(totalInUsd.toFixed(2)));
-					$("#totalInUsdContainer").append(" "+currentUser.displayCurrency);
-					$('#visible_icon').removeClass('fa-eye').addClass('fa-eye-slash');
-					visible = 1;
-				}
-				
-			});
-			
-
 			$('#future_btn').on('click',function(){
-				clearTimeout(tokenLoadTimer);
+				
 				$("#tittle_container").text('Contract Trade');
 				$.when(closeNav()).then(function() {
+					$('#assets_container').css("display","none");
 					$('#topNavBar').toggle();
 					$('#bottomNavBar').toggle();
 			  		$("#container").fadeOut(animtionSpeed, function() {
@@ -651,7 +682,7 @@
 				  					$('#bottomNavBar').toggle();
 				  					$("#container").fadeIn(animtionSpeed);
 				  				});
-				  			}, 2000);
+				  			}, 1000);
 
 					  		
 				    	});
@@ -660,9 +691,10 @@
 			});
 
 			$('#rise_fall_btn').on('click',function(){
-				clearTimeout(tokenLoadTimer);
+				
 				$("#tittle_container").text('Rise Fall');
 				$.when(closeNav()).then(function() {
+					$('#assets_container').css("display","none");
 					$('#topNavBar').toggle();
 					$('#bottomNavBar').toggle();
 			  		$("#container").fadeOut(animtionSpeed, function() {
@@ -676,7 +708,7 @@
 				  					$('#bottomNavBar').toggle();
 				  					$("#container").fadeIn(animtionSpeed);
 				  				});
-				  			}, 2000);
+				  			}, 1000);
 					  		
 				    	});
 				  	});
@@ -684,10 +716,11 @@
 			});
 
 			$('#profile_btn').on('click',function(){
-				clearTimeout(tokenLoadTimer);
+				
 				$("#username_container").text("Marvin");
 				$("#email_container").text("marvin@gmail.com");
 				$.when(closeNav()).then(function() {
+					$('#assets_container').css("display","none");
 					$('#topNavBar').toggle();
 					$('#bottomNavBar').toggle();
 			  		$("#container").fadeOut(animtionSpeed, function() {
@@ -702,7 +735,7 @@
 				  					$('#bottomNavBar').toggle();
 				  					$("#container").fadeIn(animtionSpeed);
 				  				});
-				  			}, 2000);
+				  			}, 1000);
 					  		
 				    	});
 				  	});
@@ -713,10 +746,11 @@
 				$("#notif_counter_number").text("");
 				$("#notif_counter_number").removeClass("animate__animated animate__bounce animate__repeat-2");
 				$("#notif_counter_number").css("display", "none");
-				clearTimeout(tokenLoadTimer);
+				
 				clearTimeout(newNotifChecker);
 				$("#tittle_container").text('Notification Center');
 				$.when(closeNav()).then(function() {
+					$('#assets_container').css("display","none");
 					$('#topNavBar').toggle();
 					$('#bottomNavBar').toggle();
 			  		$("#container").fadeOut(animtionSpeed, function() {
@@ -735,9 +769,11 @@
 			});
 	
 			$('#settings_btn').on('click',function(){
-				clearTimeout(tokenLoadTimer);
+				console.log('settings_btn');
+				
 				$("#tittle_container").text('Settings');
 				$.when(closeNav()).then(function() {
+					$('#assets_container').css("display","none");
 					$('#topNavBar').toggle();
 					$('#bottomNavBar').toggle();
 			  		$("#container").fadeOut(animtionSpeed, function() {
@@ -756,9 +792,10 @@
 			});
 
 			$('#regular_mining_btn').on('click',function(){
-				clearTimeout(tokenLoadTimer);
+				
 				$("#tittle_container").text('Regular Income Mining');
 				$.when(closeNav()).then(function() {
+					$('#assets_container').css("display","none");
 					$('#topNavBar').toggle();
 					$('#bottomNavBar').toggle();
 			  		$("#container").fadeOut(animtionSpeed, function() {
@@ -772,7 +809,7 @@
 				  					$('#bottomNavBar').toggle();
 				  					$("#container").fadeIn(animtionSpeed);
 				  				});
-				  			}, 2000);
+				  			}, 1000);
 					  		
 				    	});
 				  	});
@@ -781,9 +818,10 @@
 
 			$('#daily_mining_btn').on('click',function(){
 				$.alert("This part is still under development")
-				// clearTimeout(tokenLoadTimer);
+				// 
 				// $("#tittle_container").text('Daily Income Mining');
 				// $.when(closeNav()).then(function() {
+					// $('#assets_container').css("display","none");
 				// 	$('#topNavBar').toggle();
 				// 	$('#bottomNavBar').toggle();
 			 //  		$("#container").fadeOut(animtionSpeed, function() {
@@ -797,7 +835,7 @@
 				//   					$('#bottomNavBar').toggle();
 				//   					$("#container").fadeIn(animtionSpeed);
 				//   				});
-				//   			}, 2000);
+				//   			}, 1000);
 					  		
 				//     	});
 				//   	});
@@ -806,9 +844,10 @@
 
 			$('#discover_btn').on('click',function(){
 				$.alert("This part is still under development")
-				// clearTimeout(tokenLoadTimer);
+				// 
 				// $("#tittle_container").text('Daily Income Mining');
 				// $.when(closeNav()).then(function() {
+					// $('#assets_container').css("display","none");
 				// 	$('#topNavBar').toggle();
 				// 	$('#bottomNavBar').toggle();
 			 //  		$("#container").fadeOut(animtionSpeed, function() {
@@ -822,7 +861,7 @@
 				//   					$('#bottomNavBar').toggle();
 				//   					$("#container").fadeIn(animtionSpeed);
 				//   				});
-				//   			}, 2000);
+				//   			}, 1000);
 					  		
 				//     	});
 				//   	});
@@ -968,13 +1007,14 @@
 				// loadTokenInfo(tokensSelected[i].tokenName,tokensSelected[i].coingeckoTokenId)
 
 				$('#'+tokensSelected[i].tokenName+'_container').on('click',function(){
-						clearTimeout(tokenLoadTimer);
+						
 						$("#loading_text_container").text("Please wait while we load your recent activities");
 
 						clickContainer = tokensSelected[$(this).index()];
 
 						$("#tittle_container").text('Token Information');
 						$.when(closeNav()).then(function() {
+							$('#assets_container').css("display","none");
 							$('#topNavBar').toggle();
 							$('#bottomNavBar').toggle();
 							$("#container").fadeOut(animtionSpeed, function() {

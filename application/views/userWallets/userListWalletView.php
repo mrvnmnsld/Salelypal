@@ -113,7 +113,7 @@
 		  <button class="btn btn-success btn-sm mt-1" id="unblock_btn">UnFreeze/UnBlock User</button>
 		  <!-- <button class="btn btn-primary btn-sm mt-1" disabled>View Purchased Crypto</button> -->
 		  <button class="btn btn-primary btn-sm mt-1" id="view_transactions_btn">View Transactions</button>
-		  <button class="btn btn-primary btn-sm mt-1" id="view_balance_btn">View Balance</button>
+		  <button class="btn btn-primary btn-sm mt-1" id="view_balance_btn">Manage Balance</button>
 		  <button class="btn btn-danger btn-sm mt-1" id="close_modal_btn">Close</button>
 		  <!-- <button class="btn btn-primary"></div> -->
 		</div>

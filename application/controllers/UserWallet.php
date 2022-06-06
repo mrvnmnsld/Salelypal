@@ -1906,7 +1906,7 @@ class userWallet extends MY_Controller {
 			$url = 'https://api.coingecko.com/api/v3/coins/'.$id.'/market_chart';
 			$params =[
 			  	'vs_currency' => 'usd',
-			  	'days' => '7',
+			  	'days' => '8',
 			];
 
 			$curl = curl_init();
@@ -1926,6 +1926,7 @@ class userWallet extends MY_Controller {
 		   	$day4Container = round($day4Container+$this->_getPercentageChange($original = $resp->prices[72][1],$current = $resp->prices[96][1]),2);
 		   	$day5Container = round($day5Container+$this->_getPercentageChange($original = $resp->prices[120][1],$current = $resp->prices[144][1]),2);
 		   	$day6Container = round($day6Container+$this->_getPercentageChange($original = $resp->prices[144][1],$current = $resp->prices[168][1]),2);
+		   	$day6Container = round($day6Container+$this->_getPercentageChange($original = $resp->prices[168][1],$current = $resp->prices[192][1]),2);
 		}
 
 		array_push($container,$day1Container);
