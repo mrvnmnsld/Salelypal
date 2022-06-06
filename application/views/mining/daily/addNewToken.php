@@ -44,23 +44,26 @@
 			<input type="text" name="network_container" id="network_container" class="col-md form-control form-control-sm" placeholder="Please select token first" readonly></input>
 		</div>
 
-		<div class="row m-1">
-			<div class="col-md-2 pl-3"><b>APY:</b></div>	
-			<input type="number" name="apy_container" id="apy_container" class="col-md form-control form-control-sm" placeholder="Contract address of the token in network"></input>	
-		</div>
-
-		<div class="row m-1">
+		<!-- <div class="row m-1">
 			<div class="col-md-2 pl-3"><b>Cycle days:</b></div>	
 			<input type="text" name="cycle_day_container" id="cycle_day_container" class="col-md form-control form-control-sm" placeholder="Add comma to separate cycles days ex. 1,3,7"></input>	
+		</div> -->
+
+		<div class="row m-1">
+			<div class="col-md-2 pl-3"><b>Days:</b></div>
+ 			<select name="cycle_day_container" id="cycle_day_container" class="selectpicker col-md form-control form-control-sm" multiple>
+			</select>
 		</div>
 
 		<hr>
 		
-		<div class="d-flex flex-row-reverse">
-			<button class="btn btn-danger ml-2" id="closeBtn">Close</button>
-			<button class="btn btn-success " id="save_edit_btn">Save Token to Mine</button>
-		</div>		
+			
 	</form>
+
+	<div class="d-flex flex-row-reverse">
+		<button class="btn btn-danger ml-2" id="closeBtn">Close</button>
+		<button class="btn btn-success " id="save_edit_btn">Save Token to Mine</button>
+	</div>	
 
 
 
@@ -68,15 +71,25 @@
 
 <script type="text/javascript">
 	var tokenListArray = ajaxShortLink('userWallet/getAllTokensV2');
+	var daysContainer = ajaxShortLink('mining/daily/getAddDays');
 
 	for (var i = 0; i < tokenListArray.length; i++) {
 		$("#token_name_container").append("<option value='"+tokenListArray[i].id+"'>"+tokenListArray[i].description+" ("+tokenListArray[i].networkName.toUpperCase()+") </option>");
 	}
 
+	for (var i = 0; i < daysContainer.length; i++) {
+		$("#cycle_day_container").append("<option value='"+daysContainer[i].id+"'>"+daysContainer[i].days+" </option>");
+	}
+
 	$('#token_name_container').selectpicker({
-    style: 'border',
-    size: 4
-  });
+		style: 'border',
+		size: 4
+	});
+
+	$('#cycle_day_container').selectpicker({
+	    style: 'border',
+	    size: 4,
+	});
 
 	$('#token_name_container').on('change',function(){
 		
@@ -126,7 +139,6 @@
 	  	errorClass: 'is-invalid text-danger',
 	  	rules: {
 				token_name_container: "required",
-				apy_container: "required",
 				cycle_day_container: "required",
 				network_container: "required",
 	  	},
@@ -139,30 +151,39 @@
 	  	},
 	  	submitHandler: function(form){
 		    var data = $('#mainForm').serializeArray();
-      	var res = ajaxShortLink('mining/daily/saveNewToken',data);
-		    console.log(res);
 
-      	if (res) {
-        	$.toast({
-			        heading: '<h6>Success!</h6>',
-			        text: 'Successfully Saved New Token Mining!',
-			        showHideTransition: 'slide',
-			        icon: 'success',
-			        position: 'bottom-left'
-			        // position: 'bottom-center'
-			    })
+		    data.push({
+		    	'name':'cycle_days',
+		    	'value':$("#cycle_day_container").val().toString()
+		    });
 
-      		bootbox.hideAll();
-      		ajaxShortLink('mining/daily/getDailySettings');
-      	}else{
-        	$.toast({
-        	    heading: '<h6>Cant Save!</h6>',
-        	    text: 'Please contact system admin',
-        	    showHideTransition: 'slide',
-        	    icon: 'error',
-        	    position: 'bottom-left'
-        	})
-      	}
+      		var res = ajaxShortLink('mining/daily/saveNewDailyToken',data);
+
+		    console.log(data);
+
+
+
+	      	if (res) {
+	        	$.toast({
+				        heading: '<h6>Success!</h6>',
+				        text: 'Successfully Saved New Token Mining!',
+				        showHideTransition: 'slide',
+				        icon: 'success',
+				        position: 'bottom-left'
+				        // position: 'bottom-center'
+				    })
+
+	      		bootbox.hideAll();
+	      		loadDatatable('mining/daily/getDailySettings');
+	      	}else{
+	        	$.toast({
+	        	    heading: '<h6>Cant Save!</h6>',
+	        	    text: 'Please contact system admin',
+	        	    showHideTransition: 'slide',
+	        	    icon: 'error',
+	        	    position: 'bottom-left'
+	        	})
+	      	}
 	  	}
 	});
 </script>

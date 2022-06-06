@@ -309,6 +309,29 @@ class main extends MY_Controller {
 		echo json_encode($updateRecordsRes);
 	}
 
+	public function editProfileV2(){
+		// $user_id = $_GET['user_id'];
+		$data = $_GET;
+
+		$insertRecord = array(
+			'fullname' => $data['fullNameEdit'],
+			'birthday' => $data['birthdayEdit'],
+			'mobileNumber' => $data['mobileNumberEdit']
+		);
+
+		$tableName="user_tbl";
+		$fieldName='userID';
+		$where=$data['userID'];
+
+		$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
+
+		if($updateRecordsRes==1){
+			echo json_encode(true);
+		}else{
+			echo json_encode(false);
+		}
+	}
+
 	public function checkPasswordMatch(){
 		$matchingPassword = $_GET['matchingPassword'];
 		$oldPassword = $_GET['oldPassword'];
@@ -336,7 +359,7 @@ class main extends MY_Controller {
 
 	public function saveNewProfilePic(){
 		foreach ($_FILES as $key => $value) {
-			$config['upload_path'] = 'assets/imgs/profle_pic';
+			$config['upload_path'] = 'assets/imgs/profile_pic';
 			$config['allowed_types'] = '*';
 			$config['file_name'] = $_FILES[$key]['name'].'.'.strval(explode("/",$_FILES[$key]['type'])[1]);
 			unlink($config['upload_path'].'/'.$_POST['oldPic']);

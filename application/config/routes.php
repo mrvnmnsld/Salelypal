@@ -21,6 +21,7 @@ $route['paypal-test'] = 'main/paypaltest';
 
 $route['loadAnnouncement'] = 'main/loadAnnouncement';
 $route['editProfile'] = 'main/editProfile';
+$route['main/editProfileV2'] = 'main/editProfileV2';
 $route['saveNewProfilePic'] = 'main/saveNewProfilePic';
 $route['confirmPassword'] = 'main/confirmPassword';
 $route['main/getCurrentPrice'] = 'main/getCurrentPrice';
@@ -218,7 +219,7 @@ $route['main/getCurrentPrice'] = 'main/getCurrentPrice';
 
 		// daily
 			$route['mining/daily/getDailySettings'] = 'mining/getDailySettings';	
-			$route['mining/daily/saveNewToken'] = 'mining/saveNewDailyToken';
+			$route['mining/daily/saveNewDailyToken'] = 'mining/saveNewDailyToken';
 			$route['mining/daily/saveEditToken'] = 'mining/saveEditDailyToken';
 			$route['mining/daily/deleteToken'] = 'mining/deleteDailyToken';
 
@@ -304,5 +305,14 @@ $route['testing'] = 'main/testing';
 
 	$route['test-platform/newBalance'] = 'testPlatform/newBalance';
 // testing platform
+
+	//add day cycle
+
+	$route['mining/daily/getAddDays'] = 'mining/getAddDays';
+	$route['mining/daily/saveDays'] = 'mining/saveDays';
+	$route['mining/daily/updateDays'] = 'mining/updateDays';
+
+
+
 
 $route[(':any')] = 'main/error';

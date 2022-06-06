@@ -12,12 +12,10 @@ class testPlatform extends MY_Controller {
 	public function indexNormal(){
 		$this->load->view('wallet/test-platform/index');
 	}	
-	//arl_05-19-22
 
-		public function indexPro(){
-			$this->load->view('wallet/test-platform/index-pro');
-		}
-	//arl_05-19-22	
+	public function indexPro(){
+		$this->load->view('wallet/test-platform/index-pro');
+	}
 
 
 	public function getTronBalance(){
@@ -386,8 +384,4 @@ class testPlatform extends MY_Controller {
    		
 	}
 	
-
-
-	
-
 }
