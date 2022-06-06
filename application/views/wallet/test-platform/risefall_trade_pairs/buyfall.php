@@ -4,12 +4,12 @@
     }
 </style>
 
-<div class="pagetitle text-center text-primary">
+<div class="pagetitle text-center text-primary d-none">
   <h4>Buy Fall</h4>
   <small>Opening Position</small>
 </div>
 
-<hr>
+<!-- <hr> -->
 
 <div id="main_modal_container">
     <div class="btn-group btn-group-toggle d-flex justify-content-center mt-2" data-toggle="buttons">
@@ -65,9 +65,9 @@
 </div>
 
 <div id="sec_modal_container" style="display:none">
-    <div class="text-center text-success h5">Successfully Opened Position</div>
+    <!-- <div class="text-center text-success h5">Successfully Opened Position</div> -->
 
-    <div class="text-center">
+    <div class="text-center" id="opened_position_display_container">
         <div>
             <span>Price Started:</span>
             <span id="currentPrice_container"></span> 
@@ -88,7 +88,6 @@
             <span id="trade_pair_container"></span> 
         </div>
     </div>
-    <br>
 
     <div class="text-center">Countdown to resolve</div>
 
@@ -108,10 +107,14 @@
         <small>Note: Please wait for the position to be resolve</small>
         <small>Closing this means forfeit and assets staked will be liquidated</small>
     </div>
+
+    <div>
+        <button class="btn btn-block btn-sm btn-warning modalMinimize">Toggle chart view</button>
+    </div>
 </div>
 
 <div id="resolve_modal_container" style="display:none" class="text-center">
-    <div class="h3" id="resolve_text_container">Position Won!</div>
+    <!-- <div class="h3" id="resolve_text_container">Position Won!</div> -->
 
     <div>
         <span id="amount_won" class="h4">+ 100 USDT</span>
@@ -138,6 +141,9 @@
 </div>
 
 <script type="text/javascript">
+    var bettingSettings = ajaxShortLink("admin/getBettingSettings");
+    console.log(bettingSettings)
+
     var idToResolve;
     var balanceOpen = ajaxShortLink('test-platform/getTokenBalanceBySmartAddress',{
         // 'trc20Address':currentUser['trc20_wallet'],
@@ -173,7 +179,9 @@
            }
         // test-platform
 
-        if(amountInput!=""&&amountInput<=availableAmount&&isGasEnough==1){
+        // console.log(bettingSettings[0].value,amountInput,amountInput>=bettingSettings[0].value);
+
+        if(amountInput!=""&&amountInput<=availableAmount&&isGasEnough==1&&parseFloat(amountInput)>=parseFloat(bettingSettings[0].value)){
            $.confirm({
                title: 'Buy Fall?',
                content: 'Are you sure you want to proceed with these risks?',
@@ -259,11 +267,12 @@
                }
            });
         }else{
-           $.alert("Please Input Enough USDT to be Staked & make sure GAS(trx) is enough");
+           $.alert("Please Input Enough USDT to be Staked & make sure GAS(trx) is enough & minimum amount to stake is "+bettingSettings[0].value);
         }
     })
 
     function resolveThisID(id){
+        $(".modalMinimize").click();
 
         // test-platform
             var balanceUsdtInner = ajaxShortLink('test-platform/getTokenBalanceBySmartAddress',{
@@ -340,9 +349,7 @@
             var currentPrice = positionsOpened[0].currentPrice;
             var buyType = positionsOpened[0].buyType;
             var statusClass = "";
-
-            var ohlcTimeStamp = ajaxShortLinkNoParse("https://api.binance.com/api/v3/klines?symbol="+tokenPairArray.tokenPairID+"&interval=1m&limit=1&startTime="+(positionOpenedTimeStamp-60000)+"&endTime="+Date.parse(getTimeDateNonFormated()));
-            var closeTokenValue = ohlcTimeStamp[0][4];
+            var closeTokenValue = $("#token_pair_value_container").text();
             var status = '';
             var newIncome = ((positionsOpened[0].income/100)*positionsOpened[0].amount).toFixed(2);
 
@@ -407,5 +414,25 @@
         }
     }
 
-   
+    var isMinimized = 0;
+    $(".modalMinimize").on("click", function(){
+      if(isMinimized==0){
+        $(".bootbox .modal-content" ).css("position",'absolute')
+        $(".bootbox .modal-content" ).animate({
+            bottom: 0,
+        }, 'fast' );
+        $("#opened_position_display_container").toggle()
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+        $(".modal-backdrop").css('opacity',0.2);
+
+        isMinimized = 1
+      }else{
+        $(".bootbox .modal-content" ).removeAttr("style")
+        $("#opened_position_display_container").toggle()
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+        $(".modal-backdrop").css('opacity',0.5);
+
+        isMinimized = 0
+      }
+    });
 </script>
