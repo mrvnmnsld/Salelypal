@@ -779,54 +779,98 @@ class admin extends MY_Controller {
    		}
 	}
 
-		public function getAllVipPoints(){
-	   		$users = $this->_getRecordsData(
-	   			$selectfields = array("user_tbl.*"), 
+	public function getAllVipPoints(){
+   		$users = $this->_getRecordsData(
+   			$selectfields = array("user_tbl.*"), 
+	   		$tables = array('user_tbl'), 
+	   		$fieldName = null, $where = null, 
+	   		$join = null, $joinType = null, $sortBy = array('userID'), 
+	   		$sortOrder = array('desc'), $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+   		);
+
+   		for ($i=0; $i < count($users); $i++) { 
+	   		$totalReferals = $this->_getRecordsData(
+	   			$selectfields = array("count(*) AS totalReferals"), 
 		   		$tables = array('user_tbl'), 
-		   		$fieldName = null, $where = null, 
+		   		$fieldName = array('referred_user_id'), $where = array($users[$i]->userID), 
 		   		$join = null, $joinType = null, $sortBy = array('userID'), 
 		   		$sortOrder = array('desc'), $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
 	   		);
 
-	   		for ($i=0; $i < count($users); $i++) { 
-		   		$totalReferals = $this->_getRecordsData(
-		   			$selectfields = array("count(*) AS totalReferals"), 
-			   		$tables = array('user_tbl'), 
-			   		$fieldName = array('referred_user_id'), $where = array($users[$i]->userID), 
-			   		$join = null, $joinType = null, $sortBy = array('userID'), 
-			   		$sortOrder = array('desc'), $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
-		   		);
+	   		$totalTopUpArray = $this->_getRecordsData(
+	   			$selectfields = array("top_up.*"), 
+		   		$tables = array('top_up'), 
+		   		$fieldName = array('user_id'), $where = array($users[$i]->userID), 
+		   		$join = null, $joinType = null, $sortBy = null, 
+		   		$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+	   		);
 
-		   		$totalTopUpArray = $this->_getRecordsData(
-		   			$selectfields = array("top_up.*"), 
-			   		$tables = array('top_up'), 
-			   		$fieldName = array('user_id'), $where = array($users[$i]->userID), 
-			   		$join = null, $joinType = null, $sortBy = null, 
-			   		$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
-		   		);
+	   		$totalTopUpPoints = 0;
 
-		   		$totalTopUpPoints = 0;
-
-		   		foreach ($totalTopUpArray as $key => $value) {
-		   			$totalTopUpPoints = $totalTopUpPoints+intval($value->amount);
-		   		}
-
-				$tasksPoints = $this->_getRecordsData(
-					$selectfields = array("*"), 
-			   		$tables = array('task_completed'), 
-			   		$fieldName = array('userID','isValidated'), $where = array($users[$i]->userID,1), 
-			   		$join = null, $joinType = null, $sortBy = null, 
-			   		$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
-				);
-
-				foreach ($tasksPoints as $key => $value) {
-					$totalTopUpPoints = $totalTopUpPoints+intval($value->points);
-				}
-
-		   		$users[$i]->totalReferals = $totalReferals[0]->totalReferals;
-		   		$users[$i]->totalPoints = $totalTopUpPoints;
+	   		foreach ($totalTopUpArray as $key => $value) {
+	   			$totalTopUpPoints = $totalTopUpPoints+intval($value->amount);
 	   		}
 
-	   		echo json_encode($users);
-		}
+			$tasksPoints = $this->_getRecordsData(
+				$selectfields = array("*"), 
+		   		$tables = array('task_completed'), 
+		   		$fieldName = array('userID','isValidated'), $where = array($users[$i]->userID,1), 
+		   		$join = null, $joinType = null, $sortBy = null, 
+		   		$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+			);
+
+			foreach ($tasksPoints as $key => $value) {
+				$totalTopUpPoints = $totalTopUpPoints+intval($value->points);
+			}
+
+	   		$users[$i]->totalReferals = $totalReferals[0]->totalReferals;
+	   		$users[$i]->totalPoints = $totalTopUpPoints;
+   		}
+
+   		echo json_encode($users);
+	}
+
+	public function getBettingSettings(){
+   		$res = $this->_getRecordsData(
+   			$selectfields = array("*"), 
+	   		$tables = array('contract_settings_tbl'), 
+	   		$fieldName = null, $where = null, 
+	   		$join = null, $joinType = null, $sortBy = null, 
+	   		$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+   		);
+
+   		echo json_encode($res);
+	}
+
+	public function saveBettingSettings(){
+   		$tableName="contract_settings_tbl";
+   		$fieldName='id';
+
+   		$where=1;
+   		$insertRecord = array(
+   			'value' => $_GET["risefall_minimum"]
+   		);
+   		$risefall_minimumRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
+
+   		// _____________________________________________
+
+   		$where=2;
+   		$insertRecord = array(
+   			// 'risefall_minimum' => $_GET["risefall_minimum"]
+   			'value' => $_GET["contract_minimum"]
+   		);
+   		$contract_minimumRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
+
+   		if ($risefall_minimumRes||$contract_minimumRes) {
+   			echo json_encode(true);
+   		}else{
+   			echo json_encode(false);
+   		}
+
+	}
+
+	
+
+
+		
 }

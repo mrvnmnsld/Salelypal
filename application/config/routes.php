@@ -64,6 +64,10 @@ $route['main/getCurrentPrice'] = 'main/getCurrentPrice';
 
 	$route['saveCredentialEdit'] = 'main/saveCredentialEdit';
 
+	$route['admin/getBettingSettings'] = 'admin/getBettingSettings';
+	$route['admin/saveBettingSettings'] = 'admin/saveBettingSettings';
+
+	
 
 // Admin
 
@@ -89,6 +93,7 @@ $route['main/getCurrentPrice'] = 'main/getCurrentPrice';
 	$route['mainWallet/getErc20TokenBalance'] = 'mainWallet/getErc20TokenBalance';
 
 	$route['mainWallet/getAllTokensV2'] = 'mainWallet/getAllTokensV2';
+
 // MainWallet
 
 // userWallet

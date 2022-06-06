@@ -577,6 +577,7 @@
 			$('#assets_btn').on('click',function(){
 				if ($('#assets_container').css("display") == 'none') {
 					$("#tittle_container").text('Purchase');
+					$("html, body").animate({ scrollTop: 0 }, "slow");
 					$.when(closeNav()).then(function() {
 						$('#topNavBar').toggle();
 						$('#bottomNavBar').toggle();
@@ -604,8 +605,8 @@
 			});
 
 			$('#buyCrypto_btn, #buy_btn_option').on('click',function(){
-					
 					$("#tittle_container").text('Purchase');
+					$("html, body").animate({ scrollTop: 0 }, "slow");
 					$.when(closeNav()).then(function() {
 						$('#assets_container').css("display","none");
 						$('#topNavBar').toggle();
@@ -630,8 +631,8 @@
 			});
 
 			$('#addToken_btn').on('click',function(){
-				
 				$("#tittle_container").text('Token Management');
+				$("html, body").animate({ scrollTop: 0 }, "slow");
 				$.when(closeNav()).then(function() {
 					$('#assets_container').css("display","none");
 					$('#topNavBar').toggle();
@@ -667,6 +668,7 @@
 			$('#future_btn').on('click',function(){
 				
 				$("#tittle_container").text('Contract Trade');
+				$("html, body").animate({ scrollTop: 0 }, "slow");
 				$.when(closeNav()).then(function() {
 					$('#assets_container').css("display","none");
 					$('#topNavBar').toggle();
@@ -693,6 +695,7 @@
 			$('#rise_fall_btn').on('click',function(){
 				
 				$("#tittle_container").text('Rise Fall');
+				$("html, body").animate({ scrollTop: 0 }, "slow");
 				$.when(closeNav()).then(function() {
 					$('#assets_container').css("display","none");
 					$('#topNavBar').toggle();
@@ -719,6 +722,7 @@
 				
 				$("#username_container").text("Marvin");
 				$("#email_container").text("marvin@gmail.com");
+				$("html, body").animate({ scrollTop: 0 }, "slow");
 				$.when(closeNav()).then(function() {
 					$('#assets_container').css("display","none");
 					$('#topNavBar').toggle();
@@ -749,6 +753,7 @@
 				
 				clearTimeout(newNotifChecker);
 				$("#tittle_container").text('Notification Center');
+				$("html, body").animate({ scrollTop: 0 }, "slow");
 				$.when(closeNav()).then(function() {
 					$('#assets_container').css("display","none");
 					$('#topNavBar').toggle();
@@ -772,6 +777,7 @@
 				console.log('settings_btn');
 				
 				$("#tittle_container").text('Settings');
+				$("html, body").animate({ scrollTop: 0 }, "slow");
 				$.when(closeNav()).then(function() {
 					$('#assets_container').css("display","none");
 					$('#topNavBar').toggle();
@@ -794,6 +800,7 @@
 			$('#regular_mining_btn').on('click',function(){
 				
 				$("#tittle_container").text('Regular Income Mining');
+				$("html, body").animate({ scrollTop: 0 }, "slow");
 				$.when(closeNav()).then(function() {
 					$('#assets_container').css("display","none");
 					$('#topNavBar').toggle();
@@ -817,35 +824,37 @@
 			});
 
 			$('#daily_mining_btn').on('click',function(){
-				$.alert("This part is still under development")
-				// 
-				// $("#tittle_container").text('Daily Income Mining');
-				// $.when(closeNav()).then(function() {
-					// $('#assets_container').css("display","none");
-				// 	$('#topNavBar').toggle();
-				// 	$('#bottomNavBar').toggle();
-			 //  		$("#container").fadeOut(animtionSpeed, function() {
-				// 	  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
-				//   			$("#container").empty();
-				//   			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/daily_mining'}));
+				// $.alert("This part is still under development")
+				
+				$("#tittle_container").text('Daily Income Mining');
+				$("html, body").animate({ scrollTop: 0 }, "slow");
+				$.when(closeNav()).then(function() {
+					$('#assets_container').css("display","none");
+					$('#topNavBar').toggle();
+					$('#bottomNavBar').toggle();
+			  		$("#container").fadeOut(animtionSpeed, function() {
+					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
+				  			$("#container").empty();
+				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/daily_mining'}));
 
-				//   			setTimeout(function(){
-				//   				$("#loadSpinner").fadeOut(animtionSpeed,function(){
-				//   					$('#topNavBar').toggle();
-				//   					$('#bottomNavBar').toggle();
-				//   					$("#container").fadeIn(animtionSpeed);
-				//   				});
-				//   			}, 1000);
+				  			setTimeout(function(){
+				  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
+				  					$('#topNavBar').toggle();
+				  					$('#bottomNavBar').toggle();
+				  					$("#container").fadeIn(animtionSpeed);
+				  				});
+				  			}, 1000);
 					  		
-				//     	});
-				//   	});
-				// });
+				    	});
+				  	});
+				});
 			});
 
 			$('#discover_btn').on('click',function(){
 				$.alert("This part is still under development")
 				// 
 				// $("#tittle_container").text('Daily Income Mining');
+				// $("html, body").animate({ scrollTop: 0 }, "slow");
 				// $.when(closeNav()).then(function() {
 					// $('#assets_container').css("display","none");
 				// 	$('#topNavBar').toggle();
@@ -1013,6 +1022,7 @@
 						clickContainer = tokensSelected[$(this).index()];
 
 						$("#tittle_container").text('Token Information');
+						$("html, body").animate({ scrollTop: 0 }, "slow");
 						$.when(closeNav()).then(function() {
 							$('#assets_container').css("display","none");
 							$('#topNavBar').toggle();
