@@ -204,8 +204,7 @@ class mining extends MY_Controller {
 
 		$insertRecord = array(
 			'token_id' => $_GET['token_name_container'],
-			'apy' => $_GET["apy_container"],
-			'cycle_day' => $_GET["cycle_day_container"],
+			'cycle_day' => $_GET["cycle_days"],
 			'date_created' => $this->_getTimeStamp24Hours(),
 		);
 
@@ -216,6 +215,7 @@ class mining extends MY_Controller {
 		}else{
 			echo false;
 		}
+		// echo json_encode($insertRecord);
 	}
 
 
@@ -489,30 +489,61 @@ class mining extends MY_Controller {
 		echo json_encode($updateRecordsRes);
 	}
 
-	
+	public function getAddDays(){
+		$res = $this->_getRecordsData(
+			$selectfields = array("*"), 
+	   		$tables = array('add_days_tbl'),
+	   		$fieldName = null, 
+	   		$where = null, 
+	   		$join = null,	 
+	   		$joinType = null,
+	   		$sortBy = array("id"), 
+	   		$sortOrder = array('desc'), 
+	   		$limit = null, 
+	   		$fieldNameLike = null, 
+	   		$like = null,
+	   		$whereSpecial = null, 
+	   		$groupBy = null 
+		);
 
-	
+		echo json_encode($res);
+	}
 
+	public function saveDays(){
+		$insertRecord = array(
+			'days' => $_GET["days"],
+			'apy' => $_GET["apy"],
+			'dateCreated' => $this->_getTimeStamp24Hours(),
+		);
 
-	
+		$saveQueryNotif = $this->_insertRecords($tableName = 'add_days_tbl', $insertRecord);
 
-	
+		if ($saveQueryNotif) {
+			echo true;
+		}else{
+			echo false;
+		}
+		// echo json_encode($insertRecord);
+	}
 
-	
+	public function updateDays(){
 
-	
+		$insertRecord = array(
+			'days' => $_GET['days'],
+			'apy' => $_GET['apy'],
+		);
 
-	
+		$tableName="add_days_tbl";
+		$fieldName='id';
+		$where= $_GET['id'];
 
-	
+		$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
 
-
-	
-
-	
-
-	
-
-
+		if($updateRecordsRes){
+			echo json_encode(true);
+		}else{
+			echo json_encode(false);
+		}
+	}		
 	
 }

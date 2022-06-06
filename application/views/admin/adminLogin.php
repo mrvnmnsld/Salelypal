@@ -38,6 +38,81 @@
     />
 </head>
 
+<!-- <style>
+  *{
+    box-sizing: border-box;
+  }
+  body{
+    margin: 0;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    background: linear-gradient(to left bottom, #e9e9e9, #ebebeb, #d6d6d6, #b1b1b1, #505050);
+  }
+  #login_form_container{
+    filter: blur(0.4px);
+    width: 430px;
+    height: 700px;
+    padding: 60px 35px 35px 35px;
+    border-radius: 10px;
+    /*background: radial-gradient(circle, #555555, #535353, #505050, #4e4e4e, #4c4c4c);*/
+    box-shadow: 
+    /*bottom shadow*/
+    0px 20px 20px rgba(0,0,0,0.2),
+    0px 5px 10px rgba(0,0,0,0.2),
+    /*long bottom shadow*/
+    0px 70px 50px rgba(0,0,0,0.4),
+    /*right shadow*/
+    30px 50px 50px rgba(0,0,0,0.2),
+    /*left shadow*/
+    -30px 50px 50px rgba(0,0,0,0.2),
+    /*right inset*/
+    inset 20px 0px 60px rgba(0,0,0,0.1),
+    /*left inset*/
+    inset -20px 0px 60px rgba(0,0,0,0.1);
+  }
+  img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 0 auto;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  #title{
+    text-align: center;
+    font-size: 28px;
+    padding-top: 24px;
+    letter-spacing: 0.5px;
+  }
+  #sub-title{
+    text-align: center;
+    font-size: 15px;
+    padding-top: 7px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+  .input-field{
+    
+  }
+  .fields input{
+    width: 100%;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 18px;
+    color: white;
+    padding: 10px 10px 10px 5px;
+  }
+</style> -->
+
+
 <body>
   <main>
     <div class="container">
@@ -67,7 +142,6 @@
                     <div class="col-12">
                       <label for="yourUsername" class="form-label">Username</label>
                       <div class="input-group has-validation">
-                        <span class="input-group-text" id="inputGroupPrepend">@</span>
                         <input type="text" name="username" class="form-control" id="yourUsername">
                         <div class="invalid-feedback">Please enter your username.</div>
                       </div>
@@ -89,12 +163,14 @@
                     </span>
                   </form>
 
+                  <div class="credits">
+                    © Security Wallet 2022
+                  </div>
+
                 </div>
               </div>
 
-              <div class="credits">
-                © Security Wallet 2022
-              </div>
+              
 
             </div>
           </div>
@@ -104,6 +180,25 @@
 
     </div>
   </main>
+
+  <!-- <div id="login_form_container">
+    <img src="assets/imgs/ezpayex_logo.png">
+    <div id="title">Security Wallet Admin</div>
+    <div id="sub-title">Ezpayex</div>
+
+    <div class="input-field"> 
+      <i class="fa fa-user"></i>
+      <input type="text" placeholder="Username">     
+    </div>
+
+    <div class="input-field"> 
+      <i class="fa fa-lock"></i>
+      <input type="password" placeholder="Password">     
+    </div>
+
+    <button id="signin-button">LOGIN</button>
+  </div> -->
+  
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
   <script src="assets/vendor-admin/apexcharts/apexcharts.min.js"></script>

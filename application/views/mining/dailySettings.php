@@ -17,8 +17,8 @@
                 <th>ID #</th>
                 <th>Token Name</th>
                 <th>Network</th>
-                <th>APY</th>
-                <th>Cycles</th>
+                <!-- <th>APY</th> -->
+                <th>Cycles ID</th>
                 <th>Date Created</th>
             </tr>
         </thead>
@@ -26,11 +26,36 @@
   </div>
 </div>
 
+<div id="secondContainer" class="card"><br>
+  <div class="card-body">
+
+    <hr>
+
+    <div class="d-flex">
+    	<button class="btn btn-success mb-2" id="add_day_btn"><i class="bi bi-plus"></i> Add Days</button>
+    </div>
+
+    <table id="tableContainerDay" class="table table-hover" style="width:100%">
+    	<thead>
+            <tr>
+                <th>ID #</th>
+                <th>Days</th>
+                <th>APY</th>
+                <th>Date Created</th>
+            </tr>
+        </thead>
+    </table>
+  </div>
+</div>
+
+
+
 <script>
 	var selectedData = [];
 	$(document).ready(function() {
 		
 		loadDatatable('mining/daily/getDailySettings');
+		loadDatatable2('mining/daily/getAddDays');
 		$("#loading").toggle();
 		$("#footer").toggle();
 		$("#innerContainer").toggle();
@@ -50,7 +75,15 @@
 	  	});
 	});
 
-	
+		$('#add_day_btn').on('click', function () {
+	  	bootbox.alert({
+	  	    message: ajaxLoadPage('quickLoadPage',{'pagename':'mining/daily/addDays'}),
+	  	    size: 'large',
+	  	    centerVertical: true,
+	  	    closeButton: false
+	  	});
+	});
+
 
 	$('#tableContainer').on('click', 'tbody tr', function () {
 		selectedData = $('#tableContainer').DataTable().row($(this)).data();
@@ -61,6 +94,17 @@
 	  	    centerVertical: true,
 	  	    closeButton: false
 	  	});
+	});
+
+		$('#tableContainerDay').on('click', 'tbody tr', function () {
+		selectedData = $('#tableContainerDay').DataTable().row($(this)).data();
+		
+  	bootbox.alert({
+  	    message: ajaxLoadPage('quickLoadPage',{'pagename':'mining/daily/editDays'}),
+  	    size: 'large',
+  	    centerVertical: true,
+  	    closeButton: false
+  	});
 	});
 
 	function loadDatatable(url,data){
@@ -89,13 +133,52 @@
 				{ data:'id'},
 				{ data:'tokenName'},
 				{ data:'network'},
-				{ data:'apy'},
+				// { data:'apy'},
 				{ data:'cycle_day'},
 				{ data:'date_created'},
 
       		],"createdRow": function( row, data, dataIndex){
 
-    		},autoWidth: false,
+    		},
+    		order: [[0, 'desc']],
+    		autoWidth: false,
 		});
 	}
+
+	function loadDatatable2(url,data){
+		var callDataViaURLVal = ajaxShortLink(url,data);
+		$('#tableContainerDay').DataTable().destroy();
+
+		$('#tableContainerDay').DataTable({
+			dom: 'Bfrtip',
+	        buttons: [
+            	'copyHtml5',
+            {
+              extend: 'excelHtml5',
+              title: 'data_export'
+            },
+            {
+              extend: 'csvHtml5',
+              title: 'data_export'
+            },
+            {
+              extend: 'pdfHtml5',
+              title: 'data_export'
+            }
+	        ],
+			data: callDataViaURLVal,
+			columns: [
+				{ data:'id'},
+				{ data:'days'},
+				{ data:'apy'},
+				{ data:'dateCreated'},
+
+      		],"createdRow": function( row, data, dataIndex){
+
+    		},
+    		order: [[0, 'desc']],
+    		autoWidth: false,
+		});
+	}
+
 </script>
