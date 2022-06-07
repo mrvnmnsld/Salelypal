@@ -142,6 +142,7 @@
 </div>
 
 <script type="text/javascript">
+    isMinimized = 0;
     var bettingSettings = ajaxShortLink("admin/getBettingSettings");
     console.log(bettingSettings)
 
@@ -165,7 +166,7 @@
         var riskOptionVal = $('input[name="risk_option_radio"]:checked').val().split('/');
         var availableAmount = float2DecimalPoints($("#available_amount_container").text().split(' ')[0])
         var buyType = 'rise';
-        var currentPrice = tokenPriceBinanceLastPrice;
+        var currentPrice = $("#token_pair_value_container").text();
         var amountInput = $('#amount_input_container').val();
         var timer = riskOptionVal[0];
         var income = riskOptionVal[1];
@@ -216,6 +217,11 @@
                         var seconds = (timeStampJSObj.getTime() - now.getTime()) / 1000;
 
                         console.log(idToResolve);
+
+                        console.log(
+                            unixTimeToDate13CharNonFormated(date+(timer*1000)),
+                            formatDateObject(unixTimeToDate13CharNonFormated(date+(timer*1000)))
+                        )
 
                         setTimeout(function(){
                             resolveThisID(idToResolve)
@@ -414,7 +420,6 @@
         }
     }
 
-    var isMinimized = 0;
     $(".modalMinimize").on("click", function(){
       if(isMinimized==0){
         $(".bootbox .modal-content" ).css("position",'absolute')

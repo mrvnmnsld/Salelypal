@@ -471,7 +471,7 @@ function formatDateObject(date){
 		hour:'numeric',
 		minute:'numeric',
 		second:'2-digit',
-		hour12: false
+		// hour12: false
 	};
 
 	return date.toLocaleDateString("en-US", options);

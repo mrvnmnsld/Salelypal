@@ -141,6 +141,7 @@
 </div>
 
 <script type="text/javascript">
+    isMinimized = 0;
     var bettingSettings = ajaxShortLink("admin/getBettingSettings");
     console.log(bettingSettings)
 
@@ -163,7 +164,7 @@
         var riskOptionVal = $('input[name="risk_option_radio"]:checked').val().split('/');
         var availableAmount = float2DecimalPoints($("#available_amount_container").text().split(' ')[0])
         var buyType = 'fall';
-        var currentPrice = tokenPriceBinanceLastPrice;
+        var currentPrice = $("#token_pair_value_container").text();
         var amountInput = $('#amount_input_container').val();
         var timer = riskOptionVal[0];
         var income = riskOptionVal[1];
@@ -267,7 +268,7 @@
                }
            });
         }else{
-           $.alert("Please Input Enough USDT to be Staked & make sure GAS(trx) is enough & minimum amount to stake is "+bettingSettings[0].value);
+           $.alert("1. Please Input Enough USDT to be Staked <br>2. Make sure GAS(trx) is enough<br>3. Minimum amount to stake is "+bettingSettings[0].value);
         }
     })
 
@@ -414,7 +415,7 @@
         }
     }
 
-    var isMinimized = 0;
+    
     $(".modalMinimize").on("click", function(){
       if(isMinimized==0){
         $(".bootbox .modal-content" ).css("position",'absolute')

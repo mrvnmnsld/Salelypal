@@ -4,12 +4,12 @@
     }
 </style>
 
-<div class="pagetitle text-center text-primary">
+<!-- <div class="pagetitle text-center text-primary">
   <h4>Buy Short</h4>
   <small>Opening Position</small>
 
   <hr>
-</div>
+</div> -->
 
 <div id="main_modal_container" style="display:block">
     <small>
@@ -32,6 +32,19 @@
         <div style="flex-basis: 100%;">
             <input type="number" class="ml-1 form-control form-control-sm" id="amount_input_container">
         </div>      
+    </div>
+
+    <div class="">
+        <div>
+            <span>Value Predicted:</span>
+            <span id="risk_value_predicted"></span>
+        </div>
+
+        <div>
+            <span>Timestamp Trigger:</span>
+            <span id="risk_timestamp_predicted" class="notranslate"></span>
+
+        </div>
     </div>
 
     <!-- <div class="mt-3 headers">
@@ -60,19 +73,6 @@
       </label>
     </div>
 
-    <div class="mt-2">
-        <div>
-            <span>Value Predicted:</span>
-            <span id="risk_value_predicted"></span>
-        </div>
-
-        <div>
-            <span>Timestamp Trigger:</span>
-            <span id="risk_timestamp_predicted" class="notranslate"></span>
-
-        </div>
-    </div>
-
     <hr>
 
     <button class="btn btn-success btn-block btn-sm" id="open_position_btn">Open</button>
@@ -80,9 +80,9 @@
 </div>
 
 <div id="sec_modal_container" style="display:none">
-    <div class="text-center text-success h5">Successfully Opened Position</div>
+    <!-- <div class="text-center text-success h5">Successfully Opened Position</div> -->
 
-    <div class="text-center">
+    <div class="text-center mb-3" id="opened_position_display_container">
         <div>
             <span>Price Prediction:</span>
             <span id="price_predicted_container"></span> 
@@ -98,7 +98,6 @@
             <span id="trade_pair_container"></span> 
         </div>
     </div>
-    <br>
 
     <div class="text-center">Countdown to resolve</div>
 
@@ -114,9 +113,13 @@
         </div>
     </div>
 
-    <div class="text-danger text-center">
+    <div class="text-danger text-center mb-2">
         <small>Note: Please wait for the position to be resolve</small>
         <small>Closing this means forfeit and assets staked will be liquidated</small>
+    </div>
+
+    <div>
+        <button class="btn btn-block btn-sm btn-warning modalMinimize">Toggle chart view</button>
     </div>
 </div>
 
@@ -143,12 +146,16 @@
 </div>
 
 <script type="text/javascript">
-
+    isMinimized = 0;
+    var bettingSettings = ajaxShortLink("admin/getBettingSettings");
+    
     var balanceUsdt = ajaxShortLink('test-platform/getTokenBalanceBySmartAddress',{
         // 'trc20Address':currentUser['trc20_wallet'],
         'contractaddress':'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t',
     })['balance'];
     var gasSupply = getGasSupplyTestPlatform('trx');
+
+    console.log(bettingSettings)
     console.log(balanceUsdt,gasSupply);
 
     $("#available_amount_container").html(parseFloat(balanceUsdt).toFixed(2)+" USDT");
@@ -185,7 +192,7 @@
                     }
                 // test-platform
 
-                if($("#amount_input_container").val()<=availableAmount&&isGasEnough==1){
+                if($("#amount_input_container").val()<=availableAmount&&isGasEnough==1&&parseFloat(amount)>=parseFloat(bettingSettings[1].value)){
                     $.confirm({
                         title: 'Buy short?',
                         content: 'Are you sure you want to proceed with these risks?',
@@ -267,7 +274,7 @@
                         }
                     });
                 }else{
-                    $.alert("Please Input Enough USDT to be Staked & make sure GAS(trx) is enough");
+                    $.alert("1. Please Input Enough USDT to be Staked <br>2. Make sure GAS(trx) is enough<br>3. Minimum amount to stake is "+bettingSettings[1].value);
                 }
             }
            
@@ -390,7 +397,7 @@
 
             console.log(currentPrice,closeTokenValue);
 
-            if (parseFloat(currentPrice)>parseFloat(closeTokenValue)) {
+            if (parseFloat(positionsOpened[0].riskPrice)==parseFloat(closeTokenValue)) {
                 status = "WIN";
                 statusClass = 'text-success';
 
@@ -448,4 +455,25 @@
             // resolve here   
         }
     }
+
+    $(".modalMinimize").on("click", function(){
+      if(isMinimized==0){
+        $(".bootbox .modal-content" ).css("position",'absolute')
+        $(".bootbox .modal-content" ).animate({
+            bottom: 0,
+        }, 'fast' );
+        $("#opened_position_display_container").toggle()
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+        $(".modal-backdrop").css('opacity',0.2);
+
+        isMinimized = 1
+      }else{
+        $(".bootbox .modal-content" ).removeAttr("style")
+        $("#opened_position_display_container").toggle()
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+        $(".modal-backdrop").css('opacity',0.5);
+
+        isMinimized = 0
+      }
+    });
 </script>
