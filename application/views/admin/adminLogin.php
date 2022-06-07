@@ -56,12 +56,13 @@
     background: linear-gradient(to left bottom, #e9e9e9, #ebebeb, #d6d6d6, #b1b1b1, #505050);
   }
   #login_form_container{
+    text-align: center;
     filter: blur(0.4px);
     width: 430px;
     height: 700px;
     padding: 60px 35px 35px 35px;
     border-radius: 10px;
-    /*background: radial-gradient(circle, #555555, #535353, #505050, #4e4e4e, #4c4c4c);*/
+    background: radial-gradient(circle, #555555, #535353, #505050, #4e4e4e, #4c4c4c);
     box-shadow: 
     /*bottom shadow*/
     0px 20px 20px rgba(0,0,0,0.2),
@@ -89,6 +90,7 @@
     font-size: 28px;
     padding-top: 24px;
     letter-spacing: 0.5px;
+    color: white;
   }
   #sub-title{
     text-align: center;
@@ -97,21 +99,65 @@
     letter-spacing: 3px;
     text-transform: uppercase;
     font-weight: bold;
+    color: white;
+    margin-bottom: 50px;
   }
   .input-field{
-    
-  }
-  .fields input{
     width: 100%;
+    height: 50px;
+    background: rgb(232, 240, 254);
+    margin: 10px 0;
+    padding: 10px;
+    border: 2px solid #293038;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+  }
+  .input-field i {
+    flex: 1;
+    text-align: center;
+    color: #666;
+    font-size: 25px;
+    margin-top: 3px;
+  }
+  .input-field input{
+    flex: 5;
+    background: none;
     border: none;
     outline: none;
-    background: none;
-    font-size: 18px;
-    color: white;
-    padding: 10px 10px 10px 5px;
+    width: 100%;
+    font-size: 20px;
+    font-weight: 600;
+    color: #444;
   }
-</style> -->
-
+  .credits{
+    margin-top: 50px;
+    text-align: center;
+    color: white;
+  }
+  button {
+    width: 100%;
+    height: 50px;
+    transition: all .5s ease;
+    color: #fff;
+    border: 2px solid white;
+    border-radius: 20px;
+    font-family:'Montserrat', sans-serif;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1;
+    font-size: 17px;
+    font-weight: 600;
+    background-color : transparent;
+    padding: 10px;
+    outline: none;
+  }
+  button:hover {
+      color: #001F3F;
+      background-color: #fff;
+  }
+</style>
+ -->
 
 <body>
   <main>
@@ -196,7 +242,12 @@
       <input type="password" placeholder="Password">     
     </div>
 
-    <button id="signin-button">LOGIN</button>
+    <button>LOGIN</button>
+
+    <div class="credits">
+      <p>© Security Wallet 2022</p>
+    </div>
+
   </div> -->
   
 

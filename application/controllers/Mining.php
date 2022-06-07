@@ -226,8 +226,8 @@ class mining extends MY_Controller {
 
 		$insertRecord = array(
 			'token_id' => $_GET['token_name_container'],
-			'apy' => $_GET["apy_container"],
-			'cycle_day' => $_GET["cycle_day_container"],
+			// 'apy' => $_GET["apy_container"],
+			'cycle_day' => $_GET["cycle_days"],
 		);
 
 		$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);

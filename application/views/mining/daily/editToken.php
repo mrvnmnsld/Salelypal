@@ -222,7 +222,7 @@
 
 		    // console.log(data)
 
-    		var res = ajaxShortLink('mining/daily/saveEditToken',data);
+    		var res = ajaxShortLink('mining/daily/saveEditDailyToken',data);
 
 	      	if (res) {
 	        	$.toast({

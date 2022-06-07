@@ -220,7 +220,7 @@ $route['main/getCurrentPrice'] = 'main/getCurrentPrice';
 		// daily
 			$route['mining/daily/getDailySettings'] = 'mining/getDailySettings';	
 			$route['mining/daily/saveNewDailyToken'] = 'mining/saveNewDailyToken';
-			$route['mining/daily/saveEditToken'] = 'mining/saveEditDailyToken';
+			$route['mining/daily/saveEditDailyToken'] = 'mining/saveEditDailyToken';
 			$route['mining/daily/deleteToken'] = 'mining/deleteDailyToken';
 
 			$route['mining/daily/getDailyEntries'] = 'mining/getDailyEntries';
