@@ -492,7 +492,7 @@ class mining extends MY_Controller {
 	public function getAddDays(){
 		$res = $this->_getRecordsData(
 			$selectfields = array("*"), 
-	   		$tables = array('add_days_tbl'),
+	   		$tables = array('mining_daily_days_tbl'),
 	   		$fieldName = null, 
 	   		$where = null, 
 	   		$join = null,	 
@@ -516,7 +516,7 @@ class mining extends MY_Controller {
 			'dateCreated' => $this->_getTimeStamp24Hours(),
 		);
 
-		$saveQueryNotif = $this->_insertRecords($tableName = 'add_days_tbl', $insertRecord);
+		$saveQueryNotif = $this->_insertRecords($tableName = 'mining_daily_days_tbl', $insertRecord);
 
 		if ($saveQueryNotif) {
 			echo true;
@@ -533,7 +533,7 @@ class mining extends MY_Controller {
 			'apy' => $_GET['apy'],
 		);
 
-		$tableName="add_days_tbl";
+		$tableName="mining_daily_days_tbl";
 		$fieldName='id';
 		$where= $_GET['id'];
 

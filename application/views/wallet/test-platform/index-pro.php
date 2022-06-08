@@ -836,7 +836,7 @@
 					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
 				  			$("#container").empty();
 				  			// $("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/daily_mining'}));
-				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/daysList'}));
+				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/dailyMining'}));
 
 				  			setTimeout(function(){
 				  				$("#loadSpinner").fadeOut(animtionSpeed,function(){

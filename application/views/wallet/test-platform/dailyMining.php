@@ -32,9 +32,7 @@
   <div class="progress-bar" style="width: 87%;" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">87%</div>
 </div>
 
-<div id="daysBtn_container" class="container text-center my-5" style="display:block;">			
-
-</div>
+<div id="daysBtn_container" class="container text-center my-5" style="display:block;"></div>
 
 <div id="daily_mining_token_containers" style="display:none;">
     <button onclick="goback_btn()" class="btn btn-dark" id="backbtn_container">
@@ -57,7 +55,7 @@ for(var i = 0;i<getDaysSettings.length;i++){
 
     $("#daysBtn_container").append(
         '<div class="m-1 justify-content-center">'+
-            '<button id="'+getDaysSettings[i].id+'_days_btn" apyC="'+getDaysSettings[i].apy+'" daysId="'+getDaysSettings[i].id+'" type="button" class="btn btn-dark" style="min-width:12em;">'+
+            '<button id="'+getDaysSettings[i].id+'_days_btn" apy="'+getDaysSettings[i].apy+'" daysId="'+getDaysSettings[i].id+'" days="'+getDaysSettings[i].days+'" type="button" class="btn btn-dark" style="min-width:12em;">'+
                 '<span style = "float:left;">'+
                     '<i class="fa fa-clock-o fa-lg" style="" aria-hidden="true"></i>'+
                 '</span>'+
@@ -73,8 +71,7 @@ for(var i = 0;i<getDaysSettings.length;i++){
 				'day': $(this).attr('daysId')
         });
 
-        console.log(getDayTokens,'tokens with dayID:',$(this).attr('daysId'));
-        console.log(getDayTokens,'APY of dayID:',$(this).attr('apyC'));
+        console.log('TOKENS of daysId: '+$(this).attr('daysId'),getDayTokens);
         
 
         $('#daily_mining_token_containers').toggle();
@@ -88,9 +85,9 @@ for(var i = 0;i<getDaysSettings.length;i++){
                     'tokenID': getDayTokens[x].token_id
             });
 
-            var token_name_combo = tokenInformation.tokenName+' ('+tokenInformation.network.toUpperCase()+')';
+        	console.log(tokenInformation);
 
-            console.log(x,"TOKEN TEST");
+            var token_name_combo = tokenInformation.tokenName+' ('+tokenInformation.network.toUpperCase()+')';
 
             $("#days_token_container").append(
                 '<div id="'+tokenInformation.tokenName+'_container" class="cardboxes p-2 mt-2">'+
@@ -103,7 +100,7 @@ for(var i = 0;i<getDaysSettings.length;i++){
 							token_name_combo+
 						'</div>'+
 
-						'<div class="flex-even text-right h5 text-success">APY: '+$(this).attr('apyC')+'%</div>'+
+						'<div class="flex-even text-right h5 text-success">APY: '+$(this).attr('apy')+'%</div>'+
 					'</div>'+
 
 					'<div class="text-muted" style="font-size:.7em">'+
@@ -112,45 +109,41 @@ for(var i = 0;i<getDaysSettings.length;i++){
 
 					'<div class="m-2">'+
 						"<button type='button' class='btn btn-warning btn-block' onClick='"+
-							'openEntryForm("")'+
+							'openEntryForm("'+tokenInformation.smartAddress+'","'+getDayTokens[x].id+'","'+token_name_combo+'","'+tokenInformation.network+'","'+tokenInformation.tokenName+'","'+'","'+$(this).attr('apy')+'","'+$(this).attr('days')+'")'+
 						"'>Mine Now!</button>"+
 					'</div>'+
 				'</div>'
             );
         }
 
-    });
 
+    });
 }
 
+function openEntryForm(smartAddress,mining_id,token_name_combo,networkName,tokenName,apy,cycleSelected){	
+	selectedData = {
+		'cycleSelected':cycleSelected,
+		'smartAddress':smartAddress,
+		'mining_id':mining_id,
+		'token_name_combo':token_name_combo,
+		'networkName':networkName,
+		'tokenName':tokenName,
+		'apy':apy,
+	}
 
+	console.log(selectedData);
+
+	bootbox.alert({
+	    message: ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/daily_income/saveEntry'}),
+	    size: 'large',
+	    centerVertical: true,
+	    closeButton: false
+	});
+}
 
 function goback_btn(){
     $("#daysBtn_container").toggle()
     $("#daily_mining_token_containers").toggle()
-    
-//     $("#tittle_container").text('Daily Income Mining');
-//         $("html, body").animate({ scrollTop: 0 }, "slow");
-//         $.when(closeNav()).then(function() {
-//             $('#assets_container').css("display","none");
-//             $('#topNavBar').toggle();
-//             $('#bottomNavBar').toggle();
-//             $("#container").fadeOut(animtionSpeed, function() {
-//                 $("#loadSpinner").fadeIn(animtionSpeed,function(){
-//                     $("#container").empty();
-//                     $("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/daysList'}));
-
-//                     setTimeout(function(){
-//                         $("#loadSpinner").fadeOut(animtionSpeed,function(){
-//                             $('#topNavBar').toggle();
-//                             $('#bottomNavBar').toggle();
-//                             $("#container").fadeIn(animtionSpeed);
-//                         });
-//                     }, 120);
-                    
-//                 });
-//             });
-//         });
 }
 
 </script>
