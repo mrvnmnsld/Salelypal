@@ -55,6 +55,11 @@
 			</select>
 		</div>
 
+		<div class="row m-1">
+			<div class="col-md-2 pl-3"><b>Limit:</b></div>	
+			<input type="text" name="purchase_limit_container" id="purchase_limit_container" class="col-md form-control form-control-sm" placeholder="Purchase Limit"></input>
+		</div>
+
 		<hr>
 	</form>
 
@@ -69,6 +74,9 @@
 <script type="text/javascript">
 	var tokenListArray = ajaxShortLink('userWallet/getAllTokensV2');
 	var daysContainer = ajaxShortLink('mining/daily/getAddDays');
+
+	
+
 
 	// select picker
 		for (var i = 0; i < tokenListArray.length; i++) {
@@ -103,6 +111,8 @@
 	  	$('#token_name_container').selectpicker("val",selectedData.token_id)
 	  	$('#token_name_container').selectpicker('render');
 	// select picker
+
+	$("#purchase_limit_container").val(selectedData.purchasable_limit);
 
   	$("#network_container").val(selectedData.network.toUpperCase());
   	// $('#apy_container').val(selectedData.apy)
@@ -199,6 +209,7 @@
 				token_name_container: "required",
 				cycle_day_container: "required",
 				network_container: "required",
+				purchase_limit_container: "required",
 	  	},
 	  	errorPlacement: function (error, element) {
 	  	    if ($(element).is('select')) {
@@ -220,9 +231,9 @@
 		    	'value':$("#cycle_day_container").val().toString()
 		    });
 
-		    // console.log(data)
-
     		var res = ajaxShortLink('mining/daily/saveEditDailyToken',data);
+
+    		console.log(res)
 
 	      	if (res) {
 	        	$.toast({

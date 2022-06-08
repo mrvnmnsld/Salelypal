@@ -1,6 +1,7 @@
 <style type="text/css">
 .is-invalid{
   text-align: center;
+  color: red;
 }
 </style>
 
@@ -38,7 +39,7 @@
     />
 </head>
 
-<!-- <style>
+<style>
   *{
     box-sizing: border-box;
   }
@@ -62,7 +63,8 @@
     height: 700px;
     padding: 60px 35px 35px 35px;
     border-radius: 10px;
-    background: radial-gradient(circle, #555555, #535353, #505050, #4e4e4e, #4c4c4c);
+    /*background: radial-gradient(circle, #555555, #535353, #505050, #4e4e4e, #4c4c4c);*/
+    background: #293038;
     box-shadow: 
     /*bottom shadow*/
     0px 20px 20px rgba(0,0,0,0.2),
@@ -117,7 +119,7 @@
     flex: 1;
     text-align: center;
     color: #666;
-    font-size: 25px;
+    font-size: 23px;
     margin-top: 3px;
   }
   .input-field input{
@@ -126,7 +128,7 @@
     border: none;
     outline: none;
     width: 100%;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
     color: #444;
   }
@@ -135,13 +137,14 @@
     text-align: center;
     color: white;
   }
-  button {
+  button{
     width: 100%;
     height: 50px;
     transition: all .5s ease;
     color: #fff;
     border: 2px solid white;
-    border-radius: 20px;
+    border-radius: 20px !important;
+    margin-top: 20px !important;
     font-family:'Montserrat', sans-serif;
     text-transform: uppercase;
     text-align: center;
@@ -157,10 +160,10 @@
       background-color: #fff;
   }
 </style>
- -->
+
 
 <body>
-  <main>
+ <!--  <main>
     <div class="container">
       <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
         <div class="container">
@@ -199,7 +202,7 @@
                       <div class="invalid-feedback">Please enter your password!</div>
                     </div>
 
-                    <div id="errorReporter" class="text-center h5 text-danger animate__animated animate__shakeX" style="display:none"></div>
+                    
 
                     <div class="col-12">
                       <button class="btn btn-primary w-100" type="submit">Login</button>
@@ -225,30 +228,36 @@
       </section>
 
     </div>
-  </main>
+  </main> -->
 
-  <!-- <div id="login_form_container">
+  <div id="login_form_container">
     <img src="assets/imgs/ezpayex_logo.png">
     <div id="title">Security Wallet Admin</div>
     <div id="sub-title">Ezpayex</div>
 
-    <div class="input-field"> 
-      <i class="fa fa-user"></i>
-      <input type="text" placeholder="Username">     
-    </div>
+    <form id="loginForm">
+      <div class="input-field"> 
+        <i class="fa fa-user"></i>
+        <input type="text" name="username" placeholder="Username">     
+      </div>
 
-    <div class="input-field"> 
-      <i class="fa fa-lock"></i>
-      <input type="password" placeholder="Password">     
-    </div>
+      <div class="input-field"> 
+        <i class="fa fa-lock"></i>
+        <input type="password" name="password" placeholder="Password">     
+      </div>
 
-    <button>LOGIN</button>
+      <div id="errorReporter" class="text-center h5 animate__animated animate__shakeX" style="display:none"></div>
+
+      <button>LOGIN</button>
+    </form>
+
+    
 
     <div class="credits">
       <p>© Security Wallet 2022</p>
     </div>
 
-  </div> -->
+  </div>
   
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
@@ -286,10 +295,12 @@
           var data = $('#loginForm').serializeArray();
           var loginRes = ajaxShortLink('admin/checkLoginCredentials',data);
 
-          console.log(loginRes);
+          console.log(data);
 
           if (loginRes['wrongFlag'] != 0) {
-            $('#errorReporter').toggle();
+            $('#errorReporter').css("display","block");
+            $('#errorReporter').css("color","red");
+
 
             if (loginRes['wrongFlag'] == 2 || loginRes['wrongFlag'] == 1) {
               $('#errorReporter').text("Wrong Credentials.");
@@ -297,6 +308,8 @@
               $('#errorReporter').html("Account frozen!");
             }
           }else{
+            $('#errorReporter').text("Successfully logged in. Please wait");
+            $('#errorReporter').css("color","white");
             window.location.replace("admin-dashboard");
           }
         
