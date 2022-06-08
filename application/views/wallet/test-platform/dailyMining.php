@@ -114,7 +114,7 @@ for(var i = 0;i<getDaysSettings.length;i++){
 							token_name_combo+
 						'</div>'+
 
-						'<div class="flex-even text-right h5 text-success">APY: '+$(this).attr('apy')+'%</div>'+
+						'<div class="flex-even text-right h5 text-success">APY: '+$(this).attr('apyC')+'%</div>'+
 					'</div>'+
 
 					'<div class="text-muted" style="font-size:.7em">'+
