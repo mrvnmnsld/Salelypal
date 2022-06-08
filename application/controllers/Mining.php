@@ -545,5 +545,25 @@ class mining extends MY_Controller {
 			echo json_encode(false);
 		}
 	}		
+
+	public function getDayTokens(){
+		$res = $this->_getRecordsData(
+			$selectfields = array("*"), 
+	   		$tables = array('mining_daily_income'),
+	   		$fieldName = null, 
+	   		$where = null, 
+	   		$join = null,	 
+	   		$joinType = null,
+	   		$sortBy = null, 
+	   		$sortOrder = null, 
+	   		$limit = null, 
+	   		$fieldNameLike = null, 
+	   		$like = null,
+	   		$whereSpecial = array('cycle_day LIKE "%'.$_GET['day'].'%"'), 
+	   		$groupBy = null 
+		);
+
+		echo json_encode($res);
+	}
 	
 }

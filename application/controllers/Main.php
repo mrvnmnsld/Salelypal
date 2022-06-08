@@ -714,18 +714,27 @@ class main extends MY_Controller {
    		echo json_encode($updateRecordsRes);
 	}
 
-	
+	public function getTokenInfoViaID(){
+			$tokenid = $_GET['tokenID'];
 
-	
+			$res = $this->_getRecordsData(
+				$selectfields = array("token_reference.tokenName,token_reference.tokenImage,token_reference.smartAddress,token_reference.decimal,network_reference.network"), 
+				$tables = array('token_reference','network_reference'),
+				$fieldName = array('token_reference.id'), 
+				$where = array($tokenid), 
+				$join = array('token_reference.networkId = network_reference.id'), 
+				$joinType = array('inner','inner'),
+				$sortBy = null, 
+				$sortOrder = null, 
+				$limit = null, 
+				$fieldNameLike = null, 
+				$like = null,
+				$whereSpecial = null, 
+				$groupBy = null 
+			);
+
+			echo json_encode($res[0]);
+	}
 
 
-	
-
-	
-
-
-	
-
-
-	
 }

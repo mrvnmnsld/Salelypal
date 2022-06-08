@@ -17,6 +17,7 @@ $route['homeViewPro'] = 'main/homeViewPro';
 
 $route['paypal-test'] = 'main/paypaltest';
 
+
 // $route['homeView'] = 'main/homeView';
 
 $route['loadAnnouncement'] = 'main/loadAnnouncement';
@@ -25,6 +26,8 @@ $route['main/editProfileV2'] = 'main/editProfileV2';
 $route['saveNewProfilePic'] = 'main/saveNewProfilePic';
 $route['confirmPassword'] = 'main/confirmPassword';
 $route['main/getCurrentPrice'] = 'main/getCurrentPrice';
+$route['main/getTokenInfoViaID'] = 'main/getTokenInfoViaID';
+
 
 // Admin
 	$route['admin-login'] = 'admin/adminLogin';
@@ -231,6 +234,14 @@ $route['main/getCurrentPrice'] = 'main/getCurrentPrice';
 
 			$route['mining/daily/getAllDailyEntries'] = 'mining/getAllDailyEntries';
 			$route['mining/daily/editMiningEntry'] = 'mining/editDailyMiningEntry';
+
+			$route['mining/daily/getAddDays'] = 'mining/getAddDays';
+			$route['mining/daily/saveDays'] = 'mining/saveDays';
+			$route['mining/daily/updateDays'] = 'mining/updateDays';
+			$route['mining/daily/getDayTokens'] = 'mining/getDayTokens';
+			$route['mining/daily/getDailyMiningDaysSettings'] = 'mining/getDailyMiningDaysSettings';
+			
+
 		// daily
 	//mining
 
@@ -308,9 +319,7 @@ $route['testing'] = 'main/testing';
 
 	//add day cycle
 
-	$route['mining/daily/getAddDays'] = 'mining/getAddDays';
-	$route['mining/daily/saveDays'] = 'mining/saveDays';
-	$route['mining/daily/updateDays'] = 'mining/updateDays';
+	
 
 
 
