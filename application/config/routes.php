@@ -240,6 +240,10 @@ $route['main/getTokenInfoViaID'] = 'main/getTokenInfoViaID';
 			$route['mining/daily/updateDays'] = 'mining/updateDays';
 			$route['mining/daily/getDayTokens'] = 'mining/getDayTokens';
 			$route['mining/daily/getDailyMiningDaysSettings'] = 'mining/getDailyMiningDaysSettings';
+
+			$route['mining/daily/getPurchasableLimit'] = 'mining/getPurchasableLimit';
+			$route['mining/daily/getTokenBalanceLimit'] = 'mining/getTokenBalanceLimit';
+
 			
 
 		// daily
