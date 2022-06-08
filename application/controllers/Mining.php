@@ -226,8 +226,8 @@ class mining extends MY_Controller {
 
 		$insertRecord = array(
 			'token_id' => $_GET['token_name_container'],
-			// 'apy' => $_GET["apy_container"],
 			'cycle_day' => $_GET["cycle_days"],
+			'purchasable_limit' => $_GET["purchase_limit_container"],
 		);
 
 		$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
@@ -237,6 +237,8 @@ class mining extends MY_Controller {
 		}else{
 			echo false;
 		}
+
+		// echo json_encode($insertRecord);
 	}	
 
 	public function deleteDailyToken(){
@@ -441,27 +443,30 @@ class mining extends MY_Controller {
 					mining_daily_income_entry.*,FORMAT(mining_daily_income_entry.balance, token_reference.decimal) AS balance,
 					user_tbl.email,
 					CONCAT(token_reference.tokenName,' (',network_reference.network,')')AS tokenNameCombo,
-					FORMAT (((mining_daily_income_entry.balance * (mining_regular.apy / 100))/365)*mining_daily_income_entry.lock_period, token_reference.decimal)  AS claimAmount,
-					mining_regular.apy,
-					DATE_ADD(mining_daily_income_entry.date_created, INTERVAL mining_daily_income_entry.lock_period DAY) AS date_release
+					FORMAT (((mining_daily_income_entry.balance * (mining_daily_days_tbl.apy / 100))/365)*mining_daily_days_tbl.days, token_reference.decimal)  AS claimAmount,
+					mining_daily_days_tbl.apy,
+					DATE_ADD(mining_daily_income_entry.date_created, INTERVAL mining_daily_days_tbl.days DAY) AS date_release,
+					mining_daily_days_tbl.days AS daysLock
 
 				"), 
 	   		$tables = array(
 	   			'mining_daily_income_entry',
 	   			'user_tbl',
-	   			'mining_regular',
+	   			'mining_daily_income',
 	   			'token_reference',
-	   			'network_reference'
+	   			'network_reference',
+	   			'mining_daily_days_tbl'
 	   		),
 	   		$fieldName = null, 
 	   		$where = null, 
 	   		$join = array(
 	   			'mining_daily_income_entry.userID = user_tbl.userID',
-	   			'mining_daily_income_entry.mining_id = mining_regular.id',
-	   			'mining_regular.token_id = token_reference.id',
-	   			'token_reference.networkId = network_reference.id'
+	   			'mining_daily_income_entry.mining_id = mining_daily_income.id',
+	   			'mining_daily_income.token_id = token_reference.id',
+	   			'token_reference.networkId = network_reference.id',
+	   			'mining_daily_income_entry.daysID = mining_daily_days_tbl.id'
 	   		), 
-	   		$joinType = array('inner','inner','inner','inner'),
+	   		$joinType = array('inner','inner','inner','inner','inner'),
 	   		$sortBy = null, 
 	   		$sortOrder = null, 
 	   		$limit = null, 
@@ -565,5 +570,95 @@ class mining extends MY_Controller {
 
 		echo json_encode($res);
 	}
+
+	public function getPurchasableLimit(){
+		$tokenLimit = $this->_getRecordsData(
+			$selectfields = array("*"), 
+	   		$tables = array('mining_daily_income'),
+	   		$fieldName = null, 
+	   		$where = null, 
+	   		$join = null,	 
+	   		$joinType = null,
+	   		$sortBy = null, 
+	   		$sortOrder = null, 
+	   		$limit = null, 
+	   		$fieldNameLike = null, 
+	   		$like = null,
+	   		$whereSpecial = array('cycle_day LIKE "%'.$_GET['day'].'%"'), 
+	   		$groupBy = null 
+		);
+
+		$totalBalanceContainer = 0;
+		$totalLimitContainer = 0;
+
+		foreach ($tokenLimit as $key => $value) {
+			$tokenBalance = $this->_getRecordsData(
+				$selectfields = array("COALESCE(SUM(balance),0) AS balance"), 
+		   		$tables = array('mining_daily_income_entry'),
+		   		$fieldName = array("mining_id","daysID"), 
+		   		$where = array($value->id,$_GET['day']), 
+		   		$join = null,	 
+		   		$joinType = null,
+		   		$sortBy = null, 
+		   		$sortOrder = null, 
+		   		$limit = null, 
+		   		$fieldNameLike = null, 
+		   		$like = null,
+		   		$whereSpecial = null, 
+		   		$groupBy = null 
+			);
+
+			$totalBalanceContainer = (int)$tokenBalance[0]->balance + $totalBalanceContainer;
+			$totalLimitContainer = (int)$value->purchasable_limit + $totalLimitContainer;
+		}
+
+		echo json_encode(array(
+			"totalBalance"=>$totalBalanceContainer,
+			"totalLimit"=>$totalLimitContainer
+		));
+		
+	}
+
+	public function getTokenBalanceLimit(){
+		$tokenBalance = $this->_getRecordsData(
+			$selectfields = array("COALESCE(SUM(balance),0) AS balance"), 
+	   		$tables = array('mining_daily_income_entry'),
+	   		$fieldName = array("mining_id","daysID"), 
+	   		$where = array($_GET['mining_id'],$_GET['day']), 
+	   		$join = null,	 
+	   		$joinType = null,
+	   		$sortBy = null, 
+	   		$sortOrder = null, 
+	   		$limit = null, 
+	   		$fieldNameLike = null, 
+	   		$like = null,
+	   		$whereSpecial = null, 
+	   		$groupBy = null 
+		);
+
+		$tokenLimit = $this->_getRecordsData(
+			$selectfields = array("*"), 
+	   		$tables = array('mining_daily_income'),
+	   		$fieldName = array("id"), 
+	   		$where = array($_GET['mining_id']), 
+	   		$join = null,	 
+	   		$joinType = null,
+	   		$sortBy = null, 
+	   		$sortOrder = null, 
+	   		$limit = null, 
+	   		$fieldNameLike = null, 
+	   		$like = null,
+	   		$whereSpecial = null, 
+	   		$groupBy = null
+		);
+
+		echo json_encode(array(
+			"totalBalance"=>$tokenBalance[0]->balance,
+			"totalLimit"=>$tokenLimit[0]->purchasable_limit
+		));
+	}
+
+
+	
 	
 }
