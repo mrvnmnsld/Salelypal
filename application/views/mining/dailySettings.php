@@ -24,13 +24,8 @@
         </thead>
     </table>
   </div>
-</div>
 
-<div id="secondContainer" class="card"><br>
   <div class="card-body">
-
-    <hr>
-
     <div class="d-flex">
     	<button class="btn btn-success mb-2" id="add_day_btn"><i class="bi bi-plus"></i> Add Days</button>
     </div>
@@ -47,6 +42,7 @@
     </table>
   </div>
 </div>
+
 
 
 
