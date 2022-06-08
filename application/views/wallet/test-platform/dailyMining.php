@@ -28,11 +28,9 @@
 	}
 </style>
 
-<div class="progress">
-  <div class="progress-bar" style="width: 87%;" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">87%</div>
-</div>
+<div id="daysBtn_container" class="container text-center my-5" style="display:block;">			
 
-<div id="daysBtn_container" class="container text-center my-5" style="display:block;"></div>
+</div>
 
 <div id="daily_mining_token_containers" style="display:none;">
     <button onclick="goback_btn()" class="btn btn-dark" id="backbtn_container">
@@ -53,16 +51,32 @@ console.log(getDaysSettings);
 
 for(var i = 0;i<getDaysSettings.length;i++){
 
-    $("#daysBtn_container").append(
-        '<div class="m-1 justify-content-center">'+
-            '<button id="'+getDaysSettings[i].id+'_days_btn" apy="'+getDaysSettings[i].apy+'" daysId="'+getDaysSettings[i].id+'" days="'+getDaysSettings[i].days+'" type="button" class="btn btn-dark" style="min-width:12em;">'+
-                '<span style = "float:left;">'+
-                    '<i class="fa fa-clock-o fa-lg" style="" aria-hidden="true"></i>'+
-                '</span>'+
-                    getDaysSettings[i].days+"Days , APY"+getDaysSettings[i].apy+
-            '</button>'+
-        '</div>'
-    );
+	$('#daysBtn_container').append(
+		'<div class="cardboxes p-2 mt-2">'+
+			'<div class="d-flex justify-content-around">'+
+				'<div class="flex-even text-center h3 text-dark">'+
+				+getDaysSettings[i].days+' Days'+
+				'</div>'+
+			'</div>'+
+
+			'<div class="flex-even text-center h5 text-success">APY: '+getDaysSettings[i].apy+'%</div>'+
+
+			'<div class="text-muted" style="font-size:.7em">'+
+				'Mining annualize rate of return'+
+			'</div>'+
+
+			'<div class="m-2">'+
+				'<button id="'+getDaysSettings[i].id+'_days_btn" apyC="'+getDaysSettings[i].apy+'" daysId="'+getDaysSettings[i].id+'" type="button" class="btn btn-warning btn-block" style="min-width:12em;">'+
+				'Participate now!</button>'+
+			'</div>'+
+
+			'<div class="mx-2">'+
+				'<div class="progress">'+
+					'<div class="progress-bar" style="width: 87%;" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">87%</div>'+
+				'</div>'+
+			'</div>'+
+		'</div>'
+	);
     
 
     $('#'+getDaysSettings[i].id+'_days_btn').on('click',function(){
