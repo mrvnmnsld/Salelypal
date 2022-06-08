@@ -59,9 +59,9 @@
 	</form>
 
 	<div class="d-flex flex-row-reverse">
-		<button class="ml-2 btn btn-danger" id="closeBtn">Close</button>
-		<button class="ml-2 btn btn-warning" id="delete_btn">Delete</button>
-		<button class="ml-2 btn btn-success" id="save_edit_btn">Save Token to Mine</button>
+		<button type="button" class="ml-2 btn btn-danger" id="closeBtn">Close</button>
+		<button type="button" class="ml-2 btn btn-warning" id="delete_btn">Delete</button>
+		<button type="button" class="ml-2 btn btn-success" id="save_edit_btn">Save Token to Mine</button>
 	</div>
 
 </div>
