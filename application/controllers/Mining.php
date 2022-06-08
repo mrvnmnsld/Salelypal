@@ -226,8 +226,8 @@ class mining extends MY_Controller {
 
 		$insertRecord = array(
 			'token_id' => $_GET['token_name_container'],
-			// 'apy' => $_GET["apy_container"],
 			'cycle_day' => $_GET["cycle_days"],
+			'purchasable_limit' => $_GET["purchase_limit_container"],
 		);
 
 		$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
@@ -237,6 +237,8 @@ class mining extends MY_Controller {
 		}else{
 			echo false;
 		}
+
+		// echo json_encode($insertRecord);
 	}	
 
 	public function deleteDailyToken(){

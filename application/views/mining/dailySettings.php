@@ -17,8 +17,8 @@
                 <th>ID #</th>
                 <th>Token Name</th>
                 <th>Network</th>
-                <!-- <th>APY</th> -->
                 <th>Cycles ID</th>
+                <th>Purchasable Limit</th>
                 <th>Date Created</th>
             </tr>
         </thead>
@@ -26,6 +26,13 @@
   </div>
 
   <div class="card-body">
+  	<div class="pagetitle">
+      <h1>Add Cycle Day</h1>
+      <!-- <sub class="fw-bold">Configure Tokens listings in daily income mining</sub> -->
+    </div>
+
+    <hr>
+
     <div class="d-flex">
     	<button class="btn btn-success mb-2" id="add_day_btn"><i class="bi bi-plus"></i> Add Days</button>
     </div>
@@ -129,8 +136,8 @@
 				{ data:'id'},
 				{ data:'tokenName'},
 				{ data:'network'},
-				// { data:'apy'},
 				{ data:'cycle_day'},
+				{ data:'purchasable_limit'},
 				{ data:'date_created'},
 
       		],"createdRow": function( row, data, dataIndex){
