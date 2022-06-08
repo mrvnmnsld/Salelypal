@@ -82,7 +82,7 @@
 				{ data:'status'},
 				{ data:'balance'},
 				{ data:'claimAmount'},
-				{ data:'lock_period'},
+				{ data:'daysLock'},
 				{ data:'date_created'},
 				{ data:'date_release'},
 				{ data:'tokenNameCombo'},
