@@ -194,7 +194,8 @@
 				<span id="totalInUsdContainer">Loading...</span><br>
 
 				<sup id="visible_btn" style="display:none;!important">
-					<i class="fa fa-eye-slash" style=" color:#adbab9;" aria-hidden="true"></i>
+					<i id="eye_close" class="fa fa-eye-slash mt-3" style="display:block; color:#adbab9;" aria-hidden="true"></i>
+					<i id="eye_open" class="fa fa-eye" style="display:none; color:#adbab9;" aria-hidden="true"></i>
 				</sup>
 			</div>
 		</div>
@@ -223,10 +224,10 @@
 		</div>
 
 		<style>
-			#asset_tab_container{
+			/* #asset_tab_container{
 				background-color:rgba(34,34,34,.1);
 				padding-bottom:5em;
-			}
+			} */
 			#asset_tabs a{
 				color: #777;
 			}
@@ -532,7 +533,8 @@
 							$(this).html("<h3>*****</h3>")
 						})
 						$('#totalInUsdContainer').html('*****');
-						$('#visible_icon').removeClass('fa-eye-slash').addClass('fa-eye');
+						$('#eye_open').toggle();
+						$('#eye_close').toggle();
 						visible = 0;
 					}else{
 						$("#tokenContainer > div").find("div:nth-child(3)").each(function(i){
@@ -541,7 +543,8 @@
 						})
 						$('#totalInUsdContainer').html(numberWithCommas(totalInUsd.toFixed(2)));
 						$("#totalInUsdContainer").append(" "+currentUser.displayCurrency);
-						$('#visible_icon').removeClass('fa-eye').addClass('fa-eye-slash');
+						$('#eye_open').toggle();
+						$('#eye_close').toggle();
 						visible = 1;
 					}
 					

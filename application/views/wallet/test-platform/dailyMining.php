@@ -33,19 +33,17 @@
 		margin-top:2em;
 	}
 
-	#dailymining_tab_container{
-				background-color:rgba(34,34,34,.1);
-				padding-bottom:5em;
-			}
-			#dailymining_tabs a{
+	#dailymining_tabs a{
 				color: #777;
 			}
-			.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
-				font-size:1.3em;
-				color:black!important;
-				background-color:rgba(0,0,0,.03);
-				border-color: transparent;
-			}
+	.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
+		font-size:1.3em;
+		color:black!important;
+		background-color:rgba(0,0,0,.03);
+		border-color: transparent;
+	}
+
+
 </style>
 
 
@@ -99,14 +97,6 @@
 
 	for(var i = 0;i<getDaysSettings.length;i++){
 
-	$('#daysBtn_container').append(
-		'<div class="cardboxes p-2 mt-4">'+
-			'<div class="d-flex justify-content-around">'+
-				'<div class="flex-even text-center h3 text-dark">'+
-				+getDaysSettings[i].days+' Days'+
-				'</div>'+
-			'</div>'+
-	);
         var getPurchasableLimit = ajaxShortLink('mining/daily/getPurchasableLimit',{
 				'day': getDaysSettings[i].id
         });
