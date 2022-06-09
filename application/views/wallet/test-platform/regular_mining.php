@@ -62,36 +62,38 @@
 		
 		if (foundEntry == null) {
 			$('#token_mining_container').append(
-				'<div id="'+miningSettings[i].id+'_container" class="card shadow-lg rounded p-2 mt-2">'+
-					'<div class="d-flex justify-content-around">'+
-						'<div class="flex-even text-left h4 text-success">'+
-							'<img '+
-								'style="width: 35px;"'+
-								'src="'+miningSettings[i].tokenImage+'"'+
-							'> '+
-							token_name_combo+
+				'<div id="'+miningSettings[i].id+'_container" class="card p-2 mt-2 rounded shadow-lg">'+
+					'<div class="card-body" style="padding: 1px!important">'+
+						'<div class="d-flex justify-content-around">'+
+							'<div class="flex-even text-left h4 text-success">'+
+								'<img '+
+									'style="width: 35px;"'+
+									'src="'+miningSettings[i].tokenImage+'"'+
+								'> '+
+								token_name_combo+
+							'</div>'+
+
+							'<div class="flex-even text-right h5 text-success">APY: '+miningSettings[i].apy+'%</div>'+
 						'</div>'+
 
-						'<div class="flex-even text-right h5 text-success">APY: '+miningSettings[i].apy+'%</div>'+
-					'</div>'+
-
-					'<div class="text-muted" style="font-size:.7em">'+
-						'Mining annualize rate of return'+
-					'</div>'+
-
-					'<div class="font-weight-bold">'+
-						'Financial Cycles:'+
-					'</div>'+
-
-					'<div class="d-flex justify-content-around mt-1">'+
-						'<div class="btn-group" role="group" aria-label="Basic radio toggle button group" id="'+mining_id+'_cycle_container">'+
+						'<div class="text-muted" style="font-size:.7em">'+
+							'Mining annualize rate of return'+
 						'</div>'+
-					'</div>'+
 
-					'<div class="m-2">'+
-						"<button type='button' class='btn btn-success btn-block' onClick='"+
-							'openEntryForm("'+smartAddress+'","'+mining_id+'","'+token_name_combo+'","'+networkName+'","'+tokenName+'","'+miningSettings[i].apy+'")'+
-						"'>Mine Now!</button>"+
+						'<div class="font-weight-bold">'+
+							'Financial Cycles:'+
+						'</div>'+
+
+						'<div class="d-flex justify-content-around mt-1">'+
+							'<div class="btn-group" role="group" aria-label="Basic radio toggle button group" id="'+mining_id+'_cycle_container">'+
+							'</div>'+
+						'</div>'+
+
+						'<div class="my-1">'+
+							"<button type='button' class='btn btn-warning btn-block' onClick='"+
+								'openEntryForm("'+smartAddress+'","'+mining_id+'","'+token_name_combo+'","'+networkName+'","'+tokenName+'","'+miningSettings[i].apy+'")'+
+							"'>Mine Now!</button>"+
+						'</div>'+
 					'</div>'+
 				'</div>'
 			);
@@ -113,47 +115,49 @@
 			var income = ((parseFloat(foundEntry.balance)*(parseFloat(miningSettings[i].apy)/100))/365)*parseFloat(foundEntry.lock_period)
 
 			$('#token_mining_container').append(
-				'<div id="'+miningSettings[i].id+'_container" class="card shadow-lg rounded p-2 mt-2">'+
-					'<div class="d-flex justify-content-around">'+
-						'<div class="flex-even text-left h4 text-success">'+
-							'<img '+
-								'style="width: 35px;"'+
-								'src="'+miningSettings[i].tokenImage+'"'+
-							'> '+
-							miningSettings[i].tokenName+' ('+miningSettings[i].network.toUpperCase()+')'+
+				'<div id="'+miningSettings[i].id+'_container" class="card p-2 mt-2 rounded shadow-lg">'+
+					'<div class="card-body" style="padding: 1px!important">'+
+						'<div class="d-flex justify-content-around">'+
+							'<div class="flex-even text-left h4 text-success">'+
+								'<img '+
+									'style="width: 35px;"'+
+									'src="'+miningSettings[i].tokenImage+'"'+
+								'> '+
+								miningSettings[i].tokenName+' ('+miningSettings[i].network.toUpperCase()+')'+
+							'</div>'+
+
+							'<div class="flex-even text-right h5 text-success">APY: '+miningSettings[i].apy+'%</div>'+
 						'</div>'+
 
-						'<div class="flex-even text-right h5 text-success">APY: '+miningSettings[i].apy+'%</div>'+
-					'</div>'+
+						'<div class="text-muted" style="font-size:.7em">'+
+							'Mining annualize rate of return'+
+						'</div>'+
 
-					'<div class="text-muted" style="font-size:.7em">'+
-						'Mining annualize rate of return'+
-					'</div>'+
+						'<div>'+
+							'<b>Mining Balance:</b> '+foundEntry.balance+
+						'</div>'+
 
-					'<div>'+
-						'<b>Mining Balance:</b> '+foundEntry.balance+
-					'</div>'+
+						'<div>'+
+							'<b>Cycle Days: </b>'+foundEntry.lock_period+
+						'</div>'+
 
-					'<div>'+
-						'<b>Cycle Days: </b>'+foundEntry.lock_period+
-					'</div>'+
+						'<div>'+
+							'<b>Claim Balance when completed: </b>'+income.toFixed(miningSettings[i].decimal)+
+						'</div>'+
 
-					'<div>'+
-						'<b>Claim Balance when completed: </b>'+income.toFixed(miningSettings[i].decimal)+
-					'</div>'+
+						'<div>'+
+							'<b>Date Enter: </b>'+formatDateObject(new Date(foundEntry.date_created))+
+						'</div>'+
 
-					'<div>'+
-						'<b>Date Enter: </b>'+formatDateObject(new Date(foundEntry.date_created))+
-					'</div>'+
+						'<div>'+
+							'<b>Date of Claiming: </b>'+formatDateObject(releaseDate)+
+						'</div>'+
 
-					'<div>'+
-						'<b>Date of Claiming: </b>'+formatDateObject(releaseDate)+
-					'</div>'+
-
-					'<div class="m-2">'+
-						'<button type="button" class="btn btn-success btn-block" id="'+miningSettings[i].id+'_mine_btn" disabled onClick='+
-							'claimIncome("'+income+'","'+mining_id+'","'+foundEntry.id+'","'+foundEntry.balance+'","'+networkName+'","'+tokenName+'","'+smartAddress+'")'+
-						'>Claim</button>'+
+						'<div class="my-1">'+
+							'<button type="button" class="btn btn-success btn-block" id="'+miningSettings[i].id+'_mine_btn" disabled onClick='+
+								'claimIncome("'+income+'","'+mining_id+'","'+foundEntry.id+'","'+foundEntry.balance+'","'+networkName+'","'+tokenName+'","'+smartAddress+'")'+
+							'>Claim</button>'+
+						'</div>'+
 					'</div>'+
 				'</div>'
 			);
