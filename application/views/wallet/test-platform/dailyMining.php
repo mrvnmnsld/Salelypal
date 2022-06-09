@@ -140,7 +140,7 @@
 					'</div>'+
 
 					'<div class="m-2">'+
-						'<button id="'+getDaysSettings[i].id+'_days_btn" apyC="'+getDaysSettings[i].apy+'" daysId="'+getDaysSettings[i].id+'" type="button" class="btn btn-warning btn-block btn-sm" style="min-width:12em;">'+
+						'<button id="'+getDaysSettings[i].id+'_days_btn" apyC="'+getDaysSettings[i].apy+'" daysId="'+getDaysSettings[i].id+'" type="button" class="btn btn-success btn-block btn-sm" style="min-width:12em;">'+
 						'Participate now!</button>'+
 					'</div>'+
 				'</div>'+
@@ -206,7 +206,7 @@
 						'</div>'+
 
 						'<div class="m-2">'+
-							"<button type='button' class='btn btn-warning btn-block' "+isRatioEnough+" "+isRatioEnough+" onClick='"+
+							"<button type='button' class='btn btn-success btn-block' "+isRatioEnough+" "+isRatioEnough+" onClick='"+
 								'openEntryForm("'+tokenInformation.smartAddress+'","'+getDayTokens[x].id+'","'+token_name_combo+'","'+tokenInformation.network+'","'+tokenInformation.tokenName+'","'+'","'+$(this).attr('apy')+'","'+$(this).attr('days')+'")'+
 							"'>Mine Now!</button>"+
 						'</div>'+

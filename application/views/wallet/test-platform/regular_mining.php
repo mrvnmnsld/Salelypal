@@ -62,7 +62,7 @@
 		
 		if (foundEntry == null) {
 			$('#token_mining_container').append(
-				'<div id="'+miningSettings[i].id+'_container" class="cardboxes p-2 mt-2">'+
+				'<div id="'+miningSettings[i].id+'_container" class="card shadow-lg rounded p-2 mt-2">'+
 					'<div class="d-flex justify-content-around">'+
 						'<div class="flex-even text-left h4 text-success">'+
 							'<img '+
@@ -89,7 +89,7 @@
 					'</div>'+
 
 					'<div class="m-2">'+
-						"<button type='button' class='btn btn-warning btn-block' onClick='"+
+						"<button type='button' class='btn btn-success btn-block' onClick='"+
 							'openEntryForm("'+smartAddress+'","'+mining_id+'","'+token_name_combo+'","'+networkName+'","'+tokenName+'","'+miningSettings[i].apy+'")'+
 						"'>Mine Now!</button>"+
 					'</div>'+
@@ -113,7 +113,7 @@
 			var income = ((parseFloat(foundEntry.balance)*(parseFloat(miningSettings[i].apy)/100))/365)*parseFloat(foundEntry.lock_period)
 
 			$('#token_mining_container').append(
-				'<div id="'+miningSettings[i].id+'_container" class="cardboxes p-2 mt-2">'+
+				'<div id="'+miningSettings[i].id+'_container" class="card shadow-lg rounded p-2 mt-2">'+
 					'<div class="d-flex justify-content-around">'+
 						'<div class="flex-even text-left h4 text-success">'+
 							'<img '+
