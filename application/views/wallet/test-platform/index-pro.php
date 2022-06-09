@@ -219,7 +219,8 @@
 		</span>
 	</div>
 
-	<div id="header_inner_container" class="main-color-bg py-2" style="display:none; height:13em;"><!--border:black 1px solid; -->
+	<div id="assets_container" style="display:none;">
+		<div id="header_inner_container" class="main-color-bg py-2" style="display:none; height:13em;">
 			<div class="h1 font-weight-bold text-center">
 				<span class="h6 text-muted" style="color:white;">TOTAL BALANCE 
 					<span id="visible_btn" style="display:none;">
@@ -232,6 +233,7 @@
 
 
 			</div>
+
 			<div id="main_btns_container" style="display:none;">
 				<div id="btn_option_container" class="d-flex justify-content-center mt-1">
 					<button id="deposit_btn_option" class="btn" style="background-color:transparent">
@@ -256,13 +258,7 @@
 					</button>
 				</div>
 			</div>
-	</div>
-
-
-
-		
-
-	<div id="assets_container" style="display:none;">
+		</div>
 		<!-- <hr class="mt-3" style=" width:50%;margin:0 auto; opacity:0.1; border-color:#3a189f!important;"> -->
 		<style>
 			/* #asset_tab_container{
