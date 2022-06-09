@@ -291,13 +291,13 @@ class mining extends MY_Controller {
 
 	public function saveDailyMiningEntry(){
 		$balance = $_GET["balance"];
-		$lock_period = $_GET["lock_period"];
+		$daysID = $_GET["daysID"];
 		$mining_id = $_GET["mining_id"];
 		$userID = $_GET["userID"];
 
 		$insertRecord = array(
 			'balance' => $balance,
-			'lock_period' => $lock_period,
+			'daysID' => $daysID,
 			'mining_id' => $mining_id,
 			'userID' => $userID,
 			'date_created' => $this->_getTimeStamp24Hours()

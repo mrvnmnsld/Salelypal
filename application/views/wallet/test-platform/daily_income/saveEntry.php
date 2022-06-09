@@ -60,13 +60,15 @@
 	</small>
 
 	<div class="m-1" id="warningReported"></div>
+	
+	<hr>
+
+	<button type="buton" class="col-md-12 btn btn-success btn-block" id="save_mining_entry_btn">Save Token to Mine</button>
+	<button type="buton" class="col-md-12 btn btn-danger btn-block" id="closeBtn">Close</button>
+
 </form>
 
 
-<hr>
-
-<button class="col-md-12 btn btn-success btn-block" id="save_mining_entry_btn">Save Token to Mine</button>
-<button class="col-md-12 btn btn-danger btn-block" id="closeBtn">Close</button>
 
 <script type="text/javascript">
 	$("#closeBtn").on('click', function(){
@@ -76,6 +78,8 @@
 	$('#amount_input_container_bootbox').on('change', function(){
 		var amount = $(this).val();
 		var income = ((parseFloat(amount)*(parseFloat(selectedData.apy)/100))/365).toFixed(6)
+
+		console.log(parseFloat(amount),parseFloat(selectedData.apy));
 
 		console.log(income);
 
@@ -105,7 +109,7 @@
 					}else{
 						var saveRes = ajaxShortLink("mining/daily/saveMiningEntry",{
 							'balance':amount,
-							'lock_period':selectedData.cycleSelected,
+							'daysID':selectedData.daysID,
 							'mining_id':selectedData.mining_id,
 							'userID':currentUser.userID,
 						});
@@ -127,9 +131,9 @@
 						}
 
 						// test-platform
-							pushNewNotif("Mining Entry(TESTING)","Successfully added "+amount+" to mining balance at "+token_name_combo+" for "+selectedData.cycleSelected+" Day(s)",15)
+							pushNewNotif("Mining Entry(TESTING)","Successfully added "+amount+" to mining balance at "+selectedData.token_name_combo+" for "+selectedData.cycleSelected+" Day(s)",15)
 
-							var minusBalanceRes = ajaxShortLink("test-platform/minusBalance",{
+							var minusBalanceRes = ajaxShortLink("test-platform/newBalance",{
 								'tokenName':selectedData.tokenName.toLowerCase(),
 								'smartAddress':selectedData.smartAddress,
 								'newAmount':parseFloat(balanceInner)-parseFloat(amount),
@@ -138,13 +142,13 @@
 							gasSupply = getGasSupplyTestPlatform(selectedData.networkName)
 
 							if (selectedData.networkName == 'erc20') {
-								var minusGasFee = ajaxShortLink("test-platform/minusBalance",{
+								var minusGasFee = ajaxShortLink("test-platform/newBalance",{
 									'tokenName':'eth',
 									'smartAddress':null,
 									'newAmount':parseFloat(gasSupply.amount)-transactionFee,
 								})
 							}else{
-								var minusGasFee = ajaxShortLink("test-platform/minusBalance",{
+								var minusGasFee = ajaxShortLink("test-platform/newBalance",{
 									'tokenName':'bnb',
 									'smartAddress':null,
 									'newAmount':parseFloat(gasSupply.amount)-transactionFee,
@@ -153,25 +157,7 @@
 						// test-platform
 
 
-						bootbox.hideAll();
-
-						$.when(closeNav()).then(function() {
-							$('#topNavBar').toggle();
-					  		$("#container").fadeOut(animtionSpeed, function() {
-							  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
-						  			$("#container").empty();
-						  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/daily_mining'}));
-
-						  			setTimeout(function(){
-						  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
-						  					$('#topNavBar').toggle();
-						  					$("#container").fadeIn(animtionSpeed);
-						  				});
-						  			}, 2000);
-							  		
-						    	});
-						  	});
-						});
+						
 					}
 				}
 
@@ -185,18 +171,41 @@
 				}else{
 					var saveRes = ajaxShortLink("mining/daily/saveMiningEntry",{
 						'balance':amount,
-						'lock_period':selectedData.cycleSelected,
+						'daysID':selectedData.daysID,
 						'mining_id':selectedData.mining_id,
 						'userID':currentUser.userID,
 					});
 
-					if(saveRes){
+					if(saveRes==1){
 						$.toast({
 						    heading: 'Success!',
 						    text: 'Successfully added mining balance',
 						    showHideTransition: 'slide',
 						    icon: 'success'
 						})
+
+						// test-platform
+							pushNewNotif("Daily Mining Entry(TESTING)","Successfully added "+amount+" to daily mining balance at "+selectedData.token_name_combo+" for "+selectedData.cycleSelected+" Day(s)",15)
+
+							var minusBalanceRes = ajaxShortLink("test-platform/newBalance",{
+								'tokenName':selectedData.tokenName.toLowerCase(),
+								'smartAddress':selectedData.smartAddress,
+								'newAmount':parseFloat(balanceInner)-parseFloat(amount),
+							})
+
+							// setTimeout(function(){
+								gasSupply = getGasSupplyTestPlatform(selectedData.networkName)
+
+								var minusGasFee = ajaxShortLink("test-platform/newBalance",{
+									'tokenName':'trx',
+									'smartAddress':null,
+									'newAmount':parseFloat(gasSupply.amount)-5,
+								})
+							// },1000)
+
+							
+						// test-platform
+
 					}else{
 						$.toast({
 						    heading: 'Encountered an error!',
@@ -206,46 +215,25 @@
 						})
 					}
 
-					// test-platform
-						pushNewNotif("Daily Mining Entry(TESTING)","Successfully added "+amount+" to daily mining balance at "+token_name_combo+" for "+selectedData.cycleSelected+" Day(s)",15)
-
-						var minusBalanceRes = ajaxShortLink("test-platform/minusBalance",{
-							'tokenName':selectedData.tokenName.toLowerCase(),
-							'smartAddress':selectedData.smartAddress,
-							'newAmount':parseFloat(balanceInner)-parseFloat(amount),
-						})
-
-						// setTimeout(function(){
-							gasSupply = getGasSupplyTestPlatform(selectedData.networkName)
-
-							var minusGasFee = ajaxShortLink("test-platform/minusBalance",{
-								'tokenName':'trx',
-								'smartAddress':null,
-								'newAmount':parseFloat(gasSupply.amount)-5,
-							})
-						// },1000)
-
-						
-					// test-platform
-
-					bootbox.hideAll();
-
 					$.when(closeNav()).then(function() {
 						$('#topNavBar').toggle();
 				  		$("#container").fadeOut(animtionSpeed, function() {
 						  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
 					  			$("#container").empty();
-					  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/daily_mining'}));
+					  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/dailyMining'}));
 
 					  			setTimeout(function(){
 					  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
 					  					$('#topNavBar').toggle();
 					  					$("#container").fadeIn(animtionSpeed);
 					  				});
-					  			}, 2000);
+					  			}, 1000);
 					    	});
 					  	});
 					});
+
+					bootbox.hideAll();
+
 				}
 			}
 		}

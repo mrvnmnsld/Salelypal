@@ -93,7 +93,7 @@
 <script> 
 
 	var getDaysSettings = ajaxShortLink('mining/daily/getAddDays');
-	console.log(getDaysSettings);
+	// console.log(getDaysSettings);
 
 	for(var i = 0;i<getDaysSettings.length;i++){
 
@@ -101,7 +101,7 @@
 				'day': getDaysSettings[i].id
         });
 
-        console.log(getPurchasableLimit);
+        // console.log(getPurchasableLimit);
 
         var ratioLimit =(getPurchasableLimit.totalBalance/getPurchasableLimit.totalLimit)*100;
         var isRatioEnough = "";
@@ -140,7 +140,7 @@
 					'</div>'+
 
 					'<div class="m-2">'+
-						'<button id="'+getDaysSettings[i].id+'_days_btn" apyC="'+getDaysSettings[i].apy+'" daysId="'+getDaysSettings[i].id+'" type="button" class="btn btn-success btn-block btn-sm" style="min-width:12em;">'+
+						'<button id="'+getDaysSettings[i].id+'_days_btn" apy="'+getDaysSettings[i].apy+'" daysId="'+getDaysSettings[i].id+'" days="'+getDaysSettings[i].days+'" type="button" class="btn btn-success btn-block btn-sm" style="min-width:12em;">'+
 						'Participate now!</button>'+
 					'</div>'+
 				'</div>'+
@@ -161,6 +161,9 @@
 
 	        $("#days_token_container").empty()
 
+            console.log($(this).attr('apy'),$(this).attr('days'));
+
+
 	        for(var x = 0;x<getDayTokens.length;x++){
 
 	            var tokenInformation = ajaxShortLink('main/getTokenInfoViaID',{
@@ -179,7 +182,6 @@
                 	isRatioEnough = "disabled"
                 }
 
-                console.log(getTokenBalanceLimit);
 
 	            var token_name_combo = tokenInformation.tokenName+' ('+tokenInformation.network.toUpperCase()+')';
 
@@ -207,7 +209,7 @@
 
 						'<div class="m-2">'+
 							"<button type='button' class='btn btn-success btn-block' "+isRatioEnough+" "+isRatioEnough+" onClick='"+
-								'openEntryForm("'+tokenInformation.smartAddress+'","'+getDayTokens[x].id+'","'+token_name_combo+'","'+tokenInformation.network+'","'+tokenInformation.tokenName+'","'+'","'+$(this).attr('apy')+'","'+$(this).attr('days')+'")'+
+								'openEntryForm("'+tokenInformation.smartAddress+'","'+getDayTokens[x].id+'","'+token_name_combo+'","'+tokenInformation.network+'","'+tokenInformation.tokenName+'","'+$(this).attr('apy')+'","'+$(this).attr('days')+'","'+$(this).attr('daysID')+'")'+
 							"'>Mine Now!</button>"+
 						'</div>'+
 					'</div>'
@@ -245,7 +247,7 @@
 		}).find('.modal-content').css({'background-color': 'rgb(34 34 34)', color: '#D9E9E8','border-radius':'5%'} );
 	}
 
-	function openEntryForm(smartAddress,mining_id,token_name_combo,networkName,tokenName,apy,cycleSelected){	
+	function openEntryForm(smartAddress,mining_id,token_name_combo,networkName,tokenName,apy,cycleSelected,daysID){	
 		selectedData = {
 			'cycleSelected':cycleSelected,
 			'smartAddress':smartAddress,
@@ -254,21 +256,10 @@
 			'networkName':networkName,
 			'tokenName':tokenName,
 			'apy':apy,
-		}
-	}
-
-	function openEntryForm(smartAddress,mining_id,token_name_combo,networkName,tokenName,apy,cycleSelected){	
-		selectedData = {
-			'cycleSelected':cycleSelected,
-			'smartAddress':smartAddress,
-			'mining_id':mining_id,
-			'token_name_combo':token_name_combo,
-			'networkName':networkName,
-			'tokenName':tokenName,
-			'apy':apy,
+			'daysID':daysID,
 		}
 
-		console.log(selectedData);
+		// console.log(smartAddress,mining_id,token_name_combo,networkName,tokenName,apy,cycleSelected);
 
 		bootbox.alert({
 			message: ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/daily_income/saveEntry'}),
