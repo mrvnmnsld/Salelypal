@@ -1,7 +1,6 @@
 <!-- Author: Marvin Monsalud -->
 <!-- Startdate: Dec 16 2021 -->
 <!-- Email: marvin.monsalud.mm@gmail.com -->
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -88,7 +87,7 @@
 
 <!-- css -->
 	<style>
-		@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+		/* @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
 
 		@font-face {
 		  font-family: tron;
@@ -98,7 +97,9 @@
 		@font-face {
 		  font-family:Agelast;
 		  src: url('assets/fonts/Agelast.otf');
-		}
+		} */
+
+	@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap%27');
 
 		.btn-circle.btn-sm {
             width: 30px;
@@ -167,8 +168,9 @@
 
 		/* Mainstyle */
 			body{
-				font-family: 'proxima_nova_rgbold', Helvetica, Arial, sans-serif;
-				color: #3a189f;
+				
+			font-family: 'Poppins', sans-serif;
+			color: #3a189f;
 			}
 			.main-color-text{
 				color: #3a189f;
@@ -195,6 +197,7 @@
 			.text-muted{
 				color: #94abef!important;
 			}
+			
 	</style>
 <!-- css -->
 
