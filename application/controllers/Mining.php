@@ -595,8 +595,8 @@ class mining extends MY_Controller {
 			$tokenBalance = $this->_getRecordsData(
 				$selectfields = array("COALESCE(SUM(balance),0) AS balance"), 
 		   		$tables = array('mining_daily_income_entry'),
-		   		$fieldName = array("mining_id","daysID"), 
-		   		$where = array($value->id,$_GET['day']), 
+		   		$fieldName = array("mining_id","daysID",'status'), 
+		   		$where = array($value->id,$_GET['day'],'lock'), 
 		   		$join = null,	 
 		   		$joinType = null,
 		   		$sortBy = null, 
@@ -623,8 +623,8 @@ class mining extends MY_Controller {
 		$tokenBalance = $this->_getRecordsData(
 			$selectfields = array("COALESCE(SUM(balance),0) AS balance"), 
 	   		$tables = array('mining_daily_income_entry'),
-	   		$fieldName = array("mining_id","daysID"), 
-	   		$where = array($_GET['mining_id'],$_GET['day']), 
+	   		$fieldName = array("mining_id","daysID",'status'), 
+	   		$where = array($_GET['mining_id'],$_GET['day'],'lock'), 
 	   		$join = null,	 
 	   		$joinType = null,
 	   		$sortBy = null, 
