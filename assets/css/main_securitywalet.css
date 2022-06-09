@@ -1,6 +1,6 @@
 	body{
 		background-color: white;
-		background-image: url('../../assets/imgs/1bg-2.jpg');
+		/* background-image: url('../../assets/imgs/1bg-2.jpg'); */
 		background-repeat:no-repeat;
 		background-size:400%;
 		background-attachment: fixed;
@@ -53,7 +53,7 @@
   	}
 
   	.modal-content{
-  		/*background-color: #/*3c3c3c*/;*/
+  		/* background-color: #3c3c3c; */
   	}
 
   	.modal-header{
@@ -89,8 +89,8 @@
 	    padding: 13px;
 	    display: flex;
 	    justify-content: space-between;
-	    background: rgb(34 34 34);
+	    /* background: rgb(34 34 34); */
 	    /* border-bottom-left-radius: 27px 20px; */
 	    /* border-bottom-right-radius: 27px 20px; */
-	    color: #D9E9E8;
+	    /* color: #D9E9E8; */
   	}
