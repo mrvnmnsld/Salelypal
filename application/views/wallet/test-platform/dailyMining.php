@@ -46,6 +46,16 @@
 
 </style>
 
+<div id="title_container" class="text-center" style="display:block">
+	<div class="mt-3">
+		<h5>Obtain rewards or earn interest!</h5>
+	</div>
+	<div class="text-muted mt-2 " style="font-size:.7em">
+		<i onclick="instruction_btn()" class="fa fa-question-circle"aria-hidden="true"></i>
+		Click here for detailed instructions
+	</div>
+</div>
+
 
 <div id="dailymining_tab_container" class="mt-3">
 			<ul id="dailymining_tabs" class="nav nav-tabs nav-justified" role="tablist">
@@ -60,22 +70,13 @@
 
 			<div class="dailymining-tab-content tab-content">
 				<div id="mine_tab" class="container tab-pane active"><br>
-					<div id="title_container" class="text-center" style="display:block">
-						<div class="mt-3">
-							<h5>Obtain rewards or earn interest!</h5>
-						</div>
-						<div class="text-muted mt-2 " style="font-size:.7em">
-							<i onclick="instruction_btn()" class="fa fa-question-circle"aria-hidden="true"></i>
-							Click here for detailed instructions
-						</div>
-					</div>
 
 					<div id="daysBtn_container" class="container text-center mb-5" style="display:block;"></div>
 
-					<div id="daily_mining_token_containers" style="display:none;">
-						<button onclick="goback_btn()" class="btn btn-dark" id="backbtn_container">
-							<i class="fa fa-arrow-left fa-lg" style="" aria-hidden="true"></i> 
-							Go back
+					<div id="daily_mining_token_containers" class="text-center" style="display:none;">
+						<button onclick="goback_btn()" class="btn btn-transparent" id="backbtn_container">
+							<i class="fa fa-arrow-left" style="" aria-hidden="true"></i> 
+							<b>Previous page</b>
 						</button>  
 
 						<div id="days_token_container"></div>
