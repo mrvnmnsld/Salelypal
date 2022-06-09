@@ -1,7 +1,6 @@
 <!-- Author: Marvin Monsalud -->
 <!-- Startdate: Dec 16 2021 -->
 <!-- Email: marvin.monsalud.mm@gmail.com -->
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -88,7 +87,7 @@
 
 <!-- css -->
 	<style>
-		@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+		/* @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
 
 		@font-face {
 		  font-family: tron;
@@ -98,7 +97,9 @@
 		@font-face {
 		  font-family:Agelast;
 		  src: url('assets/fonts/Agelast.otf');
-		}
+		} */
+
+	@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap%27');
 
 		.btn-circle.btn-sm {
             width: 30px;
@@ -112,7 +113,7 @@
         .btn-circle.btn-md {
             width: 50px;
             height: 50px;
-            padding: 7px 10px;
+            padding: 5px 7px;
             border-radius: 25px;
             font-size: 10px;
             text-align: center;
@@ -165,88 +166,145 @@
     	    }
         /*google translate*/
 
-
+		/* Mainstyle */
+			body{
+				
+			font-family: 'Poppins', sans-serif;
+			color: #3a189f;
+			}
+			.main-color-text{
+				color: #3a189f;
+				/* color:#9e68e8; */
+			}
+			.main-color-icon{
+				color: #5426de;
+				/* color:#9e68e8; */
+			}
+			.main-color-bg{
+				background-color: #5426de;
+				/* background-color:#9e68e8; */
+			}
+			.light-text{
+				color:#D9E9E8;
+			}
+		/* font */
+			.font-proxima-reg{
+				font-family: 'proxima_nova_rgregular', Helvetica, Arial, sans-serif;
+			}
+			.font-proxima-bold{
+				font-family: 'proxima_nova_rgbold', Helvetica, Arial, sans-serif !important;
+			}
+			.text-muted{
+				color: #94abef!important;
+			}
+			
 	</style>
 <!-- css -->
 
 <body style="min-height: 130%;">
 	<div id="loadSpinner" class="text-center text-primary" style="margin-top: 30vh;">
-	  	<div class="spinner-border" role="status" style="width: 5rem; height: 5rem;">
+	  	<div class="spinner-border main-color-text" role="status" style="width: 5rem; height: 5rem;">
 	    	<span class="sr-only"></span>
 	  	</div><br>
-		<span class="font-weight-bold mt-2" id="loading_text_container" style="font-size: 30px;text-align: center;">Loading...</span>
+		<span class="font-weight-bold mt-2 main-color-text" id="loading_text_container" style="font-size:30px; text-align: center;">Loading...</span>
 	</div>
 
-	<div id="topNavBar" style="display:none;">
+	<div id="topNavBar" class="main-color-bg light-text" style="display:none; color:white!important;">
 		<span id="profile_btn" style="float: left;" ><i class="fa fa-user fa-md" aria-hidden="true"></i><span class="ml-2" id="username_container"></span></span>
 		<!-- onclick="$.alert('This function is still under development')" -->
 		<span id="notif_btn" class="" style="float:right;">
-			<i id="notif_logo" class="fa fa-bell fa-md fa-inverse" style="color:#D9E9E8;"  aria-hidden="true">
+			<i id="notif_logo" class="fa fa-bell fa-md fa-inverse" style="color:white!important;"  aria-hidden="true">
 				<span id="notif_counter_number" style="font-size:.45em; right:.4em; top:1.5em; display:none" class="position-absolute badge bg-danger">0</span>
 			</i>
 		</span>
 	</div>
 
-	<div id="assets_container" style="display:none;">
-		<div class="m-2 text-left">
-			<div class="h3 p-2 m-2 font-weight-bold text-center">
-				<span class="h3 text-muted">Total Balance:</span><br>
-				<span id="totalInUsdContainer">Loading...</span><br>
+	<div id="header_inner_container" class="main-color-bg py-2" style="display:none; height:13em;"><!--border:black 1px solid; -->
+			<div class="h1 font-weight-bold text-center">
+				<span class="h6 text-muted" style="color:white;">TOTAL BALANCE 
+					<span id="visible_btn" style="display:none;">
+						<i id="eye_close" class="fa fa-eye-slash mt-2 text-muted" style="display:inline-block;" aria-hidden="true"></i>
+						<i id="eye_open" class="fa fa-eye text-muted" style="display:none;" aria-hidden="true"></i>
+					</span>
+				</span>
+				<br>
+				<span id="totalInUsdContainer" style="color:white;" class="display-5 main-color-text">Loading...</span>
 
-				<sup id="visible_btn" style="display:none;!important">
-					<i id="eye_close" class="fa fa-eye-slash mt-3" style="display:block; color:#adbab9;" aria-hidden="true"></i>
-					<i id="eye_open" class="fa fa-eye" style="display:none; color:#adbab9;" aria-hidden="true"></i>
-				</sup>
+
 			</div>
-		</div>
+			<div id="main_btns_container" style="display:none;">
+				<div id="btn_option_container" class="d-flex justify-content-center mt-1">
+					<button id="deposit_btn_option" class="btn" style="background-color:transparent">
+						<div class="btn main-color-icon btn-md" style="font-size:2em;padding:1px;">
+							<i class="fa fa-arrow-circle-down fa-lg fa-inverse" aria-hidden="true"></i>
+						</div>
+						<div style="font-size:.8em" class="text-light"><b>Deposit</b></div>
+					</button>
 
-		<div id="btn_option_container" class="d-flex justify-content-center mt-1">
-			<button id="deposit_btn_option" class="btn" style="background-color:transparent">
-				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(34 34 34);padding: 5px;">
-					<i class="fa fa-arrow-circle-down fa-lg" aria-hidden="true"></i>
+					<button id="withdraw_btn_option" class="btn" style="background-color:transparent">
+						<div class="btn main-color-icon btn-md" style="font-size:2em;padding:1px;">
+							<i class="fa fa-arrow-circle-up fa-lg fa-inverse" aria-hidden="true"></i>
+						</div>
+						<div style="font-size:.8em" class="text-light"><b>Withdraw</b></div>
+					</button>
+
+					<button id="buy_btn_option" class="btn" style="background-color:transparent">
+						<div class="btn main-color-icon btn-md" style="font-size:2em;padding:1px;">
+							<i class="fa fa-credit-card-alt fa-md fa-inverse" aria-hidden="true"></i>
+						</div>
+						<div style="font-size:.8em;" class="text-light"><b>Buy</b></div>
+					</button>
 				</div>
-				<div style="font-size:.8em"><b>Deposit</b></div>
-			</button>
+			</div>
+	</div>
 
-			<button id="withdraw_btn_option" class="btn" style="background-color:transparent">
-				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(34 34 34);padding: 5px;">
-					<i class="fa fa-arrow-circle-up fa-lg" aria-hidden="true"></i>
-				</div>
-				<div style="font-size:.8em"><b>Withdraw</b></div>
-			</button>
 
-			<button id="buy_btn_option" class="btn" style="background-color:transparent">
-				<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(34 34 34);padding: 5px;">
-					<i class="fa fa-usd fa-lg" aria-hidden="true"></i>
-				</div>
-				<div style="font-size:.8em;"><b>Buy</b></div>
-			</button>
-		</div>
 
+		
+
+	<div id="assets_container" style="display:none;">
+		<!-- <hr class="mt-3" style=" width:50%;margin:0 auto; opacity:0.1; border-color:#3a189f!important;"> -->
 		<style>
 			/* #asset_tab_container{
 				background-color:rgba(34,34,34,.1);
 				padding-bottom:5em;
 			} */
 			#asset_tabs a{
-				color: #777;
+				color: #94abef;
+				-webkit-transition: color 2s, font-size .25s;
+				-moz-transition: color 2s, font-size .25s;
+				-o-transition: color 2s, font-size .25s;
+				transition: color 2s, font-size .25s;
 			}
 			.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
-				font-size:1.3em;
-				color:black!important;
-				background-color:rgba(0,0,0,.03);
+				font-size:2em;
+				/* color:black!important;
+				border-bottom-color: transparent;
+				background-color:rgba(45,15,87,.01); */
+
+				-webkit-transition: color 1s, font-size .25s;
+				-moz-transition: color 1s, font-size .25s;
+				-o-transition: color 1s, font-size .25s;
+				transition: color 1s, font-size .25s;
+
+				color: #3a189f!important;
 				border-color: transparent;
+				background-color:transparent;
+				/* font-weight:bold; */
 			}
+
 		</style>
+
+		
 
 		<div id="asset_tab_container" class="mt-3">
 			<ul id="asset_tabs" class="nav nav-tabs nav-justified" role="tablist">
 				<li class="nav-item">
-					<a class="nav-link active" data-toggle="tab" href="#balance_tab">BALANCE</a>
+					<a class="nav-link active tab-pane fade show " data-toggle="tab" href="#balance_tab">BALANCE</a>
 				</li>
 
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="tab" href="#portfolio_tab">PORTFOLIO</a>
+					<a class="nav-link tab-pane fade show" data-toggle="tab" href="#portfolio_tab">PORTFOLIO</a>
 				</li>
 			</ul>	
 
@@ -255,7 +313,7 @@
 					<div id="tokenContainer"></div>
 
 					<div class="col-md-12 text-center pl-3 pr-3">
-						<button class="btn btn-outline-link btn-block text-primary mt-2" id="addToken_btn">
+						<button class="btn btn-outline-link btn-block text-primary mt-2 text-muted" id="addToken_btn">
 							<i class="fa fa-sliders" aria-hidden="true"></i>
 							Add more
 						</button>
@@ -278,9 +336,6 @@
 				border-bottom: transparent;
 			}
 			
-			.test1{
-				color: #D9E9E8 !important;
-			}
 		</style>
 	</div>
 
@@ -372,7 +427,7 @@
 		</div>
 	<!-- modal-mining -->
 
-	<ul id="bottomNavBar" style="background:rgb(34 34 34); display:none;" class="nav fixed-bottom justify-content-center row pt-2">
+	<ul id="bottomNavBar" style="display:none;" class="nav fixed-bottom main-color-bg justify-content-center row pt-2">
 		<li id="assets_btn" class="nav-item col-3 text-center">
 			<i class="fa fa-money fa-inverse fa-lg" aria-hidden="true"></i>
 			<a class="botnavlink nav-link active" style="font-size:.8em; color:#D9E9E8;"><span class="test1">Asset</span></a>
@@ -489,6 +544,8 @@
 					$('#loadSpinner').toggle();
 					$('#topNavBar').toggle();
 					$('#bottomNavBar').toggle();
+					$('#header_inner_container').toggle();
+					$('#main_btns_container').toggle();
 
 					$("#loading_text_container").text('Please Wait');
 				});
@@ -985,7 +1042,7 @@
 			for (var i = 0; i < tokensSelected.length; i++) {
 		
 				$("#tokenContainer").append(
-					'<div id="'+tokensSelected[i].tokenName+'_container" class="row border-bottom border-muted mb-2">'+
+					'<div id="'+tokensSelected[i].tokenName+'_container" class="row mb-2">'+
 						'<div class="col-2 row" style="flex-basis:10%">'+
 							'<div class="col-12 mt-2">'+
 								'<img  style="width: 40px;" src="'+tokensSelected[i].tokenImage+'">'+
@@ -993,7 +1050,7 @@
 						'</div>'+
 
 						'<div class="col-7 ml-4">'+
-							'<span class="font-weight-bold">'+
+							'<span class="">'+
 								'<span id="'+tokensSelected[i].tokenName+'_name_container">'+
 									tokensSelected[i].description+" ("+tokensSelected[i].networkName.toUpperCase()+")"+
 								'</span>'+
@@ -1004,11 +1061,11 @@
 							'<span class="h5">'+
 								// '<span style="font-size: 15px;" id="'+tokensSelected[i].tokenName+'_change_container">'+
 									// valueNow+' | <span class="'+color+'">'+changePercentage+'%</span>'+
-								'<span style="font-size: 15px;" id="'+tokensSelected[i].tokenName+'_change_container">Loading...</span>'+
+								'<span class="text-muted" style="font-size:.65em;" id="'+tokensSelected[i].tokenName+'_change_container">Loading...</span>'+
 							'</span>'+
 						'</div>'+
 
-						'<div class="col-3 text-center font-weight-bold">'+
+						'<div class="col-3 text-center">'+
 								// '<span style="font-size: 14px;text-align: center;" id="'+tokensSelected[i].tokenName+'_amount_container">'+
 									// parseFloat(balanceInner).toFixed(3)+' '+tokensSelected[i].tokenName.toUpperCase()+
 
