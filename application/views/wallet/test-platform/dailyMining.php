@@ -26,36 +26,83 @@
 	.btn-outline-dark{
 		font-size: .7em;
 	}
+
+	#instruction_img{
+		height:100%;
+		width:100%;
+		margin-top:2em;
+	}
+
+	#dailymining_tabs a{
+				color: #777;
+			}
+	.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
+		font-size:1.3em;
+		color:black!important;
+		background-color:rgba(0,0,0,.03);
+		border-color: transparent;
+	}
+
+
 </style>
 
-<div id="daysBtn_container" class="container text-center my-5" style="display:block;"></div>
-
-<div id="daily_mining_token_containers" style="display:none;">
-    <button onclick="goback_btn()" class="btn btn-dark" id="backbtn_container">
-        <i class="fa fa-arrow-left fa-lg" style="" aria-hidden="true"></i> 
-        Go back
-    </button>  
-
-    <div id="days_token_container" class="p-3">
-        
-    </div>
+<div id="title_container" class="text-center" style="display:block">
+	<div class="mt-3">
+		<h5>Obtain rewards or earn interest!</h5>
+	</div>
+	<div class="text-muted mt-2 " style="font-size:.7em">
+		<i onclick="instruction_btn()" class="fa fa-question-circle"aria-hidden="true"></i>
+		Click here for detailed instructions
+	</div>
 </div>
 
+
+<div id="dailymining_tab_container" class="mt-3">
+	<ul id="dailymining_tabs" class="nav nav-tabs nav-justified" role="tablist">
+		<li class="nav-item">
+			<a class="nav-link active" data-toggle="tab" href="#mine_tab">MINE</a>
+		</li>
+
+		<li class="nav-item">
+			<a class="nav-link" data-toggle="tab" href="#claim_tab">CLAIM</a>
+		</li>
+	</ul>	
+
+	<div class="dailymining-tab-content tab-content">
+		<div id="mine_tab" class="container tab-pane active"><br>
+
+			<div id="daysBtn_container" class="container text-center mb-5" style="display:block;"></div>
+
+			<div id="daily_mining_token_containers" style="display:none;">
+				<button onclick="goback_btn()" style="color: #ff6f6f" class="btn btn-transparent" id="backbtn_container">
+					<i class="fa fa-arrow-left" style="" aria-hidden="true"></i> 
+					<b>Previous page</b>
+				</button>  
+
+				<div id="days_token_container"></div>
+			</div>
+		</div>
+
+		<div id="claim_tab" class="container tab-pane fade"><br>
+			<!-- <div class="text-center">
+				<h3>This part is still under development</h3>
+			</div> -->
+
+			<div id="claim_tokens_container"></div>
+		</div>
+	</div>
+</div>
 
 <script> 
 
 	var getDaysSettings = ajaxShortLink('mining/daily/getAddDays');
-	console.log(getDaysSettings);
-
 	for(var i = 0;i<getDaysSettings.length;i++){
-
-		// console.log(getDaysSettings[i].id);
 
         var getPurchasableLimit = ajaxShortLink('mining/daily/getPurchasableLimit',{
 				'day': getDaysSettings[i].id
         });
 
-        console.log(getPurchasableLimit);
+        // console.log(getPurchasableLimit);
 
         var ratioLimit =(getPurchasableLimit.totalBalance/getPurchasableLimit.totalLimit)*100;
         var isRatioEnough = "";
@@ -84,7 +131,7 @@
 					'<hr class="w-100">'+
 
 					'<div class="m-2 text-left">'+
-						'<b>Purchasable Limit: </b><span id="'+getDaysSettings[i].id+'_days_purchasable_limit_container">'+getPurchasableLimit.totalBalance+'/'+getPurchasableLimit.totalLimit+'</span>'+
+						'<b>Purchasable Limit: </b><span id="'+getDaysSettings[i].id+'_days_purchasable_limit_container">'+getPurchasableLimit.totalBalance.toFixed(2)+'/'+getPurchasableLimit.totalLimit.toFixed(2)+'</span>'+
 					'</div>'+
 
 					'<div class="mx-2">'+
@@ -94,7 +141,7 @@
 					'</div>'+
 
 					'<div class="m-2">'+
-						'<button id="'+getDaysSettings[i].id+'_days_btn" apyC="'+getDaysSettings[i].apy+'" daysId="'+getDaysSettings[i].id+'" type="button" class="btn btn-warning btn-block btn-sm" style="min-width:12em;">'+
+						'<button id="'+getDaysSettings[i].id+'_days_btn" apy="'+getDaysSettings[i].apy+'" daysId="'+getDaysSettings[i].id+'" days="'+getDaysSettings[i].days+'" type="button" class="btn btn-success btn-block btn-sm" style="min-width:12em;">'+
 						'Participate now!</button>'+
 					'</div>'+
 				'</div>'+
@@ -115,6 +162,9 @@
 
 	        $("#days_token_container").empty()
 
+            console.log($(this).attr('apy'),$(this).attr('days'));
+
+
 	        for(var x = 0;x<getDayTokens.length;x++){
 
 	            var tokenInformation = ajaxShortLink('main/getTokenInfoViaID',{
@@ -133,7 +183,6 @@
                 	isRatioEnough = "disabled"
                 }
 
-                console.log(getTokenBalanceLimit);
 
 	            var token_name_combo = tokenInformation.tokenName+' ('+tokenInformation.network.toUpperCase()+')';
 
@@ -160,19 +209,122 @@
 						'</div>'+
 
 						'<div class="m-2">'+
-							"<button type='button' class='btn btn-warning btn-block' "+isRatioEnough+" "+isRatioEnough+" onClick='"+
-								'openEntryForm("'+tokenInformation.smartAddress+'","'+getDayTokens[x].id+'","'+token_name_combo+'","'+tokenInformation.network+'","'+tokenInformation.tokenName+'","'+'","'+$(this).attr('apy')+'","'+$(this).attr('days')+'")'+
+							"<button type='button' class='btn btn-success btn-block' "+isRatioEnough+" "+isRatioEnough+" onClick='"+
+								'openEntryForm("'+tokenInformation.smartAddress+'","'+getDayTokens[x].id+'","'+token_name_combo+'","'+tokenInformation.network+'","'+tokenInformation.tokenName+'","'+$(this).attr('apy')+'","'+$(this).attr('days')+'","'+$(this).attr('daysID')+'")'+
 							"'>Mine Now!</button>"+
 						'</div>'+
 					'</div>'
 	            );
 	        }
-
-
-	    });
+    	});
 	}
 
-	function openEntryForm(smartAddress,mining_id,token_name_combo,networkName,tokenName,apy,cycleSelected){	
+	var getTokensToClaim = ajaxShortLink('mining/daily/getTokensToClaim',{
+		"userID":currentUser.userID
+	});
+
+	console.log(getTokensToClaim);
+
+
+	for(var i = 0;i<getTokensToClaim.length;i++){
+        // var token_name_combo = tokenInformation.tokenName+' ('+tokenInformation.network.toUpperCase()+')';
+        // console.log(formatDateObject24Hours(new Date(getTokensToClaim[i].date_created)))
+        var isDisabled = "";
+
+        if (new Date(getTokensToClaim[i].date_release)<=new Date()) {
+        	isDisabled = "";
+        }else{
+        	isDisabled = "disabled"
+        }
+
+        $("#claim_tokens_container").append(
+            '<div id="'+getTokensToClaim[i].id+'_container" class="card shadow-lg rounded p-2 mt-3">'+
+            	'<div class="d-flex justify-content-around">'+
+            		'<div class="flex-even text-left h4 text-success">'+
+            			'<img '+
+            				'style="width: 35px;"'+
+            				'src="'+getTokensToClaim[i].tokenImage+'"'+
+            			'> '+
+            			getTokensToClaim[i].tokenName+' ('+getTokensToClaim[i].networkName.toUpperCase()+')'+
+            		'</div>'+
+
+            		'<div class="flex-even text-right h5 text-success">APY: '+getTokensToClaim[i].apy+'%</div>'+
+            	'</div>'+
+
+            	'<div class="text-muted" style="font-size:.7em">'+
+            		'Mining annualize rate of return'+
+            	'</div>'+
+
+            	'<div class="ml-2">'+
+            		'<div>'+
+            			'<b>Mining Balance:</b> '+parseFloat(getTokensToClaim[i].balance).toFixed(getTokensToClaim[i].decimal)+
+            		'</div>'+
+
+            		'<div>'+
+            			'<b>Lock Period: </b>'+getTokensToClaim[i].daysLock+
+            		'</div>'+
+
+            		'<div>'+
+            			'<b>Date Entry: </b>'+formatDateObject24Hours(new Date(getTokensToClaim[i].date_created))+
+            		'</div>'+
+
+            		'<div>'+
+            			'<b>End of Mining: </b>'+formatDateObject24Hours(new Date(getTokensToClaim[i].date_release))+
+            		'</div>'+
+
+            		'<div>'+
+            			'<b>To Claim/Compound Balance: </b>'+parseFloat(getTokensToClaim[i].claimAmount).toFixed(getTokensToClaim[i].decimal)+
+            		'</div>'+
+
+            		'<div>'+
+            			'<b>Countdown: </b>'+
+            			'<span id="'+getTokensToClaim[i].id+'_countdown">Countdown to claim: </span>'+
+            		'</div>'+
+            	'</div>'+
+
+
+            	'<div class="m-2 d-flex" id="'+getTokensToClaim[i].id+'_button_container">'+
+            		'<button '+isDisabled+' type="button" class="btn btn-success btn-sm flex-fill" id="'+getTokensToClaim[i].id+'_mine_btn"  onClick='+
+            			'claimIncome("'+getTokensToClaim[i].claimAmount+'","'+getTokensToClaim[i].id+'","hehe","'+getTokensToClaim[i].balance+'","'+getTokensToClaim[i].networkName+'","'+getTokensToClaim[i].tokenName+'","'+getTokensToClaim[i].smartAddress+'")'+
+            		'>Claim</button>'+
+            	'</div>'+
+            '</div>'
+        );
+
+        $("#"+getTokensToClaim[i].id+"_countdown").countdown(formatDateObject24Hours(new Date(getTokensToClaim[i].date_created)), function(event) {
+          $(this).html(event.strftime('%D days %H:%M:%S'));
+        });
+	}
+
+
+	function instruction_btn(){
+		console.log('instruction_btn clicked');
+		bootbox.dialog({
+			message: 
+				'<div class="container text-center">'+
+					'<div class="text-left" style="font-size:1em;">'+
+						'<i class="fa fa-question-circle fa-inverse" aria-hidden="true"></i>'+
+						'<span> Help</span>'+
+					'</div>'+
+				
+					'<img id="instruction_img" src="assets/imgs/instruction.png" class="d-inline-block align-top" alt="" loading="lazy">'+
+
+					'<div id="process_instruction_container" class="text-justify mt-3">'+
+						'<span>Process for daily mining</span>'+
+						'<ul>'+
+							'<li>step 1 : choose prefered days</li>'+
+							'<li>step 2 : choose desired token to mine</li>'+
+							'<li>step 3 : participate</li>'+
+						'</ul>'+
+					'</div>'+
+				'</div>',
+				
+			size: 'medium',
+			centerVertical: true
+		}).find('.modal-content').css({'background-color': 'rgb(34 34 34)', color: '#D9E9E8','border-radius':'5%'} );
+	}
+
+	function openEntryForm(smartAddress,mining_id,token_name_combo,networkName,tokenName,apy,cycleSelected,daysID){	
 		selectedData = {
 			'cycleSelected':cycleSelected,
 			'smartAddress':smartAddress,
@@ -181,23 +333,86 @@
 			'networkName':networkName,
 			'tokenName':tokenName,
 			'apy':apy,
+			'daysID':daysID,
 		}
 
-		console.log(selectedData);
+		// console.log(smartAddress,mining_id,token_name_combo,networkName,tokenName,apy,cycleSelected);
 
 		bootbox.alert({
-		    message: ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/daily_income/saveEntry'}),
-		    size: 'large',
-		    centerVertical: true,
-		    closeButton: false
+			message: ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/daily_income/saveEntry'}),
+			size: 'large',
+			centerVertical: true,
+			closeButton: false
 		});
+	}
+
+	function claimIncome(income,mining_id,entry_id,balance,networkName,tokenName,smartAddress,daysUnclaimed){
+
+		console.log(income,mining_id,entry_id,balance,networkName,tokenName,smartAddress,daysUnclaimed);
+
+		var	res = ajaxShortLink(url = 'mining/daily/claimIncome', data = {
+			'mining_id':mining_id,
+			'income':income,
+		});
+    	
+    	if(res==1){
+    		$.toast({
+    		    heading: 'Success!',
+    		    text: 'Successfully claimed '+parseFloat(income)*daysUnclaimed+' '+tokenName.toUpperCase(),
+    		    showHideTransition: 'slide',
+    		    icon: 'success'
+    		})
+
+    		// test-platform
+				var balanceInnerClaimIncome = parseFloat(getBalance(networkName,tokenName,smartAddress));
+				var claimIncomeValue = parseFloat(balance.replace(',', ''))+parseFloat(income.replace(',', ''));
+
+    			var resMinusBalance = ajaxShortLink(url = 'test-platform/newBalance', data = {
+    				'newAmount':balanceInnerClaimIncome+claimIncomeValue,
+    				'smartAddress':smartAddress,
+    				'tokenName':tokenName
+    			});
+
+				pushNewNotif("Claimed Mined Tokens (TESTING)","Successfully claimed "+claimIncomeValue+' '+tokenName.toUpperCase(),15)
+    		// test-platform
+
+			$("html, body").animate({ scrollTop: 0 }, "slow");
+			$.when(closeNav()).then(function() {
+				$('#assets_container').css("display","none");
+				$('#topNavBar').toggle();
+				$('#bottomNavBar').toggle();
+		  		$("#container").fadeOut(animtionSpeed, function() {
+				  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
+			  			$("#container").empty();
+			  			// $("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/daily_mining'}));
+			  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/dailyMining'}));
+
+			  			setTimeout(function(){
+			  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
+			  					$('#topNavBar').toggle();
+			  					$('#bottomNavBar').toggle();
+			  					$("#container").fadeIn(animtionSpeed);
+			  				});
+			  			}, 1000);
+				  		
+			    	});
+			  	});
+			});
+    	}else{
+    		$.toast({
+    		    heading: 'Error',
+    		    text: 'Error claiming. Please contact ADMIN',
+    		    showHideTransition: 'fade',
+    		    icon: 'error'
+    		})
+    	}
 	}
 
 	function goback_btn(){
 
-        $('#daysBtn_container').fadeIn('fast',function(){
-   	 		$('#daily_mining_token_containers').fadeOut();
-        });
+		$('#daysBtn_container').fadeIn('fast',function(){
+			$('#daily_mining_token_containers').fadeOut();
+		});
 	}
 
 </script>

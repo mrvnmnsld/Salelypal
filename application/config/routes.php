@@ -243,6 +243,8 @@ $route['main/getTokenInfoViaID'] = 'main/getTokenInfoViaID';
 
 			$route['mining/daily/getPurchasableLimit'] = 'mining/getPurchasableLimit';
 			$route['mining/daily/getTokenBalanceLimit'] = 'mining/getTokenBalanceLimit';
+			$route['mining/daily/getTokensToClaim'] = 'mining/getTokensToClaim';
+			
 
 			
 

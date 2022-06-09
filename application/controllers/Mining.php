@@ -291,13 +291,13 @@ class mining extends MY_Controller {
 
 	public function saveDailyMiningEntry(){
 		$balance = $_GET["balance"];
-		$lock_period = $_GET["lock_period"];
+		$daysID = $_GET["daysID"];
 		$mining_id = $_GET["mining_id"];
 		$userID = $_GET["userID"];
 
 		$insertRecord = array(
 			'balance' => $balance,
-			'lock_period' => $lock_period,
+			'daysID' => $daysID,
 			'mining_id' => $mining_id,
 			'userID' => $userID,
 			'date_created' => $this->_getTimeStamp24Hours()
@@ -333,45 +333,21 @@ class mining extends MY_Controller {
 	}
 
 	public function claimDailyIncome(){
-		$res = $this->_getRecordsData(
-			$selectfields = array("mining_daily_income_entry.*,DATE_ADD(date_created, INTERVAL lock_period DAY) AS date_release"), 
-	   		$tables = array('mining_daily_income_entry'),
-	   		$fieldName = array("id"), 
-	   		$where = array($_GET["entry_id"]), 
-	   		$join = null, 
-	   		$joinType = null,
-	   		$sortBy = null, 
-	   		$sortOrder = null, 
-	   		$limit = null, 
-	   		$fieldNameLike = null, 
-	   		$like = null,
-	   		$whereSpecial = null, 
-	   		$groupBy = null 
-		);
 
-		if(date('Y-m-d',strtotime($res[0]->date_release)) == date("Y-m-d")){
-		   $tableName="mining_daily_income_entry";
-		   $fieldName='id';
-		   $where=$_GET["entry_id"];
 
-		   $insertRecord = array(
-   			'status' => 'claimed',
-   			'isClaimableAdmin' => '0',
-		   );
+	   	$tableName="mining_daily_income_entry";
+	   	$fieldName='id';
+	   	$where=$_GET["mining_id"];
 
-		   $updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
-		}
+	   	$insertRecord = array(
+			'status' => 'claimed',
+			'isClaimableAdmin' => '0',
+	   	);
 
-		$insertRecord = array(
-			'type' => 'pocket',
-			'entry_id' => $_GET['entry_id'],
-			'claimed_amount' => $_GET['income'],
-			'date_claimed' => $this->_getTimeStamp24Hours()
-		);
+	   	$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
 
-		$saveQueryNotif = $this->_insertRecords($tableName = 'mining_daily_income_entry_claims', $insertRecord);
 
-		if ($saveQueryNotif) {
+		if ($updateRecordsRes) {
 			echo true;	
 		}else{
 			echo false;
@@ -595,8 +571,8 @@ class mining extends MY_Controller {
 			$tokenBalance = $this->_getRecordsData(
 				$selectfields = array("COALESCE(SUM(balance),0) AS balance"), 
 		   		$tables = array('mining_daily_income_entry'),
-		   		$fieldName = array("mining_id","daysID"), 
-		   		$where = array($value->id,$_GET['day']), 
+		   		$fieldName = array("mining_id","daysID",'status'), 
+		   		$where = array($value->id,$_GET['day'],'lock'), 
 		   		$join = null,	 
 		   		$joinType = null,
 		   		$sortBy = null, 
@@ -623,8 +599,8 @@ class mining extends MY_Controller {
 		$tokenBalance = $this->_getRecordsData(
 			$selectfields = array("COALESCE(SUM(balance),0) AS balance"), 
 	   		$tables = array('mining_daily_income_entry'),
-	   		$fieldName = array("mining_id","daysID"), 
-	   		$where = array($_GET['mining_id'],$_GET['day']), 
+	   		$fieldName = array("mining_id","daysID",'status'), 
+	   		$where = array($_GET['mining_id'],$_GET['day'],'lock'), 
 	   		$join = null,	 
 	   		$joinType = null,
 	   		$sortBy = null, 
@@ -657,6 +633,51 @@ class mining extends MY_Controller {
 			"totalLimit"=>$tokenLimit[0]->purchasable_limit
 		));
 	}
+
+	public function getTokensToClaim(){
+		$res = $this->_getRecordsData(
+			$selectfields = array(
+				"
+					mining_daily_income_entry.*,FORMAT(mining_daily_income_entry.balance, token_reference.decimal) AS balance,
+					user_tbl.email,
+					CONCAT(token_reference.tokenName,' (',network_reference.network,')')AS tokenNameCombo,
+					FORMAT (((mining_daily_income_entry.balance * (mining_daily_days_tbl.apy / 100))/365)*mining_daily_days_tbl.days, token_reference.decimal)  AS claimAmount,
+					mining_daily_days_tbl.apy,
+					DATE_ADD(mining_daily_income_entry.date_created, INTERVAL mining_daily_days_tbl.days DAY) AS date_release,
+					mining_daily_days_tbl.days AS daysLock, token_reference.tokenImage, token_reference.smartAddress, token_reference.tokenName, network_reference.network as networkName 
+
+				"), 
+	   		$tables = array(
+	   			'mining_daily_income_entry',
+	   			'user_tbl',
+	   			'mining_daily_income',
+	   			'token_reference',
+	   			'network_reference',
+	   			'mining_daily_days_tbl'
+	   		),
+	   		$fieldName = array("mining_daily_income_entry.userID"), 
+	   		$where = array($_GET['userID']), 
+	   		$join = array(
+	   			'mining_daily_income_entry.userID = user_tbl.userID',
+	   			'mining_daily_income_entry.mining_id = mining_daily_income.id',
+	   			'mining_daily_income.token_id = token_reference.id',
+	   			'token_reference.networkId = network_reference.id',
+	   			'mining_daily_income_entry.daysID = mining_daily_days_tbl.id'
+	   		), 
+	   		$joinType = array('inner','inner','inner','inner','inner'),
+	   		$sortBy = null, 
+	   		$sortOrder = null, 
+	   		$limit = null, 
+	   		$fieldNameLike = null, 
+	   		$like = null,
+	   		$whereSpecial = null, 
+	   		$groupBy = null 
+		);
+
+		echo json_encode($res);
+	}
+
+	
 
 
 	
