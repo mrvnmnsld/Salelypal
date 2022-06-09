@@ -251,7 +251,7 @@
 			</ul>	
 
 			<div class="asset-tab-content tab-content">
-				<div id="balance_tab" class="container tab-pane active"><br>
+				<div id="balance_tab" class="container notranslate tab-pane active"><br>
 					<div id="tokenContainer"></div>
 
 					<div class="col-md-12 text-center pl-3 pr-3">

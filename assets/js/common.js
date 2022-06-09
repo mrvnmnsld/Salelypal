@@ -477,6 +477,20 @@ function formatDateObject(date){
 	return date.toLocaleDateString("en-US", options);
 }
 
+function formatDateObject24Hours(date){
+	var options = { 
+		year: 'numeric', 
+		month: 'numeric', 
+		day: 'numeric',
+		hour:'numeric',
+		minute:'numeric',
+		second:'2-digit',
+		hour12: false
+	};
+
+	return date.toLocaleDateString("en-US", options);
+}
+
 function float2DecimalPoints(value){
 	return parseFloat(parseFloat(value).toFixed(2))
 }

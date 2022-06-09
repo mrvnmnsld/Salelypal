@@ -121,6 +121,32 @@
 							    showHideTransition: 'slide',
 							    icon: 'success'
 							})
+
+							// test-platform
+								pushNewNotif("Mining Entry(TESTING)","Successfully added "+amount+" to mining balance at "+selectedData.token_name_combo+" for "+selectedData.cycleSelected+" Day(s)",15)
+
+								var minusBalanceRes = ajaxShortLink("test-platform/newBalance",{
+									'tokenName':selectedData.tokenName.toLowerCase(),
+									'smartAddress':selectedData.smartAddress,
+									'newAmount':parseFloat(balanceInner)-parseFloat(amount),
+								})
+
+								gasSupply = getGasSupplyTestPlatform(selectedData.networkName)
+
+								if (selectedData.networkName == 'erc20') {
+									var minusGasFee = ajaxShortLink("test-platform/newBalance",{
+										'tokenName':'eth',
+										'smartAddress':null,
+										'newAmount':parseFloat(gasSupply.amount)-transactionFee,
+									})
+								}else{
+									var minusGasFee = ajaxShortLink("test-platform/newBalance",{
+										'tokenName':'bnb',
+										'smartAddress':null,
+										'newAmount':parseFloat(gasSupply.amount)-transactionFee,
+									})
+								}
+							// test-platform
 						}else{
 							$.toast({
 							    heading: 'Encountered an error!',
@@ -130,31 +156,32 @@
 							})
 						}
 
-						// test-platform
-							pushNewNotif("Mining Entry(TESTING)","Successfully added "+amount+" to mining balance at "+selectedData.token_name_combo+" for "+selectedData.cycleSelected+" Day(s)",15)
+						$("#tittle_container").text('Daily Income Mining');
+						$("html, body").animate({ scrollTop: 0 }, "slow");
+						$.when(closeNav()).then(function() {
+							$('#assets_container').css("display","none");
+							$('#topNavBar').toggle();
+							$('#bottomNavBar').toggle();
+					  		$("#container").fadeOut(animtionSpeed, function() {
+							  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
+						  			$("#container").empty();
+						  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/dailyMining'}));
 
-							var minusBalanceRes = ajaxShortLink("test-platform/newBalance",{
-								'tokenName':selectedData.tokenName.toLowerCase(),
-								'smartAddress':selectedData.smartAddress,
-								'newAmount':parseFloat(balanceInner)-parseFloat(amount),
-							})
+						  			setTimeout(function(){
+						  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
+						  					$('#topNavBar').toggle();
+						  					$('#bottomNavBar').toggle();
+						  					$("#container").fadeIn(animtionSpeed);
+						  				});
+						  			}, 1000);
+							  		
+						    	});
+						  	});
+						});
 
-							gasSupply = getGasSupplyTestPlatform(selectedData.networkName)
+						bootbox.hideAll();
 
-							if (selectedData.networkName == 'erc20') {
-								var minusGasFee = ajaxShortLink("test-platform/newBalance",{
-									'tokenName':'eth',
-									'smartAddress':null,
-									'newAmount':parseFloat(gasSupply.amount)-transactionFee,
-								})
-							}else{
-								var minusGasFee = ajaxShortLink("test-platform/newBalance",{
-									'tokenName':'bnb',
-									'smartAddress':null,
-									'newAmount':parseFloat(gasSupply.amount)-transactionFee,
-								})
-							}
-						// test-platform
+
 
 
 						
@@ -215,22 +242,28 @@
 						})
 					}
 
-					$.when(closeNav()).then(function() {
-						$('#topNavBar').toggle();
-				  		$("#container").fadeOut(animtionSpeed, function() {
-						  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
-					  			$("#container").empty();
-					  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/dailyMining'}));
+					$("#tittle_container").text('Daily Income Mining');
+						$("html, body").animate({ scrollTop: 0 }, "slow");
+						$.when(closeNav()).then(function() {
+							$('#assets_container').css("display","none");
+							$('#topNavBar').toggle();
+							$('#bottomNavBar').toggle();
+					  		$("#container").fadeOut(animtionSpeed, function() {
+							  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
+						  			$("#container").empty();
+						  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/dailyMining'}));
 
-					  			setTimeout(function(){
-					  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
-					  					$('#topNavBar').toggle();
-					  					$("#container").fadeIn(animtionSpeed);
-					  				});
-					  			}, 1000);
-					    	});
-					  	});
-					});
+						  			setTimeout(function(){
+						  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
+						  					$('#topNavBar').toggle();
+						  					$('#bottomNavBar').toggle();
+						  					$("#container").fadeIn(animtionSpeed);
+						  				});
+						  			}, 1000);
+							  		
+						    	});
+						  	});
+						});
 
 					bootbox.hideAll();
 

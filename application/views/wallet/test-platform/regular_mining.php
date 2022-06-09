@@ -38,7 +38,7 @@
 	</div>
 </div>
 
-<div id="token_mining_container" class="p-2"></div>
+<div id="token_mining_container" class="p-4"></div>
 
 <script type="text/javascript">
 	var selectedData;
@@ -90,7 +90,7 @@
 						'</div>'+
 
 						'<div class="my-1">'+
-							"<button type='button' class='btn btn-warning btn-block' onClick='"+
+							"<button type='button' class='btn btn-success btn-block' onClick='"+
 								'openEntryForm("'+smartAddress+'","'+mining_id+'","'+token_name_combo+'","'+networkName+'","'+tokenName+'","'+miningSettings[i].apy+'")'+
 							"'>Mine Now!</button>"+
 						'</div>'+
