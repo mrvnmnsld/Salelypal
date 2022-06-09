@@ -28,10 +28,15 @@
 	}
 </style>
 
-<div class="p-2">
-	<b>Notes on usage:</b><br>
-	Claiming mined tokens are computed by (Balance× APY)÷365×Financial cycle
-</div>						 
+<div id="title_container" class="text-center" style="display:block">
+	<div class="mt-3">
+		<h5>Mine and Claim now!</h5>
+	</div>
+	<div class="text-muted mt-2 " style="font-size:.7em">
+		<i onclick="how_compute_btn()" class="fa fa-question-circle"aria-hidden="true"></i>
+		How do we compute this?
+	</div>
+</div>
 
 <div id="token_mining_container" class="p-2"></div>
 
@@ -245,6 +250,27 @@
     	}
 
 		
+	}
+
+	function how_compute_btn(){
+		console.log('how_compute_btn clicked');
+		bootbox.dialog({
+			message: 
+				'<div class="container text-center">'+
+					'<div class="text-left" style="font-size:1em;">'+
+						'<i class="fa fa-question-circle fa-inverse" aria-hidden="true"></i>'+
+						'<span> Usage</span>'+
+					'</div>'+
+			
+					'<div id="process_instruction_container" class="text-justify mt-3">'+
+							'Formula for Claiming the mined tokens:<br>'+
+							'(Balance× APY)÷365×Financial cycle'+
+					'</div>'+
+				'</div>',
+
+			size: 'medium',
+			centerVertical: true
+		}).find('.modal-content').css({'background-color': 'rgb(34 34 34)', color: '#D9E9E8','border-radius':'1%'} );
 	}
 
 	// $("#token_mine_btn").on('click',function(){
