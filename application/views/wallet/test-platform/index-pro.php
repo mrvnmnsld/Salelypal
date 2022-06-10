@@ -168,34 +168,45 @@
 
 		/* Mainstyle */
 			body{
-				
-			font-family: 'Poppins', sans-serif;
-			color: #3a189f;
+				font-family: 'Poppins', sans-serif;
+				/* background-image: url('../../assets/imgs/1bg-2.jpg');
+				background-repeat:no-repeat;
+				background-size:400%;
+				background-attachment: fixed; */
+				/*font-family: 'Roboto Condensed', sans-serif;*/
+				/* LIGHTMODE_ */
+					/* background-color: white;  */
+				/* DARKMODE_ */
+					background-color: #220e5d!important; 
+				color: white !important; 
 			}
 			.main-color-text{
-				color: #3a189f;
-				/* color:#9e68e8; */
+				/* color: #3a189f; */
+				/* DARKMODE_  */
+					color: white !important;
 			}
 			.main-color-icon{
 				color: #5426de;
-				/* color:#9e68e8; */
 			}
 			.main-color-bg{
-				background-color: #5426de;
-				/* background-color:#9e68e8; */
+				/*LIGHTMODE_*/
+					/* background-color: #5426de;  */
+				/*DARKMODE_*/
+					background-color: #120731; 
 			}
 			.light-text{
 				color:#D9E9E8;
 			}
 		/* font */
-			.font-proxima-reg{
-				font-family: 'proxima_nova_rgregular', Helvetica, Arial, sans-serif;
-			}
-			.font-proxima-bold{
-				font-family: 'proxima_nova_rgbold', Helvetica, Arial, sans-serif !important;
-			}
 			.text-muted{
 				color: #94abef!important;
+			}
+
+			.modal-content{
+				/*DARKMODE_*/
+					background-color: #220e5d!important;
+				/*LIGHTMODE_*/
+					/* background-color: white!important;  */
 			}
 			
 	</style>
@@ -210,10 +221,10 @@
 	</div>
 
 	<div id="topNavBar" class="main-color-bg light-text" style="display:none; color:white!important;">
-		<span id="profile_btn" style="float: left;" ><i class="fa fa-user fa-md" aria-hidden="true"></i><span class="ml-2" id="username_container"></span></span>
+		<span id="profile_btn" style="float: left;" ><i class="fa fa-user-o fa-md" aria-hidden="true"></i><span class="ml-2" id="username_container"></span></span>
 		<!-- onclick="$.alert('This function is still under development')" -->
 		<span id="notif_btn" class="" style="float:right;">
-			<i id="notif_logo" class="fa fa-bell fa-md fa-inverse" style="color:white!important;"  aria-hidden="true">
+			<i id="notif_logo" class="fa fa-bell-o fa-md fa-inverse" style="color:white!important;"  aria-hidden="true">
 				<span id="notif_counter_number" style="font-size:.45em; right:.4em; top:1.5em; display:none" class="position-absolute badge bg-danger">0</span>
 			</i>
 		</span>
@@ -230,28 +241,26 @@
 				</span>
 				<br>
 				<span id="totalInUsdContainer" style="color:white;" class="display-5 main-color-text">Loading...</span>
-
-
 			</div>
 
 			<div id="main_btns_container" style="display:none;">
 				<div id="btn_option_container" class="d-flex justify-content-center mt-1">
 					<button id="deposit_btn_option" class="btn" style="background-color:transparent">
-						<div class="btn main-color-icon btn-md" style="font-size:2em;padding:1px;">
+						<div class="btn btn-md" style="font-size:2em;padding:1px;">
 							<i class="fa fa-arrow-circle-down fa-lg fa-inverse" aria-hidden="true"></i>
 						</div>
 						<div style="font-size:.8em" class="text-light"><b>Deposit</b></div>
 					</button>
 
 					<button id="withdraw_btn_option" class="btn" style="background-color:transparent">
-						<div class="btn main-color-icon btn-md" style="font-size:2em;padding:1px;">
+						<div class="btn btn-md" style="font-size:2em;padding:1px;">
 							<i class="fa fa-arrow-circle-up fa-lg fa-inverse" aria-hidden="true"></i>
 						</div>
 						<div style="font-size:.8em" class="text-light"><b>Withdraw</b></div>
 					</button>
 
 					<button id="buy_btn_option" class="btn" style="background-color:transparent">
-						<div class="btn main-color-icon btn-md" style="font-size:2em;padding:1px;">
+						<div class="btn btn-md" style="font-size:2em;padding:1px;">
 							<i class="fa fa-credit-card-alt fa-md fa-inverse" aria-hidden="true"></i>
 						</div>
 						<div style="font-size:.8em;" class="text-light"><b>Buy</b></div>
@@ -259,12 +268,7 @@
 				</div>
 			</div>
 		</div>
-		<!-- <hr class="mt-3" style=" width:50%;margin:0 auto; opacity:0.1; border-color:#3a189f!important;"> -->
 		<style>
-			/* #asset_tab_container{
-				background-color:rgba(34,34,34,.1);
-				padding-bottom:5em;
-			} */
 			#asset_tabs a{
 				color: #94abef;
 				-webkit-transition: color 2s, font-size .25s;
@@ -274,31 +278,25 @@
 			}
 			.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
 				font-size:2em;
-				/* color:black!important;
-				border-bottom-color: transparent;
-				background-color:rgba(45,15,87,.01); */
-
 				-webkit-transition: color 1s, font-size .25s;
 				-moz-transition: color 1s, font-size .25s;
 				-o-transition: color 1s, font-size .25s;
 				transition: color 1s, font-size .25s;
 
-				color: #3a189f!important;
 				border-color: transparent;
 				background-color:transparent;
-				/* font-weight:bold; */
+				/* LIGHTMODE_ */
+				/* color: #3a189f!important;  */
+				/* DARKMODE_ */
+				color: white !important; 
 			}
-
 		</style>
-
-		
 
 		<div id="asset_tab_container" class="mt-3">
 			<ul id="asset_tabs" class="nav nav-tabs nav-justified" role="tablist">
 				<li class="nav-item">
 					<a class="nav-link active tab-pane fade show " data-toggle="tab" href="#balance_tab">BALANCE</a>
 				</li>
-
 				<li class="nav-item">
 					<a class="nav-link tab-pane fade show" data-toggle="tab" href="#portfolio_tab">PORTFOLIO</a>
 				</li>
@@ -320,24 +318,18 @@
 					<div class="text-center">
 						<h3>This part is still under development</h3>
 					</div>
-					
-					
 				</div>
 			</div>
 		</div><!-- asset_tab_container -->
 		
-
 		<style>
 			.nav-tabs {
 				border-bottom: transparent;
 			}
-			
 		</style>
 	</div>
 
-	<div id="container" class="mb-5" style="display:none;min-height: 120%;">
-		
-	</div>
+	<div id="container" class="mb-5" style="display:none;min-height: 120%;"></div>
 
 	<br>
 	<br>
@@ -346,766 +338,769 @@
 
 	<!-- modal-mining -->
 		<style>
-			#modal_trade .modal-content{
-				background:transparent;
-			}
-
 			#modal_trade .modal-header{
 				padding:.3em;
-
 			}
-
 			#modal_trade .modal-body{
-				
-				padding:0em!important;
-
-			}
-
-			#modal_trade .btn-modal {
-				background: rgb(34 34 34);
-
-				border:.2px solid;
 				border-radius : .5em;
-				
-				color: #D9E9E8;
-
+				padding:0em!important;
+			}
+			#modal_trade .btn-modal {
 				min-height: 100%;
 				min-width: 100%;
-				padding:2em;
+				padding:.5em;
+				box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+				margin:.5em 0;
+			}
+			#modal_trade .btn-modal:hover {
+				background-color:#94abef;
+				font-size:1.5em;
+			}
+			.modal-header{
+				border-bottom: 0px solid #dee2e6!important;
 			}
 		</style>
 
 		<div class="modal fade" id="modal_trade">
 			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content" style="background-color: rgb(0 0 0 / 79%);">
+				<div class="modal-content p-4">
 				
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">
-							<i class="fa fa-close fa-inverse" aria-hidden="true"></i>
+							<i class="fa fa-close " aria-hidden="true"></i>
 						</button>
 					</div>
 					
-					<div class="modal-body" style="">
-
+					<div class="modal-body">
 						<div class="m-1 justify-content-center">
-							<button id="rise_fall_btn" type="button" class="btn btn-modal" data-dismiss="modal">
-								<!-- <img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png"> -->
+							<button id="rise_fall_btn" type="button" class="btn btn-modal main-color-bg" data-dismiss="modal">
 								<i class="fa fa-bar-chart fa-inverse fa-lg" style="" aria-hidden="true"></i>
-								Contract Rise Fall
+								<small class="text-light">Rise Fall Contract</small>
 							</button>
 						</div>
-
-						<div class="m-1 justify-content-center">
-							<button id="future_btn" class="btn btn-modal" data-dismiss="modal">
-								<!-- <img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png"> -->
+						<div class="m-1 justify-content-center main-color-text">
+							<button id="future_btn" class="btn btn-modal main-color-bg" data-dismiss="modal">
 								<i class="fa fa-bar-chart fa-inverse fa-lg" style="" aria-hidden="true"></i>
-								Contract Long Short
+								<small class="text-light">Long Short Contract</small>
 							</button>
-						</div>					
-
-						<div class="m-1 justify-content-center">
-							<button id="daily_mining_btn" type="button" class="btn btn-modal" data-dismiss="modal">
+						</div>	
+						<div class="m-1 justify-content-center main-color-text">
+							<button id="daily_mining_btn" type="button" class="btn btn-modal main-color-bg" data-dismiss="modal">
 								<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">
-								Daily Mining
+								<small class="text-light">Daily Mining</small>
 							</button>
 						</div>
 
 						<div class="m-1 justify-content-center">
-							<button id="regular_mining_btn" class="btn btn-modal" data-dismiss="modal">
+							<button id="regular_mining_btn" class="btn btn-modal main-color-bg" data-dismiss="modal">
 								<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">
-								Regular Mining
+								<small class="text-light">Regular Mining</small>
 							</button>
 						</div>
-							
 					</div>
 				</div>	
 			</div>
 		</div>
-	<!-- modal-mining -->
+	<!-- modal-mining END -->
+	<style>
+		.botnav-icon{
+			font-size:2em;
+		}
+		.botnav-icon:hover{
+			color: #94abef;
+		}
+	</style>
 
-	<ul id="bottomNavBar" style="display:none;" class="nav fixed-bottom main-color-bg justify-content-center row pt-2">
+	<!-- bottomnavbar -->
+	<ul id="bottomNavBar" style="display:none;" class="nav fixed-bottom main-color-bg justify-content-center row p-4">
 		<li id="assets_btn" class="nav-item col-3 text-center">
-			<i class="fa fa-money fa-inverse fa-lg" aria-hidden="true"></i>
-			<a class="botnavlink nav-link active" style="font-size:.8em; color:#D9E9E8;"><span class="test1">Asset</span></a>
+			<i class="fa fa-bank fa-inverse botnav-icon" alt="Asset" aria-hidden="true"></i>
+			<!-- <a class="botnavlink nav-link active" style="font-size:.8em; color:#D9E9E8;"><span class="test1">Asset</span></a> -->
 		</li>
 
 		<li id="modal_mining_btn" data-toggle="modal" data-target="#modal_trade" class="nav-item col-3 text-center">
-			<i class="fa fa-bar-chart fa-inverse fa-lg" style="" aria-hidden="true"></i>
-			<a class="nav-link" style="font-size:.8em; color:#D9E9E8;"  href="#">Trade</a>
+			<i class="fa fa-bar-chart fa-inverse botnav-icon" alt="Trade" aria-hidden="true"></i>
+			<!-- <a class="nav-link" style="font-size:.8em; color:#D9E9E8;"  href="#">Trade</a> -->
 		</li>
 
 		<li id="discover_btn" class="nav-item col-3 text-center">
-			<i class="fa fa-globe fa-inverse fa-lg" aria-hidden="true"></i>
-			<a  class="nav-link" style="font-size:.8em; color:#D9E9E8;" href="#">Discover</a>
+			<i class="fa fa-globe fa-inverse botnav-icon" alt="Discover" aria-hidden="true"></i>
+			<!-- <a  class="nav-link" style="font-size:.8em; color:#D9E9E8;" href="#">Discover</a> -->
 		</li>
 
 		<li id="settings_btn" class="nav-item col-3 text-center">
-			<i class="fa fa-cogs fa-inverse fa-lg" aria-hidden="true"></i>
-			<a class="nav-link" style="font-size:.8em; color:#D9E9E8;"  href="#">Settings</a>
+			<i class="fa fa-cogs fa-inverse botnav-icon" alt="Settings" aria-hidden="true"></i>
+			<!-- <a class="nav-link" style="font-size:.8em; color:#D9E9E8;"  href="#">Settings</a> -->
 		</li>
 	</ul>
 
-	<!-- translate -->
-		<script type="text/javascript">
-			function googleTranslateElementInit() {
-			    // setCookie('googtrans', currentUserLanguage.lang,1);
-			    new google.translate.TranslateElement({
-			        pageLanguage: 'en',
-			        // includedLanguages: 'en,zh-CN,zh-TW',
-			        // layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-			        autoDisplay: true
-			    }, 'google_translate_element');
+<!-- translate -->
+<script type="text/javascript">
+	function googleTranslateElementInit() {
+		// setCookie('googtrans', currentUserLanguage.lang,1);
+		new google.translate.TranslateElement({
+			pageLanguage: 'en',
+			// includedLanguages: 'en,zh-CN,zh-TW',
+			// layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+			autoDisplay: true
+		}, 'google_translate_element');
+	}
+</script>
+
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
+<!-- translate -->
+
+<script type="text/javascript">
+
+	$.confirm({
+		theme: 'dark', //DARKMODE_
+		title: 'Testing Mode!',
+		content: 'Testing Mode intitiated, this limits the function and all token amounts are only for testing, They dont exists in the blockchain but it exists in our own server',
+		typeAnimated: true,
+		buttons: {
+			close: function () {
 			}
-			
-		</script>
+		}
+	});
 
-		<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
-	<!-- translate -->
+	// var currentUser = JSON.parse(getLocalStorageByKey('currentUser'));
+	var currentUser = {'userID':"15","displayCurrency":"USD"}
+	var animtionSpeed = 250;
+	var	SelectedtransactionDetails = [];
+	var totalInUsd = 0;
+	var balance = [];
+	var clickContainer;
+	var totalInUsd;
+	var tokenLoadTimer;
+	var assetsHtmlContainer;
+	var tokensSelected = ajaxShortLink('userWallet/getAllSelectedTokensVer2',{'userID':15});
 
-	<script type="text/javascript">
 
-		$.confirm({
-		    title: 'Testing Mode!',
-		    content: 'Testing Mode intitiated, this limits the function and all token amounts are only for testing, They dont exists in the blockchain but it exists in our own server',
-		    typeAnimated: true,
-		    buttons: {
-		        close: function () {
-		        }
-		    }
+	//initial
+		$("#username_container").text("Marvin");
+		$("#email_container").text("marvin@gmail.com");
+
+		var priceAlert = ajaxShortLink('userWallet/triggerPriceAlerts',{'userID':
+			15});
+		var priceAlertTokensId = [];
+		console.log(priceAlert);
+
+		if(priceAlert.isAlert == 1){
+			if(priceAlert.tokens!=""){
+				priceAlertTokensId = priceAlert.tokens.split(',')
+			}
+
+		}	
+
+		var initialNotifList = ajaxShortLink("getNewNotifs",{
+			'userID':15
 		});
 
-		// var currentUser = JSON.parse(getLocalStorageByKey('currentUser'));
-		var currentUser = {'userID':"15","displayCurrency":"USD"}
-		var animtionSpeed = 250;
-		var	SelectedtransactionDetails = [];
-		var totalInUsd = 0;
-		var balance = [];
-		var clickContainer;
-		var totalInUsd;
-		var tokenLoadTimer;
-		var assetsHtmlContainer;
-		var tokensSelected = ajaxShortLink('userWallet/getAllSelectedTokensVer2',{'userID':15});
+		if(initialNotifList.length>=1){
+			$("#new_notif_counter").text(initialNotifList.length);
+		}
 
-
-		//initial
-			$("#username_container").text("Marvin");
-			$("#email_container").text("marvin@gmail.com");
-
-			var priceAlert = ajaxShortLink('userWallet/triggerPriceAlerts',{'userID':
-				15});
-			var priceAlertTokensId = [];
-			console.log(priceAlert);
-
-			if(priceAlert.isAlert == 1){
-				if(priceAlert.tokens!=""){
-					priceAlertTokensId = priceAlert.tokens.split(',')
-				}
-
-			}	
-
-			var initialNotifList = ajaxShortLink("getNewNotifs",{
+		const newNotifChecker = setInterval(function() {
+			var notifList = ajaxShortLink("getNewNotifs",{
 				'userID':15
 			});
 
-			if(initialNotifList.length>=1){
-				$("#new_notif_counter").text(initialNotifList.length);
+			if(notifList.length>=1){
+				$("#notif_counter_number").text(notifList.length);
+				$("#notif_counter_number").addClass("animate__animated animate__heartBeat animate__repeat-2");
+				$("#notif_counter_number").css("display", "block");
 			}
 
-			const newNotifChecker = setInterval(function() {
-			    var notifList = ajaxShortLink("getNewNotifs",{
-			    	'userID':15
-			    });
+			console.log(notifList);
+		}, 30000);	
+	//initial
 
-			    if(notifList.length>=1){
-					$("#notif_counter_number").text(notifList.length);
-					$("#notif_counter_number").addClass("animate__animated animate__heartBeat animate__repeat-2");
-					$("#notif_counter_number").css("display", "block");
-			    }
+	// function checkValidityLocalStorageValidity(){
+	// 	console.log(currentUser.lastLoginDate);
+	// }
 
-			    console.log(notifList);
-			}, 30000);	
-		//initial
+	$(document).ready(function(){
+		console.time('loadTimer');
 
-		// function checkValidityLocalStorageValidity(){
-		// 	console.log(currentUser.lastLoginDate);
-		// }
+		setTimeout(function(){
+			$.when(loadSystem()).then(function(){
+				$('#container').toggle();
+				$('#assets_container').css("display","block");
+				$('#loadSpinner').toggle();
+				$('#topNavBar').toggle();
+				$('#bottomNavBar').toggle();
+				$('#header_inner_container').toggle();
+				$('#main_btns_container').toggle();
 
-		$(document).ready(function(){
-			console.time('loadTimer');
+				$("#loading_text_container").text('Please Wait');
+			});
+		}, 500);
 
-			setTimeout(function(){
-				$.when(loadSystem()).then(function(){
-					$('#container').toggle();
-					$('#assets_container').css("display","block");
-					$('#loadSpinner').toggle();
-					$('#topNavBar').toggle();
-					$('#bottomNavBar').toggle();
-					$('#header_inner_container').toggle();
-					$('#main_btns_container').toggle();
+		setTimeout(function(){
+			var i = 0;
 
-					$("#loading_text_container").text('Please Wait');
-				});
-			}, 500);
+			function myLoop() {
+				tokenLoadTimer = setTimeout(function() {
+					if (i < tokensSelected.length) {
+						loadTokenInfo(tokensSelected[i]);
+						myLoop();
+					}else{
+						$("#totalInUsdContainer").html(numberWithCommas(totalInUsd.toFixed(2)));
+						$("#totalInUsdContainer").append(" "+currentUser.displayCurrency);
+						$('#visible_btn').toggle();
+						console.timeEnd('loadTimer');
+					}
 
-			setTimeout(function(){
-				var i = 0;
+					i++;
+				}, 500)
+			}
 
-				function myLoop() {
-				  	tokenLoadTimer = setTimeout(function() {
-					    if (i < tokensSelected.length) {
-							loadTokenInfo(tokensSelected[i]);
-							myLoop();
-					    }else{
-					  		$("#totalInUsdContainer").html(numberWithCommas(totalInUsd.toFixed(2)));
-					  		$("#totalInUsdContainer").append(" "+currentUser.displayCurrency);
-					  		$('#visible_btn').toggle();
-							console.timeEnd('loadTimer');
-					    }
+			myLoop();
+		}, 1000);	
 
-				    	i++;
-				  	}, 500)
+	});
+
+	// buttonEvents
+		// visible
+			var tokenValuesContainer = []; // this is global
+			var visible = 1;
+
+			$('#visible_btn').on('click',function(){
+				console.log('visible_btn click',visible);
+
+				if(visible==1){
+					tokenValuesContainer = []; // this is start of onclick event
+					$("#tokenContainer > div").find("div:nth-child(3)").each(function(){
+						tokenValuesContainer.push($(this).html());
+						$(this).html("<h3>*****</h3>")
+					})
+					$('#totalInUsdContainer').html('*****');
+					$('#eye_open').toggle();
+					$('#eye_close').toggle();
+					visible = 0;
+				}else{
+					$("#tokenContainer > div").find("div:nth-child(3)").each(function(i){
+						$(this).html(tokenValuesContainer[i]);
+						i+1
+					})
+					$('#totalInUsdContainer').html(numberWithCommas(totalInUsd.toFixed(2)));
+					$("#totalInUsdContainer").append(" "+currentUser.displayCurrency);
+					$('#eye_open').toggle();
+					$('#eye_close').toggle();
+					visible = 1;
 				}
+				
+			});
+		// visible
 
-				myLoop();
-			}, 1000);	
-	
+		$('#deposit_btn, #deposit_btn_option').on('click',function(){
+			$.confirm({
+				theme: 'dark', //DARKMODE_
+				title: 'Testing Mode!',
+				content: 'Deposit is disabled due to testing mode being active',
+				type: 'red',
+				typeAnimated: true,
+				buttons: {
+					close: function () {
+					}
+				}
+			});
 		});
 
-		// buttonEvents
-			// visible
-				var tokenValuesContainer = []; // this is global
-				var visible = 1;
-
-				$('#visible_btn').on('click',function(){
-					console.log('visible_btn click',visible);
-
-					if(visible==1){
-						tokenValuesContainer = []; // this is start of onclick event
-						$("#tokenContainer > div").find("div:nth-child(3)").each(function(){
-							tokenValuesContainer.push($(this).html());
-							$(this).html("<h3>*****</h3>")
-						})
-						$('#totalInUsdContainer').html('*****');
-						$('#eye_open').toggle();
-						$('#eye_close').toggle();
-						visible = 0;
-					}else{
-						$("#tokenContainer > div").find("div:nth-child(3)").each(function(i){
-							$(this).html(tokenValuesContainer[i]);
-							i+1
-						})
-						$('#totalInUsdContainer').html(numberWithCommas(totalInUsd.toFixed(2)));
-						$("#totalInUsdContainer").append(" "+currentUser.displayCurrency);
-						$('#eye_open').toggle();
-						$('#eye_close').toggle();
-						visible = 1;
+		$('#withdraw_btn, #withdraw_btn_option').on('click',function(){
+			$.confirm({
+				theme: 'dark', //DARKMODE_
+				title: 'Testing Mode!',
+				content: 'Withdrawal is disabled due to testing mode being active',
+				type: 'red',
+				typeAnimated: true,
+				buttons: {
+					close: function () {
 					}
-					
-				});
-			// visible
-
-			$('#deposit_btn, #deposit_btn_option').on('click',function(){
-				$.confirm({
-				    title: 'Testing Mode!',
-				    content: 'Deposit is disabled due to testing mode being active',
-				    type: 'red',
-				    typeAnimated: true,
-				    buttons: {
-				        close: function () {
-				        }
-				    }
-				});
-			});
-
-			$('#withdraw_btn, #withdraw_btn_option').on('click',function(){
-				$.confirm({
-				    title: 'Testing Mode!',
-				    content: 'Withdrawal is disabled due to testing mode being active',
-				    type: 'red',
-				    typeAnimated: true,
-				    buttons: {
-				        close: function () {
-				        }
-				    }
-				});
-			});
-
-			$('#assets_btn').on('click',function(){
-				if ($('#assets_container').css("display") == 'none') {
-					$("#tittle_container").text('Purchase');
-					$("html, body").animate({ scrollTop: 0 }, "slow");
-					$.when(closeNav()).then(function() {
-						$('#topNavBar').toggle();
-						$('#bottomNavBar').toggle();
-				  		$("#container").fadeOut(animtionSpeed, function() {
-						  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
-					  			$("#container").empty();
-					  			// $("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/buyCrypto'}));
-
-					  			setTimeout(function(){
-					  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
-										$('#assets_container').fadeIn(animtionSpeed);
-					  					$('#topNavBar').toggle();
-					  					$('#bottomNavBar').toggle();
-					  					$("#container").fadeIn(animtionSpeed);
-					  				});
-					  			}, 1000);
-
-						  		
-					    	});
-					  	});
-					});
 				}
-					
-					
 			});
+		});
 
-			$('#buyCrypto_btn, #buy_btn_option').on('click',function(){
-					$("#tittle_container").text('Purchase');
+		$('#assets_btn').on('click',function(){
+			if ($('#assets_container').css("display") == 'none') {
+				$("#tittle_container").text('Purchase');
+				$("html, body").animate({ scrollTop: 0 }, "slow");
+				$.when(closeNav()).then(function() {
+					$('#topNavBar').toggle();
+					$('#bottomNavBar').toggle();
+					$("#container").fadeOut(animtionSpeed, function() {
+						$("#loadSpinner").fadeIn(animtionSpeed,function(){
+							$("#container").empty();
+							// $("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/buyCrypto'}));
+
+							setTimeout(function(){
+								$("#loadSpinner").fadeOut(animtionSpeed,function(){
+									$('#assets_container').fadeIn(animtionSpeed);
+									$('#topNavBar').toggle();
+									$('#bottomNavBar').toggle();
+									$("#container").fadeIn(animtionSpeed);
+								});
+							}, 1000);
+
+							
+						});
+					});
+				});
+			}
+				
+				
+		});
+
+		$('#buyCrypto_btn, #buy_btn_option').on('click',function(){
+				$("#tittle_container").text('Purchase');
+				$("html, body").animate({ scrollTop: 0 }, "slow");
+				$.when(closeNav()).then(function() {
+					$('#assets_container').css("display","none");
+					$('#topNavBar').toggle();
+					$('#bottomNavBar').toggle();
+					$("#container").fadeOut(animtionSpeed, function() {
+						$("#loadSpinner").fadeIn(animtionSpeed,function(){
+							$("#container").empty();
+							$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/buyCrypto'}));
+
+							setTimeout(function(){
+								$("#loadSpinner").fadeOut(animtionSpeed,function(){
+									$('#topNavBar').toggle();
+									$('#bottomNavBar').toggle();
+									$("#container").fadeIn(animtionSpeed);
+								});
+							}, 1000);
+
+							
+						});
+					});
+				});
+		});
+
+		$('#addToken_btn').on('click',function(){
+			$("#tittle_container").text('Token Management');
+			$("html, body").animate({ scrollTop: 0 }, "slow");
+			$.when(closeNav()).then(function() {
+				$('#assets_container').css("display","none");
+				$('#topNavBar').toggle();
+				$('#bottomNavBar').toggle();
+				$("#container").fadeOut(animtionSpeed, function() {
+					$("#loadSpinner").fadeIn(animtionSpeed,function(){
+						$("#container").empty();
+						$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/addToken'}));
+
+						$("#loadSpinner").fadeOut(animtionSpeed,function(){
+							$('#topNavBar').toggle();
+							$('#bottomNavBar').toggle();
+							$("#container").fadeIn(animtionSpeed);
+						});
+					});
+				});
+			});
+		});
+
+		$('#logOut_btn').on('click',function(){
+			$.confirm({
+				theme: 'dark', //DARKMODE_
+				title: 'Testing Mode!',
+				content: 'Loging out is disabled due to testing mode being active',
+				type: 'red',
+				typeAnimated: true,
+				buttons: {
+					close: function () {
+					}
+				}
+			});
+		});
+
+		$('#future_btn').on('click',function(){
+			
+			$("#tittle_container").text('Contract Trade');
+			$("html, body").animate({ scrollTop: 0 }, "slow");
+			$.when(closeNav()).then(function() {
+				$('#assets_container').css("display","none");
+				$('#topNavBar').toggle();
+				$('#bottomNavBar').toggle();
+				$("#container").fadeOut(animtionSpeed, function() {
+					$("#loadSpinner").fadeIn(animtionSpeed,function(){
+						$("#container").empty();
+						$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/future'}));
+
+						setTimeout(function(){
+							$("#loadSpinner").fadeOut(animtionSpeed,function(){
+								$('#topNavBar').toggle();
+								$('#bottomNavBar').toggle();
+								$("#container").fadeIn(animtionSpeed);
+							});
+						}, 1000);
+
+						
+					});
+				});
+			});
+		});
+
+		$('#rise_fall_btn').on('click',function(){
+			
+			$("#tittle_container").text('Rise Fall');
+			$("html, body").animate({ scrollTop: 0 }, "slow");
+			$.when(closeNav()).then(function() {
+				$('#assets_container').css("display","none");
+				$('#topNavBar').toggle();
+				$('#bottomNavBar').toggle();
+				$("#container").fadeOut(animtionSpeed, function() {
+					$("#loadSpinner").fadeIn(animtionSpeed,function(){
+						$("#container").empty();
+						$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/risefall'}));
+
+						setTimeout(function(){
+							$("#loadSpinner").fadeOut(animtionSpeed,function(){
+								$('#topNavBar').toggle();
+								$('#bottomNavBar').toggle();
+								$("#container").fadeIn(animtionSpeed);
+							});
+						}, 1000);
+						
+					});
+				});
+			});
+		});
+
+		$('#profile_btn').on('click',function(){
+			
+			$("#username_container").text("Marvin");
+			$("#email_container").text("marvin@gmail.com");
+			$("html, body").animate({ scrollTop: 0 }, "slow");
+			$.when(closeNav()).then(function() {
+				$('#assets_container').css("display","none");
+				$('#topNavBar').toggle();
+				$('#bottomNavBar').toggle();
+				$("#container").fadeOut(animtionSpeed, function() {
+					$("#loadSpinner").fadeIn(animtionSpeed,function(){
+						$("#container").empty();
+						$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/user_profile/profile'}));
+						console.log('profile_btn clicked');
+
+						setTimeout(function(){
+							$("#loadSpinner").fadeOut(animtionSpeed,function(){
+								$('#topNavBar').toggle();
+								$('#bottomNavBar').toggle();
+								$("#container").fadeIn(animtionSpeed);
+							});
+						}, 1000);
+						
+					});
+				});
+			});
+		});
+
+		$('#notif_btn').on('click',function(){
+			$("#notif_counter_number").text("");
+			$("#notif_counter_number").removeClass("animate__animated animate__bounce animate__repeat-2");
+			$("#notif_counter_number").css("display", "none");
+			
+			clearTimeout(newNotifChecker);
+			$("#tittle_container").text('Notification Center');
+			$("html, body").animate({ scrollTop: 0 }, "slow");
+			$.when(closeNav()).then(function() {
+				$('#assets_container').css("display","none");
+				$('#topNavBar').toggle();
+				$('#bottomNavBar').toggle();
+				$("#container").fadeOut(animtionSpeed, function() {
+					$("#loadSpinner").fadeIn(animtionSpeed,function(){
+						$("#container").empty();
+						$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/notificationCenter'}));
+
+							$("#loadSpinner").fadeOut(animtionSpeed,function(){
+								$('#topNavBar').toggle();
+								$('#bottomNavBar').toggle();
+								$("#container").fadeIn(animtionSpeed);
+							});
+					});
+				});
+			});
+		});
+
+		$('#settings_btn').on('click',function(){
+			console.log('settings_btn');
+			
+			$("#tittle_container").text('Settings');
+			$("html, body").animate({ scrollTop: 0 }, "slow");
+			$.when(closeNav()).then(function() {
+				$('#assets_container').css("display","none");
+				$('#topNavBar').toggle();
+				$('#bottomNavBar').toggle();
+				$("#container").fadeOut(animtionSpeed, function() {
+					$("#loadSpinner").fadeIn(animtionSpeed,function(){
+						$("#container").empty();
+						$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings'}));
+
+						$("#loadSpinner").fadeOut(animtionSpeed,function(){
+							$('#topNavBar').toggle();
+							$('#bottomNavBar').toggle();
+							$("#container").fadeIn(animtionSpeed);
+						});
+					});
+				});
+			});
+		});
+
+		$('#regular_mining_btn').on('click',function(){
+			
+			$("#tittle_container").text('Regular Income Mining');
+			$("html, body").animate({ scrollTop: 0 }, "slow");
+			$.when(closeNav()).then(function() {
+				$('#assets_container').css("display","none");
+				$('#topNavBar').toggle();
+				$('#bottomNavBar').toggle();
+				$("#container").fadeOut(animtionSpeed, function() {
+					$("#loadSpinner").fadeIn(animtionSpeed,function(){
+						$("#container").empty();
+						$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/regular_mining'}));
+
+						setTimeout(function(){
+							$("#loadSpinner").fadeOut(animtionSpeed,function(){
+								$('#topNavBar').toggle();
+								$('#bottomNavBar').toggle();
+								$("#container").fadeIn(animtionSpeed);
+							});
+						}, 1000);
+						
+					});
+				});
+			});
+		});
+
+		$('#daily_mining_btn').on('click',function(){
+			// $.alert("This part is still under development")
+			
+			$("#tittle_container").text('Daily Income Mining');
+			$("html, body").animate({ scrollTop: 0 }, "slow");
+			$.when(closeNav()).then(function() {
+				$('#assets_container').css("display","none");
+				$('#topNavBar').toggle();
+				$('#bottomNavBar').toggle();
+				$("#container").fadeOut(animtionSpeed, function() {
+					$("#loadSpinner").fadeIn(animtionSpeed,function(){
+						$("#container").empty();
+						// $("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/daily_mining'}));
+						$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/dailyMining'}));
+
+						setTimeout(function(){
+							$("#loadSpinner").fadeOut(animtionSpeed,function(){
+								$('#topNavBar').toggle();
+								$('#bottomNavBar').toggle();
+								$("#container").fadeIn(animtionSpeed);
+							});
+						}, 1000);
+						
+					});
+				});
+			});
+		});
+
+		$('#discover_btn').on('click',function(){
+			$.alert({
+				theme: 'dark', //DARKMODE_
+				content:"This part is still under development"
+			});
+			// 
+			// $("#tittle_container").text('Daily Income Mining');
+			// $("html, body").animate({ scrollTop: 0 }, "slow");
+			// $.when(closeNav()).then(function() {
+				// $('#assets_container').css("display","none");
+			// 	$('#topNavBar').toggle();
+			// 	$('#bottomNavBar').toggle();
+			//  		$("#container").fadeOut(animtionSpeed, function() {
+			// 	  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
+			//   			$("#container").empty();
+			//   			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/daily_mining'}));
+
+			//   			setTimeout(function(){
+			//   				$("#loadSpinner").fadeOut(animtionSpeed,function(){
+			//   					$('#topNavBar').toggle();
+			//   					$('#bottomNavBar').toggle();
+			//   					$("#container").fadeIn(animtionSpeed);
+			//   				});
+			//   			}, 1000);
+						
+			//     	});
+			//   	});
+			// });
+		});
+	// buttonEvents	
+
+	function openNav(){
+		// document.getElementById("mySidenav").style.width = "102%";
+		// document.getElementById("mySidenav").style.width = "102%";
+		// document.getElementById("mySidenav").style.opacity = "1";
+	}
+
+	function closeNav(){
+		// document.getElementById("mySidenav").style.width = "0";
+		// document.getElementById("mySidenav").style.opacity = "0%";
+	}
+
+	function backButton(){
+		window.location.href = 'test-platform-pro';//local
+	}
+
+	function loadTokenInfo(tokenInfo){
+		// console.time('loadTokenInfo');
+
+		console.log(tokenInfo);
+		var differenceResponse = ajaxShortLink('userWallet/getTokenDifference',{'tokenName':tokenInfo.coingeckoTokenId});
+		var valueNow = differenceResponse.market_data.current_price.usd
+		var changePercentage = differenceResponse.market_data.price_change_percentage_24h;
+
+		var balanceInner;
+		var sign;
+		var color;
+
+		if (changePercentage>0) {
+			sign = '+';
+			color = 'text-success';
+		}else if (changePercentage<0) {
+			sign = '';
+			color = 'text-danger';
+		}else{
+			sign = '';
+			color = '';
+		}
+
+		if (tokenInfo.networkName == 'trx'||tokenInfo.networkName == 'trc20') {
+			if (tokenInfo.tokenName.toUpperCase() === 'trx'.toUpperCase()) {
+				balanceInner = ajaxShortLink('test-platform/getTronBalance',{
+					// 'trc20Address':currentUser['trc20_wallet']
+				})['balance'];			
+			}else{
+				balanceInner = ajaxShortLink('test-platform/getTokenBalanceBySmartAddress',{
+					// 'trc20Address':currentUser['trc20_wallet'],
+					'contractaddress':tokenInfo.smartAddress,
+				})['balance'];
+			}
+		}else if(tokenInfo.networkName =='bsc'){
+
+			if(tokenInfo.tokenName.toUpperCase() === 'bnb'.toUpperCase()){
+
+				balanceInner = ajaxShortLink('test-platform/getBinancecoinBalance',{
+					// 'bsc_wallet':currentUser['bsc_wallet']
+				})['balance'];
+
+			}else{
+				balanceInner = ajaxShortLink('test-platform/getTokenBalanceBySmartAddress',{
+					// 'bsc_wallet':currentUser['bsc_wallet'],
+					'contractaddress':tokenInfo.smartAddress
+				})['balance'];
+			}
+		}else if(tokenInfo.networkName =='erc20'){
+
+			if(tokenInfo.tokenName.toUpperCase() === 'eth'.toUpperCase()){
+
+				balanceInner = ajaxShortLink('test-platform/getEthereumBalance',{
+					// 'erc20_address':currentUser['erc20_wallet']
+				})['balance'];
+
+			}else{
+				balanceInner = ajaxShortLink('test-platform/getTokenBalanceBySmartAddress',{
+					// 'erc20_address':currentUser['erc20_wallet'],
+					'contractaddress':tokenInfo.smartAddress
+				})['balance'];
+			}
+		}
+
+		// console.log(tokenInfo.decimal)
+
+		$("#"+tokenInfo.tokenName+"_amount_container").html(parseFloat(balanceInner).toFixed(tokenInfo.decimal)+' <br>'+tokenInfo.tokenName.toUpperCase());
+		$("#"+tokenInfo.tokenName+"_change_container").html(valueNow.toFixed(3)+' | <span class="'+color+'">'+sign+changePercentage.toFixed(2)+'%</span>');
+		
+		totalInUsd = totalInUsd+(parseFloat(valueNow)*parseFloat(balanceInner));
+
+		if (priceAlertTokensId.includes(tokenInfo.id)) {
+			if (changePercentage>=5) {
+				pushNewNotif("Price Alert!",tokenInfo.tokenName.toUpperCase()+" have increased "+ changePercentage.toFixed(2)+'%',15);
+			}else if(changePercentage<0&&changePercentage<=-5){
+				pushNewNotif("Price Alert!",tokenInfo.tokenName.toUpperCase()+" have decreased "+ changePercentage.toFixed(2)+'%',15);
+			}
+		}
+
+		// console.timeEnd('loadTokenInfo');
+
+		// console.log("---------------------");
+	}
+
+	function loadSystem(){
+		for (var i = 0; i < tokensSelected.length; i++) {
+	
+			$("#tokenContainer").append(
+				'<div id="'+tokensSelected[i].tokenName+'_container" class="row mb-2">'+
+					'<div class="col-2 row" style="flex-basis:10%">'+
+						'<div class="col-12 mt-2">'+
+							'<img  style="width: 40px;" src="'+tokensSelected[i].tokenImage+'">'+
+						'</div>'+
+					'</div>'+
+
+					'<div class="col-7 ml-4">'+
+						'<span class="main-color-text">'+
+							'<span id="'+tokensSelected[i].tokenName+'_name_container">'+
+								tokensSelected[i].description+" ("+tokensSelected[i].networkName.toUpperCase()+")"+
+							'</span>'+
+						'</span>'+
+
+						'<br>'+
+
+						'<span class="h5">'+
+							// '<span style="font-size: 15px;" id="'+tokensSelected[i].tokenName+'_change_container">'+
+								// valueNow+' | <span class="'+color+'">'+changePercentage+'%</span>'+
+							'<span class="text-muted" style="font-size:.65em;" id="'+tokensSelected[i].tokenName+'_change_container">Loading...</span>'+
+						'</span>'+
+					'</div>'+
+
+					'<div class="col-3 text-center">'+
+							// '<span style="font-size: 14px;text-align: center;" id="'+tokensSelected[i].tokenName+'_amount_container">'+
+								// parseFloat(balanceInner).toFixed(3)+' '+tokensSelected[i].tokenName.toUpperCase()+
+
+							'<span class="main-color-text" style="font-size: 13px;" id="'+tokensSelected[i].tokenName+'_amount_container">Loading...</span>'+
+					'</div>'+
+				'</div>'
+			);
+
+			// loadTokenInfo(tokensSelected[i].tokenName,tokensSelected[i].coingeckoTokenId)
+
+			$('#'+tokensSelected[i].tokenName+'_container').on('click',function(){
+					
+					$("#loading_text_container").text("Please wait while we load your recent activities");
+
+					clickContainer = tokensSelected[$(this).index()];
+
+					$("#tittle_container").text('Token Information');
 					$("html, body").animate({ scrollTop: 0 }, "slow");
 					$.when(closeNav()).then(function() {
 						$('#assets_container').css("display","none");
 						$('#topNavBar').toggle();
 						$('#bottomNavBar').toggle();
-				  		$("#container").fadeOut(animtionSpeed, function() {
-						  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
-					  			$("#container").empty();
-					  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/buyCrypto'}));
+						$("#container").fadeOut(animtionSpeed, function() {
+							$("#loadSpinner").fadeIn(animtionSpeed,function(){
+								// setTimeout(function(){
+									$("#container").empty();
+									$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/viewTokenInfo'}));
 
-					  			setTimeout(function(){
-					  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
-					  					$('#topNavBar').toggle();
-					  					$('#bottomNavBar').toggle();
-					  					$("#container").fadeIn(animtionSpeed);
-					  				});
-					  			}, 1000);
-
-						  		
-					    	});
-					  	});
-					});
-			});
-
-			$('#addToken_btn').on('click',function(){
-				$("#tittle_container").text('Token Management');
-				$("html, body").animate({ scrollTop: 0 }, "slow");
-				$.when(closeNav()).then(function() {
-					$('#assets_container').css("display","none");
-					$('#topNavBar').toggle();
-					$('#bottomNavBar').toggle();
-			  		$("#container").fadeOut(animtionSpeed, function() {
-					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
-				  			$("#container").empty();
-				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/addToken'}));
-
-					  		$("#loadSpinner").fadeOut(animtionSpeed,function(){
-					  			$('#topNavBar').toggle();
-					  			$('#bottomNavBar').toggle();
-					  			$("#container").fadeIn(animtionSpeed);
-					  		});
-				    	});
-				  	});
-				});
-			});
-
-			$('#logOut_btn').on('click',function(){
-				$.confirm({
-				    title: 'Testing Mode!',
-				    content: 'Loging out is disabled due to testing mode being active',
-				    type: 'red',
-				    typeAnimated: true,
-				    buttons: {
-				        close: function () {
-				        }
-				    }
-				});
-			});
-
-			$('#future_btn').on('click',function(){
-				
-				$("#tittle_container").text('Contract Trade');
-				$("html, body").animate({ scrollTop: 0 }, "slow");
-				$.when(closeNav()).then(function() {
-					$('#assets_container').css("display","none");
-					$('#topNavBar').toggle();
-					$('#bottomNavBar').toggle();
-			  		$("#container").fadeOut(animtionSpeed, function() {
-					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
-				  			$("#container").empty();
-				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/future'}));
-
-				  			setTimeout(function(){
-				  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
-				  					$('#topNavBar').toggle();
-				  					$('#bottomNavBar').toggle();
-				  					$("#container").fadeIn(animtionSpeed);
-				  				});
-				  			}, 1000);
-
-					  		
-				    	});
-				  	});
-				});
-			});
-
-			$('#rise_fall_btn').on('click',function(){
-				
-				$("#tittle_container").text('Rise Fall');
-				$("html, body").animate({ scrollTop: 0 }, "slow");
-				$.when(closeNav()).then(function() {
-					$('#assets_container').css("display","none");
-					$('#topNavBar').toggle();
-					$('#bottomNavBar').toggle();
-			  		$("#container").fadeOut(animtionSpeed, function() {
-					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
-				  			$("#container").empty();
-				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/risefall'}));
-
-				  			setTimeout(function(){
-				  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
-				  					$('#topNavBar').toggle();
-				  					$('#bottomNavBar').toggle();
-				  					$("#container").fadeIn(animtionSpeed);
-				  				});
-				  			}, 1000);
-					  		
-				    	});
-				  	});
-				});
-			});
-
-			$('#profile_btn').on('click',function(){
-				
-				$("#username_container").text("Marvin");
-				$("#email_container").text("marvin@gmail.com");
-				$("html, body").animate({ scrollTop: 0 }, "slow");
-				$.when(closeNav()).then(function() {
-					$('#assets_container').css("display","none");
-					$('#topNavBar').toggle();
-					$('#bottomNavBar').toggle();
-			  		$("#container").fadeOut(animtionSpeed, function() {
-					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
-				  			$("#container").empty();
-				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/user_profile/profile'}));
-							console.log('profile_btn clicked');
-
-				  			setTimeout(function(){
-				  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
-				  					$('#topNavBar').toggle();
-				  					$('#bottomNavBar').toggle();
-				  					$("#container").fadeIn(animtionSpeed);
-				  				});
-				  			}, 1000);
-					  		
-				    	});
-				  	});
-				});
-			});
-
-			$('#notif_btn').on('click',function(){
-				$("#notif_counter_number").text("");
-				$("#notif_counter_number").removeClass("animate__animated animate__bounce animate__repeat-2");
-				$("#notif_counter_number").css("display", "none");
-				
-				clearTimeout(newNotifChecker);
-				$("#tittle_container").text('Notification Center');
-				$("html, body").animate({ scrollTop: 0 }, "slow");
-				$.when(closeNav()).then(function() {
-					$('#assets_container').css("display","none");
-					$('#topNavBar').toggle();
-					$('#bottomNavBar').toggle();
-			  		$("#container").fadeOut(animtionSpeed, function() {
-					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
-				  			$("#container").empty();
-				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/notificationCenter'}));
-
-				  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
-				  					$('#topNavBar').toggle();
-				  					$('#bottomNavBar').toggle();
-				  					$("#container").fadeIn(animtionSpeed);
-				  				});
-				    	});
-				  	});
-				});
-			});
-	
-			$('#settings_btn').on('click',function(){
-				console.log('settings_btn');
-				
-				$("#tittle_container").text('Settings');
-				$("html, body").animate({ scrollTop: 0 }, "slow");
-				$.when(closeNav()).then(function() {
-					$('#assets_container').css("display","none");
-					$('#topNavBar').toggle();
-					$('#bottomNavBar').toggle();
-			  		$("#container").fadeOut(animtionSpeed, function() {
-					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
-				  			$("#container").empty();
-				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings'}));
-
-			  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
-			  					$('#topNavBar').toggle();
-			  					$('#bottomNavBar').toggle();
-			  					$("#container").fadeIn(animtionSpeed);
-			  				});
-				    	});
-				  	});
-				});
-			});
-
-			$('#regular_mining_btn').on('click',function(){
-				
-				$("#tittle_container").text('Regular Income Mining');
-				$("html, body").animate({ scrollTop: 0 }, "slow");
-				$.when(closeNav()).then(function() {
-					$('#assets_container').css("display","none");
-					$('#topNavBar').toggle();
-					$('#bottomNavBar').toggle();
-			  		$("#container").fadeOut(animtionSpeed, function() {
-					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
-				  			$("#container").empty();
-				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/regular_mining'}));
-
-				  			setTimeout(function(){
-				  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
-				  					$('#topNavBar').toggle();
-				  					$('#bottomNavBar').toggle();
-				  					$("#container").fadeIn(animtionSpeed);
-				  				});
-				  			}, 1000);
-					  		
-				    	});
-				  	});
-				});
-			});
-
-			$('#daily_mining_btn').on('click',function(){
-				// $.alert("This part is still under development")
-				
-				$("#tittle_container").text('Daily Income Mining');
-				$("html, body").animate({ scrollTop: 0 }, "slow");
-				$.when(closeNav()).then(function() {
-					$('#assets_container').css("display","none");
-					$('#topNavBar').toggle();
-					$('#bottomNavBar').toggle();
-			  		$("#container").fadeOut(animtionSpeed, function() {
-					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
-				  			$("#container").empty();
-				  			// $("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/daily_mining'}));
-				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/dailyMining'}));
-
-				  			setTimeout(function(){
-				  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
-				  					$('#topNavBar').toggle();
-				  					$('#bottomNavBar').toggle();
-				  					$("#container").fadeIn(animtionSpeed);
-				  				});
-				  			}, 1000);
-					  		
-				    	});
-				  	});
-				});
-			});
-
-			$('#discover_btn').on('click',function(){
-				$.alert("This part is still under development")
-				// 
-				// $("#tittle_container").text('Daily Income Mining');
-				// $("html, body").animate({ scrollTop: 0 }, "slow");
-				// $.when(closeNav()).then(function() {
-					// $('#assets_container').css("display","none");
-				// 	$('#topNavBar').toggle();
-				// 	$('#bottomNavBar').toggle();
-			 //  		$("#container").fadeOut(animtionSpeed, function() {
-				// 	  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
-				//   			$("#container").empty();
-				//   			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/daily_mining'}));
-
-				//   			setTimeout(function(){
-				//   				$("#loadSpinner").fadeOut(animtionSpeed,function(){
-				//   					$('#topNavBar').toggle();
-				//   					$('#bottomNavBar').toggle();
-				//   					$("#container").fadeIn(animtionSpeed);
-				//   				});
-				//   			}, 1000);
-					  		
-				//     	});
-				//   	});
-				// });
-			});
-		// buttonEvents	
-
-		function openNav(){
-	  		// document.getElementById("mySidenav").style.width = "102%";
-	  		// document.getElementById("mySidenav").style.width = "102%";
-	  		// document.getElementById("mySidenav").style.opacity = "1";
-		}
-
-		function closeNav(){
-	  		// document.getElementById("mySidenav").style.width = "0";
-	  		// document.getElementById("mySidenav").style.opacity = "0%";
-		}
-
-		function backButton(){
-			window.location.href = 'test-platform-pro';//local
-		}
-
-		function loadTokenInfo(tokenInfo){
-			// console.time('loadTokenInfo');
-
-			console.log(tokenInfo);
-			var differenceResponse = ajaxShortLink('userWallet/getTokenDifference',{'tokenName':tokenInfo.coingeckoTokenId});
-			var valueNow = differenceResponse.market_data.current_price.usd
-			var changePercentage = differenceResponse.market_data.price_change_percentage_24h;
-
-			var balanceInner;
-			var sign;
-			var color;
-
-			if (changePercentage>0) {
-				sign = '+';
-				color = 'text-success';
-			}else if (changePercentage<0) {
-				sign = '';
-				color = 'text-danger';
-			}else{
-				sign = '';
-				color = '';
-			}
-
-			if (tokenInfo.networkName == 'trx'||tokenInfo.networkName == 'trc20') {
-				if (tokenInfo.tokenName.toUpperCase() === 'trx'.toUpperCase()) {
-					balanceInner = ajaxShortLink('test-platform/getTronBalance',{
-						// 'trc20Address':currentUser['trc20_wallet']
-					})['balance'];			
-				}else{
-					balanceInner = ajaxShortLink('test-platform/getTokenBalanceBySmartAddress',{
-						// 'trc20Address':currentUser['trc20_wallet'],
-						'contractaddress':tokenInfo.smartAddress,
-					})['balance'];
-				}
-			}else if(tokenInfo.networkName =='bsc'){
-
-				if(tokenInfo.tokenName.toUpperCase() === 'bnb'.toUpperCase()){
-
-					balanceInner = ajaxShortLink('test-platform/getBinancecoinBalance',{
-						// 'bsc_wallet':currentUser['bsc_wallet']
-					})['balance'];
-
-				}else{
-					balanceInner = ajaxShortLink('test-platform/getTokenBalanceBySmartAddress',{
-						// 'bsc_wallet':currentUser['bsc_wallet'],
-						'contractaddress':tokenInfo.smartAddress
-					})['balance'];
-				}
-			}else if(tokenInfo.networkName =='erc20'){
-
-				if(tokenInfo.tokenName.toUpperCase() === 'eth'.toUpperCase()){
-
-					balanceInner = ajaxShortLink('test-platform/getEthereumBalance',{
-						// 'erc20_address':currentUser['erc20_wallet']
-					})['balance'];
-
-				}else{
-					balanceInner = ajaxShortLink('test-platform/getTokenBalanceBySmartAddress',{
-						// 'erc20_address':currentUser['erc20_wallet'],
-						'contractaddress':tokenInfo.smartAddress
-					})['balance'];
-				}
-			}
-
-			// console.log(tokenInfo.decimal)
-
-			$("#"+tokenInfo.tokenName+"_amount_container").html(parseFloat(balanceInner).toFixed(tokenInfo.decimal)+' <br>'+tokenInfo.tokenName.toUpperCase());
-			$("#"+tokenInfo.tokenName+"_change_container").html(valueNow.toFixed(3)+' | <span class="'+color+'">'+sign+changePercentage.toFixed(2)+'%</span>');
-			
-			totalInUsd = totalInUsd+(parseFloat(valueNow)*parseFloat(balanceInner));
-
-			if (priceAlertTokensId.includes(tokenInfo.id)) {
-				if (changePercentage>=5) {
-					pushNewNotif("Price Alert!",tokenInfo.tokenName.toUpperCase()+" have increased "+ changePercentage.toFixed(2)+'%',15);
-				}else if(changePercentage<0&&changePercentage<=-5){
-					pushNewNotif("Price Alert!",tokenInfo.tokenName.toUpperCase()+" have decreased "+ changePercentage.toFixed(2)+'%',15);
-				}
-			}
-
-			// console.timeEnd('loadTokenInfo');
-
-			// console.log("---------------------");
-		}
-
-		function loadSystem(){
-			for (var i = 0; i < tokensSelected.length; i++) {
-		
-				$("#tokenContainer").append(
-					'<div id="'+tokensSelected[i].tokenName+'_container" class="row mb-2">'+
-						'<div class="col-2 row" style="flex-basis:10%">'+
-							'<div class="col-12 mt-2">'+
-								'<img  style="width: 40px;" src="'+tokensSelected[i].tokenImage+'">'+
-							'</div>'+
-						'</div>'+
-
-						'<div class="col-7 ml-4">'+
-							'<span class="">'+
-								'<span id="'+tokensSelected[i].tokenName+'_name_container">'+
-									tokensSelected[i].description+" ("+tokensSelected[i].networkName.toUpperCase()+")"+
-								'</span>'+
-							'</span>'+
-
-							'<br>'+
-
-							'<span class="h5">'+
-								// '<span style="font-size: 15px;" id="'+tokensSelected[i].tokenName+'_change_container">'+
-									// valueNow+' | <span class="'+color+'">'+changePercentage+'%</span>'+
-								'<span class="text-muted" style="font-size:.65em;" id="'+tokensSelected[i].tokenName+'_change_container">Loading...</span>'+
-							'</span>'+
-						'</div>'+
-
-						'<div class="col-3 text-center">'+
-								// '<span style="font-size: 14px;text-align: center;" id="'+tokensSelected[i].tokenName+'_amount_container">'+
-									// parseFloat(balanceInner).toFixed(3)+' '+tokensSelected[i].tokenName.toUpperCase()+
-
-								'<span style="font-size: 13px;" id="'+tokensSelected[i].tokenName+'_amount_container">Loading...</span>'+
-						'</div>'+
-					'</div>'
-				);
-
-				// loadTokenInfo(tokensSelected[i].tokenName,tokensSelected[i].coingeckoTokenId)
-
-				$('#'+tokensSelected[i].tokenName+'_container').on('click',function(){
-						
-						$("#loading_text_container").text("Please wait while we load your recent activities");
-
-						clickContainer = tokensSelected[$(this).index()];
-
-						$("#tittle_container").text('Token Information');
-						$("html, body").animate({ scrollTop: 0 }, "slow");
-						$.when(closeNav()).then(function() {
-							$('#assets_container').css("display","none");
-							$('#topNavBar').toggle();
-							$('#bottomNavBar').toggle();
-							$("#container").fadeOut(animtionSpeed, function() {
-								$("#loadSpinner").fadeIn(animtionSpeed,function(){
-									// setTimeout(function(){
-							  			$("#container").empty();
-							  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/viewTokenInfo'}));
-
-								  		$("#loadSpinner").fadeOut(animtionSpeed,function(){
-								  			$('#topNavBar').toggle();
-								  			$('#bottomNavBar').toggle();
-								  			$("#container").fadeIn(animtionSpeed);
-								  		});
-									// }, 1000)
-							  	});
-
-							  	$("#loading_text_container").text("Please wait");
+									$("#loadSpinner").fadeOut(animtionSpeed,function(){
+										$('#topNavBar').toggle();
+										$('#bottomNavBar').toggle();
+										$("#container").fadeIn(animtionSpeed);
+									});
+								// }, 1000)
 							});
+
+							$("#loading_text_container").text("Please wait");
 						});
-				});	
-				
-			}
-			// $('#totalInUsdContainer').text(totalInUsd.toFixed(2));
+					});
+			});	
+			
 		}
-	</script>
+		// $('#totalInUsdContainer').text(totalInUsd.toFixed(2));
+	}
+</script>
 </body>
 </html>
