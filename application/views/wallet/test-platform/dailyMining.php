@@ -228,7 +228,8 @@
 
 	for(var i = 0;i<getTokensToClaim.length;i++){
         // var token_name_combo = tokenInformation.tokenName+' ('+tokenInformation.network.toUpperCase()+')';
-        // console.log(formatDateObject24Hours(new Date(getTokensToClaim[i].date_created)))
+        console.log(getTokensToClaim[i]);
+
         var isDisabled = "";
 
         if (new Date(getTokensToClaim[i].date_release)<=new Date()) {
@@ -275,26 +276,36 @@
             		'<div>'+
             			'<b>To Claim/Compound Balance: </b>'+parseFloat(getTokensToClaim[i].claimAmount).toFixed(getTokensToClaim[i].decimal)+
             		'</div>'+
-
-            		'<div>'+
-            			'<b>Countdown: </b>'+
-            			'<span id="'+getTokensToClaim[i].id+'_countdown">Countdown to claim: </span>'+
-            		'</div>'+
             	'</div>'+
 
 
             	'<div class="m-2 d-flex" id="'+getTokensToClaim[i].id+'_button_container">'+
             		'<button '+isDisabled+' type="button" class="btn btn-success btn-sm flex-fill" id="'+getTokensToClaim[i].id+'_mine_btn"  onClick='+
             			'claimIncome("'+getTokensToClaim[i].claimAmount+'","'+getTokensToClaim[i].id+'","hehe","'+getTokensToClaim[i].balance+'","'+getTokensToClaim[i].networkName+'","'+getTokensToClaim[i].tokenName+'","'+getTokensToClaim[i].smartAddress+'")'+
-            		'>Claim</button>'+
+            		'><span id="'+getTokensToClaim[i].id+'_countdown" data-countdown="'+formatDateObject24Hours(new Date(getTokensToClaim[i].date_release))+'">Countdown to claim: </span></button>'+
             	'</div>'+
             '</div>'
         );
 
-        $("#"+getTokensToClaim[i].id+"_countdown").countdown(formatDateObject24Hours(new Date(getTokensToClaim[i].date_created)), function(event) {
-          $(this).html(event.strftime('%D days %H:%M:%S'));
-        });
+        console.log(formatDateObject24Hours(new Date(getTokensToClaim[i].date_created)));
+
+        
 	}
+
+	$('[data-countdown]').each(function() {
+	    var $this = $(this), finalDate = $(this).data('countdown');
+	    // console.log(new Date(finalDate),new Date(),new Date(finalDate)>=new Date());
+	    if(new Date(finalDate)>=new Date()){
+	    	$this.countdown(finalDate, function(event) {
+	    	    $this.html(event.strftime('Claim after %D day(s) and %H:%M:%S'));
+	    	});
+	    }else{
+	    	$(this).parent("button").text("Claim Now!")
+	    	// $(this).parent("button").empty()
+	    	// $this.text("NOW!");
+	    }
+
+	});
 
 
 	function instruction_btn(){
@@ -356,13 +367,6 @@
 		});
     	
     	if(res==1){
-    		$.toast({
-    		    heading: 'Success!',
-    		    text: 'Successfully claimed '+parseFloat(income)*daysUnclaimed+' '+tokenName.toUpperCase(),
-    		    showHideTransition: 'slide',
-    		    icon: 'success'
-    		})
-
     		// test-platform
 				var balanceInnerClaimIncome = parseFloat(getBalance(networkName,tokenName,smartAddress));
 				var claimIncomeValue = parseFloat(balance.replace(',', ''))+parseFloat(income.replace(',', ''));
@@ -373,8 +377,17 @@
     				'tokenName':tokenName
     			});
 
+    			console.log(claimIncomeValue);
+
 				pushNewNotif("Claimed Mined Tokens (TESTING)","Successfully claimed "+claimIncomeValue+' '+tokenName.toUpperCase(),15)
     		// test-platform
+
+    		$.toast({
+    		    heading: 'Success!',
+    		    text: 'Successfully claimed '+claimIncomeValue+' '+tokenName.toUpperCase(),
+    		    showHideTransition: 'slide',
+    		    icon: 'success'
+    		})
 
 			$("html, body").animate({ scrollTop: 0 }, "slow");
 			$.when(closeNav()).then(function() {

@@ -346,7 +346,6 @@ class mining extends MY_Controller {
 
 	   	$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
 
-
 		if ($updateRecordsRes) {
 			echo true;	
 		}else{
@@ -644,7 +643,7 @@ class mining extends MY_Controller {
 					FORMAT (((mining_daily_income_entry.balance * (mining_daily_days_tbl.apy / 100))/365)*mining_daily_days_tbl.days, token_reference.decimal)  AS claimAmount,
 					mining_daily_days_tbl.apy,
 					DATE_ADD(mining_daily_income_entry.date_created, INTERVAL mining_daily_days_tbl.days DAY) AS date_release,
-					mining_daily_days_tbl.days AS daysLock, token_reference.tokenImage, token_reference.smartAddress, token_reference.tokenName, network_reference.network as networkName 
+					mining_daily_days_tbl.days AS daysLock, token_reference.tokenImage, token_reference.smartAddress, token_reference.tokenName, token_reference.decimal, network_reference.network as networkName 
 
 				"), 
 	   		$tables = array(
@@ -655,8 +654,8 @@ class mining extends MY_Controller {
 	   			'network_reference',
 	   			'mining_daily_days_tbl'
 	   		),
-	   		$fieldName = array("mining_daily_income_entry.userID"), 
-	   		$where = array($_GET['userID']), 
+	   		$fieldName = array("mining_daily_income_entry.userID","mining_daily_income_entry.status"), 
+	   		$where = array($_GET['userID'],"lock"), 
 	   		$join = array(
 	   			'mining_daily_income_entry.userID = user_tbl.userID',
 	   			'mining_daily_income_entry.mining_id = mining_daily_income.id',
