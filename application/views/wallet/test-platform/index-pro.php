@@ -23,6 +23,8 @@
 	<link href="assets/lib/DataTables/datatables.min.css" rel="stylesheet">
 	<link href="assets/lib/DataTables/datatables.min.css" rel="stylesheet">
 	<link href="assets/lib/DataTables/buttons.dataTables.min.css" rel="stylesheet">
+	<link href="assets/css/fontsss.css" rel="stylesheet">
+
 
 	<script src="assets/vendor/jquery/jquery.min.js"></script>
 	<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
