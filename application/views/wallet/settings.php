@@ -21,7 +21,7 @@
 		<i class="fa fa-paint-brush" aria-hidden="true"></i>
 		<span class="" style="font-size: 18px;">&nbsp;Theme</span>
 	</button>
-</div>
+</div> 
 	
 	<!-- <button id="price_alert_btn" class="btn text-muted border-bottom btn-block text-left">
 		<i class="fa fa-bell" aria-hidden="true"></i>
@@ -231,6 +231,11 @@
 
 		
 	});
+	$("#back_btn").on("click",function(){
+		$('#assets_btn').click();
+	});
+
+	
 
 
 </script>
