@@ -213,7 +213,9 @@
 
 	<div id="topNavBar" class="main-color-bg light-text" style="display:none; color:white!important;">
 		<span id="profile_btn" style="float: left;" ><i class="fa fa-user fa-md" aria-hidden="true"></i><span class="ml-2" id="username_container"></span></span>
-		<!-- onclick="$.alert('This function is still under development')" -->
+
+		<span id="back_btn" style="float: left;display: none;" ><i class="fa fa-angle-left fa-md" aria-hidden="true"></i></span>
+
 		<span id="notif_btn" class="" style="float:right;">
 			<i id="notif_logo" class="fa fa-bell fa-md fa-inverse" style="color:white!important;"  aria-hidden="true">
 				<span id="notif_counter_number" style="font-size:.45em; right:.4em; top:1.5em; display:none" class="position-absolute badge bg-danger">0</span>
@@ -634,9 +636,9 @@
 
 			$('#assets_btn').on('click',function(){
 				if ($('#assets_container').css("display") == 'none') {
-					$("#tittle_container").text('Purchase');
 					$("html, body").animate({ scrollTop: 0 }, "slow");
 					$.when(closeNav()).then(function() {
+
 						$('#topNavBar').toggle();
 						$('#bottomNavBar').toggle();
 				  		$("#container").fadeOut(animtionSpeed, function() {
@@ -650,6 +652,9 @@
 					  					$('#topNavBar').toggle();
 					  					$('#bottomNavBar').toggle();
 					  					$("#container").fadeIn(animtionSpeed);
+										$("#profile_btn").css('display',"block")
+										$("#back_btn").css('display',"none")
+
 					  				});
 					  			}, 1000);
 
@@ -673,6 +678,9 @@
 						  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
 					  			$("#container").empty();
 					  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/buyCrypto'}));
+								$("#profile_btn").css('display',"none")
+								$("#back_btn").css('display',"block ")
+
 
 					  			setTimeout(function(){
 					  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
@@ -699,6 +707,8 @@
 					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
 				  			$("#container").empty();
 				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/addToken'}));
+							$("#profile_btn").css('display',"none")
+							$("#back_btn").css('display',"block ")
 
 					  		$("#loadSpinner").fadeOut(animtionSpeed,function(){
 					  			$('#topNavBar').toggle();
@@ -735,6 +745,10 @@
 					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
 				  			$("#container").empty();
 				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/future'}));
+							$("#profile_btn").css('display',"none")
+							$("#back_btn").css('display',"block ")
+
+
 
 				  			setTimeout(function(){
 				  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
@@ -762,6 +776,9 @@
 					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
 				  			$("#container").empty();
 				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/risefall'}));
+							$("#profile_btn").css('display',"none")
+							$("#back_btn").css('display',"block ")
+
 
 				  			setTimeout(function(){
 				  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
@@ -789,7 +806,9 @@
 					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
 				  			$("#container").empty();
 				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/user_profile/profile'}));
-							console.log('profile_btn clicked');
+							$("#profile_btn").css('display',"none")
+							$("#back_btn").css('display',"block ")
+
 
 				  			setTimeout(function(){
 				  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
@@ -820,6 +839,8 @@
 					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
 				  			$("#container").empty();
 				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/notificationCenter'}));
+							$("#profile_btn").css('display',"none")
+							$("#back_btn").css('display',"block ")
 
 				  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
 				  					$('#topNavBar').toggle();
@@ -844,6 +865,9 @@
 					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
 				  			$("#container").empty();
 				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings'}));
+							$("#profile_btn").css('display',"none")
+							$("#back_btn").css('display',"block ")
+
 
 			  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
 			  					$('#topNavBar').toggle();
@@ -867,6 +891,9 @@
 					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
 				  			$("#container").empty();
 				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/regular_mining'}));
+							$("#profile_btn").css('display',"none")
+							$("#back_btn").css('display',"block ")
+
 
 				  			setTimeout(function(){
 				  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
@@ -895,6 +922,9 @@
 				  			$("#container").empty();
 				  			// $("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/daily_mining'}));
 				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/dailyMining'}));
+							$("#profile_btn").css('display',"none")
+							$("#back_btn").css('display',"block ")
+
 
 				  			setTimeout(function(){
 				  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
@@ -922,6 +952,9 @@
 				// 	  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
 				//   			$("#container").empty();
 				//   			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/daily_mining'}));
+							// $("#profile_btn").css('display',"none")
+							// $("#back_btn").css('display',"block ")
+
 
 				//   			setTimeout(function(){
 				//   				$("#loadSpinner").fadeOut(animtionSpeed,function(){

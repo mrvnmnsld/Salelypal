@@ -183,7 +183,6 @@
                 	isRatioEnough = "disabled"
                 }
 
-
 	            var token_name_combo = tokenInformation.tokenName+' ('+tokenInformation.network.toUpperCase()+')';
 
 	            $("#days_token_container").append(
