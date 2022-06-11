@@ -145,11 +145,6 @@ function showLocalStorage(){
 	console.log(JSON.parse(localStorage.getItem("currentUser")));
 }
 
-function deleteLocalStorageByKey(key){
-	localStorage.removeItem(key);
-	console.log("DELETED LOCALSTORAGE: "+key);
-}
-
 function getCurrentUser(){
 	if (localStorage.getItem("currentUser") === null) {
 		return null;
@@ -174,6 +169,8 @@ function getAllLocalStorageByKey(){
     return values;
 }
 
+// local storage
+
 function getLocalStorageByKey(key){
 	return localStorage.getItem(key);
 }
@@ -181,6 +178,14 @@ function getLocalStorageByKey(key){
 function setLocalStorageByKey(key,value){
 	localStorage.setItem(key,value);//value expects strings use stringify if needed
 }
+
+function deleteLocalStorageByKey(key){
+	localStorage.removeItem(key);
+	console.log("DELETED LOCALSTORAGE: "+key);
+}
+
+// local storage
+
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);

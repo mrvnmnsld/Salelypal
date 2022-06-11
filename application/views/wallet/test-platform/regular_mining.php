@@ -62,10 +62,10 @@
 		
 		if (foundEntry == null) {
 			$('#token_mining_container').append(
-				'<div id="'+miningSettings[i].id+'_container" class="card p-2 mt-2 rounded shadow-lg">'+
+				'<div id="'+miningSettings[i].id+'_container" class="card main-color-bg p-2 mt-2 rounded shadow-lg">'+
 					'<div class="card-body" style="padding: 1px!important">'+
 						'<div class="d-flex justify-content-around">'+
-							'<div class="flex-even text-left h4 text-success">'+
+							'<div class="flex-even text-left h4">'+
 								'<img '+
 									'style="width: 35px;"'+
 									'src="'+miningSettings[i].tokenImage+'"'+
@@ -80,7 +80,7 @@
 							'Mining annualize rate of return'+
 						'</div>'+
 
-						'<div class="font-weight-bold">'+
+						'<div class="font-weight-bold main-color-text">'+
 							'Financial Cycles:'+
 						'</div>'+
 
@@ -115,10 +115,10 @@
 			var income = ((parseFloat(foundEntry.balance)*(parseFloat(miningSettings[i].apy)/100))/365)*parseFloat(foundEntry.lock_period)
 
 			$('#token_mining_container').append(
-				'<div id="'+miningSettings[i].id+'_container" class="card p-2 mt-2 rounded shadow-lg">'+
+				'<div id="'+miningSettings[i].id+'_container" class="card p-2 mt-2 rounded shadow-lg main-color-bg">'+
 					'<div class="card-body" style="padding: 1px!important">'+
 						'<div class="d-flex justify-content-around">'+
-							'<div class="flex-even text-left h4 text-success">'+
+							'<div class="flex-even text-left h4 main-color-text">'+
 								'<img '+
 									'style="width: 35px;"'+
 									'src="'+miningSettings[i].tokenImage+'"'+

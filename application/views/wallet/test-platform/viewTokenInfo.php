@@ -27,28 +27,28 @@
 			<div class="btn main-color-icon btn-md" style="font-size:2em;padding:1px;">
 				<i class="fa fa-arrow-circle-down fa-lg main-color-text" aria-hidden="true"></i>
 			</div>
-			<div style="font-size:.8em" class="main-color-text"><b>Deposit</b></div>
+			<div style="font-size:.8em" ><b class="main-color-text">Deposit</b></div>
 		</button>
 
 		<button id="withdraw_btn_option_token_info" class="btn" style="background-color:transparent">
 			<div class="btn main-color-icon btn-md" style="font-size:2em;padding:1px;">
 				<i class="fa fa-arrow-circle-up fa-lg main-color-text" aria-hidden="true"></i>
 			</div>
-			<div style="font-size:.8em" class="main-color-text"><b>Withdraw</b></div>
+			<div style="font-size:.8em" ><b class="main-color-text">Withdraw</b></div>
 		</button>
 
 		<button id="buy_btn_option_token_info" class="btn" style="background-color:transparent">
 			<div class="btn main-color-icon btn-md" style="font-size:2em;padding:1px;">
 				<i class="fa fa-credit-card-alt fa-md main-color-text" aria-hidden="true"></i>
 			</div>
-			<div style="font-size:.8em;" class="main-color-text"><b>Buy</b></div>
+			<div style="font-size:.8em;" ><b class="main-color-text">Buy</b></div>
 		</button>
 
 		<button id="info_btn_option_token_info" class="btn" style="background-color:transparent">
 			<div class="btn main-color-icon btn-md" style="font-size:2em;padding:1px;">
 				<i class="fa fa-info-circle fa-lg main-color-text" aria-hidden="true"></i>
 			</div>
-			<div style="font-size:.8em;" class="main-color-text"><b>Information</b></div>
+			<div style="font-size:.8em;" ><b class="main-color-text">Information</b></div>
 		</button>
 	</div>
 </div>

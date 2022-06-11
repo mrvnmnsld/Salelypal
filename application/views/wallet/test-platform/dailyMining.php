@@ -56,6 +56,15 @@
 	</div>
 </div>
 
+	<style> /* dailymining_tab_container */
+		#dailymining_tabs a{
+		color: #94abef;
+		-webkit-transition: color 2s, font-size .25s;
+		-moz-transition: color 2s, font-size .25s;
+		-o-transition: color 2s, font-size .25s;
+		transition: color 2s, font-size .25s;
+		}
+	</style>
 
 <div id="dailymining_tab_container" class="mt-3">
 	<ul id="dailymining_tabs" class="nav nav-tabs nav-justified" role="tablist">
@@ -112,10 +121,10 @@
         }
 
 		$('#daysBtn_container').append(
-			'<div class="card p-2 mt-2 bg-light rounded shadow-lg">'+
+			'<div class="card p-2 mt-2 main-color-bg rounded shadow-lg">'+
 				'<div class="card-body" style="padding: 1px!important">'+	
 					'<div class="d-flex justify-content-around">'+
-						'<div class="flex-even text-left h3 font-weight-bold text-dark">'+
+						'<div class="flex-even text-left h3 font-weight-bold main-color-text">'+
 							+getDaysSettings[i].days+' Days'+
 						'</div>'+
 
@@ -130,13 +139,13 @@
 
 					'<hr class="w-100">'+
 
-					'<div class="m-2 text-left">'+
+					'<div class="m-2 text-left main-color-text">'+
 						'<b>Purchasable Limit: </b><span id="'+getDaysSettings[i].id+'_days_purchasable_limit_container">'+getPurchasableLimit.totalBalance.toFixed(2)+'/'+getPurchasableLimit.totalLimit.toFixed(2)+'</span>'+
 					'</div>'+
 
 					'<div class="mx-2">'+
 						'<div class="progress">'+
-							'<div class="progress-bar" id="'+getDaysSettings[i].id+'_days_progress_bar" style="width: '+ratioLimit.toFixed(2)+'%;" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">'+ratioLimit.toFixed(2)+'%</div>'+
+							'<div class="progress-bar secondary-color-bg text-dark" id="'+getDaysSettings[i].id+'_days_progress_bar" style="width: '+ratioLimit.toFixed(2)+'%;" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">'+ratioLimit.toFixed(2)+'%</div>'+
 						'</div>'+
 					'</div>'+
 
@@ -186,9 +195,9 @@
 	            var token_name_combo = tokenInformation.tokenName+' ('+tokenInformation.network.toUpperCase()+')';
 
 	            $("#days_token_container").append(
-	                '<div id="'+tokenInformation.tokenName+'_container" class="card shadow-lg rounded p-2 mb-3">'+
+	                '<div id="'+tokenInformation.tokenName+'_container" class="card shadow-lg rounded p-2 mb-3 main-color-bg">'+
 						'<div class="d-flex justify-content-around">'+
-							'<div class="flex-even text-left h4 text-success">'+
+							'<div class="flex-even text-left h4 main-color-text">'+
 								'<img '+
 									'style="width: 35px;"'+
 									'src="'+tokenInformation.tokenImage+'"'+
@@ -197,13 +206,13 @@
 							'</div>'+
 						'</div>'+
 
-						'<div class="m-2 text-left">'+
+						'<div class="m-2 text-left text-muted">'+
 							'<b>Purchasable Limit: </b><span>'+getTokenBalanceLimit.totalBalance+'/'+getTokenBalanceLimit.totalLimit+'</span>'+
 						'</div>'+
 
 						'<div class="mx-2">'+
 							'<div class="progress">'+
-								'<div class="progress-bar" style="width: '+ratioLimit.toFixed(2)+'%;" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">'+ratioLimit.toFixed(2)+'%</div>'+
+								'<div class="progress-bar secondary-color-bg text-dark" style="width: '+ratioLimit.toFixed(2)+'%;" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">'+ratioLimit.toFixed(2)+'%</div>'+
 							'</div>'+
 						'</div>'+
 
@@ -238,9 +247,9 @@
         }
 
         $("#claim_tokens_container").append(
-            '<div id="'+getTokensToClaim[i].id+'_container" class="card shadow-lg rounded p-2 mt-3">'+
+            '<div id="'+getTokensToClaim[i].id+'_container" class="card main-color-bg shadow-lg rounded p-2 mt-3">'+
             	'<div class="d-flex justify-content-around">'+
-            		'<div class="flex-even text-left h4 text-success">'+
+            		'<div class="flex-even text-left h4 main-color-text">'+
             			'<img '+
             				'style="width: 35px;"'+
             				'src="'+getTokensToClaim[i].tokenImage+'"'+
@@ -255,7 +264,7 @@
             		'Mining annualize rate of return'+
             	'</div>'+
 
-            	'<div class="ml-2">'+
+            	'<div class="ml-2 main-color-text">'+
             		'<div>'+
             			'<b>Mining Balance:</b> '+parseFloat(getTokensToClaim[i].balance).toFixed(getTokensToClaim[i].decimal)+
             		'</div>'+

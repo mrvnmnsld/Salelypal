@@ -176,268 +176,300 @@
 				background-size:400%;
 				background-attachment: fixed; */
 				/*font-family: 'Roboto Condensed', sans-serif;*/
-				/* LIGHTMODE_ */
-					/* background-color: white;  */
-				/* DARKMODE_ */
-					background-color: #220e5d!important; 
-				color: white !important; 
 			}
-			.main-color-text{
-				/* color: #3a189f; */
-				/* DARKMODE_  */
-					color: white !important;
-			}
+
 			.main-color-icon{
 				color: #5426de;
 			}
-			.main-color-bg{
-				/*LIGHTMODE_*/
-					/* background-color: #5426de;  */
-				/*DARKMODE_*/
-					background-color: #120731; 
-			}
+		
 			.light-text{
 				color:#D9E9E8;
 			}
-		/* font */
 			.text-muted{
 				color: #94abef!important;
 			}
+			.secondary-color-bg{
+				background-color: #94abef!important;
+			}
 
-			.modal-content{
-				/*DARKMODE_*/
-					background-color: #220e5d!important;
-				/*LIGHTMODE_*/
-					/* background-color: white!important;  */
+			/* tabs */
+			.nav-link.tab-pane.fade.show.active{
+					font-size:2em;
+					-webkit-transition: color 1s, font-size .25s;
+					-moz-transition: color 1s, font-size .25s;
+					-o-transition: color 1s, font-size .25s;
+					transition: color 1s, font-size .25s;
+
+					border-color: transparent;
+					background-color:transparent;
+					/* LIGHTMODE_ */
+					/* color: #3a189f!important;  */
+					/* DARKMODE_ */
+					/* color: white !important;  */
+				}
+
+			/* dark mode */
+			.dark-mode{
+				background-color : #220e5d!important;
+				color : white!important;
+			}
+			.dark-mode body{
+				background-color : #220e5d!important;
+			}
+			.dark-mode .main-color-bg{
+				background-color: #120731;
+			}
+			.dark-mode .main-color-text{
+				color: white!important;
+			}
+			.dark-mode .title-color-text{
+				color: white!important;
+			}
+			.dark-mode .modal-content{
+				background-color: #220e5d!important;
+			}
+
+			/* light mode */
+			.light-mode{
+				background-color : white!important;
+				color: #3a189f!important;
+			}
+			.light-mode .main-color-bg{
+				background-color: #5426de;
+			}
+			.light-mode .main-color-text{
+				color: #3a189f !important;
+			}
+
+			.light-mode .title-color-text{
+				color: white!important;
+			}
+			.light-mode .modal-content{
+				background-color: white!important;
 			}
 			
+
+
 	</style>
 <!-- css -->
+	<body style="min-height: 130%;" class="light-mode">
+		<div id="loadSpinner" class="text-center main-color-text" style="margin-top: 30vh;">
+			<div class="spinner-border main-color-text" role="status" style="width: 5rem; height: 5rem;">
+				<span class="sr-only"></span>
+			</div><br>
+			<span class="font-weight-bold mt-2 main-color-text" id="loading_text_container" style="font-size:30px; text-align: center;">Loading...</span>
+		</div>
 
-<body style="min-height: 130%;">
-	<div id="loadSpinner" class="text-center text-primary" style="margin-top: 30vh;">
-	  	<div class="spinner-border main-color-text" role="status" style="width: 5rem; height: 5rem;">
-	    	<span class="sr-only"></span>
-	  	</div><br>
-		<span class="font-weight-bold mt-2 main-color-text" id="loading_text_container" style="font-size:30px; text-align: center;">Loading...</span>
-	</div>
+		<div id="topNavBar" class="main-color-bg light-text" style="display:none; color:white!important;">
+			<span id="profile_btn" style="float: left;" ><i class="fa fa-user-o fa-md" aria-hidden="true"></i><span class="ml-2" id="username_container"></span></span>
 
-	<div id="topNavBar" class="main-color-bg light-text" style="display:none; color:white!important;">
-		<span id="profile_btn" style="float: left;" ><i class="fa fa-user fa-md" aria-hidden="true"></i><span class="ml-2" id="username_container"></span></span>
+			<span id="back_btn" style="float: left;display: none;" ><i class="fa fa-angle-left fa-md" aria-hidden="true"></i></span>
 
-		<span id="back_btn" style="float: left;display: none;" ><i class="fa fa-angle-left fa-md" aria-hidden="true"></i></span>
+			<span id="notif_btn" class="" style="float:right;">
+				<i id="notif_logo" class="fa fa-bell-o fa-md fa-inverse" style="color:white!important;"  aria-hidden="true">
+					<span id="notif_counter_number" style="font-size:.45em; right:.4em; top:1.5em; display:none" class="position-absolute badge bg-danger">0</span>
+				</i>
+			</span>
+		</div>
 
-		<span id="notif_btn" class="" style="float:right;">
-			<i id="notif_logo" class="fa fa-bell-o fa-md fa-inverse" style="color:white!important;"  aria-hidden="true">
-				<span id="notif_counter_number" style="font-size:.45em; right:.4em; top:1.5em; display:none" class="position-absolute badge bg-danger">0</span>
-			</i>
-		</span>
-	</div>
-
-	<div id="assets_container" style="display:none;">
-		<div id="header_inner_container" class="main-color-bg py-2" style="display:none; height:13em;">
-			<div class="h1 font-weight-bold text-center">
-				<span class="h6 text-muted" style="color:white;">TOTAL BALANCE 
-					<span id="visible_btn" style="display:none;">
-						<i id="eye_close" class="fa fa-eye-slash mt-2 text-muted" style="display:inline-block;" aria-hidden="true"></i>
-						<i id="eye_open" class="fa fa-eye text-muted" style="display:none;" aria-hidden="true"></i>
+		<div id="assets_container" style="display:none;">
+			<div id="header_inner_container" class="main-color-bg py-2" style="display:none; height:13em;">
+				<div class="h1 font-weight-bold text-center">
+					<span class="h6 text-muted">TOTAL BALANCE 
+						<span id="visible_btn" style="display:none;">
+							<i id="eye_close" class="fa fa-eye-slash mt-2 text-muted" style="display:inline-block;" aria-hidden="true"></i>
+							<i id="eye_open" class="fa fa-eye text-muted" style="display:none;" aria-hidden="true"></i>
+						</span>
 					</span>
-				</span>
-				<br>
-				<span id="totalInUsdContainer" style="color:white;" class="display-5 main-color-text">Loading...</span>
-			</div>
+					<br>
+					<span id="totalInUsdContainer" class="display-5 title-color-text">Loading...</span>
+				</div>
 
-			<div id="main_btns_container" style="display:none;">
-				<div id="btn_option_container" class="d-flex justify-content-center mt-1">
-					<button id="deposit_btn_option" class="btn" style="background-color:transparent">
-						<div class="btn btn-md" style="font-size:2em;padding:1px;">
-							<i class="fa fa-arrow-circle-down fa-lg fa-inverse" aria-hidden="true"></i>
-						</div>
-						<div style="font-size:.8em" class="text-light"><b>Deposit</b></div>
-					</button>
+				<div id="main_btns_container" style="display:none;">
+					<div id="btn_option_container" class="d-flex justify-content-center mt-1">
+						<button id="deposit_btn_option" class="btn" style="background-color:transparent">
+							<div class="btn btn-md" style="font-size:2em;padding:1px;">
+								<i class="fa fa-arrow-circle-down fa-lg fa-inverse" aria-hidden="true"></i>
+							</div>
+							<div style="font-size:.8em" class="text-light"><b>Deposit</b></div>
+						</button>
 
-					<button id="withdraw_btn_option" class="btn" style="background-color:transparent">
-						<div class="btn btn-md" style="font-size:2em;padding:1px;">
-							<i class="fa fa-arrow-circle-up fa-lg fa-inverse" aria-hidden="true"></i>
-						</div>
-						<div style="font-size:.8em" class="text-light"><b>Withdraw</b></div>
-					</button>
+						<button id="withdraw_btn_option" class="btn" style="background-color:transparent">
+							<div class="btn btn-md" style="font-size:2em;padding:1px;">
+								<i class="fa fa-arrow-circle-up fa-lg fa-inverse" aria-hidden="true"></i>
+							</div>
+							<div style="font-size:.8em" class="text-light"><b>Withdraw</b></div>
+						</button>
 
-					<button id="buy_btn_option" class="btn" style="background-color:transparent">
-						<div class="btn btn-md" style="font-size:2em;padding:1px;">
-							<i class="fa fa-credit-card-alt fa-md fa-inverse" aria-hidden="true"></i>
-						</div>
-						<div style="font-size:.8em;" class="text-light"><b>Buy</b></div>
-					</button>
+						<button id="buy_btn_option" class="btn" style="background-color:transparent">
+							<div class="btn btn-md" style="font-size:2em;padding:1px;">
+								<i class="fa fa-credit-card-alt fa-md fa-inverse" aria-hidden="true"></i>
+							</div>
+							<div style="font-size:.8em;" class="text-light"><b>Buy</b></div>
+						</button>
+					</div>
 				</div>
 			</div>
+			<style>
+				#asset_tabs a{
+					color: #94abef;
+					-webkit-transition: color 2s, font-size .25s;
+					-moz-transition: color 2s, font-size .25s;
+					-o-transition: color 2s, font-size .25s;
+					transition: color 2s, font-size .25s;
+				}
+
+			</style>
+
+			<script>
+				// darkmode
+				$(".nav-link.tab-pane.fade.show.active").css('color','white !important');
+				// lightmode
+				$(".nav-link.tab-pane.fade.show.active").css('color','#3a189f!important');
+			</script>
+
+			<div id="asset_tab_container" class="mt-3">
+				<ul id="asset_tabs" class="nav nav-tabs nav-justified" role="tablist">
+					<li class="nav-item">
+						<a class="nav-link active tab-pane fade show " data-toggle="tab" href="#balance_tab">BALANCE</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link tab-pane fade show" data-toggle="tab" href="#portfolio_tab">PORTFOLIO</a>
+					</li>
+				</ul>	
+
+				<div class="asset-tab-content tab-content">
+					<div id="balance_tab" class="container notranslate tab-pane active"><br>
+						<div id="tokenContainer"></div>
+
+						<div class="col-md-12 text-center pl-3 pr-3">
+							<button class="btn btn-outline-link btn-block text-primary mt-2 text-muted" id="addToken_btn">
+								<i class="fa fa-sliders" aria-hidden="true"></i>
+								Add more
+							</button>
+						</div>
+					</div>
+
+					<div id="portfolio_tab" class="container tab-pane fade"><br>
+						<div class="text-center">
+							<h3>This part is still under development</h3>
+						</div>
+					</div>
+				</div>
+			</div><!-- asset_tab_container -->
+			
+			<style>
+				.nav-tabs {
+					border-bottom: transparent;
+				}
+			</style>
 		</div>
-		<style>
-			#asset_tabs a{
-				color: #94abef;
-				-webkit-transition: color 2s, font-size .25s;
-				-moz-transition: color 2s, font-size .25s;
-				-o-transition: color 2s, font-size .25s;
-				transition: color 2s, font-size .25s;
-			}
-			.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
-				font-size:2em;
-				-webkit-transition: color 1s, font-size .25s;
-				-moz-transition: color 1s, font-size .25s;
-				-o-transition: color 1s, font-size .25s;
-				transition: color 1s, font-size .25s;
 
-				border-color: transparent;
-				background-color:transparent;
-				/* LIGHTMODE_ */
-				/* color: #3a189f!important;  */
-				/* DARKMODE_ */
-				color: white !important; 
-			}
-		</style>
+		<div id="container" class="mb-5" style="display:none;min-height: 120%;"></div>
 
-		<div id="asset_tab_container" class="mt-3">
-			<ul id="asset_tabs" class="nav nav-tabs nav-justified" role="tablist">
-				<li class="nav-item">
-					<a class="nav-link active tab-pane fade show " data-toggle="tab" href="#balance_tab">BALANCE</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link tab-pane fade show" data-toggle="tab" href="#portfolio_tab">PORTFOLIO</a>
-				</li>
-			</ul>	
+		<br>
+		<br>
+		<br>
+		<br>
 
-			<div class="asset-tab-content tab-content">
-				<div id="balance_tab" class="container notranslate tab-pane active"><br>
-					<div id="tokenContainer"></div>
+		<!-- modal-mining -->
+			<style>
+				#modal_trade .modal-header{
+					padding:.3em;
+				}
+				#modal_trade .modal-body{
+					border-radius : .5em;
+					padding:0em!important;
+				}
+				#modal_trade .btn-modal {
+					min-height: 100%;
+					min-width: 100%;
+					padding:.5em;
+					box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+					margin:.5em 0;
+				}
+				#modal_trade .btn-modal:hover {
+					background-color:#94abef;
+					font-size:1.5em;
+				}
+				.modal-header{
+					border-bottom: 0px solid #dee2e6!important;
+				}
+			</style>
 
-					<div class="col-md-12 text-center pl-3 pr-3">
-						<button class="btn btn-outline-link btn-block text-primary mt-2 text-muted" id="addToken_btn">
-							<i class="fa fa-sliders" aria-hidden="true"></i>
-							Add more
-						</button>
-					</div>
-				</div>
-
-				<div id="portfolio_tab" class="container tab-pane fade"><br>
-					<div class="text-center">
-						<h3>This part is still under development</h3>
-					</div>
-				</div>
-			</div>
-		</div><!-- asset_tab_container -->
-		
-		<style>
-			.nav-tabs {
-				border-bottom: transparent;
-			}
-		</style>
-	</div>
-
-	<div id="container" class="mb-5" style="display:none;min-height: 120%;"></div>
-
-	<br>
-	<br>
-	<br>
-	<br>
-
-	<!-- modal-mining -->
-		<style>
-			#modal_trade .modal-header{
-				padding:.3em;
-			}
-			#modal_trade .modal-body{
-				border-radius : .5em;
-				padding:0em!important;
-			}
-			#modal_trade .btn-modal {
-				min-height: 100%;
-				min-width: 100%;
-				padding:.5em;
-				box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
-				margin:.5em 0;
-			}
-			#modal_trade .btn-modal:hover {
-				background-color:#94abef;
-				font-size:1.5em;
-			}
-			.modal-header{
-				border-bottom: 0px solid #dee2e6!important;
-			}
-		</style>
-
-		<div class="modal fade" id="modal_trade">
-			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content p-4">
-				
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">
-							<i class="fa fa-close " aria-hidden="true"></i>
-						</button>
-					</div>
+			<div class="modal fade" id="modal_trade">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content p-4">
 					
-					<div class="modal-body">
-						<div class="m-1 justify-content-center">
-							<button id="rise_fall_btn" type="button" class="btn btn-modal main-color-bg" data-dismiss="modal">
-								<i class="fa fa-bar-chart fa-inverse fa-lg" style="" aria-hidden="true"></i>
-								<small class="text-light">Rise Fall Contract</small>
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">
+								<i class="fa fa-close " aria-hidden="true"></i>
 							</button>
 						</div>
-						<div class="m-1 justify-content-center main-color-text">
-							<button id="future_btn" class="btn btn-modal main-color-bg" data-dismiss="modal">
-								<i class="fa fa-bar-chart fa-inverse fa-lg" style="" aria-hidden="true"></i>
-								<small class="text-light">Long Short Contract</small>
-							</button>
-						</div>	
-						<div class="m-1 justify-content-center main-color-text">
-							<button id="daily_mining_btn" type="button" class="btn btn-modal main-color-bg" data-dismiss="modal">
-								<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">
-								<small class="text-light">Daily Mining</small>
-							</button>
-						</div>
+						
+						<div class="modal-body">
+							<div class="m-1 justify-content-center">
+								<button id="rise_fall_btn" type="button" class="btn btn-modal main-color-bg" data-dismiss="modal">
+									<i class="fa fa-bar-chart fa-inverse fa-lg" style="" aria-hidden="true"></i>
+									<small class="text-light">Rise Fall Contract</small>
+								</button>
+							</div>
+							<div class="m-1 justify-content-center main-color-text">
+								<button id="future_btn" class="btn btn-modal main-color-bg" data-dismiss="modal">
+									<i class="fa fa-bar-chart fa-inverse fa-lg" style="" aria-hidden="true"></i>
+									<small class="text-light">Long Short Contract</small>
+								</button>
+							</div>	
+							<div class="m-1 justify-content-center main-color-text">
+								<button id="daily_mining_btn" type="button" class="btn btn-modal main-color-bg" data-dismiss="modal">
+									<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">
+									<small class="text-light">Daily Mining</small>
+								</button>
+							</div>
 
-						<div class="m-1 justify-content-center">
-							<button id="regular_mining_btn" class="btn btn-modal main-color-bg" data-dismiss="modal">
-								<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">
-								<small class="text-light">Regular Mining</small>
-							</button>
+							<div class="m-1 justify-content-center">
+								<button id="regular_mining_btn" class="btn btn-modal main-color-bg" data-dismiss="modal">
+									<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">
+									<small class="text-light">Regular Mining</small>
+								</button>
+							</div>
 						</div>
-					</div>
-				</div>	
+					</div>	
+				</div>
 			</div>
-		</div>
-	<!-- modal-mining END -->
-	<style>
-		.botnav-icon{
-			font-size:2em;
-		}
-		.botnav-icon:hover{
-			color: #94abef;
-		}
-	</style>
+		<!-- modal-mining END -->
+		<style>
+			.botnav-icon{
+				font-size:2em;
+			}
+			.botnav-icon:hover{
+				color: #94abef;
+			}
+		</style>
 
-	<!-- bottomnavbar -->
-	<ul id="bottomNavBar" style="display:none;" class="nav fixed-bottom main-color-bg justify-content-center row p-4">
-		<li id="assets_btn" class="nav-item col-3 text-center">
-			<i class="fa fa-bank fa-inverse botnav-icon" alt="Asset" aria-hidden="true"></i>
-			<!-- <a class="botnavlink nav-link active" style="font-size:.8em; color:#D9E9E8;"><span class="test1">Asset</span></a> -->
-		</li>
+		<!-- bottomnavbar -->
+		<ul id="bottomNavBar" style="display:none;" class="nav fixed-bottom main-color-bg justify-content-center row p-4">
+			<li id="assets_btn" class="nav-item col-3 text-center">
+				<i class="fa fa-bank fa-inverse botnav-icon" alt="Asset" aria-hidden="true"></i>
+				<!-- <a class="botnavlink nav-link active" style="font-size:.8em; color:#D9E9E8;"><span class="test1">Asset</span></a> -->
+			</li>
 
-		<li id="modal_mining_btn" data-toggle="modal" data-target="#modal_trade" class="nav-item col-3 text-center">
-			<i class="fa fa-bar-chart fa-inverse botnav-icon" alt="Trade" aria-hidden="true"></i>
-			<!-- <a class="nav-link" style="font-size:.8em; color:#D9E9E8;"  href="#">Trade</a> -->
-		</li>
+			<li id="modal_mining_btn" data-toggle="modal" data-target="#modal_trade" class="nav-item col-3 text-center">
+				<i class="fa fa-bar-chart fa-inverse botnav-icon" alt="Trade" aria-hidden="true"></i>
+				<!-- <a class="nav-link" style="font-size:.8em; color:#D9E9E8;"  href="#">Trade</a> -->
+			</li>
 
-		<li id="discover_btn" class="nav-item col-3 text-center">
-			<i class="fa fa-globe fa-inverse botnav-icon" alt="Discover" aria-hidden="true"></i>
-			<!-- <a  class="nav-link" style="font-size:.8em; color:#D9E9E8;" href="#">Discover</a> -->
-		</li>
+			<li id="discover_btn" class="nav-item col-3 text-center">
+				<i class="fa fa-globe fa-inverse botnav-icon" alt="Discover" aria-hidden="true"></i>
+				<!-- <a  class="nav-link" style="font-size:.8em; color:#D9E9E8;" href="#">Discover</a> -->
+			</li>
 
-		<li id="settings_btn" class="nav-item col-3 text-center">
-			<i class="fa fa-cogs fa-inverse botnav-icon" alt="Settings" aria-hidden="true"></i>
-			<!-- <a class="nav-link" style="font-size:.8em; color:#D9E9E8;"  href="#">Settings</a> -->
-		</li>
-	</ul>
-
+			<li id="settings_btn" class="nav-item col-3 text-center">
+				<i class="fa fa-cogs fa-inverse botnav-icon" alt="Settings" aria-hidden="true"></i>
+				<!-- <a class="nav-link" style="font-size:.8em; color:#D9E9E8;"  href="#">Settings</a> -->
+			</li>
+		</ul>
+	</body>
 <!-- translate -->
 <script type="text/javascript">
 	function googleTranslateElementInit() {
@@ -494,6 +526,13 @@
 				}
 
 			}	
+
+			var isDarkMode = getLocalStorageByKey("isDarkMode");
+			if(isDarkMode==1){
+				$("body").removeClass( "light-mode" ).addClass( "dark-mode" );
+			}else{
+				$("body").removeClass( "dark-mode" ).addClass( "light-mode" );
+			}
 
 			var initialNotifList = ajaxShortLink("getNewNotifs",{
 				'userID':15
@@ -1071,8 +1110,8 @@
 						'</div>'+
 
 						'<div class="col-7 ml-4">'+
-							'<span class="">'+
-								'<span id="'+tokensSelected[i].tokenName+'_name_container">'+
+							'<span >'+
+								'<span class="main-color-text" id="'+tokensSelected[i].tokenName+'_name_container">'+
 									tokensSelected[i].description+" ("+tokensSelected[i].networkName.toUpperCase()+")"+
 								'</span>'+
 							'</span>'+
@@ -1090,7 +1129,7 @@
 								// '<span style="font-size: 14px;text-align: center;" id="'+tokensSelected[i].tokenName+'_amount_container">'+
 									// parseFloat(balanceInner).toFixed(3)+' '+tokensSelected[i].tokenName.toUpperCase()+
 
-								'<span style="font-size: 13px;" id="'+tokensSelected[i].tokenName+'_amount_container">Loading...</span>'+
+								'<span class="main-color-text" style="font-size: 13px;" id="'+tokensSelected[i].tokenName+'_amount_container">Loading...</span>'+
 						'</div>'+
 					'</div>'
 				);

@@ -50,7 +50,7 @@
 </style>
 
 <div class="m-1">
-	<div class="text-center mb-2 text-dark">*Note:Toogle which tokens to add to your wallet</div>
+	<div class="text-center mb-2 text-muted">*Note: Toggle which tokens to add to your wallet</div>
 
     <ul class="list-group" id="token_container">
     	
@@ -82,14 +82,14 @@
 		$("#token_container").append(
 		  	'<li class="d-flex justify-content-between border-bottom border-secondary">'+
 		  		'<div class="p-2">'+
-		  			'<img class="img-thumbnail border border-secondary" src="'+tokens[i].tokenImage+'" style="width:40px;height: 40px;">'+
+		  			'<img class="img-thumbnail " src="'+tokens[i].tokenImage+'" style="width:40px;height: 40px; border:1px;">'+
 		  		'</div>'+
 
 		  		'<div class="p-2 mt-2">'+tokens[i].description+" ("+tokens[i].network.toUpperCase()+")"+'</div>'+
 
 		  		'<div class="ml-auto mt-2 p-2 material-switch pull-right">'+
 		  	  	   	'<input id="'+tokens[i].id+'" name="someSwitchOption001" type="checkbox" '+isSelected+'/>'+
-	  	  	    	'<label for="'+tokens[i].id+'" class="label-default bg-success"></label>'+
+	  	  	    	'<label for="'+tokens[i].id+'" class="label-default secondary-color-bg"></label>'+
 		  		'</div>'+
 		  	'</li>'
 		);
