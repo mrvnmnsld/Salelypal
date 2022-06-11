@@ -1,7 +1,6 @@
 <style type="text/css">
 .is-invalid{
   text-align: center;
-  color: red;
 }
 </style>
 
@@ -40,8 +39,10 @@
 </head>
 
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap%27');
   *{
     box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
   }
   body{
     margin: 0;
@@ -52,7 +53,6 @@
     align-items: center;
     justify-content: center;
     color: white;
-    font-family: 'Lato', sans-serif;
     font-weight: 300;
     background: linear-gradient(to left bottom, #e9e9e9, #ebebeb, #d6d6d6, #b1b1b1, #505050);
   }
@@ -236,6 +236,13 @@
     <div id="sub-title">Ezpayex</div>
 
     <form id="loginForm">
+
+      <!-- <div class="form-group">
+        <label for="username" class="text-light">Username</label>
+        <input type="email" class="form-control" id="username" placeholder="Username">
+        <div class="invalid-feedback"></div>
+      </div> -->
+
       <div class="input-field"> 
         <i class="fa fa-user"></i>
         <input type="text" name="username" placeholder="Username">     

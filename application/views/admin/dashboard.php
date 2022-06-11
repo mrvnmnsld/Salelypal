@@ -160,8 +160,8 @@ if (!isset($_SESSION["currentUser"])) {
 
     <div class="d-flex align-items-center justify-content-between">
       <a href="index.html" class="logo d-flex align-items-center">
-        <img src="assets/imgs/logo_main.png" alt="">
-        <span class="d-none d-lg-block" style="font-size: 21px;">Security Wallet <span id="userTypeTitle" style="text-transform: capitalize;"></span></span>
+        <img src="assets/imgs/ezpayex_logo.png" alt="" style="border-radius:50%">
+        <span class="d-none d-lg-block" style="font-size: 21px;font-family: 'Poppins', sans-serif;">Security Wallet <span id="userTypeTitle" style="text-transform: capitalize;font-family: 'Poppins', sans-serif;"></span></span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->

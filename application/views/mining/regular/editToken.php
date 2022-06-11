@@ -23,6 +23,10 @@
 		box-shadow: 10px 15px 25px rgba(0, 0, 0, .8);
 		padding: 20px;
 	}
+	.col-md-2 {
+    flex: 0 0 auto;
+    width: 19.66666667%;
+	}
 </style>
 
 <div id="pagetitle_background" class="pagetitle">
@@ -66,7 +70,7 @@
 </div>
 
 <script type="text/javascript">
-	// console.log(selectedData);
+	console.log(selectedData);
 	var tokenListArray = ajaxShortLink('userWallet/getAllTokensV2');
 
 	for (var i = 0; i < tokenListArray.length; i++) {
@@ -74,11 +78,10 @@
 	}
 
 	$('#token_name_container').val(selectedData.token_id);
-	$("#network_container").val(tokenListArray[$('#token_name_container')[0].selectedIndex].networkName.toUpperCase());
-	$('#apy_container').val(selectedData.apy)
-	$('#cycle_day_container').val(selectedData.cycle_day)
+	$('#apy_container').val(selectedData.apy);
+	$('#cycle_day_container').val(selectedData.cycle_day);
+	$("#network_container").val(tokenListArray[$('#token_name_container')[0].selectedIndex-1].networkName.toUpperCase());
 
-	
 
 	$('#token_name_container').selectpicker({
 	    style: 'border',
@@ -86,6 +89,7 @@
   	});
 
 	$('#token_name_container').on('change',function(){
+		console.log("here");
 		var data = ajaxShortLink('getRegularMiningSettings');
 
 		if(data.find(e => e.id === $(this).val()) == null){
@@ -94,7 +98,6 @@
 			$("#network_container").val('');
 			$("#token_name_container").val('');
 			$('#token_name_container').selectpicker('refresh');
-
 
 			$.toast({
 			    heading: '<h6>Token Already Exist!</h6>',

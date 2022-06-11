@@ -23,6 +23,10 @@
 		box-shadow: 10px 15px 25px rgba(0, 0, 0, .8);
 		padding: 20px;
 	}
+	.col-md-2 {
+    flex: 0 0 auto;
+    width: 19.66666667%;
+	}
 </style>
 
 
@@ -52,7 +56,7 @@
 			</div>
 
 			<div class="row m-1">
-				<div class="col-md-2 pl-3"><b>Cycle days:</b></div>	
+				<div class="col-md-2 pl-3"><b>Cycle Days:</b></div>	
 				<input type="text" name="cycle_day_container" id="cycle_day_container" class="col-md form-control form-control-sm" placeholder="Add comma to separate cycles days ex. 1,3,7"></input>
 			</div>
 
