@@ -192,4 +192,9 @@
 		    }
 		});
 	});
+
+	$("#back_btn").on("click",function(){
+		$('#assets_btn').click();
+	});
+	
 </script>

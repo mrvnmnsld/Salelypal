@@ -638,6 +638,8 @@
 				if ($('#assets_container').css("display") == 'none') {
 					$("html, body").animate({ scrollTop: 0 }, "slow");
 					$.when(closeNav()).then(function() {
+						$("#profile_btn").css('display',"block")
+						$("#back_btn").css('display',"none")
 
 						$('#topNavBar').toggle();
 						$('#bottomNavBar').toggle();
@@ -649,14 +651,14 @@
 					  			setTimeout(function(){
 					  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
 										$('#assets_container').fadeIn(animtionSpeed);
-					  					$('#topNavBar').toggle();
+										$('#topNavBar').toggle();
 					  					$('#bottomNavBar').toggle();
 					  					$("#container").fadeIn(animtionSpeed);
-										$("#profile_btn").css('display',"block")
-										$("#back_btn").css('display',"none")
-
 					  				});
 					  			}, 1000);
+
+					  			$("#profile_btn").css('display',"block")
+					  			$("#back_btn").css('display',"none")
 
 						  		
 					    	});
@@ -1124,6 +1126,8 @@
 									// setTimeout(function(){
 							  			$("#container").empty();
 							  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/viewTokenInfo'}));
+							  			$("#profile_btn").css('display',"none")
+							  			$("#back_btn").css('display',"block ")
 
 								  		$("#loadSpinner").fadeOut(animtionSpeed,function(){
 								  			$('#topNavBar').toggle();
