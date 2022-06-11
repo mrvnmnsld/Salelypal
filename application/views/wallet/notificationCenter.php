@@ -1,28 +1,19 @@
 <style type="text/css">
-	.alert-simple.alert-custom{
-	  background-color: rgba(52, 55, 67, 0.5);
-	  color: white;
-	  transition:0.5s;
-	  cursor:pointer;
+	.card{
+		max-width: 100%;
+		border-radius: 20px;
+		box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 	}
-	.alert-custom{
-		border-color: #000000;
+	.card-header{
+		font-weight: bold;
+		color: #28a745;
 	}
-	.alert-custom:hover{
-	  background-color: rgba(52, 55, 67, 0.8);
-	  transition:0.5s;
+	.card-text{
+		font-weight: bold;
+		color: #28a745;
 	}
-	.alert-info:hover{
-	  background-color: rgba(7, 73, 149, 0.35);
-	  transition:0.5s;
-	}
-	.notif{
-		font-size: 13px;
-	}
-	.notif-header{
-		font-size: 18px;
-	}
-</style> 
+</style>
+
 
 <div class="p-2">
 	<div class="text-center h5 text-dark font-weight-bold" id="notification_counter_string_container"></div>
@@ -42,6 +33,8 @@
 			</span><br>
 
 			<small>1 Hour ago</small> -->
+
+
 <script type="text/javascript">
 	var notifList = ajaxShortLink("getNewNotifsToViewed",{
 		'userID':currentUser.userID
@@ -76,24 +69,32 @@
 				// '</div>'
 
 		//pancho 05-24-2022
-				'<div class="row">'+
-			      '<div class="col-sm-12">'+
-			        '<div class="alert fade alert-simple alert-custom alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show" role="alert" data-brk-library="component__alert">'+
-			          '<button type="button" class="close font__size-18" data-dismiss="alert">'+
-												'<span class="sr-only">Close</span>'+
-											'</button>'+
-			          '<strong class="font__weight-semibold">'+
 
-			          tittle+
+				'<div class="card bg-light mb-3">'+
+				  '<div class="card-header h5">'+
+				  		
+				  		tittle+	
 
-			          '</strong><br>'+
+				  	'<button type="button" class="close ml-4 text-right" aria-label="Close">'+
+					  '<span aria-hidden="true">&times;</span>'+
+					'</button>'+
+				  '</div>'+
+				  	
+				  '<div class="card-body">'+
+				    '<class="card-title">'+
 
-			          content+
+						content+
 
-			          '<div class="text-center"><small>'+formatDateObject(endDate)+'</small></div>'+
-			        '</div>'+
-			      '</div>'+
-			    '</div>'
+				    '<p class="card-text text-right">'+
+
+				    '<br>'+	
+
+						formatDateObject(endDate)+
+
+				    '</p>'+
+
+				  '</div>'+
+				'</div>'
 			);
 		//pancho 05-24-2022	
 		}
