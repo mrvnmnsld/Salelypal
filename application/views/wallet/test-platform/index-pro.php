@@ -488,6 +488,7 @@
 <script type="text/javascript">
 
 		$.confirm({
+			theme: 'dark',
 		    title: 'Testing Mode!',
 		    content: 'Testing Mode intitiated, this limits the function and all token amounts are only for testing, They dont exists in the blockchain but it exists in our own server',
 		    typeAnimated: true,
@@ -637,6 +638,7 @@
 
 			$('#deposit_btn, #deposit_btn_option').on('click',function(){
 				$.confirm({
+					theme:'dark',
 				    title: 'Testing Mode!',
 				    content: 'Deposit is disabled due to testing mode being active',
 				    type: 'red',
@@ -650,6 +652,7 @@
 
 			$('#withdraw_btn, #withdraw_btn_option').on('click',function(){
 				$.confirm({
+					theme:'dark',
 				    title: 'Testing Mode!',
 				    content: 'Withdrawal is disabled due to testing mode being active',
 				    type: 'red',
@@ -749,6 +752,7 @@
 
 			$('#logOut_btn').on('click',function(){
 				$.confirm({
+					dark:'dark',
 				    title: 'Testing Mode!',
 				    content: 'Loging out is disabled due to testing mode being active',
 				    type: 'red',
