@@ -45,7 +45,7 @@
                     <p id="email" class="text-muted">info@email.com</p>
                 </div>
             <div class="col-6 mb-3">
-                <h6> Phone </i></h6>
+                <h6> Phone Number</i></h6>
                 <p id="mobileNumber" class="text-muted">123 456 789</p>
             </div>
         </div>
@@ -53,7 +53,7 @@
             <hr class="mt-0 mb-4">
             <div class="row pt-1">
                 <div class="col-6 mb-3">
-                    <h6 id="userIDh6"> User number </h6>
+                    <h6 id="userIDh6"> User ID# </h6>
                     <p id="userID" class="text-muted">#</p>
                 </div>
             <div class="col-6 mb-3">
@@ -61,9 +61,9 @@
                 <p id="birthday" class="text-muted">dd/mm/yyyy</p>
             </div>
         </div>
-        <div id="goBackLink" class="mt-3">
+       <!--  <div id="goBackLink" class="mt-3">
             <a id="goBack" onclick="backButton()"><i class="fa fa-undo" aria-hidden="true"></i> Go back</a>
-        </div>
+        </div> -->
     </div>
 </div>
 

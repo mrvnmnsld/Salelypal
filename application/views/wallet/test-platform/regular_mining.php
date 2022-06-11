@@ -19,11 +19,11 @@
 
 	input:checked + label {
 	    /*background: red;*/
-	    background: #343a40;
+	    background: #1b742f;
 	    color: white;
 	}
 
-	.btn-outline-dark{
+	label.btn{
 		font-size: .7em;
 	}
 </style>
@@ -103,7 +103,7 @@
 			for (var cycleCounter = 0; cycleCounter < cycleContainer.length; cycleCounter++) {
 				$('#'+miningSettings[i].id+'_cycle_container').append(
 			  		'<input type="radio" class="btn-check" value="'+cycleContainer[cycleCounter]+'" name="'+mining_id+'_cycle_selector" id="'+miningSettings[i].id+'_cycle_'+cycleContainer[cycleCounter]+'" checked> '+
-				  	'<label class="btn btn-sm btn-outline-dark" for="'+miningSettings[i].id+'_cycle_'+cycleContainer[cycleCounter]+'">'+cycleContainer[cycleCounter]+' Day(s)</label>'
+				  	'<label class="btn btn-sm main-color-bg text-light" for="'+miningSettings[i].id+'_cycle_'+cycleContainer[cycleCounter]+'">'+cycleContainer[cycleCounter]+' Day(s)</label>'
 				);
 			}
 

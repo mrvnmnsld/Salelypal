@@ -103,7 +103,7 @@
                     <th scope="col">Amount</th>
                     <th scope="col">Price/Resolved</th>
                     <!-- <th scope="col"></th> -->
-                    <th scope="col">Status</th>
+                    <!-- <th scope="col">Status</th> -->
                   </tr>
                 </thead>
                 <tbody id="positions_closed_container">
@@ -191,6 +191,9 @@
         clearInterval(tokenPriceInterval);
         clearInterval(pendingPositionChecker);
 
+        addBreadCrumbs('wallet/test-platform/risefall_trade_pairs/'+location);
+        
+
         $.when(closeNav()).then(function() {
             $('#topNavBar').toggle();
             $("#container").fadeOut(animtionSpeed, function() {
@@ -213,23 +216,25 @@
     });
 
     setTimeout(function() {
-        new TradingView.widget({
-            "autosize": true,
-            "symbol": "BINANCE:"+tokenPairArray.tokenPairID,
-            // "symbol": "BINANCE:BTCUSDT",
-            "interval": "1",
-            "timezone": Intl.DateTimeFormat().resolvedOptions().timeZone,
-            "theme": "dark",
-            "style": "1",
-            "locale": "en",
-            "toolbar_bg": "#f1f3f6",
-            "enable_publishing": false,
-            "save_image": false,
-            "container_id": "tradingview",
-            "loading_screen": {
-                "backgroundColor": "#f1f3f6",
-            },
-        });
+        if($("#tradingview").length==1){
+            new TradingView.widget({
+                "autosize": true,
+                "symbol": "BINANCE:"+tokenPairArray.tokenPairID,
+                // "symbol": "BINANCE:BTCUSDT",
+                "interval": "1",
+                "timezone": Intl.DateTimeFormat().resolvedOptions().timeZone,
+                "theme": "dark",
+                "style": "1",
+                "locale": "en",
+                "toolbar_bg": "#f1f3f6",
+                "enable_publishing": false,
+                "save_image": false,
+                "container_id": "tradingview",
+                "loading_screen": {
+                    "backgroundColor": "#f1f3f6",
+                },
+            });
+        }
 
         //continous
             tokenPriceInterval = setInterval(function() {
@@ -386,7 +391,7 @@
                             '<td class="text-center">'+closedPositions[x].amount+'</td>'+
                             '<td class="">'+parseFloat(closedPositions[x].currentPrice).toFixed(2)+'/'+parseFloat(closedPositions[x].resolvedPrice).toFixed(2)+'</td>'+
                             // '<td class="">'+parseFloat(closedPositions[x].resolvedPrice).toFixed(2)+'</td>'+
-                            '<td class="">'+closedPositions[x].status+' </td>'+
+                            // '<td class="">'+closedPositions[x].status+' </td>'+
                         '</tr>'
                     ); 
                 } 
