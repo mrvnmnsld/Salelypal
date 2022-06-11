@@ -252,34 +252,33 @@
 
 	</style>
 <!-- css -->
-	<body style="min-height: 130%;" class="light-mode">
-		<div id="loadSpinner" class="text-center main-color-text" style="margin-top: 30vh;">
-			<div class="spinner-border main-color-text" role="status" style="width: 5rem; height: 5rem;">
-				<span class="sr-only"></span>
-			</div><br>
-			<span class="font-weight-bold mt-2 main-color-text" id="loading_text_container" style="font-size:30px; text-align: center;">Loading...</span>
-		</div>
+<body style="min-height: 130%;" class="light-mode">
+	<div id="topNavBar" class="main-color-bg light-text" style="display:none; color:white!important;">
+		<span id="profile_btn" style="float: left;" ><i class="fa fa-user-o fa-md" aria-hidden="true"></i><span class="ml-2" id="username_container"></span></span>
 
-		<div id="topNavBar" class="main-color-bg light-text" style="display:none; color:white!important;">
-			<span id="profile_btn" style="float: left;" ><i class="fa fa-user-o fa-md" aria-hidden="true"></i><span class="ml-2" id="username_container"></span></span>
+		<span id="top_back_btn" style="float: left;display: none;" ><i class="fa fa-angle-left fa-md" aria-hidden="true"></i></span>
 
-			<span id="back_btn" style="float: left;display: none;" ><i class="fa fa-angle-left fa-md" aria-hidden="true"></i></span>
+		<span id="notif_btn" class="" style="float:right;">
+			<i id="notif_logo" class="fa fa-bell-o fa-md fa-inverse" style="color:white!important;"  aria-hidden="true">
+				<span id="notif_counter_number" style="font-size:.45em; right:.4em; top:1.5em; display:none" class="position-absolute badge bg-danger">0</span>
+			</i>
+		</span>
+	</div>
 
-			<span id="notif_btn" class="" style="float:right;">
-				<i id="notif_logo" class="fa fa-bell-o fa-md fa-inverse" style="color:white!important;"  aria-hidden="true">
-					<span id="notif_counter_number" style="font-size:.45em; right:.4em; top:1.5em; display:none" class="position-absolute badge bg-danger">0</span>
-				</i>
-			</span>
-		</div>
+	<div id="loadSpinner" class="text-center text-primary" style="margin-top: 30vh;">
+	  	<div class="spinner-border main-color-text" role="status" style="width: 5rem; height: 5rem;">
+	    	<span class="sr-only"></span>
+	  	</div><br>
+		<span class="font-weight-bold mt-2 main-color-text" id="loading_text_container" style="font-size:30px; text-align: center;">Loading...</span>
+	</div>
 
-		<div id="assets_container" style="display:none;">
-			<div id="header_inner_container" class="main-color-bg py-2" style="display:none; height:13em;">
-				<div class="h1 font-weight-bold text-center">
-					<span class="h6 text-muted">TOTAL BALANCE 
-						<span id="visible_btn" style="display:none;">
-							<i id="eye_close" class="fa fa-eye-slash mt-2 text-muted" style="display:inline-block;" aria-hidden="true"></i>
-							<i id="eye_open" class="fa fa-eye text-muted" style="display:none;" aria-hidden="true"></i>
-						</span>
+	<div id="assets_container" style="display:none;">
+		<div id="header_inner_container" class="main-color-bg py-2" style="display:none; height:13em;">
+			<div class="h1 font-weight-bold text-center">
+				<span class="h6 text-muted" style="color:white;">TOTAL BALANCE 
+					<span id="visible_btn" style="display:none;">
+						<i id="eye_close" class="fa fa-eye-slash mt-2 text-muted" style="display:inline-block;" aria-hidden="true"></i>
+						<i id="eye_open" class="fa fa-eye text-muted" style="display:none;" aria-hidden="true"></i>
 					</span>
 					<br>
 					<span id="totalInUsdContainer" class="display-5 title-color-text">Loading...</span>
@@ -509,6 +508,7 @@
 		var tokenLoadTimer;
 		var assetsHtmlContainer;
 		var tokensSelected = ajaxShortLink('userWallet/getAllSelectedTokensVer2',{'userID':15});
+		var breadCrumbs = ['assets'];
 
 
 		//initial
@@ -662,42 +662,39 @@
 			});
 
 			$('#assets_btn').on('click',function(){
+				addBreadCrumbs("assets_container")
+				console.log($('#assets_container').css("display"));
 				if ($('#assets_container').css("display") == 'none') {
 					$("html, body").animate({ scrollTop: 0 }, "slow");
-					$.when(closeNav()).then(function() {
-						$("#profile_btn").css('display',"block")
-						$("#back_btn").css('display',"none")
+		  			$("#container").empty();
 
-						$('#topNavBar').toggle();
-						$('#bottomNavBar').toggle();
-				  		$("#container").fadeOut(animtionSpeed, function() {
-						  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
-					  			$("#container").empty();
-					  			// $("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/buyCrypto'}));
+					$('#topNavBar').toggle();
+					$('#bottomNavBar').toggle();
 
-					  			setTimeout(function(){
-					  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
-										$('#assets_container').fadeIn(animtionSpeed);
-										$('#topNavBar').toggle();
-					  					$('#bottomNavBar').toggle();
-					  					$("#container").fadeIn(animtionSpeed);
-					  				});
-					  			}, 1000);
+					$("#profile_btn").css('display',"block")
+					$("#top_back_btn").css('display',"none")
 
-					  			$("#profile_btn").css('display',"block")
-					  			$("#back_btn").css('display',"none")
+			  		$("#container").fadeOut(animtionSpeed, function() {
+					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
+				  			// $("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/buyCrypto'}));
 
-						  		
-					    	});
-					  	});
-					});
+				  			setTimeout(function(){
+				  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
+									$('#assets_container').fadeIn(animtionSpeed);
+									$('#topNavBar').toggle();
+				  					$('#bottomNavBar').toggle();
+				  					$("#container").fadeIn(animtionSpeed);
+				  				});
+				  			}, 1000);
+					  		
+				    	});
+				  	});
 				}
-					
-					
 			});
 
 			$('#buyCrypto_btn, #buy_btn_option').on('click',function(){
-					$("#tittle_container").text('Purchase');
+					addBreadCrumbs("wallet/test-platform/buyCrypto")
+
 					$("html, body").animate({ scrollTop: 0 }, "slow");
 					$.when(closeNav()).then(function() {
 						$('#assets_container').css("display","none");
@@ -708,7 +705,7 @@
 					  			$("#container").empty();
 					  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/buyCrypto'}));
 								$("#profile_btn").css('display',"none")
-								$("#back_btn").css('display',"block ")
+								$("#top_back_btn").css('display',"block ")
 
 
 					  			setTimeout(function(){
@@ -726,7 +723,8 @@
 			});
 
 			$('#addToken_btn').on('click',function(){
-				$("#tittle_container").text('Token Management');
+				addBreadCrumbs("wallet/addToken")
+
 				$("html, body").animate({ scrollTop: 0 }, "slow");
 				$.when(closeNav()).then(function() {
 					$('#assets_container').css("display","none");
@@ -737,7 +735,7 @@
 				  			$("#container").empty();
 				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/addToken'}));
 							$("#profile_btn").css('display',"none")
-							$("#back_btn").css('display',"block ")
+							$("#top_back_btn").css('display',"block ")
 
 					  		$("#loadSpinner").fadeOut(animtionSpeed,function(){
 					  			$('#topNavBar').toggle();
@@ -763,6 +761,8 @@
 			});
 
 			$('#future_btn').on('click',function(){
+				addBreadCrumbs("wallet/test-platform/future")
+
 				
 				$("#tittle_container").text('Contract Trade');
 				$("html, body").animate({ scrollTop: 0 }, "slow");
@@ -775,7 +775,7 @@
 				  			$("#container").empty();
 				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/future'}));
 							$("#profile_btn").css('display',"none")
-							$("#back_btn").css('display',"block ")
+							$("#top_back_btn").css('display',"block ")
 
 
 
@@ -794,6 +794,8 @@
 			});
 
 			$('#rise_fall_btn').on('click',function(){
+				addBreadCrumbs("wallet/test-platform/risefall")
+
 				
 				$("#tittle_container").text('Rise Fall');
 				$("html, body").animate({ scrollTop: 0 }, "slow");
@@ -806,7 +808,7 @@
 				  			$("#container").empty();
 				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/risefall'}));
 							$("#profile_btn").css('display',"none")
-							$("#back_btn").css('display',"block ")
+							$("#top_back_btn").css('display',"block ")
 
 
 				  			setTimeout(function(){
@@ -823,7 +825,8 @@
 			});
 
 			$('#profile_btn').on('click',function(){
-				
+				addBreadCrumbs("wallet/test-platform/user_profile/profile");
+
 				$("#username_container").text("Marvin");
 				$("#email_container").text("marvin@gmail.com");
 				$("html, body").animate({ scrollTop: 0 }, "slow");
@@ -836,7 +839,7 @@
 				  			$("#container").empty();
 				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/user_profile/profile'}));
 							$("#profile_btn").css('display',"none")
-							$("#back_btn").css('display',"block ")
+							$("#top_back_btn").css('display',"block ")
 
 
 				  			setTimeout(function(){
@@ -853,6 +856,8 @@
 			});
 
 			$('#notif_btn').on('click',function(){
+				addBreadCrumbs("wallet/notificationCenter");
+
 				$("#notif_counter_number").text("");
 				$("#notif_counter_number").removeClass("animate__animated animate__bounce animate__repeat-2");
 				$("#notif_counter_number").css("display", "none");
@@ -869,7 +874,7 @@
 				  			$("#container").empty();
 				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/notificationCenter'}));
 							$("#profile_btn").css('display',"none")
-							$("#back_btn").css('display',"block ")
+							$("#top_back_btn").css('display',"block ")
 
 				  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
 				  					$('#topNavBar').toggle();
@@ -882,6 +887,8 @@
 			});
 	
 			$('#settings_btn').on('click',function(){
+				addBreadCrumbs("wallet/settings");
+
 				console.log('settings_btn');
 				
 				$("#tittle_container").text('Settings');
@@ -895,7 +902,7 @@
 				  			$("#container").empty();
 				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings'}));
 							$("#profile_btn").css('display',"none")
-							$("#back_btn").css('display',"block ")
+							$("#top_back_btn").css('display',"block ")
 
 
 			  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
@@ -909,6 +916,7 @@
 			});
 
 			$('#regular_mining_btn').on('click',function(){
+				addBreadCrumbs("wallet/test-platform/regular_mining");
 				
 				$("#tittle_container").text('Regular Income Mining');
 				$("html, body").animate({ scrollTop: 0 }, "slow");
@@ -921,7 +929,7 @@
 				  			$("#container").empty();
 				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/regular_mining'}));
 							$("#profile_btn").css('display',"none")
-							$("#back_btn").css('display',"block ")
+							$("#top_back_btn").css('display',"block ")
 
 
 				  			setTimeout(function(){
@@ -938,6 +946,7 @@
 			});
 
 			$('#daily_mining_btn').on('click',function(){
+				addBreadCrumbs("wallet/test-platform/dailyMining");
 				// $.alert("This part is still under development")
 				
 				$("#tittle_container").text('Daily Income Mining');
@@ -952,7 +961,7 @@
 				  			// $("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/daily_mining'}));
 				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/dailyMining'}));
 							$("#profile_btn").css('display',"none")
-							$("#back_btn").css('display',"block ")
+							$("#top_back_btn").css('display',"block ")
 
 
 				  			setTimeout(function(){
@@ -969,6 +978,8 @@
 			});
 
 			$('#discover_btn').on('click',function(){
+				// addBreadCrumbs("test-platform/regular_mining");
+
 				$.alert("This part is still under development")
 				// 
 				// $("#tittle_container").text('Daily Income Mining');
@@ -982,7 +993,7 @@
 				//   			$("#container").empty();
 				//   			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/daily_mining'}));
 							// $("#profile_btn").css('display',"none")
-							// $("#back_btn").css('display',"block ")
+							// $("#top_back_btn").css('display',"block ")
 
 
 				//   			setTimeout(function(){
@@ -1137,7 +1148,8 @@
 				// loadTokenInfo(tokensSelected[i].tokenName,tokensSelected[i].coingeckoTokenId)
 
 				$('#'+tokensSelected[i].tokenName+'_container').on('click',function(){
-						
+						addBreadCrumbs("wallet/test-platform/viewTokenInfo");
+
 						$("#loading_text_container").text("Please wait while we load your recent activities");
 
 						clickContainer = tokensSelected[$(this).index()];
@@ -1154,7 +1166,7 @@
 							  			$("#container").empty();
 							  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/viewTokenInfo'}));
 							  			$("#profile_btn").css('display',"none")
-							  			$("#back_btn").css('display',"block ")
+							  			$("#top_back_btn").css('display',"block ")
 
 								  		$("#loadSpinner").fadeOut(animtionSpeed,function(){
 								  			$('#topNavBar').toggle();
@@ -1172,6 +1184,67 @@
 			}
 			// $('#totalInUsdContainer').text(totalInUsd.toFixed(2));
 		}
+
+		function addBreadCrumbs(page){
+			breadCrumbs.push(page);
+		}
+
+		$("#top_back_btn").on("click",function(){
+			breadCrumbs.pop()
+			console.log(breadCrumbs[breadCrumbs.length-1]);
+
+			if (breadCrumbs[breadCrumbs.length-1]=="assets"||breadCrumbs[breadCrumbs.length-1]=="assets_container") {
+				$("#assets_btn").click();
+			}else if(breadCrumbs[breadCrumbs.length-1]==undefined){
+				$.toast({
+				    text: "Can't go back, already on the first page", // Text that is to be shown in the toast
+				    
+				    icon: 'info', // Type of toast icon
+				    showHideTransition: 'slide', // fade, slide or plain
+				    allowToastClose: true, // Boolean value true or false
+				    hideAfter: 3000, // false to make it sticky or number representing the miliseconds as time after which toast needs to be hidden
+				    stack: false, // false if there should be only one toast at a time or a number representing the maximum number of toasts to be shown at a time
+				    position: 'top-center', // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
+				    
+				    
+				    
+				    textAlign: 'left',  // Text alignment i.e. left, right or center
+				    loader: true,  // Whether to show loader or not. True by default
+				    loaderBg: '#9EC600',  // Background color of the toast loader
+				    beforeShow: function () {}, // will be triggered before the toast is shown
+				    afterShown: function () {}, // will be triggered after the toat has been shown
+				    beforeHide: function () {}, // will be triggered before the toast gets hidden
+				    afterHidden: function () {}  // will be triggered after the toast has been hidden
+				});
+			}else{
+				$.when(closeNav()).then(function() {
+					$('#assets_container').css("display","none");
+					$('#topNavBar').toggle();
+					$('#bottomNavBar').toggle();
+					$("#container").fadeOut(animtionSpeed, function() {
+						$("#loadSpinner").fadeIn(animtionSpeed,function(){
+							setTimeout(function(){
+					  			$("#container").empty();
+					  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':breadCrumbs[breadCrumbs.length-1]}));
+					  			$("#profile_btn").css('display',"none")
+					  			$("#top_back_btn").css('display',"block ")
+
+						  		$("#loadSpinner").fadeOut(animtionSpeed,function(){
+						  			$('#topNavBar').toggle();
+						  			$('#bottomNavBar').toggle();
+						  			$("#container").fadeIn(animtionSpeed);
+						  		});
+							}, 1000)
+					  	});
+
+					  	$("#loading_text_container").text("Please wait");
+					});
+				});
+			}
+		});
+
+
+
 	</script>
 </body>
 </html>

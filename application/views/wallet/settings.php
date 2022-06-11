@@ -183,7 +183,7 @@
 	});
 
 	$('#security_btn').on('click',function(){
-		$("#tittle_container").text('Security');
+		addBreadCrumbs("wallet/settings/security");
 
     	$.when(closeNav()).then(function() {
     		$('#topNavBar').toggle();
@@ -217,6 +217,8 @@
 	});
 
 	$('#price_alert_btn').on('click',function(){
+		addBreadCrumbs("wallet/settings/priceAlert");
+		
 		$("#tittle_container").text('Price Alert');
 
     	$.when(closeNav()).then(function() {
@@ -254,28 +256,25 @@
 	});
 
 	$('#language_btn').on('click',function(){
+		addBreadCrumbs("wallet/settings/language");
+
 		$("#tittle_container").text('Language ');
 
-		    	$.when(closeNav()).then(function() {
-		    		$('#topNavBar').toggle();
-		      		$("#container").fadeOut(animtionSpeed, function() {
-		    		  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
-		    	  			$("#container").empty();
-		    	  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings/language'}));
+    	$.when(closeNav()).then(function() {
+    		$('#topNavBar').toggle();
+      		$("#container").fadeOut(animtionSpeed, function() {
+    		  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
+    	  			$("#container").empty();
+    	  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings/language'}));
 
-		    		  		$("#loadSpinner").fadeOut(animtionSpeed,function(){
-		    		  			$('#topNavBar').toggle();
-		    		  			$("#container").fadeIn(animtionSpeed);
-		    		  		});
-		    	    	});
-		    	  	});
-		    	});
+    		  		$("#loadSpinner").fadeOut(animtionSpeed,function(){
+    		  			$('#topNavBar').toggle();
+    		  			$("#container").fadeIn(animtionSpeed);
+    		  		});
+    	    	});
+    	  	});
+    	});
 	});
-
-	$("#back_btn").on("click",function(){
-		$('#assets_btn').click();
-	});
-
 	
 
 

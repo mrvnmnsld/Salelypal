@@ -99,7 +99,7 @@
                 <th scope="col">Amount</th>
                 <th scope="col">Resolved Price</th>
                 <th scope="col">Difference</th>
-                <th scope="col">Status</th>
+                <!-- <th scope="col">Status</th> -->
               </tr>
             </thead>
             <tbody id="positions_closed_container">
@@ -160,20 +160,22 @@
 
     //setChart
         setTimeout(function() {
-            new TradingView.widget({
-                "autosize": true,
-                // "symbol": "BINANCE:ETHUSDT",
-                "symbol": tokenPairArray.tokenPairID,
-                "interval": "1",
-                "timezone": Intl.DateTimeFormat().resolvedOptions().timeZone,
-                "theme": "dark",
-                "style": "1",
-                "locale": "en",
-                "toolbar_bg": "#f1f3f6",
-                "enable_publishing": false,
-                "save_image": false,
-                "container_id": "tradingview"
-            });
+            if($("#tradingview").length == 1){
+                new TradingView.widget({
+                    "autosize": true,
+                    // "symbol": "BINANCE:ETHUSDT",
+                    "symbol": tokenPairArray.tokenPairID,
+                    "interval": "1",
+                    "timezone": Intl.DateTimeFormat().resolvedOptions().timeZone,
+                    "theme": "dark",
+                    "style": "1",
+                    "locale": "en",
+                    "toolbar_bg": "#f1f3f6",
+                    "enable_publishing": false,
+                    "save_image": false,
+                    "container_id": "tradingview"
+                });
+            }
 
             // continuous
                 tokenPriceInterval = setInterval(function() {
@@ -258,6 +260,7 @@
         clearInterval(tokenPriceInterval);
         clearInterval(pendingPositionChecker);
 
+        addBreadCrumbs('wallet/test-platform/contract_trade_pairs/'+location)
 
         $.when(closeNav()).then(function() {
             $('#topNavBar').toggle();
@@ -311,7 +314,7 @@
                             '<td class="">'+positionsClosed[i].amount+'</td>'+
                             '<td class="">'+parseFloat(positionsClosed[i].resolvedPrice).toFixed(2)+'</td>'+
                             '<td class="">'+(positionsClosed[i].resolvedPrice-positionsClosed[i].riskPrice).toFixed(2)+'</td>'+
-                            '<td class="">'+positionsClosed[i].status+' </td>'+
+                            // '<td class="">'+positionsClosed[i].status+' </td>'+
                         '</tr>'
                     );  
                 }        
