@@ -1,9 +1,3 @@
-<style type="text/css">
-.is-invalid{
-  text-align: center;
-}
-</style>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -159,6 +153,9 @@
       color: #001F3F;
       background-color: #fff;
   }
+  .is-invalid{
+    color: red;
+  }
 </style>
 
 
@@ -297,6 +294,9 @@
         rules: {
             username: "required",
             password: "required",
+        },
+        errorPlacement: function(error, element) {
+          element.parent("div").after(error);
         },
         submitHandler: function(form){
           var data = $('#loginForm').serializeArray();
