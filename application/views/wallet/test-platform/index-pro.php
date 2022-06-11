@@ -170,34 +170,45 @@
 
 		/* Mainstyle */
 			body{
-				
-			font-family: 'Poppins', sans-serif;
-			color: #3a189f;
+				font-family: 'Poppins', sans-serif;
+				/* background-image: url('../../assets/imgs/1bg-2.jpg');
+				background-repeat:no-repeat;
+				background-size:400%;
+				background-attachment: fixed; */
+				/*font-family: 'Roboto Condensed', sans-serif;*/
+				/* LIGHTMODE_ */
+					/* background-color: white;  */
+				/* DARKMODE_ */
+					background-color: #220e5d!important; 
+				color: white !important; 
 			}
 			.main-color-text{
-				color: #3a189f;
-				/* color:#9e68e8; */
+				/* color: #3a189f; */
+				/* DARKMODE_  */
+					color: white !important;
 			}
 			.main-color-icon{
 				color: #5426de;
-				/* color:#9e68e8; */
 			}
 			.main-color-bg{
-				background-color: #5426de;
-				/* background-color:#9e68e8; */
+				/*LIGHTMODE_*/
+					/* background-color: #5426de;  */
+				/*DARKMODE_*/
+					background-color: #120731; 
 			}
 			.light-text{
 				color:#D9E9E8;
 			}
 		/* font */
-			.font-proxima-reg{
-				font-family: 'proxima_nova_rgregular', Helvetica, Arial, sans-serif;
-			}
-			.font-proxima-bold{
-				font-family: 'proxima_nova_rgbold', Helvetica, Arial, sans-serif !important;
-			}
 			.text-muted{
 				color: #94abef!important;
+			}
+
+			.modal-content{
+				/*DARKMODE_*/
+					background-color: #220e5d!important;
+				/*LIGHTMODE_*/
+					/* background-color: white!important;  */
 			}
 			
 	</style>
@@ -217,7 +228,7 @@
 		<span id="back_btn" style="float: left;display: none;" ><i class="fa fa-angle-left fa-md" aria-hidden="true"></i></span>
 
 		<span id="notif_btn" class="" style="float:right;">
-			<i id="notif_logo" class="fa fa-bell fa-md fa-inverse" style="color:white!important;"  aria-hidden="true">
+			<i id="notif_logo" class="fa fa-bell-o fa-md fa-inverse" style="color:white!important;"  aria-hidden="true">
 				<span id="notif_counter_number" style="font-size:.45em; right:.4em; top:1.5em; display:none" class="position-absolute badge bg-danger">0</span>
 			</i>
 		</span>
@@ -234,28 +245,26 @@
 				</span>
 				<br>
 				<span id="totalInUsdContainer" style="color:white;" class="display-5 main-color-text">Loading...</span>
-
-
 			</div>
 
 			<div id="main_btns_container" style="display:none;">
 				<div id="btn_option_container" class="d-flex justify-content-center mt-1">
 					<button id="deposit_btn_option" class="btn" style="background-color:transparent">
-						<div class="btn main-color-icon btn-md" style="font-size:2em;padding:1px;">
+						<div class="btn btn-md" style="font-size:2em;padding:1px;">
 							<i class="fa fa-arrow-circle-down fa-lg fa-inverse" aria-hidden="true"></i>
 						</div>
 						<div style="font-size:.8em" class="text-light"><b>Deposit</b></div>
 					</button>
 
 					<button id="withdraw_btn_option" class="btn" style="background-color:transparent">
-						<div class="btn main-color-icon btn-md" style="font-size:2em;padding:1px;">
+						<div class="btn btn-md" style="font-size:2em;padding:1px;">
 							<i class="fa fa-arrow-circle-up fa-lg fa-inverse" aria-hidden="true"></i>
 						</div>
 						<div style="font-size:.8em" class="text-light"><b>Withdraw</b></div>
 					</button>
 
 					<button id="buy_btn_option" class="btn" style="background-color:transparent">
-						<div class="btn main-color-icon btn-md" style="font-size:2em;padding:1px;">
+						<div class="btn btn-md" style="font-size:2em;padding:1px;">
 							<i class="fa fa-credit-card-alt fa-md fa-inverse" aria-hidden="true"></i>
 						</div>
 						<div style="font-size:.8em;" class="text-light"><b>Buy</b></div>
@@ -263,12 +272,7 @@
 				</div>
 			</div>
 		</div>
-		<!-- <hr class="mt-3" style=" width:50%;margin:0 auto; opacity:0.1; border-color:#3a189f!important;"> -->
 		<style>
-			/* #asset_tab_container{
-				background-color:rgba(34,34,34,.1);
-				padding-bottom:5em;
-			} */
 			#asset_tabs a{
 				color: #94abef;
 				-webkit-transition: color 2s, font-size .25s;
@@ -278,31 +282,25 @@
 			}
 			.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
 				font-size:2em;
-				/* color:black!important;
-				border-bottom-color: transparent;
-				background-color:rgba(45,15,87,.01); */
-
 				-webkit-transition: color 1s, font-size .25s;
 				-moz-transition: color 1s, font-size .25s;
 				-o-transition: color 1s, font-size .25s;
 				transition: color 1s, font-size .25s;
 
-				color: #3a189f!important;
 				border-color: transparent;
 				background-color:transparent;
-				/* font-weight:bold; */
+				/* LIGHTMODE_ */
+				/* color: #3a189f!important;  */
+				/* DARKMODE_ */
+				color: white !important; 
 			}
-
 		</style>
-
-		
 
 		<div id="asset_tab_container" class="mt-3">
 			<ul id="asset_tabs" class="nav nav-tabs nav-justified" role="tablist">
 				<li class="nav-item">
 					<a class="nav-link active tab-pane fade show " data-toggle="tab" href="#balance_tab">BALANCE</a>
 				</li>
-
 				<li class="nav-item">
 					<a class="nav-link tab-pane fade show" data-toggle="tab" href="#portfolio_tab">PORTFOLIO</a>
 				</li>
@@ -324,24 +322,18 @@
 					<div class="text-center">
 						<h3>This part is still under development</h3>
 					</div>
-					
-					
 				</div>
 			</div>
 		</div><!-- asset_tab_container -->
 		
-
 		<style>
 			.nav-tabs {
 				border-bottom: transparent;
 			}
-			
 		</style>
 	</div>
 
-	<div id="container" class="mb-5" style="display:none;min-height: 120%;">
-		
-	</div>
+	<div id="container" class="mb-5" style="display:none;min-height: 120%;"></div>
 
 	<br>
 	<br>
@@ -350,123 +342,119 @@
 
 	<!-- modal-mining -->
 		<style>
-			#modal_trade .modal-content{
-				background:transparent;
-			}
-
 			#modal_trade .modal-header{
 				padding:.3em;
-
 			}
-
 			#modal_trade .modal-body{
-				
-				padding:0em!important;
-
-			}
-
-			#modal_trade .btn-modal {
-				background: rgb(34 34 34);
-
-				border:.2px solid;
 				border-radius : .5em;
-				
-				color: #D9E9E8;
-
+				padding:0em!important;
+			}
+			#modal_trade .btn-modal {
 				min-height: 100%;
 				min-width: 100%;
-				padding:2em;
+				padding:.5em;
+				box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+				margin:.5em 0;
+			}
+			#modal_trade .btn-modal:hover {
+				background-color:#94abef;
+				font-size:1.5em;
+			}
+			.modal-header{
+				border-bottom: 0px solid #dee2e6!important;
 			}
 		</style>
 
 		<div class="modal fade" id="modal_trade">
 			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content" style="background-color: rgb(0 0 0 / 79%);">
+				<div class="modal-content p-4">
 				
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">
-							<i class="fa fa-close fa-inverse" aria-hidden="true"></i>
+							<i class="fa fa-close " aria-hidden="true"></i>
 						</button>
 					</div>
 					
-					<div class="modal-body" style="">
-
+					<div class="modal-body">
 						<div class="m-1 justify-content-center">
-							<button id="rise_fall_btn" type="button" class="btn btn-modal" data-dismiss="modal">
-								<!-- <img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png"> -->
+							<button id="rise_fall_btn" type="button" class="btn btn-modal main-color-bg" data-dismiss="modal">
 								<i class="fa fa-bar-chart fa-inverse fa-lg" style="" aria-hidden="true"></i>
-								Contract Rise Fall
+								<small class="text-light">Rise Fall Contract</small>
 							</button>
 						</div>
-
-						<div class="m-1 justify-content-center">
-							<button id="future_btn" class="btn btn-modal" data-dismiss="modal">
-								<!-- <img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png"> -->
+						<div class="m-1 justify-content-center main-color-text">
+							<button id="future_btn" class="btn btn-modal main-color-bg" data-dismiss="modal">
 								<i class="fa fa-bar-chart fa-inverse fa-lg" style="" aria-hidden="true"></i>
-								Contract Long Short
+								<small class="text-light">Long Short Contract</small>
 							</button>
-						</div>					
-
-						<div class="m-1 justify-content-center">
-							<button id="daily_mining_btn" type="button" class="btn btn-modal" data-dismiss="modal">
+						</div>	
+						<div class="m-1 justify-content-center main-color-text">
+							<button id="daily_mining_btn" type="button" class="btn btn-modal main-color-bg" data-dismiss="modal">
 								<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">
-								Daily Mining
+								<small class="text-light">Daily Mining</small>
 							</button>
 						</div>
 
 						<div class="m-1 justify-content-center">
-							<button id="regular_mining_btn" class="btn btn-modal" data-dismiss="modal">
+							<button id="regular_mining_btn" class="btn btn-modal main-color-bg" data-dismiss="modal">
 								<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">
-								Regular Mining
+								<small class="text-light">Regular Mining</small>
 							</button>
 						</div>
-							
 					</div>
 				</div>	
 			</div>
 		</div>
-	<!-- modal-mining -->
+	<!-- modal-mining END -->
+	<style>
+		.botnav-icon{
+			font-size:2em;
+		}
+		.botnav-icon:hover{
+			color: #94abef;
+		}
+	</style>
 
-	<ul id="bottomNavBar" style="display:none;" class="nav fixed-bottom main-color-bg justify-content-center row pt-2">
+	<!-- bottomnavbar -->
+	<ul id="bottomNavBar" style="display:none;" class="nav fixed-bottom main-color-bg justify-content-center row p-4">
 		<li id="assets_btn" class="nav-item col-3 text-center">
-			<i class="fa fa-money fa-inverse fa-lg" aria-hidden="true"></i>
-			<a class="botnavlink nav-link active" style="font-size:.8em; color:#D9E9E8;"><span class="test1">Asset</span></a>
+			<i class="fa fa-bank fa-inverse botnav-icon" alt="Asset" aria-hidden="true"></i>
+			<!-- <a class="botnavlink nav-link active" style="font-size:.8em; color:#D9E9E8;"><span class="test1">Asset</span></a> -->
 		</li>
 
 		<li id="modal_mining_btn" data-toggle="modal" data-target="#modal_trade" class="nav-item col-3 text-center">
-			<i class="fa fa-bar-chart fa-inverse fa-lg" style="" aria-hidden="true"></i>
-			<a class="nav-link" style="font-size:.8em; color:#D9E9E8;"  href="#">Trade</a>
+			<i class="fa fa-bar-chart fa-inverse botnav-icon" alt="Trade" aria-hidden="true"></i>
+			<!-- <a class="nav-link" style="font-size:.8em; color:#D9E9E8;"  href="#">Trade</a> -->
 		</li>
 
 		<li id="discover_btn" class="nav-item col-3 text-center">
-			<i class="fa fa-globe fa-inverse fa-lg" aria-hidden="true"></i>
-			<a  class="nav-link" style="font-size:.8em; color:#D9E9E8;" href="#">Discover</a>
+			<i class="fa fa-globe fa-inverse botnav-icon" alt="Discover" aria-hidden="true"></i>
+			<!-- <a  class="nav-link" style="font-size:.8em; color:#D9E9E8;" href="#">Discover</a> -->
 		</li>
 
 		<li id="settings_btn" class="nav-item col-3 text-center">
-			<i class="fa fa-cogs fa-inverse fa-lg" aria-hidden="true"></i>
-			<a class="nav-link" style="font-size:.8em; color:#D9E9E8;"  href="#">Settings</a>
+			<i class="fa fa-cogs fa-inverse botnav-icon" alt="Settings" aria-hidden="true"></i>
+			<!-- <a class="nav-link" style="font-size:.8em; color:#D9E9E8;"  href="#">Settings</a> -->
 		</li>
 	</ul>
 
-	<!-- translate -->
-		<script type="text/javascript">
-			function googleTranslateElementInit() {
-			    // setCookie('googtrans', currentUserLanguage.lang,1);
-			    new google.translate.TranslateElement({
-			        pageLanguage: 'en',
-			        // includedLanguages: 'en,zh-CN,zh-TW',
-			        // layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-			        autoDisplay: true
-			    }, 'google_translate_element');
-			}
-			
-		</script>
+<!-- translate -->
+<script type="text/javascript">
+	function googleTranslateElementInit() {
+		// setCookie('googtrans', currentUserLanguage.lang,1);
+		new google.translate.TranslateElement({
+			pageLanguage: 'en',
+			// includedLanguages: 'en,zh-CN,zh-TW',
+			// layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+			autoDisplay: true
+		}, 'google_translate_element');
+	}
+</script>
 
-		<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
-	<!-- translate -->
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
+<!-- translate -->
 
-	<script type="text/javascript">
+<script type="text/javascript">
 
 		$.confirm({
 		    title: 'Testing Mode!',

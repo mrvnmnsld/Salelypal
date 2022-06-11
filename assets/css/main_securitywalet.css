@@ -1,18 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap%27');
 	
-	body{
-		font-family: 'Poppins', sans-serif;
-		background-color: white;
-		/* background-image: url('../../assets/imgs/1bg-2.jpg'); */
-		background-repeat:no-repeat;
-		background-size:400%;
-		background-attachment: fixed;
-		/*color: white;*/
-		/*background-color: #f0f0f0;*/
-		/*font-family: 'Roboto Condensed', sans-serif;*/
-		font-size: 16px!important;
-	}
-
 	.h4{
 		font-weight: bold;
 		color: white;
@@ -59,11 +46,11 @@
   		/* background-color: #3c3c3c; */
   	}
 
-  	.modal-header{
+  	/* .modal-header{
   		border-bottom: 0px solid #dee2e6!important;
 		background-color: rgb(0 0 0 / 79%);
 	  	color: white;
-  	}
+  	} */
 
   	.modal-header .bootbox-close-button{
 	  	color: white;
