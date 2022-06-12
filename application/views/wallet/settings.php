@@ -59,7 +59,7 @@
 
 <div class="p-2">
 	<div class="main-color-text mb-2 font-weight-bold h5">Preference</div>
-	<button id="display_currency_btn" disabled class="btn custom-2nd-text  btn-block text-left">
+	<button id="display_currency_btn" class="btn custom-2nd-text btn-block text-left">
 		<i class="fa fa-money" aria-hidden="true"></i>
 		<span class="" style="font-size: 18px;">&nbsp;Display Currency</span>
 	</button>
@@ -181,6 +181,27 @@
     	    }
     	});
 	});
+
+	$('#display_currency_btn').on('click',function(){
+		addBreadCrumbs("wallet/settings/security");
+
+    	$.when(closeNav()).then(function() {
+    		$('#topNavBar').toggle();
+      		$("#container").fadeOut(animtionSpeed, function() {
+    		  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
+    	  			$("#container").empty();
+    	  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings/currency'}));
+
+    		  		$("#loadSpinner").fadeOut(animtionSpeed,function(){
+    		  			$('#topNavBar').toggle();
+    		  			$("#container").fadeIn(animtionSpeed);
+    		  		});
+    	    	});
+    	  	});
+    	});
+	});
+
+	
 
 	$('#security_btn').on('click',function(){
 		addBreadCrumbs("wallet/settings/security");

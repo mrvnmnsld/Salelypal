@@ -19,9 +19,9 @@
 
 	<div class="text-center">Note: Report inaccurate translation to our system admins</div>
 
-	<div class="p-4">
+	<div class="mt-3">
 		<button class="btn btn-success btn-block" id="save_btn">Save Language</button>
-		<button class="btn btn-danger btn-block" id="close_btn">Back</button>
+		<button class="btn btn-danger red-btn btn-block" id="close_btn">Back</button>
 	</div>
 
 	

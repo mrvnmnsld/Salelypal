@@ -373,14 +373,14 @@
 
 						<div class="row">
 							<div class="col-6 text-center">
-								<button class="btn btn-outline-link btn-block text-primary mt-2 text-muted" id="addToken_btn">
+								<button class="btn btn-outline-link btn-block main-color-text mt-2 text-muted" id="addToken_btn">
 									<i class="fa fa-sliders" aria-hidden="true"></i>
 									Add more
 								</button>
 							</div>
 
 							<div class="col-6 text-center">
-								<button class="btn btn-outline-link btn-block text-primary mt-2 text-muted" disabled id="refresh_btn">
+								<button class="btn btn-outline-link btn-block main-color-text mt-2 text-muted" disabled id="refresh_btn">
 									<i class="fa fa-refresh" aria-hidden="true"></i>
 									Refresh
 								</button>
@@ -440,13 +440,6 @@
 			<div class="modal fade" id="modal_trade">
 				<div class="modal-dialog modal-dialog-centered">
 					<div class="modal-content p-4">
-					
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">
-								<i class="fa fa-close " aria-hidden="true"></i>
-							</button>
-						</div>
-						
 						<div class="modal-body">
 							<div class="m-1 justify-content-center">
 								<button id="rise_fall_btn" type="button" class="btn btn-modal main-color-bg" data-dismiss="modal">
@@ -473,6 +466,15 @@
 									<small class="text-light">Regular Mining</small>
 								</button>
 							</div>
+
+							<div class="m-1 justify-content-center">
+								<button type="button" class="btn btn-modal main-color-bg" data-dismiss="modal">
+									<i class="fa fa-close" style="width:1.4em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" aria-hidden="true"></i>
+									<small class="text-light">Cancel</small>
+								</button>
+							</div>
+
+							
 						</div>
 					</div>	
 				</div>
@@ -576,6 +578,12 @@
 				$("body").removeClass( "dark-mode" ).addClass( "light-mode" );
 			}
 
+			var displayCurrency = getLocalStorageByKey("displayCurrency");
+			if(displayCurrency==null){
+				displayCurrency = "usd"
+				setLocalStorageByKey("displayCurrency",'usd')
+			}
+
 			var initialNotifList = ajaxShortLink("getNewNotifs",{
 				'userID':15
 			});
@@ -630,7 +638,7 @@
 							myLoop();
 					    }else{
 					  		$("#totalInUsdContainer").html(numberWithCommas(totalInUsd.toFixed(2)));
-					  		$("#totalInUsdContainer").append(" "+currentUser.displayCurrency);
+					  		$("#totalInUsdContainer").append(" "+displayCurrency.toUpperCase());
 					  		$('#visible_btn').toggle();
 					  		$('#refresh_btn').removeAttr("disabled");
 
@@ -669,7 +677,7 @@
 							i+1
 						})
 						$('#totalInUsdContainer').html(numberWithCommas(totalInUsd.toFixed(2)));
-						$("#totalInUsdContainer").append(" "+currentUser.displayCurrency);
+						$("#totalInUsdContainer").append(" "+displayCurrency.toUpperCase());
 						$('#eye_open').toggle();
 						$('#eye_close').toggle();
 						visible = 1;
@@ -680,6 +688,7 @@
 			
 
 			$('#refresh_btn').on('click',function(){
+				$('#refresh_btn').attr("disabled");
 
 				$("#tokenContainer > div").find("div:nth-child(3)").find("span").each(function(){
 					$(this).text("Loading...")
@@ -698,8 +707,9 @@
 								myLoop();
 						    }else{
 						  		$("#totalInUsdContainer").html(numberWithCommas(totalInUsd.toFixed(2)));
-						  		$("#totalInUsdContainer").append(" "+currentUser.displayCurrency);
+						  		$("#totalInUsdContainer").append(" "+displayCurrency.toUpperCase());
 						  		$('#visible_btn').toggle();
+						  		$('#refresh_btn').removeAttr("disabled");
 								console.timeEnd('loadTimer');
 						    }
 
@@ -1059,7 +1069,29 @@
 			$('#discover_btn').on('click',function(){
 				// addBreadCrumbs("test-platform/regular_mining");
 
-				$.alert("This part is still under development")
+				// $.confirm({
+				// 	dark:'dark',
+				//     // title: 'Testing Mode!',
+				//     content: 'This part is still under development',
+				//     type: 'red',
+				//     typeAnimated: true,
+				//     buttons: {
+				//         close: function () {
+				//         }
+				//     }
+				// });
+
+				$.confirm({
+					theme: 'dark',
+					type: 'orange',
+				    title: 'Development',
+				    content: 'This part is still under development',
+				    typeAnimated: true,
+				    buttons: {
+				        close: function () {
+				        }
+				    }
+				});
 				// 
 				// $("#tittle_container").text('Daily Income Mining');
 				// $("html, body").animate({ scrollTop: 0 }, "slow");
@@ -1105,9 +1137,10 @@
 		}
 
 		function loadTokenInfo(tokenInfo){
-			console.log(tokenInfo);
 			var differenceResponse = ajaxShortLink('userWallet/getTokenDifference',{'tokenName':tokenInfo.coingeckoTokenId});
-			var valueNow = differenceResponse.market_data.current_price.usd
+			console.log(differenceResponse,displayCurrency);
+
+			var valueNow = differenceResponse.market_data.current_price[displayCurrency]
 			var changePercentage = differenceResponse.market_data.price_change_percentage_24h;
 
 			var balanceInner;
