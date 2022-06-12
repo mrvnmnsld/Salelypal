@@ -36,8 +36,9 @@
 	#dailymining_tabs a{
 		border-color: transparent;
 	}
-	.nav-link.active{
+	.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
 		font-size:2em;
+		opacity: 1 !important;
 		-webkit-transition: color 1s, font-size .25s;
 		-moz-transition: color 1s, font-size .25s;
 		-o-transition: color 1s, font-size .25s;
@@ -66,7 +67,7 @@
 
 	<style> /* dailymining_tab_container */
 		#dailymining_tabs a{
-		color: #94abef;
+		opacity: .5;
 		-webkit-transition: color 2s, font-size .25s;
 		-moz-transition: color 2s, font-size .25s;
 		-o-transition: color 2s, font-size .25s;
@@ -129,7 +130,7 @@
         }
 
 		$('#daysBtn_container').append(
-			'<div class="card p-2 mt-2 main-color-bg rounded shadow-lg">'+
+			'<div class="card p-2 mt-2 main-card-ui rounded shadow-lg">'+
 				'<div class="card-body" style="padding: 1px!important">'+	
 					'<div class="d-flex justify-content-around">'+
 						'<div class="flex-even text-left h3 font-weight-bold main-color-text">'+
@@ -203,7 +204,7 @@
 	            var token_name_combo = tokenInformation.tokenName+' ('+tokenInformation.network.toUpperCase()+')';
 
 	            $("#days_token_container").append(
-	                '<div id="'+tokenInformation.tokenName+'_container" class="card shadow-lg rounded p-2 mb-3 main-color-bg">'+
+	                '<div id="'+tokenInformation.tokenName+'_container" class="card shadow-lg rounded p-2 mb-3 main-card-ui">'+
 						'<div class="d-flex justify-content-around">'+
 							'<div class="flex-even text-left h4 main-color-text">'+
 								'<img '+
@@ -255,7 +256,7 @@
         }
 
         $("#claim_tokens_container").append(
-            '<div id="'+getTokensToClaim[i].id+'_container" class="card main-color-bg shadow-lg rounded p-2 mb-3">'+
+            '<div id="'+getTokensToClaim[i].id+'_container" class="card main-card-ui shadow-lg rounded p-2 mb-3">'+
             	'<div class="d-flex justify-content-around">'+
             		'<div class="flex-even text-left h4 main-color-text">'+
             			'<img '+
@@ -329,8 +330,8 @@
 		bootbox.dialog({
 			message: 
 				'<div class="container text-center">'+
-					'<div class="text-left" style="font-size:1em;">'+
-						'<i class="fa fa-question-circle fa-inverse" aria-hidden="true"></i>'+
+					'<div class="text-left main-color-text" style="font-size:1em;">'+
+						'<i class="fa fa-question-circle fa-inverse main-color-text" aria-hidden="true"></i>'+
 						'<span> Help</span>'+
 					'</div>'+
 				
@@ -348,7 +349,7 @@
 				
 			size: 'medium',
 			centerVertical: true
-		}).find('.modal-content').css({'background-color': 'rgb(34 34 34)', color: '#D9E9E8','border-radius':'5%'} );
+		}).find('.modal-content').css({'border-radius':'5%'} );
 	}
 
 	function openEntryForm(smartAddress,mining_id,token_name_combo,networkName,tokenName,apy,cycleSelected,daysID,minimum_entry){	

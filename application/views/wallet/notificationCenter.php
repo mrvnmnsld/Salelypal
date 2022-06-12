@@ -70,8 +70,8 @@
 
 		//pancho 05-24-2022
 
-				'<div class="card main-color-bg mb-3">'+
-				  '<div class="card-header main-color-text h5">'+
+				'<div class="card main-card-ui mb-3">'+
+				  '<div class="card-header h5 main-color-text">'+
 				  		
 				  		tittle+	
 
@@ -80,8 +80,8 @@
 					'</button>'+
 				  '</div>'+
 				  	
-				  '<div class="card-body">'+
-				    '<class="card-title main-color-text">'+
+				  '<div class="card-body main-cardbody-ui">'+
+				    '<class="card-title">'+
 
 						content+
 

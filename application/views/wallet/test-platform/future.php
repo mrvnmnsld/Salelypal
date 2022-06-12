@@ -18,17 +18,6 @@
         background: #bf5279 !important;
      }
 
-     .nav .nav-tabs .nav-fill{
-        
-     }
-
-    .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link {
-        background-color: rgba(0, 0, 0, .10);
-    }
-
-    .make_me_dark{
-        background-color: rgba(0, 0, 0, .05);
-    }
 </style>
 <!-- 
 <div class="text-danger p-2" id="testNotes">
@@ -41,11 +30,11 @@
 </div> -->
 
 <div id="innerContainer">
-    <div class="text-light p-1" style="background-color:#131722">
+    <div class="main-color-text p-1" style="">
 
-        <div class="p-2 text-light">
+        <div class="p-2 main-color-text">
             <label>Select Token Pair: </label>
-            <select id="token_pair_select" style="background-color:#131722!important;color: white;" class="p-2 form-control">
+            <select id="token_pair_select" style=";" class="p-2 form-control main-card-ui main-color-text">
                 <option selected>BTC/USDT</option>
                 <option>ETH/USDT</option>
                 <option>XRP/USDT</option>
@@ -80,19 +69,46 @@
     </div>
 </div>
 
-<div>
+<style>
+    .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+        font-size:1.5em;
+        opacity: 1 !important;
+        -webkit-transition: color 1s, font-size .25s;
+        -moz-transition: color 1s, font-size .25s;
+        -o-transition: color 1s, font-size .25s;
+        transition: color 1s, font-size .25s;
+
+        border-color: transparent;
+        background-color:transparent;
+        /* LIGHTMODE_ */
+        /* color: #3a189f!important;  */
+        /* DARKMODE_ */
+        /* color: white !important;  */
+    }
+
+    #future_history_container a{
+        /* color: #94abef; */
+        opacity: .5;
+        -webkit-transition: color 2s, font-size .25s;
+        -moz-transition: color 2s, font-size .25s;
+        -o-transition: color 2s, font-size .25s;
+        transition: color 2s, font-size .25s;
+    }
+</style>
+
+<div id="future_history_container">
     <ul class="nav nav-tabs nav-fill">
       <li class="nav-item">
-        <a class="nav-link text-dark font-weight-bold active" aria-current="page" data-toggle="tab" href="#history_tab_btn">History</a>
+        <a class="nav-link active main-color-link" aria-current="page" data-toggle="tab" href="#future_history_tab_btn">History</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-dark font-weight-bold" data-toggle="tab" href="#instructions_tab_btn">Instructions</a>
+        <a class="nav-link main-color-link" data-toggle="tab" href="#future_instructions_tab_btn">Instructions</a>
       </li>
     </ul>
 
     <div class="tab-content">
-        <div id="history_tab_btn" class="tab-pane active">
-          <table class="table" style="font-size: 13px;width: 100%;" cellpadding="5">
+        <div id="future_history_tab_btn" class="tab-pane active text-muted">
+          <table style="font-size: 13px;width: 100%;" cellpadding="5">
             <thead>
               <tr>
                 <th scope="col">Risk Taken</th>
@@ -103,7 +119,7 @@
               </tr>
             </thead>
             <tbody id="positions_closed_container">
-              <tr class="text-center text-danger" id="no_history_position_flag_container">
+              <tr class="text-center text-muted" id="no_history_position_flag_container">
                   <td colspan="5"><b>No positions opened</b></td>
               </tr>
             </tbody>
@@ -115,7 +131,7 @@
           </div>
         </div>
 
-        <div id="instructions_tab_btn" class="tab-pane fade p-2">
+        <div id="future_instructions_tab_btn main-color-text" class="tab-pane fade p-2">
           <span>
               1. Select token value prediction.<br>
               2. Select Time limit of prediction.<br>

@@ -89,54 +89,8 @@
 
 <!-- css -->
 	<style>
-		/* @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
-
-		@font-face {
-		  font-family: tron;
-		  src: url('assets/fonts/tron.ttf')  format('truetype');
-		}
-
-		@font-face {
-		  font-family:Agelast;
-		  src: url('assets/fonts/Agelast.otf');
-		} */
-
-	@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap%27');
-
-		.btn-circle.btn-sm {
-            width: 30px;
-            height: 30px;
-            padding: 6px 0px;
-            border-radius: 15px;
-            font-size: 8px;
-            text-align: center;
-        }
-
-        .btn-circle.btn-md {
-            width: 50px;
-            height: 50px;
-            padding: 5px 7px;
-            border-radius: 25px;
-            font-size: 10px;
-            text-align: center;
-        }
-
-        .btn-circle.btn-xl {
-            width: 70px;
-            height: 70px;
-            padding: 10px 16px;
-            border-radius: 35px;
-            font-size: 12px;
-            text-align: center;
-        }
-
-        .btn:focus {
-        	/*outline: none;*/
-        	box-shadow: 0 0 0 0;
-        }
-
       	/*google translate*/
-    	    .goog-te-banner-frame.skiptranslate, .goog-te-gadget-icon {
+		  .goog-te-banner-frame.skiptranslate, .goog-te-gadget-icon {
     	       display: none !important;
     	    }
 
@@ -167,15 +121,11 @@
     	    	display: none !important;
     	    }
         /*google translate*/
+	@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap%27');
 
 		/* Mainstyle */
 			body{
 				font-family: 'Poppins', sans-serif;
-				/* background-image: url('../../assets/imgs/1bg-2.jpg');
-				background-repeat:no-repeat;
-				background-size:400%;
-				background-attachment: fixed; */
-				/*font-family: 'Roboto Condensed', sans-serif;*/
 			}
 			.font-size-2p5em{
 				font-size:2.5em;
@@ -195,23 +145,6 @@
 			.secondary-color-bg{
 				background-color: #94abef!important;
 			}
-
-			/* tabs */
-			.nav-link.tab-pane.fade.show.active{
-					font-size:2em;
-					opacity: 1 !important;
-					-webkit-transition: color 1s, font-size .25s;
-					-moz-transition: color 1s, font-size .25s;
-					-o-transition: color 1s, font-size .25s;
-					transition: color 1s, font-size .25s;
-
-					border-color: transparent;
-					background-color:transparent;
-					/* LIGHTMODE_ */
-					/* color: #3a189f!important;  */
-					/* DARKMODE_ */
-					/* color: white !important;  */
-				}
 
 			/* dark mode */
 			.dark-mode{
@@ -243,6 +176,22 @@
 			}
 			.dark-mode #asset_tabs a{
 				color:white;
+			}
+			.dark-mode #dailymining_tabs a{
+				color:white;
+			}
+			.dark-mode #risefall_history_container a{
+				color:white;
+			}
+			.dark-mode #future_history_container a{
+				color:white;
+			}
+			/* .dark-mode #risefall_history_tab_btn th{
+				color:white;
+			} */
+			.dark-mode .main-card-ui{
+				background-color:#120731;
+				color:white!important;
 			}
 			
 
@@ -283,6 +232,19 @@
 			}
 			.light-mode #asset_tabs a{
 				color:#3a189f;
+			}
+			.light-mode #dailymining_tabs a{
+				color:#3a189f;
+			}
+			.light-mode #risefall_history_container a{
+				color:#3a189f;
+			}
+			.light-mode #future_history_container a{
+				color:#3a189f;
+			}
+			.light-mode .main-card-ui{
+				background-color:white;
+				color:#3a189f !important;
 			}
 
 
@@ -353,6 +315,22 @@
 					-moz-transition: color 2s, font-size .25s;
 					-o-transition: color 2s, font-size .25s;
 					transition: color 2s, font-size .25s;
+				}
+
+				.nav-link.tab-pane.fade.show.active{
+					font-size:2em;
+					opacity: 1 !important;
+					-webkit-transition: color 1s, font-size .25s;
+					-moz-transition: color 1s, font-size .25s;
+					-o-transition: color 1s, font-size .25s;
+					transition: color 1s, font-size .25s;
+
+					border-color: transparent;
+					background-color:transparent;
+					/* LIGHTMODE_ */
+					/* color: #3a189f!important;  */
+					/* DARKMODE_ */
+					/* color: white !important;  */
 				}
 
 			</style>
