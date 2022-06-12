@@ -207,11 +207,13 @@
 
 		if($this.is(":checked")){
 			isDarkMode = 1;
+			chartTheme = 'dark';
 			setLocalStorageByKey("isDarkMode",1);
 			$("body").removeClass( "light-mode" ).addClass( "dark-mode" );
 			
 		}else{
 			isDarkMode = 0;
+			chartTheme = 'light';
 			setLocalStorageByKey("isDarkMode",0);
 			$("body").removeClass( "dark-mode" ).addClass( "light-mode" );
 		}

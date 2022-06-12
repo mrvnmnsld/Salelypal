@@ -548,10 +548,13 @@
 			}	
 
 			var isDarkMode = getLocalStorageByKey("isDarkMode");
+			var chartTheme;
 			if(isDarkMode==1){
 				$("body").removeClass( "light-mode" ).addClass( "dark-mode" );
+				chartTheme = 'dark';
 			}else{
 				$("body").removeClass( "dark-mode" ).addClass( "light-mode" );
+				chartTheme = 'light';
 			}
 
 			var initialNotifList = ajaxShortLink("getNewNotifs",{

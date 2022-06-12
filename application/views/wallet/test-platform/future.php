@@ -131,7 +131,7 @@
           </div>
         </div>
 
-        <div id="future_instructions_tab_btn main-color-text" class="tab-pane fade p-2">
+        <div id="future_instructions_tab_btn" class="tab-pane fade p-2 main-color-text">
           <span>
               1. Select token value prediction.<br>
               2. Select Time limit of prediction.<br>
@@ -182,7 +182,7 @@
                     "symbol": tokenPairArray.tokenPairID,
                     "interval": "1",
                     "timezone": Intl.DateTimeFormat().resolvedOptions().timeZone,
-                    "theme": "dark",
+                    "theme": chartTheme,
                     "style": "1",
                     "locale": "en",
                     "toolbar_bg": "#f1f3f6",

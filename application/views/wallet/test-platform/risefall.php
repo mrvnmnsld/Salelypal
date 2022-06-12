@@ -120,7 +120,6 @@
     </ul>
 
     <div class="tab-content">
-
         <div id="history_tab_btn" class=" tab-pane active text-muted">
             <table style="font-size: 13px;width: 100%;" cellpadding="5">
                 <thead>
@@ -146,7 +145,7 @@
             </div>
         </div>
 
-        <div id="instructions_tab_btn main-color-text" class="tab-pane fade p-2">
+        <div id="instructions_tab_btn" class="tab-pane fade p-2 main-color-text">
           <span>
               1. Select token value prediction.<br>
               2. Select Time limit of prediction.<br>
@@ -174,6 +173,7 @@
         </div>
     </div>
 </div>
+
 
 <script type="text/javascript">
     var tokenPriceBinanceLastPrice;
@@ -248,7 +248,7 @@
                 // "symbol": "BINANCE:BTCUSDT",
                 "interval": "1",
                 "timezone": Intl.DateTimeFormat().resolvedOptions().timeZone,
-                "theme": "dark",
+                "theme": chartTheme,
                 "style": "1",
                 "locale": "en",
                 "toolbar_bg": "#f1f3f6",
