@@ -247,6 +247,14 @@
 			.light-mode .modal-content{
 				background-color: white!important;
 			}
+
+			.dark-mode th{
+				color: white;
+			}
+
+			.light-mode th{
+				color: #120731;
+			}
 			
 
 

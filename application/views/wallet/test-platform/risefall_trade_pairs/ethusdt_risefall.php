@@ -124,8 +124,7 @@
               1. Select token value prediction.<br>
               2. Select Time limit of prediction.<br>
               3. Input amount to be staked.<br>
-              4. Wait for time prediction.<br>
-              5. Check history if won or lost.<br>
+              4. Wait for time to be resolved.<br>
               <br>
 
               <!-- *Additional<br>
