@@ -15,16 +15,18 @@
 
 	label {
 	    cursor: pointer;
+	    border: #1ca245!important;
 	}
 
 	input:checked + label {
 	    /*background: red;*/
-	    background: #1b742f;
-	    color: white;
+	    background: #94abef!important;
+	    color: black;
 	}
 
 	label.btn{
 		font-size: .7em;
+	    color: white;
 	}
 </style>
 
@@ -46,6 +48,8 @@
 	var miningEntries = ajaxShortLink('mining/getMyMiningEntries',{
 		'userID':currentUser.userID
 	});
+
+	console.log(miningSettings);
 
 	// console.log(miningSettings);
 	// console.log(miningEntries);
@@ -91,7 +95,7 @@
 
 						'<div class="my-1">'+
 							"<button type='button' class='btn btn-success btn-block' onClick='"+
-								'openEntryForm("'+smartAddress+'","'+mining_id+'","'+token_name_combo+'","'+networkName+'","'+tokenName+'","'+miningSettings[i].apy+'")'+
+								'openEntryForm("'+smartAddress+'","'+mining_id+'","'+token_name_combo+'","'+networkName+'","'+tokenName+'","'+miningSettings[i].apy+'","'+miningSettings[i].minimum_entry+'")'+
 							"'>Mine Now!</button>"+
 						'</div>'+
 					'</div>'+
@@ -103,7 +107,7 @@
 			for (var cycleCounter = 0; cycleCounter < cycleContainer.length; cycleCounter++) {
 				$('#'+miningSettings[i].id+'_cycle_container').append(
 			  		'<input type="radio" class="btn-check" value="'+cycleContainer[cycleCounter]+'" name="'+mining_id+'_cycle_selector" id="'+miningSettings[i].id+'_cycle_'+cycleContainer[cycleCounter]+'" checked> '+
-				  	'<label class="btn btn-sm main-color-bg text-light" for="'+miningSettings[i].id+'_cycle_'+cycleContainer[cycleCounter]+'">'+cycleContainer[cycleCounter]+' Day(s)</label>'
+				  	'<label class="btn btn-sm" for="'+miningSettings[i].id+'_cycle_'+cycleContainer[cycleCounter]+'">'+cycleContainer[cycleCounter]+' Day(s)</label>'
 				);
 			}
 
@@ -178,7 +182,7 @@
 		}
 	}
 
-	function openEntryForm(smartAddress,mining_id,token_name_combo,networkName,tokenName,apy){		
+	function openEntryForm(smartAddress,mining_id,token_name_combo,networkName,tokenName,apy,minimum_entry){		
 		selectedData = {
 			'cycleSelected':$('input[name="'+mining_id+'_cycle_selector"]:checked').val(),
 			'smartAddress':smartAddress,
@@ -186,7 +190,8 @@
 			'token_name_combo':token_name_combo,
 			'networkName':networkName,
 			'tokenName':tokenName,
-			'apy' : apy
+			'apy' : apy,
+			'minimum_entry' : minimum_entry
 		}
 
 		bootbox.alert({

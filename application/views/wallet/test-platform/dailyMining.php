@@ -218,7 +218,7 @@
 
 						'<div class="m-2">'+
 							"<button type='button' class='btn btn-success btn-block' "+isRatioEnough+" "+isRatioEnough+" onClick='"+
-								'openEntryForm("'+tokenInformation.smartAddress+'","'+getDayTokens[x].id+'","'+token_name_combo+'","'+tokenInformation.network+'","'+tokenInformation.tokenName+'","'+$(this).attr('apy')+'","'+$(this).attr('days')+'","'+$(this).attr('daysID')+'")'+
+								'openEntryForm("'+tokenInformation.smartAddress+'","'+getDayTokens[x].id+'","'+token_name_combo+'","'+tokenInformation.network+'","'+tokenInformation.tokenName+'","'+$(this).attr('apy')+'","'+$(this).attr('days')+'","'+$(this).attr('daysID')+'","'+getDayTokens[x].minimum_entry+'")'+
 							"'>Mine Now!</button>"+
 						'</div>'+
 					'</div>'
@@ -343,7 +343,7 @@
 		}).find('.modal-content').css({'background-color': 'rgb(34 34 34)', color: '#D9E9E8','border-radius':'5%'} );
 	}
 
-	function openEntryForm(smartAddress,mining_id,token_name_combo,networkName,tokenName,apy,cycleSelected,daysID){	
+	function openEntryForm(smartAddress,mining_id,token_name_combo,networkName,tokenName,apy,cycleSelected,daysID,minimum_entry){	
 		selectedData = {
 			'cycleSelected':cycleSelected,
 			'smartAddress':smartAddress,
@@ -353,9 +353,8 @@
 			'tokenName':tokenName,
 			'apy':apy,
 			'daysID':daysID,
+			"minimum_entry":minimum_entry
 		}
-
-		// console.log(smartAddress,mining_id,token_name_combo,networkName,tokenName,apy,cycleSelected);
 
 		bootbox.alert({
 			message: ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/daily_income/saveEntry'}),

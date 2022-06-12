@@ -3,10 +3,10 @@
 		display: none;
 	}
 
-	.is-invalid{
-		text-align: center;
+	.error{
 		color: red;
 	}
+
 </style>
 
 <div class="pagetitle">
@@ -253,13 +253,11 @@
 
 	$("#mainForm").submit(function(e){
 		e.preventDefault()
-		console.log('tets');
 	})
 
-	// $("#form").submit(function(){
-	//                 return false;
-	//             });
+	$("#amount_input_container_bootbox").attr("min",selectedData.minimum_entry);
 
+	console.log(selectedData.minimum_entry);
 
 	var balanceInner = getBalance(selectedData.networkName,selectedData.tokenName,selectedData.smartAddress);
 	var gasSupply = getGasSupplyTestPlatform(selectedData.networkName);

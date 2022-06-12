@@ -341,12 +341,23 @@
 					<div id="balance_tab" class="container notranslate tab-pane active"><br>
 						<div id="tokenContainer"></div>
 
-						<div class="col-md-12 text-center pl-3 pr-3">
-							<button class="btn btn-outline-link btn-block text-primary mt-2 text-muted" id="addToken_btn">
-								<i class="fa fa-sliders" aria-hidden="true"></i>
-								Add more
-							</button>
+						<div class="row">
+							<div class="col-6 text-center">
+								<button class="btn btn-outline-link btn-block text-primary mt-2 text-muted" id="addToken_btn">
+									<i class="fa fa-sliders" aria-hidden="true"></i>
+									Add more
+								</button>
+							</div>
+
+							<div class="col-6 text-center">
+								<button class="btn btn-outline-link btn-block text-primary mt-2 text-muted" disabled id="refresh_btn">
+									<i class="fa fa-refresh" aria-hidden="true"></i>
+									Refresh
+								</button>
+							</div>
 						</div>
+
+						
 					</div>
 
 					<div id="portfolio_tab" class="container tab-pane fade"><br>
@@ -591,6 +602,8 @@
 					  		$("#totalInUsdContainer").html(numberWithCommas(totalInUsd.toFixed(2)));
 					  		$("#totalInUsdContainer").append(" "+currentUser.displayCurrency);
 					  		$('#visible_btn').toggle();
+					  		$('#refresh_btn').removeAttr("disabled");
+
 							console.timeEnd('loadTimer');
 					    }
 
@@ -600,7 +613,6 @@
 
 				myLoop();
 			}, 1000);	
-	
 		});
 
 		// buttonEvents
@@ -635,6 +647,39 @@
 					
 				});
 			// visible
+			
+
+			$('#refresh_btn').on('click',function(){
+
+				$("#tokenContainer > div").find("div:nth-child(3)").find("span").each(function(){
+					$(this).text("Loading...")
+				})
+				$('#totalInUsdContainer').text('Loading...');
+
+				totalInUsd = 0
+
+				setTimeout(function(){
+					var i = 0;
+
+					function myLoop() {
+					  	tokenLoadTimer = setTimeout(function() {
+						    if (i < tokensSelected.length) {
+								loadTokenInfo(tokensSelected[i]);
+								myLoop();
+						    }else{
+						  		$("#totalInUsdContainer").html(numberWithCommas(totalInUsd.toFixed(2)));
+						  		$("#totalInUsdContainer").append(" "+currentUser.displayCurrency);
+						  		$('#visible_btn').toggle();
+								console.timeEnd('loadTimer');
+						    }
+
+					    	i++;
+					  	}, 500)
+					}
+
+					myLoop();
+				}, 1000);
+			});
 
 			$('#deposit_btn, #deposit_btn_option').on('click',function(){
 				$.confirm({
@@ -1030,8 +1075,6 @@
 		}
 
 		function loadTokenInfo(tokenInfo){
-			// console.time('loadTokenInfo');
-
 			console.log(tokenInfo);
 			var differenceResponse = ajaxShortLink('userWallet/getTokenDifference',{'tokenName':tokenInfo.coingeckoTokenId});
 			var valueNow = differenceResponse.market_data.current_price.usd
@@ -1093,7 +1136,7 @@
 				}
 			}
 
-			// console.log(tokenInfo.decimal)
+			console.log($("#"+tokenInfo.tokenName+"_amount_container"))
 
 			$("#"+tokenInfo.tokenName+"_amount_container").html(parseFloat(balanceInner).toFixed(tokenInfo.decimal)+' <br>'+tokenInfo.tokenName.toUpperCase());
 			$("#"+tokenInfo.tokenName+"_change_container").html(valueNow.toFixed(3)+' | <span class="'+color+'">'+sign+changePercentage.toFixed(2)+'%</span>');
@@ -1166,7 +1209,7 @@
 							$('#bottomNavBar').toggle();
 							$("#container").fadeOut(animtionSpeed, function() {
 								$("#loadSpinner").fadeIn(animtionSpeed,function(){
-									// setTimeout(function(){
+									setTimeout(function(){
 							  			$("#container").empty();
 							  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/viewTokenInfo'}));
 							  			$("#profile_btn").css('display',"none")
@@ -1177,7 +1220,7 @@
 								  			$('#bottomNavBar').toggle();
 								  			$("#container").fadeIn(animtionSpeed);
 								  		});
-									// }, 1000)
+									}, 1000)
 							  	});
 
 							  	$("#loading_text_container").text("Please wait");
@@ -1238,7 +1281,7 @@
 						  			$('#bottomNavBar').toggle();
 						  			$("#container").fadeIn(animtionSpeed);
 						  		});
-							}, 1000)
+							}, 500)
 					  	});
 
 					  	$("#loading_text_container").text("Please wait");

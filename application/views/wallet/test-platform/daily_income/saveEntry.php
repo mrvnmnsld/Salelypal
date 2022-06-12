@@ -3,8 +3,7 @@
 		display: none;
 	}
 
-	.is-invalid{
-		text-align: center;
+	.error{
 		color: red;
 	}
 </style>
@@ -74,6 +73,10 @@
 	$("#closeBtn").on('click', function(){
 		bootbox.hideAll();
 	});
+
+	$("#mainForm").submit(function(e){
+		e.preventDefault()
+	})
 
 	$('#amount_input_container_bootbox').on('change', function(){
 		var amount = $(this).val();
@@ -279,6 +282,7 @@
 	$("#tokenName_container_bootbox").text(selectedData.token_name_combo);
 	$("#cycle_container_bootbox").text(selectedData.cycleSelected+" Day(s)");+
 	$("#balance_container").text(balanceInner);
+	$("#amount_input_container_bootbox").attr("min",selectedData.minimum_entry);
 
 	console.log(selectedData);
 	console.log(gasSupply,balanceInner);
