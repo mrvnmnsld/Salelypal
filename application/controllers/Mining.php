@@ -36,6 +36,7 @@ class mining extends MY_Controller {
 			'token_id' => $_GET['token_name_container'],
 			'apy' => $_GET["apy_container"],
 			'cycle_day' => $_GET["cycle_day_container"],
+			'minimum_entry' => $_GET["minimum_entry_container"],
 			'date_created' => $this->_getTimeStamp24Hours(),
 		);
 
@@ -58,6 +59,7 @@ class mining extends MY_Controller {
 			'token_id' => $_GET['token_name_container'],
 			'apy' => $_GET["apy_container"],
 			'cycle_day' => $_GET["cycle_day_container"],
+			'minimum_entry' => $_GET["minimum_entry_container"],
 		);
 
 		$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
@@ -205,6 +207,8 @@ class mining extends MY_Controller {
 		$insertRecord = array(
 			'token_id' => $_GET['token_name_container'],
 			'cycle_day' => $_GET["cycle_days"],
+			'purchasable_limit' => $_GET["purchase_limit_container"],
+			'minimum_entry' => $_GET["minimum_entry_container"],
 			'date_created' => $this->_getTimeStamp24Hours(),
 		);
 
@@ -228,6 +232,8 @@ class mining extends MY_Controller {
 			'token_id' => $_GET['token_name_container'],
 			'cycle_day' => $_GET["cycle_days"],
 			'purchasable_limit' => $_GET["purchase_limit_container"],
+			'minimum_entry' => $_GET["minimum_entry_container"],
+
 		);
 
 		$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);

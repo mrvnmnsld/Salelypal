@@ -23,6 +23,10 @@
 		box-shadow: 10px 15px 25px rgba(0, 0, 0, .8);
 		padding: 20px;
 	}
+	.col-md-2 {
+    flex: 0 0 auto;
+    width: 23%;
+	}
 </style>
 
 <div id="pagetitle_background" class="pagetitle">
@@ -33,14 +37,14 @@
 	<form id="mainForm">
 
 		<div class="row m-1">
-			<div class="col-md-2 pl-3"><b>Token:</b></div>	
+			<div class="col-md-2 pl-3 mt-1"><b>Token:</b></div>	
 			<select type="text" name="token_name_container" id="token_name_container" data-live-search="true" class="col-md form-control form-control-sm">
 				<option value="">Please select...</option>
 			</select>
 		</div>
 
 		<div class="row m-1">
-			<div class="col-md-2 pl-3"><b>Network:</b></div>	
+			<div class="col-md-2 pl-3 mt-1"><b>Network:</b></div>	
 			<input type="text" name="network_container" id="network_container" class="col-md form-control form-control-sm" placeholder="Please select token first" readonly></input>
 		</div>
 
@@ -50,10 +54,22 @@
 		</div> -->
 
 		<div class="row m-1">
-			<div class="col-md-2 pl-3"><b>Days:</b></div>
+			<div class="col-md-2 pl-3 mt-1"><b>Days:</b></div>
  			<select name="cycle_day_container" id="cycle_day_container" class="selectpicker col-md form-control form-control-sm" multiple>
 			</select>
 		</div>
+
+		<div class="row m-1">
+			<div class="col-md-2 pl-3 mt-1"><b>Limit:</b></div>	
+			<input type="number" name="purchase_limit_container" id="purchase_limit_container" class="col-md form-control form-control-sm" placeholder="Purchasable limit"></input>
+		</div>
+
+		<div class="row m-1">
+			<div class="col-md-2 pl-3 mt-1"><b>Minimum Entry:</b></div>	
+			<input type="number" name="minimum_entry_container" id="minimum_entry_container" class="col-md form-control form-control-sm" placeholder="Minimum number of token"></input>
+		</div>
+
+		
 
 		<hr>
 		
@@ -141,6 +157,8 @@
 				token_name_container: "required",
 				cycle_day_container: "required",
 				network_container: "required",
+				purchase_limit_container: "required",
+				minimum_entry_container: "required",
 	  	},
 	  	errorPlacement: function (error, element) {
 	  	    if ($(element).is('select')) {

@@ -19,6 +19,7 @@
                 <th>Network</th>
                 <th>Cycles ID</th>
                 <th>Purchasable Limit</th>
+                <th>Minimum Entry</th>
                 <th>Date Created</th>
             </tr>
         </thead>
@@ -138,6 +139,7 @@
 				{ data:'network'},
 				{ data:'cycle_day'},
 				{ data:'purchasable_limit'},
+				{ data:'minimum_entry'},
 				{ data:'date_created'},
 
       		],"createdRow": function( row, data, dataIndex){
