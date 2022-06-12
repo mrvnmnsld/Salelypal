@@ -87,6 +87,7 @@
     padding-top: 24px;
     letter-spacing: 0.5px;
     color: white;
+    font-weight: bold;
   }
   #sub-title{
     text-align: center;

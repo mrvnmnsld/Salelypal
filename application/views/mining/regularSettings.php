@@ -19,6 +19,8 @@
                 <th>Network</th>
                 <th>APY</th>
                 <th>Cycles</th>
+                <th>Minimum Entry</th>
+                <th>Date Created</th>
             </tr>
         </thead>
     </table>
@@ -90,8 +92,12 @@
 				{ data:'network'},
 				{ data:'apy'},
 				{ data:'cycle_day'},
+				{ data:'minimum_entry'},
+				{ data:'date_created'},
       		],"createdRow": function( row, data, dataIndex){
-    		},autoWidth: false,
+    		},
+    		order: [[0, 'desc']],
+    		autoWidth: false,
 		});
 	}
 </script>
