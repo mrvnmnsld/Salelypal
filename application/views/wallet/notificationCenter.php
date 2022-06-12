@@ -16,11 +16,11 @@
 
 
 <div class="p-2">
-	<div class="text-center h5 text-dark font-weight-bold" id="notification_counter_string_container"></div>
+	<div class="text-center h5 main-color-text font-weight-bold" id="notification_counter_string_container"></div>
 
 	<div id="new_notification_container"></div>
 
-	<div class="text-center text-dark font-weight-bold"> Nothing follows</div>
+	<div class="text-center text-muted font-weight-bold"> Nothing follows</div>
 </div>
 
 		<div id="" class="new-notif notif border-bottom border-dark m-3">
@@ -70,8 +70,8 @@
 
 		//pancho 05-24-2022
 
-				'<div class="card bg-light mb-3">'+
-				  '<div class="card-header h5">'+
+				'<div class="card main-color-bg mb-3">'+
+				  '<div class="card-header main-color-text h5">'+
 				  		
 				  		tittle+	
 
@@ -81,11 +81,11 @@
 				  '</div>'+
 				  	
 				  '<div class="card-body">'+
-				    '<class="card-title">'+
+				    '<class="card-title main-color-text">'+
 
 						content+
 
-				    '<p class="card-text text-right">'+
+				    '<p class="card-text text-muted text-right">'+
 
 				    '<br>'+	
 

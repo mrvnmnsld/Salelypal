@@ -51,7 +51,7 @@
 
 <div class="p-2">
 	<div class="main-color-text mb-2 font-weight-bold h5">Security</div>
-	<button id="security_btn" style="margin-left:3px" class="btn text-muted  btn-block text-left">
+	<button id="security_btn" style="margin-left:3px" class="btn custom-2nd-text btn-block text-left">
 		<i class="fa fa-shield" aria-hidden="true"></i>
 		<span style="font-size: 18px;margin-left:2px">&nbsp;Reset Password</span>
 	</button>
@@ -59,16 +59,16 @@
 
 <div class="p-2">
 	<div class="main-color-text mb-2 font-weight-bold h5">Preference</div>
-	<button id="display_currency_btn" disabled class="btn text-muted  btn-block text-left">
+	<button id="display_currency_btn" disabled class="btn custom-2nd-text  btn-block text-left">
 		<i class="fa fa-money" aria-hidden="true"></i>
 		<span class="" style="font-size: 18px;">&nbsp;Display Currency</span>
 	</button>
 
-	<button id="language_btn" class="btn text-muted  btn-block text-left">
+	<button id="language_btn" class="btn custom-2nd-text  btn-block text-left">
 		<i class="fa fa-language" aria-hidden="true"></i>
 		<span class="" style="font-size: 18px;">&nbsp;Language</span>
 	</button>
-	<button id="theme_btn" class="btn text-muted  btn-block text-left d-flex">
+	<button id="theme_btn" class="btn custom-2nd-text btn-block text-left d-flex">
 		<div class="flex-fill">
 			<i class="fa fa-paint-brush" aria-hidden="true"></i>
 			<span class="" style="font-size: 18px;">&nbsp;Dark Mode</span>
@@ -101,27 +101,27 @@
 <div class="p-2">
 	<div class="main-color-text mb-2 font-weight-bold h5">Follow Us</div>
 
-	<button class="btn text-muted  btn-block text-left" disabled style="font-size: 18px;">
+	<button class="btn custom-2nd-text  btn-block text-left" disabled style="font-size: 18px;">
 		<i class="fa fa-facebook-square" aria-hidden="true"></i>
 		<span class="">&nbsp;Facebook</span>
 	</button>
 
-	<button class="btn text-muted  btn-block text-left" disabled style="font-size: 18px;">
+	<button class="btn custom-2nd-text  btn-block text-left" disabled style="font-size: 18px;">
 		<i class="fa fa-telegram" aria-hidden="true"></i>
 		<span class="">&nbsp;Telegram</span>
 	</button>
 
-	<button class="btn text-muted  btn-block text-left" disabled style="font-size: 18px;">
+	<button class="btn custom-2nd-text  btn-block text-left" disabled style="font-size: 18px;">
 		<i class="fa fa-twitter-square" aria-hidden="true"></i>
 		<span class="">&nbsp;Twitter</span>
 	</button>
 
-	<button class="btn text-muted  btn-block text-left" disabled style="font-size: 18px;">
+	<button class="btn custom-2nd-text  btn-block text-left" disabled style="font-size: 18px;">
 		<i class="fa fa-youtube-play" aria-hidden="true"></i>
 		<span class="">&nbsp;Youtube</span>
 	</button>
 
-	<button class="btn text-muted  btn-block text-left" disabled style="font-size: 18px;">
+	<button class="btn custom-2nd-text  btn-block text-left" disabled style="font-size: 18px;">
 		<i class="fa fa-reddit" aria-hidden="true"></i>
 		<span class="">&nbsp;Reddit</span>
 	</button>
@@ -130,14 +130,14 @@
 <div class="p-2">
 
 	<div class="main-color-text mb-2 font-weight-bold h5">Support</div>
-	<button class="btn text-muted  btn-block text-left" disabled style="font-size: 20px;margin-left:3px">
+	<button class="btn custom-2nd-text  btn-block text-left" disabled style="font-size: 20px;margin-left:3px">
 		<i class="fa fa-question" aria-hidden="true"></i>
 		<span class="" style="font-size: 18px;margin-left:2px">&nbsp;FAQ/Help Center</span>
 	</button>
 
 	<hr>
 	
-	<button id="logOut_btn" type="button" class="btn btn-block btn-danger" style="font-size: 20px;">LOGOUT</button>
+	<button id="logOut_btn" type="button" class="btn btn-block red-btn" style="font-size: 20px;">LOGOUT</button>
 	
 </div>
 
@@ -209,6 +209,7 @@
 			isDarkMode = 1;
 			setLocalStorageByKey("isDarkMode",1);
 			$("body").removeClass( "light-mode" ).addClass( "dark-mode" );
+			
 		}else{
 			isDarkMode = 0;
 			setLocalStorageByKey("isDarkMode",0);

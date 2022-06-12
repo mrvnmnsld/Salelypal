@@ -34,13 +34,21 @@
 	}
 
 	#dailymining_tabs a{
-				color: #777;
-			}
-	.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
-		font-size:1.3em;
-		color:black!important;
-		background-color:rgba(0,0,0,.03);
 		border-color: transparent;
+	}
+	.nav-link.active{
+		font-size:2em;
+		-webkit-transition: color 1s, font-size .25s;
+		-moz-transition: color 1s, font-size .25s;
+		-o-transition: color 1s, font-size .25s;
+		transition: color 1s, font-size .25s;
+
+		border-color: transparent;
+		background-color:transparent;
+		/* LIGHTMODE_ */
+		/* color: #3a189f!important;  */
+		/* DARKMODE_ */
+		/* color: white !important;  */
 	}
 
 
@@ -69,11 +77,11 @@
 <div id="dailymining_tab_container" class="mt-3">
 	<ul id="dailymining_tabs" class="nav nav-tabs nav-justified" role="tablist">
 		<li class="nav-item">
-			<a class="nav-link active" data-toggle="tab" href="#mine_tab">MINE</a>
+			<a class="nav-link active main-color-link" data-toggle="tab" href="#mine_tab">MINE</a>
 		</li>
 
 		<li class="nav-item">
-			<a class="nav-link" data-toggle="tab" href="#claim_tab">CLAIM</a>
+			<a class="nav-link main-color-link" data-toggle="tab" href="#claim_tab">CLAIM</a>
 		</li>
 	</ul>	
 
@@ -247,7 +255,7 @@
         }
 
         $("#claim_tokens_container").append(
-            '<div id="'+getTokensToClaim[i].id+'_container" class="card main-color-bg shadow-lg rounded p-2 mt-3">'+
+            '<div id="'+getTokensToClaim[i].id+'_container" class="card main-color-bg shadow-lg rounded p-2 mb-3">'+
             	'<div class="d-flex justify-content-around">'+
             		'<div class="flex-even text-left h4 main-color-text">'+
             			'<img '+
@@ -328,7 +336,7 @@
 				
 					'<img id="instruction_img" src="assets/imgs/instruction.png" class="d-inline-block align-top" alt="" loading="lazy">'+
 
-					'<div id="process_instruction_container" class="text-justify mt-3">'+
+					'<div id="process_instruction_container" class="text-justify mt-3 main-color-text">'+
 						'<span>Process for daily mining</span>'+
 						'<ul>'+
 							'<li>step 1 : choose prefered days</li>'+

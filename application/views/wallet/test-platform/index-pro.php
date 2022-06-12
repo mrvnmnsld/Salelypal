@@ -177,12 +177,16 @@
 				background-attachment: fixed; */
 				/*font-family: 'Roboto Condensed', sans-serif;*/
 			}
-
+			.font-size-2p5em{
+				font-size:2.5em;
+			}
 			.main-color-icon{
 				color: #5426de;
 			}
-		
 			.light-text{
+				color:#D9E9E8;
+			}
+			.custom-2nd-text{
 				color:#D9E9E8;
 			}
 			.text-muted{
@@ -195,6 +199,7 @@
 			/* tabs */
 			.nav-link.tab-pane.fade.show.active{
 					font-size:2em;
+					opacity: 1 !important;
 					-webkit-transition: color 1s, font-size .25s;
 					-moz-transition: color 1s, font-size .25s;
 					-o-transition: color 1s, font-size .25s;
@@ -228,6 +233,18 @@
 			.dark-mode .modal-content{
 				background-color: #220e5d!important;
 			}
+			.dark-mode .red-btn{
+				background-color: #5d220e!important;
+				border-color: #5d220e!important;
+				color:white!important;
+			}
+			.dark-mode .custom-2nd-text{
+				color:#D9E9E8;
+			}
+			.dark-mode #asset_tabs a{
+				color:white;
+			}
+			
 
 			/* light mode */
 			.light-mode{
@@ -248,14 +265,25 @@
 				background-color: white!important;
 			}
 
-			.dark-mode th{
+			/* .dark-mode th{
 				color: white;
 			}
 
 			.light-mode th{
 				color: #120731;
-			}
+			} */
 			
+			.light-mode .custom-2nd-text{
+				color:#3a189f;
+			}
+			.light-mode .red-btn{
+				background-color: #dc3545!important;
+				border-color: #dc3545!important;
+				color:white!important;
+			}
+			.light-mode #asset_tabs a{
+				color:#3a189f;
+			}
 
 
 	</style>
@@ -289,7 +317,7 @@
 						<i id="eye_open" class="fa fa-eye text-muted" style="display:none;" aria-hidden="true"></i>
 					</span>
 					<br>
-					<span id="totalInUsdContainer" class="display-5 title-color-text">Loading...</span>
+					<span id="totalInUsdContainer" class="font-size-2p5em title-color-text">Loading...</span>
 				</div>
 
 				<div id="main_btns_container" style="display:none;">
@@ -319,7 +347,8 @@
 			</div>
 			<style>
 				#asset_tabs a{
-					color: #94abef;
+					/* color: #94abef; */
+					opacity: .5;
 					-webkit-transition: color 2s, font-size .25s;
 					-moz-transition: color 2s, font-size .25s;
 					-o-transition: color 2s, font-size .25s;
@@ -328,22 +357,15 @@
 
 			</style>
 
-			<script>
-				// darkmode
-				$(".nav-link.tab-pane.fade.show.active").css('color','white !important');
-				// lightmode
-				$(".nav-link.tab-pane.fade.show.active").css('color','#3a189f!important');
-			</script>
-
 			<div id="asset_tab_container" class="mt-3">
 				<ul id="asset_tabs" class="nav nav-tabs nav-justified" role="tablist">
 					<li class="nav-item">
-						<a class="nav-link active tab-pane fade show " data-toggle="tab" href="#balance_tab">BALANCE</a>
+						<a class="nav-link active tab-pane fade show main-color-link" data-toggle="tab" href="#balance_tab">BALANCE</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link tab-pane fade show" data-toggle="tab" href="#portfolio_tab">PORTFOLIO</a>
+						<a class="nav-link tab-pane fade show main-color-link" data-toggle="tab" href="#portfolio_tab">PORTFOLIO</a>
 					</li>
-				</ul>	
+				</ul>
 
 				<div class="asset-tab-content tab-content">
 					<div id="balance_tab" class="container notranslate tab-pane active"><br>
