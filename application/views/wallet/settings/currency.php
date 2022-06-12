@@ -18,7 +18,7 @@
 	<div class="text-center">Note: Saving will reload your assets</div>
 
 	<div class="mt-3">
-		<button class="btn btn-success btn-block" id="save_btn">Save Language</button>
+		<button class="btn btn-success btn-block" id="save_btn">Save Changes</button>
 		<button class="btn btn-danger red-btn btn-block" id="close_btn">Back</button>
 	</div>
 </div>
