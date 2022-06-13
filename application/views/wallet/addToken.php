@@ -80,7 +80,7 @@
 		// console.log(String(tokens[i].id),tokensSelected,tokensSelected.includes(String(tokens[i].id)));
 
 		$("#token_container").append(
-		  	'<li class="d-flex justify-content-between border-bottom border-secondary">'+
+		  	'<li class="d-flex justify-content-between">'+
 		  		'<div class="p-2">'+
 		  			'<img class="img-thumbnail " src="'+tokens[i].tokenImage+'" style="width:40px;height: 40px; border:1px;">'+
 		  		'</div>'+
