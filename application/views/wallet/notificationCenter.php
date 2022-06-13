@@ -23,7 +23,7 @@
 	<div class="text-center text-muted font-weight-bold"> Nothing follows</div>
 </div>
 
-		<div id="" class="new-notif notif border-bottom border-dark m-3">
+		<!-- <div id="" class="new-notif notif border-bottom border-dark m-3"> -->
 			<!-- <span class="text-dark notif-header">
 				Tittle Testing
 			</span><br>
@@ -76,7 +76,7 @@
 				  		tittle+	
 
 				  	'<button type="button" class="close ml-4 text-right" aria-label="Close">'+
-					  '<span aria-hidden="true">&times;</span>'+
+					  // '<span aria-hidden="true">&times;</span>'+
 					'</button>'+
 				  '</div>'+
 				  	

@@ -35,7 +35,7 @@
         <div class="p-2 main-color-text">
             <label>Select Token Pair: </label>
             <select id="token_pair_select" style=";" class="p-2 form-control main-card-ui main-color-text">
-                <option selected>BTC/USDT</option>
+                <option>BTC/USDT</option>
                 <option>ETH/USDT</option>
                 <option>XRP/USDT</option>
                 <option>BNB/USDT</option>
@@ -168,10 +168,7 @@
     var tokenPriceBinanceLastPrice;
 
     var totalAmountPending = 0;
-    var tokenPairArray = {
-        'tokenPairID':'BTCUSDT',
-        'tokenPairDescription':'BTC/USDT'
-    };
+    $('#token_pair_select').val(tokenPairArray.tokenPairDescription);
 
     //setChart
         setTimeout(function() {
@@ -249,33 +246,50 @@
         var location;
 
         if(selectedPair=='BTC/USDT'){
-            location = 'btcusdt_contract';
+            tokenPairArray = {
+                'tokenPairID':'BTCUSDT',
+                'tokenPairDescription':'BTC/USDT'
+            }
         }
 
         if(selectedPair=='ETH/USDT'){
-            location = 'ethusdt_contract';
+
+            tokenPairArray = {
+                'tokenPairID':'ETHUSDT',
+                'tokenPairDescription':'ETH/USDT'
+            }
         }
 
         if(selectedPair=='XRP/USDT'){
-            location = 'xrpusdt_contract';
+            tokenPairArray = {
+                'tokenPairID':'XRPUSDT',
+                'tokenPairDescription':'XRP/USDT'
+            }
         }
 
         if(selectedPair=='BNB/USDT'){
-            location = 'bnbusdt_contract';
+            tokenPairArray = {
+                'tokenPairID':'BNBUSDT',
+                'tokenPairDescription':'BNB/USDT'
+            }
         }
 
         if(selectedPair=='DOGE/USDT'){
-            location = 'dogeusdt_contract';
+            tokenPairArray = {
+                'tokenPairID':'DOGEUSDT',
+                'tokenPairDescription':'DOGE/USDT'
+            }
         }
 
         if(selectedPair=='TRX/USDT'){
-            location = 'trxusdt_contract';
+            tokenPairArray = {
+                'tokenPairID':'TRXUSDT',
+                'tokenPairDescription':'TRX/USDT'
+            }
         }
 
         clearInterval(tokenPriceInterval);
-        clearInterval(pendingPositionChecker);
-
-        addBreadCrumbs('wallet/test-platform/contract_trade_pairs/'+location)
+        // addBreadCrumbs('wallet/test-platform/contract_trade_pairs/'+location)
 
 
         $.when(closeNav()).then(function() {
@@ -284,9 +298,9 @@
             $("#container").fadeOut(animtionSpeed, function() {
                 $("#loadSpinner").fadeIn(animtionSpeed,function(){
                     $("#container").empty();
-                    $("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/contract_trade_pairs/'+location}));
+                    $("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/future'}));
 
-                    console.log('wallet/test-platform/contract_trade_pairs/'+location);
+                    // console.log('wallet/test-platform/contract_trade_pairs/'+location);
 
                     setTimeout(function(){
                         $("#loadSpinner").fadeOut(animtionSpeed,function(){

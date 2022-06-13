@@ -94,14 +94,14 @@
 			<div id="daily_mining_token_containers" style="display:none;">
 				<button onclick="goback_btn()" style="color: #ff6f6f" class="btn btn-transparent" id="backbtn_container">
 					<i class="fa fa-arrow-left" style="" aria-hidden="true"></i> 
-					<b>Previous page</b>
+					<b>Back to days</b>
 				</button>  
 
 				<div id="days_token_container"></div>
 			</div>
 		</div>
 
-		<div id="claim_tab" class="container tab-pane fade"><br>
+		<div id="claim_tab" class="tab-pane fade"><br>
 			<!-- <div class="text-center">
 				<h3>This part is still under development</h3>
 			</div> -->

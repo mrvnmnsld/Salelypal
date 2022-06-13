@@ -1,7 +1,7 @@
 <style type="text/css">
 	.cardboxes{
 		box-shadow: 3px 3px 3px 3px rgb(0 0 0 / 29%);
-		background-color: rgb(0, 0, 0, 0%)!important;
+		ground-color: rgb(0, 0, 0, 0%)!important;
 		color: black;
 	}
 

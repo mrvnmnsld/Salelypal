@@ -26,6 +26,9 @@
 
 	label.btn{
 		font-size: .7em;
+	}
+
+	.dark-mode label.btn{
 	    color: white;
 	}
 </style>

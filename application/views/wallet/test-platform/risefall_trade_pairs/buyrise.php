@@ -110,7 +110,7 @@
     </div>
 
     <div>
-        <button class="btn btn-block btn-sm btn-warning modalMinimize">Toggle chart view</button>
+        <button class="btn btn-block btn-sm btn-warning modalMinimize mt-2">Toggle chart view</button>
     </div>
 </div>
 
@@ -269,7 +269,8 @@
                    cancel: function () {
 
                    },
-               }
+               },
+               theme: 'dark'
            });
         }else{
            $.alert("1. Please Input Enough USDT to be Staked <br>2. Make sure GAS(trx) is enough<br>3. Minimum amount to stake is "+bettingSettings[0].value);

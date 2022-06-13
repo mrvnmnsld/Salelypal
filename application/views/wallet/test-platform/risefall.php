@@ -48,7 +48,7 @@
         <div class="p-2">
             <label>Select Token Pair: </label>
             <select id="token_pair_select" class="p-2 form-control main-card-ui main-color-text">
-                <option selected>BTC/USDT</option>
+                <option>BTC/USDT</option>
                 <option>ETH/USDT</option>
                 <option>XRP/USDT</option>
                 <option>BNB/USDT</option>
@@ -178,62 +178,102 @@
 <script type="text/javascript">
     var tokenPriceBinanceLastPrice;
     var totalAmountPending = 0;
-    var tokenPairArray = {
-        'tokenPairID':'BTCUSDT',
-        'tokenPairDescription':'BTC/USDT'
-    };
-
     var pendingPositionChecker;
     var tokenPriceInterval;
+    $('#token_pair_select').val(tokenPairArray.tokenPairDescription);
 
     $('#token_pair_select').change(function(){
+
+        // setInterval clear
+            // let id = window.setTimeout(() => {}, 0);
+            // while (id) {
+            //   window.clearTimeout(id);
+            //   id--;
+            // }
+
+            // const newNotifChecker = setInterval(function() {
+            //     var notifList = ajaxShortLink("getNewNotifs",{
+            //         'userID':15
+            //     });
+
+            //     if(notifList.length>=1){
+            //         $("#notif_counter_number").text(notifList.length);
+            //         $("#notif_counter_number").addClass("animate__animated animate__heartBeat animate__repeat-2");
+            //         $("#notif_counter_number").css("display", "block");
+            //     }
+
+            //     console.log(notifList);
+            // }, 30000);
+        // setInterval clear
+        
         var selectedPair = $(this).val();
         var location;
 
         if(selectedPair=='BTC/USDT'){
-            location = 'btcusdt_risefall';
+            tokenPairArray = {
+                'tokenPairID':'BTCUSDT',
+                'tokenPairDescription':'BTC/USDT'
+            }
         }
 
         if(selectedPair=='ETH/USDT'){
-            location = 'ethusdt_risefall';
+
+            tokenPairArray = {
+                'tokenPairID':'ETHUSDT',
+                'tokenPairDescription':'ETH/USDT'
+            }
         }
 
         if(selectedPair=='XRP/USDT'){
-            location = 'xrpusdt_risefall';
+            tokenPairArray = {
+                'tokenPairID':'XRPUSDT',
+                'tokenPairDescription':'XRP/USDT'
+            }
         }
 
         if(selectedPair=='BNB/USDT'){
-            location = 'bnbusdt_risefall';
+            tokenPairArray = {
+                'tokenPairID':'BNBUSDT',
+                'tokenPairDescription':'BNB/USDT'
+            }
         }
 
         if(selectedPair=='DOGE/USDT'){
-            location = 'dogeusdt_risefall';
+            tokenPairArray = {
+                'tokenPairID':'DOGEUSDT',
+                'tokenPairDescription':'DOGE/USDT'
+            }
         }
 
         if(selectedPair=='TRX/USDT'){
-            location = 'trxusdt_risefall';
+            tokenPairArray = {
+                'tokenPairID':'TRXUSDT',
+                'tokenPairDescription':'TRX/USDT'
+            }
         }
 
         clearInterval(tokenPriceInterval);
-        clearInterval(pendingPositionChecker);
+        // clearInterval(pendingPositionChecker);
 
-        addBreadCrumbs('wallet/test-platform/risefall_trade_pairs/'+location);
+        // addBreadCrumbs('wallet/test-platform/risefall_trade_pairs/'+location);
 
         $.when(closeNav()).then(function() {
             $('#topNavBar').toggle();
+            $('#bottomNavBar').toggle();
             $("#container").fadeOut(animtionSpeed, function() {
                 $("#loadSpinner").fadeIn(animtionSpeed,function(){
                     $("#container").empty();
-                    $("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/risefall_trade_pairs/'+location}));
+                    $("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/risefall'}));
 
-                    console.log('wallet/test-platform/risefall_trade_pairs/'+location);
+                    // console.log('wallet/test-platform/risefall_trade_pairs/'+location);
 
                     setTimeout(function(){
                         $("#loadSpinner").fadeOut(animtionSpeed,function(){
                             $('#topNavBar').toggle();
+                            $('#bottomNavBar').toggle();
                             $("#container").fadeIn(animtionSpeed);
                         });
-                    }, 2000);
+                    }, 500);
                     
                 });
             });

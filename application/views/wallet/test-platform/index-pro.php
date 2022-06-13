@@ -532,6 +532,11 @@
 		var tokensSelected = ajaxShortLink('userWallet/getAllSelectedTokensVer2',{'userID':15});
 		var breadCrumbs = ['assets'];
 
+		var tokenPairArray = {
+		    'tokenPairID':'BTCUSDT',
+		    'tokenPairDescription':'BTC/USDT'
+		}; // for mining
+
 
 		//initial
 			$("#username_container").text("Marvin");
@@ -620,6 +625,7 @@
 					    }else{
 					  		$("#totalInUsdContainer").html(numberWithCommas(totalInUsd.toFixed(2)));
 					  		$("#totalInUsdContainer").append(" "+displayCurrency.toUpperCase());
+					  		
 					  		$('#visible_btn').toggle();
 					  		$('#refresh_btn').removeAttr("disabled");
 
@@ -1282,7 +1288,8 @@
 
 		$("#top_back_btn").on("click",function(){
 			breadCrumbs.pop()
-			console.log(breadCrumbs[breadCrumbs.length-1]);
+			// console.log(breadCrumbs[breadCrumbs.length-1]);
+			clearInterval(tokenPriceInterval);
 
 			if (breadCrumbs[breadCrumbs.length-1]=="assets"||breadCrumbs[breadCrumbs.length-1]=="assets_container") {
 				$("#assets_btn").click();
