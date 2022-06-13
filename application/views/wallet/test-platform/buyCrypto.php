@@ -120,12 +120,12 @@
     }
 </style>
 
-<div class="p-1 m-2 mb-2 text-dark bg-light rounded">
+<div class="p-1 m-2 mb-2 card main-card-bg main-color-text rounded border-0">
     <div class="text-center">
         <h4>Purchase History</h4>
     </div>
 
-    <table id="tableContainer" class="table table-sm" style="width: 98%!important;">  
+    <table id="tableContainer" class="" style="width: 98%!important;">  
         <thead>
             <tr>
                 <th>Token</th>
@@ -136,8 +136,10 @@
         </thead>
     </table>
 
-    <button id="purchaseAppeals_inner_btn" class="btn btn-link btn-block mt-2">Purchase Appeals</button>
+    <!-- <button id="purchaseAppeals_inner_btn" class="btn btn-link btn-block mt-2">Purchase Appeals</button> -->
 </div>
+
+
 
 
 <script>
@@ -191,7 +193,8 @@
                 }
             ],
             "autoWidth": true,
-            "order": [[ 2, "desc" ]]
+            "order": [[ 2, "desc" ]],
+            "sDom": '<"row view-filter"<"col-sm-12"<"pull-left"l><"pull-right"f><"clearfix">>>t<"row view-pager"<"col-sm-12"<"text-center"ip>>>'
         });
     }
 

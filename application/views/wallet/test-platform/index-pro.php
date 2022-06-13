@@ -1333,6 +1333,9 @@
 		}
 
 		function loadSystem(){
+			tokenNames = [];
+			tokenBalance = [];
+			
 			for (var i = 0; i < tokensSelected.length; i++) {
 		
 				$("#tokenContainer").append(
