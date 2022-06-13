@@ -161,7 +161,6 @@ $route['main/getTokenInfoViaID'] = 'main/getTokenInfoViaID';
 		$route['userWallet/getToken24HourChange'] = 'userWallet/getToken24HourChange';
 	// PNL
 		
-
 	// strict
 		$route['userWallet/strictModeToggle'] = 'userWallet/strictModeToggle';
 		$route['userWallet/getCurrentUserStrictStatus'] = 'userWallet/getCurrentUserStrictStatus';
@@ -199,10 +198,7 @@ $route['main/getTokenInfoViaID'] = 'main/getTokenInfoViaID';
 		$route['userWallet/riseFall/getPositionDetails'] = 'userWallet/risefallGetPositionDetails';
 
 		$route['userWallet/future/checkIfSet'] = 'userWallet/futureCheckIfSet';
-		$route['userWallet/future/getPositionDetails'] = 'userWallet/futureGetPositionDetails';
-
-
-		
+		$route['userWallet/future/getPositionDetails'] = 'userWallet/futureGetPositionDetails';		
 	//riseFall
 
 	//mining

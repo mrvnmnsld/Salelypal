@@ -65,7 +65,7 @@ class MY_Controller extends CI_Controller {
     }
 
     function _getPercentageChange($original,$current){
-        return round($percentChange = (1 - $original / $current) * 100,4);
+        return round($percentChange = ($current - $original)/$original * 100,4);
     }
 
     

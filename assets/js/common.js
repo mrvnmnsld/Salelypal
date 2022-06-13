@@ -496,6 +496,20 @@ function formatDateObject24Hours(date){
 	return date.toLocaleDateString("en-US", options);
 }
 
+function formatDateObjectMonthAndDayOnly(date){
+	var options = { 
+		year:false,
+		month: 'numeric', 
+		day: 'numeric',
+		hour:false,
+		minute:false,
+		second:false,
+		hour12: false
+	};
+
+	return date.toLocaleDateString("en-US", options);
+}
+
 function float2DecimalPoints(value){
 	return parseFloat(parseFloat(value).toFixed(2))
 }
@@ -686,6 +700,38 @@ animateCSS = function(element, animation, prefix = 'animate__'){
 
 	  node.addEventListener('animationend', handleAnimationEnd, {once: true});
 	});
+}
+
+getDaysDate = function(numDays){
+	var dateContainer = [];
+
+	for (var i = numDays; i >= 0; i--) {
+		var innerDate = new Date().getTime()+(-Math.abs(i)*24*60*60*1000)
+
+		innerDate = unixTimeToDate13CharNonFormated(innerDate)
+		// dateContainer.push(formatDateObjectMonthAndDayOnly(new Date(new Date().getTime()+(-Math.abs(i)*24*60*60*1000))))
+		dateContainer.push(
+			(innerDate.getMonth()+1)+"-"+innerDate.getDate()
+		)
+	}
+
+	return dateContainer;
+}
+
+getRandomColorIteration = function(iteration) {
+	var colorContainer = [];
+
+	for (var x = 0; x < iteration; x++) {
+		var letters = '0123456789ABCDEF';
+		var color = '#';
+		for (var i = 0; i < 6; i++) {
+		  color += letters[Math.floor(Math.random() * 16)];
+		}
+
+		colorContainer.push(color)
+	}
+  
+	return colorContainer;
 }
 
 

@@ -251,7 +251,7 @@
 	</style>
 <!-- css -->
 <body style="min-height: 130%;" class="light-mode">
-	<div id="topNavBar" class="main-color-bg light-text" style="display:none; color:white!important;">
+	<div id="topNavBar" class="main-color-bg light-text notranslate" style="display:none; color:white!important;">
 		<span id="profile_btn" style="float: left;" ><i class="fa fa-user-o fa-md" aria-hidden="true"></i><span class="ml-2" id="username_container"></span></span>
 
 		<span id="top_back_btn" style="float: left;display: none;" ><i class="fa fa-angle-left fa-md" aria-hidden="true"></i></span>
@@ -279,7 +279,7 @@
 						<i id="eye_open" class="fa fa-eye text-muted" style="display:none;" aria-hidden="true"></i>
 					</span>
 					<br>
-					<span id="totalInUsdContainer" class="font-size-2p5em title-color-text">Loading...</span>
+					<span id="totalInUsdContainer" class="font-size-2p5em title-color-text notranslate">Loading...</span>
 				</div>
 
 				<div id="main_btns_container" style="display:none;">
@@ -307,6 +307,7 @@
 					</div>
 				</div>
 			</div>
+
 			<style>
 				#asset_tabs a{
 					/* color: #94abef; */
@@ -369,9 +370,47 @@
 					</div>
 
 					<div id="portfolio_tab" class="container tab-pane fade"><br>
-						<div class="text-center">
-							<h3>This part is still under development</h3>
+						<div class="text-center" id="pnl_loading">
+							<h3>
+								<div class="spinner-grow main-color-text" role="status">
+								  <span class="sr-only">Loading...</span>
+								</div>
+
+								Loading...
+
+							</h3>
 						</div>
+
+						<div id="pnl_main" class="main-card-ui rounded shadow-lg" style="display:none">
+							<div class="d-flex p-2 mt-2">
+								<div class="flex-fill p-2">
+									<h5>Yesterdays PNL:</h5>
+									<span class="text-success" id="yesterdayPnl">
+										0% Change
+									</span>
+								</div>
+
+								<div class="flex-fill p-2">
+									<h5>7 Days PNL:</h5>
+									<span class="text-success" id="allDaysPnl">
+										0% Change
+									</span>
+								</div>
+							</div>
+
+							<div class="p-3">
+								7 Days PNL Chart
+
+								<canvas id="pnl_chart_container" width="400" height="200"></canvas >
+							</div>
+
+							<div class="p-3">
+								Assets Distribution
+
+								<canvas id="assets_chart_container" width="600" height="400"></canvas >
+							</div>
+						</div>
+
 					</div>
 				</div>
 			</div><!-- asset_tab_container -->
@@ -531,11 +570,15 @@
 		var assetsHtmlContainer;
 		var tokensSelected = ajaxShortLink('userWallet/getAllSelectedTokensVer2',{'userID':15});
 		var breadCrumbs = ['assets'];
+		var tokenNames = [];
+		var tokenBalance = [];
 
 		var tokenPairArray = {
 		    'tokenPairID':'BTCUSDT',
 		    'tokenPairDescription':'BTC/USDT'
 		}; // for mining
+
+		var coinIds = [];
 
 
 		//initial
@@ -620,6 +663,8 @@
 				function myLoop() {
 				  	tokenLoadTimer = setTimeout(function() {
 					    if (i < tokensSelected.length) {
+					    	coinIds.push(tokensSelected[i].coingeckoTokenId);
+					    	// coinIds
 							loadTokenInfo(tokensSelected[i]);
 							myLoop();
 					    }else{
@@ -628,6 +673,84 @@
 					  		
 					  		$('#visible_btn').toggle();
 					  		$('#refresh_btn').removeAttr("disabled");
+
+					  		// chart PNL
+						  		$("#pnl_loading").toggle();
+						  		$("#pnl_main").toggle();
+
+
+				  				var yValues = ajaxShortLink("userWallet/getToken24HourChange",{
+					  				"coinIds":coinIds.toString()
+					  			})
+				  				var xValues = getDaysDate(6);
+
+				  				const average = yValues.reduce((a, b) => a + b, 0) / yValues.length;
+
+				  				console.log(yValues);
+				  				console.log(average);
+
+				  				$("#yesterdayPnl").text(parseFloat(yValues[yValues.length-1]).toFixed(2)+"% Change");
+				  				$("#allDaysPnl").text(average.toFixed(2)+"% Change");
+
+				  				new Chart("pnl_chart_container", {
+				  				  	type: "line",
+				  				  	data: {
+				  				    	labels: xValues,
+				  			    		datasets: [{
+				  						      // backgroundColor: "rgba(0,0,0,1.0)",
+				  						      fill: false,
+				  						      label: false,
+				  						      borderColor: "#94abef",
+				  						      data: yValues
+				  					    }]
+				  					},
+				  				  	options:{
+				  				  		responsive: true,
+			  				        	legend: {
+			  				          		position: 'top',
+			  				          		display: false
+			  				        	},
+			  				        	title: {
+			  			          			display: false,
+			  			          			// text: 'Chart.js Line Chart'
+			  				       	 	},
+				  		      		    tooltips: {
+				  		      		        callbacks: {
+				  		      		           label: function(tooltipItem) {
+				  		      		                  return tooltipItem.yLabel;
+				  		      		           }
+				  		      		        }
+				  		      		    }
+				  				  	}
+				  				});
+
+				  				var xValues = tokenNames;
+				  				var yValues = tokenBalance;
+
+
+				  				var barColors = getRandomColorIteration(xValues.length);
+
+				  				new Chart("assets_chart_container", {
+				  				  	type: "pie",
+				  				  	data: {
+					  				    labels: xValues,
+					  				    datasets: [{
+					  				      	backgroundColor: barColors,
+				  				      		data: yValues
+					  				    }]
+				  				  	},
+				  				  	options: {
+					  				    title: {
+				  				      		display: false,
+				  				      		// text: "World Wide Wine Production 2018"
+					  				    },
+					  				    legend: {
+				  				      		display: true
+					  				    }
+				  				  }
+				  				});
+
+					  		// chart PNL
 
 							console.timeEnd('loadTimer');
 					    }
@@ -1186,6 +1309,9 @@
 				}
 			}
 
+			tokenNames.push(tokenInfo.tokenName);
+			tokenBalance.push(balanceInner);
+
 			console.log($("#"+tokenInfo.tokenName+"_amount_container"))
 
 			$("#"+tokenInfo.tokenName+"_amount_container").html(parseFloat(balanceInner).toFixed(tokenInfo.decimal)+' <br>'+tokenInfo.tokenName.toUpperCase());
@@ -1289,7 +1415,9 @@
 		$("#top_back_btn").on("click",function(){
 			breadCrumbs.pop()
 			// console.log(breadCrumbs[breadCrumbs.length-1]);
-			clearInterval(tokenPriceInterval);
+			if (typeof tokenPriceInterval  != 'undefined') {
+				clearInterval(tokenPriceInterval);
+			}
 
 			if (breadCrumbs[breadCrumbs.length-1]=="assets"||breadCrumbs[breadCrumbs.length-1]=="assets_container") {
 				$("#assets_btn").click();

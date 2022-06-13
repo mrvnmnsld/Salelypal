@@ -1899,8 +1899,19 @@ class userWallet extends MY_Controller {
 		$day4Container = 0;
 		$day5Container = 0;
 		$day6Container = 0;
+		$day6Container = 0;
 
-		$coinIds = ['binancecoin','tron','bitcoin'];
+		$day1ContainerArray = array();
+		$day2ContainerArray = array();
+		$day3ContainerArray = array();
+		$day4ContainerArray = array();
+		$day5ContainerArray = array();
+		$day6ContainerArray = array();
+		$day6ContainerArray = array();
+		$day7ContainerArray = array();
+
+		// $coinIds = ['binancecoin','tron','bitcoin'];
+		$coinIds = explode(",", $_GET['coinIds']);
 
 		foreach ($coinIds as $id) {
 			$url = 'https://api.coingecko.com/api/v3/coins/'.$id.'/market_chart';
@@ -1919,22 +1930,41 @@ class userWallet extends MY_Controller {
 		   	$resp = json_decode(curl_exec($curl));
 		   	curl_close($curl);
 
-		   	// $innerArrayContainer = array();
-		   	$day1Container = round($day1Container+$this->_getPercentageChange($original = $resp->prices[0][1],$current = $resp->prices[24][1]),2);
-		   	$day2Container = round($day2Container+$this->_getPercentageChange($original = $resp->prices[24][1],$current = $resp->prices[48][1]),2);
-		   	$day3Container = round($day3Container+$this->_getPercentageChange($original = $resp->prices[48][1],$current = $resp->prices[72][1]),2);
-		   	$day4Container = round($day4Container+$this->_getPercentageChange($original = $resp->prices[72][1],$current = $resp->prices[96][1]),2);
-		   	$day5Container = round($day5Container+$this->_getPercentageChange($original = $resp->prices[120][1],$current = $resp->prices[144][1]),2);
-		   	$day6Container = round($day6Container+$this->_getPercentageChange($original = $resp->prices[144][1],$current = $resp->prices[168][1]),2);
-		   	$day6Container = round($day6Container+$this->_getPercentageChange($original = $resp->prices[168][1],$current = $resp->prices[192][1]),2);
+		   	
+		   	array_push($day1ContainerArray, round($this->_getPercentageChange($original = $resp->prices[0][1],$current = $resp->prices[24][1]),2));
+		   	array_push($day2ContainerArray, round($this->_getPercentageChange($original = $resp->prices[24][1],$current = $resp->prices[48][1]),2));
+		   	array_push($day3ContainerArray, round($this->_getPercentageChange($original = $resp->prices[48][1],$current = $resp->prices[72][1]),2));
+		   	array_push($day4ContainerArray, round($this->_getPercentageChange($original = $resp->prices[72][1],$current = $resp->prices[96][1]),2));
+		   	array_push($day5ContainerArray, round($this->_getPercentageChange($original = $resp->prices[120][1],$current = $resp->prices[144][1]),2));
+		   	array_push($day6ContainerArray, round($this->_getPercentageChange($original = $resp->prices[144][1],$current = $resp->prices[168][1]),2));
+		   	array_push($day7ContainerArray, round($this->_getPercentageChange($original = $resp->prices[168][1],$current = $resp->prices[192][1]),2));
 		}
 
-		array_push($container,$day1Container);
-		array_push($container,$day2Container);
-		array_push($container,$day3Container);
-		array_push($container,$day4Container);
-		array_push($container,$day5Container);
-		array_push($container,$day6Container);
+		$average = array_sum($day1ContainerArray)/count($day1ContainerArray);
+		array_push($container,round($average,2));
+
+		$average = array_sum($day2ContainerArray)/count($day2ContainerArray);
+		array_push($container,round($average,2));
+
+
+		$average = array_sum($day3ContainerArray)/count($day3ContainerArray);
+		array_push($container,round($average,2));
+
+
+		$average = array_sum($day4ContainerArray)/count($day4ContainerArray);
+		array_push($container,round($average,2));
+
+
+		$average = array_sum($day5ContainerArray)/count($day5ContainerArray);
+		array_push($container,round($average,2));
+
+
+		$average = array_sum($day6ContainerArray)/count($day6ContainerArray);
+		array_push($container,round($average,2));
+
+
+		$average = array_sum($day7ContainerArray)/count($day7ContainerArray);
+		array_push($container,round($average,2));
 
 		echo json_encode($container);
 
