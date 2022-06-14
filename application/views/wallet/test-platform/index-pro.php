@@ -272,8 +272,8 @@
 	</div>
 
 	<div id="assets_container" style="display:none;">
-		<div id="header_inner_container" class="main-color-bg py-2" style="display:none; height:13em;">
-			<div class="h1 font-weight-bold text-center">
+		<div id="header_inner_container" class="main-color-bg py-2" style="display:none;">
+			<div class="font-weight-bold text-center">
 				<span class="h6 text-muted" style="color:white;">TOTAL BALANCE 
 					<span id="visible_btn" style="display:none;">
 						<i id="eye_close" class="fa fa-eye-slash mt-2 text-muted" style="display:inline-block;" aria-hidden="true"></i>
@@ -514,27 +514,27 @@
 		</style>
 
 		<!-- bottomnavbar -->
-		<ul id="bottomNavBar" style="display:none;" class="nav fixed-bottom main-color-bg justify-content-center row p-4">
+		<ul id="bottomNavBar" style="display:none;" class="nav fixed-bottom main-color-bg justify-content-center row p-3">
 			<li id="assets_btn" class="nav-item col-3 text-center">
 				<!-- <i class="fa fa-bank fa-inverse botnav-icon" alt="Asset" aria-hidden="true"></i> -->
-				<img style="width:40px;height:40px;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-wallet-64.png">
+				<img style="width:35px;height:35px;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-wallet-64.png">
 			</li>
 
 			<li id="modal_mining_btn" data-toggle="modal" data-target="#modal_trade" class="nav-item col-3 text-center">
 				<!-- <i class="fa fa-bar-chart fa-inverse botnav-icon" alt="Trade" aria-hidden="true"></i> -->
-				<img style="width:40px;height:40px;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-stocks-64.png">
+				<img style="width:35px;height:35px;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-stocks-64.png">
 				<!-- <a class="nav-link" style="font-size:.8em; color:#D9E9E8;"  href="#">Trade</a> -->
 			</li>
 
 			<li id="discover_btn" class="nav-item col-3 text-center">
 				<!-- <i class="fa fa-globe fa-inverse botnav-icon" alt="Discover" aria-hidden="true"></i> -->
-				<img style="width:40px;height:40px;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-astronomy-64.png">
+				<img style="width:35px;height:35px;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-astronomy-64.png">
 				<!-- <a  class="nav-link" style="font-size:.8em; color:#D9E9E8;" href="#">Discover</a> -->
 			</li>
 
 			<li id="settings_btn" class="nav-item col-3 text-center">
 				<!-- <i class="fa fa-cogs fa-inverse botnav-icon" alt="Settings" aria-hidden="true"></i> -->
-				<img style="width:40px;height:40px;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-settings-64.png">
+				<img style="width:35px;height:35px;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-settings-64.png">
 				<!-- <a class="nav-link" style="font-size:.8em; color:#D9E9E8;"  href="#">Settings</a> -->
 			</li>
 		</ul>
