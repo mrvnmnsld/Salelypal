@@ -137,7 +137,7 @@
 
 	<hr>
 	
-	<button id="logOut_btn" type="button" class="btn btn-block red-btn" style="font-size: 20px;">LOGOUT</button>
+	<button id="logOut_btn" type="button" class="btn btn-block btn-danger" style="font-size: 20px;">LOGOUT</button>
 	
 </div>
 
