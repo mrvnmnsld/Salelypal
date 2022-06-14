@@ -15,19 +15,18 @@
         }
         #saveEdit_btn,#cancelEdit_btn{
             margin-top:3em;
-            color:#004999;
         }
     </style>
     <div id="edit_profile_image_container" class="text-center my-3">
-        <div>
+        <div class="">
             <img id="profilePicEdit" src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" style="">
         </div>
-        <span id="edit_image_btn" class="text-muted"><small>change image <i id="editImageIcon" class="fa fa-edit my-2"></i></small></span>
+        <span id="edit_image_btn" class="text-muted"><small>change image <i id="editImageIcon" class="fa fa-edit my-2 text-muted"></i></small></span>
         <input class="form-control d-none" type="file" name="fileToUpload" id="fileToUpload" accept="image/png, image/gif, image/jpeg" >
     </div>
     <form id="editprofile_form" class="row mx-1 text-left">
         <div class="form-group col-12">
-            <span style="color:#004999;" class="form-text">Edit personal information :</span>
+            <span style="color:#004999;" class="form-text main-color-text">Edit personal information :</span>
         </div>
         <div class="form-group col-12">
             <input type="text" class="form-control" id="fullNameEdit" name="fullNameEdit" placeholder="Enter desired name">
@@ -39,10 +38,10 @@
             <input type="text" class="form-control" id="mobileNumberEdit" name="mobileNumberEdit" placeholder="Enter new number">
         </div>
         <div class="col-6 text-center">
-            <a id="saveEdit_btn" class=""><i class="fa fa-floppy-o" aria-hidden="true"></i> save</a>
+            <a id="saveEdit_btn" class=""><i class="fa fa-floppy-o text-muted" aria-hidden="true"></i> save</a>
         </div>
         <div class="col-6 text-center">
-            <a id="cancelEdit_btn" class=""><i class="fa fa-times" aria-hidden="true"></i> cancel</a>
+            <a id="cancelEdit_btn" class=""><i class="fa fa-times text-muted" aria-hidden="true"></i> cancel</a>
         </div>
     </form>
 </div>  

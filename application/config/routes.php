@@ -27,6 +27,9 @@ $route['saveNewProfilePic'] = 'main/saveNewProfilePic';
 $route['confirmPassword'] = 'main/confirmPassword';
 $route['main/getCurrentPrice'] = 'main/getCurrentPrice';
 $route['main/getTokenInfoViaID'] = 'main/getTokenInfoViaID';
+$route['saveFaceImageKyc'] = 'main/saveFaceImageKyc';
+$route['saveIDImageKyc'] = 'main/saveIDImageKyc';
+
 
 
 // Admin

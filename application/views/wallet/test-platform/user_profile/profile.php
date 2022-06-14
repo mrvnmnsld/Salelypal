@@ -27,7 +27,7 @@
             <img id="profilePic" src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" style="">
         </div>
 
-        <span id="edit_profile_btn" class="text-muted">Edit profile <i id="editIcon" class="fa fa-edit mt-3"></i></span>
+        <span id="edit_profile_btn" class="text-muted">Edit profile <i id="editIcon" class="fa fa-edit mt-3 text-muted"></i></span>
 
     </div>
 
