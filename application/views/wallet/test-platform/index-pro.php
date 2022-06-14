@@ -167,9 +167,14 @@
 			.dark-mode .modal-content{
 				background-color: #120731!important;
 			}
-			.dark-mode .red-btn{
+			.dark-mode .btn-danger{
 				background-color: #5d220e!important;
 				border-color: #5d220e!important;
+				color:white!important;
+			}
+			.dark-mode .btn-sucess{
+				background-color: #23923d!important;
+				border-color: #23923d!important;
 				color:white!important;
 			}
 			.dark-mode .custom-2nd-text{
@@ -202,10 +207,10 @@
 				color: #3a189f!important;
 			}
 			.light-mode .main-color-bg{
-				background-color: #2b1d55;
+				background-color: #5426de;
 			}
 			.light-mode .main-color-text{
-				color: #3a189f !important;
+				color: #5426de !important;
 			}
 
 			.light-mode .title-color-text{
@@ -226,7 +231,7 @@
 			.light-mode .custom-2nd-text{
 				color:#3a189f;
 			}
-			.light-mode .red-btn{
+			.light-mode .btn-danger{
 				background-color: #dc3545!important;
 				border-color: #dc3545!important;
 				color:white!important;
@@ -506,7 +511,7 @@
 		<!-- modal-mining END -->
 		<style>
 			.botnav-icon{
-				font-size:2em;
+				font-size:2.2rem;
 			}
 			.botnav-icon:hover{
 				color: #94abef;
@@ -517,24 +522,24 @@
 		<ul id="bottomNavBar" style="display:none;" class="nav fixed-bottom main-color-bg justify-content-center row p-3">
 			<li id="assets_btn" class="nav-item col-3 text-center">
 				<!-- <i class="fa fa-bank fa-inverse botnav-icon" alt="Asset" aria-hidden="true"></i> -->
-				<img style="width:35px;height:35px;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-wallet-64.png">
+				<img style="width:2.2rem;height:2.2rem;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-wallet-64.png">
 			</li>
 
 			<li id="modal_mining_btn" data-toggle="modal" data-target="#modal_trade" class="nav-item col-3 text-center">
 				<!-- <i class="fa fa-bar-chart fa-inverse botnav-icon" alt="Trade" aria-hidden="true"></i> -->
-				<img style="width:35px;height:35px;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-stocks-64.png">
+				<img style="width:2.2rem;height:2.2rem;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-trading-64.png">
 				<!-- <a class="nav-link" style="font-size:.8em; color:#D9E9E8;"  href="#">Trade</a> -->
 			</li>
 
 			<li id="discover_btn" class="nav-item col-3 text-center">
-				<!-- <i class="fa fa-globe fa-inverse botnav-icon" alt="Discover" aria-hidden="true"></i> -->
-				<img style="width:35px;height:35px;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-astronomy-64.png">
+				<i class="fa fa-globe fa-inverse botnav-icon" alt="Discover" aria-hidden="true"></i>
+				<!-- <img style="width:2.2rem;height:2.2rem;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-astronomy-64.png"> -->
 				<!-- <a  class="nav-link" style="font-size:.8em; color:#D9E9E8;" href="#">Discover</a> -->
 			</li>
 
 			<li id="settings_btn" class="nav-item col-3 text-center">
 				<!-- <i class="fa fa-cogs fa-inverse botnav-icon" alt="Settings" aria-hidden="true"></i> -->
-				<img style="width:35px;height:35px;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-settings-64.png">
+				<img style="width:2.2rem;height:2.2rem;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-settings-64.png">
 				<!-- <a class="nav-link" style="font-size:.8em; color:#D9E9E8;"  href="#">Settings</a> -->
 			</li>
 		</ul>
