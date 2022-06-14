@@ -1937,7 +1937,12 @@ class userWallet extends MY_Controller {
 		   	array_push($day4ContainerArray, round($this->_getPercentageChange($original = $resp->prices[72][1],$current = $resp->prices[96][1]),2));
 		   	array_push($day5ContainerArray, round($this->_getPercentageChange($original = $resp->prices[120][1],$current = $resp->prices[144][1]),2));
 		   	array_push($day6ContainerArray, round($this->_getPercentageChange($original = $resp->prices[144][1],$current = $resp->prices[168][1]),2));
-		   	array_push($day7ContainerArray, round($this->_getPercentageChange($original = $resp->prices[168][1],$current = $resp->prices[192][1]),2));
+
+		   	if (isset($resp->prices[192][1])) {
+		   		array_push($day7ContainerArray, round($this->_getPercentageChange($original = $resp->prices[168][1],$current = $resp->prices[192][1]),2));
+		   	}else{
+		   		array_push($day7ContainerArray,0);
+		   	}
 		}
 
 		$average = array_sum($day1ContainerArray)/count($day1ContainerArray);

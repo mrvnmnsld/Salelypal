@@ -120,7 +120,7 @@
     }
 </style>
 
-<div class="p-1 m-2 mb-2 card main-card-bg main-color-text rounded border-0">
+<div class="p-1 m-2 mb-2 main-card-bg main-color-text rounded border-0">
     <div class="text-center">
         <h4>Purchase History</h4>
     </div>

@@ -201,7 +201,7 @@
 				color: #3a189f!important;
 			}
 			.light-mode .main-color-bg{
-				background-color: #5426de;
+				background-color: #2b1d55;
 			}
 			.light-mode .main-color-text{
 				color: #3a189f !important;

@@ -342,7 +342,8 @@
 	// transaction load
 
 	$("#buy_btn_option_token_info").on('click',function(){
-		$("#tittle_container").text('Buy Crypto');
+		// $("#tittle_container").text('Buy Crypto');
+		console.log("test");
 		$.when(closeNav()).then(function() {
 			$('#topNavBar').toggle();
 	  		$("#container").fadeOut(animtionSpeed, function() {

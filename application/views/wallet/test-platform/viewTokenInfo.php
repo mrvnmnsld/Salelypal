@@ -147,16 +147,23 @@
 	//balance check
 
 	$("#buy_btn_option_token_info").on('click',function(){
-		$.confirm({
-		    title: 'Testing Mode!',
-		    content: 'This function is not available in testing mode',
-		    type: 'red',
-		    typeAnimated: true,
-		    buttons: {
-		        close: function () {
-		        }
-		    }
-		});
+		addBreadCrumbs("wallet/test-platform/buyCrypto");
+		
+			$.when(closeNav()).then(function() {
+				$('#topNavBar').toggle();
+		  		$("#container").fadeOut(animtionSpeed, function() {
+				  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
+			  			$("#container").empty();
+			  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/buyCrypto'}));
+
+				  		$("#loadSpinner").fadeOut(animtionSpeed,function(){
+				  			$('#topNavBar').toggle();
+				  			$("#container").fadeIn(animtionSpeed);
+				  			// $("#token_select").val(clickContainer.tokenName+"_"+clickContainer.networkName+"_"+clickContainer.smartAddress+"_"+clickContainer.coingeckoTokenId).change();
+				  		});
+			    	});
+			  	});
+			});
 	});
 
 	$("#withdraw_btn_option_token_info").on('click',function(){
@@ -164,6 +171,7 @@
 		    title: 'Testing Mode!',
 		    content: 'This function is not available in testing mode',
 		    type: 'red',
+		    theme:"dark",
 		    typeAnimated: true,
 		    buttons: {
 		        close: function () {
@@ -181,7 +189,9 @@
 		    buttons: {
 		        close: function () {
 		        }
-		    }
+		    },
+		    theme:"dark",
+
 		});
 	});
 
@@ -194,12 +204,8 @@
 		    buttons: {
 		        close: function () {
 		        }
-		    }
+		    },
+		    theme:"dark"
 		});
-	});
-
-	$("#back_btn").on("click",function(){
-		$('#assets_btn').click();
-	});
-	
+	});	
 </script>
