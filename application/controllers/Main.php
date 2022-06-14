@@ -392,7 +392,105 @@ class main extends MY_Controller {
 			echo json_encode($config['file_name']);
 			// echo json_encode($_POST['oldPic']);
 		}       		
-	}	
+	}
+	
+	public function saveFaceImageKyc(){
+		foreach ($_FILES as $key => $value) {
+			$config['upload_path'] = 'assets/imgs/kyc-imgs/face-imgs';
+			$config['allowed_types'] = '*';
+			$config['file_name'] = $_FILES[$key]['name'].'.'.strval(explode("/",$_FILES[$key]['type'])[1]);
+			unlink($config['upload_path'].'/'.$_POST['userID'].'_faceImage'.'.'.explode("/",$_FILES[$key]['type'])[1]);
+
+   			$this->load->library('upload', $config);
+   			$this->load->helper("file");
+
+			if(!$this->upload->do_upload($_FILES[$key]['name'])){
+				array_push($response, array('ERROR'=>'1','Reason'=>'Cant upload to server, please contact admin','MORE'=>$this->upload->display_errors(),$exif));
+            }else{
+				$data = $this->upload->data();
+			}
+
+			$tableName="kyc_image_tbl";
+			$fieldName='userID';
+			$where=$_POST['userID'];
+			
+
+			$checkIfExist = $this->_getRecordsData(
+				$selectfields = array("*"), 
+				$tables = array('kyc_image_tbl'), 
+				$fieldName = array('userID'), $where = array($_POST['userID']), 
+				$join = null, $joinType = null, $sortBy = null, 
+				$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+			);
+
+			if(count($checkIfExist)==0){
+				$insertRecord = array(
+					'faceImagePath'=>$config['file_name'],
+					'userID'=>$_POST['userID'],
+					'timestamp' => $this->_getTimeStamp24Hours(),
+				);
+				$insertRecord = $this->_insertRecords($tableName = 'kyc_image_tbl', $insertRecord);
+			}else{
+				$insertRecord = array(
+					'faceImagePath'=>$config['file_name'],
+					'timestamp' => $this->_getTimeStamp24Hours(),
+				);
+				$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
+			}
+
+			echo json_encode($config['file_name']);
+			// echo json_encode($insertRecord);
+		}       		
+	}
+
+	public function saveIDImageKyc(){
+		foreach ($_FILES as $key => $value) {
+			$config['upload_path'] = 'assets/imgs/kyc-imgs/id-imgs';
+			$config['allowed_types'] = '*';
+			$config['file_name'] = $_FILES[$key]['name'].'.'.strval(explode("/",$_FILES[$key]['type'])[1]);
+			unlink($config['upload_path'].'/'.$_POST['userID'].'_idImage'.'.'.explode("/",$_FILES[$key]['type'])[1]);
+
+   			$this->load->library('upload', $config);
+   			$this->load->helper("file");
+
+			if(!$this->upload->do_upload($_FILES[$key]['name'])){
+				array_push($response, array('ERROR'=>'1','Reason'=>'Cant upload to server, please contact admin','MORE'=>$this->upload->display_errors(),$exif));
+            }else{
+				$data = $this->upload->data();
+			}
+
+			$tableName="kyc_image_tbl";
+			$fieldName='userID';
+			$where=$_POST['userID'];
+			
+
+			$checkIfExist = $this->_getRecordsData(
+				$selectfields = array("*"), 
+				$tables = array('kyc_image_tbl'), 
+				$fieldName = array('userID'), $where = array($_POST['userID']), 
+				$join = null, $joinType = null, $sortBy = null, 
+				$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+			);
+
+			if(count($checkIfExist)==0){
+				$insertRecord = array(
+					'IDImagePath'=>$config['file_name'],
+					'userID'=>$_POST['userID'],
+					'timestamp' => $this->_getTimeStamp24Hours(),
+				);
+				$insertRecord = $this->_insertRecords($tableName = 'kyc_image_tbl', $insertRecord);
+			}else{
+				$insertRecord = array(
+					'IDImagePath'=>$config['file_name'],
+					'timestamp' => $this->_getTimeStamp24Hours(),
+				);
+				$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
+			}
+
+			echo json_encode($config['file_name']);
+			// echo json_encode($insertRecord);
+		}       		
+	}
 
 	public function confirmPassword(){
    		$password = md5($_GET['password']);

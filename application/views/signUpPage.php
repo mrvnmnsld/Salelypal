@@ -33,7 +33,7 @@
 <hr style="width:70%;height: 1.5px;" class="bg-dark">
 
 <div class="card p-3 m-2 mb-5">
-	<div class="text-center" style="display: none;" id="thankYou">
+	<div class="text-center" style="display: block;" id="thankYou">
 		<span class="h3">
 			Signing up successfully! 
 		</span>
@@ -50,12 +50,41 @@
 		</div>
 	</div>
 
+	<!-- KYC upload -->
 	<div class="text-center" style="display: none;" id="verify_kyc_container">
-		Put KYC here
+		<div>
+			<div class="">
+				<div id="process_instruction_container" class="text-justify mt-3 main-color-text">
+					<span>Note before uploading face image</span>
+					<ul>
+						<li>Make sure..</li>
+						<li>Lighting...</li>
+						<li>Clear...</li>
+					</ul>
+					<span><i id="faceCheckUpload_kyc" class="fa fa-picture-o my-2"></i></span>
+					<span id="faceUpload_btn" class=""><small>Upload Face Image <i id="" class="fa fa-edit my-2"></i></small></span>
+					<input class="form-control d-none" type="file" name="faceUpload" id="faceUpload" accept="image/png, image/gif, image/jpeg" >
+				</div>
+			</div>
+			<hr>
+			<div class="">
+				<div id="process_instruction_container" class="text-justify mt-3 main-color-text">
+					<span>Note before uploading ID image</span>
+					<ul>
+						<li>Make sure..</li>
+						<li>Lighting...</li>
+						<li>Clear...</li>
+					</ul>
+					<span><i id="IDCheckUpload_kyc" class="fa fa-picture-o my-2"></i></span>
+					<span id="IDUpload_btn" class=""><small>Upload ID <i id="" class="fa fa-edit my-2"></i></small></span>
+					<input class="form-control d-none" type="file" name="IDUpload" id="IDUpload" accept="image/png, image/gif, image/jpeg" >
+				</div>
+			</div>
+		</div>
 	</div>
+	<!-- KYC upload -->
 
-
-	<form id="signUpForm">
+	<form id="signUpForm" style="display:none;">
 		<div class="form-group">
 			<label for="exampleInputEmail1">Full Name</label>
 			<input type="text" class="form-control" name="fullName" aria-describedby="emailHelp" placeholder="Enter Name">
@@ -109,6 +138,8 @@
 </div>
 
 <script type="text/javascript">
+	var currentUserID='32';
+
 	var generatedOtp = generateOTP();
 	console.log(generatedOtp,referalCode);
 
@@ -123,10 +154,6 @@
 		$("#thankYou").toggle();
 		$("#verify_kyc_container").toggle();
 	})
-
-
-	
-
 
 	jQuery.validator.addMethod("checkEmailAvailability", function(value, element) {
 	    return (ajaxShortLinkNoParse("checkEmailAvailability",{'email':value}))
@@ -156,7 +183,7 @@
 		    console.log(data);
 
 		    var res = ajaxShortLink("saveSignUpForm",data);
-
+			currentUserID = res;
 		    console.log(res);
 
 		    if(res!=false){
@@ -182,4 +209,70 @@
 
 	  	}
 	});
+
+    $("#faceUpload_btn").on("click", function(){
+        $('#faceUpload').click();
+    });
+
+	$("#IDUpload_btn").on("click", function(){
+        $('#IDUpload').click();
+    });
+
+    $('#faceUpload').change(function(){
+		$.confirm({
+		    title: 'KYC - Face upload',
+		    columnClass: 'col-md-6 col-md-offset-6',
+		    content: 'Are you sure you want to upload image?',
+		    buttons: {
+		        confirm: function () {
+		        	var imageUploadFormData = new FormData();
+
+		        	imageUploadFormData.append(currentUserID+"_faceImage", $('#faceUpload')[0].files[0],currentUserID+"_faceImage");
+					imageUploadFormData.append('userID', currentUserID);
+			     	backendHandleFormData('saveFaceImageKyc',imageUploadFormData);
+
+    			    $.toast({
+    			        heading: '<h6>Face Image Uploaded</h6>',
+    			        text: 'Successfull!',
+    			        showHideTransition: 'slide',
+    			        icon: 'success',
+    			        position: 'bottom-center'
+    			    })
+		        },
+		        cancel: function () {
+		        	
+		        },
+		    }
+		});
+	});
+
+	$('#IDUpload').change(function(){
+		$.confirm({
+		    title: 'KYC - ID upload',
+		    columnClass: 'col-md-6 col-md-offset-6',
+		    content: 'Are you sure you want to upload image?',
+		    buttons: {
+		        confirm: function () {
+		        	var imageUploadFormData = new FormData();
+
+		        	imageUploadFormData.append(currentUserID+"_IDImage", $('#IDUpload')[0].files[0],currentUserID+"_IDImage");
+					imageUploadFormData.append('userID', currentUserID);
+			     	backendHandleFormData('saveIDImageKyc',imageUploadFormData);
+
+    			    $.toast({
+    			        heading: '<h6>Face Image Uploaded</h6>',
+    			        text: 'Successfull!',
+    			        showHideTransition: 'slide',
+    			        icon: 'success',
+    			        position: 'bottom-center'
+    			    })
+		        },
+		        cancel: function () {
+		        	
+		        },
+		    }
+		});
+	});
+
+
 </script>
