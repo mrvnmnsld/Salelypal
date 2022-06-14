@@ -148,14 +148,15 @@
 
 			/* dark mode */
 			.dark-mode{
-				background-color : #220e5d!important;
+				background-color : #120731!important;
 				color : white!important;
 			}
 			.dark-mode body{
-				background-color : #220e5d!important;
+				background-color : #120731!important;
 			}
 			.dark-mode .main-color-bg{
-				background-color: #120731;
+				/* background-color: #120731; */
+				background-color: #220e5d;
 			}
 			.dark-mode .main-color-text{
 				color: white!important;
@@ -164,7 +165,7 @@
 				color: white!important;
 			}
 			.dark-mode .modal-content{
-				background-color: #220e5d!important;
+				background-color: #120731!important;
 			}
 			.dark-mode .red-btn{
 				background-color: #5d220e!important;
@@ -190,7 +191,7 @@
 				color:white;
 			} */
 			.dark-mode .main-card-ui{
-				background-color:#120731;
+				background-color:#220e5d;
 				color:white!important;
 			}
 			
@@ -284,9 +285,11 @@
 
 				<div id="main_btns_container" style="display:none;">
 					<div id="btn_option_container" class="d-flex justify-content-center mt-1">
+					
 						<button id="deposit_btn_option" class="btn" style="background-color:transparent">
 							<div class="btn btn-md" style="font-size:2em;padding:1px;">
 								<i class="fa fa-arrow-circle-down fa-lg fa-inverse" aria-hidden="true"></i>
+								<!-- <img style="width:50px;height:50px;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-deposit-64.png"> -->
 							</div>
 							<div style="font-size:.8em" class="text-light"><b>Deposit</b></div>
 						</button>
@@ -294,13 +297,15 @@
 						<button id="withdraw_btn_option" class="btn" style="background-color:transparent">
 							<div class="btn btn-md" style="font-size:2em;padding:1px;">
 								<i class="fa fa-arrow-circle-up fa-lg fa-inverse" aria-hidden="true"></i>
+								<!-- <img style="width:50px;height:50px;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-withdraw-64.png"> -->
 							</div>
 							<div style="font-size:.8em" class="text-light"><b>Withdraw</b></div>
 						</button>
 
 						<button id="buy_btn_option" class="btn" style="background-color:transparent">
 							<div class="btn btn-md" style="font-size:2em;padding:1px;">
-								<i class="fa fa-credit-card-alt fa-md fa-inverse" aria-hidden="true"></i>
+								<!-- <i class="fa fa-credit-card-alt fa-md fa-inverse" aria-hidden="true"></i> -->
+								<img style="width:50px;height:50px;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-top-64.png">
 							</div>
 							<div style="font-size:.8em;" class="text-light"><b>Buy</b></div>
 						</button>
@@ -460,26 +465,28 @@
 						<div class="modal-body">
 							<div class="m-1 justify-content-center">
 								<button id="rise_fall_btn" type="button" class="btn btn-modal main-color-bg" data-dismiss="modal">
-									<i class="fa fa-bar-chart fa-inverse fa-lg" style="" aria-hidden="true"></i>
+									<!-- <i class="fa fa-bar-chart fa-inverse fa-lg" style="" aria-hidden="true"></i> -->
+									<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-strategy-64.png">
 									<small class="text-light">Rise Fall Contract</small>
 								</button>
 							</div>
 							<div class="m-1 justify-content-center main-color-text">
 								<button id="future_btn" class="btn btn-modal main-color-bg" data-dismiss="modal">
-									<i class="fa fa-bar-chart fa-inverse fa-lg" style="" aria-hidden="true"></i>
+									<!-- <i class="fa fa-bar-chart fa-inverse fa-lg" style="" aria-hidden="true"></i> -->
+									<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-chart-64.png">
 									<small class="text-light">Long Short Contract</small>
 								</button>
 							</div>	
 							<div class="m-1 justify-content-center main-color-text">
 								<button id="daily_mining_btn" type="button" class="btn btn-modal main-color-bg" data-dismiss="modal">
-									<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">
+									<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-mining1-64.png">
 									<small class="text-light">Daily Mining</small>
 								</button>
 							</div>
 
 							<div class="m-1 justify-content-center">
 								<button id="regular_mining_btn" class="btn btn-modal main-color-bg" data-dismiss="modal">
-									<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/icons/mining1.png">
+									<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-mining-64.png">
 									<small class="text-light">Regular Mining</small>
 								</button>
 							</div>
@@ -509,22 +516,25 @@
 		<!-- bottomnavbar -->
 		<ul id="bottomNavBar" style="display:none;" class="nav fixed-bottom main-color-bg justify-content-center row p-4">
 			<li id="assets_btn" class="nav-item col-3 text-center">
-				<i class="fa fa-bank fa-inverse botnav-icon" alt="Asset" aria-hidden="true"></i>
-				<!-- <a class="botnavlink nav-link active" style="font-size:.8em; color:#D9E9E8;"><span class="test1">Asset</span></a> -->
+				<!-- <i class="fa fa-bank fa-inverse botnav-icon" alt="Asset" aria-hidden="true"></i> -->
+				<img style="width:40px;height:40px;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-wallet-64.png">
 			</li>
 
 			<li id="modal_mining_btn" data-toggle="modal" data-target="#modal_trade" class="nav-item col-3 text-center">
-				<i class="fa fa-bar-chart fa-inverse botnav-icon" alt="Trade" aria-hidden="true"></i>
+				<!-- <i class="fa fa-bar-chart fa-inverse botnav-icon" alt="Trade" aria-hidden="true"></i> -->
+				<img style="width:40px;height:40px;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-stocks-64.png">
 				<!-- <a class="nav-link" style="font-size:.8em; color:#D9E9E8;"  href="#">Trade</a> -->
 			</li>
 
 			<li id="discover_btn" class="nav-item col-3 text-center">
-				<i class="fa fa-globe fa-inverse botnav-icon" alt="Discover" aria-hidden="true"></i>
+				<!-- <i class="fa fa-globe fa-inverse botnav-icon" alt="Discover" aria-hidden="true"></i> -->
+				<img style="width:40px;height:40px;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-astronomy-64.png">
 				<!-- <a  class="nav-link" style="font-size:.8em; color:#D9E9E8;" href="#">Discover</a> -->
 			</li>
 
 			<li id="settings_btn" class="nav-item col-3 text-center">
-				<i class="fa fa-cogs fa-inverse botnav-icon" alt="Settings" aria-hidden="true"></i>
+				<!-- <i class="fa fa-cogs fa-inverse botnav-icon" alt="Settings" aria-hidden="true"></i> -->
+				<img style="width:40px;height:40px;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-settings-64.png">
 				<!-- <a class="nav-link" style="font-size:.8em; color:#D9E9E8;"  href="#">Settings</a> -->
 			</li>
 		</ul>
