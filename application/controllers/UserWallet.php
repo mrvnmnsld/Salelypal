@@ -1929,7 +1929,6 @@ class userWallet extends MY_Controller {
 
 		   	$resp = json_decode(curl_exec($curl));
 		   	curl_close($curl);
-
 		   	
 		   	array_push($day1ContainerArray, round($this->_getPercentageChange($original = $resp->prices[0][1],$current = $resp->prices[24][1]),2));
 		   	array_push($day2ContainerArray, round($this->_getPercentageChange($original = $resp->prices[24][1],$current = $resp->prices[48][1]),2));

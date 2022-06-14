@@ -32,18 +32,28 @@
 
 <hr style="width:70%;height: 1.5px;" class="bg-dark">
 
-<div class="cardboxes p-3 m-2 mb-5">
-	<div class="text-center d-none" id="thankYou">
+<div class="card p-3 m-2 mb-5">
+	<div class="text-center" style="display: none;" id="thankYou">
 		<span class="h3">
-			Thank you for signing up.
+			Signing up successfully! 
 		</span>
 
-		<br><br>
+		<div>
+			You can verify your KYC now or do it later. Verifiying KYC will give you full access to all trade functions without any withdrawal limits
+		</div>
 
-		<span>
-			We'll be redirecting you back to the login page in a few seconds
-		</span> 
+		<br>
+
+		<div class="d-flex">
+			<button class="flex-fill btn btn-success" id="verify_kyc_btn">Verify Now</button>
+			<button class="flex-fill ml-1 btn btn-warning" onclick="$('#backToLogin').click()">Go to Login</button>
+		</div>
 	</div>
+
+	<div class="text-center" style="display: none;" id="verify_kyc_container">
+		Put KYC here
+	</div>
+
 
 	<form id="signUpForm">
 		<div class="form-group">
@@ -56,13 +66,13 @@
 			<input type="date" class="form-control" name="birthdate" placeholder="Birthdate">
 		</div>
 
-		<!-- <div class="form-group">
-			<label for="exampleInputEmail1">Mobile Number & OTP</label>
+		<div class="form-group">
+			<label for="exampleInputEmail1">Mobile </label>
 			<input type="number" class="form-control" name="mobileNumber" aria-describedby="emailHelp" placeholder="Enter Mobile Number with country code">
 			<small id="emailHelp" class="form-text text-light">Please indicate dialing code ex. (+)01954558879</small>
 		</div>
 
-		<div class="input-group mb-3">
+		<!-- <div class="input-group mb-3">
 			<input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1" placeholder="Enter SMS OTP" name="otp">
 
 			<div class="input-group-prepend">
@@ -109,48 +119,26 @@
 		$("#container").append(res);
 	})
 
-	// $("#network").selectpicker();
+	$("#verify_kyc_btn").on("click", function(){
+		$("#thankYou").toggle();
+		$("#verify_kyc_container").toggle();
+	})
 
-	// jQuery.validator.addMethod("matchOTP", function(value, element) {
-	//     return (value==generatedOtp);
-	// }, "");
+
+	
+
 
 	jQuery.validator.addMethod("checkEmailAvailability", function(value, element) {
 	    return (ajaxShortLinkNoParse("checkEmailAvailability",{'email':value}))
 	}, "Email already taken");
 
-	// $("#sendOtp").on("click", function(){
-	// 	if ($('input[name="mobileNumber"]').valid()) {
-	// 		var timeleft = 29;
-
-	// 		ajaxShortLink("sendOtp",{'generatedOtp':generatedOtp,'destination':$('input[name="mobileNumber"]').val()});
-	// 		$("#sendOtp").attr("disabled",true);
-	// 		$("#sendOtp").text("Resend in 30 Seconds");
-
-	// 		var timer = setInterval(function(){
-	// 	 		$("#sendOtp").text("Resend in "+timeleft+" Seconds");
-
-	// 			if(timeleft <= 0){
-	// 				$("#sendOtp").attr("disabled",false);
-	// 	 			$("#sendOtp").text("Resend");
-
-	// 				clearInterval(timer);
-	// 			}
-	// 	  		timeleft -= 1;
-	// 		}, 1000);
-	// 	}
-	// });
 
 	$("#signUpForm").validate({
 	  	errorClass: 'is-invalid text-danger',
 	  	rules: {
 			fullName: "required",
 			birthdate: "required",
-			// mobileNumber: "required",
-			// otp: {
-			// 	required:true,
-			// 	matchOTP:true
-			// },
+			mobileNumber: "required",
 			email: {
 				required:true,
 				checkEmailAvailability:true
@@ -171,23 +159,23 @@
 
 		    console.log(res);
 
-		    if(res==true){
-		    	$("#thankYou").removeClass('d-none');
-		    	$("#signUpForm").addClass('d-none');
+		    if(res!=false){
+		    	console.log("test");
+		    	$("#thankYou").toggle();
+		    	$("#signUpForm").toggle();
 
-	    		var timeleft = 3;
 
-	    		var timer = setInterval(function(){
-	    			if(timeleft <= 0){
-	    				var res = ajaxLoadPage('quickLoadPage',{'pagename':'loginform'});
+	    		// var timeleft = 3;
 
-	    				$("#container").empty();
-	    				$("#container").append(res);
+	    		// var timer = setInterval(function(){
+	    		// 	if(timeleft <= 0){
+	    		// 		$("#container").empty();
+	    		// 		$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'loginform'}));
 
-	    				clearInterval(timer);
-	    			}
-	    	  		timeleft -= 1;
-	    		}, 1000);
+	    		// 		clearInterval(timer);
+	    		// 	}
+	    	 //  		timeleft -= 1;
+	    		// }, 1000);
 		    }else{
 		    	alert("error in signing up: please contact system admin !errorCode 3322!");
 		    }
