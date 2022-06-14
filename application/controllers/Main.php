@@ -123,9 +123,10 @@ class main extends MY_Controller {
 			'email' => $data['email'],
 			'password' => md5($data['password']),
 			'fullname' => $data['fullName'],
-			'timestamp' => $this->_getTimeStamp(),
+			'mobileNumber' => $data['mobileNumber'],
+			'timestamp' => $this->_getTimeStamp24Hours(),
 			'birthday' => $data['birthdate'],
-			'verified' => 1,
+			'verified' => 0,
 		);
 
 		$saveQueryNotifUserId = $this->_insertRecords($tableName = 'user_tbl', $insertRecord);
@@ -136,108 +137,113 @@ class main extends MY_Controller {
 			'timestamp_edit' => $this->_getTimeStamp(),
 		);
 
-		$saveQueryNotifUserId = $this->_insertRecords($tableName = 'token_selected', $insertRecord);
+		$tokenSelectedRes = $this->_insertRecords($tableName = 'token_selected', $insertRecord);
 
-		if ($saveQueryNotifUserId) {
+		if ($tokenSelectedRes) {
 			$apikey = "4h7896o0ujoskkwk84wo0848wo0o0w4wg8sw84wwcs80kwcg4kc8ogwg44s4ocw8"; // API Key in your account panel
 			$password = md5($data['password']);
 
-			// //TRX
-			// 	$ch = curl_init("https://eu.trx.chaingateway.io/v1/newAddress");
+			// // create wallets
+			// 	//TRX
+			// 		$ch = curl_init("https://eu.trx.chaingateway.io/v1/newAddress");
 
-			// 	curl_setopt( $ch, CURLOPT_HTTPHEADER, 
-			// 		array(
-			// 			"Content-Type:application/json",
-			// 			"Authorization:".$apikey
-			// 		)
-			// 	);
-
-			// 	curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
-
-			// 	$result = curl_exec($ch);
-			// 	$resultdecoded = json_decode($result, true);
-			// 	curl_close($ch);
-
-			// 	if ($resultdecoded['ok']==true) {
-			// 		$insertRecord = array(
-			// 			'privateKey' => $resultdecoded['privatekey'],
-			// 			'hexAddress' => $resultdecoded['hexaddress'],
-			// 			'address' => $resultdecoded['address'],
-			// 			'dateCreated' => $this->_getTimeStamp(),
-			// 			'userOwner' => $saveQueryNotifUserId,
+			// 		curl_setopt( $ch, CURLOPT_HTTPHEADER, 
+			// 			array(
+			// 				"Content-Type:application/json",
+			// 				"Authorization:".$apikey
+			// 			)
 			// 		);
 
-			// 		$saveQueryNotif = $this->_insertRecords($tableName = 'trc20_wallet', $insertRecord);
-			// 	}else{
-			// 		echo json_encode(false);
-			// 	}
-			// //TRX
+			// 		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
 
-			// //BSC
-			// 	$ch = curl_init("https://eu.bsc.chaingateway.io/v1/newAddress");
-			// 	$payload = json_encode(
-			// 		array(
-			// 			"password" => $password,
-			// 		) 
-			// 	);
+			// 		$result = curl_exec($ch);
+			// 		$resultdecoded = json_decode($result, true);
+			// 		curl_close($ch);
 
-			// 	curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
-			// 	curl_setopt( $ch, CURLOPT_HTTPHEADER, array("Content-Type:application/json", "Authorization: " . $apikey));
+			// 		if ($resultdecoded['ok']==true) {
+			// 			$insertRecord = array(
+			// 				'privateKey' => $resultdecoded['privatekey'],
+			// 				'hexAddress' => $resultdecoded['hexaddress'],
+			// 				'address' => $resultdecoded['address'],
+			// 				'dateCreated' => $this->_getTimeStamp(),
+			// 				'userOwner' => $saveQueryNotifUserId,
+			// 			);
 
-			// 	# Return response instead of printing.
-			// 	curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+			// 			$saveQueryNotif = $this->_insertRecords($tableName = 'trc20_wallet', $insertRecord);
+			// 		}else{
+			// 			echo json_encode(false);
+			// 		}
+			// 	//TRX
 
-			// 	$result = curl_exec($ch);
-			// 	$resultdecoded = json_decode($result, true);
-			// 	curl_close($ch);
-
-			// 	if ($resultdecoded['ok']==true) {
-			// 		$insertRecord = array(
-			// 			'password' => $resultdecoded['password'],
-			// 			'address' => $resultdecoded['binancecoinaddress'],
-			// 			'dateCreated' => $this->_getTimeStamp(),
-			// 			'userOwner' => $saveQueryNotifUserId,
+			// 	//BSC
+			// 		$ch = curl_init("https://eu.bsc.chaingateway.io/v1/newAddress");
+			// 		$payload = json_encode(
+			// 			array(
+			// 				"password" => $password,
+			// 			) 
 			// 		);
 
-			// 		$saveQueryNotif = $this->_insertRecords($tableName = 'bsc_wallet', $insertRecord);
-			// 	}else{
-			// 		echo json_encode(false);
-			// 	}
-			// //BSC
+			// 		curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
+			// 		curl_setopt( $ch, CURLOPT_HTTPHEADER, array("Content-Type:application/json", "Authorization: " . $apikey));
 
-			// //ETHER
-			// 	$ch = curl_init("https://eu.eth.chaingateway.io/v1/newAddress");
-			// 	$payload = json_encode(
-			// 		array(
-			// 			"password" => $password,
-			// 		) 
-			// 	);
+			// 		# Return response instead of printing.
+			// 		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
 
-			// 	curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
-			// 	curl_setopt( $ch, CURLOPT_HTTPHEADER, array("Content-Type:application/json", "Authorization: " . $apikey));
+			// 		$result = curl_exec($ch);
+			// 		$resultdecoded = json_decode($result, true);
+			// 		curl_close($ch);
 
-			// 	# Return response instead of printing.
-			// 	curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+			// 		if ($resultdecoded['ok']==true) {
+			// 			$insertRecord = array(
+			// 				'password' => $resultdecoded['password'],
+			// 				'address' => $resultdecoded['binancecoinaddress'],
+			// 				'dateCreated' => $this->_getTimeStamp(),
+			// 				'userOwner' => $saveQueryNotifUserId,
+			// 			);
 
-			// 	$result = curl_exec($ch);
-			// 	$resultdecoded = json_decode($result, true);
-			// 	curl_close($ch);
+			// 			$saveQueryNotif = $this->_insertRecords($tableName = 'bsc_wallet', $insertRecord);
+			// 		}else{
+			// 			echo json_encode(false);
+			// 		}
+			// 	//BSC
 
-			// 	if ($resultdecoded['ok']==true) {
-			// 		$insertRecord = array(
-			// 			'password' => $resultdecoded['password'],
-			// 			'address' => $resultdecoded['ethereumaddress'],
-			// 			'dateCreated' => $this->_getTimeStamp(),
-			// 			'userOwner' => $saveQueryNotifUserId,
+			// 	//ETHER
+			// 		$ch = curl_init("https://eu.eth.chaingateway.io/v1/newAddress");
+			// 		$payload = json_encode(
+			// 			array(
+			// 				"password" => $password,
+			// 			) 
 			// 		);
 
-			// 		$saveQueryNotif = $this->_insertRecords($tableName = 'erc20_wallet', $insertRecord);
-			// 	}else{
-			// 		echo json_encode(false);
-			// 	}
-			// //ETHER
+			// 		curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
+			// 		curl_setopt( $ch, CURLOPT_HTTPHEADER, array("Content-Type:application/json", "Authorization: " . $apikey));
 
-			echo json_encode(true);
+			// 		# Return response instead of printing.
+			// 		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+
+			// 		$result = curl_exec($ch);
+			// 		$resultdecoded = json_decode($result, true);
+			// 		curl_close($ch);
+
+			// 		if ($resultdecoded['ok']==true) {
+			// 			$insertRecord = array(
+			// 				'password' => $resultdecoded['password'],
+			// 				'address' => $resultdecoded['ethereumaddress'],
+			// 				'dateCreated' => $this->_getTimeStamp(),
+			// 				'userOwner' => $saveQueryNotifUserId,
+			// 			);
+
+			// 			$saveQueryNotif = $this->_insertRecords($tableName = 'erc20_wallet', $insertRecord);
+			// 		}else{
+			// 			echo json_encode(false);
+			// 		}
+			// 	//ETHER
+			// // create wallets
+
+
+			
+
+			echo json_encode($saveQueryNotifUserId);
 		}else{
 			echo json_encode(false);
 		}

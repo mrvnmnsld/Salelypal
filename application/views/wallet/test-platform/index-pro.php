@@ -357,7 +357,7 @@
 
 						<div class="row">
 							<div class="col-6 text-center">
-								<button class="btn btn-outline-link btn-block main-color-text mt-2 text-muted" id="addToken_btn">
+								<button class="btn btn-outline-link btn-block main-color-text mt-2 text-muted" disabled id="addToken_btn">
 									<i class="fa fa-sliders" aria-hidden="true"></i>
 									Add more
 								</button>
@@ -683,6 +683,8 @@
 					  		
 					  		$('#visible_btn').toggle();
 					  		$('#refresh_btn').removeAttr("disabled");
+					  		$('#addToken_btn').removeAttr("disabled");
+
 
 					  		// chart PNL
 						  		$("#pnl_loading").toggle();
@@ -830,6 +832,8 @@
 						  		$("#totalInUsdContainer").append(" "+displayCurrency.toUpperCase());
 						  		$('#visible_btn').toggle();
 						  		$('#refresh_btn').removeAttr("disabled");
+						  		$('#addToken_btn').removeAttr("disabled");
+						  		
 								console.timeEnd('loadTimer');
 						    }
 
@@ -1258,7 +1262,7 @@
 
 		function loadTokenInfo(tokenInfo){
 			var differenceResponse = ajaxShortLink('userWallet/getTokenDifference',{'tokenName':tokenInfo.coingeckoTokenId});
-			console.log(differenceResponse,displayCurrency);
+			// console.log(differenceResponse,displayCurrency);
 
 			var valueNow = differenceResponse.market_data.current_price[displayCurrency]
 			var changePercentage = differenceResponse.market_data.price_change_percentage_24h;
@@ -1322,10 +1326,10 @@
 			tokenNames.push(tokenInfo.tokenName);
 			tokenBalance.push(balanceInner);
 
-			console.log($("#"+tokenInfo.tokenName+"_amount_container"))
+			console.log($("#"+tokenInfo.id+"_amount_container"))
 
-			$("#"+tokenInfo.tokenName+"_amount_container").html(parseFloat(balanceInner).toFixed(tokenInfo.decimal)+' <br>'+tokenInfo.tokenName.toUpperCase());
-			$("#"+tokenInfo.tokenName+"_change_container").html(valueNow.toFixed(3)+' | <span class="'+color+'">'+sign+changePercentage.toFixed(2)+'%</span>');
+			$("#"+tokenInfo.id+"_amount_container").html(parseFloat(balanceInner).toFixed(tokenInfo.decimal)+' <br>'+tokenInfo.tokenName.toUpperCase());
+			$("#"+tokenInfo.id+"_change_container").html(valueNow.toFixed(3)+' | <span class="'+color+'">'+sign+changePercentage.toFixed(2)+'%</span>');
 			
 			totalInUsd = totalInUsd+(parseFloat(valueNow)*parseFloat(balanceInner));
 
@@ -1345,20 +1349,21 @@
 		function loadSystem(){
 			tokenNames = [];
 			tokenBalance = [];
+			// console.log(tokensSelected);
 			
 			for (var i = 0; i < tokensSelected.length; i++) {
 		
 				$("#tokenContainer").append(
-					'<div id="'+tokensSelected[i].tokenName+'_container" class="row mb-2">'+
+					'<div id="'+tokensSelected[i].id+'_container" class="row mb-2">'+
 						'<div class="col-2 row" style="flex-basis:10%">'+
 							'<div class="col-12 mt-2">'+
-								'<img  style="width: 40px;" src="'+tokensSelected[i].tokenImage+'">'+
+								'<img  style="width: 40px;height:40px;" src="'+tokensSelected[i].tokenImage+'">'+
 							'</div>'+
 						'</div>'+
 
 						'<div class="col-7 ml-4">'+
 							'<span >'+
-								'<span class="main-color-text" id="'+tokensSelected[i].tokenName+'_name_container">'+
+								'<span class="main-color-text" id="'+tokensSelected[i].id+'_name_container">'+
 									tokensSelected[i].description+" ("+tokensSelected[i].networkName.toUpperCase()+")"+
 								'</span>'+
 							'</span>'+
@@ -1368,7 +1373,7 @@
 							'<span class="h5">'+
 								// '<span style="font-size: 15px;" id="'+tokensSelected[i].tokenName+'_change_container">'+
 									// valueNow+' | <span class="'+color+'">'+changePercentage+'%</span>'+
-								'<span class="text-muted" style="font-size:.65em;" id="'+tokensSelected[i].tokenName+'_change_container">Loading...</span>'+
+								'<span class="text-muted" style="font-size:.65em;" id="'+tokensSelected[i].id+'_change_container">Loading...</span>'+
 							'</span>'+
 						'</div>'+
 
@@ -1376,14 +1381,14 @@
 								// '<span style="font-size: 14px;text-align: center;" id="'+tokensSelected[i].tokenName+'_amount_container">'+
 									// parseFloat(balanceInner).toFixed(3)+' '+tokensSelected[i].tokenName.toUpperCase()+
 
-								'<span class="main-color-text" style="font-size: 13px;" id="'+tokensSelected[i].tokenName+'_amount_container">Loading...</span>'+
+								'<span class="main-color-text" style="font-size: 13px;" id="'+tokensSelected[i].id+'_amount_container">Loading...</span>'+
 						'</div>'+
 					'</div>'
 				);
 
 				// loadTokenInfo(tokensSelected[i].tokenName,tokensSelected[i].coingeckoTokenId)
 
-				$('#'+tokensSelected[i].tokenName+'_container').on('click',function(){
+				$('#'+tokensSelected[i].id+'_container').on('click',function(){
 						addBreadCrumbs("wallet/test-platform/viewTokenInfo");
 
 						$("#loading_text_container").text("Please wait while we load your recent activities");

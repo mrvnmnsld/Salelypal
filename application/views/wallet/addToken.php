@@ -111,6 +111,127 @@
 		});
 
 		var res = ajaxShortLink("userWallet/updateTokenManagement",{'tokenIDSelected':container.checked.toString(),'userID':currentUser['userID']})
+		tokensSelected = ajaxShortLink('userWallet/getAllSelectedTokensVer2',{'userID':15});
+
+		$("#top_back_btn").click();
+
+		$("#tokenContainer").empty();
+		$("#totalInUsdContainer").text("Loading...");
+		$("#addToken_btn").attr("disabled",'true');
+		$("#refresh_btn").attr("disabled",'true');
+
+		
+		
+
+		totalInUsd = 0;
+		loadSystem();
+
+		setTimeout(function(){
+			var i = 0;
+
+			function myLoop() {
+			  	tokenLoadTimer = setTimeout(function() {
+				    if (i < tokensSelected.length) {
+				    	coinIds.push(tokensSelected[i].coingeckoTokenId);
+				    	// coinIds
+						loadTokenInfo(tokensSelected[i]);
+						myLoop();
+				    }else{
+				  		$("#totalInUsdContainer").html(numberWithCommas(totalInUsd.toFixed(2)));
+				  		$("#totalInUsdContainer").append(" "+displayCurrency.toUpperCase());
+				  		
+				  		$('#visible_btn').toggle();
+				  		$('#refresh_btn').removeAttr("disabled");
+				  		$('#addToken_btn').removeAttr("disabled");
+
+
+				  		// chart PNL
+					  		$("#pnl_loading").toggle();
+					  		$("#pnl_main").toggle();
+
+
+			  				var yValues = ajaxShortLink("userWallet/getToken24HourChange",{
+				  				"coinIds":coinIds.toString()
+				  			})
+			  				var xValues = getDaysDate(6);
+
+			  				const average = yValues.reduce((a, b) => a + b, 0) / yValues.length;
+
+			  				console.log(yValues);
+			  				console.log(average);
+
+			  				$("#yesterdayPnl").text(parseFloat(yValues[yValues.length-1]).toFixed(2)+"% Change");
+			  				$("#allDaysPnl").text(average.toFixed(2)+"% Change");
+
+			  				new Chart("pnl_chart_container", {
+			  				  	type: "line",
+			  				  	data: {
+			  				    	labels: xValues,
+			  			    		datasets: [{
+			  						      // backgroundColor: "rgba(0,0,0,1.0)",
+			  						      fill: false,
+			  						      label: false,
+			  						      borderColor: "#94abef",
+			  						      data: yValues
+			  					    }]
+			  					},
+			  				  	options:{
+			  				  		responsive: true,
+		  				        	legend: {
+		  				          		position: 'top',
+		  				          		display: false
+		  				        	},
+		  				        	title: {
+		  			          			display: false,
+		  			          			// text: 'Chart.js Line Chart'
+		  				       	 	},
+			  		      		    tooltips: {
+			  		      		        callbacks: {
+			  		      		           label: function(tooltipItem) {
+			  		      		                  return tooltipItem.yLabel;
+			  		      		           }
+			  		      		        }
+			  		      		    }
+			  				  	}
+			  				});
+
+			  				var xValues = tokenNames;
+			  				var yValues = tokenBalance;
+
+
+			  				var barColors = getRandomColorIteration(xValues.length);
+
+			  				new Chart("assets_chart_container", {
+			  				  	type: "pie",
+			  				  	data: {
+				  				    labels: xValues,
+				  				    datasets: [{
+				  				      	backgroundColor: barColors,
+			  				      		data: yValues
+				  				    }]
+			  				  	},
+			  				  	options: {
+				  				    title: {
+			  				      		display: false,
+			  				      		// text: "World Wide Wine Production 2018"
+				  				    },
+				  				    legend: {
+			  				      		display: true
+				  				    }
+			  				  }
+			  				});
+
+				  		// chart PNL
+
+						console.timeEnd('loadTimer');
+				    }
+
+			    	i++;
+			  	}, 500)
+			}
+
+			myLoop();
+		}, 1000);		
 
 		$.toast({
 		    heading: '<h6>Success!</h6>',
