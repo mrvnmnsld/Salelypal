@@ -240,6 +240,7 @@
         if (found==undefined&&tokenInfoWithdraw!='') {
         	$.confirm({
         	    title: 'Something is up!',
+                theme: 'dark',
         	    content: 'This token is not currently added to your wallet, do you wish to list this in your managed tokens?',
         	    buttons: {
         	    	yes: {

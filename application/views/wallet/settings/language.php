@@ -39,6 +39,7 @@
 				$.confirm({
 					icon: 'fa fa-language',
 					title: 'Changing language?',
+					theme: 'dark',
 					columnClass: 'col-md-6 col-md-offset-6',
 					content: 'Are you sure you want to <b>Change the language</b> to '+$("#language_selector option:selected").text()+'?',
 					buttons: {
