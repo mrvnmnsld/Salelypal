@@ -33,11 +33,6 @@
 		$("#loading").toggle();
 		$("#footer").toggle();
 		$("#innerContainer").toggle();
-
-		$(".dt-button").each(function( index ) {
-		  $(this).removeClass();
-		  $(this).addClass('btn btn-primary');
-		});
 	});
 
 	$('#tableContainer').on('click', 'tbody tr', function () {
@@ -88,6 +83,11 @@
 					}
     		},autoWidth: false,
     		 "order": [[ 7, "desc" ]]
+		});
+
+		$(".dt-button").each(function( index ) {
+		  $(this).removeClass();
+		  $(this).addClass('btn btn-primary');
 		});
 	}
 </script>

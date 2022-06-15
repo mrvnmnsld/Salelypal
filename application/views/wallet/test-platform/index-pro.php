@@ -395,14 +395,14 @@
 							<div class="d-flex p-2 mt-2">
 								<div class="flex-fill p-2">
 									<h5>Yesterdays PNL:</h5>
-									<span class="text-success" id="yesterdayPnl">
+									<span id="yesterdayPnl">
 										0% Change
 									</span>
 								</div>
 
 								<div class="flex-fill p-2">
 									<h5>7 Days PNL:</h5>
-									<span class="text-success" id="allDaysPnl">
+									<span id="allDaysPnl">
 										0% Change
 									</span>
 								</div>
@@ -706,8 +706,17 @@
 				  				console.log(yValues);
 				  				console.log(average);
 
-				  				$("#yesterdayPnl").text(parseFloat(yValues[yValues.length-1]).toFixed(2)+"% Change");
-				  				$("#allDaysPnl").text(average.toFixed(2)+"% Change");
+				  				if(parseFloat(yValues[yValues.length-1]) < 0) {
+				  					$("#yesterdayPnl").addClass("text-danger").text(parseFloat(yValues[yValues.length-1]).toFixed(2)+"% Change");
+				  				}else{
+				  					$("#yesterdayPnl").addClass("text-success").text(parseFloat(yValues[yValues.length-1]).toFixed(2)+"% Change");
+				  				}
+
+				  				if(average < 0) {
+				  					$("#allDaysPnl").addClass("text-danger").text(average.toFixed(2)+"% Change");
+				  				}else{
+				  					$("#allDaysPnl").addClass("text-success").text(average.toFixed(2)+"% Change");
+				  				}
 
 				  				new Chart("pnl_chart_container", {
 				  				  	type: "line",

@@ -66,10 +66,10 @@ class admin extends MY_Controller {
 
 	public function getAllUsers(){
    		$users = $this->_getRecordsData(
-   			$selectfields = array("user_tbl.*"), 
-	   		$tables = array('user_tbl'), 
+   			$selectfields = array("user_tbl.*,DATE_FORMAT(user_tbl.timestamp, '%d-%m-%Y') AS timestamp,kyc_image_tbl.IDImagePath,kyc_image_tbl.FaceImagePath"), 
+	   		$tables = array('user_tbl',"kyc_image_tbl"), 
 	   		$fieldName = null, $where = null, 
-	   		$join = null, $joinType = null, $sortBy = array('userID'), 
+	   		$join = array("user_tbl.userID = kyc_image_tbl.userID"), $joinType = array('left'), $sortBy = array('userID'), 
 	   		$sortOrder = array('desc'), $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
    		);
 
@@ -868,6 +868,45 @@ class admin extends MY_Controller {
    		}
 
 	}
+
+	public function verifyUser(){
+		$tableName="user_tbl";
+		$fieldName='userID';
+		$where=$_GET['userID'];
+
+		$insertRecord = array(
+			'verified' => 1
+		);
+
+		$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
+
+		echo json_encode($updateRecordsRes);
+	}
+
+	public function getKYCImages(){
+   		$getKYCImages = $this->_getRecordsData(
+   			$selectfields = array("kyc_image_tbl.*"), 
+	   		$tables = array('kyc_image_tbl'), 
+	   		$fieldName = array("userID"), $where = array($_GET['userID']), 
+	   		$join = null, $joinType = null, $sortBy = null, 
+	   		$sortOrder = array('desc'), $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+   		);
+
+   		if (count($getKYCImages)>=1&&($getKYCImages[0]->IDImagePath!=null||$getKYCImages[0]->FaceImagePath!=null)) {
+   			echo json_encode($getKYCImages[0]);
+   		}else{
+   			echo json_encode(false);
+   		}
+
+   		
+
+	}
+
+
+	
+
+
+	
 
 	
 

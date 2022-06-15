@@ -5,7 +5,7 @@
       <sub class="fw-bold">Clients who signed up</sub>
     </div>
 
-    <hr>
+    <br>
 
     <table id="tableContainer" class="table table-hover" style="width:100%">
     	<thead>
@@ -16,6 +16,10 @@
                 <th>Name</th>
                 <th>Last login Date</th>
                 <th>Last login IP Address</th>
+                <th>Verified</th>
+                <th>Blocked</th>
+                <th>Date Joined</th>
+
             </tr>
         </thead>
     </table>
@@ -61,6 +65,9 @@
 				{ data:'fullname'},
 				{ data:'lastLoginDate'},
 				{ data:'ip_lastLogin'},
+				{ data:'verified'},
+				{ data:'isBlocked'},
+				{ data:'timestamp'},
 	        ],
 			"columnDefs": [
 				{
@@ -73,21 +80,34 @@
 		        }
 			],"createdRow": function( row, data, dataIndex){
 				if (data['isBlocked'] == 1) {
-					$(row).addClass('bg-danger text-light');
+					$(row).find("td:eq(6)").addClass('text-danger').text("Yes");
+				}else{
+					$(row).find("td:eq(6)").addClass('text-success').text("No");
 				}
 
 				if (data['lastLoginDate'] == null) {
-					// $(row[0]+":eq("+dataIndex+")").addClass('bg-danger text-light');
-					// console.log(row+":eq("+dataIndex+")");
-					// $(row).find("td:eq(4)");
 					$(row).find("td:eq(3)").addClass('text-warning').text("No data available");
-				}
-
-				if (data['ip_lastLogin'] == null) {
 					$(row).find("td:eq(4)").addClass('text-warning').text("No data available");
 				}
-	        },
+
+
+				if (data['verified'] == 0) {
+					if(data['FaceImagePath'] != null && data['IDImagePath'] != null) {
+						$(row).find("td:eq(5)").addClass('text-warning').text("Pending");
+					}else if((data['FaceImagePath'] == null || data['IDImagePath'] == null) && (data['FaceImagePath'] == null && data['IDImagePath'] == null)){
+						$(row).find("td:eq(5)").addClass('text-danger').text("Incomplete");
+					}
+				}else{
+					$(row).find("td:eq(5)").addClass('text-success').text("Yes");
+
+				}
+      },
 			"autoWidth": false,
+		});
+
+		$(".dt-button").each(function( index ) {
+		  $(this).removeClass();
+		  $(this).addClass('btn btn-primary');
 		});
 	}
 

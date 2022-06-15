@@ -99,7 +99,7 @@
         </div>
     </div>
 
-    <div class="text-center">Countdown to resolve</div>
+    <!-- <div class="text-center">Countdown to resolve</div> -->
 
     <div class="d-flex justify-content-center">
         <div class="text-center m-2">
@@ -195,6 +195,7 @@
                 if($("#amount_input_container").val()<=availableAmount&&isGasEnough==1&&parseFloat(amount)>=parseFloat(bettingSettings[1].value)){
                     $.confirm({
                         title: 'Buy short?',
+                        theme: 'dark',
                         content: 'Are you sure you want to proceed with these risks?',
                         buttons: {
                             confirm: function () {

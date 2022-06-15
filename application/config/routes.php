@@ -25,8 +25,10 @@ $route['editProfile'] = 'main/editProfile';
 $route['main/editProfileV2'] = 'main/editProfileV2';
 $route['saveNewProfilePic'] = 'main/saveNewProfilePic';
 $route['confirmPassword'] = 'main/confirmPassword';
+
 $route['main/getCurrentPrice'] = 'main/getCurrentPrice';
 $route['main/getTokenInfoViaID'] = 'main/getTokenInfoViaID';
+
 $route['saveFaceImageKyc'] = 'main/saveFaceImageKyc';
 $route['saveIDImageKyc'] = 'main/saveIDImageKyc';
 
@@ -40,11 +42,14 @@ $route['saveIDImageKyc'] = 'main/saveIDImageKyc';
 
 
 	$route['admin/getTopUpChartData'] = 'admin/getTopUpChartData';
+	
 	//USERS
 		$route['admin/getAllUsers'] = 'admin/getAllUsers';
 		$route['admin/userlist/blockuser'] = 'admin/blockuser';
 		$route['admin/userlist/unblockuser'] = 'admin/unblockuser';
 		$route['admin/userlist/resetPassword'] = 'admin/resetPassword';
+		$route['admin/userlist/verify'] = 'admin/verifyUser';
+		$route['admin/getKYCImages'] = 'admin/getKYCImages';
 	//USERS
 
 	//ADMIN Users
@@ -73,9 +78,6 @@ $route['saveIDImageKyc'] = 'main/saveIDImageKyc';
 
 	$route['admin/getBettingSettings'] = 'admin/getBettingSettings';
 	$route['admin/saveBettingSettings'] = 'admin/saveBettingSettings';
-
-	
-
 // Admin
 
 // MainWallet
