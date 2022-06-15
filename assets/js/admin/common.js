@@ -278,12 +278,12 @@ function setChartJsTablePie(labelArray,dataArray,chartId,width,height,title){
 function resetCanvas(chartId,width,height){
     console.log("RESETING CANVAS: running");
 
-  $(chartId).remove(); // this is my <canvas> element
-  $('#graph-container').append('<canvas id="'+chartId+'"><canvas>');
-  canvas = document.querySelector('#'+chartId);
-  ctx = canvas.getContext('2d');
-  ctx.canvas.width = width;
-  ctx.canvas.height = height;
+    $(chartId).remove(); // this is my <canvas> element
+    $('#graph-container').append('<canvas id="'+chartId+'"><canvas>');
+    canvas = document.querySelector('#'+chartId);
+    ctx = canvas.getContext('2d');
+    ctx.canvas.width = width;
+    ctx.canvas.height = height;
 }
 
 function setDataTable(tableKeys,tableLabels,inventoryArray){    

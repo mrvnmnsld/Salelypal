@@ -35,6 +35,11 @@
 			theme: 'dark',
 			buttons: {
 				confirm: function () {
+					if (visible == 0) {
+						$('#visible_btn').click();
+						$('#visible_btn').toggle();
+					}
+
 					displayCurrency = $("#display_currency_selector").val()
 					setLocalStorageByKey("displayCurrency",displayCurrency);
 					$('#refresh_btn').click();
