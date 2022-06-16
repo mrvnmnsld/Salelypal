@@ -231,7 +231,7 @@
   <div id="login_form_container">
     <img src="assets/imgs/ezpayex_logo.png">
     <div id="title">Security Wallet Admin</div>
-    <div id="sub-title">Ezpayex</div>
+    <div id="sub-title">Safety Pal</div>
 
     <form id="loginForm">
 
@@ -240,6 +240,8 @@
         <input type="email" class="form-control" id="username" placeholder="Username">
         <div class="invalid-feedback"></div>
       </div> -->
+
+      <div id="errorReporter" class="text-center h5 animate__animated animate__shakeX" style="display:none"></div>
 
       <div class="input-field"> 
         <i class="fa fa-user"></i>
@@ -251,7 +253,6 @@
         <input type="password" name="password" placeholder="Password">     
       </div>
 
-      <div id="errorReporter" class="text-center h5 animate__animated animate__shakeX" style="display:none"></div>
 
       <button>LOGIN</button>
     </form>

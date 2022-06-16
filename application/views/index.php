@@ -76,152 +76,357 @@
 <!-- custom libraries -->
 
 <!-- font -->
-	<style>
-		@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
-	</style>
+<style>
+		/*@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');*/
+		@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap%27');
+ 	 *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+      }
+      body{
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(-135deg, #c850c0, #4158d0);
+      /*background-color: #5426de;*/
+      }
+      .container{
+      position: relative;
+      max-width: 430px;
+      width: 100%;
+      background: #fff;
+      box-shadow: rgba(0, 0, 0, 0.5) 0px 19px 38px, rgba(0, 0, 0, 0.30) 0px 15px 12px;
+      overflow: hidden;
+		  background: linear-gradient(to right, #9e68e8, #7305ff);
+      }
+      .container .forms{
+      display: flex;
+      align-items: center;
+      height: 430px;
+      width: 200%;
+      transition: height 0.2s ease;
+      }
+      .container .form{
+      width: 50%;
+      padding: 30px;
+      background-color: #fff;
+      transition: margin-left 0.18s ease;
+      }
+      .container.active .login{
+      margin-left: -50%;
+      opacity: 0;
+      transition: margin-left 0.18s ease, opacity 0.15s ease;
+      }
+      .container .signup{
+      opacity: 0;
+      transition: opacity 0.09s ease;
+      }
+      .container.active .signup{
+      opacity: 1;
+      transition: opacity 0.2s ease;
+      }
+      .container.active .forms{
+      height: 600px;
+      }
+      .container .form .title{
+      position: relative;
+      font-size: 27px;
+      font-weight: 600;
+      color: #5426de;
+      }
+      .form .title::before{
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 3px;
+      width: 30px;
+      background-color: #5426de;
+      }
+      .form .input-field{
+      position: relative;
+      height: 50px;
+      width: 100%;
+      margin-top: 30px;
+      }
+      .input-field input{
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      padding: 0 35px;
+      border: none;
+      outline: none;
+      font-size: 16px;
+      border-bottom: 2px solid #ccc;
+      border-top: 2px solid transparent;
+      transition: all 0.2s ease;
+      }
+      .input-field input:is(:focus){
+      border-bottom-color: #5426de;
+      }
+      .input-field i{
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #999;
+      font-size: 20px;
+      }
+      .input-field input:is(:focus) ~ i{
+      color: #5426de;
+      }
+      .input-field i.icon{
+      left: 0;
+      }
+      .input-field i.showHidePw{
+      right: 0;
+      cursor: pointer;
+      padding: 10px;
+      }
+      .form .text{
+      color: #333;
+      font-size: 14px;
+      }
+      .form a.text{
+      color: #5426de;
+      text-decoration: none;
+      }
+      .form a:hover{
+      text-decoration: underline;
+      }
+      .form button{
+      width: 100%;
+      height: 100%;
+      border: none;
+      color: #fff;
+      font-size: 20px;
+      font-weight: 1000;
+      letter-spacing: 2px;
+      background-color: #5426de;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      }
+      button:hover{
+      background-color: #9e68e8;
+      }
+      .form .login-signup{
+      margin-top: 30px;
+      text-align: center;
+      }
+
+</style>
+
 <!-- font -->
-
-<style type="text/css">
-
+<!-- <style>
+	*{
+	box-sizing: border-box;
+	font-family: 'Poppins', sans-serif;
+	}
 	body{
-		background-color: white;
-		background-image: url('assets/imgs/bg-2.jpg');
-		background-repeat:no-repeat;
-		background-size:cover;
-		background-size: 100% 110%;
-		/*background-size: auto;*/
-		background-attachment: fixed;
-		/*color: white;*/
-		font-family: 'Roboto Condensed', sans-serif;
+	background-color: white;
+	background-image: url('assets/imgs/bg-2.jpg');
+	background-repeat:no-repeat;
+	background-size:cover;
+	background-size: 100% 110%;
+	/*background-size: auto;*/
+	background-attachment: fixed;
 	}
 
 	.navbarFixed {
-	  background-color: #3c3c3c;
-	  overflow: hidden;
-	  position: fixed;
-	  bottom: 0;
-	  /*width: 100%;*/
+	background-color: #3c3c3c;
+	overflow: hidden;
+	position: fixed;
+	bottom: 0;
+	/*width: 100%;*/
 	}
 
 	.navbarFixed a {
-	  float: left;
-	  display: block;
-	  color: #f2f2f2;
-	  text-align: center;
-	  padding: 14px 16px;
-	  text-decoration: none;
-	  font-size: 13px;
-	  width: 20%;
-	  font-weight: bold;
-	  font-family: 'Roboto Condensed', sans-serif;
+	float: left;
+	display: block;
+	color: #f2f2f2;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-size: 13px;
+	width: 20%;
+	font-weight: bold;
+	font-family: 'Roboto Condensed', sans-serif;
 	}
 
 	.navbarFixed a img{
-	  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(208deg) brightness(106%) contrast(102%);  
-	  width: 50%;
+	filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(208deg) brightness(106%) contrast(102%);  
+	width: 50%;
 	}
 
 	.navbarFixed a.active {
-	  color: white;
-	  padding-bottom: 3px;
-	  border-bottom: 3px solid white;
+	color: white;
+	padding-bottom: 3px;
+	border-bottom: 3px solid white;
 	}
 
 	.cardboxes{
-		background-color: #1C81D3;
-		border-radius: 10px;
+	background-color: #1C81D3;
+	border-radius: 10px;
 	}
 
 	.footer {
-		/*background-color: #cdcdcd;*/
-		/*height: 180px;*/
-		text-align: center;
-		padding-top: 10px;
-		width: 100%;
-		position:fixed;
-		left: 0px;
-		bottom: 0px;
-	  	font-family: 'Roboto Condensed', sans-serif;
+	/*background-color: #cdcdcd;*/
+	/*height: 180px;*/
+	text-align: center;
+	padding-top: 10px;
+	width: 100%;
+	position:fixed;
+	left: 0px;
+	bottom: 0px;
+	font-family: 'Roboto Condensed', sans-serif;
 	}
 
 	/*login*/
-		.login-container{
-			width: 90%;
-			margin-left: 5%;
-			padding: 20px;
-			background-color: rgba(0,0,0,0.3);
-		}
+	.login-container{
+	width: 90%;
+	margin-left: 5%;
+	padding: 20px;
+	background-color: rgba(0,0,0,0.3);
+	}
 
-		.circle{
-		    border-radius: 50%;
-		    width: 150px;
-		    height: 150px;
-		    background-color: white;
-	  	}
+	.circle{
+	border-radius: 50%;
+	width: 150px;
+	height: 150px;
+	background-color: white;
+	}
 
-		label.is-invalid{
-			color: red;
-		}
-
+	label.is-invalid{
+	color: red;
+	}
 
 	/*login*/
-</style>
+</style> -->
 
 <body>
-<div id="container">
-	<div class="h2 text-center" style="margin-top: 6vh;font-family: 'Roboto Condensed', sans-serif;">
-		<!-- <div class="circle" style="margin: auto"> -->
-			<img style="margin-top: 10%;width:30%;" src="assets/imgs/logo_main.png">
-		<!-- </div><br> -->
-	</div><br>
 
-	<div class="text-center mt-4 login-container" style="font-family: 'Roboto Condensed', sans-serif;">
-		<span class="h2 font-weight-bold">LOGIN</span>
+    <div class="container">
+      <div class="forms">
+        <div class="form login">
+          <span class="title">SafetyPal</span>
 
-		<!-- <sub>Please input your email and password</sub> -->
-		<br>
+          <form id="loginForm">
+            <div class="input-field">
+              <input id="emailAddress" name="emailAddress" type="emial" placeholder="Enter your username">
+              <i class="fa fa-user-o icon"></i>
+            </div>
 
-		<form id="loginForm">
-	  		<div class="form-group">
-			    <label for="exampleInputEmail1" style="float:left">Email</label>
-			    <input type="email" class="form-control" name="emailAddress" id="emailAddress" aria-describedby="emailHelp" placeholder="Enter email">
-		 	</div>
-		  	
-		  	<div class="form-group">
-		    	<label for="exampleInputPassword1"style="float:left">Password</label>
-		    	<input type="password" class="form-control" name="password" id="password" placeholder="Password">
-		  	</div>
+            <div class="input-field">
+              <input id="password" name="password" type="password" class="password" autocomplete="chrome-off" placeholder="Enter your password">
+              <i class="fa fa-key icon"></i>
+              <i class="fa fa-eye-slash showHidePw"></i>
+            </div>
 
-		  	<!-- <canvas id="captcha" style="background-color: white;height: 45px;"></canvas>
+            <div class="input-field button">
+              <button id="submit_login_btn" data-toggle="modal" data-target="#sliderCaptchaModal" type="button">LOGIN</button>
+            </div>
+          </form>
 
-  	  		<div class="form-group mt-2">
-  			    <label for="exampleInputEmail1">Enter Captcha above</label>
-  			    <input type="text" class="form-control" name="captcha" aria-describedby="emailHelp" placeholder="Enter Captcha above">
-  		 	</div> -->
+          <div class="login-signup">
+            <span class="text">Not a member?
+              <a href="#" class="text signup-link">Signup now</a>
+            </span>
+          </div>
 
-		  	<div class="text-center bg-dark text-danger mb-3" id="errorReporter"></div>
+        </div>
 
-		  	<button id="submit_login_btn" type="button" data-toggle="modal" data-target="#sliderCaptchaModal" class="btn btn-success col-md-12">Login</button>
+        <div class="form signup">
+          <span class="title">Register</span>
 
-		  	<br>
-		  	
-		  	<span>
-		  		<button id="signUpBtn" class="btn btn-link text-primary" href="#signUp"><u>Not yet a member? Click here</u></button>
-		  	</span>
-		</form>
-	</div>
-</div>
+          <form>
+            <div class="input-field">
+              <input type="text" placeholder="Enter your name">
+              <i class="fa fa-user-circle-o icon"></i>
+            </div>
+            <div class="input-field">
+              <input type="text" placeholder="Enter your username">
+              <i class="fa fa-user-o icon"></i>
+            </div>
 
-<!-- sliderCaptchaModal -->
-<div class="modal fade" id="sliderCaptchaModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered">
-		<div class="modal-content" style="background-color:transparent; border:none;">
-		    <div id="captcha"></div>
-		</div>
-	</div>
-</div>
+            <div class="input-field">
+              <input type="password" class="password" placeholder="Create password">
+              <i class="fa fa-key icon"></i>
+            </div>
+
+            <div class="input-field">
+              <input type="password" class="password" placeholder="Confirm password">
+              <i class="fa fa-key icon"></i>
+              <i class="fa fa-eye-slash showHidePw"></i>
+            </div>
+
+            <div class="input-field button">
+              <button id="" type="button">LOGIN</button>
+            </div>
+          </form>
+
+          <div class="login-signup">
+            <span class="text">Already have an account?
+              <a href="#" class="text login-link">Signin now</a>
+            </span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- sliderCaptchaModal -->
+	    <div class="modal fade" id="sliderCaptchaModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	    	<div class="modal-dialog modal-dialog-centered">
+	    		<div class="modal-content" style="background-color:transparent; border:none;">
+	    		    <div id="captcha"></div>
+	    		</div>
+	    	</div>
+	    </div>
+    <!-- sliderCaptchaModal -->
+
 
 <script type="text/javascript">
+	const container = document.querySelector(".container"),
+	  pwShowHide = document.querySelectorAll(".showHidePw"),
+	  pwFields = document.querySelectorAll(".password"),
+	  signUp = document.querySelector(".signup-link"),
+	  login = document.querySelector(".login-link");
+
+
+	  pwShowHide.forEach(eyeIcon => {
+	  	eyeIcon.addEventListener("click",()=>{
+	  		pwFields.forEach(pwField => {
+	  			if(pwField.type === "password"){
+	  				pwField.type = "text";
+
+	  				pwShowHide.forEach(icon =>{
+	  					icon.classList.replace("fa-eye-slash","fa-eye");
+	  				})
+	  			}else{
+	  				pwField.type = "password";
+
+	  				pwShowHide.forEach(icon =>{
+	  					icon.classList.replace("fa-eye","fa-eye-slash");
+	  				})
+	  			}
+	  		})
+	  	})
+	  })
+
+
+	  signUp.addEventListener("click",()=>{
+	  	container.classList.add("active");
+	  });
+
+	  login.addEventListener("click",()=>{
+	  	container.classList.remove("active");
+	  });
+
+
+
+
 	var currentUser = JSON.parse(getLocalStorageByKey('currentUser'));
 	var referalCode = getUrlParameter('referalCode')
 
@@ -322,6 +527,7 @@
 			
 	// submit_login_btn
 	$("#submit_login_btn").on("click",function(){
+		console.log("click");
 		// binance slider validation
 		// if success continue to validate
 		// validation 

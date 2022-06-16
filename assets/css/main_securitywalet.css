@@ -11,11 +11,12 @@
 		background-color: rgb(0, 0, 0, 50%);
 		/*rgb(0 0 0 / 52%)*/
 		 border-radius: 10px; 
-		font-family: 'Roboto Condensed', sans-serif;
+		/*font-family: 'Roboto Condensed', sans-serif;*/
 		box-shadow: 3px 4px 3px 1px rgb(0 0 0 / 29%);
 		-webkit-box-shadow: 3px 4px 3px 1px rgb(0 0 0 / 29%);
 		letter-spacing: 1px;
 		/*border: 1px solid rgb(0 0 0 / 50%);*/
+		font-family: 'Poppins', sans-serif;
 	}
 
 	.circle{
