@@ -1,17 +1,14 @@
 <link href="assets/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 <style type="text/css">
-	.is-invalid{
-		text-align:center;
-	}
 	.modal-footer{
 		display: none;
 	}
-	.is-invalid{
+
+	label.is-invalid{
 		text-align: center;
-	}
-	.error{
 		color: red;
 	}
+
 	.icon-size{
 		font-size: 1.4em;
 		max-width: 2em;
@@ -73,6 +70,12 @@
 		<div class="input-group row m-1 mb-3">
 			<i class="input-group-text fa fa-key icon-size" aria-hidden="true"></i>
 		  <input type="password" class="form-control" id="password" name="password" placeholder="*Note: Only enter value if changing">
+		</div>
+
+		<label class="fw-bold">Confirm Password</label>
+		<div class="input-group row m-1 mb-3">
+			<i class="input-group-text fa fa-key icon-size" aria-hidden="true"></i>
+		  <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm Password">
 		</div>
 
 		<hr>
@@ -144,17 +147,37 @@
 
 
 
-	// jQuery.validator.addMethod("checkEmailAvailability", function(value, element) {
-	//     return (ajaxShortLinkNoParse("compareEmailUpdate",{'email':value, "currentEmail": selectedData.email}))
-	// }, "Email already taken");
+	jQuery.validator.addMethod("checkUserNameAvailability", function(value, element) {
+		if (selectedData.username == value) {
+			return true
+		}else{
+	    	return (ajaxShortLinkNoParse("agent/checkUserNameAvailability",{'username':value}))
+		}
+	}, "Username already taken");
+
+	jQuery.validator.addMethod("confirmPassword", function(value, element) {
+		if (value == $("#password").val()) return true
+	}, "Password Doesn't Match");
 
 	$("#update_agent_form").validate({
 	  	errorClass: 'is-invalid',
 	  	rules: {
-				fullname: "required",
-				country: "required",
-				username: "required",
-				// password: "required",
+			fullname: {
+				required:true,
+				minlength:2,
+			},
+			country: "required",
+			username: {
+				required:true,
+				minlength:8,
+				checkUserNameAvailability:true,
+			},
+			password: {
+				minlength:8,
+			},
+			confirm_password:{
+				confirmPassword: true
+			}
 	  	},
 	  	submitHandler: function(form){
 		    var data = $('#update_agent_form').serializeArray();

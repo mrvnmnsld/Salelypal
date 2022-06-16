@@ -18,6 +18,7 @@
             <tr>
                 <th>Token Icon</th>
                 <th>Token Name</th>
+                <th>Token Symbol</th>
                 <th>Description</th>
                 <th>Network</th>
             </tr>
@@ -99,6 +100,7 @@
 				{ data:'tokenImage',render: function (data, type, row, meta) {
 	            	return '<img src="' + data + '" height="50" width="50"/>';
 	      		}},
+				{ data:'description'},
 				{ data:'tokenName'},
 				{ data:'description'},
 				{ data:'network'},

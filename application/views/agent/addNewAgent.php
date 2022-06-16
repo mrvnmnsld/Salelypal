@@ -3,8 +3,9 @@
 	.modal-footer{
 		display: none;
 	}
-	.is-invalid{
-		text-align:center;
+	label.is-invalid{
+		text-align: center;
+		color: red;
 	}
 	.error{
 		color: red;
@@ -74,6 +75,12 @@
 		  <input type="password" class="form-control" id="password" name="password" placeholder="Password">
 		</div>
 
+		<label class="fw-bold">Confirm Password</label>
+		<div class="input-group row m-1 mb-3">
+			<i class="input-group-text fa fa-key icon-size" aria-hidden="true"></i>
+		  <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm Password">
+		</div>
+
 		<hr>
 
 		<div class="d-flex flex-row-reverse">
@@ -94,17 +101,34 @@
 		bootbox.hideAll();
 	});
 
-	// jQuery.validator.addMethod("checkEmailAvailability", function(value, element) {
-	//     return (ajaxShortLinkNoParse("checkEmailAvailability",{'email':value}))
-	// }, "Email already taken");
+	jQuery.validator.addMethod("checkUserNameAvailability", function(value, element) {
+	    return (ajaxShortLinkNoParse("agent/checkUserNameAvailability",{'username':value}))
+	}, "Username already taken");
+
+	jQuery.validator.addMethod("confirmPassword", function(value, element) {
+		if (value == $("#password").val()) return true
+	}, "Password Doesn't Match");
 
 	$("#add_agent_form").validate({
 	  	errorClass: 'is-invalid',
 	  	rules: {
-				fullname: "required",
-				country: "required",
-				username: "required",
-				password: "required",
+			fullname: {
+				required:true,
+				minlength:2,
+			},
+			country: "required",
+			username: {
+				required:true,
+				minlength:8,
+				checkUserNameAvailability:true,
+			},
+			password: {
+				required:true,
+				minlength:8,
+			},
+			confirm_password:{
+				confirmPassword: true,
+			}
 	  	},
 	  	submitHandler: function(form){
 		    var data = $('#add_agent_form').serializeArray();

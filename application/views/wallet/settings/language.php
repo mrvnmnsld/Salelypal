@@ -96,10 +96,10 @@
 		function setCookie(key, value, expiry) {
 			var expires = new Date();
 			expires.setTime(expires.getTime() + (expiry * 24 * 60 * 60 * 1000));
-			document.cookie = key + '=' + value + ';expires=' + expires.toUTCString();
-			// document.cookie = key + '=' + value + ';expires=' + expires.toUTCString()+";domain=www.testingcenter.xyz";
-			// document.cookie = key + '=' + value + ';expires=' + expires.toUTCString()+";domain=.testingcenter.xyz";
-			// document.cookie = key + '=' + value + ';expires=' + expires.toUTCString()+";domain=testingcenter.xyz";
+			document.cookie = key + '=' + value + ';expires=' + expires.toUTCString(); //local
+			// document.cookie = key + '=' + value + ';expires=' + expires.toUTCString()+";domain=www.testingcenter.xyz"; //live
+			// document.cookie = key + '=' + value + ';expires=' + expires.toUTCString()+";domain=.testingcenter.xyz"; //live
+			// document.cookie = key + '=' + value + ';expires=' + expires.toUTCString()+";domain=testingcenter.xyz"; //live
 		}
 
 		function deleteAllCookies() {

@@ -32,40 +32,41 @@
 	}
 </style>
 
-
-<div id="innerContainer" style="display:none" class="card pt-3">
+<div id="innerContainer" style="display:none" class="card"><br>
   <div class="card-body">
     <div class="pagetitle">
       <h1>Admin User Type Permission</h1>
       <sub>Edit Admin Permissions</sub>
     </div>
 
-	<div class="d-flex">
+    <br>
+
+  	<div class="d-flex">
     	<button class="btn btn-success mb-2" id="addNewAdminType">
     		<i class="bi bi-plus-circle-fill"></i>
     		 Add New Admin Type
     	</button>
-    </div>
+  	</div>
 
-    <table id="tableContainer" class="table">
+    <table id="tableContainer" class="table table-hover" style="width:100%">
     	<thead>
             <tr>
-                <th></th>
-                <th>ID</th>
-                <th>User Type</th>
-                <th>Date Created</th>
+            	<th></th>
+            	<th>ID</th>
+            	<th>User Type</th>
+            	<th>Date Created</th>
             </tr>
         </thead>
     </table>
+
+  </div>
 </div>
 
 <script type="text/javascript">
 	var consulatationArray = [];
 
 	$(document).ready(function() {
-
 		loadDatatable('admin/getAllUserTypes');
-
 		$("#loading").toggle();
 		$("#footer").toggle();
 		$("#innerContainer").toggle();
@@ -87,7 +88,7 @@
 			            action: function () {
 			                var userType = this.$content.find('#userTypeContainer').val();
 			                if(!userType){
-			                    $.alert('provide a valid details');
+			                    $.alert('Provide valid detail');
 			                    return false;
 			                }else{
 			                	ajaxShortLink(
@@ -127,27 +128,26 @@
 		});
 	});
 
-	function loadDatatable(url){
-		var dataRes = ajaxShortLink(url);
-		console.log(dataRes);
-
+	function loadDatatable(url,data){
+		var callDataViaURLVal = ajaxShortLink(url,data);
 		$('#tableContainer').DataTable().destroy();
 
-		var dt = $('#tableContainer').DataTable({
-			data: dataRes,
+		$('#tableContainer').DataTable({
+			data: callDataViaURLVal,
 			columns: [
-				{ 
-					"class":"details-control",
-					"orderable":false,
-					"data":null,
-					'width':'5%',
-					"defaultContent":
-						 '<button type="button" class="btn btn-primary rounded btn-sm" onClick="viewThis(this)"><i class="bi bi-pencil"></i> Edit</button>&nbsp;'
-				},
-				{ data:'id'},
-				{ data:'userType'},
-				{ data:'dateCreated'},
-			],
+				{},
+				{data:'id'},
+				{data:'userType'},
+				{data:'dateCreated'},
+      ],
+			"columnDefs": [{
+				"targets": 0,
+				"width": "5%",
+				"data": null,
+				"defaultContent": '<button type="button" class="btn btn-primary rounded btn-sm" onClick="viewThis(this)"><i class="bi bi-pencil"></i></button>&nbsp;',
+				"orderable": false,
+				"sortable": false
+			}],
 			"order": [[1, 'asc']],
 			"createdRow": function( row, data, dataIndex){
 				if (data['lastLoginDate'] == null) {
@@ -158,7 +158,12 @@
 					$(row).addClass('bg-danger text-light');
 				}
       },
-	    autoWidth: false
+			"autoWidth": false,
+		});
+
+		$(".dt-button").each(function( index ) {
+		  $(this).removeClass();
+		  $(this).addClass('btn btn-primary');
 		});
 	}
 
@@ -167,7 +172,6 @@
 		selectedData = table.row($(element).closest('tr')).data();
 
 		bootbox.alert({
-		    // message: ajaxLoadPage('quickLoadPage',{'pagename':'userWallets/userListWalletView'}),
 		    message: ajaxLoadPage('quickLoadPage',{'pagename':'users/permission/editPermissions'}),
 		    size: 'large',
 		    centerVertical: true,
@@ -175,3 +179,4 @@
 		});
 	}
 </script>
+

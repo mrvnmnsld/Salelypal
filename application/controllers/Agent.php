@@ -121,9 +121,8 @@ class agent extends MY_Controller {
 		}else{
 			echo json_encode(false);
 		}
-
-	
 	}
+
 	//agent update
 	public function updateAgentInfo(){
 		$insertRecord = array(
@@ -148,6 +147,7 @@ class agent extends MY_Controller {
 			echo json_encode(false);
 		}
 	}
+
 	//agent delete
 	public function deleteAgent(){
 		$deleteQuery = $this->_deleteRecords(
@@ -157,6 +157,27 @@ class agent extends MY_Controller {
 		);
 		echo json_encode($deleteQuery);
 	}
+
+	public function checkUserNameAvailability(){
+   		$username = $_GET['username'];
+
+   		$test = $this->_getRecordsData(
+   			$selectfields = array("*"), 
+	   		$tables = array('agent_profile_tbl'), 
+	   		$fieldName = array('username'), $where = array($username), 
+	   		$join = null, $joinType = null, $sortBy = null, 
+	   		$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+   		);
+
+   		if (count($test)==0) {
+   			echo true;
+   		}else{
+   			echo false;
+   		}
+	}
+
+
+	
 
 }
 

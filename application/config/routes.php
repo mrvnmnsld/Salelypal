@@ -278,6 +278,8 @@ $route['saveIDImageKyc'] = 'main/saveIDImageKyc';
 	$route['agent/updateAgentInfo'] = 'agent/updateAgentInfo';
 	$route['agent/deleteAgent'] = 'agent/deleteAgent';
 	$route['agent/getAgentInvites'] = 'agent/getAgentInvites';
+
+	$route['agent/checkUserNameAvailability'] = 'agent/checkUserNameAvailability';
 //agent management
 
 //users management
