@@ -183,22 +183,18 @@
 	});
 
 	$('#display_currency_btn').on('click',function(){
-		addBreadCrumbs("wallet/settings/security");
+		addBreadCrumbs("wallet/settings/currency");
 
-    	$.when(closeNav()).then(function() {
-    		$('#topNavBar').toggle();
-      		$("#container").fadeOut(animtionSpeed, function() {
-    		  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
-    	  			$("#container").empty();
-    	  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings/currency'}));
+		$("html, body").animate({ scrollTop: 0 }, "slow");
+		$('#assets_container').css("display","none");
+		$("#container").fadeOut(animtionSpeed, function() {
+			$("#profile_btn").css('display',"none")
+			$("#top_back_btn").css('display',"block")
 
-    		  		$("#loadSpinner").fadeOut(animtionSpeed,function(){
-    		  			$('#topNavBar').toggle();
-    		  			$("#container").fadeIn(animtionSpeed);
-    		  		});
-    	    	});
-    	  	});
-    	});
+  			$("#container").empty();
+  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings/currency'}));
+  			$("#container").fadeIn(animtionSpeed);
+		});
 	});
 
 	
@@ -206,20 +202,16 @@
 	$('#security_btn').on('click',function(){
 		addBreadCrumbs("wallet/settings/security");
 
-    	$.when(closeNav()).then(function() {
-    		$('#topNavBar').toggle();
-      		$("#container").fadeOut(animtionSpeed, function() {
-    		  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
-    	  			$("#container").empty();
-    	  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings/security'}));
+		$("html, body").animate({ scrollTop: 0 }, "slow");
+		$('#assets_container').css("display","none");
+		$("#container").fadeOut(animtionSpeed, function() {
+			$("#profile_btn").css('display',"none")
+			$("#top_back_btn").css('display',"block")
 
-    		  		$("#loadSpinner").fadeOut(animtionSpeed,function(){
-    		  			$('#topNavBar').toggle();
-    		  			$("#container").fadeIn(animtionSpeed);
-    		  		});
-    	    	});
-    	  	});
-    	});
+  			$("#container").empty();
+  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings/security'}));
+  			$("#container").fadeIn(animtionSpeed);
+		});
 	});
 
 	$('#theme_switch').on('change',function(){
@@ -243,22 +235,32 @@
 	$('#price_alert_btn').on('click',function(){
 		addBreadCrumbs("wallet/settings/priceAlert");
 		
-		$("#tittle_container").text('Price Alert');
 
-    	$.when(closeNav()).then(function() {
-    		$('#topNavBar').toggle();
-      		$("#container").fadeOut(animtionSpeed, function() {
-    		  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
-    	  			$("#container").empty();
-    	  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings/priceAlert'}));
+		$("html, body").animate({ scrollTop: 0 }, "slow");
+		$('#assets_container').css("display","none");
+		$("#container").fadeOut(animtionSpeed, function() {
+			$("#profile_btn").css('display',"none")
+			$("#top_back_btn").css('display',"block")
 
-    		  		$("#loadSpinner").fadeOut(animtionSpeed,function(){
-    		  			$('#topNavBar').toggle();
-    		  			$("#container").fadeIn(animtionSpeed);
-    		  		});
-    	    	});
-    	  	});
-    	});
+  			$("#container").empty();
+  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings/priceAlert'}));
+  			$("#container").fadeIn(animtionSpeed);
+		});
+	});
+
+	$('#language_btn').on('click',function(){
+		addBreadCrumbs("wallet/settings/language");
+
+		$("html, body").animate({ scrollTop: 0}, "slow");
+		$('#assets_container').css("display","none");
+		$("#container").fadeOut(animtionSpeed, function() {
+			$("#profile_btn").css('display',"none")
+			$("#top_back_btn").css('display',"block")
+
+  			$("#container").empty();
+  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings/language'}));
+  			$("#container").fadeIn(animtionSpeed);
+		});
 	});
 
 	$('#logOut_btn').on('click',function(){
@@ -278,28 +280,4 @@
 			}
 		});
 	});
-
-	$('#language_btn').on('click',function(){
-		addBreadCrumbs("wallet/settings/language");
-
-		$("#tittle_container").text('Language ');
-
-    	$.when(closeNav()).then(function() {
-    		$('#topNavBar').toggle();
-      		$("#container").fadeOut(animtionSpeed, function() {
-    		  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
-    	  			$("#container").empty();
-    	  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings/language'}));
-
-    		  		$("#loadSpinner").fadeOut(animtionSpeed,function(){
-    		  			$('#topNavBar').toggle();
-    		  			$("#container").fadeIn(animtionSpeed);
-    		  		});
-    	    	});
-    	  	});
-    	});
-	});
-	
-
-
 </script>

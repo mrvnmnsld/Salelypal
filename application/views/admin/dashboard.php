@@ -69,6 +69,8 @@ if (!isset($_SESSION["currentUser"])) {
     <link href="assets/vendor/jquery-toast-plugin-master/src/jquery.toast.css" rel="stylesheet">
 
     <script src="assets/vendor/qrCode/qrcode.js"></script>
+
+    <!-- <script src="assets/vendor/jquery.facedetection-master/dist/jquery.facedetection.min.js"></script> -->
     <!-- <script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script> -->
     <!-- <script src="assets/vendor/ethereumjs/index.js"></script> -->
     

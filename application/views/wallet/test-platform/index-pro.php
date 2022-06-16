@@ -863,10 +863,6 @@
 						  		$('#refresh_btn').removeAttr("disabled");
 						  		$('#addToken_btn').removeAttr("disabled");
 
-	  		    		  		$('#visible_btn').toggle();
-	  		    		  		$('#refresh_btn').removeAttr("disabled");
-	  		    		  		$('#addToken_btn').removeAttr("disabled");
-
 	  		    		  		// chart PNL
 	  			    		  		$("#pnl_chart_container").empty();
 	  			    		  		$("#assets_chart_container").empty();
@@ -1010,26 +1006,26 @@
 					$("html, body").animate({ scrollTop: 0 }, "slow");
 		  			$("#container").empty();
 
-					$('#topNavBar').toggle();
-					$('#bottomNavBar').toggle();
+					// $('#topNavBar').toggle();
+					// $('#bottomNavBar').toggle();
 
 					$("#profile_btn").css('display',"block")
 					$("#top_back_btn").css('display',"none")
 
 			  		$("#container").fadeOut(animtionSpeed, function() {
-					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
+					  	// $("#loadSpinner").fadeIn(animtionSpeed,function(){
 				  			// $("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/buyCrypto'}));
 
-				  			setTimeout(function(){
-				  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
+				  			// setTimeout(function(){
+				  				// $("#loadSpinner").fadeOut(animtionSpeed,function(){
 									$('#assets_container').fadeIn(animtionSpeed);
-									$('#topNavBar').toggle();
-				  					$('#bottomNavBar').toggle();
+									// $('#topNavBar').toggle();
+				  					// $('#bottomNavBar').toggle();
 				  					$("#container").fadeIn(animtionSpeed);
-				  				});
-				  			}, 1000);
+				  				// });
+				  			// }, 1000);
 					  		
-				    	});
+				    	// });
 				  	});
 				}
 			});
@@ -1206,117 +1202,61 @@
 				$("#notif_counter_number").css("display", "none");
 				
 				clearTimeout(newNotifChecker);
-				$("#tittle_container").text('Notification Center');
-				$("html, body").animate({ scrollTop: 0 }, "slow");
-				$.when(closeNav()).then(function() {
-					$('#assets_container').css("display","none");
-					$('#topNavBar').toggle();
-					$('#bottomNavBar').toggle();
-			  		$("#container").fadeOut(animtionSpeed, function() {
-					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
-				  			$("#container").empty();
-				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/notificationCenter'}));
-							$("#profile_btn").css('display',"none")
-							$("#top_back_btn").css('display',"block ")
 
-				  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
-				  					$('#topNavBar').toggle();
-				  					$('#bottomNavBar').toggle();
-				  					$("#container").fadeIn(animtionSpeed);
-				  				});
-				    	});
-				  	});
+				$("html, body").animate({ scrollTop: 0 }, "slow");
+				$('#assets_container').css("display","none");
+				$("#container").fadeOut(animtionSpeed, function() {
+					$("#profile_btn").css('display',"none")
+					$("#top_back_btn").css('display',"block")
+
+		  			$("#container").empty();
+		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/notificationCenter'}));
+		  			$("#container").fadeIn(animtionSpeed);
 				});
 			});
 	
 			$('#settings_btn').on('click',function(){
 				addBreadCrumbs("wallet/settings");
 
-				console.log('settings_btn');
-				
-				$("#tittle_container").text('Settings');
 				$("html, body").animate({ scrollTop: 0 }, "slow");
-				$.when(closeNav()).then(function() {
-					$('#assets_container').css("display","none");
-					$('#topNavBar').toggle();
-					$('#bottomNavBar').toggle();
-			  		$("#container").fadeOut(animtionSpeed, function() {
-					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
-				  			$("#container").empty();
-				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings'}));
-							$("#profile_btn").css('display',"none")
-							$("#top_back_btn").css('display',"block ")
+				$('#assets_container').css("display","none");
+				$("#container").fadeOut(animtionSpeed, function() {
+					$("#profile_btn").css('display',"none")
+					$("#top_back_btn").css('display',"block")
 
-
-			  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
-			  					$('#topNavBar').toggle();
-			  					$('#bottomNavBar').toggle();
-			  					$("#container").fadeIn(animtionSpeed);
-			  				});
-				    	});
-				  	});
+		  			$("#container").empty();
+		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings'}));
+		  			$("#container").fadeIn(animtionSpeed);
 				});
 			});
 
 			$('#regular_mining_btn').on('click',function(){
 				addBreadCrumbs("wallet/test-platform/regular_mining");
 				
-				$("#tittle_container").text('Regular Income Mining');
 				$("html, body").animate({ scrollTop: 0 }, "slow");
-				$.when(closeNav()).then(function() {
-					$('#assets_container').css("display","none");
-					$('#topNavBar').toggle();
-					$('#bottomNavBar').toggle();
-			  		$("#container").fadeOut(animtionSpeed, function() {
-					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
-				  			$("#container").empty();
-				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/regular_mining'}));
-							$("#profile_btn").css('display',"none")
-							$("#top_back_btn").css('display',"block ")
+				$('#assets_container').css("display","none");
+				$("#container").fadeOut(animtionSpeed, function() {
+					$("#profile_btn").css('display',"none")
+					$("#top_back_btn").css('display',"block")
 
-
-				  			setTimeout(function(){
-				  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
-				  					$('#topNavBar').toggle();
-				  					$('#bottomNavBar').toggle();
-				  					$("#container").fadeIn(animtionSpeed);
-				  				});
-				  			}, 1000);
-					  		
-				    	});
-				  	});
+		  			$("#container").empty();
+		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/regular_mining'}));
+		  			$("#container").fadeIn(animtionSpeed);
 				});
 			});
 
 			$('#daily_mining_btn').on('click',function(){
 				addBreadCrumbs("wallet/test-platform/dailyMining");
-				// $.alert("This part is still under development")
-				
-				$("#tittle_container").text('Daily Income Mining');
+
 				$("html, body").animate({ scrollTop: 0 }, "slow");
-				$.when(closeNav()).then(function() {
-					$('#assets_container').css("display","none");
-					$('#topNavBar').toggle();
-					$('#bottomNavBar').toggle();
-			  		$("#container").fadeOut(animtionSpeed, function() {
-					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
-				  			$("#container").empty();
-				  			// $("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/daily_mining'}));
-				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/dailyMining'}));
-							$("#profile_btn").css('display',"none")
-							$("#top_back_btn").css('display',"block ")
+				$('#assets_container').css("display","none");
+				$("#container").fadeOut(animtionSpeed, function() {
+					$("#profile_btn").css('display',"none")
+					$("#top_back_btn").css('display',"block")
 
-
-				  			setTimeout(function(){
-				  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
-				  					$('#topNavBar').toggle();
-				  					$('#bottomNavBar').toggle();
-				  					$("#container").fadeIn(animtionSpeed);
-				  				});
-				  			}, 1000);
-					  		
-				    	});
-				  	});
+		  			$("#container").empty();
+		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/dailyMining'}));
+		  			$("#container").fadeIn(animtionSpeed);
 				});
 			});
 
@@ -1591,28 +1531,13 @@
 				    afterHidden: function () {}  // will be triggered after the toast has been hidden
 				});
 			}else{
-				$.when(closeNav()).then(function() {
-					$('#assets_container').css("display","none");
-					$('#topNavBar').toggle();
-					$('#bottomNavBar').toggle();
-					$("#container").fadeOut(animtionSpeed, function() {
-						$("#loadSpinner").fadeIn(animtionSpeed,function(){
-							setTimeout(function(){
-					  			$("#container").empty();
-					  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':breadCrumbs[breadCrumbs.length-1]}));
-					  			$("#profile_btn").css('display',"none")
-					  			$("#top_back_btn").css('display',"block ")
-
-						  		$("#loadSpinner").fadeOut(animtionSpeed,function(){
-						  			$('#topNavBar').toggle();
-						  			$('#bottomNavBar').toggle();
-						  			$("#container").fadeIn(animtionSpeed);
-						  		});
-							}, 500)
-					  	});
-
-					  	$("#loading_text_container").text("Please wait");
-					});
+				$("html, body").animate({ scrollTop: 0 }, "slow");
+				$('#assets_container').css("display","none");
+				$("#container").fadeOut(animtionSpeed, function() {
+		  			$("#container").empty();
+		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':breadCrumbs[breadCrumbs.length-1]}));
+		  			$("#container").fadeIn(animtionSpeed);
+				  	$("#loading_text_container").text("Please wait");
 				});
 			}
 		});
