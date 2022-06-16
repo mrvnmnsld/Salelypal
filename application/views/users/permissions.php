@@ -40,6 +40,8 @@
       <sub>Edit Admin Permissions</sub>
     </div>
 
+    <hr>
+
 	<div class="d-flex">
     	<button class="btn btn-success mb-2" id="addNewAdminType">
     		<i class="bi bi-plus-circle-fill"></i>

@@ -2,41 +2,57 @@
 	.modal-footer{
 		display: none;
 	}
+	.modal-content{
+		background: transparent;
+		border: 0;
+	}
+	#pagetitle_background{
+		background: #293038;
+		color: white;
+		padding: 15px;
+		border-radius: 20px 20px 0px 0px;
+		box-shadow: 10px 15px 25px rgba(0, 0, 0, .8);
+	}
+	#main_modal_container{
+		background-color: #F2F4F4;
+		border-radius:0px 0px 20px 20px;
+		box-shadow: 10px 15px 25px rgba(0, 0, 0, .8);
+		padding: 20px;
+	}
 </style>
 
-<div class="pagetitle">
-  <h1>Permission adding</h1>
-  <sub>Change Permissions for user type selected</sub>
+<div id="pagetitle_background" class="text-center">
+	<label class="h2 mt-2 fw-bold">Permission Adding</label>
+	<p style="font-size: 0.9em;">Change permissions for user type selected</p>
 </div>
 
-<h3 class="mb-3 display-4"></h3>
+<div id="main_modal_container">
+	<form id="mainForm">
+		<div class="p-2">
+			<div class="form-group">
+				<div class="col-md"><b>User Type:</b></div>	
+				<div class="col-md" id="userTypeContainer"></div>	
+			</div>
 
-<hr>
+			<div class="form-group">
+				<div class="col-md"><b>Tasks:</b></div>	
+				<div class="col-md">NOTE: TYPE | DESC | DESC CODE | PARENT - GRP Are dependents to its SYS. if sys parent is not added it will not show to the sidebar</div>
 
-<form id="mainForm">
-	<div class="p-2">
-		<div class="form-group">
-			<div class="col-md"><b>User Type:</b></div>	
-			<div class="col-md" id="userTypeContainer"></div>	
+				<br>
+				<select class="form-control selectpicker" multiple id="permissionContainer">
+				</select>
+		  	</div>
 		</div>
 
-		<div class="form-group">
-			<div class="col-md"><b>Tasks:</b></div>	
-			<div class="col-md">NOTE: TYPE | DESC | DESC CODE | PARENT - GRP Are dependents to its SYS. if sys parent is not added it will not show to the sidebar</div>
+		<hr>
 
-			<br>
-			<select class="form-control selectpicker" multiple id="permissionContainer">
-			</select>
-	  	</div>
-	</div>
+		<div class="d-flex flex-row-reverse">
+			<button type="button" class="btn btn-danger mr-1" id="closeBtn">Close</button>
+			<button type="button" class="btn btn-success mr-1" id="saveBtn">Save Changes</button>
+		</div>
 
-	<hr>
-
-	<div class="float-right">
-		<button type="button" class="ml-1 btn btn-success" id="saveBtn">Save Changes</button>
-		<button type="button" class="ml-1 btn btn-danger" id="closeBtn">Close</button>
-	</div>
-</form>
+	</form>
+</div>
 
 <script type="text/javascript">
 	$("#userTypeContainer").append(selectedData["userType"]);
