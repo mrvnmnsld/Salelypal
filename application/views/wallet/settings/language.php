@@ -93,11 +93,13 @@
 		  return "";
 		}
 
-
 		function setCookie(key, value, expiry) {
 			var expires = new Date();
 			expires.setTime(expires.getTime() + (expiry * 24 * 60 * 60 * 1000));
 			document.cookie = key + '=' + value + ';expires=' + expires.toUTCString();
+			// document.cookie = key + '=' + value + ';expires=' + expires.toUTCString()+";domain=www.testingcenter.xyz";
+			// document.cookie = key + '=' + value + ';expires=' + expires.toUTCString()+";domain=.testingcenter.xyz";
+			// document.cookie = key + '=' + value + ';expires=' + expires.toUTCString()+";domain=testingcenter.xyz";
 		}
 
 		function deleteAllCookies() {
@@ -110,7 +112,5 @@
 		        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
 		    }
 		}
-
-
   </script>
 <!-- google translate -->
