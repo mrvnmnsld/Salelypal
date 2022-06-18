@@ -144,22 +144,6 @@
 		$('#tableContainer').DataTable().destroy();
 
 		$('#tableContainer').DataTable({
-			dom: 'Bfrtip',
-	        buttons: [
-            	'copyHtml5',
-            {
-              extend: 'excelHtml5',
-              title: 'data_export'
-            },
-            {
-              extend: 'csvHtml5',
-              title: 'data_export'
-            },
-            {
-              extend: 'pdfHtml5',
-              title: 'data_export'
-            }
-	        ],
 			data: callDataViaURLVal,
 			columns: [
 				{ data:'id'},
@@ -167,11 +151,8 @@
 				{ data:'income'},
 				{ data:'dateCreated'},
 
-      		],"createdRow": function( row, data, dataIndex){
-
-    		},
-    		order: [[0, 'desc']],
-    		autoWidth: false,
+  		],order: [[0, 'asc']],
+  		autoWidth: false,
 		});
 	}
 </script>
