@@ -46,16 +46,16 @@
 	        buttons: [
 	            'copyHtml5',
 	            {
-                    extend: 'excelHtml5',
-	                title: 'data_export'
+								extend: 'excelHtml5',
+								title: 'data_export'
 	            },
 	            {
-                    extend: 'csvHtml5',
-	                title: 'data_export'
+								extend: 'csvHtml5',
+								title: 'data_export'
 	            },
 	            {
-	                extend: 'pdfHtml5',
-	                title: 'data_export'
+								extend: 'pdfHtml5',
+								title: 'data_export'
 	            },
 	        ],
 			data: callDataViaURLVal,

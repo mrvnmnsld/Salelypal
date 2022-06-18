@@ -80,8 +80,6 @@ $route['saveIDImageKyc'] = 'main/saveIDImageKyc';
 	$route['admin/saveBettingSettings'] = 'admin/saveBettingSettings';
 
 	$route['admin/getFutureRisefallTimings'] = 'admin/getFutureRisefallTimings';
-
-
 // Admin
 
 // MainWallet

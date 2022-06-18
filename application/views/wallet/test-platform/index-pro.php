@@ -269,7 +269,7 @@
 		</span>
 	</div>
 
-	<div id="loadSpinner" class="text-center text-primary" style="margin-top: 30vh;">
+	<div id="loadSpinner" class="text-center text-primary" style="margin-top: 30vh;display: none;">
 	  	<div class="spinner-border main-color-text" role="status" style="width: 5rem; height: 5rem;">
 	    	<span class="sr-only"></span>
 	  	</div><br>
@@ -669,7 +669,7 @@
 				$.when(loadSystem()).then(function(){
 					$('#container').toggle();
 					$('#assets_container').css("display","block");
-					$('#loadSpinner').toggle();
+					// $('#loadSpinner').toggle();
 					$('#topNavBar').toggle();
 					$('#bottomNavBar').toggle();
 					$('#header_inner_container').toggle();

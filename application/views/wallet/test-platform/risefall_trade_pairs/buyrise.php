@@ -13,27 +13,7 @@
 
 
 <div id="main_modal_container" style="display:block">
-    <div class="btn-group btn-group-toggle d-flex justify-content-center mt-2" data-toggle="buttons">
-      <label class="btn btn-secondary active">
-        <input type="radio" name="risk_option_radio" value="30/30" autocomplete="off" checked="checked"> 30 Sec <br>
-        <small style="font-size: 12px;">30% Income</small>
-      </label>
-
-      <label class="btn btn-secondary">
-        <input type="radio" name="risk_option_radio" value="60/50" autocomplete="off"> 60 Sec <br>
-        <small style="font-size: 12px;">50% Income</small>
-      </label>
-
-      <label class="btn btn-secondary">
-        <input type="radio" name="risk_option_radio" value="120/70" autocomplete="off"> 120 Sec <br>
-        <small style="font-size: 12px;">70% Income</small>
-      </label>
-
-      <label class="btn btn-secondary">
-        <input type="radio" name="risk_option_radio" value="180/90" autocomplete="off"> 180 Sec <br>
-        <small style="font-size: 12px;">90% Income</small>
-      </label>
-    </div>
+    <div class="btn-group btn-group-toggle d-flex justify-content-center mt-2" data-toggle="buttons" id="timings_container"></div>
 
     <div class="d-flex mt-1 flex-basis: fit-content;">
         <div>
@@ -144,7 +124,22 @@
 <script type="text/javascript">
     isMinimized = 0;
     var bettingSettings = ajaxShortLink("admin/getBettingSettings");
-    console.log(bettingSettings)
+
+    var riseFallTimings = ajaxShortLink("admin/getFutureRisefallTimings");
+    console.log(riseFallTimings)
+
+    for (var i = 0; i < riseFallTimings.length; i++) {
+        if (i==0) {
+            $("#timings_container").append('<label class="btn btn-secondary active" id="timing_'+riseFallTimings[i].id+'">')
+        }else{
+            $("#timings_container").append('<label class="btn btn-secondary" id="timing_'+riseFallTimings[i].id+'">')
+        }
+
+        $("#timing_"+riseFallTimings[i].id).append('<input type="radio" name="risk_option_radio" value="'+riseFallTimings[i].timing+'/'+riseFallTimings[i].income+'" autocomplete="off" checked="checked"> '+riseFallTimings[i].timing+' Sec <br>')
+
+        $("#timing_"+riseFallTimings[i].id).append('<small style="font-size: 12px;">'+riseFallTimings[i].income+'% Income</small>')
+        $("#timings_container").append("</label>")
+    }
 
     var idToResolve;
 

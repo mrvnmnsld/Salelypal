@@ -64,10 +64,10 @@
 		<span class="" style="font-size: 18px;">&nbsp;Display Currency</span>
 	</button>
 
-	<button id="language_btn" class="btn custom-2nd-text  btn-block text-left">
+	<!-- <button id="language_btn" class="btn custom-2nd-text  btn-block text-left">
 		<i class="fa fa-language" aria-hidden="true"></i>
 		<span class="" style="font-size: 18px;">&nbsp;Language</span>
-	</button>
+	</button> -->
 	<button id="theme_btn" class="btn custom-2nd-text btn-block text-left d-flex">
 		<div class="flex-fill">
 			<i class="fa fa-paint-brush" aria-hidden="true"></i>

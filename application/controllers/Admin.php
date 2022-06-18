@@ -897,9 +897,6 @@ class admin extends MY_Controller {
    		}else{
    			echo json_encode(false);
    		}
-
-   		
-
 	}
 
 	public function getFutureRisefallTimings(){
@@ -911,7 +908,7 @@ class admin extends MY_Controller {
 	   		$join = null,	 
 	   		$joinType = null,
 	   		$sortBy = array("id"), 
-	   		$sortOrder = array('desc'), 
+	   		$sortOrder = array('asc'), 
 	   		$limit = null, 
 	   		$fieldNameLike = null, 
 	   		$like = null,
