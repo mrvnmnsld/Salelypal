@@ -230,16 +230,10 @@
 
   <div id="login_form_container">
     <img src="assets/imgs/ezpayex_logo.png">
-    <div id="title">Security Wallet Admin</div>
-    <div id="sub-title">Safety Pal</div>
+    <div id="title">Admin Login</div>
+    <div id="sub-title">SafetyPal</div>
 
     <form id="loginForm">
-
-      <!-- <div class="form-group">
-        <label for="username" class="text-light">Username</label>
-        <input type="email" class="form-control" id="username" placeholder="Username">
-        <div class="invalid-feedback"></div>
-      </div> -->
 
       <div id="errorReporter" class="text-center h5 animate__animated animate__shakeX" style="display:none"></div>
 
@@ -253,14 +247,20 @@
         <input type="password" name="password" placeholder="Password">     
       </div>
 
-
       <button>LOGIN</button>
+
     </form>
+
+    <br>
+
+    <div>
+      <a href="agent-login">Click here for Agent login</a>
+    </div>
 
     
 
     <div class="credits">
-      <p>© Security Wallet 2022</p>
+      <p>© SafetyPal 2022</p>
     </div>
 
   </div>
