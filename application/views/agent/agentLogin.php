@@ -32,8 +32,135 @@
     />
 </head>
 
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap%27');
+  *{
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+  body{
+    margin: 0;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 300;
+    background: linear-gradient(to left bottom, #e9e9e9, #ebebeb, #d6d6d6, #b1b1b1, #505050);
+  }
+  #login_form_container{
+    text-align: center;
+    filter: blur(0.4px);
+    width: 430px;
+    height: 700px;
+    padding: 60px 35px 35px 35px;
+    border-radius: 10px;
+    /*background: radial-gradient(circle, #555555, #535353, #505050, #4e4e4e, #4c4c4c);*/
+    background: #293038;
+    box-shadow: 
+    /*bottom shadow*/
+    0px 20px 20px rgba(0,0,0,0.2),
+    0px 5px 10px rgba(0,0,0,0.2),
+    /*long bottom shadow*/
+    0px 70px 50px rgba(0,0,0,0.4),
+    /*right shadow*/
+    30px 50px 50px rgba(0,0,0,0.2),
+    /*left shadow*/
+    -30px 50px 50px rgba(0,0,0,0.2),
+    /*right inset*/
+    inset 20px 0px 60px rgba(0,0,0,0.1),
+    /*left inset*/
+    inset -20px 0px 60px rgba(0,0,0,0.1);
+  }
+  img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 0 auto;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  #title{
+    text-align: center;
+    font-size: 28px;
+    padding-top: 24px;
+    letter-spacing: 0.5px;
+    color: white;
+    font-weight: bold;
+  }
+  #sub-title{
+    text-align: center;
+    font-size: 15px;
+    padding-top: 7px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 50px;
+  }
+  .input-field{
+    width: 100%;
+    height: 50px;
+    background: rgb(232, 240, 254);
+    margin: 10px 0;
+    padding: 10px;
+    border: 2px solid #293038;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+  }
+  .input-field i {
+    flex: 1;
+    text-align: center;
+    color: #666;
+    font-size: 23px;
+    margin-top: 3px;
+  }
+  .input-field input{
+    flex: 5;
+    background: none;
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 18px;
+    font-weight: 600;
+    color: #444;
+  }
+  .credits{
+    margin-top: 50px;
+    text-align: center;
+    color: white;
+  }
+  button{
+    width: 100%;
+    height: 50px;
+    transition: all .5s ease;
+    color: #fff;
+    border: 2px solid white;
+    border-radius: 20px !important;
+    margin-top: 20px !important;
+    font-family:'Montserrat', sans-serif;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1;
+    font-size: 17px;
+    font-weight: 600;
+    background-color : transparent;
+    padding: 10px;
+    outline: none;
+  }
+  button:hover {
+      color: #001F3F;
+      background-color: #fff;
+  }
+  .is-invalid{
+    color: red;
+  }
+</style>
+
 <body>
-  <main>
+  <!-- <main>
     <div class="container">
       <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
         <div class="container">
@@ -98,7 +225,44 @@
       </section>
 
     </div>
-  </main>
+  </main> -->
+
+  <div id="login_form_container">
+    <img src="assets/imgs/ezpayex_logo.png">
+    <div id="title">Agent Login</div>
+    <div id="sub-title">SafetyPal</div>
+
+    <form id="loginForm">
+
+      <div id="errorReporter" class="text-center h5 animate__animated animate__shakeX" style="display:none"></div>
+
+      <div class="input-field"> 
+        <i class="fa fa-user"></i>
+        <input type="text" name="username" placeholder="Username">     
+      </div>
+
+      <div class="input-field"> 
+        <i class="fa fa-lock"></i>
+        <input type="password" name="password" placeholder="Password">     
+      </div>
+
+      <button>LOGIN</button>
+
+    </form>
+
+    <br>
+
+    <div>
+      <a href="admin-login">Click here for Admin login</a>
+    </div>
+
+    
+
+    <div class="credits">
+      <p>© SafetyPal 2022</p>
+    </div>
+
+  </div>
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
   <script src="assets/vendor-admin/apexcharts/apexcharts.min.js"></script>
@@ -151,11 +315,11 @@
         }
     });
 
-    $("#switchAdminLogin").on("click",function(){
+    // $("#switchAdminLogin").on("click",function(){
 	
-  window.location.replace("admin-login");
+    //   window.location.replace("admin-login");
 
-});
+    // });
 
   </script>
 

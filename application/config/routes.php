@@ -78,6 +78,10 @@ $route['saveIDImageKyc'] = 'main/saveIDImageKyc';
 
 	$route['admin/getBettingSettings'] = 'admin/getBettingSettings';
 	$route['admin/saveBettingSettings'] = 'admin/saveBettingSettings';
+
+	$route['admin/getFutureRisefallTimings'] = 'admin/getFutureRisefallTimings';
+
+
 // Admin
 
 // MainWallet
@@ -203,7 +207,9 @@ $route['saveIDImageKyc'] = 'main/saveIDImageKyc';
 		$route['userWallet/riseFall/getPositionDetails'] = 'userWallet/risefallGetPositionDetails';
 
 		$route['userWallet/future/checkIfSet'] = 'userWallet/futureCheckIfSet';
-		$route['userWallet/future/getPositionDetails'] = 'userWallet/futureGetPositionDetails';		
+		$route['userWallet/future/getPositionDetails'] = 'userWallet/futureGetPositionDetails';
+
+
 	//riseFall
 
 	//mining

@@ -681,10 +681,6 @@ class mining extends MY_Controller {
 
 		echo json_encode($res);
 	}
-
 	
 
-
-	
-	
 }
