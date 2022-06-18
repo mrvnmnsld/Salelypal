@@ -922,13 +922,50 @@ class admin extends MY_Controller {
 		echo json_encode($res);
 	}
 
+	public function addFutureRisefallOption(){
+		$insertRecord = array(
+			'timing' => $_GET["timing"],
+			'income' => $_GET["income"],
+			'dateCreated' => $this->_getTimeStamp24Hours(),
+		);
+
+		$saveQueryNotif = $this->_insertRecords($tableName = 'future_risefall_timings', $insertRecord);
+
+		if ($saveQueryNotif) {
+			echo true;
+		}else{
+			echo false;
+		}
+		// echo json_encode($insertRecord);
+	}
+
+	public function updateFutureRisefallOption(){
+
+		$insertRecord = array(
+			'timing' => $_GET['timing'],
+			'income' => $_GET['income'],
+		);
+
+		$tableName="future_risefall_timings";
+		$fieldName='id';
+		$where= $_GET['id'];
+
+		$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
+
+		if($updateRecordsRes){
+			echo json_encode(true);
+		}else{
+			echo json_encode(false);
+		}
+	}
+
+	public function deleteFutureRisefallOption(){
+		$deleteQuery = $this->_deleteRecords(
+			$tableName = "future_risefall_timings",
+		 	$fieldName = array("id"),
+		  	$where = array($_GET['id'])
+		);
+		echo json_encode($deleteQuery);
+	}
 	
-
-
-	
-
-	
-
-
-		
 }

@@ -34,7 +34,7 @@
     <hr>
 
     <div class="d-flex">
-    	<button class="btn btn-success mb-2" id="addToken_btn"><i class="bi bi-plus"></i> Add Token to Mine</button>
+    	<button class="btn btn-success mb-2" id="add_option_btn"><i class="bi bi-plus"></i> Add Option</button>
     </div>
 
     <table id="tableContainer" class="table table-hover" style="width:100%">
@@ -123,11 +123,20 @@
 		selectedData = $('#tableContainer').DataTable().row($(this)).data();
 		
 	  	bootbox.alert({
-	  	    message: ajaxLoadPage('quickLoadPage',{'pagename':'mining/daily/editToken'}),
+	  	    message: ajaxLoadPage('quickLoadPage',{'pagename':'betting/editTimingIncome'}),
 	  	    size: 'large',
 	  	    centerVertical: true,
 	  	    closeButton: false
 	  	});
+	});
+
+	$('#add_option_btn').on('click', function () {
+  	bootbox.alert({
+  	    message: ajaxLoadPage('quickLoadPage',{'pagename':'betting/addTimingIncome'}),
+  	    size: 'large',
+  	    centerVertical: true,
+  	    closeButton: false
+  	});
 	});
 
 	function loadDatatable(url,data){

@@ -80,7 +80,10 @@ $route['saveIDImageKyc'] = 'main/saveIDImageKyc';
 	$route['admin/saveBettingSettings'] = 'admin/saveBettingSettings';
 
 	$route['admin/getFutureRisefallTimings'] = 'admin/getFutureRisefallTimings';
-
+	$route['admin/addFutureRisefallOption'] = 'admin/addFutureRisefallOption';
+	$route['admin/updateFutureRisefallOption'] = 'admin/updateFutureRisefallOption';
+	$route['admin/deleteFutureRisefallOption'] = 'admin/deleteFutureRisefallOption';
+	
 
 // Admin
 

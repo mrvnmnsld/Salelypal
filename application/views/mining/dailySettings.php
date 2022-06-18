@@ -71,21 +71,21 @@
 	});
 
 	$('#addToken_btn').on('click', function () {
-	  	bootbox.alert({
-	  	    message: ajaxLoadPage('quickLoadPage',{'pagename':'mining/daily/addNewToken'}),
-	  	    size: 'large',
-	  	    centerVertical: true,
-	  	    closeButton: false
-	  	});
+  	bootbox.alert({
+  	    message: ajaxLoadPage('quickLoadPage',{'pagename':'mining/daily/addNewToken'}),
+  	    size: 'large',
+  	    centerVertical: true,
+  	    closeButton: false
+  	});
 	});
 
-		$('#add_day_btn').on('click', function () {
-	  	bootbox.alert({
-	  	    message: ajaxLoadPage('quickLoadPage',{'pagename':'mining/daily/addDays'}),
-	  	    size: 'large',
-	  	    centerVertical: true,
-	  	    closeButton: false
-	  	});
+	$('#add_day_btn').on('click', function () {
+  	bootbox.alert({
+  	    message: ajaxLoadPage('quickLoadPage',{'pagename':'mining/daily/addDays'}),
+  	    size: 'large',
+  	    centerVertical: true,
+  	    closeButton: false
+  	});
 	});
 
 
