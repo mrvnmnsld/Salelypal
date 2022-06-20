@@ -1,3 +1,6 @@
+<script defer src="assets/lib/faceapi/face-api.min.js"></script>
+<!-- <script defer src="assets/lib/faceapi/script.js"></script> -->
+
 <style type="text/css">
 	.modal-footer{
 		display: none;
@@ -248,8 +251,66 @@
 		});
 
 		$("#verifyBtn").on('click', function(){
+
+			$("#loading_text").text("Loading FaceMatcher");
+			$("#loading").toggle();
 			$("#initial_modal").toggle();
 			$("#kyc_modal").toggle();
+
+			var idImg = document.getElementById('id_img_container')
+			var faceImg = document.getElementById('face_img_container')
+
+			Promise.all([
+			  faceapi.nets.faceRecognitionNet.loadFromUri('assets/lib/faceapi/models'),
+			  faceapi.nets.faceLandmark68Net.loadFromUri('assets/lib/faceapi/models'),
+			  faceapi.nets.ssdMobilenetv1.loadFromUri('assets/lib/faceapi/models')
+			]).then(start)
+
+			async function start() {
+
+				$("#loading_text").text("Checking face comparison percentage");
+
+				var container = document.createElement('div')
+				container.style.position = 'relative'
+				// document.body.append(container)
+				$("#kyc_modal").append(container)
+				$("#loading_text").text("Comparing face descriptions");
+
+				let image
+				let canvas
+
+		  		image2 = await faceapi.fetchImage("assets/imgs/kyc-imgs/id-imgs/"+selectedData.IDImagePath);
+		  		image2Detections = await faceapi.detectAllFaces(image2).withFaceLandmarks().withFaceDescriptors()
+
+		  		console.log(image2,image2Detections);
+
+		  		var faceMatcher = new faceapi.FaceMatcher(image2Detections, 0.6)
+
+		  		console.log(faceMatcher.length);
+		  		console.log(faceMatcher);
+
+				$("#loading_text").text("Loading...");
+		  		$("#loading").toggle();
+
+		  		image = await faceapi.fetchImage("assets/imgs/kyc-imgs/face-imgs/"+selectedData.FaceImagePath)
+		  		canvas = faceapi.createCanvasFromMedia(image)
+
+		  		var displaySize = { width: image.width, height: image.height }
+		  		faceapi.matchDimensions(canvas, displaySize)
+		  		var detections = await faceapi.detectAllFaces(image).withFaceLandmarks().withFaceDescriptors()
+		  		var resizedDetections = faceapi.resizeResults(detections, displaySize)
+
+		  		var results = resizedDetections.map(d => faceMatcher.findBestMatch(d.descriptor))
+
+		  		console.log(results);
+
+		  		// results.forEach((result, i) => {
+		  		//   var box = resizedDetections[i].detection.box
+		  		//   var drawBox = new faceapi.draw.DrawBox(box, { label: result.toString() })
+		  		//   drawBox.draw(canvas)
+		  		// })
+
+			}
 		});
 	// initial Modal
 
@@ -258,11 +319,14 @@
 		// 	"userID":selectedData.userID
 		// })
 
+
 		if (selectedData.IDImagePath!=null && selectedData.FaceImagePath!=null) {
 			$("#id_img_container").attr("src","assets/imgs/kyc-imgs/id-imgs/"+selectedData.IDImagePath);
 			$("#id_img_codownload").attr("href","assets/imgs/kyc-imgs/id-imgs/"+selectedData.IDImagePath);
 			$("#face_img_container").attr("src","assets/imgs/kyc-imgs/face-imgs/"+selectedData.FaceImagePath);
 			$("#face_img_download").attr("href","assets/imgs/kyc-imgs/face-imgs/"+selectedData.FaceImagePath);
+
+			// $("#id_img_container").change();
 		}else{
 			$("#verifyBtn").text("Incomplete/No verfication uploaded")
 			$("#verifyBtn").attr("disabled",true)

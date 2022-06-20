@@ -51,37 +51,37 @@
 	</div>
 
 	<!-- KYC upload -->
-	<div class="text-center" style="display: none;" id="verify_kyc_container">
-		<div>
-			<div class="">
-				<div id="process_instruction_container" class="text-justify mt-3 main-color-text">
-					<span>Note before uploading face image</span>
-					<ul>
-						<li>Make sure..</li>
-						<li>Lighting...</li>
-						<li>Clear...</li>
-					</ul>
-					<span><i id="faceCheckUpload_kyc" class="fa fa-picture-o my-2"></i></span>
-					<span id="faceUpload_btn" class=""><small>Upload Face Image <i id="" class="fa fa-edit my-2"></i></small></span>
-					<input class="form-control d-none" type="file" name="faceUpload" id="faceUpload" accept="image/png, image/gif, image/jpeg" >
+		<div class="text-center" style="display: none;" id="verify_kyc_container">
+			<div>
+				<div class="">
+					<div id="process_instruction_container" class="text-justify mt-3 main-color-text">
+						<span>Note before uploading face image</span>
+						<ul>
+							<li>Make sure..</li>
+							<li>Lighting...</li>
+							<li>Clear...</li>
+						</ul>
+						<span><i id="faceCheckUpload_kyc" class="fa fa-picture-o my-2"></i></span>
+						<span id="faceUpload_btn" class=""><small>Upload Face Image <i id="" class="fa fa-edit my-2"></i></small></span>
+						<input class="form-control d-none" type="file" name="faceUpload" id="faceUpload" accept="image/png, image/gif, image/jpeg" >
+					</div>
 				</div>
-			</div>
-			<hr>
-			<div class="">
-				<div id="process_instruction_container" class="text-justify mt-3 main-color-text">
-					<span>Note before uploading ID image</span>
-					<ul>
-						<li>Make sure..</li>
-						<li>Lighting...</li>
-						<li>Clear...</li>
-					</ul>
-					<span><i id="IDCheckUpload_kyc" class="fa fa-picture-o my-2"></i></span>
-					<span id="IDUpload_btn" class=""><small>Upload ID <i id="" class="fa fa-edit my-2"></i></small></span>
-					<input class="form-control d-none" type="file" name="IDUpload" id="IDUpload" accept="image/png, image/gif, image/jpeg" >
+				<hr>
+				<div class="">
+					<div id="process_instruction_container" class="text-justify mt-3 main-color-text">
+						<span>Note before uploading ID image</span>
+						<ul>
+							<li>Make sure..</li>
+							<li>Lighting...</li>
+							<li>Clear...</li>
+						</ul>
+						<span><i id="IDCheckUpload_kyc" class="fa fa-picture-o my-2"></i></span>
+						<span id="IDUpload_btn" class=""><small>Upload ID <i id="" class="fa fa-edit my-2"></i></small></span>
+						<input class="form-control d-none" type="file" name="IDUpload" id="IDUpload" accept="image/png, image/gif, image/jpeg" >
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 	<!-- KYC upload -->
 
 	<form id="signUpForm" style="display:none;">
@@ -101,14 +101,6 @@
 			<small id="emailHelp" class="form-text text-light">Please indicate dialing code ex. (+)01954558879</small>
 		</div>
 
-		<!-- <div class="input-group mb-3">
-			<input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1" placeholder="Enter SMS OTP" name="otp">
-
-			<div class="input-group-prepend">
-		  		<button class="btn btn-success" id="sendOtp" style="border-top-right-radius: 5px 5px;border-bottom-right-radius: 5px 5px;" type="button">Send OTP</button>
-			</div>
-		</div> -->
-
 		<div class="form-group">
 			<label for="exampleInputEmail1">Email address</label>
 			<input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="Enter email">
@@ -120,25 +112,12 @@
 			<input type="password" class="form-control" name="password" placeholder="Password">
 		</div>
 
-		<!-- <div class="form-group">
-			<label >Network</label>
-			<div class="text-center">
-				<select id="network" name="network" class="form-control" multiple>
-					<option value="trx" selected disabled data-content="<img style='width:30px;' src='assets/imgs/icons/tron-trx-logo.png'><span class='ml-2 mr-2'>Tron</span>"></option>
-					<option value="bsc" data-content="<img style='width:30px;' src='assets/imgs/icons/bsc_logo.png'><span class='ml-2 mr-2'>BSC</span>"></option>
-				</select>
-			</div>
-
-			<small id="emailHelp" class="form-text text-light">Tron network will be our main network</small>
-		</div> -->
-
-		
 	  <button type="submit" class="btn btn-success btn-block">Sign up</button>
 	</form>
 </div>
 
 <script type="text/javascript">
-	var currentUserID='32';
+	// var currentUserID='32';
 
 	var generatedOtp = generateOTP();
 	console.log(generatedOtp,referalCode);
@@ -158,7 +137,6 @@
 	jQuery.validator.addMethod("checkEmailAvailability", function(value, element) {
 	    return (ajaxShortLinkNoParse("checkEmailAvailability",{'email':value}))
 	}, "Email already taken");
-
 
 	$("#signUpForm").validate({
 	  	errorClass: 'is-invalid text-danger',

@@ -964,5 +964,11 @@ class admin extends MY_Controller {
 		);
 		echo json_encode($deleteQuery);
 	}
+
+	public function faceRecog(){
+		$this->load->view('faceRecog/index');
+
+	}
+
 	
 }

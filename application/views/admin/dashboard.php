@@ -156,7 +156,7 @@ if (!isset($_SESSION["currentUser"])) {
         <div class="spinner-border text-center text-light" id="spinner" role="status" style="width: 250px;height: 250px;">
         </div>
 
-        <div class="text-center h3 mt-1 text-light fw-bold" style="width:100%">Loading...</div>
+        <div class="text-center h3 mt-1 text-light fw-bold" style="width:100%" id="loading_text">Loading...</div>
 
       </div>
   </div>

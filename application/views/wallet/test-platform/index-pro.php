@@ -292,27 +292,27 @@
 					<div id="btn_option_container" class="d-flex justify-content-center mt-1">
 					
 						<button id="deposit_btn_option" class="btn" style="background-color:transparent">
-							<div class="btn btn-md" style="font-size:2em;padding:1px;">
+							<div class="btn btn-md" style="font-size:1.5em;padding:1px;">
 								<i class="fa fa-arrow-circle-down fa-lg fa-inverse" aria-hidden="true"></i>
 								<!-- <img style="width:50px;height:50px;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-deposit-64.png"> -->
 							</div>
-							<div style="font-size:.8em" class="text-light"><b>Deposit</b></div>
+							<div style="font-size:.8em;" class="text-light">Deposit</div>
 						</button>
 
 						<button id="withdraw_btn_option" class="btn" style="background-color:transparent">
-							<div class="btn btn-md" style="font-size:2em;padding:1px;">
+							<div class="btn btn-md" style="font-size:1.5em;padding:1px;">
 								<i class="fa fa-arrow-circle-up fa-lg fa-inverse" aria-hidden="true"></i>
 								<!-- <img style="width:50px;height:50px;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-withdraw-64.png"> -->
 							</div>
-							<div style="font-size:.8em" class="text-light"><b>Withdraw</b></div>
+							<div style="font-size:.8em;" class="text-light">Withdraw</div>
 						</button>
 
 						<button id="buy_btn_option" class="btn" style="background-color:transparent">
-							<div class="btn btn-md" style="font-size:2em;padding:1px;">
-								<!-- <i class="fa fa-credit-card-alt fa-md fa-inverse" aria-hidden="true"></i> -->
-								<img style="width:50px;height:50px;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-top-64.png">
+							<div class="btn btn-md" style="font-size:1.5em;padding:1px;">
+								<i class="fa fa-credit-card-alt fa-md fa-inverse" aria-hidden="true"></i>
+								<!-- <img style="width:50px;height:50px;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%); width: 1.5em: ;" src="assets/imgs/app-icons/menu-icons/icons8-top-64.png"> -->
 							</div>
-							<div style="font-size:.8em;" class="text-light"><b>Buy</b></div>
+							<div style="font-size:.8em;;" class="text-light">Buy</div>
 						</button>
 					</div>
 				</div>
@@ -329,7 +329,7 @@
 				}
 
 				.nav-link.tab-pane.fade.show.active{
-					font-size:2em;
+					font-size:1.8em;
 					opacity: 1 !important;
 					-webkit-transition: color 1s, font-size .25s;
 					-moz-transition: color 1s, font-size .25s;
@@ -526,45 +526,45 @@
 		</style>
 
 		<!-- bottomnavbar -->
-		<ul id="bottomNavBar" style="display:none;" class="nav fixed-bottom main-color-bg justify-content-center row p-3">
+		<ul id="bottomNavBar" style="display:none;" class="nav fixed-bottom main-color-bg justify-content-center row py-3">
 			<li id="assets_btn" class="nav-item col-3 text-center">
 				<!-- <i class="fa fa-bank fa-inverse botnav-icon" alt="Asset" aria-hidden="true"></i> -->
-				<img style="width:2.2rem;height:2.2rem;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-wallet-64.png">
+				<img style="width:1.8em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-wallet-64.png">
 			</li>
 
 			<li id="modal_mining_btn" data-toggle="modal" data-target="#modal_trade" class="nav-item col-3 text-center">
 				<!-- <i class="fa fa-bar-chart fa-inverse botnav-icon" alt="Trade" aria-hidden="true"></i> -->
-				<img style="width:2.2rem;height:2.2rem;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-trading-64.png">
+				<img style="width:1.8em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-trading-64.png">
 				<!-- <a class="nav-link" style="font-size:.8em; color:#D9E9E8;"  href="#">Trade</a> -->
 			</li>
 
 			<li id="discover_btn" class="nav-item col-3 text-center">
-				<i class="fa fa-globe fa-inverse botnav-icon" alt="Discover" aria-hidden="true"></i>
-				<!-- <img style="width:2.2rem;height:2.2rem;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-astronomy-64.png"> -->
+				<!-- <i class="fa fa-globe fa-inverse botnav-icon" style="width:1.5em;" alt="Discover" aria-hidden="true"></i> -->
+				<img style="width:1.8em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-astronomy-64.png">
 				<!-- <a  class="nav-link" style="font-size:.8em; color:#D9E9E8;" href="#">Discover</a> -->
 			</li>
 
 			<li id="settings_btn" class="nav-item col-3 text-center">
 				<!-- <i class="fa fa-cogs fa-inverse botnav-icon" alt="Settings" aria-hidden="true"></i> -->
-				<img style="width:2.2rem;height:2.2rem;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-settings-64.png">
+				<img style="width:1.8em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-settings-64.png">
 				<!-- <a class="nav-link" style="font-size:.8em; color:#D9E9E8;"  href="#">Settings</a> -->
 			</li>
 		</ul>
 	</body>
 <!-- translate -->
-<script type="text/javascript">
-	function googleTranslateElementInit() {
-		// setCookie('googtrans', currentUserLanguage.lang,1);
-		new google.translate.TranslateElement({
-			pageLanguage: 'en',
-			// includedLanguages: 'en,zh-CN,zh-TW',
-			// layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-			autoDisplay: true
-		}, 'google_translate_element');
-	}
-</script>
+	<!-- <script type="text/javascript">
+		function googleTranslateElementInit() {
+			// setCookie('googtrans', currentUserLanguage.lang,1);
+			new google.translate.TranslateElement({
+				pageLanguage: 'en',
+				// includedLanguages: 'en,zh-CN,zh-TW',
+				// layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+				autoDisplay: true
+			}, 'google_translate_element');
+		}
+	</script>
 
-<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
+	<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script> -->
 <!-- translate -->
 
 <script type="text/javascript">

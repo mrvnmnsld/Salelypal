@@ -129,7 +129,7 @@
       transition: opacity 0.2s ease;
       }
       .container.active .forms{
-      height: 600px;
+      height: 750px;
       }
       .container .form .title{
       position: relative;
@@ -324,6 +324,8 @@
               <i class="fa fa-eye-slash showHidePw"></i>
             </div>
 
+            <div id="errorReporter" class="text-danger text-center mt-4"></div>
+
             <div class="input-field button">
               <button id="submit_login_btn" data-toggle="modal" data-target="#sliderCaptchaModal" type="button">LOGIN</button>
             </div>
@@ -331,7 +333,7 @@
 
           <div class="login-signup">
             <span class="text">Not a member?
-              <a href="#" class="text signup-link">Signup now</a>
+              <a href="#" class="text signup-link">Sign up now</a>
             </span>
           </div>
 
@@ -340,35 +342,97 @@
         <div class="form signup">
           <span class="title">Register</span>
 
-          <form>
+          <div class="text-center" style="display: none;" id="thankYou">
+          	<span class="h3">
+          		Signing up successfully! 
+          	</span>
+
+          	<div>
+          		Please verify a selfie image and an ID picture to activate account
+          	</div>
+
+          	<br>
+
+          	<div class="d-flex">
+          		<button class="flex-fill btn btn-success" id="verify_kyc_btn">Verify Now</button>
+          	</div>
+          </div>
+
+          <!-- KYC upload -->
+          	<div class="text-center" style="display: none;" id="verify_kyc_container">
+          		<div>
+          			<div class="">
+          				<div id="process_instruction_container" class="text-justify mt-3 main-color-text">
+          					<span>Note before uploading face image</span>
+          					<ul>
+          						<li>Make sure..</li>
+          						<li>Lighting...</li>
+          						<li>Clear...</li>
+          					</ul>
+          					<span><i id="faceCheckUpload_kyc" class="fa fa-picture-o my-2"></i></span>
+          					<span id="faceUpload_btn" class=""><small>Upload Face Image <i id="" class="fa fa-edit my-2"></i></small></span>
+          					<input class="form-control d-none" type="file" name="faceUpload" id="faceUpload" accept="image/png, image/gif, image/jpeg" >
+          				</div>
+          			</div>
+          			<hr>
+          			<div class="">
+          				<div id="process_instruction_container" class="text-justify mt-3 main-color-text">
+          					<span>Note before uploading ID image</span>
+          					<ul>
+          						<li>Make sure..</li>
+          						<li>Lighting...</li>
+          						<li>Clear...</li>
+          					</ul>
+          					<span><i id="IDCheckUpload_kyc" class="fa fa-picture-o my-2"></i></span>
+          					<span id="IDUpload_btn" class=""><small>Upload ID <i id="" class="fa fa-edit my-2"></i></small></span>
+          					<input class="form-control d-none" type="file" name="IDUpload" id="IDUpload" accept="image/png, image/gif, image/jpeg" >
+          				</div>
+          			</div>
+          		</div>
+          	</div>
+          <!-- KYC upload -->
+
+          <form id="signUpForm">
             <div class="input-field">
-              <input type="text" placeholder="Enter your name">
+              <input type="text" name="fullName" placeholder="Enter your Fullname">
               <i class="fa fa-user-circle-o icon"></i>
-            </div>
-            <div class="input-field">
-              <input type="text" placeholder="Enter your username">
-              <i class="fa fa-user-o icon"></i>
             </div>
 
             <div class="input-field">
-              <input type="password" class="password" placeholder="Create password">
+              <input type="text" name="email" placeholder="Enter your email">
+              <i class="fa fa-envelope-o"></i>
+            </div>
+
+
+            <div class="input-field">
+              <input type="text" name="birthdate" placeholder="Enter your birthdate">
+              <i class="fa fa-birthday-cake"></i>
+            </div>
+
+            <div class="input-field">
+              <input type="number" name="mobileNumber" placeholder="Enter Mobile Number">
+              <i class="fa fa-mobile"></i>
+            </div>
+
+            <div class="input-field">
+              <input type="password" name="password" class="password" placeholder="Create password">
               <i class="fa fa-key icon"></i>
             </div>
 
             <div class="input-field">
-              <input type="password" class="password" placeholder="Confirm password">
+              <input type="password" name="confirm_password" class="password" placeholder="Confirm password">
               <i class="fa fa-key icon"></i>
               <i class="fa fa-eye-slash showHidePw"></i>
             </div>
 
             <div class="input-field button">
-              <button id="" type="button">LOGIN</button>
+              <button id="" type="submit">SIGN UP</button>
             </div>
           </form>
 
           <div class="login-signup">
             <span class="text">Already have an account?
-              <a href="#" class="text login-link">Signin now</a>
+              <a href="#" class="text login-link">Sign in now</a>
             </span>
           </div>
 
@@ -394,38 +458,34 @@
 	  signUp = document.querySelector(".signup-link"),
 	  login = document.querySelector(".login-link");
 
+  pwShowHide.forEach(eyeIcon => {
+  	eyeIcon.addEventListener("click",()=>{
+  		pwFields.forEach(pwField => {
+  			if(pwField.type === "password"){
+  				pwField.type = "text";
 
-	  pwShowHide.forEach(eyeIcon => {
-	  	eyeIcon.addEventListener("click",()=>{
-	  		pwFields.forEach(pwField => {
-	  			if(pwField.type === "password"){
-	  				pwField.type = "text";
+  				pwShowHide.forEach(icon =>{
+  					icon.classList.replace("fa-eye-slash","fa-eye");
+  				})
+  			}else{
+  				pwField.type = "password";
 
-	  				pwShowHide.forEach(icon =>{
-	  					icon.classList.replace("fa-eye-slash","fa-eye");
-	  				})
-	  			}else{
-	  				pwField.type = "password";
-
-	  				pwShowHide.forEach(icon =>{
-	  					icon.classList.replace("fa-eye","fa-eye-slash");
-	  				})
-	  			}
-	  		})
-	  	})
-	  })
-
-
-	  signUp.addEventListener("click",()=>{
-	  	container.classList.add("active");
-	  });
-
-	  login.addEventListener("click",()=>{
-	  	container.classList.remove("active");
-	  });
+  				pwShowHide.forEach(icon =>{
+  					icon.classList.replace("fa-eye","fa-eye-slash");
+  				})
+  			}
+  		})
+  	})
+  })
 
 
+  signUp.addEventListener("click",()=>{
+  	container.classList.add("active");
+  });
 
+  login.addEventListener("click",()=>{
+  	container.classList.remove("active");
+  });
 
 	var currentUser = JSON.parse(getLocalStorageByKey('currentUser'));
 	var referalCode = getUrlParameter('referalCode')
@@ -464,7 +524,7 @@
 		onSuccess: function () {
 			$("#sliderCaptchaModal").css("display", 'none')
 			$(".modal-backdrop").css("display", 'none')
-			console.log("captcha slider success");
+			// console.log("captcha slider success");
 
 			$("#loginForm").submit();
 		},
@@ -476,18 +536,11 @@
 		}
 	});
 
-
-	// $.validator.addMethod("captchaCheck",function(value, element) {
-	// 		return value==captchaRight;
-	// 	},
-	// 	"Captcha value does not match"
-	// );
-
 	$("#loginForm").validate({
 	  	errorClass: 'is-invalid',
 	  	rules: {
-			emailAddress: "required",
-			password: "required",
+				emailAddress: "required",
+				password: "required",
 	  	},
 	  	submitHandler: function(form){
 	  		captcha.reset();
@@ -505,27 +558,15 @@
 	  			setLocalStorageByKey('currentUser',JSON.stringify(loginRes['data']));
 
   				if(loginRes.data.isPro == 0){
-					window.location.replace("homeView");
-				}
-				else {
-					window.location.replace("homeViewPro");
-				}
+						window.location.replace("homeView");
+					}else {
+						window.location.replace("homeViewPro");
+					}
 
 	  		}
 	  	}
 	});
-
-	$("#signUpBtn").on("click",function(){
-		var res = ajaxLoadPage('quickLoadPage',{'pagename':'signUpPage'});
-
-		$("#container").empty();
-		$("#container").append(res);
-
-	});
-
 	
-			
-	// submit_login_btn
 	$("#submit_login_btn").on("click",function(){
 		console.log("click");
 		// binance slider validation
@@ -534,6 +575,145 @@
 		// $("#loginForm").submit();
 		captcha.reset();
 	});
+
+		var generatedOtp = generateOTP();
+		console.log(generatedOtp,referalCode);
+
+		$("#verify_kyc_btn").on("click", function(){
+			$("#thankYou").toggle();
+			$("#verify_kyc_container").toggle();
+		})
+
+		jQuery.validator.addMethod("checkEmailAvailability", function(value, element) {
+		    return (ajaxShortLinkNoParse("checkEmailAvailability",{'email':value}))
+		}, "Email already taken");
+
+		jQuery.validator.addMethod("checkPasswordConfirm", function(value, element) {
+			if (value == $("input[name='password']").val()) {
+				return true
+			}else{
+				return false
+			}
+		}, "Email already taken");
+
+		$("#signUpForm").validate({
+		  	errorClass: 'is-invalid text-danger',
+		  	rules: {
+					fullName: "required",
+					birthdate: "required",
+					mobileNumber: "required",
+					email: {
+						required:true,
+						checkEmailAvailability:true
+					},
+					password: {
+						required:true,
+						minlength: 6
+					},
+					confirm_password:{
+						checkPasswordConfirm:true,
+						required:true
+					}
+		  	},
+		  	errorPlacement: function(error, element) {
+		  	  element.parent("div").after(error);
+		  	},
+		  	submitHandler: function(form){
+			    var data = $('#signUpForm').serializeArray();
+			    console.log(data);
+
+			    var res = ajaxShortLink("saveSignUpForm",data);
+					currentUserID = res;
+			    console.log(res);
+
+			    if(res!=false){
+			    	console.log("test");
+			    	$("#thankYou").toggle();
+			    	$("#signUpForm").toggle();
+
+
+		    		// var timeleft = 3;
+
+		    		// var timer = setInterval(function(){
+		    		// 	if(timeleft <= 0){
+		    		// 		$("#container").empty();
+		    		// 		$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'loginform'}));
+
+		    		// 		clearInterval(timer);
+		    		// 	}
+		    	 //  		timeleft -= 1;
+		    		// }, 1000);
+			    }else{
+			    	alert("error in signing up: please contact system admin !errorCode 3322!");
+			    }
+
+		  	}
+		});
+
+    $("#faceUpload_btn").on("click", function(){
+        $('#faceUpload').click();
+    });
+
+		$("#IDUpload_btn").on("click", function(){
+	        $('#IDUpload').click();
+	    });
+
+    $('#faceUpload').change(function(){
+			$.confirm({
+			    title: 'KYC - Face upload',
+			    columnClass: 'col-md-6 col-md-offset-6',
+			    content: 'Are you sure you want to upload image?',
+			    buttons: {
+			        confirm: function () {
+			        	var imageUploadFormData = new FormData();
+
+			        	imageUploadFormData.append(currentUserID+"_faceImage", $('#faceUpload')[0].files[0],currentUserID+"_faceImage");
+						imageUploadFormData.append('userID', currentUserID);
+				     	backendHandleFormData('saveFaceImageKyc',imageUploadFormData);
+
+	    			    $.toast({
+	    			        heading: '<h6>Face Image Uploaded</h6>',
+	    			        text: 'Successfull!',
+	    			        showHideTransition: 'slide',
+	    			        icon: 'success',
+	    			        position: 'bottom-center'
+	    			    })
+			        },
+			        cancel: function () {
+			        	
+			        },
+			    }
+			});
+		});
+
+		$('#IDUpload').change(function(){
+			$.confirm({
+			    title: 'KYC - ID upload',
+			    columnClass: 'col-md-6 col-md-offset-6',
+			    content: 'Are you sure you want to upload image?',
+			    buttons: {
+			        confirm: function () {
+			        	var imageUploadFormData = new FormData();
+
+			        	imageUploadFormData.append(currentUserID+"_IDImage", $('#IDUpload')[0].files[0],currentUserID+"_IDImage");
+								imageUploadFormData.append('userID', currentUserID);
+				     		backendHandleFormData('saveIDImageKyc',imageUploadFormData);
+
+	    			    $.toast({
+	    			        heading: '<h6>Face Image Uploaded</h6>',
+	    			        text: 'Successfull!',
+	    			        showHideTransition: 'slide',
+	    			        icon: 'success',
+	    			        position: 'bottom-center'
+	    			    })
+			        },
+			        cancel: function () {
+			        	
+			        },
+			    }
+			});
+		});
+
 
 </script>
 </body>

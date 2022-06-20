@@ -311,31 +311,36 @@ $route['saveIDImageKyc'] = 'main/saveIDImageKyc';
 $route['getCountries'] = 'main/getCountries';
 $route['testing'] = 'main/testing';
 
-// testing platform
-	$route['test-platform'] = 'testPlatform/indexNormal';
-	$route['test-platform-pro'] = 'testPlatform/indexPro'; 
+	// testing platform
+		$route['test-platform'] = 'testPlatform/indexNormal';
+		$route['test-platform-pro'] = 'testPlatform/indexPro'; 
 
-	$route['test-platform/getTronBalance'] = 'testPlatform/getTronBalance';
-	$route['test-platform/getBinancecoinBalance'] = 'testPlatform/getBinancecoinBalance';
-	$route['test-platform/getEthereumBalance'] = 'testPlatform/getEthereumBalance';
-	$route['test-platform/getTokenBalanceBySmartAddress'] = 'testPlatform/getTokenBalanceBySmartAddress';
+		$route['test-platform/getTronBalance'] = 'testPlatform/getTronBalance';
+		$route['test-platform/getBinancecoinBalance'] = 'testPlatform/getBinancecoinBalance';
+		$route['test-platform/getEthereumBalance'] = 'testPlatform/getEthereumBalance';
+		$route['test-platform/getTokenBalanceBySmartAddress'] = 'testPlatform/getTokenBalanceBySmartAddress';
 
-	$route['test-platform/risefall/openPosition'] = 'testPlatform/riseFallOpenPosition';
-	$route['test-platform/risefall/winPosition'] = 'testPlatform/riseFallWinPosition';
+		$route['test-platform/risefall/openPosition'] = 'testPlatform/riseFallOpenPosition';
+		$route['test-platform/risefall/winPosition'] = 'testPlatform/riseFallWinPosition';
 
-	$route['test-platform/future/openPosition'] = 'testPlatform/riseFallOpenPosition';
-	$route['test-platform/future/winPosition'] = 'testPlatform/futureWinPosition';
+		$route['test-platform/future/openPosition'] = 'testPlatform/riseFallOpenPosition';
+		$route['test-platform/future/winPosition'] = 'testPlatform/futureWinPosition';
 
 
-	$route['test-platform/getUserPurchase'] = 'testPlatform/getUserPurchase';
-	$route['test-platform/buyCrypto'] = 'testPlatform/buyCrypto';
+		$route['test-platform/getUserPurchase'] = 'testPlatform/getUserPurchase';
+		$route['test-platform/buyCrypto'] = 'testPlatform/buyCrypto';
 
-	$route['test-platform/newBalance'] = 'testPlatform/newBalance';
-// testing platform
+		$route['test-platform/newBalance'] = 'testPlatform/newBalance';
+	// testing platform
 
-	//add day cycle
+	// tests
+		$route["faceRecog"] = 'admin/faceRecog';
+
+	// tests
+
 
 	
+
 
 
 
