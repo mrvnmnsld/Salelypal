@@ -339,8 +339,8 @@
 
         </div>
 
-        <div class="form signup">
-          <span class="title">Register</span>
+        <div class="form signup" >
+          
 
           <div class="text-center" style="display: none;" id="thankYou">
           	<span class="h3">
@@ -359,40 +359,89 @@
           </div>
 
           <!-- KYC upload -->
-          	<div class="text-center" style="display: none;" id="verify_kyc_container">
-          		<div>
-          			<div class="">
-          				<div id="process_instruction_container" class="text-justify mt-3 main-color-text">
-          					<span>Note before uploading face image</span>
-          					<ul>
-          						<li>Make sure..</li>
-          						<li>Lighting...</li>
-          						<li>Clear...</li>
-          					</ul>
-          					<span><i id="faceCheckUpload_kyc" class="fa fa-picture-o my-2"></i></span>
-          					<span id="faceUpload_btn" class=""><small>Upload Face Image <i id="" class="fa fa-edit my-2"></i></small></span>
-          					<input class="form-control d-none" type="file" name="faceUpload" id="faceUpload" accept="image/png, image/gif, image/jpeg" >
-          				</div>
-          			</div>
-          			<hr>
-          			<div class="">
-          				<div id="process_instruction_container" class="text-justify mt-3 main-color-text">
-          					<span>Note before uploading ID image</span>
-          					<ul>
-          						<li>Make sure..</li>
-          						<li>Lighting...</li>
-          						<li>Clear...</li>
-          					</ul>
-          					<span><i id="IDCheckUpload_kyc" class="fa fa-picture-o my-2"></i></span>
-          					<span id="IDUpload_btn" class=""><small>Upload ID <i id="" class="fa fa-edit my-2"></i></small></span>
-          					<input class="form-control d-none" type="file" name="IDUpload" id="IDUpload" accept="image/png, image/gif, image/jpeg" >
-          				</div>
-          			</div>
-          		</div>
+		  	<style>
+				#title_kyc{
+					font-size: 2.5rem;
+					font-weight: bold;
+					/* line-height: 2; */
+					/* text-align:center; */
+				}
+				#subtitle_kyc {
+					position: relative;
+					/* line-height:2; */
+				}
+				#subtitle_kyc:before {
+					display: inline-block;
+					content: "";
+					height: 1px;
+					background: #939ba2!important;
+					position: absolute;
+					width: 180%;
+					top: 50%;
+					margin-left: 120px;
+				}
+				.icon_kyc{
+					font-size:13px!important;
+					color:#5426de!important;
+				}
+				.col-6,.column-kyc{
+					padding-right:0px;
+				}
+				#instruction_kyc{
+					font-size:13px;
+					text-align: justify;
+					font-weight: 150;
+					color: #939ba2!important;
+				}
+				#upload_container{
+					border:1px solid #939ba2!important;
+					border-radius:5px;
+				}
+			</style>
+
+          	<div class="" style="display: none;" id="verify_kyc_container">
+				<div id="title_kyc"><span class="">Verification</span></div>
+				<div class="pb-3"><span class="text-muted text-left" id="subtitle_kyc">Upload photo</span></div>
+				<div class="text-left"><b>Important Notes</b></div>
+				<div id="noteslist_kyc" class="m-2"> 
+					<div class="row">
+						<div class="col-6 column-kyc"><i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><small> Don't use filter</small></div>
+						<div class="col-6 column-kyc"><i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><small> Don't wear make up</small></div>
+					</div>
+					<div class="row">
+						<div class="col-6 column-kyc"><i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><small> Don't wear hats</small></div>
+						<div class="col-6 column-kyc"><i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><small> Don't wear eye wear</small></div>
+					</div>
+				</div><!-- noteslist_kyc -->
+				<div id="instruction_kyc" class="text-left py-3">
+					<span>Kindly ensure that face is centered, well lit, and visible when capturing the photo to avoid facial recognition errors.</span>
+				</div>
+
+				<div id="upload_container">
+					<div class="row p-2 text-center">
+						<div class="col-6">
+							<span><i id="faceCheckUpload_kyc" class="fa fa-upload my-2"></i></span>
+							<span id="faceUpload_btn" class=""><small>Face photo</small></span>
+							<input class="form-control d-none" type="file" name="faceUpload" id="faceUpload" accept="image/png, image/gif, image/jpeg" >
+						</div>
+						<div class="col-6">
+							<span><i id="IDCheckUpload_kyc" class="fa fa-upload my-2"></i></span>
+							<span id="IDUpload_btn" class=""><small>ID photo</small></span>
+							<input class="form-control d-none" type="file" name="IDUpload" id="IDUpload" accept="image/png, image/gif, image/jpeg" >
+						</div>
+					</div>
+				</div>
+				
+
+
+
+
           	</div>
           <!-- KYC upload -->
 
-          <form id="signUpForm">
+		<form id="signUpForm" >
+
+		  <span class="title">Register</span>
             <div class="input-field">
               <input type="text" name="fullName" placeholder="Enter your Fullname">
               <i class="fa fa-user-circle-o icon"></i>
@@ -428,13 +477,15 @@
             <div class="input-field button">
               <button id="" type="submit">SIGN UP</button>
             </div>
-          </form>
 
-          <div class="login-signup">
-            <span class="text">Already have an account?
-              <a href="#" class="text login-link">Sign in now</a>
-            </span>
-          </div>
+			<div class="login-signup">
+				<span class="text">Already have an account?
+					<a href="#" class="text login-link">Sign in now</a>
+				</span>
+          	</div>
+		</form>
+
+
 
         </div>
       </div>
@@ -598,35 +649,35 @@
 
 		$("#signUpForm").validate({
 		  	errorClass: 'is-invalid text-danger',
-		  	rules: {
-					fullName: "required",
-					birthdate: "required",
-					mobileNumber: "required",
-					email: {
-						required:true,
-						checkEmailAvailability:true
-					},
-					password: {
-						required:true,
-						minlength: 6
-					},
-					confirm_password:{
-						checkPasswordConfirm:true,
-						required:true
-					}
-		  	},
+		  	// rules: {
+			// 		fullName: "required",
+			// 		birthdate: "required",
+			// 		mobileNumber: "required",
+			// 		email: {
+			// 			required:true,
+			// 			checkEmailAvailability:true
+			// 		},
+			// 		password: {
+			// 			required:true,
+			// 			minlength: 6
+			// 		},
+			// 		confirm_password:{
+			// 			checkPasswordConfirm:true,
+			// 			required:true
+			// 		}
+		  	// },
 		  	errorPlacement: function(error, element) {
 		  	  element.parent("div").after(error);
 		  	},
 		  	submitHandler: function(form){
-			    var data = $('#signUpForm').serializeArray();
-			    console.log(data);
+			    // var data = $('#signUpForm').serializeArray();
+			    // console.log(data);
 
-			    var res = ajaxShortLink("saveSignUpForm",data);
-					currentUserID = res;
-			    console.log(res);
+			    // var res = ajaxShortLink("saveSignUpForm",data);
+				// 	currentUserID = res;
+			    // console.log(res);
 
-			    if(res!=false){
+			    // if(res!=false){
 			    	console.log("test");
 			    	$("#thankYou").toggle();
 			    	$("#signUpForm").toggle();
@@ -643,9 +694,9 @@
 		    		// 	}
 		    	 //  		timeleft -= 1;
 		    		// }, 1000);
-			    }else{
-			    	alert("error in signing up: please contact system admin !errorCode 3322!");
-			    }
+			    // }else{
+			    // 	alert("error in signing up: please contact system admin !errorCode 3322!");
+			    // }
 
 		  	}
 		});
