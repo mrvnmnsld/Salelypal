@@ -967,7 +967,6 @@ class admin extends MY_Controller {
 
 	public function faceRecog(){
 		$this->load->view('faceRecog/index');
-
 	}
 
 	

@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <script defer src="assets/lib/faceapi/face-api.min.js"></script>
   <script defer src="assets/lib/faceapi/script.js"></script>
+  
   <title>Face Recognition</title>
   <style>
     body {

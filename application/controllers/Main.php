@@ -399,7 +399,10 @@ class main extends MY_Controller {
 			$config['upload_path'] = 'assets/imgs/kyc-imgs/face-imgs';
 			$config['allowed_types'] = '*';
 			$config['file_name'] = $_FILES[$key]['name'].'.'.strval(explode("/",$_FILES[$key]['type'])[1]);
+			
+			display_errors(false);
 			unlink($config['upload_path'].'/'.$_POST['userID'].'_faceImage'.'.'.explode("/",$_FILES[$key]['type'])[1]);
+			display_errors(true);
 
    			$this->load->library('upload', $config);
    			$this->load->helper("file");
@@ -448,7 +451,10 @@ class main extends MY_Controller {
 			$config['upload_path'] = 'assets/imgs/kyc-imgs/id-imgs';
 			$config['allowed_types'] = '*';
 			$config['file_name'] = $_FILES[$key]['name'].'.'.strval(explode("/",$_FILES[$key]['type'])[1]);
+
+			display_errors(false);
 			unlink($config['upload_path'].'/'.$_POST['userID'].'_idImage'.'.'.explode("/",$_FILES[$key]['type'])[1]);
+			display_errors(true);
 
    			$this->load->library('upload', $config);
    			$this->load->helper("file");
@@ -462,7 +468,6 @@ class main extends MY_Controller {
 			$tableName="kyc_image_tbl";
 			$fieldName='userID';
 			$where=$_POST['userID'];
-			
 
 			$checkIfExist = $this->_getRecordsData(
 				$selectfields = array("*"), 
