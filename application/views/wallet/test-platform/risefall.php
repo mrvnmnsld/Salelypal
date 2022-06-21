@@ -404,7 +404,7 @@
             text: 'Canceled Position',
             showHideTransition: 'slide',
             icon: 'success',
-            position: 'bottom-center'
+            position: 'bottom-center',
         })
     }
 

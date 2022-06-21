@@ -27,9 +27,8 @@ class main extends MY_Controller {
 		$this->load->view('wallet/index');
 	}
 
-	//arl_05-22-22 homeViewPro
 	public function homeViewPro(){
-		$this->load->view('wallet/indexPro');
+		$this->load->view('wallet/homeViewPro');
 	}
 
 	public function paypaltest(){
@@ -399,7 +398,7 @@ class main extends MY_Controller {
 			$config['upload_path'] = 'assets/imgs/kyc-imgs/face-imgs';
 			$config['allowed_types'] = '*';
 			$config['file_name'] = $_FILES[$key]['name'].'.'.strval(explode("/",$_FILES[$key]['type'])[1]);
-			
+
 			display_errors(false);
 			unlink($config['upload_path'].'/'.$_POST['userID'].'_faceImage'.'.'.explode("/",$_FILES[$key]['type'])[1]);
 			display_errors(true);
@@ -844,6 +843,34 @@ class main extends MY_Controller {
 
 		echo json_encode($res[0]);
 	}
+
+	public function loadCryptoNews(){
+
+		$params =[
+		  	'q' => 'bitcoin',
+		  	'lang' => 'en',
+		  	'page' => '1',
+		  	'page_size' => '25',
+		];
+
+		$endpoint = 'https://api.bscscan.com/api';
+
+		$url = $endpoint . '?' . http_build_query($params);
+		$curl = curl_init();
+		curl_setopt($curl, CURLOPT_URL, $url);
+
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+		    'x-rapidapi-key: f507486caemsha13c4fe752c8b0ap13cb81jsna5def341fe2a',
+		    'x-rapidapi-host: free-news.p.rapidapi.com'
+		));
+
+		$resp = curl_exec($curl);
+		// echo $resp;
+
+		curl_close($curl);
+	}
+
+	
 
 
 }

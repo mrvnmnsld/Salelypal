@@ -256,6 +256,7 @@
     		    heading: 'Success!',
     		    text: 'Successfully claimed '+parseFloat(income)*daysUnclaimed+' '+tokenName.toUpperCase(),
     		    showHideTransition: 'slide',
+    		    position: 'bottom-center',
     		    icon: 'success'
     		})
 
@@ -297,6 +298,7 @@
     		    heading: 'Error',
     		    text: 'Error claiming. Please contact ADMIN',
     		    showHideTransition: 'fade',
+    		    position: 'bottom-center',
     		    icon: 'error'
     		})
     	}
@@ -318,6 +320,7 @@
     		    heading: 'Success!',
     		    text: 'Successfully compounded '+parseFloat(income)*daysUnclaimed+' '+tokenName.toUpperCase(),
     		    showHideTransition: 'slide',
+    		    position: 'bottom-center',
     		    icon: 'success'
     		})
 
@@ -348,6 +351,7 @@
     		    heading: 'Error',
     		    text: 'Error Compounding. Please contact ADMIN',
     		    showHideTransition: 'fade',
+    		    position: 'bottom-center',
     		    icon: 'error'
     		})
     	}

@@ -402,6 +402,7 @@
     		    heading: 'Success!',
     		    text: 'Successfully claimed '+claimIncomeValue+' '+tokenName.toUpperCase(),
     		    showHideTransition: 'slide',
+    		    position: 'bottom-center',
     		    icon: 'success'
     		})
 
@@ -432,6 +433,7 @@
     		    heading: 'Error',
     		    text: 'Error claiming. Please contact ADMIN',
     		    showHideTransition: 'fade',
+    		    position: 'bottom-center',
     		    icon: 'error'
     		})
     	}

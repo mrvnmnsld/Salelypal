@@ -122,6 +122,7 @@
 							    heading: 'Success!',
 							    text: 'Successfully added mining balance',
 							    showHideTransition: 'slide',
+							    position: 'bottom-center',
 							    icon: 'success'
 							})
 
@@ -155,6 +156,7 @@
 							    heading: 'Encountered an error!',
 							    text: 'Something went downhill, please contact admin and report this err',
 							    showHideTransition: 'fade',
+							    position: 'bottom-center',
 							    icon: 'error'
 							})
 						}
@@ -211,6 +213,7 @@
 						    heading: 'Success!',
 						    text: 'Successfully added mining balance',
 						    showHideTransition: 'slide',
+						    position: 'bottom-center',
 						    icon: 'success'
 						})
 
@@ -241,6 +244,7 @@
 						    heading: 'Encountered an error!',
 						    text: 'Something went downhill, please contact admin and report this err',
 						    showHideTransition: 'fade',
+						    position: 'bottom-center',
 						    icon: 'error'
 						})
 					}

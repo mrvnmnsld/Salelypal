@@ -253,6 +253,10 @@
 				color:#3a189f !important;
 			}
 
+			.jq-toast-single {
+		  		font-size: 16px;
+			}
+
 
 	</style>
 <!-- css -->

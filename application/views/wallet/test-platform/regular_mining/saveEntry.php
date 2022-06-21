@@ -112,6 +112,7 @@
 							    heading: 'Success!',
 							    text: 'Successfully added mining balance',
 							    showHideTransition: 'slide',
+							    position: 'bottom-center',
 							    icon: 'success'
 							})
 						}else{
@@ -119,6 +120,7 @@
 							    heading: 'Encountered an error!',
 							    text: 'Something went downhill, please contact admin and report this err',
 							    showHideTransition: 'fade',
+							    position: 'bottom-center',
 							    icon: 'error'
 							})
 						}
@@ -194,14 +196,16 @@
 						    heading: 'Success!',
 						    text: 'Successfully added mining balance',
 						    showHideTransition: 'slide',
-						    icon: 'success'
+						    icon: 'success',
+						    position: 'bottom-center',
 						})
 					}else{
 						$.toast({
 						    heading: 'Encountered an error!',
 						    text: 'Something went downhill, please contact admin and report this err',
 						    showHideTransition: 'fade',
-						    icon: 'error'
+						    icon: 'error',
+						    position: 'bottom-center',
 						})
 					}
 

@@ -86,6 +86,7 @@
 		    	    heading: 'Success!!!',
 		    	    text: 'Profile Successfully Updated',
 		    	    icon: 'success',
+		    	    position: 'bottom-center',
 		    	})
 
 		    	bootbox.hideAll();
@@ -94,6 +95,7 @@
 		    	    heading: 'Error!!!',
 		    	    text: 'System Error, Please Contact System Admin',
 		    	    icon: 'error',
+		    	    position: 'bottom-center',
 		    	})
 		    }
 	  	}
