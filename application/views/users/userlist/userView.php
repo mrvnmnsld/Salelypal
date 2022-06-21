@@ -93,23 +93,27 @@
 
 	<div class="d-flex">
 		<div class="p-2">
-			ID Image:
+			<div>ID Image:</div>
 			<img style="height: 250px;" class="img-fluid rounded" id="id_img_container" src="http://qnimate.com/wp-content/uploads/2014/03/images2.jpg">
-			<a href="" download rel="noopener noreferrer" id="id_img_codownload" target="_blank" class="mt-2 btn btn-success btn-sm">
+			<a href="" download rel="noopener noreferrer" id="id_img_codownload" target="_blank" class="mt-2 btn btn-success btn-sm w-100">
 			   Download Original Image
 			</a>
 		</div>
 
 		<div class="p-2">
-			Face Image:
+			<div>Face Image:</div>
 			<img style="height: 250px;" class="img-fluid rounded" id="face_img_container" src="http://qnimate.com/wp-content/uploads/2014/03/images2.jpg">
-			<a href="" download rel="noopener noreferrer" id="face_img_download" target="_blank" class="mt-2 btn btn-success btn-sm">
+			<a href="" download rel="noopener noreferrer" id="face_img_download" target="_blank" class="mt-2 btn btn-success btn-sm w-100">
 			   Download Original Image
 			</a>
 		</div>
 	</div>
 
-	<br>
+	<div id="errorReporter" class="text-center">
+		
+	</div>
+
+	<hr>
 
 	<div>
 		<button class="btn-block btn btn-sm btn-success mt-1" id="verify_user_btn">Verify KYC</button>
@@ -267,42 +271,61 @@
 			]).then(start)
 
 			async function start() {
-
-				$("#loading_text").text("Checking face comparison percentage");
-
-				var container = document.createElement('div')
-				container.style.position = 'relative'
-				// document.body.append(container)
-				$("#kyc_modal").append(container)
 				$("#loading_text").text("Comparing face descriptions");
 
 				let image
 				let canvas
 
-		  		image2 = await faceapi.fetchImage("assets/imgs/kyc-imgs/id-imgs/"+selectedData.IDImagePath);
-		  		image2Detections = await faceapi.detectAllFaces(image2).withFaceLandmarks().withFaceDescriptors()
+		  		idImage = await faceapi.fetchImage("assets/imgs/kyc-imgs/id-imgs/"+selectedData.IDImagePath);
+		  		image2Detections = await faceapi.detectAllFaces(idImage).withFaceLandmarks().withFaceDescriptors()
 
-		  		console.log(image2,image2Detections);
+		  		console.log(idImage,image2Detections);
 
-		  		var faceMatcher = new faceapi.FaceMatcher(image2Detections, 0.6)
+		  		if (image2Detections.length != 0) {
 
-		  		console.log(faceMatcher.length);
-		  		console.log(faceMatcher);
+			  		var faceMatcher = new faceapi.FaceMatcher(image2Detections, 0.6)
+			  		console.log(faceMatcher);
 
-				$("#loading_text").text("Loading...");
-		  		$("#loading").toggle();
+					$("#loading_text").text("Loading...");
+			  		$("#loading").toggle();
 
-		  		image = await faceapi.fetchImage("assets/imgs/kyc-imgs/face-imgs/"+selectedData.FaceImagePath)
-		  		canvas = faceapi.createCanvasFromMedia(image)
+			  		faceImg = await faceapi.fetchImage("assets/imgs/kyc-imgs/face-imgs/"+selectedData.FaceImagePath)
+			  		canvas = faceapi.createCanvasFromMedia(faceImg)
 
-		  		var displaySize = { width: image.width, height: image.height }
-		  		faceapi.matchDimensions(canvas, displaySize)
-		  		var detections = await faceapi.detectAllFaces(image).withFaceLandmarks().withFaceDescriptors()
-		  		var resizedDetections = faceapi.resizeResults(detections, displaySize)
+			  		var displaySize = { width: faceImg.width, height: faceImg.height }
+			  		faceapi.matchDimensions(canvas, displaySize)
+			  		var detections = await faceapi.detectAllFaces(faceImg).withFaceLandmarks().withFaceDescriptors()
 
-		  		var results = resizedDetections.map(d => faceMatcher.findBestMatch(d.descriptor))
+			  		if (image2Detections.length != 0) {
+			  			var resizedDetections = faceapi.resizeResults(detections, displaySize)
+			  			var results = resizedDetections.map(d => faceMatcher.findBestMatch(d.descriptor))
 
-		  		console.log(results);
+			  			console.log(results);
+			  			$("#errorReporter").removeClass("text-danger");
+			  			$("#errorReporter").removeClass("text-success");
+
+			  			if (results[0].distance >= 0.6) {
+			  				$("#errorReporter").addClass("text-danger");
+			  				$("#errorReporter").removeClass("text-success");
+
+			  				$("#errorReporter").append("Face in images doesn't match");
+			  			}else{
+			  				$("#errorReporter").removeClass("text-danger");
+			  				$("#errorReporter").addClass("text-success");
+			  				$("#errorReporter").append("Face image is matching with the ID Image");
+			  			}
+			  		}else{
+						$("#errorReporter").addClass("text-danger");
+						$("#errorReporter").removeClass("text-success");
+						$("#errorReporter").text("No Face Found in Face Image");
+			  		}
+		  		}else{
+		  			$("#errorReporter").addClass("text-danger");
+		  			$("#errorReporter").removeClass("text-success");
+					$("#errorReporter").text("No Face Found in ID Image");
+		  		}
+
+		  		
 
 		  		// results.forEach((result, i) => {
 		  		//   var box = resizedDetections[i].detection.box

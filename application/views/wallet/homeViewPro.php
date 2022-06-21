@@ -253,6 +253,10 @@
 				color:#3a189f !important;
 			}
 
+			.jq-toast-single {
+		  		font-size: 16px;
+			}
+
 
 	</style>
 <!-- css -->
@@ -582,8 +586,8 @@
 		    }
 		});
 
-		// var currentUser = JSON.parse(getLocalStorageByKey('currentUser'));
-		var currentUser = {'userID':"15","displayCurrency":"USD"}
+		var currentUser = JSON.parse(getLocalStorageByKey('currentUser'));
+		// var currentUser = {'userID':"15","displayCurrency":"USD"}
 		var animtionSpeed = 250;
 		var	SelectedtransactionDetails = [];
 		var totalInUsd = 0;
@@ -1087,112 +1091,48 @@
 				});
 			});
 
-			$('#logOut_btn').on('click',function(){
-				$.confirm({
-					dark:'dark',
-				    title: 'Testing Mode!',
-				    content: 'Loging out is disabled due to testing mode being active',
-				    type: 'red',
-				    typeAnimated: true,
-				    buttons: {
-				        close: function () {
-				        }
-				    }
-				});
-			});
-
 			$('#future_btn').on('click',function(){
 				addBreadCrumbs("wallet/test-platform/future")
 
-				
-				$("#tittle_container").text('Contract Trade');
 				$("html, body").animate({ scrollTop: 0 }, "slow");
-				$.when(closeNav()).then(function() {
-					$('#assets_container').css("display","none");
-					$('#topNavBar').toggle();
-					$('#bottomNavBar').toggle();
-			  		$("#container").fadeOut(animtionSpeed, function() {
-					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
-				  			$("#container").empty();
-				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/future'}));
-							$("#profile_btn").css('display',"none")
-							$("#top_back_btn").css('display',"block ")
+				$('#assets_container').css("display","none");
+				$("#container").fadeOut(animtionSpeed, function() {
+					$("#profile_btn").css('display',"none")
+					$("#top_back_btn").css('display',"block")
 
-
-
-				  			setTimeout(function(){
-				  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
-				  					$('#topNavBar').toggle();
-				  					$('#bottomNavBar').toggle();
-				  					$("#container").fadeIn(animtionSpeed);
-				  				});
-				  			}, 1000);
-
-					  		
-				    	});
-				  	});
+		  			$("#container").empty();
+		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/future'}));
+		  			$("#container").fadeIn(animtionSpeed);
 				});
 			});
 
 			$('#rise_fall_btn').on('click',function(){
 				addBreadCrumbs("wallet/test-platform/risefall")
 
-				
-				$("#tittle_container").text('Rise Fall');
 				$("html, body").animate({ scrollTop: 0 }, "slow");
-				$.when(closeNav()).then(function() {
-					$('#assets_container').css("display","none");
-					$('#topNavBar').toggle();
-					$('#bottomNavBar').toggle();
-			  		$("#container").fadeOut(animtionSpeed, function() {
-					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
-				  			$("#container").empty();
-				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/risefall'}));
-							$("#profile_btn").css('display',"none")
-							$("#top_back_btn").css('display',"block ")
+				$('#assets_container').css("display","none");
+				$("#container").fadeOut(animtionSpeed, function() {
+					$("#profile_btn").css('display',"none")
+					$("#top_back_btn").css('display',"block")
 
-
-				  			setTimeout(function(){
-				  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
-				  					$('#topNavBar').toggle();
-				  					$('#bottomNavBar').toggle();
-				  					$("#container").fadeIn(animtionSpeed);
-				  				});
-				  			}, 1000);
-					  		
-				    	});
-				  	});
+		  			$("#container").empty();
+		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/risefall'}));
+		  			$("#container").fadeIn(animtionSpeed);
 				});
 			});
 
 			$('#profile_btn').on('click',function(){
 				addBreadCrumbs("wallet/test-platform/user_profile/profile");
 
-				$("#username_container").text("Marvin");
-				$("#email_container").text("marvin@gmail.com");
 				$("html, body").animate({ scrollTop: 0 }, "slow");
-				$.when(closeNav()).then(function() {
-					$('#assets_container').css("display","none");
-					$('#topNavBar').toggle();
-					$('#bottomNavBar').toggle();
-			  		$("#container").fadeOut(animtionSpeed, function() {
-					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
-				  			$("#container").empty();
-				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/user_profile/profile'}));
-							$("#profile_btn").css('display',"none")
-							$("#top_back_btn").css('display',"block ")
+				$('#assets_container').css("display","none");
+				$("#container").fadeOut(animtionSpeed, function() {
+					$("#profile_btn").css('display',"none")
+					$("#top_back_btn").css('display',"block")
 
-
-				  			setTimeout(function(){
-				  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
-				  					$('#topNavBar').toggle();
-				  					$('#bottomNavBar').toggle();
-				  					$("#container").fadeIn(animtionSpeed);
-				  				});
-				  			}, 1000);
-					  		
-				    	});
-				  	});
+		  			$("#container").empty();
+		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/user_profile/profile'}));
+		  			$("#container").fadeIn(animtionSpeed);
 				});
 			});
 
