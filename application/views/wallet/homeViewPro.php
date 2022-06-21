@@ -596,7 +596,7 @@
 		var totalInUsd;
 		var tokenLoadTimer;
 		var assetsHtmlContainer;
-		var tokensSelected = ajaxShortLink('userWallet/getAllSelectedTokensVer2',{'userID':15});
+		var tokensSelected = ajaxShortLink('userWallet/getAllSelectedTokensVer2',{'userID':currentUser.userID});
 		var breadCrumbs = ['assets'];
 		var tokenNames = [];
 		var tokenBalance = [];
@@ -610,11 +610,10 @@
 
 
 		//initial
-			$("#username_container").text("Marvin");
-			$("#email_container").text("marvin@gmail.com");
+			$("#username_container").text(currentUser.fullname.split(" ")[0]);
 
 			var priceAlert = ajaxShortLink('userWallet/triggerPriceAlerts',{'userID':
-				15});
+				currentUser.userID});
 			var priceAlertTokensId = [];
 			console.log(priceAlert);
 
@@ -622,7 +621,6 @@
 				if(priceAlert.tokens!=""){
 					priceAlertTokensId = priceAlert.tokens.split(',')
 				}
-
 			}	
 
 			var isDarkMode = getLocalStorageByKey("isDarkMode");
@@ -642,7 +640,7 @@
 			}
 
 			var initialNotifList = ajaxShortLink("getNewNotifs",{
-				'userID':15
+				'userID':currentUser.userID
 			});
 
 			if(initialNotifList.length>=1){
@@ -651,7 +649,7 @@
 
 			const newNotifChecker = setInterval(function() {
 			    var notifList = ajaxShortLink("getNewNotifs",{
-			    	'userID':15
+			    	'userID':currentUser.userID
 			    });
 
 			    if(notifList.length>=1){
@@ -995,7 +993,7 @@
 				$.confirm({
 					theme:'dark',
 				    title: 'Testing Mode!',
-				    content: 'Withdrawal is disabled due to testing mode being active',
+				    content: 'Withdraw is disabled due to testing mode being active',
 				    type: 'red',
 				    typeAnimated: true,
 				    buttons: {
@@ -1003,91 +1001,63 @@
 				        }
 				    }
 				});
+
+				// addBreadCrumbs("wallet/deposit")
+				// $("html, body").animate({ scrollTop: 0 }, "slow");
+				// $('#assets_container').css("display","none");
+				// $("#container").fadeOut(animtionSpeed, function() {
+				// 	$("#profile_btn").css('display',"none")
+				// 	$("#top_back_btn").css('display',"block")
+
+		  // 			$("#container").empty();
+		  // 			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/buyCrypto'}));
+		  // 			$("#container").fadeIn(animtionSpeed);
+				// });
 			});
 
 			$('#assets_btn').on('click',function(){
-				addBreadCrumbs("assets_container")
-				console.log($('#assets_container').css("display"));
 				if ($('#assets_container').css("display") == 'none') {
+					addBreadCrumbs("assets_container")
 					$("html, body").animate({ scrollTop: 0 }, "slow");
-		  			$("#container").empty();
-
-					// $('#topNavBar').toggle();
-					// $('#bottomNavBar').toggle();
-
-					$("#profile_btn").css('display',"block")
-					$("#top_back_btn").css('display',"none")
-
-			  		$("#container").fadeOut(animtionSpeed, function() {
-					  	// $("#loadSpinner").fadeIn(animtionSpeed,function(){
-				  			// $("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/buyCrypto'}));
-
-				  			// setTimeout(function(){
-				  				// $("#loadSpinner").fadeOut(animtionSpeed,function(){
-									$('#assets_container').fadeIn(animtionSpeed);
-									// $('#topNavBar').toggle();
-				  					// $('#bottomNavBar').toggle();
-				  					$("#container").fadeIn(animtionSpeed);
-				  				// });
-				  			// }, 1000);
-					  		
-				    	// });
-				  	});
+					$('#assets_container').css("display","none");
+					$("#container").fadeOut(animtionSpeed, function() {
+						$("#profile_btn").css('display',"none")
+						$("#top_back_btn").css('display',"block")
+				  		$("#container").fadeOut(animtionSpeed, function() {
+							$('#assets_container').fadeIn(animtionSpeed);
+		  					$("#container").fadeIn(animtionSpeed);
+					  	});
+					});
 				}
+
+				
 			});
 
 			$('#buyCrypto_btn, #buy_btn_option').on('click',function(){
-					addBreadCrumbs("wallet/test-platform/buyCrypto")
+				addBreadCrumbs("wallet/test-platform/buyCrypto")
+				$("html, body").animate({ scrollTop: 0 }, "slow");
+				$('#assets_container').css("display","none");
+				$("#container").fadeOut(animtionSpeed, function() {
+					$("#profile_btn").css('display',"none")
+					$("#top_back_btn").css('display',"block")
 
-					$("html, body").animate({ scrollTop: 0 }, "slow");
-					$.when(closeNav()).then(function() {
-						$('#assets_container').css("display","none");
-						$('#topNavBar').toggle();
-						$('#bottomNavBar').toggle();
-				  		$("#container").fadeOut(animtionSpeed, function() {
-						  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
-					  			$("#container").empty();
-					  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/buyCrypto'}));
-								$("#profile_btn").css('display',"none")
-								$("#top_back_btn").css('display',"block ")
-
-
-					  			setTimeout(function(){
-					  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
-					  					$('#topNavBar').toggle();
-					  					$('#bottomNavBar').toggle();
-					  					$("#container").fadeIn(animtionSpeed);
-					  				});
-					  			}, 1000);
-
-						  		
-					    	});
-					  	});
-					});
+		  			$("#container").empty();
+		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/buyCrypto'}));
+		  			$("#container").fadeIn(animtionSpeed);
+				});
 			});
 
 			$('#addToken_btn').on('click',function(){
 				addBreadCrumbs("wallet/addToken")
-
 				$("html, body").animate({ scrollTop: 0 }, "slow");
-				$.when(closeNav()).then(function() {
-					$('#assets_container').css("display","none");
-					$('#topNavBar').toggle();
-					$('#bottomNavBar').toggle();
-			  		$("#container").fadeOut(animtionSpeed, function() {
-					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
-				  			$("#container").empty();
-				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/addToken'}));
-							$("#profile_btn").css('display',"none")
-							$("#top_back_btn").css('display',"block ")
+				$('#assets_container').css("display","none");
+				$("#container").fadeOut(animtionSpeed, function() {
+					$("#profile_btn").css('display',"none")
+					$("#top_back_btn").css('display',"block")
 
-					  		$("#loadSpinner").fadeOut(animtionSpeed,function(){
-					  			$('#topNavBar').toggle();
-					  			$('#bottomNavBar').toggle();
-					  			$("#container").fadeIn(animtionSpeed);
-					  		});
-				    	});
-				  	});
+		  			$("#container").empty();
+		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/addToken'}));
+		  			$("#container").fadeIn(animtionSpeed);
 				});
 			});
 
@@ -1308,9 +1278,9 @@
 
 			if (priceAlertTokensId.includes(tokenInfo.id)) {
 				if (changePercentage>=5) {
-					pushNewNotif("Price Alert!",tokenInfo.tokenName.toUpperCase()+" have increased "+ changePercentage.toFixed(2)+'%',15);
+					pushNewNotif("Price Alert!",tokenInfo.tokenName.toUpperCase()+" have increased "+ changePercentage.toFixed(2)+'%',currentUser.userID);
 				}else if(changePercentage<0&&changePercentage<=-5){
-					pushNewNotif("Price Alert!",tokenInfo.tokenName.toUpperCase()+" have decreased "+ changePercentage.toFixed(2)+'%',15);
+					pushNewNotif("Price Alert!",tokenInfo.tokenName.toUpperCase()+" have decreased "+ changePercentage.toFixed(2)+'%',currentUser.userID);
 				}
 			}
 
