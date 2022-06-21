@@ -1001,18 +1001,6 @@
 				        }
 				    }
 				});
-
-				// addBreadCrumbs("wallet/deposit")
-				// $("html, body").animate({ scrollTop: 0 }, "slow");
-				// $('#assets_container').css("display","none");
-				// $("#container").fadeOut(animtionSpeed, function() {
-				// 	$("#profile_btn").css('display',"none")
-				// 	$("#top_back_btn").css('display',"block")
-
-		  // 			$("#container").empty();
-		  // 			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/buyCrypto'}));
-		  // 			$("#container").fadeIn(animtionSpeed);
-				// });
 			});
 
 			$('#assets_btn').on('click',function(){
@@ -1029,8 +1017,6 @@
 					  	});
 					});
 				}
-
-				
 			});
 
 			$('#buyCrypto_btn, #buy_btn_option').on('click',function(){

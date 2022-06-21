@@ -632,21 +632,21 @@
 	$("#signUpForm").validate({
 	  	errorClass: 'is-invalid text-danger',
 	  	rules: {
-				// fullName: "required",
-				// birthdate: "required",
-				// mobileNumber: "required",
-				// email: {
-				// 	required:true,
-				// 	checkEmailAvailability:true
-				// },
-				// password: {
-				// 	required:true,
-				// 	minlength: 6
-				// },
-				// confirm_password:{
-				// 	checkPasswordConfirm:true,
-				// 	required:true
-				// }
+				fullName: "required",
+				birthdate: "required",
+				mobileNumber: "required",
+				email: {
+					required:true,
+					checkEmailAvailability:true
+				},
+				password: {
+					required:true,
+					minlength: 6
+				},
+				confirm_password:{
+					checkPasswordConfirm:true,
+					required:true
+				}
 	  	},
 	  	errorPlacement: function(error, element) {
 	  	  element.parent("div").after(error);
