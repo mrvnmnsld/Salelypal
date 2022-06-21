@@ -277,79 +277,118 @@
 	        	</div>
 	        </div>
 
-			  	<style>
-						#title_kyc{
-							font-size: 2.5rem;
-							font-weight: bold;
-							/* line-height: 2; */
-							/* text-align:center; */
-						}
-						#subtitle_kyc {
-							position: relative;
-							/* line-height:2; */
-						}
-						#subtitle_kyc:before {
-							display: inline-block;
-							content: "";
-							height: 1px;
-							background: #939ba2!important;
-							position: absolute;
-							width: 180%;
-							top: 50%;
-							margin-left: 120px;
-						}
-						.icon_kyc{
-							font-size:13px!important;
-							color:#5426de!important;
-						}
-						.col-6,.column-kyc{
-							padding-right:0px;
-						}
-						#instruction_kyc{
-							font-size:13px;
-							text-align: justify;
-							font-weight: 150;
-							color: #939ba2!important;
-						}
-						#upload_container{
-							border:1px solid #939ba2!important;
-							border-radius:5px;
-						}
-					</style>
-
-		    	<div class="" style="display: none;" id="verify_kyc_container">
-						<div id="title_kyc"><span class="">Verification</span></div>
-						<div class="pb-3"><span class="text-muted text-left" id="subtitle_kyc">Upload photo</span></div>
-						<div class="text-left"><b>Important Notes</b></div>
-						<div id="noteslist_kyc" class="m-2"> 
-							<div class="row">
-								<div class="col-6 column-kyc"><i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><small> Don't use filter</small></div>
-								<div class="col-6 column-kyc"><i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><small> Don't wear make up</small></div>
-							</div>
-							<div class="row">
-								<div class="col-6 column-kyc"><i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><small> Don't wear hats</small></div>
-								<div class="col-6 column-kyc"><i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><small> Don't wear eye wear</small></div>
-							</div>
-						</div><!-- noteslist_kyc -->
-						<div id="instruction_kyc" class="text-left py-3">
-							<span>Kindly ensure that face is centered, well lit, and visible when capturing the photo to avoid facial recognition errors.</span>
+			<style>
+				#title_kyc{
+					/* font-size: 3rem; */
+					/* font-weight: bold; */
+					/* text-align:center; */
+					position: relative;
+					font-size: 35px;
+					font-weight: 600;
+					color: #5426de;
+				}
+				#title_kyc:before{
+					content: '';
+					position: absolute;
+					left: 0;
+					bottom: 0;
+					height: 3px;
+					width: 30px;
+					background-color: #5426de;
+				}
+				#subtitle_kyc {
+					font-size:1rem;
+					position: relative;
+					/* line-height:2; */
+				}
+				#subtitle_kyc:before {
+					display: inline-block;
+					content: "";
+					height: 1px;
+					background: #939ba2!important;
+					position: absolute;
+					width: 170%;
+					top: 50%;
+					margin-left: 120px;
+				}
+				.icon_kyc{
+					font-size:1rem!important;
+					color:#5426de!important;
+				}
+				#instruction_kyc{
+					font-size:1rem;
+					text-align: justify;
+					font-weight: 150;
+					color: #939ba2!important;
+					/* color:#5426de!important; */
+				}
+				.font2rem{
+					font-size:2rem;
+				}
+				.font1rem{
+					font-size:1rem!important;
+				}
+				.upload_button{
+					width: 100%;
+					height: 50px;
+					border: none;
+					color: #fff;
+					font-size: 1rem;
+					font-weight: 900;
+					letter-spacing: 3px;
+					background-color: #5426de;
+					cursor: pointer;
+					transition: all 0.3s ease;
+					margin-top:10px;
+					border-radius: 0.25rem;
+				}
+				.upload_button:hover{
+					background-color: #9e68e8;
+				}
+				.check_upload{
+					color:green;
+				}
+				</style>
+				<!-- KYC upload -->
+				<div class="" style="display: none;" id="verify_kyc_container">
+					<div id="title_kyc" class="mb-4"><span class="">Verification</span></div>
+					<div class="pb-1"><span class="text-muted text-left" id="subtitle_kyc">Upload photo</span></div>
+					<div id="noteslist_kyc" class="m-2"> 
+					<div class="text-left font1rem"><b>Important Notes</b></div>
+						<!-- <div class="row font1rem">
+							<div class="col-6 column-kyc "><i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Don't use filter</span></div>
+							<div class="col-6 column-kyc"><i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Avoid make up</span></div>
 						</div>
-
-						<div id="upload_container">
-							<div class="row p-2 text-center">
-								<div class="col-6">
-									<span><i id="faceCheckUpload_kyc" class="fa fa-upload my-2"></i></span>
-									<span id="faceUpload_btn" class=""><small>Face photo</small></span>
-									<input class="form-control d-none" type="file" name="faceUpload" id="faceUpload" accept="image/png, image/gif, image/jpeg" >
-								</div>
-								<div class="col-6">
-									<span><i id="IDCheckUpload_kyc" class="fa fa-upload my-2"></i></span>
-									<span id="IDUpload_btn" class=""><small>ID photo</small></span>
-									<input class="form-control d-none" type="file" name="IDUpload" id="IDUpload" accept="image/png, image/gif, image/jpeg" >
-								</div>
+						<div class="row font1rem">
+							<div class="col-6 column-kyc"><i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Don't wear hats</span></div>
+							<div class="col-6 column-kyc"><i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Avoid eye wear</span></div>
+						</div> -->
+						<i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Don't use photo filter</span><br>
+						<i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Avoid wearing make up</span><br>
+						<i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Avoid wearing glasses</span><br>
+						<i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Avoid wearing hats</span>
+					</div><!-- noteslist_kyc -->
+					<div id="instruction_kyc" class="text-left pt-3">
+						<span>Ensure that face is centered and visible when capturing the photo to avoid facial recognition errors</span>
+					</div>
+					<div class="row">
+							<div class="col-6 d-flex flex-row-reverse">
+								<button class="upload_button face_upload_btn" type="button">
+									<span><i id="faceCheckUpload_kyc" class="fa fa-picture-o fa-inverse"></i></span>
+									<span id="faceUpload_btn" class="">Face</span>
+								</button>
+								<input class="form-control d-none" type="file" name="faceUpload" id="faceUpload" accept="image/png, image/gif, image/jpeg" >
+							</div>
+							<div class="col-6 d-flex flex-row-reverse">
+								<button class="upload_button id_upload_btn" type="button">
+									<span><i id="IDCheckUpload_kyc" class="fa fa-picture-o fa-inverse"></i></span>
+									<span id="IDUpload_btn" class="">ID</span>
+								</button>
+								<input class="form-control d-none" type="file" name="IDUpload" id="IDUpload" accept="image/png, image/gif, image/jpeg" >
 							</div>
 						</div>
-		    	</div>
+				</div><!-- verify_kyc_container -->
+				<!-- KYC upload -->
 
 					<form id="signUpForm" >
 
@@ -388,7 +427,7 @@
 	          </div>
 
 	          <div class="input-field button">
-	            <button id="" type="submit">SIGN UP</button>
+	            <button type="button" id="signup_btn">SIGN UP</button>
 	          </div>
 
 						<div class="login-signup">
@@ -523,6 +562,8 @@
 	  		  $('#errorReporter').text("Wrong Credentials.");
 	  		}else if(loginRes['wrongFlag'] == 3){
 	  		  $('#errorReporter').html("Account Blocked.");
+	  		}else if(loginRes['wrongFlag'] == 4){
+	  		  $('#errorReporter').html("Account not yet verified. Please wait while we process your verification");
 	  		}else if(loginRes['wrongFlag'] == 0){
 
 	  			$("#submit_login_btn").empty().append(
@@ -545,8 +586,27 @@
 	});
 	
 	$("#submit_login_btn").on("click",function(){
-		console.log("click");
 		captcha.reset();
+	});
+
+	$("#signup_btn").on("click",function(){
+		if ($("#signUpForm").valid()) {
+			$("#signup_btn").empty().append(
+			    '<span class="spinner-border" role="status">'+
+			      '<span class="sr-only">Loading...</span>'+
+			    '</span>'+
+			    "&nbsp Submiting..."
+			).attr('disabled',true);
+
+			setTimeout(function(){
+				$("#signUpForm").submit();
+			},1000)
+
+		}else{
+			$("#signup_btn").empty().append(
+			    'SIGN UP'
+			).removeAttr('disabled');
+		}
 	});
 
 	var generatedOtp = generateOTP();
@@ -612,8 +672,13 @@
 				currentUserID = res;
 		    console.log(res);
 
+		   
+
 		    if(res!=false){
-		    	console.log("test");
+		    	$("#signup_btn").empty().append(
+		    	    'SIGN UP'
+		    	).removeAttr('disabled');
+
 		    	$("#thankYou").toggle();
 		    	$("#signUpForm").toggle();
 		    }else{
@@ -623,70 +688,99 @@
 	  	}
 	});
 
-  $("#faceUpload_btn").on("click", function(){
-      $('#faceUpload').click();
-  });
+	var face_upload=0;
+	var id_upload=0;
 
-	$("#IDUpload_btn").on("click", function(){
-        $('#IDUpload').click();
+    $("#faceUpload_btn").on("click", function(){
+        $('#faceUpload').click();
     });
 
-  $('#faceUpload').change(function(){
-		$.confirm({
-		    title: 'KYC - Face upload',
-		    columnClass: 'col-md-6 col-md-offset-6',
-		    content: 'Are you sure you want to upload image?',
-		    buttons: {
-		        confirm: function () {
-		        	var imageUploadFormData = new FormData();
+		$("#IDUpload_btn").on("click", function(){
+	        $('#IDUpload').click();
+	    });
 
-		        	imageUploadFormData.append(currentUserID+"_faceImage", $('#faceUpload')[0].files[0],currentUserID+"_faceImage");
-					imageUploadFormData.append('userID', currentUserID);
-			     	backendHandleFormData('saveFaceImageKyc',imageUploadFormData);
+    $('#faceUpload').change(function(){
+			$.confirm({
+			    title: 'KYC - Face upload',
+			    columnClass: 'col-md-6 col-md-offset-6',
+			    content: 'Are you sure you want to upload image?',
+			    buttons: {
+			        confirm: function () {
+			        	var imageUploadFormData = new FormData();
 
-    			    $.toast({
-    			        heading: '<h6>Face Image Uploaded</h6>',
-    			        text: 'Successfull!',
-    			        showHideTransition: 'slide',
-    			        icon: 'success',
-    			        position: 'bottom-center'
-    			    })
-		        },
-		        cancel: function () {
-		        	
-		        },
-		    }
+			        	imageUploadFormData.append(currentUserID+"_faceImage", $('#faceUpload')[0].files[0],currentUserID+"_faceImage");
+						imageUploadFormData.append('userID', currentUserID);
+				     	backendHandleFormData('saveFaceImageKyc',imageUploadFormData);
+
+						 face_upload = 1;
+						 checkupload();
+
+	    			    $.toast({
+	    			        heading: '<h6>Face Image Uploaded</h6>',
+	    			        text: 'Successfull!',
+	    			        showHideTransition: 'slide',
+	    			        icon: 'success',
+	    			        position: 'bottom-center'
+	    			    })
+			        },
+			        cancel: function () {
+			        	
+			        },
+			    }
+			});
 		});
-	});
 
-	$('#IDUpload').change(function(){
-		$.confirm({
-		    title: 'KYC - ID upload',
-		    columnClass: 'col-md-6 col-md-offset-6',
-		    content: 'Are you sure you want to upload image?',
-		    buttons: {
-		        confirm: function () {
-		        	var imageUploadFormData = new FormData();
+		$('#IDUpload').change(function(){
+			$.confirm({
+			    title: 'KYC - ID upload',
+			    columnClass: 'col-md-6 col-md-offset-6',
+			    content: 'Are you sure you want to upload image?',
+			    buttons: {
+			        confirm: function () {
+			        	var imageUploadFormData = new FormData();
 
-		        	imageUploadFormData.append(currentUserID+"_IDImage", $('#IDUpload')[0].files[0],currentUserID+"_IDImage");
-							imageUploadFormData.append('userID', currentUserID);
-			     		backendHandleFormData('saveIDImageKyc',imageUploadFormData);
+						imageUploadFormData.append(currentUserID+"_IDImage", $('#IDUpload')[0].files[0],currentUserID+"_IDImage");
+						imageUploadFormData.append('userID', currentUserID);
+						backendHandleFormData('saveIDImageKyc',imageUploadFormData);
 
-    			    $.toast({
-    			        heading: '<h6>Face Image Uploaded</h6>',
-    			        text: 'Successfull!',
-    			        showHideTransition: 'slide',
-    			        icon: 'success',
-    			        position: 'bottom-center'
-    			    })
-		        },
-		        cancel: function () {
-		        	
-		        },
-		    }
+						id_upload = 1;
+						checkupload();
+
+	    			    $.toast({
+	    			        heading: '<h6>Face Image Uploaded</h6>',
+	    			        text: 'Successfull!',
+	    			        showHideTransition: 'slide',
+	    			        icon: 'success',
+	    			        position: 'bottom-center'
+	    			    })
+			        },
+			        cancel: function () {
+			        	
+			        },
+			    }
+			});
 		});
-	});
 
+		function checkupload(){
+			if (id_upload == 1 && face_upload == 0){
+				$('#instruction_kyc').html("\
+				<span>Ensure that face is centered and visible when capturing the photo to avoid facial recognition errors</span>\
+				<br><i class='fa fa-check check_upload' aria-hidden='true'></i><span class='check_upload'> ID uploaded</span>\
+				")
+			}else if(face_upload == 1 && id_upload == 0){
+				$('#instruction_kyc').html("\
+				<span>Ensure that face is centered and visible when capturing the photo to avoid facial recognition errors</span>\
+				<br><i class='fa fa-check check_upload' aria-hidden='true'></i><span class='check_upload'> Face uploaded</span>\
+				")
+			}else{
+				// $('#noteslist_kyc').toggle();
+				$('#instruction_kyc').html("\
+				<i class='fa fa-check check_upload' aria-hidden='true'></i><span class='check_upload'> ID uploaded</span>\
+				<i class='fa fa-check check_upload' aria-hidden='true'></i><span class='check_upload'> Face uploaded</span><br>\
+				<span style='color:black;'> Uploaded! Kindly wait 1-3 working days for verification. Thank you</span>\
+				")
+			}
+		}
 
 </script>
 </body>
