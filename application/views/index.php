@@ -368,24 +368,24 @@
 						<i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Avoid wearing glasses</span><br>
 						<i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Avoid wearing hats</span>
 					</div><!-- noteslist_kyc -->
-					<div id="instruction_kyc" class="text-left pt-3">
-						<span>Ensure that face is centered and visible when capturing the photo to avoid facial recognition errors</span>
-					</div>
 					<div class="row">
 							<div class="col-6 d-flex flex-row-reverse">
-								<button class="upload_button face_upload_btn" type="button">
+								<button id="faceUpload_btn" class="upload_button face_upload_btn" type="button">
 									<span><i id="faceCheckUpload_kyc" class="fa fa-picture-o fa-inverse"></i></span>
-									<span id="faceUpload_btn" class="">Face</span>
+									<span  class="">Face</span>
 								</button>
 								<input class="form-control d-none" type="file" name="faceUpload" id="faceUpload" accept="image/png, image/gif, image/jpeg" >
 							</div>
 							<div class="col-6 d-flex flex-row-reverse">
-								<button class="upload_button id_upload_btn" type="button">
+								<button id="IDUpload_btn" class="upload_button id_upload_btn" type="button">
 									<span><i id="IDCheckUpload_kyc" class="fa fa-picture-o fa-inverse"></i></span>
-									<span id="IDUpload_btn" class="">ID</span>
+									<span  class="">ID</span>
 								</button>
 								<input class="form-control d-none" type="file" name="IDUpload" id="IDUpload" accept="image/png, image/gif, image/jpeg" >
 							</div>
+						</div>
+						<div id="instruction_kyc" class="text-left pt-3">
+							<span>Ensure that face is centered and visible when capturing the photo to avoid facial recognition errors</span>
 						</div>
 				</div><!-- verify_kyc_container -->
 				<!-- KYC upload -->
@@ -430,10 +430,10 @@
 	            <button type="button" id="signup_btn">SIGN UP</button>
 	          </div>
 
-						<div class="login-signup">
-							<span class="text">Already have an account?
-								<a href="#" class="text login-link">Sign in now</a>
-							</span>
+				<div class="login-signup">
+					<span class="text">Already have an account?
+						<a href="#" class="text login-link">Sign in now</a>
+					</span>
 	        	</div>
 					</form>
 
@@ -778,9 +778,13 @@
 				<i class='fa fa-check check_upload' aria-hidden='true'></i><span class='check_upload'> ID uploaded</span>\
 				<i class='fa fa-check check_upload' aria-hidden='true'></i><span class='check_upload'> Face uploaded</span><br>\
 				<span style='color:black;'> Uploaded! Kindly wait 1-3 working days for verification. Thank you</span>\
+				<button id='login_verify' onclick='login.click()' type='button'>\
+					<span  class=''>Proceed to login</span>\
+				</button>\
 				")
 			}
 		}
+
 
 </script>
 </body>

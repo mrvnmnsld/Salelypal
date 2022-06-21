@@ -196,11 +196,8 @@ if (!isset($_SESSION["currentUser"])) {
               </a>
             </li>
 
-            <li>
+            <!-- <li>
               <a class="dropdown-item d-flex bd-highlight">
-                
-
-                <!-- <div class="bd-highlight">Flex item</div> -->
 
                 <div class="align-middle">
                   <i class="bi bi-translate"></i>
@@ -214,13 +211,12 @@ if (!isset($_SESSION["currentUser"])) {
                         <option value="zh-TW">Chinese (Traditional)</option>
                         <option value="ceb">Cebuano</option>
                         <option value="ja">Japanese</option>
-
-
                     </select>
                 </div>
 
               </a>
-            </li>
+            </li> -->
+
             <li>
               <hr class="dropdown-divider">
             </li>
@@ -546,7 +542,7 @@ if (!isset($_SESSION["currentUser"])) {
 </body>
 
 <!-- google translate -->
-  <script type="text/javascript">
+  <!-- <script type="text/javascript">
       // var currentUserLanguage = {
       //     'lang':"/en/zh-TW"
       // }
@@ -576,7 +572,7 @@ if (!isset($_SESSION["currentUser"])) {
       })
   </script>
 
-  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script> -->
 <!-- google translate -->
 
 <script type="text/javascript">

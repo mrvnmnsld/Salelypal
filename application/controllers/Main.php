@@ -415,11 +415,7 @@ class main extends MY_Controller {
 				$data = $this->upload->data();
 			}
 
-			$tableName="kyc_image_tbl";
-			$fieldName='userID';
-			$where=$_POST['userID'];
 			
-
 			$checkIfExist = $this->_getRecordsData(
 				$selectfields = array("*"), 
 				$tables = array('kyc_image_tbl'), 
@@ -436,6 +432,10 @@ class main extends MY_Controller {
 				);
 				$insertRecord = $this->_insertRecords($tableName = 'kyc_image_tbl', $insertRecord);
 			}else{
+				$tableName="kyc_image_tbl";
+				$fieldName='userID';
+				$where=$_POST['userID'];
+				
 				$insertRecord = array(
 					'faceImagePath'=>$config['file_name'],
 					'timestamp' => $this->_getTimeStamp24Hours(),
@@ -466,10 +466,7 @@ class main extends MY_Controller {
 				$data = $this->upload->data();
 			}
 
-			$tableName="kyc_image_tbl";
-			$fieldName='userID';
-			$where=$_POST['userID'];
-
+			
 			$checkIfExist = $this->_getRecordsData(
 				$selectfields = array("*"), 
 				$tables = array('kyc_image_tbl'), 
@@ -486,6 +483,10 @@ class main extends MY_Controller {
 				);
 				$insertRecord = $this->_insertRecords($tableName = 'kyc_image_tbl', $insertRecord);
 			}else{
+				$tableName="kyc_image_tbl";
+				$fieldName='userID';
+				$where=$_POST['userID'];
+
 				$insertRecord = array(
 					'IDImagePath'=>$config['file_name'],
 					'timestamp' => $this->_getTimeStamp24Hours(),
