@@ -400,15 +400,11 @@
         }
 
         $.toast({
+            heading: '<h6>Success</h6>',
             text: 'Canceled Position',
             showHideTransition: 'slide',
-            allowToastClose: false,
-            hideAfter: 5000,
-            stack: 5,
-            position: 'bottom-center',
-            textAlign: 'center',
-            loader: true,
-            loaderBg: '#9EC600'
+            icon: 'success',
+            position: 'bottom-center'
         })
     }
 

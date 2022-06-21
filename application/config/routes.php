@@ -32,14 +32,6 @@ $route['main/getTokenInfoViaID'] = 'main/getTokenInfoViaID';
 $route['saveFaceImageKyc'] = 'main/saveFaceImageKyc';
 $route['saveIDImageKyc'] = 'main/saveIDImageKyc';
 
-$route['main/loadCryptoNews'] = 'main/loadCryptoNews';
-$route['referalLink'] = 'main/referalLink';
-
-
-
-
-
-
 
 
 // Admin

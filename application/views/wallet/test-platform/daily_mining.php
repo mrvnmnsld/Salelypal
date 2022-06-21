@@ -253,11 +253,10 @@
     	
     	if(res==1){
     		$.toast({
+    		    heading: 'Success!',
     		    text: 'Successfully claimed '+parseFloat(income)*daysUnclaimed+' '+tokenName.toUpperCase(),
     		    showHideTransition: 'slide',
-				allowToastClose: false,
-				hideAfter: 5000,
-				stack: 5,
+    		    icon: 'success'
     		})
 
     		// test-platform
@@ -295,11 +294,10 @@
     		// test-platform
     	}else{
     		$.toast({
+    		    heading: 'Error',
     		    text: 'Error claiming. Please contact ADMIN',
     		    showHideTransition: 'fade',
-				allowToastClose: false,
-				hideAfter: 5000,
-				stack: 5,
+    		    icon: 'error'
     		})
     	}
 	}
@@ -317,11 +315,10 @@
     	
     	if(res==1){
     		$.toast({
+    		    heading: 'Success!',
     		    text: 'Successfully compounded '+parseFloat(income)*daysUnclaimed+' '+tokenName.toUpperCase(),
     		    showHideTransition: 'slide',
-				allowToastClose: false,
-				hideAfter: 5000,
-				stack: 5,
+    		    icon: 'success'
     		})
 
     		// test-platform
@@ -348,15 +345,10 @@
     		// test-platform
     	}else{
     		$.toast({
+    		    heading: 'Error',
     		    text: 'Error Compounding. Please contact ADMIN',
     		    showHideTransition: 'fade',
-				allowToastClose: false,
-				hideAfter: 5000,
-				stack: 5,
-				position: 'bottom-center',
-    		    textAlign: 'center',
-    		    loader: true,
-    		    loaderBg: '#9EC600'
+    		    icon: 'error'
     		})
     	}
 	}

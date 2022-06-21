@@ -5,8 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <link rel="icon" type="image/png" href="assets/imgs/ezpayex_logo.png"/>
-  <title>SafetyPal - Admin Login</title>
+  <title>Security Wallet - Admin Login</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -141,12 +140,15 @@
     border: 2px solid white;
     border-radius: 20px !important;
     margin-top: 20px !important;
+    font-family:'Montserrat', sans-serif;
+    text-transform: uppercase;
     text-align: center;
+    line-height: 1;
+    font-size: 17px;
     font-weight: 600;
     background-color : transparent;
     padding: 10px;
     outline: none;
-    letter-spacing: 5px;
   }
   button:hover {
       color: #001F3F;

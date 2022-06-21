@@ -530,26 +530,24 @@
 			<li id="assets_btn" class="nav-item col-3 text-center">
 				<!-- <i class="fa fa-bank fa-inverse botnav-icon" alt="Asset" aria-hidden="true"></i> -->
 				<img style="width:1.8em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-wallet-64.png">
-				<!-- <a class="nav-link" style="font-size:.7em; color:#D9E9E8;"  href="#">Assets</a> -->
-
 			</li>
 
 			<li id="modal_mining_btn" data-toggle="modal" data-target="#modal_trade" class="nav-item col-3 text-center">
 				<!-- <i class="fa fa-bar-chart fa-inverse botnav-icon" alt="Trade" aria-hidden="true"></i> -->
 				<img style="width:1.8em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-trading-64.png">
-				<!-- <a class="nav-link" style="font-size:.7em; color:#D9E9E8;"  href="#">Trade</a> -->
+				<!-- <a class="nav-link" style="font-size:.8em; color:#D9E9E8;"  href="#">Trade</a> -->
 			</li>
 
 			<li id="discover_btn" class="nav-item col-3 text-center">
 				<!-- <i class="fa fa-globe fa-inverse botnav-icon" style="width:1.5em;" alt="Discover" aria-hidden="true"></i> -->
 				<img style="width:1.8em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-astronomy-64.png">
-				<!-- <a  class="nav-link" style="font-size:.7em; color:#D9E9E8;" href="#">Discover</a> -->
+				<!-- <a  class="nav-link" style="font-size:.8em; color:#D9E9E8;" href="#">Discover</a> -->
 			</li>
 
 			<li id="settings_btn" class="nav-item col-3 text-center">
 				<!-- <i class="fa fa-cogs fa-inverse botnav-icon" alt="Settings" aria-hidden="true"></i> -->
 				<img style="width:1.8em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-settings-64.png">
-				<!-- <a class="nav-link" style="font-size:.7em; color:#D9E9E8;"  href="#">Settings</a> -->
+				<!-- <a class="nav-link" style="font-size:.8em; color:#D9E9E8;"  href="#">Settings</a> -->
 			</li>
 		</ul>
 	</body>
@@ -1263,18 +1261,57 @@
 			});
 
 			$('#discover_btn').on('click',function(){
-				addBreadCrumbs("wallet/test-platform/discover");
+				// addBreadCrumbs("test-platform/regular_mining");
 
-				$("html, body").animate({ scrollTop: 0 }, "slow");
-				$('#assets_container').css("display","none");
-				$("#container").fadeOut(animtionSpeed, function() {
-					$("#profile_btn").css('display',"none")
-					$("#top_back_btn").css('display',"block")
+				// $.confirm({
+				// 	dark:'dark',
+				//     // title: 'Testing Mode!',
+				//     content: 'This part is still under development',
+				//     type: 'red',
+				//     typeAnimated: true,
+				//     buttons: {
+				//         close: function () {
+				//         }
+				//     }
+				// });
 
-		  			$("#container").empty();
-		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/discover'}));
-		  			$("#container").fadeIn(animtionSpeed);
+				$.confirm({
+					theme: 'dark',
+					type: 'orange',
+				    title: 'Development',
+				    content: 'This part is still under development',
+				    typeAnimated: true,
+				    buttons: {
+				        close: function () {
+				        }
+				    }
 				});
+				// 
+				// $("#tittle_container").text('Daily Income Mining');
+				// $("html, body").animate({ scrollTop: 0 }, "slow");
+				// $.when(closeNav()).then(function() {
+					// $('#assets_container').css("display","none");
+				// 	$('#topNavBar').toggle();
+				// 	$('#bottomNavBar').toggle();
+			 //  		$("#container").fadeOut(animtionSpeed, function() {
+				// 	  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
+				//   			$("#container").empty();
+				//   			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/daily_mining'}));
+							// $("#profile_btn").css('display',"none")
+							// $("#top_back_btn").css('display',"block ")
+
+
+				//   			setTimeout(function(){
+				//   				$("#loadSpinner").fadeOut(animtionSpeed,function(){
+				//   					$('#topNavBar').toggle();
+				//   					$('#bottomNavBar').toggle();
+				//   					$("#container").fadeIn(animtionSpeed);
+				//   				});
+				//   			}, 1000);
+					  		
+				//     	});
+				//   	});
+				// });
 			});
 		// buttonEvents	
 
@@ -1481,7 +1518,7 @@
 				    allowToastClose: true, // Boolean value true or false
 				    hideAfter: 3000, // false to make it sticky or number representing the miliseconds as time after which toast needs to be hidden
 				    stack: false, // false if there should be only one toast at a time or a number representing the maximum number of toasts to be shown at a time
-				    position: 'bottom-center', // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
+				    position: 'top-center', // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
 				    
 				    
 				    

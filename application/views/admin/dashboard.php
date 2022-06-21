@@ -14,8 +14,7 @@ if (!isset($_SESSION["currentUser"])) {
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <link rel="icon" type="image/png" href="assets/imgs/ezpayex_logo.png"/>
-  <title>SafetyPal Dashboard</title>
+  <title>Security Wallet Dashboard</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -168,7 +167,7 @@ if (!isset($_SESSION["currentUser"])) {
     <div class="d-flex align-items-center justify-content-between">
       <a href="index.html" class="logo d-flex align-items-center">
         <img src="assets/imgs/ezpayex_logo.png" alt="" style="border-radius:50%">
-        <span class="d-none d-lg-block" style="font-size: 21px;font-family: 'Poppins', sans-serif;">SafetyPal <span id="userTypeTitle" style="text-transform: capitalize;font-family: 'Poppins', sans-serif;"></span></span>
+        <span class="d-none d-lg-block" style="font-size: 21px;font-family: 'Poppins', sans-serif;">Security Wallet <span id="userTypeTitle" style="text-transform: capitalize;font-family: 'Poppins', sans-serif;"></span></span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->

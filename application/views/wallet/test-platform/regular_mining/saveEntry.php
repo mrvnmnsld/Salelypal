@@ -109,27 +109,17 @@
 
 						if(saveRes){
 							$.toast({
+							    heading: 'Success!',
 							    text: 'Successfully added mining balance',
 							    showHideTransition: 'slide',
-									allowToastClose: false,
-									hideAfter: 5000,
-									stack: 5,
-									position: 'bottom-center',
-			    		    textAlign: 'center',
-			    		    loader: true,
-			    		    loaderBg: '#9EC600'
+							    icon: 'success'
 							})
 						}else{
 							$.toast({
+							    heading: 'Encountered an error!',
 							    text: 'Something went downhill, please contact admin and report this err',
 							    showHideTransition: 'fade',
-									allowToastClose: false,
-									hideAfter: 5000,
-									stack: 5,
-									position: 'bottom-center',
-			    		    textAlign: 'center',
-			    		    loader: true,
-			    		    loaderBg: '#9EC600'
+							    icon: 'error'
 							})
 						}
 
@@ -201,27 +191,17 @@
 
 					if(saveRes){
 						$.toast({
+						    heading: 'Success!',
 						    text: 'Successfully added mining balance',
 						    showHideTransition: 'slide',
-								allowToastClose: false,
-								hideAfter: 5000,
-								stack: 5,
-								position: 'bottom-center',
-		    		    textAlign: 'center',
-		    		    loader: true,
-		    		    loaderBg: '#9EC600'
+						    icon: 'success'
 						})
 					}else{
 						$.toast({
+						    heading: 'Encountered an error!',
 						    text: 'Something went downhill, please contact admin and report this err',
 						    showHideTransition: 'fade',
-								allowToastClose: false,
-								hideAfter: 5000,
-								stack: 5,
-								position: 'bottom-center',
-		    		    textAlign: 'center',
-		    		    loader: true,
-		    		    loaderBg: '#9EC600'
+						    icon: 'error'
 						})
 					}
 
