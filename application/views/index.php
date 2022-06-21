@@ -359,14 +359,28 @@
           </div>
 
           <!-- KYC upload -->
-		  	<style>
+     <!-- KYC upload -->
+	 <style>
 				#title_kyc{
-					font-size: 2.5rem;
-					font-weight: bold;
-					/* line-height: 2; */
+					/* font-size: 3rem; */
+					/* font-weight: bold; */
 					/* text-align:center; */
+					position: relative;
+					font-size: 35px;
+					font-weight: 600;
+					color: #5426de;
+				}
+				#title_kyc:before{
+					content: '';
+					position: absolute;
+					left: 0;
+					bottom: 0;
+					height: 3px;
+					width: 30px;
+					background-color: #5426de;
 				}
 				#subtitle_kyc {
+					font-size:1rem;
 					position: relative;
 					/* line-height:2; */
 				}
@@ -376,121 +390,131 @@
 					height: 1px;
 					background: #939ba2!important;
 					position: absolute;
-					width: 180%;
+					width: 170%;
 					top: 50%;
 					margin-left: 120px;
 				}
 				.icon_kyc{
-					font-size:13px!important;
+					font-size:1rem!important;
 					color:#5426de!important;
 				}
-				.col-6,.column-kyc{
-					padding-right:0px;
-				}
 				#instruction_kyc{
-					font-size:13px;
+					font-size:1rem;
 					text-align: justify;
 					font-weight: 150;
 					color: #939ba2!important;
+					/* color:#5426de!important; */
 				}
-				#upload_container{
-					border:1px solid #939ba2!important;
-					border-radius:5px;
+				.font2rem{
+					font-size:2rem;
+				}
+				.font1rem{
+					font-size:1rem!important;
+				}
+				.upload_button{
+					width: 100%;
+					height: 50px;
+					border: none;
+					color: #fff;
+					font-size: 1rem;
+					font-weight: 900;
+					letter-spacing: 3px;
+					background-color: #5426de;
+					cursor: pointer;
+					transition: all 0.3s ease;
+					margin-top:10px;
+					border-radius: 0.25rem;
+				}
+				.upload_button:hover{
+					background-color: #9e68e8;
+				}
+				.check_upload{
+					color:green;
 				}
 			</style>
-
-          	<div class="" style="display: none;" id="verify_kyc_container">
-				<div id="title_kyc"><span class="">Verification</span></div>
-				<div class="pb-3"><span class="text-muted text-left" id="subtitle_kyc">Upload photo</span></div>
-				<div class="text-left"><b>Important Notes</b></div>
+        	<div class="" style="display: none;" id="verify_kyc_container">
+				<div id="title_kyc" class="mb-4"><span class="">Verification</span></div>
+				<div class="pb-1"><span class="text-muted text-left" id="subtitle_kyc">Upload photo</span></div>
 				<div id="noteslist_kyc" class="m-2"> 
-					<div class="row">
-						<div class="col-6 column-kyc"><i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><small> Don't use filter</small></div>
-						<div class="col-6 column-kyc"><i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><small> Don't wear make up</small></div>
+				<div class="text-left font1rem"><b>Important Notes</b></div>
+					<!-- <div class="row font1rem">
+						<div class="col-6 column-kyc "><i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Don't use filter</span></div>
+						<div class="col-6 column-kyc"><i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Avoid make up</span></div>
 					</div>
-					<div class="row">
-						<div class="col-6 column-kyc"><i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><small> Don't wear hats</small></div>
-						<div class="col-6 column-kyc"><i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><small> Don't wear eye wear</small></div>
-					</div>
+					<div class="row font1rem">
+						<div class="col-6 column-kyc"><i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Don't wear hats</span></div>
+						<div class="col-6 column-kyc"><i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Avoid eye wear</span></div>
+					</div> -->
+					<i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Don't use photo filter</span><br>
+					<i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Avoid wearing make up</span><br>
+					<i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Avoid wearing glasses</span><br>
+					<i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Avoid wearing hats</span>
 				</div><!-- noteslist_kyc -->
-				<div id="instruction_kyc" class="text-left py-3">
-					<span>Kindly ensure that face is centered, well lit, and visible when capturing the photo to avoid facial recognition errors.</span>
+				<div id="instruction_kyc" class="text-left pt-3">
+					<span>Ensure that face is centered and visible when capturing the photo to avoid facial recognition errors</span>
 				</div>
-
-				<div id="upload_container">
-					<div class="row p-2 text-center">
-						<div class="col-6">
-							<span><i id="faceCheckUpload_kyc" class="fa fa-upload my-2"></i></span>
-							<span id="faceUpload_btn" class=""><small>Face photo</small></span>
+				<div class="row">
+						<div class="col-6 d-flex flex-row-reverse">
+							<button class="upload_button face_upload_btn" type="button">
+								<span><i id="faceCheckUpload_kyc" class="fa fa-picture-o fa-inverse"></i></span>
+								<span id="faceUpload_btn" class="">Face</span>
+							</button>
 							<input class="form-control d-none" type="file" name="faceUpload" id="faceUpload" accept="image/png, image/gif, image/jpeg" >
 						</div>
-						<div class="col-6">
-							<span><i id="IDCheckUpload_kyc" class="fa fa-upload my-2"></i></span>
-							<span id="IDUpload_btn" class=""><small>ID photo</small></span>
+						<div class="col-6 d-flex flex-row-reverse">
+							<button class="upload_button id_upload_btn" type="button">
+								<span><i id="IDCheckUpload_kyc" class="fa fa-picture-o fa-inverse"></i></span>
+								<span id="IDUpload_btn" class="">ID</span>
+							</button>
 							<input class="form-control d-none" type="file" name="IDUpload" id="IDUpload" accept="image/png, image/gif, image/jpeg" >
 						</div>
 					</div>
-				</div>
-				
+          	</div><!-- verify_kyc_container -->
 
-
-
-
-          	</div>
           <!-- KYC upload -->
 
-		<form id="signUpForm" >
-
+	
+		  <form id="signUpForm" >
 		  <span class="title">Register</span>
             <div class="input-field">
               <input type="text" name="fullName" placeholder="Enter your Fullname">
               <i class="fa fa-user-circle-o icon"></i>
             </div>
-
             <div class="input-field">
               <input type="text" name="email" placeholder="Enter your email">
               <i class="fa fa-envelope-o"></i>
             </div>
-
-
             <div class="input-field">
               <input type="text" name="birthdate" placeholder="Enter your birthdate">
               <i class="fa fa-birthday-cake"></i>
             </div>
-
             <div class="input-field">
               <input type="number" name="mobileNumber" placeholder="Enter Mobile Number">
               <i class="fa fa-mobile"></i>
             </div>
-
             <div class="input-field">
               <input type="password" name="password" class="password" placeholder="Create password">
               <i class="fa fa-key icon"></i>
             </div>
-
             <div class="input-field">
               <input type="password" name="confirm_password" class="password" placeholder="Confirm password">
               <i class="fa fa-key icon"></i>
               <i class="fa fa-eye-slash showHidePw"></i>
             </div>
-
             <div class="input-field button">
               <button id="" type="submit">SIGN UP</button>
             </div>
 
+	
 			<div class="login-signup">
 				<span class="text">Already have an account?
 					<a href="#" class="text login-link">Sign in now</a>
 				</span>
           	</div>
 		</form>
-
-
-
         </div>
       </div>
     </div>
-
     <!-- sliderCaptchaModal -->
 	    <div class="modal fade" id="sliderCaptchaModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 	    	<div class="modal-dialog modal-dialog-centered">
@@ -500,8 +524,6 @@
 	    	</div>
 	    </div>
     <!-- sliderCaptchaModal -->
-
-
 <script type="text/javascript">
 	const container = document.querySelector(".container"),
 	  pwShowHide = document.querySelectorAll(".showHidePw"),
@@ -649,57 +671,60 @@
 
 		$("#signUpForm").validate({
 		  	errorClass: 'is-invalid text-danger',
-		  	// rules: {
-			// 		fullName: "required",
-			// 		birthdate: "required",
-			// 		mobileNumber: "required",
-			// 		email: {
-			// 			required:true,
-			// 			checkEmailAvailability:true
-			// 		},
-			// 		password: {
-			// 			required:true,
-			// 			minlength: 6
-			// 		},
-			// 		confirm_password:{
-			// 			checkPasswordConfirm:true,
-			// 			required:true
-			// 		}
-		  	// },
+		  	rules: {
+					fullName: "required",
+					birthdate: "required",
+					mobileNumber: "required",
+					email: {
+						required:true,
+						checkEmailAvailability:true
+					},
+					password: {
+						required:true,
+						minlength: 6
+					},
+					confirm_password:{
+						checkPasswordConfirm:true,
+						required:true
+					}
+		  	},
 		  	errorPlacement: function(error, element) {
 		  	  element.parent("div").after(error);
 		  	},
 		  	submitHandler: function(form){
-			    // var data = $('#signUpForm').serializeArray();
-			    // console.log(data);
+			    var data = $('#signUpForm').serializeArray();
+			    console.log(data);
 
-			    // var res = ajaxShortLink("saveSignUpForm",data);
-				// 	currentUserID = res;
-			    // console.log(res);
+			    var res = ajaxShortLink("saveSignUpForm",data);
+					currentUserID = res;
+			    console.log(res);
 
-			    // if(res!=false){
+			    if(res!=false){
 			    	console.log("test");
 			    	$("#thankYou").toggle();
 			    	$("#signUpForm").toggle();
 
 
-		    		// var timeleft = 3;
+		    		var timeleft = 3;
 
-		    		// var timer = setInterval(function(){
-		    		// 	if(timeleft <= 0){
-		    		// 		$("#container").empty();
-		    		// 		$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'loginform'}));
+		    		var timer = setInterval(function(){
+		    			if(timeleft <= 0){
+		    				$("#container").empty();
+		    				$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'loginform'}));
 
-		    		// 		clearInterval(timer);
-		    		// 	}
-		    	 //  		timeleft -= 1;
-		    		// }, 1000);
-			    // }else{
-			    // 	alert("error in signing up: please contact system admin !errorCode 3322!");
-			    // }
+		    				clearInterval(timer);
+		    			}
+		    	  		timeleft -= 1;
+		    		}, 1000);
+			    }else{
+			    	alert("error in signing up: please contact system admin !errorCode 3322!");
+			    }
 
 		  	}
 		});
+
+	var face_upload=0;
+	var id_upload=0;
 
     $("#faceUpload_btn").on("click", function(){
         $('#faceUpload').click();
@@ -721,6 +746,9 @@
 			        	imageUploadFormData.append(currentUserID+"_faceImage", $('#faceUpload')[0].files[0],currentUserID+"_faceImage");
 						imageUploadFormData.append('userID', currentUserID);
 				     	backendHandleFormData('saveFaceImageKyc',imageUploadFormData);
+
+						 face_upload = 1;
+						 checkupload();
 
 	    			    $.toast({
 	    			        heading: '<h6>Face Image Uploaded</h6>',
@@ -746,9 +774,12 @@
 			        confirm: function () {
 			        	var imageUploadFormData = new FormData();
 
-			        	imageUploadFormData.append(currentUserID+"_IDImage", $('#IDUpload')[0].files[0],currentUserID+"_IDImage");
-								imageUploadFormData.append('userID', currentUserID);
-				     		backendHandleFormData('saveIDImageKyc',imageUploadFormData);
+						imageUploadFormData.append(currentUserID+"_IDImage", $('#IDUpload')[0].files[0],currentUserID+"_IDImage");
+						imageUploadFormData.append('userID', currentUserID);
+						backendHandleFormData('saveIDImageKyc',imageUploadFormData);
+
+						id_upload = 1;
+						checkupload();
 
 	    			    $.toast({
 	    			        heading: '<h6>Face Image Uploaded</h6>',
@@ -764,6 +795,27 @@
 			    }
 			});
 		});
+
+		function checkupload(){
+			if (id_upload == 1 && face_upload == 0){
+				$('#instruction_kyc').html("\
+				<span>Ensure that face is centered and visible when capturing the photo to avoid facial recognition errors</span>\
+				<br><i class='fa fa-check check_upload' aria-hidden='true'></i><span class='check_upload'> ID uploaded</span>\
+				")
+			}else if(face_upload == 1 && id_upload == 0){
+				$('#instruction_kyc').html("\
+				<span>Ensure that face is centered and visible when capturing the photo to avoid facial recognition errors</span>\
+				<br><i class='fa fa-check check_upload' aria-hidden='true'></i><span class='check_upload'> Face uploaded</span>\
+				")
+			}else{
+				// $('#noteslist_kyc').toggle();
+				$('#instruction_kyc').html("\
+				<i class='fa fa-check check_upload' aria-hidden='true'></i><span class='check_upload'> ID uploaded</span>\
+				<i class='fa fa-check check_upload' aria-hidden='true'></i><span class='check_upload'> Face uploaded</span><br>\
+				<span style='color:black;'> Uploaded! Kindly wait 1-3 working days for verification. Thank you</span>\
+				")
+			}
+		}
 
 
 </script>
