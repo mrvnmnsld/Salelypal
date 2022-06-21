@@ -140,7 +140,7 @@
 
 	$("#signUpForm").validate({
 	  	errorClass: 'is-invalid text-danger',
-	  	rules: {
+/*	  	rules: {
 			fullName: "required",
 			birthdate: "required",
 			mobileNumber: "required",
@@ -152,7 +152,7 @@
 				required:true,
 				minlength: 6
 			}
-	  	},
+	  	},*/
 	  	messages: {
 	  		otp: ""
   	   	},
