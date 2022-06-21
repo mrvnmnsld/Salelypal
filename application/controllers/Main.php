@@ -114,10 +114,6 @@ class main extends MY_Controller {
 	public function saveSignUpForm(){
 		$data = $_GET;
 
-		if (isset($data['network'])) {
-			$networks = explode(',', $data['network']);
-		}
-
 		$insertRecord = array(
 			'email' => $data['email'],
 			'password' => md5($data['password']),
@@ -127,6 +123,11 @@ class main extends MY_Controller {
 			'birthday' => $data['birthdate'],
 			'verified' => 0,
 		);
+
+		if (isset($data['referalCode'])) {
+			$insertRecord['referred_user_id'] = $data["referalCode"];
+			$insertRecord['referType'] = $data["referType"];
+		}
 
 		$saveQueryNotifUserId = $this->_insertRecords($tableName = 'user_tbl', $insertRecord);
 
@@ -399,9 +400,7 @@ class main extends MY_Controller {
 			$config['allowed_types'] = '*';
 			$config['file_name'] = $_FILES[$key]['name'].'.'.strval(explode("/",$_FILES[$key]['type'])[1]);
 
-			display_errors(false);
 			unlink($config['upload_path'].'/'.$_POST['userID'].'_faceImage'.'.'.explode("/",$_FILES[$key]['type'])[1]);
-			display_errors(true);
 
    			$this->load->library('upload', $config);
    			$this->load->helper("file");
@@ -451,9 +450,8 @@ class main extends MY_Controller {
 			$config['allowed_types'] = '*';
 			$config['file_name'] = $_FILES[$key]['name'].'.'.strval(explode("/",$_FILES[$key]['type'])[1]);
 
-			display_errors(false);
 			unlink($config['upload_path'].'/'.$_POST['userID'].'_idImage'.'.'.explode("/",$_FILES[$key]['type'])[1]);
-			display_errors(true);
+
 
    			$this->load->library('upload', $config);
    			$this->load->helper("file");
@@ -869,6 +867,12 @@ class main extends MY_Controller {
 
 		curl_close($curl);
 	}
+
+	public function referalLink(){
+		$this->load->view('index');
+	}
+
+	
 
 	
 

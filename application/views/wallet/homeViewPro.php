@@ -586,8 +586,8 @@
 		    }
 		});
 
-		// var currentUser = JSON.parse(getLocalStorageByKey('currentUser'));
-		var currentUser = {'userID':"15","displayCurrency":"USD"}
+		var currentUser = JSON.parse(getLocalStorageByKey('currentUser'));
+		// var currentUser = {'userID':"15","displayCurrency":"USD"}
 		var animtionSpeed = 250;
 		var	SelectedtransactionDetails = [];
 		var totalInUsd = 0;
