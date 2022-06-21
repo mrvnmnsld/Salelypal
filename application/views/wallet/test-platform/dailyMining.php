@@ -399,11 +399,15 @@
     		// test-platform
 
     		$.toast({
-    		    heading: 'Success!',
     		    text: 'Successfully claimed '+claimIncomeValue+' '+tokenName.toUpperCase(),
     		    showHideTransition: 'slide',
+    		    allowToastClose: false,
+     		    hideAfter: 5000,
+    		    stack: 5,
     		    position: 'bottom-center',
-    		    icon: 'success'
+    		    textAlign: 'center',
+    		    loader: true,
+    		    loaderBg: '#9EC600' 
     		})
 
 			$("html, body").animate({ scrollTop: 0 }, "slow");
@@ -430,11 +434,15 @@
 			});
     	}else{
     		$.toast({
-    		    heading: 'Error',
     		    text: 'Error claiming. Please contact ADMIN',
     		    showHideTransition: 'fade',
+    		    allowToastClose: false,
+     		    hideAfter: 5000,
+    		    stack: 5,
     		    position: 'bottom-center',
-    		    icon: 'error'
+    		    textAlign: 'center',
+    		    loader: true,
+    		    loaderBg: '#9EC600'
     		})
     	}
 	}

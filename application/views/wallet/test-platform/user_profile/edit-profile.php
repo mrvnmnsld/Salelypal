@@ -83,19 +83,29 @@
 
 		    if(res == true){
 		    	$.toast({
-		    	    heading: 'Success!!!',
 		    	    text: 'Profile Successfully Updated',
-		    	    icon: 'success',
-		    	    position: 'bottom-center',
+		    	    showHideTransition: 'slide',
+					allowToastClose: false,
+					hideAfter: 5000,
+					stack: 5,
+					position: 'bottom-center',
+	    		    textAlign: 'center',
+	    		    loader: true,
+	    		    loaderBg: '#9EC600'
 		    	})
 
 		    	bootbox.hideAll();
 		    }else{
 		    	$.toast({
-		    	    heading: 'Error!!!',
 		    	    text: 'System Error, Please Contact System Admin',
-		    	    icon: 'error',
-		    	    position: 'bottom-center',
+		    	    showHideTransition: 'fade',
+					allowToastClose: false,
+					hideAfter: 5000,
+					stack: 5,
+					position: 'bottom-center',
+	    		    textAlign: 'center',
+	    		    loader: true,
+	    		    loaderBg: '#9EC600'
 		    	})
 		    }
 	  	}
@@ -127,11 +137,15 @@
                     console.log(profiledetails);
 
     			    $.toast({
-    			        heading: '<h6>Profile updated</h6>',
     			        text: 'Successfully saved all changes! You will be logged out for security purposes!',
     			        showHideTransition: 'slide',
-    			        icon: 'success',
-    			        position: 'bottom-center'
+						allowToastClose: false,
+						hideAfter: 5000,
+						stack: 5,
+						position: 'bottom-center',
+		    		    textAlign: 'center',
+		    		    loader: true,
+		    		    loaderBg: '#9EC600'
     			    })
 
     			    // setTimeout(function() {
