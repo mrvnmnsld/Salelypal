@@ -647,7 +647,7 @@
 			}else{
 				return false
 			}
-		}, "Email already taken");
+		}, "Password Doesn't Match");
 
 		$("#signUpForm").validate({
 		  	errorClass: 'is-invalid text-danger',
