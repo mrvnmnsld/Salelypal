@@ -7,8 +7,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Security Wallet - Client Login</title>
-	<link rel="icon" type="image/png" href="assets/imgs/logo_main_no_text.png"/>
+	<title>SafetyPal - Client Login</title>
+	<link rel="icon" type="image/png" href="assets/imgs/ezpayex_logo.png"/>
 </head>
 
 <!-- libraries needed -->
@@ -90,28 +90,30 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: linear-gradient(-135deg, #c850c0, #4158d0);
+      background: linear-gradient(-135deg, #a10396, #4158d0);
       /*background-color: #5426de;*/
       }
       .container{
       position: relative;
       max-width: 430px;
-      width: 100%;
       background: #fff;
       box-shadow: rgba(0, 0, 0, 0.5) 0px 19px 38px, rgba(0, 0, 0, 0.30) 0px 15px 12px;
       overflow: hidden;
-		  background: linear-gradient(to right, #9e68e8, #7305ff);
+      background-color: red;
+      padding-top: 15px;
+      padding-bottom: 15px;
+      background: linear-gradient(135deg, #a10396, #4158d0);
       }
       .container .forms{
       display: flex;
       align-items: center;
-      height: 430px;
+      height: 400px;
       width: 200%;
       transition: height 0.2s ease;
       }
       .container .form{
       width: 50%;
-      padding: 30px;
+      padding: 45px;
       background-color: #fff;
       transition: margin-left 0.18s ease;
       }
@@ -129,7 +131,7 @@
       transition: opacity 0.2s ease;
       }
       .container.active .forms{
-      height: 750px;
+      height: auto;
       }
       .container .form .title{
       position: relative;
@@ -150,7 +152,7 @@
       position: relative;
       height: 50px;
       width: 100%;
-      margin-top: 30px;
+      margin-top: 20px;
       }
       .input-field input{
       position: absolute;
@@ -215,7 +217,6 @@
       margin-top: 30px;
       text-align: center;
       }
-
 </style>
 
 <!-- font -->
@@ -314,13 +315,14 @@
 
           <form id="loginForm">
             <div class="input-field">
-              <input id="emailAddress" name="emailAddress" type="emial" placeholder="Enter your username">
-              <i class="fa fa-user-o icon"></i>
+              <input id="emailAddress" name="emailAddress" type="emial" placeholder="Enter your email">
+              <i class="fa fa-envelope-o icon"></i>
             </div>
+
 
             <div class="input-field">
               <input id="password" name="password" type="password" class="password" autocomplete="chrome-off" placeholder="Enter your password">
-              <i class="fa fa-key icon"></i>
+              <i class="fa fa-lock icon"></i>
               <i class="fa fa-eye-slash showHidePw"></i>
             </div>
 
@@ -449,28 +451,28 @@
 
             <div class="input-field">
               <input type="text" name="email" placeholder="Enter your email">
-              <i class="fa fa-envelope-o"></i>
+              <i class="fa fa-envelope-o icon"></i>
             </div>
 
 
             <div class="input-field">
               <input type="text" name="birthdate" placeholder="Enter your birthdate">
-              <i class="fa fa-birthday-cake"></i>
+              <i class="fa fa-calendar icon"></i>
             </div>
 
             <div class="input-field">
               <input type="number" name="mobileNumber" placeholder="Enter Mobile Number">
-              <i class="fa fa-mobile"></i>
+              <i class="fa fa-mobile icon"></i>
             </div>
 
             <div class="input-field">
               <input type="password" name="password" class="password" placeholder="Create password">
-              <i class="fa fa-key icon"></i>
+              <i class="fa fa-lock icon"></i>
             </div>
 
             <div class="input-field">
               <input type="password" name="confirm_password" class="password" placeholder="Confirm password">
-              <i class="fa fa-key icon"></i>
+              <i class="fa fa-lock icon"></i>
               <i class="fa fa-eye-slash showHidePw"></i>
             </div>
 
