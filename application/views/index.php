@@ -427,7 +427,7 @@
 	          </div>
 
 	          <div class="input-field button">
-	            <button id="" type="submit">SIGN UP</button>
+	            <button type="button" id="signup_btn">SIGN UP</button>
 	          </div>
 
 						<div class="login-signup">
@@ -562,6 +562,8 @@
 	  		  $('#errorReporter').text("Wrong Credentials.");
 	  		}else if(loginRes['wrongFlag'] == 3){
 	  		  $('#errorReporter').html("Account Blocked.");
+	  		}else if(loginRes['wrongFlag'] == 4){
+	  		  $('#errorReporter').html("Account not yet verified. Please wait while we process your verification");
 	  		}else if(loginRes['wrongFlag'] == 0){
 
 	  			$("#submit_login_btn").empty().append(
@@ -584,8 +586,27 @@
 	});
 	
 	$("#submit_login_btn").on("click",function(){
-		console.log("click");
 		captcha.reset();
+	});
+
+	$("#signup_btn").on("click",function(){
+		if ($("#signUpForm").valid()) {
+			$("#signup_btn").empty().append(
+			    '<span class="spinner-border" role="status">'+
+			      '<span class="sr-only">Loading...</span>'+
+			    '</span>'+
+			    "&nbsp Submiting..."
+			).attr('disabled',true);
+
+			setTimeout(function(){
+				$("#signUpForm").submit();
+			},1000)
+
+		}else{
+			$("#signup_btn").empty().append(
+			    'SIGN UP'
+			).removeAttr('disabled');
+		}
 	});
 
 	var generatedOtp = generateOTP();
@@ -651,8 +672,13 @@
 				currentUserID = res;
 		    console.log(res);
 
+		   
+
 		    if(res!=false){
-		    	console.log("test");
+		    	$("#signup_btn").empty().append(
+		    	    'SIGN UP'
+		    	).removeAttr('disabled');
+
 		    	$("#thankYou").toggle();
 		    	$("#signUpForm").toggle();
 		    }else{
