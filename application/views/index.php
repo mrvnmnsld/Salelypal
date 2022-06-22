@@ -1,7 +1,3 @@
-Author: Marvin Monsalud -->
-<!-- Startdate: Dec 16 2021 -->
-<!-- Email: marvin.monsalud.mm@gmail.com -->
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -436,7 +432,7 @@ Author: Marvin Monsalud -->
         	</div>
 				</form>
       </div>
-      
+
     </div>
   </div>
 
