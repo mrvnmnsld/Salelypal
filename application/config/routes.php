@@ -7,6 +7,7 @@ $route['index'] = 'main/index';
 $route['quickLoadPage'] = 'main/quickLoadPage';
 $route['checkLoginCredentials'] = 'main/checkLoginCredentials';
 $route['checkEmailAvailability'] = 'main/checkEmailAvailability';
+$route['checkMobileNumberAvailability'] = 'main/checkMobileNumberAvailability';
 $route['checkPasswordMatch'] = 'main/checkPasswordMatch';
 
 $route['saveSignUpForm'] = 'main/saveSignUpForm';

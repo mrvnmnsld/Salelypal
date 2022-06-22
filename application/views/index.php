@@ -204,6 +204,12 @@
 		      padding: 10px;
 	      }
 
+		  	.input-field i.switchUserInput{
+					right: 0;
+					cursor: pointer;
+					padding: 10px;
+	      }
+
 	      .form .text{
 		      color: #333;
 		      font-size: 14px;
@@ -346,11 +352,17 @@
         <span class="title">SafetyPal</span>
 
         <form id="loginForm">
-          <div class="input-field">
-            <input id="emailAddress" name="emailAddress" type="emial" placeholder="Enter your email">
+          <div id="emailInput" class="input-field">
+            <input id="emailAddress" name="emailAddress" type="email" placeholder="Enter your email">
             <i class="fa fa-envelope-o icon"></i>
+			<i id="emailSwitchID" from="mobileSwitch" class="fa fa-exchange switchUserInput"></i>
           </div>
 
+		  <div id="mobileInput" class="input-field" style="display:none;">
+            <input id="mobileNumber" name="mobileNumber" type="text" placeholder="Enter mobile number">
+            <i class="fa fa-mobile icon"></i>
+			<i id="mobileSwitchID" from="emailSwitch" class="fa fa-exchange switchUserInput"></i>
+          </div>
 
           <div class="input-field">
             <input id="password" name="password" type="password" class="password" autocomplete="chrome-off" placeholder="Enter your password">
@@ -583,46 +595,83 @@
 			}
 		});
 
-		$("#loginForm").validate({
-		  	errorClass: 'is-invalid',
-		  	rules: {
-					emailAddress: "required",
-					password: "required",
-		  	},
-		  	submitHandler: function(form){
-		  		captcha.reset();
+	//userinput_switch
+	var isEmailInput = true;
+	var isMobileInput = false;
+	function switchInput(data){
 
-			    var data = $('#loginForm').serializeArray();
-		    	data.push({"name":'ip','value':getIpAddress()["ip"]});
+		console.log('switch button clicked');
 
-			    var loginRes = ajaxShortLink('checkLoginCredentials',data);
-			    
-		  		if (loginRes['wrongFlag'] == 2 || loginRes['wrongFlag'] == 1) {
-		  		  $('#errorReporter').text("Wrong Credentials.");
-		  		}else if(loginRes['wrongFlag'] == 3){
-		  		  $('#errorReporter').html("Account Blocked.");
-		  		}else if(loginRes['wrongFlag'] == 4){
-		  		  $('#errorReporter').html("Account not yet verified. Please wait while we process your verification");
-		  		}else if(loginRes['wrongFlag'] == 0){
+		$('#mobileNumber').val('');
+		$('#emailAddress').val('');
+		$('#emailInput').toggle();
+		$('#mobileInput').toggle();
 
-		  			$("#submit_login_btn").empty().append(
-		  				'<span class="spinner-border" role="status">'+
-		  				  '<span class="sr-only">Loading...</span>'+
-		  				'</span>'+
-		  				"&nbsp Success Login"
-		  			).attr('disabled',true);
+		if(data == 'emailSwitch'){
+			console.log('email chosen');
+			// loginType = 'email';
+			isEmailInput = true;
+			isMobileInput = false;
+		}else{
+			console.log('mobile chosen');
+			// loginType = 'mobile';
+			isEmailInput = false;
+			isMobileInput = true;
+		}
+	}
+	$('#emailSwitchID').on('click',function(){
+		switchInput($(this).attr('from'));
+	});
+	$('#mobileSwitchID').on('click',function(){
+		switchInput($(this).attr('from'));
+	});
+	//userinput_switch
 
-		  			setLocalStorageByKey('currentUser',JSON.stringify(loginRes['data']));
 
-	  				if(loginRes.data.isPro == 0){
-							window.location.replace("homeView");
-						}else {
-							window.location.replace("homeViewPro");
-						}
+	$("#loginForm").validate({
+		errorClass: 'is-invalid',
+		rules: {
+			emailAddress : {
+				required : isEmailInput,
+			},
+			mobileNumber : {
+				required : isMobileInput,
+			},
+			password: "required",
+		},
+		submitHandler: function(form){
+			captcha.reset();
 
-		  		}
-		  	}
-		});
+			var data = $('#loginForm').serializeArray();
+			data.push({"name":'ip','value':getIpAddress()["ip"]});
+			var loginRes = ajaxShortLink('checkLoginCredentials',data);
+
+			if (loginRes['wrongFlag'] == 2 || loginRes['wrongFlag'] == 1) {
+				$('#errorReporter').text("Wrong Credentials.");
+			}else if(loginRes['wrongFlag'] == 3){
+				$('#errorReporter').html("Account Blocked.");
+			}else if(loginRes['wrongFlag'] == 4){
+				$('#errorReporter').html("Account not yet verified. Please wait while we process your verification");
+			}else if(loginRes['wrongFlag'] == 0){
+
+				$("#submit_login_btn").empty().append(
+					'<span class="spinner-border" role="status">'+
+						'<span class="sr-only">Loading...</span>'+
+					'</span>'+
+					"&nbsp Success Login"
+				).attr('disabled',true);
+
+				setLocalStorageByKey('currentUser',JSON.stringify(loginRes['data']));
+
+				if(loginRes.data.isPro == 0){
+						window.location.replace("homeView");
+					}else {
+						window.location.replace("homeViewPro");
+					}
+
+			}
+		}
+	});
 		
 		$("#submit_login_btn").on("click",function(){
 			captcha.reset();
