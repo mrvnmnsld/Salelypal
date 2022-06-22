@@ -41,17 +41,27 @@ class main extends MY_Controller {
 
 	public function checkLoginCredentials(){
    		$email = $_GET['emailAddress'];
+		$mobileNumber = $_GET['mobileNumber'];
    		$userPassInput = $_GET['password'];
    		$ip = $_GET['ip'];
 
-
-   		$test = $this->_getRecordsData(
-   			$selectfields = array("user_tbl.*,trc20_wallet.address as trc20_wallet,bsc_wallet.address as bsc_wallet,erc20_wallet.address as erc20_wallet"), 
-	   		$tables = array('user_tbl','trc20_wallet','bsc_wallet','erc20_wallet'), 
-	   		$fieldName = array('user_tbl.email'), $where = array($email), 
-	   		$join = array('user_tbl.userID = trc20_wallet.userOwner','user_tbl.userID = bsc_wallet.userOwner','user_tbl.userID = erc20_wallet.userOwner'), $joinType = array('inner','inner','inner'), $sortBy = null, 
-	   		$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
-   		);
+		if($email!=''){
+			$test = $this->_getRecordsData(
+				$selectfields = array("user_tbl.*,trc20_wallet.address as trc20_wallet,bsc_wallet.address as bsc_wallet,erc20_wallet.address as erc20_wallet"), 
+				$tables = array('user_tbl','trc20_wallet','bsc_wallet','erc20_wallet'), 
+				$fieldName = array('user_tbl.email'), $where = array($email), 
+				$join = array('user_tbl.userID = trc20_wallet.userOwner','user_tbl.userID = bsc_wallet.userOwner','user_tbl.userID = erc20_wallet.userOwner'), $joinType = array('inner','inner','inner'), $sortBy = null, 
+				$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+			);
+		}else{
+			$test = $this->_getRecordsData(
+				$selectfields = array("user_tbl.*,trc20_wallet.address as trc20_wallet,bsc_wallet.address as bsc_wallet,erc20_wallet.address as erc20_wallet"), 
+				$tables = array('user_tbl','trc20_wallet','bsc_wallet','erc20_wallet'), 
+				$fieldName = array('user_tbl.mobileNumber'), $where = array($mobileNumber), 
+				$join = array('user_tbl.userID = trc20_wallet.userOwner','user_tbl.userID = bsc_wallet.userOwner','user_tbl.userID = erc20_wallet.userOwner'), $joinType = array('inner','inner','inner'), $sortBy = null, 
+				$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+			);
+		}
 
    		$wrongFlag = 0;
    		$dataToSend = "";
@@ -114,6 +124,24 @@ class main extends MY_Controller {
    			echo false;
    		}
 	}
+
+	public function checkMobileNumberAvailability(){
+		$mobileNumber = $_GET['mobileNumber'];
+
+		$test = $this->_getRecordsData(
+			$selectfields = array("*"), 
+			$tables = array('user_tbl'), 
+			$fieldName = array('mobileNumber'), $where = array($mobileNumber), 
+			$join = null, $joinType = null, $sortBy = null, 
+			$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+		);
+
+		if (count($test)==0) {
+			echo true;
+		}else{
+			echo false;
+		}
+ }
 
 	public function saveSignUpForm(){
 		$data = $_GET;
