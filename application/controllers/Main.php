@@ -41,17 +41,27 @@ class main extends MY_Controller {
 
 	public function checkLoginCredentials(){
    		$email = $_GET['emailAddress'];
+		$mobileNumber = $_GET['mobileNumber'];
    		$userPassInput = $_GET['password'];
    		$ip = $_GET['ip'];
 
-
-   		$test = $this->_getRecordsData(
-   			$selectfields = array("user_tbl.*,trc20_wallet.address as trc20_wallet,bsc_wallet.address as bsc_wallet,erc20_wallet.address as erc20_wallet"), 
-	   		$tables = array('user_tbl','trc20_wallet','bsc_wallet','erc20_wallet'), 
-	   		$fieldName = array('user_tbl.email'), $where = array($email), 
-	   		$join = array('user_tbl.userID = trc20_wallet.userOwner','user_tbl.userID = bsc_wallet.userOwner','user_tbl.userID = erc20_wallet.userOwner'), $joinType = array('inner','inner','inner'), $sortBy = null, 
-	   		$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
-   		);
+		if($email!=''){
+			$test = $this->_getRecordsData(
+				$selectfields = array("user_tbl.*,trc20_wallet.address as trc20_wallet,bsc_wallet.address as bsc_wallet,erc20_wallet.address as erc20_wallet"), 
+				$tables = array('user_tbl','trc20_wallet','bsc_wallet','erc20_wallet'), 
+				$fieldName = array('user_tbl.email'), $where = array($email), 
+				$join = array('user_tbl.userID = trc20_wallet.userOwner','user_tbl.userID = bsc_wallet.userOwner','user_tbl.userID = erc20_wallet.userOwner'), $joinType = array('inner','inner','inner'), $sortBy = null, 
+				$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+			);
+		}else{
+			$test = $this->_getRecordsData(
+				$selectfields = array("user_tbl.*,trc20_wallet.address as trc20_wallet,bsc_wallet.address as bsc_wallet,erc20_wallet.address as erc20_wallet"), 
+				$tables = array('user_tbl','trc20_wallet','bsc_wallet','erc20_wallet'), 
+				$fieldName = array('user_tbl.mobileNumber'), $where = array($mobileNumber), 
+				$join = array('user_tbl.userID = trc20_wallet.userOwner','user_tbl.userID = bsc_wallet.userOwner','user_tbl.userID = erc20_wallet.userOwner'), $joinType = array('inner','inner','inner'), $sortBy = null, 
+				$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+			);
+		}
 
    		$wrongFlag = 0;
    		$dataToSend = "";
@@ -115,6 +125,24 @@ class main extends MY_Controller {
    		}
 	}
 
+	public function checkMobileNumberAvailability(){
+		$mobileNumber = $_GET['mobileNumber'];
+
+		$test = $this->_getRecordsData(
+			$selectfields = array("*"), 
+			$tables = array('user_tbl'), 
+			$fieldName = array('mobileNumber'), $where = array($mobileNumber), 
+			$join = null, $joinType = null, $sortBy = null, 
+			$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+		);
+
+		if (count($test)==0) {
+			echo true;
+		}else{
+			echo false;
+		}
+	}
+
 	public function saveSignUpForm(){
 		$data = $_GET;
 
@@ -124,7 +152,7 @@ class main extends MY_Controller {
 			'fullname' => $data['fullName'],
 			'mobileNumber' => $data['mobileNumber'],
 			'timestamp' => $this->_getTimeStamp24Hours(),
-			'birthday' => $data['birthdate'],
+			// 'birthday' => $data['birthdate'],
 			'verified' => 0,
 		);
 
@@ -368,6 +396,8 @@ class main extends MY_Controller {
 	}
 
 	public function saveNewProfilePic(){
+		$response = array();
+
 		foreach ($_FILES as $key => $value) {
 			$config['upload_path'] = 'assets/imgs/profile_pic';
 			$config['allowed_types'] = '*';
@@ -378,9 +408,11 @@ class main extends MY_Controller {
    			$this->load->helper("file");
 
 			if(!$this->upload->do_upload($_FILES[$key]['name'])){
-				array_push($response, array('ERROR'=>'1','Reason'=>'Cant upload to server, please contact admin','MORE'=>$this->upload->display_errors(),$exif));
+				array_push($response, array('error'=>'1','reason'=>'Cant upload to server, please contact admin','more'=>$this->upload->display_errors()));
             }else{  
 				$data = $this->upload->data();
+
+				array_push($response, array('error'=>'0','reason'=>'','more'=>''));
 			}
 
 			$tableName="user_tbl";
@@ -393,29 +425,18 @@ class main extends MY_Controller {
 
 			$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
 
-			echo json_encode($config['file_name']);
-			// echo json_encode($_POST['oldPic']);
+			echo json_encode($response);
 		}       		
 	}
 	
 	public function saveFaceImageKyc(){
+		$response = array();
+
 		foreach ($_FILES as $key => $value) {
 			$config['upload_path'] = 'assets/imgs/kyc-imgs/face-imgs';
 			$config['allowed_types'] = '*';
 			$config['file_name'] = $_FILES[$key]['name'].'.'.strval(explode("/",$_FILES[$key]['type'])[1]);
 
-			unlink($config['upload_path'].'/'.$_POST['userID'].'_faceImage'.'.'.explode("/",$_FILES[$key]['type'])[1]);
-
-   			$this->load->library('upload', $config);
-   			$this->load->helper("file");
-
-			if(!$this->upload->do_upload($_FILES[$key]['name'])){
-				array_push($response, array('ERROR'=>'1','Reason'=>'Cant upload to server, please contact admin','MORE'=>$this->upload->display_errors(),$exif));
-            }else{
-				$data = $this->upload->data();
-			}
-
-			
 			$checkIfExist = $this->_getRecordsData(
 				$selectfields = array("*"), 
 				$tables = array('kyc_image_tbl'), 
@@ -426,47 +447,52 @@ class main extends MY_Controller {
 
 			if(count($checkIfExist)==0){
 				$insertRecord = array(
-					'faceImagePath'=>$config['file_name'],
+					'FaceImagePath'=>$config['file_name'],
 					'userID'=>$_POST['userID'],
 					'timestamp' => $this->_getTimeStamp24Hours(),
 				);
+
 				$insertRecord = $this->_insertRecords($tableName = 'kyc_image_tbl', $insertRecord);
 			}else{
 				$tableName="kyc_image_tbl";
 				$fieldName='userID';
 				$where=$_POST['userID'];
-				
+
 				$insertRecord = array(
-					'faceImagePath'=>$config['file_name'],
+					'FaceImagePath'=>$config['file_name'],
 					'timestamp' => $this->_getTimeStamp24Hours(),
 				);
 				$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
+
+				if ($checkIfExist[0]->FaceImagePath != "") {
+					unlink($config['upload_path'].'/'.$_POST['userID'].'_faceImage'.'.'.explode("/",$_FILES[$key]['type'])[1]);
+				}
+
 			}
 
-			echo json_encode($config['file_name']);
-			// echo json_encode($insertRecord);
+   			$this->load->library('upload', $config);
+   			$this->load->helper("file");
+
+			if(!$this->upload->do_upload($_FILES[$key]['name'])){
+				array_push($response, array('error'=>'1','reason'=>'Cant upload to server, please contact admin','more'=>$this->upload->display_errors()));
+            }else{  
+				$data = $this->upload->data();
+
+				array_push($response, array('error'=>'0','reason'=>'','more'=>''));
+			}
+
+			echo json_encode($response[0]);
 		}       		
 	}
 
 	public function saveIDImageKyc(){
+		$response = array();
+
 		foreach ($_FILES as $key => $value) {
 			$config['upload_path'] = 'assets/imgs/kyc-imgs/id-imgs';
 			$config['allowed_types'] = '*';
 			$config['file_name'] = $_FILES[$key]['name'].'.'.strval(explode("/",$_FILES[$key]['type'])[1]);
 
-			unlink($config['upload_path'].'/'.$_POST['userID'].'_idImage'.'.'.explode("/",$_FILES[$key]['type'])[1]);
-
-
-   			$this->load->library('upload', $config);
-   			$this->load->helper("file");
-
-			if(!$this->upload->do_upload($_FILES[$key]['name'])){
-				array_push($response, array('ERROR'=>'1','Reason'=>'Cant upload to server, please contact admin','MORE'=>$this->upload->display_errors(),$exif));
-            }else{
-				$data = $this->upload->data();
-			}
-
-			
 			$checkIfExist = $this->_getRecordsData(
 				$selectfields = array("*"), 
 				$tables = array('kyc_image_tbl'), 
@@ -492,9 +518,27 @@ class main extends MY_Controller {
 					'timestamp' => $this->_getTimeStamp24Hours(),
 				);
 				$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
+
+				if ($checkIfExist[0]->IDImagePath != "") {
+					unlink($config['upload_path'].'/'.$_POST['userID'].'_idImage'.'.'.explode("/",$_FILES[$key]['type'])[1]);
+				}
+
 			}
 
-			echo json_encode($config['file_name']);
+
+   			$this->load->library('upload', $config);
+   			$this->load->helper("file");
+
+			
+			if(!$this->upload->do_upload($_FILES[$key]['name'])){
+				array_push($response, array('error'=>'1','reason'=>'Cant upload to server, please contact admin','more'=>$this->upload->display_errors()));
+            }else{  
+				$data = $this->upload->data();
+
+				array_push($response, array('error'=>'0','reason'=>'','more'=>''));
+			}
+
+			echo json_encode($response[0]);
 			// echo json_encode($insertRecord);
 		}       		
 	}
@@ -877,9 +921,77 @@ class main extends MY_Controller {
 		$this->load->view('index');
 	}
 
-	
+	public function sendOTPViaEmail(){
+		// $email = $_GET['email'];
 
-	
+		$email = "monsalud26@gmail.com";
+		$msg = "question";
+		$emailcontent = "HELLO!";
+		$name = "test!";
+
+		$resultsArray['emailcontent'] = $emailcontent;
+		$resultsArray['name'] = $name;
+		$resultsArray['emailcontent'] = $emailcontent;
+
+		require APPPATH.'third_party/phpmailer/src/exemption.php';
+		require APPPATH.'third_party/phpmailer/src/phpmailer.php';
+		require APPPATH.'third_party/phpmailer/src/smtp.php';
+		$mail = new PHPMailer\PHPMailer\PHPMailer();
+		
+        $mail->IsSMTP();
+		$mail->SMTPAuth=false;
+		// $mail->SMTPDebug = 1;
+        $mail->Host = 'localhost';
+        $mail->Port = '25';
+        $mail->Username='marvin.developer@waweb.online';
+		$mail->Password='kurusaki13';
+		
+		$mail->setFrom($email,'no.reply@nextlevelcr.info');
+		$mail->addAddress($email);
+		$mail->addReplyTo($email,'no.reply@nextlevelcr.info');
+		
+		$mail->SMTPOptions = array(
+            'ssl' => array(
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true
+            )
+        );
+        
+        $mail->isHTML(true);
+		$mail->Subject='Testing';
+    
+		$mail->Body=
+		'<html>'.
+			'<head>'.
+			'</head>'.
+			'<body>'.
+				'<h1>'.
+				    '<div style="color:#111117">Pancho Hello</div>'.
+				'</h1>'.
+			'</body>'.
+		'</html>';
+		
+
+		$resultsArray = array();
+		
+
+		if(!$mail->send()){
+		  	$resultsArray['successEmail'] = false;
+		}else{
+		  	$resultsArray['successEmail'] = true;
+		}
+
+
+		echo json_encode($resultsArray);
+
+		// echo json_encode(array(
+		// 	"successEmail"=>false,
+		// 	"successSave"=>false,
+		// ));
+		exit();
+	}
+
 
 
 }
