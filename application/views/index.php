@@ -368,10 +368,16 @@
         <span class="title">SafetyPal</span>
 
         <form id="loginForm">
-          <div class="input-field">
+          <div id="emailInput" class="input-field">
             <input id="emailAddress" name="emailAddress" type="email" placeholder="Enter your email">
             <i class="fa fa-envelope-o icon"></i>
-			<i id="emailSwitchID" from="mobileSwitch" class="fa fa-exchange switchUserInput"></i>
+						<i id="emailSwitchID" from="mobileSwitch" class="fa fa-exchange switchUserInput"></i>
+          </div>
+
+		  		<div id="mobileInput" class="input-field" style="display:none;">
+            <input id="mobileNumber" name="mobileNumber" type="text" placeholder="Enter mobile number">
+            <i class="fa fa-mobile icon"></i>
+						<i id="mobileSwitchID" from="emailSwitch" class="fa fa-exchange switchUserInput"></i>
           </div>
 
           <div class="input-field">
@@ -679,6 +685,8 @@
 			$('#emailAddress').val('');
 			$('#emailInput').toggle();
 			$('#mobileInput').toggle();
+			
+			emailAddress
 
 			if(data == 'emailSwitch'){
 				console.log('email chosen');

@@ -34,8 +34,8 @@ $route['saveFaceImageKyc'] = 'main/saveFaceImageKyc';
 $route['saveIDImageKyc'] = 'main/saveIDImageKyc';
 
 $route['main/loadCryptoNews'] = 'main/loadCryptoNews';
+$route['main/sendOTPViaEmail'] = 'main/sendOTPViaEmail';
 $route['referalLink'] = 'main/referalLink';
-
 $route['checkMobileAvailability'] = 'main/checkMobileAvailability';
 
 // Admin
