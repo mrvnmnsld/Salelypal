@@ -71,7 +71,7 @@
 	<script src="assets/js/common.js"></script>
 <!-- custom libraries -->
 
-<!-- font -->
+
 	<style>
 			.jq-toast-single {
 		  		font-size: 16px;
@@ -79,146 +79,264 @@
 
 			/*@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');*/
 			@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap%27');
-	 	 *{
-	      margin: 0;
-	      padding: 0;
-	      box-sizing: border-box;
-	      font-family: 'Poppins', sans-serif;
+	 		 *{
+		      margin: 0;
+		      padding: 0;
+		      box-sizing: border-box;
+		      font-family: 'Poppins', sans-serif;
 	      }
+
 	      body{
-	      height: 100vh;
-	      display: flex;
-	      align-items: center;
-	      justify-content: center;
-	      background: linear-gradient(-135deg, #a10396, #4158d0);
-	      /*background-color: #5426de;*/
+		      height: 100vh;
+		      display: flex;
+		      align-items: center;
+		      justify-content: center;
+		      background: linear-gradient(-135deg, #a10396, #4158d0);
+		      /*background-color: #5426de;*/
 	      }
+
 	      .container{
-	      position: relative;
-	      max-width: 430px;
-	      background: #fff;
-	      box-shadow: rgba(0, 0, 0, 0.5) 0px 19px 38px, rgba(0, 0, 0, 0.30) 0px 15px 12px;
-	      overflow: hidden;
-	      background-color: red;
-	      padding-top: 15px;
-	      padding-bottom: 15px;
-	      background: linear-gradient(135deg, #a10396, #4158d0);
+		      position: relative;
+		      max-width: 430px;
+		      background: #fff;
+		      box-shadow: rgba(0, 0, 0, 0.5) 0px 19px 38px, rgba(0, 0, 0, 0.30) 0px 15px 12px;
+		      overflow: hidden;
+		      background-color: red;
+		      padding-top: 15px;
+		      padding-bottom: 15px;
+		      background: linear-gradient(135deg, #a10396, #4158d0);
 	      }
+
 	      .container .forms{
-	      display: flex;
-	      align-items: center;
-	      height: 400px;
-	      width: 200%;
-	      transition: height 0.2s ease;
+		      display: flex;
+		      align-items: center;
+		      height: 400px;
+		      width: 200%;
+		      transition: height 0.2s ease;
 	      }
+
 	      .container .form{
-	      width: 50%;
-	      padding: 45px;
-	      background-color: #fff;
-	      transition: margin-left 0.18s ease;
+		      width: 50%;
+		      padding: 45px;
+		      background-color: #fff;
+		      transition: margin-left 0.18s ease;
 	      }
+
 	      .container.active .login{
-	      margin-left: -50%;
-	      opacity: 0;
-	      transition: margin-left 0.18s ease, opacity 0.15s ease;
+		      margin-left: -50%;
+		      opacity: 0;
+		      transition: margin-left 0.18s ease, opacity 0.15s ease;
 	      }
+
 	      .container .signup{
-	      opacity: 0;
-	      transition: opacity 0.09s ease;
+		      opacity: 0;
+		      transition: opacity 0.09s ease;
 	      }
+
 	      .container.active .signup{
-	      opacity: 1;
-	      transition: opacity 0.2s ease;
+		      opacity: 1;
+		      transition: opacity 0.2s ease;
 	      }
+
 	      .container.active .forms{
-	      height: auto;
+	      	height: auto;
 	      }
+
 	      .container .form .title{
-	      position: relative;
-	      font-size: 27px;
-	      font-weight: 600;
-	      color: #5426de;
+		      position: relative;
+		      font-size: 27px;
+		      font-weight: 600;
+		      color: #5426de;
 	      }
+
 	      .form .title::before{
-	      content: '';
-	      position: absolute;
-	      left: 0;
-	      bottom: 0;
-	      height: 3px;
-	      width: 30px;
-	      background-color: #5426de;
+		      content: '';
+		      position: absolute;
+		      left: 0;
+		      bottom: 0;
+		      height: 3px;
+		      width: 30px;
+		      background-color: #5426de;
 	      }
+
 	      .form .input-field{
-	      position: relative;
-	      height: 50px;
-	      width: 100%;
-	      margin-top: 20px;
+		      position: relative;
+		      height: 50px;
+		      width: 100%;
+		      margin-top: 20px;
 	      }
+
 	      .input-field input{
-	      position: absolute;
-	      height: 100%;
-	      width: 100%;
-	      padding: 0 35px;
-	      border: none;
-	      outline: none;
-	      font-size: 16px;
-	      border-bottom: 2px solid #ccc;
-	      border-top: 2px solid transparent;
-	      transition: all 0.2s ease;
+		      position: absolute;
+		      height: 100%;
+		      width: 100%;
+		      padding: 0 35px;
+		      border: none;
+		      outline: none;
+		      font-size: 16px;
+		      border-bottom: 2px solid #ccc;
+		      border-top: 2px solid transparent;
+		      transition: all 0.2s ease;
 	      }
+
 	      .input-field input:is(:focus){
-	      border-bottom-color: #5426de;
+	      	border-bottom-color: #5426de;
 	      }
+
 	      .input-field i{
-	      position: absolute;
-	      top: 50%;
-	      transform: translateY(-50%);
-	      color: #999;
-	      font-size: 20px;
+		      position: absolute;
+		      top: 50%;
+		      transform: translateY(-50%);
+		      color: #999;
+		      font-size: 20px;
 	      }
+
 	      .input-field input:is(:focus) ~ i{
-	      color: #5426de;
+	      	color: #5426de;
 	      }
 	      .input-field i.icon{
-	      left: 0;
+	      	left: 0;
 	      }
+
 	      .input-field i.showHidePw{
-	      right: 0;
-	      cursor: pointer;
-	      padding: 10px;
+		      right: 0;
+		      cursor: pointer;
+		      padding: 10px;
 	      }
+
 	      .form .text{
-	      color: #333;
-	      font-size: 14px;
+		      color: #333;
+		      font-size: 14px;
 	      }
+
 	      .form a.text{
-	      color: #5426de;
-	      text-decoration: none;
+		      color: #5426de;
+		      text-decoration: none;
 	      }
+
 	      .form a:hover{
-	      text-decoration: underline;
+	      	text-decoration: underline;
 	      }
 	      .form button{
-	      width: 100%;
-	      height: 100%;
-	      border: none;
-	      color: #fff;
-	      font-size: 20px;
-	      font-weight: 1000;
-	      letter-spacing: 2px;
-	      background-color: #5426de;
-	      cursor: pointer;
-	      transition: all 0.3s ease;
+		      width: 100%;
+		      height: 100%;
+		      border: none;
+		      color: #fff;
+		      font-size: 20px;
+		      font-weight: 1000;
+		      letter-spacing: 2px;
+		      background-color: #5426de;
+		      cursor: pointer;
+		      transition: all 0.3s ease;
 	      }
+
 	      button:hover{
-	      background-color: #9e68e8;
+	      	background-color: #9e68e8;
 	      }
+
 	      .form .login-signup{
-	      margin-top: 30px;
-	      text-align: center;
+		      margin-top: 30px;
+		      text-align: center;
 	      }
+
+	      /* Chrome, Safari, Edge, Opera */
+	      input::-webkit-outer-spin-button,
+	      input::-webkit-inner-spin-button {
+	        -webkit-appearance: none;
+	        margin: 0;
+	      }
+
+	      /* Firefox */
+	      input[type=number] {
+	        -moz-appearance: textfield;
+	      }
+
+	      /*kyc*/
+	      	#title_kyc{
+	      		/* font-size: 3rem; */
+	      		/* font-weight: bold; */
+	      		/* text-align:center; */
+	      		position: relative;
+	      		font-size: 35px;
+	      		font-weight: 600;
+	      		color: #5426de;
+	      	}
+	      	
+	      	#title_kyc:before{
+	      		content: '';
+	      		position: absolute;
+	      		left: 0;
+	      		bottom: 0;
+	      		height: 3px;
+	      		width: 30px;
+	      		background-color: #5426de;
+	      	}
+
+	      	#subtitle_kyc {
+	      		font-size:1rem;
+	      		position: relative;
+	      		/* line-height:2; */
+	      	}
+
+	      	#subtitle_kyc:before {
+	      		display: inline-block;
+	      		content: "";
+	      		height: 1px;
+	      		background: #939ba2!important;
+	      		position: absolute;
+	      		width: 170%;
+	      		top: 50%;
+	      		margin-left: 120px;
+	      	}
+
+	      	.icon_kyc{
+	      		font-size:1rem!important;
+	      		color:#5426de!important;
+	      	}
+
+	      	#instruction_kyc{
+	      		font-size:1rem;
+	      		text-align: justify;
+	      		font-weight: 150;
+	      		color: #939ba2!important;
+	      		/* color:#5426de!important; */
+	      	}
+
+	      	.font2rem{
+	      		font-size:2rem;
+	      	}
+
+	      	.font1rem{
+	      		font-size:1rem!important;
+	      	}
+
+	      	.upload_button{
+	      		width: 100%;
+	      		height: 50px;
+	      		border: none;
+	      		color: #fff;
+	      		font-size: 1rem;
+	      		font-weight: 900;
+	      		letter-spacing: 3px;
+	      		background-color: #5426de;
+	      		cursor: pointer;
+	      		transition: all 0.3s ease;
+	      		margin-top:10px;
+	      		border-radius: 0.25rem;
+	      	}
+
+	      	.upload_button:hover{
+	      		background-color: #9e68e8;
+	      	}
+
+	      	.check_upload{
+	      		color:green;
+	      	}
+	      /*kyc*/
+
+	      
 	</style>
-<!-- font -->
+
 
 <body>
   <div class="container">
@@ -272,79 +390,6 @@
         </div>
 
         <!-- kyc -->
-	        <style>
-	        	#title_kyc{
-	        		/* font-size: 3rem; */
-	        		/* font-weight: bold; */
-	        		/* text-align:center; */
-	        		position: relative;
-	        		font-size: 35px;
-	        		font-weight: 600;
-	        		color: #5426de;
-	        	}
-	        	#title_kyc:before{
-	        		content: '';
-	        		position: absolute;
-	        		left: 0;
-	        		bottom: 0;
-	        		height: 3px;
-	        		width: 30px;
-	        		background-color: #5426de;
-	        	}
-	        	#subtitle_kyc {
-	        		font-size:1rem;
-	        		position: relative;
-	        		/* line-height:2; */
-	        	}
-	        	#subtitle_kyc:before {
-	        		display: inline-block;
-	        		content: "";
-	        		height: 1px;
-	        		background: #939ba2!important;
-	        		position: absolute;
-	        		width: 170%;
-	        		top: 50%;
-	        		margin-left: 120px;
-	        	}
-	        	.icon_kyc{
-	        		font-size:1rem!important;
-	        		color:#5426de!important;
-	        	}
-	        	#instruction_kyc{
-	        		font-size:1rem;
-	        		text-align: justify;
-	        		font-weight: 150;
-	        		color: #939ba2!important;
-	        		/* color:#5426de!important; */
-	        	}
-	        	.font2rem{
-	        		font-size:2rem;
-	        	}
-	        	.font1rem{
-	        		font-size:1rem!important;
-	        	}
-	        	.upload_button{
-	        		width: 100%;
-	        		height: 50px;
-	        		border: none;
-	        		color: #fff;
-	        		font-size: 1rem;
-	        		font-weight: 900;
-	        		letter-spacing: 3px;
-	        		background-color: #5426de;
-	        		cursor: pointer;
-	        		transition: all 0.3s ease;
-	        		margin-top:10px;
-	        		border-radius: 0.25rem;
-	        	}
-	        	.upload_button:hover{
-	        		background-color: #9e68e8;
-	        	}
-	        	.check_upload{
-	        		color:green;
-	        	}
-	        </style>
-
 	        <div class="" style="display: none;" id="verify_kyc_container">
 	        	<div id="title_kyc" class="mb-4"><span class="">Verification</span></div>
 	        	<div class="pb-1"><span class="text-muted text-left" id="subtitle_kyc">Upload photo</span></div>
@@ -406,7 +451,7 @@
           </div>
 
           <div class="input-field">
-            <input type="number" name="mobileNumber" placeholder="Enter Mobile Number">
+            <input type="number" name="mobileNumber" placeholder="Include Local number ex: +63">
             <i class="fa fa-mobile icon"></i>
           </div>
 
@@ -491,8 +536,7 @@
 			}
 			else {
 				window.location.replace("homeViewPro");
-			}
-			
+			}	
 		}else{
 			console.log("no active user")
 		}
@@ -613,6 +657,10 @@
 		})
 
 		jQuery.validator.addMethod("checkEmailAvailability", function(value, element) {
+		    return (ajaxShortLinkNoParse("checkEmailAvailability",{'email':value}))
+		}, "Email already taken");
+
+		jQuery.validator.addMethod("checkMobileAvailability", function(value, element) {
 		    return (ajaxShortLinkNoParse("checkEmailAvailability",{'email':value}))
 		}, "Email already taken");
 
