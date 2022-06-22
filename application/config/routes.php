@@ -36,12 +36,7 @@ $route['saveIDImageKyc'] = 'main/saveIDImageKyc';
 $route['main/loadCryptoNews'] = 'main/loadCryptoNews';
 $route['referalLink'] = 'main/referalLink';
 
-
-
-
-
-
-
+$route['checkMobileAvailability'] = 'main/checkMobileAvailability';
 
 // Admin
 	$route['admin-login'] = 'admin/adminLogin';

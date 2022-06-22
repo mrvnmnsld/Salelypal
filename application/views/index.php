@@ -240,6 +240,12 @@
 	      	background-color: #9e68e8;
 	      }
 
+	      button:disabled,
+	      button[disabled]{
+	        border: 1px solid #ac7eeb;
+	        background-color: #ac7eeb;
+	      }
+
 	      .form .login-signup{
 		      margin-top: 30px;
 		      text-align: center;
@@ -340,6 +346,16 @@
 	      	}
 	      /*kyc*/
 
+	      /*otp*/
+      		#otp_container input{
+      		  display:inline-block;
+      		  width:2.5rem;
+      		  height:2.5rem;
+      		  text-align:center;
+      		}
+	      /*otp*/
+
+
 	      
 	</style>
 
@@ -352,16 +368,10 @@
         <span class="title">SafetyPal</span>
 
         <form id="loginForm">
-          <div id="emailInput" class="input-field">
+          <div class="input-field">
             <input id="emailAddress" name="emailAddress" type="email" placeholder="Enter your email">
             <i class="fa fa-envelope-o icon"></i>
 			<i id="emailSwitchID" from="mobileSwitch" class="fa fa-exchange switchUserInput"></i>
-          </div>
-
-		  <div id="mobileInput" class="input-field" style="display:none;">
-            <input id="mobileNumber" name="mobileNumber" type="text" placeholder="Enter mobile number">
-            <i class="fa fa-mobile icon"></i>
-			<i id="mobileSwitchID" from="emailSwitch" class="fa fa-exchange switchUserInput"></i>
           </div>
 
           <div class="input-field">
@@ -400,6 +410,70 @@
         		<button class="flex-fill btn btn-success" id="verify_kyc_btn">Verify Now</button>
         	</div>
         </div>
+
+        <div class="text-center" style="display: none;" id="otp_container">
+        	<div id="otp_selector" class="text-center">
+        		<span class="">Please select where to send OTP</span>
+        		<br>
+        		<br>
+        		<div class="row">
+        			<button class="btn col-5 otp_selector_btn" data-otp-type="email" style="font-size: 16px;">Send via Email</button>
+        			<div class="col-2"></div>
+        			<button class="btn col-5 otp_selector_btn" disabled data-otp-type="mobile" style="font-size: 16px;">
+        				Send via Mobile
+        			</button>
+        		</div>
+        	</div>
+
+        	<div id="otp_verifier" style="display:none">
+        		<div class="prompt">
+        			Enter the code generated on your mobile/email below to proceed with signup!
+        		</div>
+
+        		<form action="" class="mt-5">
+        		  <input class="otp" type="text" oninput='digitValidate(this)' onkeyup='tabChange(1)' maxlength=1 >
+        		  <input class="otp" type="text" oninput='digitValidate(this)' onkeyup='tabChange(2)' maxlength=1 >
+        		  <input class="otp" type="text" oninput='digitValidate(this)' onkeyup='tabChange(3)' maxlength=1 >
+        		  <input class="otp" type="text" oninput='digitValidate(this)'onkeyup='tabChange(4)' maxlength=1 >
+        		  <input class="otp" type="text" oninput='digitValidate(this)'onkeyup='tabChange(5)' maxlength=1 >
+        		  <input class="otp" type="text" oninput='digitValidate(this)' maxlength=1 >
+        		</form>
+
+        		<hr class="mt-4">
+
+        		<div id="errorReporter_otp" class="text-danger text-center"></div>
+
+        		<button id="verify_otp_btn" class='btn btn-primary btn-block mt-4 mb-4 customBtn'>Verify OTP</button>
+
+        		<div style="font-size: 14px;">
+        			Note: Check spam messages.
+        		</div>
+
+        		<div style="font-size: 14px;">
+        			Haven't Received OTP?<a href="#" id="resend_otp_btn"> Click here to resend</a>
+        		</div>
+
+
+        	</div>
+
+        	<script type="text/javascript">
+        		let digitValidate = function(ele){
+        		  console.log(ele.value);
+        		  ele.value = ele.value.replace(/[^0-9]/g,'');
+        		}
+
+        		let tabChange = function(val){
+        		    let ele = document.querySelectorAll('#otp_container input');
+        		    if(ele[val-1].value != ''){
+        		      ele[val].focus()
+        		    }else if(ele[val-1].value == ''){
+        		      ele[val-2].focus()
+        		    }   
+        		 }
+        	</script>
+
+        </div>
+
 
         <!-- kyc -->
 	        <div class="" style="display: none;" id="verify_kyc_container">
@@ -442,8 +516,7 @@
 	        </div>
         <!-- kyc -->
 
-				<form id="signUpForm">
-
+				<form id="signUpForm" style="display:">
 				  <span class="title">Register</span>
 
           <div class="input-field">
@@ -452,14 +525,8 @@
           </div>
 
           <div class="input-field">
-            <input type="text" name="email" placeholder="Enter your email">
+            <input type="email" name="email" placeholder="Enter your email">
             <i class="fa fa-envelope-o icon"></i>
-          </div>
-
-
-          <div class="input-field">
-            <input type="date" name="birthdate" placeholder="Enter your birthdate">
-            <i class="fa fa-calendar icon"></i>
           </div>
 
           <div class="input-field">
@@ -488,6 +555,7 @@
 						</span>
         	</div>
 				</form>
+
       </div>
 
     </div>
@@ -505,6 +573,14 @@
 
 
 	<script type="text/javascript">
+		var otpType = '';
+		var generatedOtp = generateOTP();
+		var currentUser = JSON.parse(getLocalStorageByKey('currentUser'));
+		var referalCode = getUrlParameter('idNum')
+		var currentUserID;
+
+		console.log(generatedOtp,referalCode);
+
 		const container = document.querySelector(".container"),
 		  pwShowHide = document.querySelectorAll(".showHidePw"),
 		  pwFields = document.querySelectorAll(".password"),
@@ -538,9 +614,6 @@
 	  login.addEventListener("click",()=>{
 	  	container.classList.remove("active");
 	  });
-
-		var currentUser = JSON.parse(getLocalStorageByKey('currentUser'));
-		var referalCode = getUrlParameter('idNum')
 
 		if (getLocalStorageByKey('currentUser')!=null) {
 			if(currentUser.isPro == 0){
@@ -596,35 +669,37 @@
 		});
 
 	//userinput_switch
-	var isEmailInput = true;
-	var isMobileInput = false;
-	function switchInput(data){
+		var isEmailInput = true;
+		var isMobileInput = false;
 
-		console.log('switch button clicked');
+		function switchInput(data){
+			console.log('switch button clicked');
 
-		$('#mobileNumber').val('');
-		$('#emailAddress').val('');
-		$('#emailInput').toggle();
-		$('#mobileInput').toggle();
+			$('#mobileNumber').val('');
+			$('#emailAddress').val('');
+			$('#emailInput').toggle();
+			$('#mobileInput').toggle();
 
-		if(data == 'emailSwitch'){
-			console.log('email chosen');
-			// loginType = 'email';
-			isEmailInput = true;
-			isMobileInput = false;
-		}else{
-			console.log('mobile chosen');
-			// loginType = 'mobile';
-			isEmailInput = false;
-			isMobileInput = true;
+			if(data == 'emailSwitch'){
+				console.log('email chosen');
+				// loginType = 'email';
+				isEmailInput = true;
+				isMobileInput = false;
+			}else{
+				console.log('mobile chosen');
+				// loginType = 'mobile';
+				isEmailInput = false;
+				isMobileInput = true;
+			}
 		}
-	}
-	$('#emailSwitchID').on('click',function(){
-		switchInput($(this).attr('from'));
-	});
-	$('#mobileSwitchID').on('click',function(){
-		switchInput($(this).attr('from'));
-	});
+
+		$('#emailSwitchID').on('click',function(){
+			switchInput($(this).attr('from'));
+		});
+		
+		$('#mobileSwitchID').on('click',function(){
+			switchInput($(this).attr('from'));
+		});
 	//userinput_switch
 
 
@@ -679,7 +754,54 @@
 
 		$("#signup_btn").on("click",function(){
 			if ($("#signUpForm").valid()) {
+				$("#signUpForm").toggle()
+				$("#otp_container").toggle()
+			}else{
 				$("#signup_btn").empty().append(
+				    'SIGN UP'
+				).removeAttr('disabled');
+			}
+		});
+
+		$(".otp_selector_btn").on("click",function(){
+			otpType = $(this).attr("data-otp-type")
+			$(".otp_selector_btn").attr("disabled",true)
+			$("#otp_selector").append()
+
+			$("#otp_selector").append(
+				'<span class="spinner-border mt-3 align-bottom" role="status">'+
+				  '<span class="sr-only">Loading...</span>'+
+				'</span>'+
+				"&nbsp Sending OTP Please wait..."
+			);
+
+			var otpRes;
+
+			setTimeout(function(){
+				console.log(`generateOTP: ${generatedOtp}`);
+
+				if (otpType=="email") {
+					otpRes = ajaxShortLink('main/sendOTPViaEmail',{
+						'email':$("#signUpForm input[name='email']").val(),
+						'otp':generatedOtp,
+					});
+				}
+
+				$("#otp_selector").toggle()
+				$("#otp_verifier").toggle()
+			},1000)
+		});
+
+		$("#verify_otp_btn").on("click",function(){
+			var otpInput = [];
+
+			$('#otp_container input').each(function(){
+				otpInput.push($(this).val())
+			});
+
+			if (otpInput.join("")==generatedOtp) {
+				$("#errorReporter_otp").text("")
+				$("#verify_otp_btn").empty().append(
 				    '<span class="spinner-border" role="status">'+
 				      '<span class="sr-only">Loading...</span>'+
 				    '</span>'+
@@ -688,17 +810,35 @@
 
 				setTimeout(function(){
 					$("#signUpForm").submit();
-				},1000)
-
+				},1000);
 			}else{
-				$("#signup_btn").empty().append(
-				    'SIGN UP'
-				).removeAttr('disabled');
+				$("#errorReporter_otp").text("Captcha Doesn't Match")
 			}
 		});
 
-		var generatedOtp = generateOTP();
-		console.log(generatedOtp,referalCode);
+		$("#resend_otp_btn").on("click",function(){
+			$("#otp_verifier").append(
+				'<span id="resend_otp_status" class="spinner-border mt-3 align-bottom" role="status">'+
+				  '<span class="sr-only">Loading...</span>'+
+				'</span>'+
+				"&nbsp Sending OTP Please wait..."
+			);
+
+			var otpRes;
+
+			setTimeout(function(){
+				console.log(`generateOTP: ${generatedOtp}`);
+
+				if (otpType=="email") {
+					otpRes = ajaxShortLink('main/sendOTPViaEmail',{
+						'email':$("#signUpForm input[name='email']").val(),
+						'otp':generatedOtp,
+					});
+
+					$("#resend_otp_status").remove();
+				}
+			},1000)
+		});
 
 		$("#verify_kyc_btn").on("click", function(){
 			$("#thankYou").toggle();
@@ -710,8 +850,8 @@
 		}, "Email already taken");
 
 		jQuery.validator.addMethod("checkMobileAvailability", function(value, element) {
-		    return (ajaxShortLinkNoParse("checkEmailAvailability",{'email':value}))
-		}, "Email already taken");
+		    return (ajaxShortLinkNoParse("checkMobileAvailability",{'mobileNumber':value}))
+		}, "Mobile number already taken");
 
 		jQuery.validator.addMethod("checkPasswordConfirm", function(value, element) {
 			if (value == $("#signUpForm input[name='password']").val()) {
@@ -726,7 +866,10 @@
 		  	rules: {
 					fullName: "required",
 					birthdate: "required",
-					mobileNumber: "required",
+					mobileNumber: {
+						checkMobileAvailability:true,
+						required:true,
+					},
 					email: {
 						required:true,
 						checkEmailAvailability:true
@@ -764,15 +907,14 @@
 					currentUserID = res;
 			    console.log(res);
 
-			   
-
 			    if(res!=false){
 			    	$("#signup_btn").empty().append(
 			    	    'SIGN UP'
 			    	).removeAttr('disabled');
 
+			    	$("#otp_container").toggle()
 			    	$("#thankYou").toggle();
-			    	$("#signUpForm").toggle();
+
 			    }else{
 			    	alert("error in signing up: please contact system admin !errorCode 3322!");
 			    }
@@ -783,99 +925,160 @@
 		var face_upload=0;
 		var id_upload=0;
 
-	    $("#faceUpload_btn").on("click", function(){
-	        $('#faceUpload').click();
-	    });
+    $("#faceUpload_btn").on("click", function(){
+      $('#faceUpload').click();
+    });
 
-			$("#IDUpload_btn").on("click", function(){
-		        $('#IDUpload').click();
-		    });
+		$("#IDUpload_btn").on("click", function(){
+  		$('#IDUpload').click();
+    });
 
-	    $('#faceUpload').change(function(){
-				$.confirm({
-				    title: 'KYC - Face upload',
-				    columnClass: 'col-md-6 col-md-offset-6',
-				    content: 'Are you sure you want to upload image?',
-				    buttons: {
-				        confirm: function () {
-				        	var imageUploadFormData = new FormData();
+    $('#faceUpload').change(function(){
+			$.confirm({
+			    title: 'KYC - Face upload',
+			    columnClass: 'col-md-6 col-md-offset-6',
+			    content: 'Are you sure you want to upload image?',
+			    buttons: {
+			        confirm: function () {
+			        	var imageUploadFormData = new FormData();
 
-				        	imageUploadFormData.append(currentUserID+"_faceImage", $('#faceUpload')[0].files[0],currentUserID+"_faceImage");
-							imageUploadFormData.append('userID', currentUserID);
-					     	backendHandleFormData('saveFaceImageKyc',imageUploadFormData);
+			        	imageUploadFormData.append(currentUserID+"_faceImage", $('#faceUpload')[0].files[0],currentUserID+"_faceImage");
+								imageUploadFormData.append('userID', currentUserID);
 
-							 face_upload = 1;
-							 checkupload();
+								$("#faceUpload_btn").empty().append(
+									'<span class="spinner-border" role="status">'+
+									  '<span class="sr-only">Loading...</span>'+
+									'</span>'+
+									"&nbsp <span style='font-size:16px'>Uploading</span>"
+								).attr('disabled',true);
 
-		    			    $.toast({
-		    			        heading: '<h6>Face Image Uploaded</h6>',
-		    			        text: 'Successfull!',
-		    			        showHideTransition: 'slide',
-		    			        icon: 'success',
-		    			        position: 'bottom-center'
-		    			    })
-				        },
-				        cancel: function () {
-				        	
-				        },
-				    }
-				});
+								var res;
+
+								setTimeout(function(){
+				     			res = JSON.parse(backendHandleFormData('saveFaceImageKyc',imageUploadFormData));
+
+					     		$("#faceUpload_btn").empty().append(
+					     			'<span><i id="faceCheckUpload_kyc" class="fa fa-picture-o fa-inverse"></i></span>'+
+					     			'<span class="">Face</span>'
+					     		).removeAttr('disabled');
+
+					     		console.log(res);
+
+	    						if (res.error==0) {
+	    							face_upload = 1;
+	    							checkupload();
+
+	        			    $.toast({
+	        			        heading: '<h6>Face Image Uploaded</h6>',
+	        			        text: 'Successfull!',
+	        			        showHideTransition: 'slide',
+	        			        icon: 'success',
+	        			        position: 'bottom-center'
+	        			    })
+	    						}else{
+	    							$.toast({
+	    							    heading: '<h6>Error In uploading. Please check if network is strong and contact system admin</h6>',
+	    							    text: 'Successfull!',
+	    							    showHideTransition: 'slide',
+	    							    icon: 'success',
+	    							    position: 'bottom-center'
+	    							})
+	    						}
+								},2000)
+
+				     		
+			        },cancel: function () {
+			        	
+			        },
+			    }
 			});
+		});
 
-			$('#IDUpload').change(function(){
-				$.confirm({
-				    title: 'KYC - ID upload',
-				    columnClass: 'col-md-6 col-md-offset-6',
-				    content: 'Are you sure you want to upload image?',
-				    buttons: {
-				        confirm: function () {
-				        	var imageUploadFormData = new FormData();
+		$('#IDUpload').change(function(){
+			$.confirm({
+			    title: 'KYC - ID upload',
+			    columnClass: 'col-md-6 col-md-offset-6',
+			    content: 'Are you sure you want to upload image?',
+			    buttons: {
+			        confirm: function () {
+			        	var imageUploadFormData = new FormData();
 
-							imageUploadFormData.append(currentUserID+"_IDImage", $('#IDUpload')[0].files[0],currentUserID+"_IDImage");
-							imageUploadFormData.append('userID', currentUserID);
-							backendHandleFormData('saveIDImageKyc',imageUploadFormData);
+								imageUploadFormData.append(currentUserID+"_IDImage", $('#IDUpload')[0].files[0],currentUserID+"_IDImage");
+								imageUploadFormData.append('userID', currentUserID);
 
-							id_upload = 1;
-							checkupload();
+								$("#IDUpload_btn").empty().append(
+									'<span class="spinner-border" role="status">'+
+									  '<span class="sr-only">Loading...</span>'+
+									'</span>'+
+									"&nbsp <span style='font-size:16px'>Uploading</span>"
+								).attr('disabled',true);
 
-		    			    $.toast({
-		    			        heading: '<h6>Face Image Uploaded</h6>',
-		    			        text: 'Successfull!',
-		    			        showHideTransition: 'slide',
-		    			        icon: 'success',
-		    			        position: 'bottom-center'
-		    			    })
-				        },
-				        cancel: function () {
-				        	
-				        },
-				    }
-				});
+								var res;
+
+								setTimeout(function(){
+				     			var res = JSON.parse(backendHandleFormData('saveIDImageKyc',imageUploadFormData));
+ 									console.log(res);
+
+ 					     		$("#IDUpload_btn").empty().append(
+ 					     			'<span><i id="IDCheckUpload_kyc" class="fa fa-picture-o fa-inverse"></i></span>'+
+ 					     			'<span  class="">ID</span>'
+ 					     		).removeAttr('disabled');
+
+ 									if (res.error==0) {
+ 										id_upload = 1;
+ 										checkupload();
+
+ 			    			    $.toast({
+ 			    			        heading: '<h6>ID Image Uploaded</h6>',
+ 			    			        text: 'Successfull!',
+ 			    			        showHideTransition: 'slide',
+ 			    			        icon: 'success',
+ 			    			        position: 'bottom-center'
+ 			    			    })
+ 									}else{
+ 										$.toast({
+ 										    heading: '<h6>Error In uploading. Please check if network is strong and contact system admin</h6>',
+ 										    text: 'Successfull!',
+ 										    showHideTransition: 'slide',
+ 										    icon: 'success',
+ 										    position: 'bottom-center'
+ 										})
+ 									}
+								},2000)
+
+								
+
+								
+			        },cancel: function () {
+			        	
+			        },
+			    }
 			});
+		});
 
-			function checkupload(){
-				if (id_upload == 1 && face_upload == 0){
-					$('#instruction_kyc').html("\
-					<span>Ensure that face is centered and visible when capturing the photo to avoid facial recognition errors</span>\
-					<br><i class='fa fa-check check_upload' aria-hidden='true'></i><span class='check_upload'> ID uploaded</span>\
-					")
-				}else if(face_upload == 1 && id_upload == 0){
-					$('#instruction_kyc').html("\
-					<span>Ensure that face is centered and visible when capturing the photo to avoid facial recognition errors</span>\
-					<br><i class='fa fa-check check_upload' aria-hidden='true'></i><span class='check_upload'> Face uploaded</span>\
-					")
-				}else{
-					// $('#noteslist_kyc').toggle();
-					$('#instruction_kyc').html("\
-					<i class='fa fa-check check_upload' aria-hidden='true'></i><span class='check_upload'> ID uploaded</span>\
-					<i class='fa fa-check check_upload' aria-hidden='true'></i><span class='check_upload'> Face uploaded</span><br>\
-					<span style='color:black;'> Uploaded! Kindly wait 1-3 working days for verification. Thank you</span>\
-					<button id='login_verify' onclick='login.click()' type='button'>\
-						<span  class=''>Proceed to login</span>\
-					</button>\
-					")
-				}
+		function checkupload(){
+			if (id_upload == 1 && face_upload == 0){
+				$('#instruction_kyc').html("\
+				<span>Ensure that face is centered and visible when capturing the photo to avoid facial recognition errors</span>\
+				<br><i class='fa fa-check check_upload' aria-hidden='true'></i><span class='check_upload'> ID uploaded</span>\
+				")
+			}else if(face_upload == 1 && id_upload == 0){
+				$('#instruction_kyc').html("\
+				<span>Ensure that face is centered and visible when capturing the photo to avoid facial recognition errors</span>\
+				<br><i class='fa fa-check check_upload' aria-hidden='true'></i><span class='check_upload'> Face uploaded</span>\
+				")
+			}else{
+				// $('#noteslist_kyc').toggle();
+				$('#instruction_kyc').html("\
+				<i class='fa fa-check check_upload' aria-hidden='true'></i><span class='check_upload'> ID uploaded</span>\
+				<i class='fa fa-check check_upload' aria-hidden='true'></i><span class='check_upload'> Face uploaded</span><br>\
+				<span style='color:black;'> Uploaded! Kindly wait 1-3 working days for verification. Thank you</span>\
+				<button id='login_verify' onclick='login.click()' type='button'>\
+					<span  class=''>Proceed to login</span>\
+				</button>\
+				")
 			}
+		}
 
 
 	</script>

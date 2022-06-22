@@ -1004,19 +1004,32 @@
 			});
 
 			$('#assets_btn').on('click',function(){
-				if ($('#assets_container').css("display") == 'none') {
-					addBreadCrumbs("assets_container")
-					$("html, body").animate({ scrollTop: 0 }, "slow");
-					$('#assets_container').css("display","none");
-					$("#container").fadeOut(animtionSpeed, function() {
-						$("#profile_btn").css('display',"none")
-						$("#top_back_btn").css('display',"block")
-				  		$("#container").fadeOut(animtionSpeed, function() {
-							$('#assets_container').fadeIn(animtionSpeed);
-		  					$("#container").fadeIn(animtionSpeed);
-					  	});
-					});
-				}
+			console.log($('#assets_container').css("display"));
+			if ($('#assets_container').css("display") == 'none') {
+				addBreadCrumbs("assets_container")
+
+				$("html, body").animate({ scrollTop: 0 }, "slow");
+	  			$("#container").empty();
+
+				$("#profile_btn").css('display',"block")
+				$("#top_back_btn").css('display',"none")
+
+		  		$("#container").fadeOut(animtionSpeed, function() {
+				  	// $("#loadSpinner").fadeIn(animtionSpeed,function(){
+			  			// $("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/buyCrypto'}));
+
+			  			// setTimeout(function(){
+			  				// $("#loadSpinner").fadeOut(animtionSpeed,function(){
+								$('#assets_container').fadeIn(animtionSpeed);
+								// $('#topNavBar').toggle();
+			  					// $('#bottomNavBar').toggle();
+			  					$("#container").fadeIn(animtionSpeed);
+			  				// });
+			  			// }, 1000);
+				  		
+			    	// });
+			  	});
+			}
 			});
 
 			$('#buyCrypto_btn, #buy_btn_option').on('click',function(){
