@@ -843,6 +843,8 @@
 						'otp':generatedOtp,
 					});
 
+					console.log(otpRes);
+
 					$("#resend_otp_status").remove();
 				}
 			},1000)

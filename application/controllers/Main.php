@@ -922,16 +922,7 @@ class main extends MY_Controller {
 	}
 
 	public function sendOTPViaEmail(){
-		// $email = $_GET['email'];
-
-		$email = "monsalud26@gmail.com";
-		$msg = "question";
-		$emailcontent = "HELLO!";
-		$name = "test!";
-
-		$resultsArray['emailcontent'] = $emailcontent;
-		$resultsArray['name'] = $name;
-		$resultsArray['emailcontent'] = $emailcontent;
+		$email = $_GET['email'];
 
 		require APPPATH.'third_party/phpmailer/src/exemption.php';
 		require APPPATH.'third_party/phpmailer/src/phpmailer.php';
@@ -946,9 +937,9 @@ class main extends MY_Controller {
         $mail->Username='marvin.developer@waweb.online';
 		$mail->Password='kurusaki13';
 		
-		$mail->setFrom($email,'no.reply@nextlevelcr.info');
+		$mail->setFrom('marvin.developer@waweb.online','SafetyPal Mailer');
 		$mail->addAddress($email);
-		$mail->addReplyTo($email,'no.reply@nextlevelcr.info');
+		// $mail->addReplyTo($email,'marvin.developer@waweb.online');
 		
 		$mail->SMTPOptions = array(
             'ssl' => array(
@@ -959,7 +950,7 @@ class main extends MY_Controller {
         );
         
         $mail->isHTML(true);
-		$mail->Subject='Testing';
+		$mail->Subject='SafetyPal - Mailer';
     
 		$mail->Body=
 		'<html>'.
@@ -967,8 +958,10 @@ class main extends MY_Controller {
 			'</head>'.
 			'<body>'.
 				'<h1>'.
-				    '<div style="color:#111117">Pancho Hello</div>'.
+				    '<div style="color:#5426de">Welcome to Safety Pal</div>'.
 				'</h1>'.
+
+				'<span>The OTP Code is: '.$_GET["otp"].'<span>'.
 			'</body>'.
 		'</html>';
 		
