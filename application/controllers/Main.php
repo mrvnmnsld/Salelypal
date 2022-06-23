@@ -974,7 +974,7 @@ class main extends MY_Controller {
 								'</h1>'.
 								'<h3 style="color: #aea9b3;">Here is your One Time Password '.
 				                'to validate your account</h3>'.
-								'<p style="font-size: 2em; letter-spacing: 5px; font-weight: bold;">'.$_GET["otp"].'</p>'.
+								'<p style="font-size: 2em; letter-spacing: 5px; font-weight: bold; border: 1px solid #9327f8; width: 50%; margin:auto; border-radius: 20px;">'.$_GET["otp"].'</p>'.
 							'</div>'.
 						'</div>'.
 
