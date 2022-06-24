@@ -575,7 +575,7 @@
 		var referalCode = getUrlParameter('idNum')
 		var face_upload=0;
 		var id_upload=0;
-		var currentUserID = 31;
+		var currentUserID;
 
 		console.log(generatedOtp,referalCode);
 
