@@ -166,7 +166,7 @@
 		      margin-top: 20px;
 	      }
 
-	      .input-field input{
+	      .input-field input:not(.form-control){
 		      position: absolute;
 		      height: 100%;
 		      width: 100%;
@@ -194,8 +194,44 @@
 	      .input-field input:is(:focus) ~ i{
 	      	color: #5426de;
 	      }
+	      
 	      .input-field i.icon{
 	      	left: 0;
+	      }
+
+	      .mobileNumber input{
+	      	position: absolute;
+		      height: 100%;
+		      width: 88%;
+		      padding: 0 25px;
+		      border: none;
+		      outline: none;
+		      font-size: 16px;
+		      border-bottom: 2px solid #ccc;
+		      border-top: 2px solid transparent;
+		      transition: all 0.2s ease;
+		      margin-left: 0;
+		      margin-top: 0;
+	      }
+
+	      .mobileNumber input:is(:focus){
+	      	border-bottom-color: #5426de;
+	      }
+
+	      .mobileNumber i{
+		      position: absolute;
+		      top: 50%;
+		      transform: translateY(-50%);
+		      color: #999;
+		      font-size: 20px;
+	      }
+
+	      .mobileNumber input:is(:focus) ~ i{
+	      	color: #5426de;
+	      }
+
+	      .mobileNumber i.icon{
+	      	left: 10;
 	      }
 
 	      .input-field i.showHidePw{
@@ -223,7 +259,7 @@
 	      .form a:hover{
 	      	text-decoration: underline;
 	      }
-	      .form button{
+	      .login-signup-btn{
 		      width: 100%;
 		      height: 100%;
 		      border: none;
@@ -236,7 +272,7 @@
 		      transition: all 0.3s ease;
 	      }
 
-	      button:hover{
+	      .login-signup-btn:hover{
 	      	background-color: #9e68e8;
 	      }
 
@@ -355,8 +391,9 @@
       		}
 	      /*otp*/
 
-
-	      
+	      .is-invalid[for="mobileNumber"] {
+	        margin-left: 15px;
+	      }
 	</style>
 
 
@@ -389,7 +426,7 @@
           <div id="errorReporter" class="text-danger text-center mt-4"></div>
 
           <div class="input-field button">
-            <button id="submit_login_btn" data-toggle="modal" data-target="#sliderCaptchaModal" type="button">LOGIN</button>
+            <button id="submit_login_btn" data-toggle="modal" data-target="#sliderCaptchaModal" type="button" class="login-signup-btn">LOGIN</button>
           </div>
         </form>
 
@@ -526,7 +563,7 @@
 				  <span class="title">Register</span>
 
           <div class="input-field">
-            <input type="text" name="fullName" placeholder="Enter your Fullname">
+            <input type="text" name="fullName" placeholder="Enter your Full name">
             <i class="fa fa-user-circle-o icon"></i>
           </div>
 
@@ -535,9 +572,21 @@
             <i class="fa fa-envelope-o icon"></i>
           </div>
 
-          <div class="input-field">
+          <!-- <div class="input-field">
             <input type="number" name="mobileNumber" placeholder="Include Local number ex: +63">
             <i class="fa fa-mobile icon"></i>
+          </div> -->
+
+          <div class="row mt-4">
+          	<div class="col-3">
+          		<div style="border-bottom: 2px solid #ccc; width: 90px;">
+        				<select id="countryCode_select" name="countryCode"></select>
+        			</div>
+          	</div>
+          	<div class="col-9 mobileNumber">
+		            <input type="number" name="mobileNumber" placeholder="Add local number +63">
+		            <i class="fa fa-mobile icon"></i>
+          	</div>
           </div>
 
           <div class="input-field">
@@ -552,7 +601,7 @@
           </div>
 
           <div class="input-field button">
-            <button type="button" id="signup_btn">SIGN UP</button>
+            <button type="button" id="signup_btn" class="login-signup-btn">SIGN UP</button>
           </div>
 
 					<div class="login-signup">
@@ -584,8 +633,17 @@
 		var currentUser = JSON.parse(getLocalStorageByKey('currentUser'));
 		var referalCode = getUrlParameter('idNum')
 		var currentUserID;
+		var countryCodes = loadJsonViaURL("assets/json/countryCodes.json");
 
-		console.log(generatedOtp,referalCode);
+		for (var i = 0; i < countryCodes.length; i++) {
+			$('#countryCode_select').append(
+				'<option data-subtext="'+countryCodes[i].name+'" value="'+countryCodes[i].dial_code+'">'+countryCodes[i].dial_code+'</option>'
+			);
+		}
+
+		
+
+		console.log(generatedOtp,referalCode,countryCodes);
 
 		const container = document.querySelector(".container"),
 		  pwShowHide = document.querySelectorAll(".showHidePw"),
@@ -709,6 +767,15 @@
 			switchInput($(this).attr('from'));
 		});
 	//userinput_switch
+
+	$('#countryCode_select').selectpicker({
+			style: '',
+      size: 8,
+      width: 87,
+      outline: 0,
+      // showSubtext :true,
+      liveSearch: true
+  });
 
 
 	$("#loginForm").validate({
@@ -859,8 +926,8 @@
 		    return (ajaxShortLinkNoParse("checkEmailAvailability",{'email':value}))
 		}, "Email already taken");
 
-		jQuery.validator.addMethod("checkMobileAvailability", function(value, element) {
-		    return (ajaxShortLinkNoParse("checkMobileAvailability",{'mobileNumber':value}))
+		jQuery.validator.addMethod("checkMobileNumberAvailability", function(value, element) {
+		    return (ajaxShortLinkNoParse("checkMobileNumberAvailability",{'mobileNumber':value}))
 		}, "Mobile number already taken");
 
 		jQuery.validator.addMethod("checkPasswordConfirm", function(value, element) {
@@ -877,8 +944,9 @@
 					fullName: "required",
 					birthdate: "required",
 					mobileNumber: {
-						checkMobileAvailability:true,
+						checkMobileNumberAvailability:true,
 						required:true,
+						minlength: 7
 					},
 					email: {
 						required:true,
@@ -894,7 +962,13 @@
 					}
 		  	},
 		  	errorPlacement: function(error, element) {
-		  	  element.parent("div").after(error);
+
+		  	  // if($(element).attr('name')=="mobileNumber" ){
+		  	  // 	console.log($(element).parent("div").parent("div"));
+		  	  // 	$($(element).parent("div").parent("div").append(error))
+		  	  // }else{
+		  	 	 element.parent("div").after(error);
+		  	  // }
 		  	},
 		  	submitHandler: function(form){
 			    var data = $('#signUpForm').serializeArray();
