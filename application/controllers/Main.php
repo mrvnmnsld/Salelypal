@@ -931,9 +931,9 @@ class main extends MY_Controller {
 		
         $mail->IsSMTP();
 		$mail->SMTPAuth=false;
-		// $mail->SMTPDebug = 1;
-        $mail->Host = 'localhost';
-        $mail->Port = '25';
+		$mail->SMTPDebug = 1;
+        $mail->Host = 'mail.waweb.online';
+        $mail->Port = '587';
         $mail->Username='marvin.developer@waweb.online';
 		$mail->Password='kurusaki13';
 		
