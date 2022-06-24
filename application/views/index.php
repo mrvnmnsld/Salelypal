@@ -353,10 +353,7 @@
       		  height:2.5rem;
       		  text-align:center;
       		}
-	      /*otp*/
-
-
-	      
+	      /*otp*/  
 	</style>
 
 
@@ -458,8 +455,6 @@
         		<div style="font-size: 14px;">
         			Haven't Received OTP?<a href="#" id="resend_otp_btn"> Click here to resend</a>
         		</div>
-
-
         	</div>
 
         	<script type="text/javascript">
@@ -477,52 +472,47 @@
         		    }   
         		 }
         	</script>
-
         </div>
 
+        <div class="" style="display: ;" id="verify_kyc_container">
+        	<div id="title_kyc" class="mb-4"><span class="">Verification</span></div>
+        	<div class="pb-1"><span class="text-muted text-left" id="subtitle_kyc">Upload photo</span></div>
 
-        <!-- kyc -->
-	        <div class="" style="display: none;" id="verify_kyc_container">
-	        	<div id="title_kyc" class="mb-4"><span class="">Verification</span></div>
-	        	<div class="pb-1"><span class="text-muted text-left" id="subtitle_kyc">Upload photo</span></div>
-	        	<div id="noteslist_kyc" class="m-2"> 
-	        	<div class="text-left font1rem"><b>Important Notes</b></div>
-	        		<!-- <div class="row font1rem">
-	        			<div class="col-6 column-kyc "><i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Don't use filter</span></div>
-	        			<div class="col-6 column-kyc"><i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Avoid make up</span></div>
-	        		</div>
-	        		<div class="row font1rem">
-	        			<div class="col-6 column-kyc"><i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Don't wear hats</span></div>
-	        			<div class="col-6 column-kyc"><i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Avoid eye wear</span></div>
-	        		</div> -->
-	        		<i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Don't use photo filter</span><br>
-	        		<i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Avoid wearing make up</span><br>
-	        		<i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Avoid wearing glasses</span><br>
-	        		<i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Avoid wearing hats</span>
-	        	</div><!-- noteslist_kyc -->
-	        	<div class="row">
-	        			<div class="col-6 d-flex flex-row-reverse">
-	        				<button id="faceUpload_btn" class="upload_button face_upload_btn" type="button">
-	        					<span><i id="faceCheckUpload_kyc" class="fa fa-picture-o fa-inverse"></i></span>
-	        					<span  class="">Face</span>
-	        				</button>
-	        				<input class="form-control d-none" type="file" name="faceUpload" id="faceUpload" accept="image/png, image/gif, image/jpeg" >
-	        			</div>
-	        			<div class="col-6 d-flex flex-row-reverse">
-	        				<button id="IDUpload_btn" class="upload_button id_upload_btn" type="button">
-	        					<span><i id="IDCheckUpload_kyc" class="fa fa-picture-o fa-inverse"></i></span>
-	        					<span  class="">ID</span>
-	        				</button>
-	        				<input class="form-control d-none" type="file" name="IDUpload" id="IDUpload" accept="image/png, image/gif, image/jpeg" >
-	        			</div>
-	        		</div>
-	        		<div id="instruction_kyc" class="text-left pt-3">
-	        			<span>Ensure that face is centered and visible when capturing the photo to avoid facial recognition errors</span>
-	        		</div>
-	        </div>
-        <!-- kyc -->
+        	<div class="input-field">
+        	  <input type="date" name="birthday">
+        	  <i class="fa fa-birthday-cake icon"></i>
+        	</div>
 
-				<form id="signUpForm" style="display:">
+        	<div id="noteslist_kyc" class="m-2"> 
+        		<div class="text-left font1rem"><b>Important Notes</b></div>
+        		<i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Don't use photo filter</span><br>
+        		<i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Avoid wearing make up</span><br>
+        		<i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Avoid wearing glasses</span><br>
+        		<i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Avoid wearing hats</span>
+        	</div>
+
+        	<div class="row">
+        			<div class="col-6 d-flex flex-row-reverse">
+        				<button id="faceUpload_btn" class="upload_button face_upload_btn" type="button">
+        					<span><i id="faceCheckUpload_kyc" class="fa fa-picture-o fa-inverse"></i></span>
+        					<span  class="">Face</span>
+        				</button>
+        				<input class="form-control d-none" type="file" name="faceUpload" id="faceUpload" accept="image/png, image/gif, image/jpeg" >
+        			</div>
+        			<div class="col-6 d-flex flex-row-reverse">
+        				<button id="IDUpload_btn" class="upload_button id_upload_btn" type="button">
+        					<span><i id="IDCheckUpload_kyc" class="fa fa-picture-o fa-inverse"></i></span>
+        					<span  class="">ID</span>
+        				</button>
+        				<input class="form-control d-none" type="file" name="IDUpload" id="IDUpload" accept="image/png, image/gif, image/jpeg" >
+        			</div>
+        		</div>
+        		<div id="instruction_kyc" class="text-left pt-3">
+        			<span>Ensure that face is centered and visible when capturing the photo to avoid facial recognition errors</span>
+        		</div>
+        </div>
+
+				<form id="signUpForm" style="display:none">
 				  <span class="title">Register</span>
 
           <div class="input-field">
@@ -583,7 +573,9 @@
 		var generatedOtp = generateOTP();
 		var currentUser = JSON.parse(getLocalStorageByKey('currentUser'));
 		var referalCode = getUrlParameter('idNum')
-		var currentUserID;
+		var face_upload=0;
+		var id_upload=0;
+		var currentUserID = 31;
 
 		console.log(generatedOtp,referalCode);
 
@@ -674,88 +666,87 @@
 			}
 		});
 
-	//userinput_switch
-		var isEmailInput = true;
-		var isMobileInput = false;
+		//userinput_switch
+			var isEmailInput = true;
+			var isMobileInput = false;
 
-		function switchInput(data){
-			console.log('switch button clicked');
+			function switchInput(data){
+				console.log('switch button clicked');
 
-			$('#mobileNumber').val('');
-			$('#emailAddress').val('');
-			$('#emailInput').toggle();
-			$('#mobileInput').toggle();
+				$('#mobileNumber').val('');
+				$('#emailAddress').val('');
+				$('#emailInput').toggle();
+				$('#mobileInput').toggle();
+				
+				emailAddress
+
+				if(data == 'emailSwitch'){
+					console.log('email chosen');
+					// loginType = 'email';
+					isEmailInput = true;
+					isMobileInput = false;
+				}else{
+					console.log('mobile chosen');
+					// loginType = 'mobile';
+					isEmailInput = false;
+					isMobileInput = true;
+				}
+			}
+
+			$('#emailSwitchID').on('click',function(){
+				switchInput($(this).attr('from'));
+			});
 			
-			emailAddress
+			$('#mobileSwitchID').on('click',function(){
+				switchInput($(this).attr('from'));
+			});
+		//userinput_switch
 
-			if(data == 'emailSwitch'){
-				console.log('email chosen');
-				// loginType = 'email';
-				isEmailInput = true;
-				isMobileInput = false;
-			}else{
-				console.log('mobile chosen');
-				// loginType = 'mobile';
-				isEmailInput = false;
-				isMobileInput = true;
-			}
-		}
-
-		$('#emailSwitchID').on('click',function(){
-			switchInput($(this).attr('from'));
-		});
-		
-		$('#mobileSwitchID').on('click',function(){
-			switchInput($(this).attr('from'));
-		});
-	//userinput_switch
-
-
-	$("#loginForm").validate({
-		errorClass: 'is-invalid',
-		rules: {
-			emailAddress : {
-				required : isEmailInput,
+		$("#loginForm").validate({
+			errorClass: 'is-invalid',
+			rules: {
+				emailAddress : {
+					required : isEmailInput,
+				},
+				mobileNumber : {
+					required : isMobileInput,
+				},
+				password: "required",
 			},
-			mobileNumber : {
-				required : isMobileInput,
-			},
-			password: "required",
-		},
-		submitHandler: function(form){
-			captcha.reset();
+			submitHandler: function(form){
+				captcha.reset();
 
-			var data = $('#loginForm').serializeArray();
-			data.push({"name":'ip','value':getIpAddress()["ip"]});
-			var loginRes = ajaxShortLink('checkLoginCredentials',data);
+				var data = $('#loginForm').serializeArray();
+				data.push({"name":'ip','value':getIpAddress()["ip"]});
+				var loginRes = ajaxShortLink('checkLoginCredentials',data);
 
-			if (loginRes['wrongFlag'] == 2 || loginRes['wrongFlag'] == 1) {
-				$('#errorReporter').text("Wrong Credentials.");
-			}else if(loginRes['wrongFlag'] == 3){
-				$('#errorReporter').html("Account Blocked.");
-			}else if(loginRes['wrongFlag'] == 4){
-				$('#errorReporter').html("Account not yet verified. Please wait while we process your verification");
-			}else if(loginRes['wrongFlag'] == 0){
+				if (loginRes['wrongFlag'] == 2 || loginRes['wrongFlag'] == 1) {
+					$('#errorReporter').text("Wrong Credentials.");
+				}else if(loginRes['wrongFlag'] == 3){
+					$('#errorReporter').html("Account Blocked.");
+				}else if(loginRes['wrongFlag'] == 4){
+					$('#errorReporter').html("Account not yet verified. Please wait while we process your verification");
+				}else if(loginRes['wrongFlag'] == 0){
 
-				$("#submit_login_btn").empty().append(
-					'<span class="spinner-border" role="status">'+
-						'<span class="sr-only">Loading...</span>'+
-					'</span>'+
-					"&nbsp Success Login"
-				).attr('disabled',true);
+					$("#submit_login_btn").empty().append(
+						'<span class="spinner-border" role="status">'+
+							'<span class="sr-only">Loading...</span>'+
+						'</span>'+
+						"&nbsp Success Login"
+					).attr('disabled',true);
 
-				setLocalStorageByKey('currentUser',JSON.stringify(loginRes['data']));
+					setLocalStorageByKey('currentUser',JSON.stringify(loginRes['data']));
 
-				if(loginRes.data.isPro == 0){
-						window.location.replace("homeView");
-					}else {
-						window.location.replace("homeViewPro");
-					}
+					if(loginRes.data.isPro == 0){
+							window.location.replace("homeView");
+						}else {
+							window.location.replace("homeViewPro");
+						}
 
+				}
 			}
-		}
-	});
-		
+		});
+			
 		$("#submit_login_btn").on("click",function(){
 			captcha.reset();
 		});
@@ -932,18 +923,15 @@
 		  	}
 		});
 
-		var face_upload=0;
-		var id_upload=0;
-
-    $("#faceUpload_btn").on("click", function(){
-      $('#faceUpload').click();
-    });
+	  $("#faceUpload_btn").on("click", function(){
+	    $('#faceUpload').click();
+	  });
 
 		$("#IDUpload_btn").on("click", function(){
-  		$('#IDUpload').click();
-    });
+			$('#IDUpload').click();
+	  });
 
-    $('#faceUpload').change(function(){
+	  $('#faceUpload').change(function(){
 			$.confirm({
 			    title: 'KYC - Face upload',
 			    columnClass: 'col-md-6 col-md-offset-6',
@@ -1027,33 +1015,33 @@
 
 								setTimeout(function(){
 				     			var res = JSON.parse(backendHandleFormData('saveIDImageKyc',imageUploadFormData));
- 									console.log(res);
+										console.log(res);
 
- 					     		$("#IDUpload_btn").empty().append(
- 					     			'<span><i id="IDCheckUpload_kyc" class="fa fa-picture-o fa-inverse"></i></span>'+
- 					     			'<span  class="">ID</span>'
- 					     		).removeAttr('disabled');
+						     		$("#IDUpload_btn").empty().append(
+						     			'<span><i id="IDCheckUpload_kyc" class="fa fa-picture-o fa-inverse"></i></span>'+
+						     			'<span  class="">ID</span>'
+						     		).removeAttr('disabled');
 
- 									if (res.error==0) {
- 										id_upload = 1;
- 										checkupload();
+										if (res.error==0) {
+											id_upload = 1;
+											checkupload();
 
- 			    			    $.toast({
- 			    			        heading: '<h6>ID Image Uploaded</h6>',
- 			    			        text: 'Successfull!',
- 			    			        showHideTransition: 'slide',
- 			    			        icon: 'success',
- 			    			        position: 'bottom-center'
- 			    			    })
- 									}else{
- 										$.toast({
- 										    heading: '<h6>Error In uploading. Please check if network is strong and contact system admin</h6>',
- 										    text: 'Successfull!',
- 										    showHideTransition: 'slide',
- 										    icon: 'success',
- 										    position: 'bottom-center'
- 										})
- 									}
+				    			    $.toast({
+				    			        heading: '<h6>ID Image Uploaded</h6>',
+				    			        text: 'Successfull!',
+				    			        showHideTransition: 'slide',
+				    			        icon: 'success',
+				    			        position: 'bottom-center'
+				    			    })
+										}else{
+											$.toast({
+											    heading: '<h6>Error In uploading. Please check if network is strong and contact system admin</h6>',
+											    text: 'Successfull!',
+											    showHideTransition: 'slide',
+											    icon: 'success',
+											    position: 'bottom-center'
+											})
+										}
 								},2000)
 
 								
@@ -1064,6 +1052,17 @@
 			        },
 			    }
 			});
+		});
+
+		$('input[name="birthday"]').change(function(){
+		    var res = ajaxShortLink("saveBirthday",{
+		    	"birthday":$(this).val(),
+		    	"userID":currentUserID,
+		    });
+
+		    if(res==false){
+		    	$.alert("Error in Uploading Birthdate, please contact system admin.<hr><div><b class='text-center'> ErrorCode:521</b></div>");
+		    }
 		});
 
 		function checkupload(){

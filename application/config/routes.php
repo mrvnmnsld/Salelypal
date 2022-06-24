@@ -37,6 +37,12 @@ $route['main/loadCryptoNews'] = 'main/loadCryptoNews';
 $route['main/sendOTPViaEmail'] = 'main/sendOTPViaEmail';
 $route['referalLink'] = 'main/referalLink';
 $route['checkMobileAvailability'] = 'main/checkMobileAvailability';
+$route['main/sendSMS'] = 'main/sendSMS';
+
+$route['saveBirthday'] = 'main/saveBirthday';
+
+
+
 
 // Admin
 	$route['admin-login'] = 'admin/adminLogin';

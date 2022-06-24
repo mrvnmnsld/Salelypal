@@ -985,6 +985,55 @@ class main extends MY_Controller {
 		exit();
 	}
 
+	public function sendSMS(){
+		$endpoint = 'https://api.twilio.com/2010-04-01/Accounts/AC51784290c7fcecfe437a217b6d796bbc/Messages.json';
+
+		$url = $endpoint;
+		$curl = curl_init();
+		curl_setopt($curl, CURLOPT_URL, $url);
+
+		curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+		   '--data-urlencode: To=+639613002479',
+		   '--data-urlencode: MessagingServiceSid=MG617e80a04a486d9a00e3fc9bf04e1f50',
+		   '--data-urlencode: Body=test',
+		   '-u AC51784290c7fcecfe437a217b6d796bbc:ea88a2518e7dd83022ac1bd19e9052bf'
+
+		));
+
+		$resp = curl_exec($curl);
+
+		echo $curl;
+	}
+
+	public function saveBirthday(){
+		$birthday = $_GET['birthday'];
+		$userID = $_GET['userID'];
+
+		$tableName="user_tbl";
+		$fieldName='userID';
+		$where=$userID;
+
+		$insertRecord = array(
+			'birthday'=>$birthday,
+		);
+
+		$updateRecordsRes = $this->_updateRecords(
+			$tableName,
+			array($fieldName),
+			array($where),
+			$insertRecord
+		); 
+
+		if ($updateRecordsRes != 1) {
+   			echo false;
+		}else{
+   			echo true;
+		}
+
+	}
+
+	
+
 
 
 }
