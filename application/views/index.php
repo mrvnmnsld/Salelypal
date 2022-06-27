@@ -210,15 +210,13 @@
 		      border-bottom: 2px solid #ccc;
 		      border-top: 2px solid transparent;
 		      transition: all 0.2s ease;
-		      margin-left: 0;
-		      margin-top: 0;
 	      }
 
 	      .mobileNumber input:is(:focus){
 	      	border-bottom-color: #5426de;
 	      }
 
-	      .mobileNumber i{
+	      /*.mobileNumber i{
 		      position: absolute;
 		      top: 50%;
 		      transform: translateY(-50%);
@@ -232,7 +230,7 @@
 
 	      .mobileNumber i.icon{
 	      	left: 10;
-	      }
+	      }*/
 
 	      .input-field i.showHidePw{
 		      right: 0;
@@ -395,6 +393,10 @@
 	      .is-invalid[for="mobileNumber"] {
 	        margin-left: 15px;
 	      }
+	      .bootstrap-select > select.mobile-device:focus + .dropdown-toggle, .bootstrap-select .dropdown-toggle:focus{
+	      	box-shadow: none;
+	      	outline: none !important;
+	      }
 	</style>
 
 
@@ -455,13 +457,13 @@
 
           <div class="row mt-4">
           	<div class="col-3">
-          		<div style="border-bottom: 2px solid #ccc; width: 90px;">
+          		<div class="country-code" style="border-bottom: 2px solid #ccc; width: 90px;">
         				<select id="countryCode_select" name="countryCode"></select>
         			</div>
           	</div>
           	<div class="col-9 mobileNumber">
 		            <input type="number" name="mobileNumber" placeholder="Enter Mobile Number">
-		            <!-- <i class="fa fa-mobile icon"></i> -->
+		            <i class="fa fa-mobile icon"></i>
           	</div>
           </div>
 

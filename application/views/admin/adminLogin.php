@@ -305,7 +305,8 @@
           console.log(data);
 
           if (loginRes['wrongFlag'] != 0) {
-            $('#errorReporter').css("display","block");
+            $('#errorReporter').toggle();
+            // $('#errorReporter').css("display","block");
             $('#errorReporter').css("color","red");
 
 

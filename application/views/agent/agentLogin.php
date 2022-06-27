@@ -301,6 +301,7 @@
 
           if (loginRes['wrongFlag'] != 0) {
             $('#errorReporter').toggle();
+            $('#errorReporter').css("color","red");
 
             if (loginRes['wrongFlag'] == 2 || loginRes['wrongFlag'] == 1) {
               $('#errorReporter').text("Wrong Credentials.");
