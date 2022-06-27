@@ -14,7 +14,7 @@ if (!isset($_SESSION["currentUser"])) {
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <link rel="icon" type="image/png" href="assets/imgs/ezpayex_logo.png"/>
+  <link rel="icon" type="image/png" href="assets/imgs/logo_safetypal_bottom_text.png"/>
   <title>SafetyPal Dashboard</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
@@ -167,7 +167,7 @@ if (!isset($_SESSION["currentUser"])) {
 
     <div class="d-flex align-items-center justify-content-between">
       <a href="admin-dashboard" class="logo d-flex align-items-center">
-        <img src="assets/imgs/ezpayex_logo.png" alt="" style="border-radius:50%">
+        <img src="assets/imgs/logo_safetypal_bottom_text.png" alt="" style="border-radius:50%" class="bg-light p-1">
         <span class="d-none d-lg-block" style="font-size: 21px;font-family: 'Poppins', sans-serif;">SafetyPal <span id="userTypeTitle" style="text-transform: capitalize;font-family: 'Poppins', sans-serif;"></span></span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -189,12 +189,12 @@ if (!isset($_SESSION["currentUser"])) {
               <hr class="dropdown-divider">
             </li>
 
-            <li>
+            <!-- <li>
               <a class="dropdown-item d-flex align-items-center" href="#">
                 <i class="bi bi-gear"></i>
                 <span>Account Settings</span>
               </a>
-            </li>
+            </li> -->
 
             <!-- <li>
               <a class="dropdown-item d-flex bd-highlight">
@@ -585,10 +585,10 @@ if (!isset($_SESSION["currentUser"])) {
 
   if (currentUser.userType == 'superAdmin'){
     $('#userType').text('Super Admin');
-    $('#userTypeTitle').text('Admin');
+    $('#userTypeTitle').text('- Admin');
   }else{
     $('#userType').text();
-    // $('#userTypeTitle').text(currentUser.userType);
+    $('#userTypeTitle').text(' - '+currentUser.userType);
   }
   
   //User Type text UI

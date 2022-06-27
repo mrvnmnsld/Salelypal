@@ -87,8 +87,9 @@ class agent extends MY_Controller {
 				$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = array("user_tbl.userID")
 			);
 
+
 			$totalDirectPainInUSD = $totalDirectPainInUSD+floatval($value->totalPaidInUSDNoFormat);
-			$totalIndirectPainInUSD = $totalIndirectPainInUSD+floatval($value->totalPaidInUSD);
+
 			$totalCount1st = $totalCount1st+count($userInvite);
 
 			foreach ($userInvite as $userInviteKey => $userInviteValue) {
@@ -101,6 +102,7 @@ class agent extends MY_Controller {
 				);
 
 				$totalIndirectPainInUSD = $totalIndirectPainInUSD+floatval($userInviteValue->totalPaidInUSD);
+
 				$totalCount2nd = $totalCount2nd+count($userInvite2ndDegree);
 
 				foreach ($userInvite2ndDegree as $userInvite2ndDegreeKey => $userInvite2ndDegreeValue) {
@@ -113,6 +115,12 @@ class agent extends MY_Controller {
 					);
 
 					$totalIndirectPainInUSD = $totalIndirectPainInUSD+floatval($userInvite2ndDegreeValue->totalPaidInUSD);
+
+					foreach ($userInvite3rdDegree as $userInvite3rdDegreeKey => $userInvite3rdDegreeValue) {
+						$totalIndirectPainInUSD = $totalIndirectPainInUSD+floatval($userInvite3rdDegreeValue->totalPaidInUSD);
+					}
+
+
 					$totalCount3rd = $totalCount3rd+count($userInvite3rdDegree);
 				}
 			}

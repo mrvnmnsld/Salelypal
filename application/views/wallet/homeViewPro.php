@@ -255,6 +255,7 @@
 
 			.jq-toast-single {
 		  		font-size: 16px;
+		  		margin-bottom: 50px;
 			}
 
 

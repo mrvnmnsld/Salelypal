@@ -2,7 +2,7 @@
 	<h4>Invite friend to earn USDT!</h4>
 
 	<div class="input-group mb-3">
-	  <input type="text" class="form-control" id="referal_link_container">
+	  <input type="text" class="form-control" id="referal_link_container" disabled>
 
 	  <div class="input-group-append">
 	    <button class="btn btn-success" type="button" id="copyLink_btn">Copy</button>
@@ -26,7 +26,11 @@
 	</div>
 
 	<script type="text/javascript">
-		$("#referal_link_container").val(`localhost/cryptoWallet/referalLink?referType=user&idNum=${currentUser.userID}`);
+		var getUrl = window.location;
+		var baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+		var urlLink = baseUrl+"/referalLink?referType=agent&idNum="+currentUser.userID+"&referBy="+currentUser.email;
+
+		$("#referal_link_container").val(urlLink);
 
 		$("#copyLink_btn").on("click",function(){
 			var copiedLink = $("#referal_link_container").val()
