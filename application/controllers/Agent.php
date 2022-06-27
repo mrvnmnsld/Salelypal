@@ -71,19 +71,19 @@ class agent extends MY_Controller {
 		$totalDirectPainInUSD = 0;
 
 		$res = $this->_getRecordsData(
-			$selectfields = array("user_tbl.*,CONCAT(COALESCE(ROUND(SUM(buy_crypto_history_tbl.amountPaid), 2) ,0) ,' USD') AS totalPaidInUSD,COALESCE(ROUND(SUM(buy_crypto_history_tbl.amountPaid), 2) ,0) AS totalPaidInUSDNoFormat"), 
-			$tables = array('user_tbl','buy_crypto_history_tbl'), 
+			$selectfields = array("user_tbl.*,CONCAT(COALESCE(ROUND(SUM(test_platform_buy_crypto_history_tbl.amountPaid), 2) ,0) ,' USD') AS totalPaidInUSD,COALESCE(ROUND(SUM(test_platform_buy_crypto_history_tbl.amountPaid), 2) ,0) AS totalPaidInUSDNoFormat"), 
+			$tables = array('user_tbl','test_platform_buy_crypto_history_tbl'), 
 			$fieldName = array('referType','referred_user_id'), $where = array('agent',$_GET['agentID']), 
-			$join = array('user_tbl.userID = buy_crypto_history_tbl.userID'), $joinType = array("LEFT"), $sortBy = null, 
+			$join = array('user_tbl.userID = test_platform_buy_crypto_history_tbl.userID'), $joinType = array("LEFT"), $sortBy = null, 
 			$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = array("user_tbl.userID")
 		);
 
 		foreach ($res as $key => $value) {
 			$userInvite = $this->_getRecordsData(
-				$selectfields = array("user_tbl.*,COALESCE(ROUND(SUM(buy_crypto_history_tbl.amountPaid), 2) ,0) AS totalPaidInUSD"), 
-				$tables = array('user_tbl','buy_crypto_history_tbl'), 
+				$selectfields = array("user_tbl.*,COALESCE(ROUND(SUM(test_platform_buy_crypto_history_tbl.amountPaid), 2) ,0) AS totalPaidInUSD"), 
+				$tables = array('user_tbl','test_platform_buy_crypto_history_tbl'), 
 				$fieldName = array('referType','referred_user_id'), $where = array('user',$value->userID), 
-				$join = array('user_tbl.userID = buy_crypto_history_tbl.userID'), $joinType = array("LEFT"), $sortBy = null, 
+				$join = array('user_tbl.userID = test_platform_buy_crypto_history_tbl.userID'), $joinType = array("LEFT"), $sortBy = null, 
 				$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = array("user_tbl.userID")
 			);
 
@@ -94,10 +94,10 @@ class agent extends MY_Controller {
 
 			foreach ($userInvite as $userInviteKey => $userInviteValue) {
 				$userInvite2ndDegree = $this->_getRecordsData(
-					$selectfields = array("user_tbl.*,COALESCE(ROUND(SUM(buy_crypto_history_tbl.amountPaid), 2) ,0) AS totalPaidInUSD"), 
-					$tables = array('user_tbl','buy_crypto_history_tbl'), 
+					$selectfields = array("user_tbl.*,COALESCE(ROUND(SUM(test_platform_buy_crypto_history_tbl.amountPaid), 2) ,0) AS totalPaidInUSD"), 
+					$tables = array('user_tbl','test_platform_buy_crypto_history_tbl'), 
 					$fieldName = array('referType','referred_user_id'), $where = array('user',$userInviteValue->userID), 
-					$join = array('user_tbl.userID = buy_crypto_history_tbl.userID'), $joinType = array("LEFT"), $sortBy = null, 
+					$join = array('user_tbl.userID = test_platform_buy_crypto_history_tbl.userID'), $joinType = array("LEFT"), $sortBy = null, 
 					$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = array("user_tbl.userID")
 				);
 
@@ -107,10 +107,10 @@ class agent extends MY_Controller {
 
 				foreach ($userInvite2ndDegree as $userInvite2ndDegreeKey => $userInvite2ndDegreeValue) {
 					$userInvite3rdDegree = $this->_getRecordsData(
-						$selectfields = array("user_tbl.*,COALESCE(ROUND(SUM(buy_crypto_history_tbl.amountPaid), 2) ,0) AS totalPaidInUSD"), 
-						$tables = array('user_tbl','buy_crypto_history_tbl'),  
+						$selectfields = array("user_tbl.*,COALESCE(ROUND(SUM(test_platform_buy_crypto_history_tbl.amountPaid), 2) ,0) AS totalPaidInUSD"), 
+						$tables = array('user_tbl','test_platform_buy_crypto_history_tbl'),  
 						$fieldName = array('referType','referred_user_id'), $where = array('user',$userInvite2ndDegreeValue->userID), 
-						$join = array('user_tbl.userID = buy_crypto_history_tbl.userID'), $joinType = array("LEFT"), $sortBy = null, 
+						$join = array('user_tbl.userID = test_platform_buy_crypto_history_tbl.userID'), $joinType = array("LEFT"), $sortBy = null, 
 						$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = array("user_tbl.userID")
 					);
 
