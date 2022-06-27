@@ -288,6 +288,9 @@ $route['saveBirthday'] = 'main/saveBirthday';
 	$route['agent/getAgentInvites'] = 'agent/getAgentInvites';
 
 	$route['agent/checkUserNameAvailability'] = 'agent/checkUserNameAvailability';
+
+	$route['agent/getMonthlyInvites'] = 'agent/getMonthlyInvites';
+	$route['agent/getYearlyInvites'] = 'agent/getYearlyInvites';
 //agent management
 
 //users management

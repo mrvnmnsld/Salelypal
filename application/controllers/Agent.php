@@ -60,8 +60,6 @@ class agent extends MY_Controller {
 	}
 
 	public function getAgentInvites(){
-		
-
 		$res = $this->_getRecordsData(
 			$selectfields = array("*"), 
 			$tables = array('user_tbl'), 
@@ -73,7 +71,6 @@ class agent extends MY_Controller {
 		echo json_encode($res);
 	}
 
-	//get data table
 	public function getAgent(){
 		$res = $this->_getRecordsData(
 			$selectfields = array("agent_profile_tbl.*, admin_users_tbl.username AS createdBy"), 
@@ -102,7 +99,6 @@ class agent extends MY_Controller {
 		echo json_encode($res);
 	}
 
-	//add agent
 	public function saveNewAgent(){
 		$insertRecord = array(
 			'fullname' => $_GET['fullname'],
@@ -123,7 +119,6 @@ class agent extends MY_Controller {
 		}
 	}
 
-	//agent update
 	public function updateAgentInfo(){
 		$insertRecord = array(
 			'fullname' => $_GET['fullname'],
@@ -148,7 +143,6 @@ class agent extends MY_Controller {
 		}
 	}
 
-	//agent delete
 	public function deleteAgent(){
 		$deleteQuery = $this->_deleteRecords(
 			$tableName = "agent_profile_tbl",
@@ -175,6 +169,34 @@ class agent extends MY_Controller {
    			echo false;
    		}
 	}
+
+	public function getMonthlyInvites(){
+		$res = $this->_getRecordsData(
+			$selectfields = array("*"), 
+			$tables = array('user_tbl'), 
+			$fieldName = array('referType','referred_user_id'), $where = array('agent',$_GET['agentID']), 
+			$join = null, $joinType = null, $sortBy = null, 
+			$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = array('timestamp LIKE "%'.$_GET['monthYear'].'-%"'), $groupBy = null 
+		);
+
+		echo json_encode($res);
+	}
+
+	public function getYearlyInvites(){
+		$res = $this->_getRecordsData(
+			$selectfields = array("*"), 
+			$tables = array('user_tbl'), 
+			$fieldName = array('referType','referred_user_id'), $where = array('agent',$_GET['agentID']), 
+			$join = null, $joinType = null, $sortBy = null, 
+			$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = array('timestamp LIKE "%'.$_GET['year'].'-%"'), $groupBy = null 
+		);
+
+		echo json_encode($res);
+	}
+
+	
+
+	
 
 
 	

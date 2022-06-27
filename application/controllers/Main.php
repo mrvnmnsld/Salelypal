@@ -1012,8 +1012,8 @@ class main extends MY_Controller {
 		   '--data-urlencode: To=+639613002479',
 		   '--data-urlencode: MessagingServiceSid=MG617e80a04a486d9a00e3fc9bf04e1f50',
 		   '--data-urlencode: Body=test',
+		   '--data-urlencode: From=+19896013789',
 		   '-u AC51784290c7fcecfe437a217b6d796bbc:ea88a2518e7dd83022ac1bd19e9052bf'
-
 		));
 
 		$resp = curl_exec($curl);
