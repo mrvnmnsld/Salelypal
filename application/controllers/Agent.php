@@ -101,6 +101,7 @@ class agent extends MY_Controller {
 
 	public function saveNewAgent(){
 		$insertRecord = array(
+			'email' => $_GET['email'],
 			'fullname' => $_GET['fullname'],
 			'country' => $_GET['country'],
 			'password' => MD5($_GET['password']),
@@ -121,9 +122,10 @@ class agent extends MY_Controller {
 
 	public function updateAgentInfo(){
 		$insertRecord = array(
+			'email' => $_GET['email'],
 			'fullname' => $_GET['fullname'],
 			'country' => $_GET['country'],
-			'username' => $_GET['username']
+			'username' => $_GET['username'],
 		);
 
 		if ($_GET['password']!="") {
@@ -141,6 +143,7 @@ class agent extends MY_Controller {
 		}else{
 			echo json_encode(false);
 		}
+		// echo json_encode($insertRecord);
 	}
 
 	public function deleteAgent(){
@@ -194,12 +197,23 @@ class agent extends MY_Controller {
 		echo json_encode($res);
 	}
 
-	
+	public function checkAgentEmailAvailability(){
+   		$email = $_GET['email'];
 
-	
+   		$test = $this->_getRecordsData(
+   			$selectfields = array("*"), 
+	   		$tables = array('agent_profile_tbl'), 
+	   		$fieldName = array('email'), $where = array($email), 
+	   		$join = null, $joinType = null, $sortBy = null, 
+	   		$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+   		);
 
-
-	
+   		if (count($test)==0) {
+   			echo true;
+   		}else{
+   			echo false;
+   		}
+	}
 
 }
 

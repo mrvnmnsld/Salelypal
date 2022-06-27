@@ -13,7 +13,9 @@
     <table id="tableContainer" class="table table-hover" style="width:100%">
     	<thead>
             <tr>
+            		<th></th>
                 <th>ID #</th>
+                <th>Email</th>
                 <th>Fullname</th>
                 <th>Username</th>
                 <th>Country</th>
@@ -47,17 +49,6 @@
 	  	});
 	});
 
-	$('#tableContainer').on('click', 'tbody tr', function () {
-		selectedData = $('#tableContainer').DataTable().row($(this)).data();
-		
-  	bootbox.alert({
-  	    message: ajaxLoadPage('quickLoadPage',{'pagename':'agent/updateAgent'}),
-  	    size: 'large',
-  	    centerVertical: true,
-  	    closeButton: false
-  	});
-	});
-
 	function loadDatatable(url,data){
 		var callDataViaURLVal = ajaxShortLink(url,data);
 		$('#tableContainer').DataTable().destroy();
@@ -65,14 +56,38 @@
 		$('#tableContainer').DataTable({
 			data: callDataViaURLVal,
 			columns: [
+				{ data:''},
 				{ data:'id'},
+				{ data:'email'},
 				{ data:'fullname'},
 				{ data:'username'},
 				{ data:'country'},
 				{ data:'createdBy'},
       ],
+      "columnDefs": [
+				{
+					"targets": 0,
+					"width": "1%",
+	            	"data": null,
+		            "defaultContent": '<button type="button" class="close edit" onClick="viewThis(this)"><i class="fa fa-eye" aria-hidden="true"></i></button>',
+	                "orderable": false,
+	                "sortable": false
+		        }
+			],
       order: [[0, 'desc']],
       autoWidth: false,
+		});
+	}
+
+	function viewThis(element){
+		var table = $('#tableContainer').DataTable();
+		selectedData = table.row($(element).closest('tr')).data();
+
+		bootbox.alert({
+		    message: ajaxLoadPage('quickLoadPage',{'pagename':'agent/agentView'}),
+		    size: 'large',
+		    centerVertical: true,
+		    closeButton: false
 		});
 	}
 </script>

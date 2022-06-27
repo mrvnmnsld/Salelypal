@@ -288,6 +288,7 @@ $route['saveBirthday'] = 'main/saveBirthday';
 	$route['agent/getAgentInvites'] = 'agent/getAgentInvites';
 
 	$route['agent/checkUserNameAvailability'] = 'agent/checkUserNameAvailability';
+	$route['agent/checkAgentEmailAvailability'] = 'agent/checkAgentEmailAvailability';
 
 	$route['agent/getMonthlyInvites'] = 'agent/getMonthlyInvites';
 	$route['agent/getYearlyInvites'] = 'agent/getYearlyInvites';

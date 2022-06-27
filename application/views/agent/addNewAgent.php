@@ -44,6 +44,12 @@
 <div id="main_modal_container">
 
 	<form id="add_agent_form">
+		<label class="fw-bold">Email</label>
+		<div class="input-group row m-1">
+			<i class="input-group-text fa fa-envelope-o icon-size" aria-hidden="true"></i>
+		  <input type="text" class="form-control" id="email" name="email" placeholder="Email">
+		</div>
+
 		<label class="fw-bold mt-3">Fullname</label>
 		<div class="input-group row m-1 mb-3">
 			<i class="input-group-text fa fa-user-o icon-size" aria-hidden="true"></i>
@@ -105,6 +111,10 @@
 	    return (ajaxShortLinkNoParse("agent/checkUserNameAvailability",{'username':value}))
 	}, "Username already taken");
 
+	jQuery.validator.addMethod("checkAgentEmailAvailability", function(value, element) {
+	    return (ajaxShortLinkNoParse("agent/checkAgentEmailAvailability",{'email':value}))
+	}, "Email already taken");
+
 	jQuery.validator.addMethod("confirmPassword", function(value, element) {
 		if (value == $("#password").val()) return true
 	}, "Password Doesn't Match");
@@ -112,6 +122,11 @@
 	$("#add_agent_form").validate({
 	  	errorClass: 'is-invalid',
 	  	rules: {
+	  		email: {
+				required:true,
+				minlength:8,
+				checkAgentEmailAvailability: true,
+			},
 			fullname: {
 				required:true,
 				minlength:2,

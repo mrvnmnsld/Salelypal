@@ -43,16 +43,22 @@
 
 	<form id="update_agent_form">
 
+		<label class="fw-bold">Email</label>
+		<div class="input-group row m-1 mb-3">
+			<i class="input-group-text fa fa-envelope-o icon-size" aria-hidden="true"></i>
+		  <input type="text" class="form-control" id="email_input" name="email" placeholder="Email">
+		</div>
+
 		<label class="fw-bold">Fullname</label>
 		<div class="input-group row m-1 mb-3">
 			<i class="input-group-text fa fa-user-o icon-size" aria-hidden="true"></i>
-		  <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Fullname">
+		  <input type="text" class="form-control" id="fullname_input" name="fullname" placeholder="Fullname">
 		</div>
 
 		<label class="fw-bold">Country</label>			
 		<div class="input-group row m-1 mb-3">
 			<i class="input-group-text fa fa-globe icon-size" aria-hidden="true"></i>
-			<select id="country" name="country" class="form-select">
+			<select id="country_input" name="country" class="form-select">
 			  <option value="" selected>Choose Country</option>
 			  <option value="PHL">Philippines</option>
 			  <option value="IND">India</option>
@@ -63,7 +69,7 @@
 		<label class="fw-bold">Username</label>	
 		<div class="input-group row m-1 mb-3">
 			<i class="input-group-text fa fa-user-circle icon-size" aria-hidden="true"></i>
-		  <input type="text" class="form-control" id="username" name="username" placeholder="Username">
+		  <input type="text" class="form-control" id="username_input" name="username" placeholder="Username">
 		</div>
 
 		<label class="fw-bold">Password</label>
@@ -81,7 +87,7 @@
 		<hr>
 
 		<div class="d-flex flex-row-reverse">
-			<button type="button" class="btn btn-danger mr-1" id="back_btn">Back</button>
+			<button type="button" class="btn btn-danger mr-1" id="close_btn">Close</button>
 			<button type="button" class="btn btn-warning mr-1" id="delete_btn">Delete</button>
 			<button type="button" class="btn btn-success mr-1" id="save_btn">Save Changes</button>
 		</div>
@@ -91,9 +97,10 @@
 
 <script type="text/javascript">
 
-	$("#fullname").val(selectedData.fullname);
-	$("#country").val(selectedData.country);
-	$("#username").val(selectedData.username);
+	$("#email_input").val(selectedData.email);
+	$("#fullname_input").val(selectedData.fullname);
+	$("#country_input").val(selectedData.country);
+	$("#username_input").val(selectedData.username);
 	// $("#password").val(selectedData.password);
 
 	// console.log(selectedData.email)
@@ -141,7 +148,7 @@
       
 	});
 
-	$("#back_btn").on("click", function(){
+	$("#close_btn").on("click", function(){
 		bootbox.hideAll();
 	});
 
@@ -155,6 +162,10 @@
 		}
 	}, "Username already taken");
 
+	jQuery.validator.addMethod("checkAgentEmailAvailability", function(value, element) {
+	    return (ajaxShortLinkNoParse("agent/checkAgentEmailAvailability",{'email':value}))
+	}, "Email already taken");
+
 	jQuery.validator.addMethod("confirmPassword", function(value, element) {
 		if (value == $("#password").val()) return true
 	}, "Password Doesn't Match");
@@ -162,6 +173,11 @@
 	$("#update_agent_form").validate({
 	  	errorClass: 'is-invalid',
 	  	rules: {
+	  		email: {
+	  			required:true,
+				minlength:8,
+				checkAgentEmailAvailability: true,
+	  		},
 			fullname: {
 				required:true,
 				minlength:2,
