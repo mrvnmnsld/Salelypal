@@ -60,15 +60,65 @@ class agent extends MY_Controller {
 	}
 
 	public function getAgentInvites(){
+		$referalCounter = array();
+		$referalCounter2ndDegree = array();
+		$referalCounter3rdDegree = array();
+
+		$totalCount1st = 0;
+		$totalCount2nd = 0;
+		$totalCount3rd = 0;
+		$totalIndirectPainInUSD = 0;
+		$totalDirectPainInUSD = 0;
+
 		$res = $this->_getRecordsData(
-			$selectfields = array("*"), 
-			$tables = array('user_tbl'), 
+			$selectfields = array("user_tbl.*,CONCAT(COALESCE(ROUND(SUM(buy_crypto_history_tbl.amountPaid), 2) ,0) ,' USD') AS totalPaidInUSD,COALESCE(ROUND(SUM(buy_crypto_history_tbl.amountPaid), 2) ,0) AS totalPaidInUSDNoFormat"), 
+			$tables = array('user_tbl','buy_crypto_history_tbl'), 
 			$fieldName = array('referType','referred_user_id'), $where = array('agent',$_GET['agentID']), 
-			$join = null, $joinType = null, $sortBy = null, 
-			$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+			$join = array('user_tbl.userID = buy_crypto_history_tbl.userID'), $joinType = array("LEFT"), $sortBy = null, 
+			$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = array("user_tbl.userID")
 		);
 
-		echo json_encode($res);
+		foreach ($res as $key => $value) {
+			$userInvite = $this->_getRecordsData(
+				$selectfields = array("user_tbl.*,COALESCE(ROUND(SUM(buy_crypto_history_tbl.amountPaid), 2) ,0) AS totalPaidInUSD"), 
+				$tables = array('user_tbl','buy_crypto_history_tbl'), 
+				$fieldName = array('referType','referred_user_id'), $where = array('user',$value->userID), 
+				$join = array('user_tbl.userID = buy_crypto_history_tbl.userID'), $joinType = array("LEFT"), $sortBy = null, 
+				$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = array("user_tbl.userID")
+			);
+
+			$totalDirectPainInUSD = $totalDirectPainInUSD+floatval($value->totalPaidInUSDNoFormat);
+			$totalIndirectPainInUSD = $totalIndirectPainInUSD+floatval($value->totalPaidInUSD);
+			$totalCount1st = $totalCount1st+count($userInvite);
+
+			foreach ($userInvite as $userInviteKey => $userInviteValue) {
+				$userInvite2ndDegree = $this->_getRecordsData(
+					$selectfields = array("user_tbl.*,COALESCE(ROUND(SUM(buy_crypto_history_tbl.amountPaid), 2) ,0) AS totalPaidInUSD"), 
+					$tables = array('user_tbl','buy_crypto_history_tbl'), 
+					$fieldName = array('referType','referred_user_id'), $where = array('user',$userInviteValue->userID), 
+					$join = array('user_tbl.userID = buy_crypto_history_tbl.userID'), $joinType = array("LEFT"), $sortBy = null, 
+					$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = array("user_tbl.userID")
+				);
+
+				$totalIndirectPainInUSD = $totalIndirectPainInUSD+floatval($userInviteValue->totalPaidInUSD);
+				$totalCount2nd = $totalCount2nd+count($userInvite2ndDegree);
+
+				foreach ($userInvite2ndDegree as $userInvite2ndDegreeKey => $userInvite2ndDegreeValue) {
+					$userInvite3rdDegree = $this->_getRecordsData(
+						$selectfields = array("user_tbl.*,COALESCE(ROUND(SUM(buy_crypto_history_tbl.amountPaid), 2) ,0) AS totalPaidInUSD"), 
+						$tables = array('user_tbl','buy_crypto_history_tbl'),  
+						$fieldName = array('referType','referred_user_id'), $where = array('user',$userInvite2ndDegreeValue->userID), 
+						$join = array('user_tbl.userID = buy_crypto_history_tbl.userID'), $joinType = array("LEFT"), $sortBy = null, 
+						$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = array("user_tbl.userID")
+					);
+
+					$totalIndirectPainInUSD = $totalIndirectPainInUSD+floatval($userInvite2ndDegreeValue->totalPaidInUSD);
+					$totalCount3rd = $totalCount3rd+count($userInvite3rdDegree);
+				}
+			}
+		}
+
+		echo json_encode(array($res,$totalCount1st,$totalCount2nd,$totalCount3rd,$totalIndirectPainInUSD,$totalDirectPainInUSD));
 	}
 
 	public function getAgent(){
@@ -194,12 +244,17 @@ class agent extends MY_Controller {
 		echo json_encode($res);
 	}
 
-	
+	public function getIndirectReferal1stDegree(){
+		$res = $this->_getRecordsData(
+			$selectfields = array("*"), 
+			$tables = array('user_tbl'), 
+			$fieldName = array('referType','referred_user_id'), $where = array('agent',$_GET['agentID']), 
+			$join = null, $joinType = null, $sortBy = null, 
+			$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = array('timestamp LIKE "%'.$_GET['year'].'-%"'), $groupBy = null 
+		);
 
-	
-
-
-	
+		echo json_encode($res);
+	}	
 
 }
 

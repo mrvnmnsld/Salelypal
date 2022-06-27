@@ -232,7 +232,7 @@
 
     <form id="loginForm">
 
-      <div id="errorReporter" class="text-center h5 animate__animated animate__shakeX" style="display:none"></div>
+      <div id="errorReporter" class="text-center h5 animate__animated animate__shakeX text-danger" style="display:none"></div>
 
       <div class="input-field"> 
         <i class="fa fa-user"></i>

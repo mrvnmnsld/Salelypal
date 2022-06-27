@@ -32,6 +32,7 @@ $route['main/sendOTPViaEmail'] = 'main/sendOTPViaEmail';
 $route['referalLink'] = 'main/referalLink';
 $route['checkMobileAvailability'] = 'main/checkMobileNumberAvailability';
 $route['main/sendSMS'] = 'main/sendSMS';
+$route['main/getUserInvites'] = 'main/getUserInvites';
 
 $route['saveBirthday'] = 'main/saveBirthday';
 
@@ -291,6 +292,11 @@ $route['saveBirthday'] = 'main/saveBirthday';
 
 	$route['agent/getMonthlyInvites'] = 'agent/getMonthlyInvites';
 	$route['agent/getYearlyInvites'] = 'agent/getYearlyInvites';
+
+	$route['agent/getIndirectReferal1stDegree'] = 'agent/getIndirectReferal1stDegree';
+
+
+	
 //agent management
 
 //users management

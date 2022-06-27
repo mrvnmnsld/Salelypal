@@ -25,8 +25,7 @@
 
 		var getUrl = window.location;
 		var baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
-		var urlLink = baseUrl+"/referalLink?type=agent&code="+currentUser.username;
-
+		var urlLink = baseUrl+"/referalLink?referType=agent&idNum="+currentUser.id+"&referBy="+currentUser.username;
 
 		$("#copyLink").val(urlLink)
 	});

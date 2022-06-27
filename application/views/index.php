@@ -627,8 +627,13 @@
 		var referalCode = getUrlParameter('idNum')
 		var face_upload=0;
 		var id_upload=0;
-		var currentUserID=31;
+		var currentUserID;
 		var isOnline = navigator.onLine;
+		const container = document.querySelector(".container"),
+		  pwShowHide = document.querySelectorAll(".showHidePw"),
+		  pwFields = document.querySelectorAll(".password"),
+		  signUp = document.querySelector(".signup-link"),
+		  login = document.querySelector(".login-link");
 
 		if (isOnline==true) {
 	  	if (getLocalStorageByKey('currentUser')!=null) {
@@ -641,19 +646,23 @@
 	  	}else{
 	  		$('.container').toggle();
 	  		if (referalCode != false) {
-	  			signUp.click();
+	  			setTimeout(function(){
+	  				signUp.click();
 
-	  			$.toast({
-	  		    text: 'Successfully Added Referal',
-	  		    showHideTransition: 'slide',
-	  		    allowToastClose: false,
-	  		    hideAfter: 5000,
-	  		    stack: 5,
-	  		    position: 'bottom-center',
-	  		    textAlign: 'center',
-	  		    loader: true,
-	  		    loaderBg: '#9EC600'
-	  			})
+  					$.toast({
+  				    text: 'Successfully Added Referal Code',
+  				    showHideTransition: 'slide',
+  				    allowToastClose: false,
+  				    hideAfter: 5000,
+  				    stack: 5,
+  				    position: 'bottom-center',
+  				    textAlign: 'center',
+  				    loader: true,
+  				    loaderBg: '#9EC600'
+  					})
+	  			},100)
+
+	  			
 	  		}
 	  		console.log("no active user")
 	  	}
@@ -686,11 +695,7 @@
       liveSearch: true
 	  });
 
-		const container = document.querySelector(".container"),
-		  pwShowHide = document.querySelectorAll(".showHidePw"),
-		  pwFields = document.querySelectorAll(".password"),
-		  signUp = document.querySelector(".signup-link"),
-		  login = document.querySelector(".login-link");
+		
 
 	  pwShowHide.forEach(eyeIcon => {
 	  	eyeIcon.addEventListener("click",()=>{

@@ -1045,8 +1045,22 @@ class main extends MY_Controller {
 		}else{
    			echo true;
 		}
-
 	}
+
+	public function getUserInvites(){
+		$res = $this->_getRecordsData(
+			$selectfields = array("*"), 
+			$tables = array('user_tbl'), 
+			$fieldName = array('referType','referred_user_id'), $where = array('user',$_GET['userID']), 
+			$join = null, $joinType = null, $sortBy = null, 
+			$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+		);
+
+		echo json_encode($res);
+	}
+
+
+	
 
 	
 
