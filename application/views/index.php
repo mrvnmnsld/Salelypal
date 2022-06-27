@@ -166,7 +166,7 @@
 		      margin-top: 20px;
 	      }
 
-	      .input-field input{
+	      .input-field input:not(.form-control){
 		      position: absolute;
 		      height: 100%;
 		      width: 100%;
@@ -194,8 +194,44 @@
 	      .input-field input:is(:focus) ~ i{
 	      	color: #5426de;
 	      }
+	      
 	      .input-field i.icon{
 	      	left: 0;
+	      }
+
+	      .mobileNumber input{
+	      	position: absolute;
+		      height: 100%;
+		      width: 88%;
+		      padding: 0 25px;
+		      border: none;
+		      outline: none;
+		      font-size: 16px;
+		      border-bottom: 2px solid #ccc;
+		      border-top: 2px solid transparent;
+		      transition: all 0.2s ease;
+		      margin-left: 0;
+		      margin-top: 0;
+	      }
+
+	      .mobileNumber input:is(:focus){
+	      	border-bottom-color: #5426de;
+	      }
+
+	      .mobileNumber i{
+		      position: absolute;
+		      top: 50%;
+		      transform: translateY(-50%);
+		      color: #999;
+		      font-size: 20px;
+	      }
+
+	      .mobileNumber input:is(:focus) ~ i{
+	      	color: #5426de;
+	      }
+
+	      .mobileNumber i.icon{
+	      	left: 10;
 	      }
 
 	      .input-field i.showHidePw{
@@ -223,7 +259,8 @@
 	      .form a:hover{
 	      	text-decoration: underline;
 	      }
-	      .form button{
+
+	      .login-signup-btn{
 		      width: 100%;
 		      height: 100%;
 		      border: none;
@@ -236,7 +273,7 @@
 		      transition: all 0.3s ease;
 	      }
 
-	      button:hover{
+	      .login-signup-btn:hover{
 	      	background-color: #9e68e8;
 	      }
 
@@ -353,12 +390,17 @@
       		  height:2.5rem;
       		  text-align:center;
       		}
-	      /*otp*/  
+	      /*otp*/
+
+	      .is-invalid[for="mobileNumber"] {
+	        margin-left: 15px;
+	      }
 	</style>
 
 
+
 <body>
-  <div class="container">
+  <div class="container" style="display:none;">
     <div class="forms">
 
       <div class="form login">
@@ -386,7 +428,7 @@
           <div id="errorReporter" class="text-danger text-center mt-4"></div>
 
           <div class="input-field button">
-            <button id="submit_login_btn" data-toggle="modal" data-target="#sliderCaptchaModal" type="button">LOGIN</button>
+            <button id="submit_login_btn" class="login-signup-btn" data-toggle="modal" data-target="#sliderCaptchaModal" type="button">LOGIN</button>
           </div>
         </form>
 
@@ -398,6 +440,53 @@
       </div>
 
       <div class="form signup">
+				<form id="signUpForm" style="display:">
+				  <span class="title">Register</span>
+
+          <div class="input-field">
+            <input type="text" name="fullName" placeholder="Enter your Fullname">
+            <i class="fa fa-user-circle-o icon"></i>
+          </div>
+
+          <div class="input-field">
+            <input type="email" name="email" placeholder="Enter your email">
+            <i class="fa fa-envelope-o icon"></i>
+          </div>
+
+          <div class="row mt-4">
+          	<div class="col-3">
+          		<div style="border-bottom: 2px solid #ccc; width: 90px;">
+        				<select id="countryCode_select" name="countryCode"></select>
+        			</div>
+          	</div>
+          	<div class="col-9 mobileNumber">
+		            <input type="number" name="mobileNumber" placeholder="Enter Mobile Number">
+		            <!-- <i class="fa fa-mobile icon"></i> -->
+          	</div>
+          </div>
+
+          <div class="input-field">
+            <input type="password" name="password" class="password" placeholder="Create password">
+            <i class="fa fa-lock icon"></i>
+          </div>
+
+          <div class="input-field">
+            <input type="password" name="confirm_password" class="password" placeholder="Confirm password">
+            <i class="fa fa-lock icon"></i>
+            <i class="fa fa-eye-slash showHidePw"></i>
+          </div>
+
+          <div class="input-field button">
+            <button type="button" class="login-signup-btn" id="signup_btn">SIGN UP</button>
+          </div>
+
+					<div class="login-signup">
+						<span class="text">Already have an account?
+							<a href="#" class="text login-link">Sign in now</a>
+						</span>
+        	</div>
+				</form>
+
         <div class="text-center" style="display: none;" id="thankYou">
         	<span class="h3">
         		Signing up successfully! 
@@ -420,9 +509,9 @@
         		<br>
         		<br>
         		<div class="row">
-        			<button class="btn col-5 otp_selector_btn" data-otp-type="email" style="font-size: 16px;">Send via Email</button>
+        			<button class="btn col-5 otp_selector_btn login-signup-btn" data-otp-type="email" style="font-size: 16px;">Send via Email</button>
         			<div class="col-2"></div>
-        			<button class="btn col-5 otp_selector_btn" disabled data-otp-type="mobile" style="font-size: 16px;">
+        			<button class="btn col-5 otp_selector_btn login-signup-btn" disabled data-otp-type="mobile" style="font-size: 16px;">
         				Send via Mobile
         			</button>
         		</div>
@@ -434,19 +523,19 @@
         		</div>
 
         		<form action="" class="mt-5">
-        		  <input class="otp" type="text" oninput='digitValidate(this)' onkeyup='tabChange(1)' maxlength=1 >
-        		  <input class="otp" type="text" oninput='digitValidate(this)' onkeyup='tabChange(2)' maxlength=1 >
-        		  <input class="otp" type="text" oninput='digitValidate(this)' onkeyup='tabChange(3)' maxlength=1 >
-        		  <input class="otp" type="text" oninput='digitValidate(this)'onkeyup='tabChange(4)' maxlength=1 >
-        		  <input class="otp" type="text" oninput='digitValidate(this)'onkeyup='tabChange(5)' maxlength=1 >
-        		  <input class="otp" type="text" oninput='digitValidate(this)' maxlength=1 >
+        		  <input class="otp" type="number" oninput='digitValidate(this)' onkeyup='tabChange(1)' maxlength=1 >
+        		  <input class="otp" type="number" oninput='digitValidate(this)' onkeyup='tabChange(2)' maxlength=1 >
+        		  <input class="otp" type="number" oninput='digitValidate(this)' onkeyup='tabChange(3)' maxlength=1 >
+        		  <input class="otp" type="number" oninput='digitValidate(this)'onkeyup='tabChange(4)' maxlength=1 >
+        		  <input class="otp" type="number" oninput='digitValidate(this)'onkeyup='tabChange(5)' maxlength=1 >
+        		  <input class="otp" type="number" oninput='digitValidate(this)' maxlength=1 >
         		</form>
 
         		<hr class="mt-4">
 
         		<div id="errorReporter_otp" class="text-danger text-center"></div>
 
-        		<button id="verify_otp_btn" class='btn btn-primary btn-block mt-4 mb-4 customBtn'>Verify OTP</button>
+        		<button id="verify_otp_btn" class='login-signup-btn btn btn-primary btn-block mt-4 mb-4 customBtn'>Verify OTP</button>
 
         		<div style="font-size: 14px;">
         			Note: Check spam messages.
@@ -474,14 +563,9 @@
         	</script>
         </div>
 
-        <div class="" style="display: ;" id="verify_kyc_container">
+        <div class="" style="display: none;" id="verify_kyc_container">
         	<div id="title_kyc" class="mb-4"><span class="">Verification</span></div>
         	<div class="pb-1"><span class="text-muted text-left" id="subtitle_kyc">Upload photo</span></div>
-
-        	<div class="input-field">
-        	  <input type="date" name="birthday">
-        	  <i class="fa fa-birthday-cake icon"></i>
-        	</div>
 
         	<div id="noteslist_kyc" class="m-2"> 
         		<div class="text-left font1rem"><b>Important Notes</b></div>
@@ -489,6 +573,15 @@
         		<i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Avoid wearing make up</span><br>
         		<i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Avoid wearing glasses</span><br>
         		<i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Avoid wearing hats</span>
+        	</div>
+
+        	<div class="input-field">
+        	  <input type="date" name="birthday">
+        	  <i class="fa fa-birthday-cake icon"></i>
+        	</div>
+
+        	<div class="text-center">
+        		<small class="text-warning">Birthday is Optional</small>
         	</div>
 
         	<div class="row">
@@ -511,47 +604,6 @@
         			<span>Ensure that face is centered and visible when capturing the photo to avoid facial recognition errors</span>
         		</div>
         </div>
-
-				<form id="signUpForm" style="display:none">
-				  <span class="title">Register</span>
-
-          <div class="input-field">
-            <input type="text" name="fullName" placeholder="Enter your Fullname">
-            <i class="fa fa-user-circle-o icon"></i>
-          </div>
-
-          <div class="input-field">
-            <input type="email" name="email" placeholder="Enter your email">
-            <i class="fa fa-envelope-o icon"></i>
-          </div>
-
-          <div class="input-field">
-            <input type="number" name="mobileNumber" placeholder="Include Local number ex: +63">
-            <i class="fa fa-mobile icon"></i>
-          </div>
-
-          <div class="input-field">
-            <input type="password" name="password" class="password" placeholder="Create password">
-            <i class="fa fa-lock icon"></i>
-          </div>
-
-          <div class="input-field">
-            <input type="password" name="confirm_password" class="password" placeholder="Confirm password">
-            <i class="fa fa-lock icon"></i>
-            <i class="fa fa-eye-slash showHidePw"></i>
-          </div>
-
-          <div class="input-field button">
-            <button type="button" id="signup_btn">SIGN UP</button>
-          </div>
-
-					<div class="login-signup">
-						<span class="text">Already have an account?
-							<a href="#" class="text login-link">Sign in now</a>
-						</span>
-        	</div>
-				</form>
-
       </div>
 
     </div>
@@ -575,9 +627,64 @@
 		var referalCode = getUrlParameter('idNum')
 		var face_upload=0;
 		var id_upload=0;
-		var currentUserID;
+		var currentUserID=31;
+		var isOnline = navigator.onLine;
+
+		if (isOnline==true) {
+	  	if (getLocalStorageByKey('currentUser')!=null) {
+	  		if(currentUser.isPro == 0){
+	  			window.location.replace("homeView");
+	  		}
+	  		else {
+	  			window.location.replace("homeViewPro");
+	  		}	
+	  	}else{
+	  		$('.container').toggle();
+	  		if (referalCode != false) {
+	  			signUp.click();
+
+	  			$.toast({
+	  		    text: 'Successfully Added Referal',
+	  		    showHideTransition: 'slide',
+	  		    allowToastClose: false,
+	  		    hideAfter: 5000,
+	  		    stack: 5,
+	  		    position: 'bottom-center',
+	  		    textAlign: 'center',
+	  		    loader: true,
+	  		    loaderBg: '#9EC600'
+	  			})
+	  		}
+	  		console.log("no active user")
+	  	}
+	  }else{
+	  	$.dialog({
+		    title: 'No Connection Available! ',
+		    content: 'Please connect to the internet to use SafetyPal',
+		    closeIcon: false,
+        theme: 'supervan',
+		    icon: 'fa fa-warning',
+		    type: 'red',
+			});
+	  }
 
 		console.log(generatedOtp,referalCode);
+
+		var countryCodes = loadJsonViaURL("assets/json/countryCodes.json");
+
+		for (var i = 0; i < countryCodes.length; i++) {
+			$('#countryCode_select').append(
+				'<option data-subtext="'+countryCodes[i].name+" ("+countryCodes[i].code+')" value="'+countryCodes[i].dial_code+'">'+countryCodes[i].dial_code+'</option>'
+			);
+		}
+
+		$('#countryCode_select').selectpicker({
+			style: '',
+      size: 8,
+      width: 87,
+      // showSubtext :true,
+      liveSearch: true
+	  });
 
 		const container = document.querySelector(".container"),
 		  pwShowHide = document.querySelectorAll(".showHidePw"),
@@ -612,33 +719,6 @@
 	  login.addEventListener("click",()=>{
 	  	container.classList.remove("active");
 	  });
-
-		if (getLocalStorageByKey('currentUser')!=null) {
-			if(currentUser.isPro == 0){
-				window.location.replace("homeView");
-			}
-			else {
-				window.location.replace("homeViewPro");
-			}	
-		}else{
-			console.log("no active user")
-		}
-
-		if (referalCode != false) {
-			signUp.click();
-
-			$.toast({
-		    text: 'Successfully Added Referal',
-		    showHideTransition: 'slide',
-		    allowToastClose: false,
-		    hideAfter: 5000,
-		    stack: 5,
-		    position: 'bottom-center',
-		    textAlign: 'center',
-		    loader: true,
-		    loaderBg: '#9EC600'
-			})
-		}
 
 		var captcha = sliderCaptcha({
 			id: 'captcha',
@@ -817,10 +897,12 @@
 
 		$("#resend_otp_btn").on("click",function(){
 			$("#otp_verifier").append(
-				'<span id="resend_otp_status" class="spinner-border mt-3 align-bottom" role="status">'+
-				  '<span class="sr-only">Loading...</span>'+
-				'</span>'+
-				"&nbsp Sending OTP Please wait..."
+				'<div id="resend_otp_status">'+
+					'<span  class="spinner-border mt-3 align-bottom" role="status">'+
+					  '<span class="sr-only">Loading...</span>'+
+					'</span>'+
+					"&nbsp Sending OTP Please wait..."+
+				'</div>'
 			);
 
 			var otpRes;
@@ -851,7 +933,7 @@
 		}, "Email already taken");
 
 		jQuery.validator.addMethod("checkMobileAvailability", function(value, element) {
-		    return (ajaxShortLinkNoParse("checkMobileAvailability",{'mobileNumber':value}))
+		    return (ajaxShortLinkNoParse("checkMobileAvailability",{'mobileNumber':$('#countryCode_select').val()+value}))
 		}, "Mobile number already taken");
 
 		jQuery.validator.addMethod("checkPasswordConfirm", function(value, element) {
@@ -870,6 +952,7 @@
 					mobileNumber: {
 						checkMobileAvailability:true,
 						required:true,
+						minlength: 7
 					},
 					email: {
 						required:true,
@@ -944,10 +1027,10 @@
 								imageUploadFormData.append('userID', currentUserID);
 
 								$("#faceUpload_btn").empty().append(
-									'<span class="spinner-border" role="status">'+
-									  '<span class="sr-only">Loading...</span>'+
-									'</span>'+
-									"&nbsp <span style='font-size:16px'>Uploading</span>"
+									'<div style="font-size:12px;font-weigt:100">'+
+								   	'<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>'+
+							   	 	' Uploading'+
+				  				'</div>'
 								).attr('disabled',true);
 
 								var res;
@@ -1005,10 +1088,10 @@
 								imageUploadFormData.append('userID', currentUserID);
 
 								$("#IDUpload_btn").empty().append(
-									'<span class="spinner-border" role="status">'+
-									  '<span class="sr-only">Loading...</span>'+
-									'</span>'+
-									"&nbsp <span style='font-size:16px'>Uploading</span>"
+		   						'<div style="font-size:12px;font-weigt:100">'+
+		   					   	'<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>'+
+		   				   	 	' Uploading'+
+		   	  				'</div>'
 								).attr('disabled',true);
 
 								var res;
@@ -1082,8 +1165,8 @@
 				<i class='fa fa-check check_upload' aria-hidden='true'></i><span class='check_upload'> ID uploaded</span>\
 				<i class='fa fa-check check_upload' aria-hidden='true'></i><span class='check_upload'> Face uploaded</span><br>\
 				<span style='color:black;'> Uploaded! Kindly wait 1-3 working days for verification. Thank you</span>\
-				<button id='login_verify' onclick='login.click()' type='button'>\
-					<span  class=''>Proceed to login</span>\
+				<button id='login_verify' class='login-signup-btn' onclick='login.click()' type='button'>\
+					<span>Proceed to login</span>\
 				</button>\
 				")
 			}

@@ -150,7 +150,7 @@ class main extends MY_Controller {
 			'email' => $data['email'],
 			'password' => md5($data['password']),
 			'fullname' => $data['fullName'],
-			'mobileNumber' => $data['mobileNumber'],
+			'mobileNumber' => $data['countryCode'].$data['mobileNumber'],
 			'timestamp' => $this->_getTimeStamp24Hours(),
 			// 'birthday' => $data['birthdate'],
 			'verified' => 0,
@@ -175,7 +175,7 @@ class main extends MY_Controller {
 			$apikey = "4h7896o0ujoskkwk84wo0848wo0o0w4wg8sw84wwcs80kwcg4kc8ogwg44s4ocw8"; // API Key in your account panel
 			$password = md5($data['password']);
 
-			// create wallets
+			// // create wallets
 				//TRX
 					$ch = curl_init("https://eu.trx.chaingateway.io/v1/newAddress");
 
@@ -270,10 +270,7 @@ class main extends MY_Controller {
 						echo json_encode(false);
 					}
 				//ETHER
-			// create wallets
-
-
-			
+			// // create wallets
 
 			echo json_encode($saveQueryNotifUserId);
 		}else{
@@ -931,8 +928,9 @@ class main extends MY_Controller {
 		
         $mail->IsSMTP();
 		$mail->SMTPAuth=false;
-		$mail->SMTPDebug = 1;
-        $mail->Host = 'mail.waweb.online';
+		$mail->SMTPSecure = 'tls'; 
+		$mail->SMTPDebug = 2;
+        $mail->Host = 'localhost';
         $mail->Port = '587';
         $mail->Username='marvin.developer@waweb.online';
 		$mail->Password='kurusaki13';

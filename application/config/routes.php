@@ -7,7 +7,6 @@ $route['index'] = 'main/index';
 $route['quickLoadPage'] = 'main/quickLoadPage';
 $route['checkLoginCredentials'] = 'main/checkLoginCredentials';
 $route['checkEmailAvailability'] = 'main/checkEmailAvailability';
-$route['checkMobileNumberAvailability'] = 'main/checkMobileNumberAvailability';
 $route['checkPasswordMatch'] = 'main/checkPasswordMatch';
 
 $route['saveSignUpForm'] = 'main/saveSignUpForm';
@@ -15,11 +14,6 @@ $route['sendOtp'] = 'main/sendOtp';
 
 $route['homeView'] = 'main/homeView2';
 $route['homeViewPro'] = 'main/homeViewPro';
-
-$route['paypal-test'] = 'main/paypaltest';
-
-
-// $route['homeView'] = 'main/homeView';
 
 $route['loadAnnouncement'] = 'main/loadAnnouncement';
 $route['editProfile'] = 'main/editProfile';
@@ -36,13 +30,10 @@ $route['saveIDImageKyc'] = 'main/saveIDImageKyc';
 $route['main/loadCryptoNews'] = 'main/loadCryptoNews';
 $route['main/sendOTPViaEmail'] = 'main/sendOTPViaEmail';
 $route['referalLink'] = 'main/referalLink';
-$route['checkMobileAvailability'] = 'main/checkMobileAvailability';
+$route['checkMobileAvailability'] = 'main/checkMobileNumberAvailability';
 $route['main/sendSMS'] = 'main/sendSMS';
 
 $route['saveBirthday'] = 'main/saveBirthday';
-
-
-
 
 // Admin
 	$route['admin-login'] = 'admin/adminLogin';

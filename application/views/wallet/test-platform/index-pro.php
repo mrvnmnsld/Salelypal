@@ -1089,7 +1089,7 @@
 
 			$('#logOut_btn').on('click',function(){
 				$.confirm({
-					dark:'dark',
+					theme:'dark',
 				    title: 'Testing Mode!',
 				    content: 'Loging out is disabled due to testing mode being active',
 				    type: 'red',

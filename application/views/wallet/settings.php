@@ -265,6 +265,7 @@
 
 	$('#logOut_btn').on('click',function(){
 		$.confirm({
+			theme:'dark',
 			icon: 'fa fa-sign-out',
 			title: 'Logging out?',
 			columnClass: 'col-md-6 col-md-offset-6',
