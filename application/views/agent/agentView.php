@@ -55,8 +55,23 @@
 	</div>
 
 	<div class="row mt-1">
-		<div class="col-md-3 pl-3"><b>Total Invited:</b></div>	
+		<div class="col-md-3 pl-3"><b>Direct Invited:</b></div>	
 		<div class="col-md" id="totalinvited"></div>	
+	</div>
+
+	<div class="row mt-1 mb-2">
+		<div class="col-md-3 pl-3"><b>Direct Paid:</b></div>	
+		<div class="col-md" id="total_direct_paid_container"></div>	
+	</div>
+
+	<div class="row mt-1 mb-2">
+		<div class="col-md-3 pl-3"><b>Indirect Invited:</b></div>	
+		<div class="col-md" id="indirect_invites"></div>	
+	</div>
+
+	<div class="row mt-1 mb-2">
+		<div class="col-md-3 pl-3"><b>Indirect Paid:</b></div>	
+		<div class="col-md" id="total_indirect_paid_container"></div>	
 	</div>
 
 	<div class="row mt-1">
@@ -68,6 +83,7 @@
 		<div class="col-md-3 pl-3"><b>Yearly Invited:</b></div>	
 		<div class="col-md" id="getYearlyInvites"></div>	
 	</div>
+
 
 	<hr>
 
@@ -105,7 +121,12 @@
 	$("#fullname").append(selectedData["fullname"]);
 	$("#country").append(selectedData["country"]);
 	$("#username").append(selectedData["username"]);
-	$("#totalinvited").append(getTotalInvites.length);
+	$("#totalinvited").append(getTotalInvites[0].length);
+	$("#indirect_invites").text(parseInt(getTotalInvites[1])+parseInt(getTotalInvites[2])+parseInt(getTotalInvites[3]))
+
+	$('#total_indirect_paid_container').text(getTotalInvites[4]+" USD");
+	$('#total_direct_paid_container').text(getTotalInvites[5]+" USD");
+
 	$("#getMonthlyInvites").append(getMonthlyInvites.length);
 	$("#getYearlyInvites").append(getYearlyInvites.length);
 

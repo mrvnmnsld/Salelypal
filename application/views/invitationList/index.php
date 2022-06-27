@@ -156,11 +156,6 @@
 		  ]
 		});
 
-		// var getIndirectReferal1stDegree = ajaxShortLink("agent/getIndirectReferal1stDegree",{
-		// 	'agentID':currentUser.id,
-		// 	'year':year
-		// });
-
 		var table = $('#tableContainer').DataTable();
 		$('#total_invited_container').text(table.rows().count());
 		$('#1st_invited_container').text(callDataViaURLVal[1]);
