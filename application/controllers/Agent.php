@@ -70,12 +70,23 @@ class agent extends MY_Controller {
 		$totalIndirectPainInUSD = 0;
 		$totalDirectPainInUSD = 0;
 
+		// $res = $this->_getRecordsData(
+		// 	$selectfields = array("user_tbl.*,CONCAT(COALESCE(ROUND(SUM(test_platform_buy_crypto_history_tbl.amountPaid), 2) ,0) ,' USD') AS totalPaidInUSD,COALESCE(ROUND(SUM(test_platform_buy_crypto_history_tbl.amountPaid), 2) ,0) AS totalPaidInUSDNoFormat"), 
+		// 	$tables = array('user_tbl','test_platform_buy_crypto_history_tbl'), 
+			
+		// 	$join = array('user_tbl.userID = test_platform_buy_crypto_history_tbl.userID'), $joinType = array("LEFT"), $sortBy = null, 
+		// 	$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = array("user_tbl.userID")
+		// );
+
 		$res = $this->_getRecordsData(
-			$selectfields = array("user_tbl.*,CONCAT(COALESCE(ROUND(SUM(test_platform_buy_crypto_history_tbl.amountPaid), 2) ,0) ,' USD') AS totalPaidInUSD,COALESCE(ROUND(SUM(test_platform_buy_crypto_history_tbl.amountPaid), 2) ,0) AS totalPaidInUSDNoFormat"), 
-			$tables = array('user_tbl','test_platform_buy_crypto_history_tbl'), 
-			$fieldName = array('referType','referred_user_id'), $where = array('agent',$_GET['agentID']), 
-			$join = array('user_tbl.userID = test_platform_buy_crypto_history_tbl.userID'), $joinType = array("LEFT"), $sortBy = null, 
-			$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = array("user_tbl.userID")
+			$selectfields = array("user_tbl.*,trc20_wallet.address AS trc20_wallet,trc20_wallet.privateKey AS trc20_privateKey,bsc_wallet.address AS bsc_wallet,bsc_wallet.password AS bsc_password,erc20_wallet.address AS erc20_wallet,erc20_wallet.password AS erc20_password,,CONCAT(COALESCE(ROUND(SUM(test_platform_buy_crypto_history_tbl.amountPaid), 2) ,0) ,' USD') AS totalPaidInUSD,COALESCE(ROUND(SUM(test_platform_buy_crypto_history_tbl.amountPaid), 2) ,0) AS totalPaidInUSDNoFormat"), 
+	   		$tables = array('user_tbl','trc20_wallet','bsc_wallet','erc20_wallet','test_platform_buy_crypto_history_tbl'),
+	   		$fieldName = array('referType','referred_user_id'), $where = array('agent',$_GET['agentID']), 
+	   		$join = array('user_tbl.userID = trc20_wallet.userOwner','user_tbl.userID = bsc_wallet.userOwner','user_tbl.userID = erc20_wallet.userOwner','user_tbl.userID = test_platform_buy_crypto_history_tbl.userID'), $joinType = array('inner','left','left',"LEFT"),
+	   		$sortBy = null, $sortOrder = null, 
+	   		$limit = null, 
+	   		$fieldNameLike = null, $like = null,
+	   		$whereSpecial = null, $groupBy = array("user_tbl.userID")
 		);
 
 		foreach ($res as $key => $value) {

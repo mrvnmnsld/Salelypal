@@ -250,8 +250,6 @@
 		</div>                
 </div>
 
-
-
 <script type="text/javascript">
 	$("#userId_container").text(selectedData["userID"]);
 	$("#email_container").text(selectedData["email"]);

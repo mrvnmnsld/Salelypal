@@ -1368,9 +1368,9 @@
 
 			if (priceAlertTokensId.includes(tokenInfo.id)) {
 				if (changePercentage>=5) {
-					pushNewNotif("Price Alert!",tokenInfo.tokenName.toUpperCase()+" have increased "+ changePercentage.toFixed(2)+'%',15);
+					pushNewNotif("Price Alert!",tokenInfo.tokenName.toUpperCase()+" have increased "+ changePercentage.toFixed(2)+'%',currentUser.userID);
 				}else if(changePercentage<0&&changePercentage<=-5){
-					pushNewNotif("Price Alert!",tokenInfo.tokenName.toUpperCase()+" have decreased "+ changePercentage.toFixed(2)+'%',15);
+					pushNewNotif("Price Alert!",tokenInfo.tokenName.toUpperCase()+" have decreased "+ changePercentage.toFixed(2)+'%',currentUser.userID);
 				}
 			}
 

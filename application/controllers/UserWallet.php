@@ -1571,7 +1571,6 @@ class userWallet extends MY_Controller {
 				'isAlert'=>$isAlert,
 			));
 		}
-		
 	}
 
 	public function setTokenPriceAlerted(){
@@ -1971,11 +1970,36 @@ class userWallet extends MY_Controller {
 		array_push($container,round($average,2));
 
 		echo json_encode($container);
-
-		
-		
-
 	}
+
+	public function getAllContractPositionsViaUserID(){
+		$future = $this->_getRecordsData(
+			$selectfields = array("*"), 
+	   		$tables = array('future_positions'),
+	   		$fieldName = array('userID'), $where = array($_GET['userID']), 
+	   		$join = null, $joinType = null,
+	   		$sortBy = null, $sortOrder = null, 
+	   		$limit = null, 
+	   		$fieldNameLike = null, $like = null,
+	   		$whereSpecial = null, 
+	   		$groupBy = null 
+		);
+
+		$risefall = $this->_getRecordsData(
+			$selectfields = array("*"), 
+	   		$tables = array('future_risefall_positions'),
+	   		$fieldName = array('userID'), $where = array($_GET['userID']), 
+	   		$join = null, $joinType = null,
+	   		$sortBy = null, $sortOrder = null, 
+	   		$limit = null, 
+	   		$fieldNameLike = null, $like = null,
+	   		$whereSpecial = null, 
+	   		$groupBy = null 
+		);
+
+		echo json_encode(array($future,$risefall));
+	}
+
 
 
 }

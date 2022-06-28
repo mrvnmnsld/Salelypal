@@ -4,6 +4,8 @@
 	      	<h1>REFERAL LINK</h1>
   			<sub class="fw-bold">Link this url to post and get rewards for every users invited</sub>
 	    </div>
+
+	    <hr>
 		
 		<div class="input-group mb-5 w-100">
 		  <input type="text" id="copyLink" class="form-control" placeholder="Link" aria-label="Link" aria-describedby="button-addon2" disabled>

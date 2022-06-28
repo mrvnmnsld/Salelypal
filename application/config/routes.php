@@ -211,9 +211,12 @@ $route['saveBirthday'] = 'main/saveBirthday';
 
 		$route['userWallet/future/checkIfSet'] = 'userWallet/futureCheckIfSet';
 		$route['userWallet/future/getPositionDetails'] = 'userWallet/futureGetPositionDetails';
-
-
 	//riseFall
+
+		$route['userWallet/getAllContractPositionsViaUserID'] = 'userWallet/getAllContractPositionsViaUserID';
+
+
+		
 
 	//mining
 		//Regular
@@ -342,6 +345,7 @@ $route['testing'] = 'main/testing';
 		$route['test-platform/buyCrypto'] = 'testPlatform/buyCrypto';
 
 		$route['test-platform/newBalance'] = 'testPlatform/newBalance';
+		$route['test-platform/getUserBuyHistory'] = 'testPlatform/getUserBuyHistory';
 	// testing platform
 
 	// tests

@@ -144,7 +144,7 @@
 
 <script>
     $(document).ready(function() {
-        loadDatatable('test-platform/getUserPurchase',{'userID':15});
+        loadDatatable('test-platform/getUserPurchase',{'userID':currentUser.userID});
 
         $('#token_select').selectpicker({
             style: 'border',
@@ -248,7 +248,7 @@
         	    	    btnClass: 'btn-success',
         	    	    action: function(){
         	    			var res = ajaxShortLink("userWallet/updateTokenManagementV2",{
-	        	        		'userID':15,
+	        	        		'userID':currentUser.userID,
 	        	        		'tokenID':tokenInfoWithdraw[4]
 	        	        	});
 
@@ -361,7 +361,7 @@
                                 $("#reference_id_container").text(details['id']);
 
                                 var buyCryptoResponse = postShortLink("test-platform/buyCrypto",{
-                                    'userID':15,
+                                    'userID':currentUser.userID,
                                     'referenceID':details['id'],
                                     'amountPaid':amountTotalToBePaid,
                                     'token':token_select[0],
@@ -371,9 +371,9 @@
                                     'tokenArray':token_select,
                                 });
 
-                                pushNewNotif("Bought Crypto(TESTING)","Tokens successfully bought, post an appeal if tokens haven't been received",15)
+                                pushNewNotif("Bought Crypto(TESTING)","Tokens successfully bought, post an appeal if tokens haven't been received",currentUser.userID)
 
-                                loadDatatable('test-platform/getUserPurchase',{'userID':15});
+                                loadDatatable('test-platform/getUserPurchase',{'userID':currentUser.userID});
 
                                 console.log(buyCryptoResponse);
                             }

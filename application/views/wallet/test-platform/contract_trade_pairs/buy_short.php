@@ -350,7 +350,7 @@
                 $("#resolved_price_container").text(checkSet[0].resolvedPrice);
                 $("#token_pair_value_container").text(checkSet[0].resolvedPrice);
                
-                pushNewNotif("Position Won!(TESTING)","You have won "+newIncome+" USDT",15); 
+                pushNewNotif("Position Won!(TESTING)","You have won "+newIncome+" USDT",currentUser.userID); 
 
                 // sendTransaction Wallet
                 // test-platform
@@ -377,7 +377,7 @@
                 $("#2_trade_pair_container").text(checkSet[0].tradePair);
                 $("#resolved_price_container").text(checkSet[0].resolvedPrice);
 
-                pushNewNotif("Position Won!(TESTING)","You have lost "+amount+" USDT",15);                           
+                pushNewNotif("Position Won!(TESTING)","You have lost "+amount+" USDT",currentUser.userID);                           
             }
 
             reloadPositions()
@@ -424,7 +424,7 @@
                     })    
                 // test-platform 
 
-                pushNewNotif("Position Won!(TESTING)","You have won "+newIncome+" USDT",15)
+                pushNewNotif("Position Won!(TESTING)","You have won "+newIncome+" USDT",currentUser.userID)
             }else{
                 status = "LOSE";
                 statusClass = 'text-danger';

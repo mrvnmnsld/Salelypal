@@ -331,7 +331,6 @@ class testPlatform extends MY_Controller {
 		  	$where = array($_GET['userID'])
 		);
 
-
 		echo json_encode($deleteQuery);
 	}
 	//update user
@@ -361,8 +360,6 @@ class testPlatform extends MY_Controller {
    		$email = $_GET['email'];
    		$currentEmail = $_GET['currentEmail'];
 
-   		// echo json_encode(array($email,$currentEmail,$email == $currentEmail));
-
    		if ($email == $currentEmail){
    			echo true;
    		}else{
@@ -380,8 +377,30 @@ class testPlatform extends MY_Controller {
 	   			echo false;
 	   		}
    		}
-
-   		
 	}
+
+	public function getUserBuyHistory(){
+		
+		$res = $this->_getRecordsData(
+			$selectfields = array("*"), 
+	   		$tables = array('test_platform_buy_crypto_history_tbl'),
+	   		$fieldName = array('userID'), 
+	   		$where = array($_GET['userID']), 
+	   		$join = null, 
+	   		$joinType = null,
+	   		$sortBy = null, 
+	   		$sortOrder = null, 
+	   		$limit = null, 
+	   		$fieldNameLike = null, 
+	   		$like = null,
+	   		$whereSpecial = null, 
+	   		$groupBy = null 
+		);
+
+		echo json_encode($res);
+	}
+
+
+	
 	
 }

@@ -1,4 +1,4 @@
-<div id="innerContainer" style="display:none" class="card">.
+<div id="innerContainer" style="display:none" class="card">
   <div class="card-body">
 		<div class="pagetitle">
       	<h1>Invitation List</h1>
@@ -130,6 +130,22 @@
 		$(".dt-button").each(function( index ) {
 		  $(this).removeClass();
 		  $(this).addClass('btn btn-primary');
+		});
+
+		$('#tableContainer').on('click', 'tbody tr', function () {
+		  selectedData = $('#tableContainer').DataTable().row($(this)).data();
+		  console.log(selectedData)
+
+			// $("#loading").toggle();
+			// $("#footer").toggle();
+
+	  	bootbox.alert({
+	  	    message: ajaxLoadPage('quickLoadPage',{'pagename':'invitationList/viewUserInfo'}),
+	  	    size: 'large',
+	  	    centerVertical: true,
+	  	    closeButton: false
+	  	});
+		  
 		});
 	});
 

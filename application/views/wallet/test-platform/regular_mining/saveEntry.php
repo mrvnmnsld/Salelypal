@@ -134,7 +134,7 @@
 						}
 
 						// test-platform
-							pushNewNotif("Mining Entry(TESTING)","Successfully added "+amount+" to mining balance at "+token_name_combo+" for "+selectedData.cycleSelected+" Day(s)",15)
+							pushNewNotif("Mining Entry(TESTING)","Successfully added "+amount+" to mining balance at "+token_name_combo+" for "+selectedData.cycleSelected+" Day(s)",currentUser.userID)
 
 							var newBalanceRes = ajaxShortLink("test-platform/newBalance",{
 								'tokenName':selectedData.tokenName.toLowerCase(),
@@ -226,7 +226,7 @@
 					}
 
 					// test-platform
-						pushNewNotif("Mining Entry(TESTING)","Successfully added "+amount+" to mining balance at "+token_name_combo+" for "+selectedData.cycleSelected+" Day(s)",15)
+						pushNewNotif("Mining Entry(TESTING)","Successfully added "+amount+" to mining balance at "+token_name_combo+" for "+selectedData.cycleSelected+" Day(s)",currentUser.userID)
 
 						var newBalanceRes = ajaxShortLink("test-platform/newBalance",{
 							'tokenName':selectedData.tokenName.toLowerCase(),

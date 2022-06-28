@@ -238,7 +238,7 @@
     				'tokenName':tokenName
     			});
 
-				pushNewNotif("Claimed Mined Tokens (TESTING)","Successfully claimed "+claimIncomeValue+' '+tokenName.toUpperCase(),15)
+				pushNewNotif("Claimed Mined Tokens (TESTING)","Successfully claimed "+claimIncomeValue+' '+tokenName.toUpperCase(),currentUser.userID)
 
 				$.when(closeNav()).then(function() {
 					$('#topNavBar').toggle();
