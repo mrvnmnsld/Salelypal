@@ -96,24 +96,7 @@
 
 			<div class="row">
 
-				<div class="col-md-6">
-					<div class="card info-card revenue-card">
-						<div class="card-body">
-							<h5 class="card-title">Total Indirect Invites <span>| Over All</span></h5>
-							<div class="d-flex align-items-center">
-							  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-							    <i class="fa fa-user-o"></i>
-							  </div>
-							  <div class="ps-3">
-							    <h6 id="total_indirect_invites_container">0</h6>
-							    <span class="text-success small pt-1 fw-bold">Person</span>
-							  </div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-6">
+				<div class="col-md-3">
 					<div class="card info-card sales-card">
 					<div class="card-body">
 						<h5 class="card-title">Total Indirect Paid in USD <span>| Over All</span></h5>
@@ -127,6 +110,23 @@
 						  </div>
 						</div>
 					</div>
+					</div>
+				</div>
+
+				<div class="col-md-3">
+					<div class="card info-card revenue-card">
+						<div class="card-body">
+							<h5 class="card-title">Total Indirect Invites <span>| Over All</span></h5>
+							<div class="d-flex align-items-center">
+							  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+							    <i class="fa fa-user-o"></i>
+							  </div>
+							  <div class="ps-3">
+							    <h6 id="total_indirect_invites_container">0</h6>
+							    <span class="text-success small pt-1 fw-bold">Person</span>
+							  </div>
+							</div>
+						</div>
 					</div>
 				</div>
 
