@@ -25,7 +25,7 @@
 				<div class="col-md-3">
 					<div class="card info-card sales-card">
 						<div class="card-body">
-							<h5 class="card-title">Total Paid in USD <span>| Today</span></h5>
+							<h5 class="card-title">Total Paid in USD <span>| Incentives</span></h5>
 							<div class="d-flex align-items-center">
 							  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
 							    <i class="fa fa-usd"></i>
