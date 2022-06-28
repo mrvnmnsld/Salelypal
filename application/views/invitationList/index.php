@@ -3,30 +3,6 @@
   *{
     font-family: 'Poppins', sans-serif;
   }
-	.first-container{
-		background: #293038;
-		color: white;
-		padding: 15px;
-		border-radius: 20px 20px 0px 0px;
-		/*box-shadow: 10px 15px 25px rgba(0, 0, 0, .8);*/
-		text-align: center;
-	}
-	.second-container{
-		background-color: #F2F4F4;
-		border-radius:0px 0px 20px 20px;
-		/*box-shadow: 10px 15px 25px rgba(0, 0, 0, .8);*/
-		border: 1px solid;
-	}
-	.container{
-		border-bottom: none !important;
-		border-left: none !important;
-		padding: 15px;
-	}
-	.container1{
-		border-bottom: none !important;
-		border-right: none !important;
-		padding: 15px;
-	}
 </style>
 
 
@@ -40,52 +16,123 @@
     <hr>
     <br>
 
-    <div class="first-container row">
-	    <div class="col h2">Direct Invites</div>
-			<div class="col h2">Indirect Invites</div>
-    </div>
+		<section class="section dashboard">
 
-    <div class="second-container row text-center">
+			<div class="col h2">Direct Invites</div> 
 
-	    <div class="container col-sm-6" style="border: 1px solid">
-	      <div class="row">
-					<div class="col-sm-3 fw-bold text-left">Total Paid in USD:</div>
-					<div id="total_direct_paid_container" class="col-sm text-left">0</div>
+			<div class="row">
+			
+				<div class="col-md-3">
+					<div class="card info-card sales-card">
+						<div class="card-body">
+							<h5 class="card-title">Total Paid in USD <span>| Today</span></h5>
+							<div class="d-flex align-items-center">
+							  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+							    <i class="fa fa-usd"></i>
+							  </div>
+							  <div class="ps-3">
+							    <h6 id="total_direct_paid_container">0</h6>
+							    <span class="text-primary small pt-1 fw-bold">Money</span>
+							  </div>
+							</div>
+						</div>
+					</div>
 				</div>
 
-				<div class="row">
-					<div class="col-sm-3 fw-bold text-left">Total invites:</div>
-					<div id="total_invited_container" class="col-sm text-left">0</div>
+				<div class="col-md-3">
+					<div class="card info-card revenue-card">
+					<div class="card-body">
+						<h5 class="card-title">Total Invites <span>| Over All</span></h5>
+						<div class="d-flex align-items-center">
+						  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+						    <i class="fa fa-user-o"></i>
+						  </div>
+						  <div class="ps-3">
+						    <h6 id="total_invited_container">0</h6>
+						    <span class="text-success small pt-1 fw-bold">Person</span>
+						  </div>
+						</div>
+					</div>
+					</div>
 				</div>
 
-				<div class="row">
-					<div class="col-sm-3 fw-bold text-left">Yearly invites:</div>
-					<div id="yearly_invited_container" class="col-sm text-left">0</div>
+				<div class="col-md-3">
+					<div class="card info-card customers-card">
+						<div class="card-body">
+							<h5 class="card-title">Total Invites <span>| Monthly</span></h5>
+							<div class="d-flex align-items-center">
+							  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+							    <i class="bi bi-people"></i>
+							  </div>
+							  <div class="ps-3">
+							    <h6 id="monthly_invited_container">0</h6>
+							    <span class="text-danger small pt-1 fw-bold">Person</span>
+							  </div>
+							</div>
+						</div>
+					</div>
 				</div>
 
-				<div class="row">
-					<div class="col-sm-3 fw-bold text-left">Monthly invites:</div>
-					<div id="monthly_invited_container" class="col-sm text-left">0</div>
+				<div class="col-md-3">
+					<div class="card info-card customers-card">
+						<div class="card-body">
+							<h5 class="card-title">Total Invites <span>| Yearly</span></h5>
+							<div class="d-flex align-items-center">
+							  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+							    <i class="bi bi-people"></i>
+							  </div>
+							  <div class="ps-3">
+							    <h6 id="yearly_invited_container">0</h6>
+							    <span class="text-danger small pt-1 fw-bold">Person</span>
+							  </div>
+							</div>
+						</div>
+					</div>
 				</div>
-	    </div>
-
-	    <div class="container1 col-sm-6" style="border: 1px solid">
-
-				<div class="row">
-						<div class="col-sm-4 fw-bold text-left">Total Indirect Invites:</div>
-						<div id="total_indirect_invites_container" class="col-sm-8 text-left">0</div>
-				</div>
-
-				<div class="row">
-					<div class="col-sm-4 fw-bold text-left">Total Indirect Paid in USD:</div>
-					<div id="total_indirect_paid_container" class="col-sm-8 text-left">0</div>
-		    </div>
 
 			</div>
 
-		</div>
+			<div class="col h2">Indirect Invites</div>
 
-    <br>
+			<div class="row">
+
+				<div class="col-md-6">
+					<div class="card info-card revenue-card">
+						<div class="card-body">
+							<h5 class="card-title">Total Indirect Invites <span>| Over All</span></h5>
+							<div class="d-flex align-items-center">
+							  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+							    <i class="fa fa-user-o"></i>
+							  </div>
+							  <div class="ps-3">
+							    <h6 id="total_indirect_invites_container">0</h6>
+							    <span class="text-success small pt-1 fw-bold">Person</span>
+							  </div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-6">
+					<div class="card info-card sales-card">
+					<div class="card-body">
+						<h5 class="card-title">Total Indirect Paid in USD <span>| Over All</span></h5>
+						<div class="d-flex align-items-center">
+						  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+						    <i class="fa fa-usd"></i>
+						  </div>
+						  <div class="ps-3">
+						    <h6 id="total_indirect_paid_container">0</h6>
+						    <span class="text-primary small pt-1 fw-bold">Money</span>
+						  </div>
+						</div>
+					</div>
+					</div>
+				</div>
+
+			</div>
+
+		</section>
 
     <hr>
 
