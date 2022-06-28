@@ -1,4 +1,36 @@
-<div id="innerContainer" style="display:none" class="card">.
+<style>
+	@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap%27');
+  *{
+    font-family: 'Poppins', sans-serif;
+  }
+	.first-container{
+		background: #293038;
+		color: white;
+		padding: 15px;
+		border-radius: 20px 20px 0px 0px;
+		/*box-shadow: 10px 15px 25px rgba(0, 0, 0, .8);*/
+		text-align: center;
+	}
+	.second-container{
+		background-color: #F2F4F4;
+		border-radius:0px 0px 20px 20px;
+		/*box-shadow: 10px 15px 25px rgba(0, 0, 0, .8);*/
+		border: 1px solid;
+	}
+	.container{
+		border-bottom: none !important;
+		border-left: none !important;
+		padding: 15px;
+	}
+	.container1{
+		border-bottom: none !important;
+		border-right: none !important;
+		padding: 15px;
+	}
+</style>
+
+
+<div id="innerContainer" style="display:none" class="card"><br>
   <div class="card-body">
 		<div class="pagetitle">
       	<h1>Invitation List</h1>
@@ -6,79 +38,54 @@
     </div>
 
     <hr>
-
-    <div class="h2 text-center">Direct Invites</div>
-
-    <div class="row">
-    	<div class="text-center h5 col-3">
-    		Total Paid in USD:
-    		<div class="text-success">
-    			<span id="total_direct_paid_container">0</span>
-    		</div>
-    	</div>
-
-    	<div class="text-center h5 col-3">
-    		Total invites:
-    		<div class="text-success">
-    			<span id="total_invited_container">0</span>
-    		</div>
-    	</div>
-
-    	<div class="text-center h5 col-3">
-    		Yearly invites:
-    		<div class="text-success">
-    			<span id="yearly_invited_container">0</span>
-    		</div>
-    	</div>
-
-    	<div class="text-center h5 col-3">
-    		Monthly invites:
-    		<div class="text-success">
-    			<span id="monthly_invited_container">0</span>
-    		</div>
-    	</div>
-    </div>
-
     <br>
 
-    <div class="h2 text-center">Indirect Invites</div>
+    <div class="first-container row">
+	    <div class="col h2">Direct Invites</div>
+			<div class="col h2">Indirect Invites</div>
+    </div>
 
-    <div class="row">
-  	  <div class="text-center h5 col-6">
-  	  	Total Indirect Invites:
-  			<span id="total_indirect_invites_container" class="text-success">0</span>
-  	  </div>
+    <div class="second-container row text-center">
 
-	    <div class="text-center h5 col-6">
-	    	Total Indirect Paid in USD:
-	  		<span id="total_indirect_paid_container" class="text-success">0</span>
+	    <div class="container col-sm-6" style="border: 1px solid">
+	      <div class="row">
+					<div class="col-sm-3 fw-bold text-left">Total Paid in USD:</div>
+					<div id="total_direct_paid_container" class="col-sm text-left">0</div>
+				</div>
+
+				<div class="row">
+					<div class="col-sm-3 fw-bold text-left">Total invites:</div>
+					<div id="total_invited_container" class="col-sm text-left">0</div>
+				</div>
+
+				<div class="row">
+					<div class="col-sm-3 fw-bold text-left">Yearly invites:</div>
+					<div id="yearly_invited_container" class="col-sm text-left">0</div>
+				</div>
+
+				<div class="row">
+					<div class="col-sm-3 fw-bold text-left">Monthly invites:</div>
+					<div id="monthly_invited_container" class="col-sm text-left">0</div>
+				</div>
 	    </div>
-    </div>
+
+	    <div class="container1 col-sm-6" style="border: 1px solid">
+
+				<div class="row">
+						<div class="col-sm-4 fw-bold text-left">Total Indirect Invites:</div>
+						<div id="total_indirect_invites_container" class="col-sm-8 text-left">0</div>
+				</div>
+
+				<div class="row">
+					<div class="col-sm-4 fw-bold text-left">Total Indirect Paid in USD:</div>
+					<div id="total_indirect_paid_container" class="col-sm-8 text-left">0</div>
+		    </div>
+
+			</div>
+
+		</div>
 
     <br>
-
-    <div class="row">
-    	<div class="text-center h5 col-4">
-    		First Degree:
-    		<div class="text-success">
-    			<span id="1st_invited_container">0</span>
-    		</div>
-    	</div>
-
-    	<div class="text-center h5 col-4">
-    		Second Degree:
-    		<div class="text-success">
-    			<span id="2nd_invited_container">0</span>
-    		</div>
-    	</div>
-
-    	<div class="text-center h5 col-4">
-    		Third Degree:
-    		<div class="text-success">
-    			<span id="3rd_invited_container">0</span>
-    		</div>
-    	</div>
-    </div>
 
     <hr>
 
