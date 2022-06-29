@@ -1,3 +1,128 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap%27');
+  *{
+    font-family: Poppins, sans-serif;
+  }
+  body{
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(120deg,#2980b9, #8e44ad) !important;
+    overflow: hidden;
+  }
+  .center{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 400px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+      border: 2px solid #5426de;
+  }
+  .center h2{
+      color: #5426de;
+      text-align: center;
+      padding: 20px 0 20px 0;
+      border-bottom: 2px solid #5426de;
+      font-weight: bold;
+  }
+  .center form{
+      padding: 0 40px;
+      box-sizing: border-box;
+  }
+  form .txt_field{
+      position: relative;
+      border-bottom: 2px solid #adadad;
+      margin: 30px 0;
+  }
+  .txt_field input{
+      width: 100%;
+      padding: 0 5px;
+      height: 40px;
+      font-size: 16px;
+      border: none;
+      background: none;
+      outline: none;
+  }
+  .txt_field label{
+      position: absolute;
+      top: 50%;
+      left: 5px;
+      color: #adadad;
+      transform: translateY(-50%);
+      font-size: 16px;
+      pointer-events: none;
+      transition: .5s;
+      font-weight: bold;
+      letter-spacing: 2px;
+  }
+  .txt_field span::before{
+      content: '';
+      position: absolute;
+      top: 40px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: #5426de;
+      transition: .5s;
+  }
+  .txt_field input:focus ~ label,
+  .txt_field input:valid ~ label{
+      top: -5px;
+      color: #5426de;
+  }
+  .txt_field input:focus ~ span::before,
+  .txt_field input:valid ~ span::before{
+      width: 100%;
+  }
+  button{
+      width: 100%;
+      height: 50px;
+      border: 1px solid;
+      background: #5426de;
+      font-size: 18px;
+      color: #e9f4fb;
+      font-weight: 700;
+      cursor: pointer;
+      letter-spacing: 5px;
+      outline: none;
+  }
+  button:hover{
+      border-color: #5426de;
+      transition: .5s;
+  }
+  .switch_login{
+      margin: 30px 0;
+      text-align: center;
+      font-size: 16px;
+  }
+  .switch_login a{
+      color: #5426de;
+      text-decoration: none;
+  }
+  .switch_login a:hover{
+      color: #5426de;
+      text-decoration: underline;
+  }
+  .img_center{
+    margin-top: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 90px;
+    width: 320px;
+  }
+  p{
+    color: #5426de;
+    font-weight: bold;
+    margin-top: 50px !important;
+  }
+  .is-invalid{
+    color: red;
+  }
+</style>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,167 +158,28 @@
     />
 </head>
 
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap%27');
-  *{
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-  }
-  body{
-    margin: 0;
-    height: 100vh;
-    width: 100vw;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-weight: 300;
-    background: linear-gradient(to left bottom, #e9e9e9, #ebebeb, #d6d6d6, #b1b1b1, #505050);
-  }
-  #login_form_container{
-    text-align: center;
-    filter: blur(0.4px);
-    width: 430px;
-    height: 700px;
-    padding: 60px 35px 35px 35px;
-    border-radius: 10px;
-    /*background: radial-gradient(circle, #555555, #535353, #505050, #4e4e4e, #4c4c4c);*/
-    background: #293038;
-    box-shadow: 
-    /*bottom shadow*/
-    0px 20px 20px rgba(0,0,0,0.2),
-    0px 5px 10px rgba(0,0,0,0.2),
-    /*long bottom shadow*/
-    0px 70px 50px rgba(0,0,0,0.4),
-    /*right shadow*/
-    30px 50px 50px rgba(0,0,0,0.2),
-    /*left shadow*/
-    -30px 50px 50px rgba(0,0,0,0.2),
-    /*right inset*/
-    inset 20px 0px 60px rgba(0,0,0,0.1),
-    /*left inset*/
-    inset -20px 0px 60px rgba(0,0,0,0.1);
-  }
-  img{
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    margin: 0 auto;
-    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-  }
-  #title{
-    text-align: center;
-    font-size: 28px;
-    padding-top: 24px;
-    letter-spacing: 0.5px;
-    color: white;
-    font-weight: bold;
-  }
-  #sub-title{
-    text-align: center;
-    font-size: 15px;
-    padding-top: 7px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    font-weight: bold;
-    color: white;
-    margin-bottom: 50px;
-  }
-  .input-field{
-    width: 100%;
-    height: 50px;
-    background: rgb(232, 240, 254);
-    margin: 10px 0;
-    padding: 10px;
-    border: 2px solid #293038;
-    border-radius: 50px;
-    display: flex;
-    align-items: center;
-  }
-  .input-field i {
-    flex: 1;
-    text-align: center;
-    color: #666;
-    font-size: 23px;
-    margin-top: 3px;
-  }
-  .input-field input{
-    flex: 5;
-    background: none;
-    border: none;
-    outline: none;
-    width: 100%;
-    font-size: 18px;
-    font-weight: 600;
-    color: #444;
-  }
-  .credits{
-    margin-top: 50px;
-    text-align: center;
-    color: white;
-  }
-  button{
-    width: 100%;
-    height: 50px;
-    transition: all .5s ease;
-    color: #fff;
-    border: 2px solid white;
-    border-radius: 20px !important;
-    margin-top: 20px !important;
-    text-align: center;
-    font-weight: 600;
-    background-color : transparent;
-    padding: 10px;
-    outline: none;
-    letter-spacing: 5px;
-  }
-  button:hover {
-      color: #001F3F;
-      background-color: #fff;
-  }
-  .is-invalid{
-    color: red;
-  }
-</style>
-
-
 <body>
-  <div id="login_form_container">
-    <img src="assets/imgs/logo_safetypal_bottom_text.png" class="">
-    <div id="title">Admin Login</div>
-    <div id="sub-title">SafetyPal</div>
 
-    <form id="loginForm">
-
-      <div id="errorReporter" class="text-center h5 animate__animated animate__shakeX" style="display:none"></div>
-
-      <div class="input-field"> 
-        <i class="fa fa-user"></i>
-        <input type="text" name="username" placeholder="Username">     
-      </div>
-
-      <div class="input-field"> 
-        <i class="fa fa-lock"></i>
-        <input type="password" name="password" placeholder="Password">     
-      </div>
-
-      <button>LOGIN</button>
-
-    </form>
-
-    <br>
-
-    <div>
-      <a href="agent-login">Click here for Agent login</a>
-    </div>
-
-    
-
-    <div class="credits">
-      <p>© SafetyPal 2022</p>
-    </div>
-
+  <div class="center">
+      <img src="assets/imgs/logo_safetypal.png" class="img_center">
+      <h2>ADMIN LOGIN</h2>
+      <form id="loginForm" method="post">
+          <div class="txt_field">
+              <input type="text" name="username" required>
+              <span></span>
+              <label>Username</label>
+          </div>
+          <div class="txt_field">
+              <input type="password" name="password" required>
+              <span></span>
+              <label>Password</label>
+          </div>
+          <button>LOGIN</button>
+          <div class="switch_login">
+             <a href="agent-login">Click here for Agent login</a>
+             <p>© SafetyPal 2022</p>
+          </div>
+      </form>
   </div>
   
 

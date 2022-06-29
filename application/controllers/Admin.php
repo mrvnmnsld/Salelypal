@@ -969,5 +969,9 @@ class admin extends MY_Controller {
 		$this->load->view('faceRecog/index');
 	}
 
+	public function volumeControl(){
+		$this->load->view('volumeControl/selectPercentage');
+	}
+
 	
 }
