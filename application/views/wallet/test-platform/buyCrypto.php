@@ -51,7 +51,7 @@
         <br>
         <hr>
 
-        <button type="button" class="btn btn-block btn-danger" id="closeBtn_buyCrypto">Close</button>
+        <button type="button" class="btn btn-block btn-danger" id="closeBtn_buyCrypto">Buy Another</button>
     </div>
 
     <form id="mainForm" style="display: ;">
@@ -269,7 +269,8 @@
     });
 
     $("#closeBtn_buyCrypto").on('click',function(){
-        backButton();
+        $("#success_container").toggle();
+        $("#mainForm").toggle();
     });
 
     $("#mainForm").validate({

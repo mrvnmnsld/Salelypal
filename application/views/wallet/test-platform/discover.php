@@ -1,8 +1,8 @@
 <div class="card p-2 mt-2 rounded shadow-lg main-card-ui m-2 text-center">
-	<h4>Invite friend to earn USDT!</h4>
+	<h4>Invite friends to earn USDT!</h4>
 
 	<div class="input-group mb-3">
-	  <input type="text" class="form-control" id="referal_link_container" disabled>
+	  <input type="text" class="form-control" id="referal_link_container" readonly>
 
 	  <div class="input-group-append">
 	    <button class="btn btn-success" type="button" id="copyLink_btn">Copy</button>
@@ -27,14 +27,18 @@
 
 	<script type="text/javascript">
 		var getUrl = window.location;
-		var baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
-		var urlLink = baseUrl+"/referalLink?referType=agent&idNum="+currentUser.userID+"&referBy="+currentUser.email;
+		var baseUrl = getUrl.protocol + "//" + getUrl.host;
+		var urlLink = baseUrl+"/referalLink?referType=user&idNum="+currentUser.userID+"&referBy="+currentUser.email;
 
 		$("#referal_link_container").val(urlLink);
 
 		$("#copyLink_btn").on("click",function(){
-			var copiedLink = $("#referal_link_container").val()
-			navigator.clipboard.writeText(copiedLink);
+			// var copiedLink = $("#referal_link_container").val()
+			// navigator.clipboard.writeText(copiedLink);
+
+			$("#referal_link_container").select();
+			document.execCommand("copy");
+			document.getSelection().removeAllRanges();
 
 			$.toast({
 			    text: 'Successfully Copied the Link',

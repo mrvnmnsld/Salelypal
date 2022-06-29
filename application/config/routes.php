@@ -326,8 +326,8 @@ $route['getCountries'] = 'main/getCountries';
 $route['testing'] = 'main/testing';
 
 	// testing platform
-		$route['test-platform'] = 'testPlatform/indexNormal';
-		$route['test-platform-pro'] = 'testPlatform/indexPro'; 
+		// $route['test-platform'] = 'testPlatform/indexNormal';
+		// $route['test-platform-pro'] = 'testPlatform/indexPro';
 
 		$route['test-platform/getTronBalance'] = 'testPlatform/getTronBalance';
 		$route['test-platform/getBinancecoinBalance'] = 'testPlatform/getBinancecoinBalance';

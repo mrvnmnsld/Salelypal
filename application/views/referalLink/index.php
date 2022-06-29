@@ -8,7 +8,7 @@
 	    <hr>
 		
 		<div class="input-group mb-5 w-100">
-		  <input type="text" id="copyLink" class="form-control" placeholder="Link" aria-label="Link" aria-describedby="button-addon2" disabled>
+		  <input type="text" id="copyLink" class="form-control" placeholder="Link" aria-label="Link" aria-describedby="button-addon2" readonly>
 		  <button class="btn btn-outline-secondary" type="button" id="copyLink_btn">Copy Link</button>		  
 		</div>
 	</div>
@@ -26,7 +26,7 @@
 		});
 
 		var getUrl = window.location;
-		var baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+		var baseUrl = getUrl.protocol + "//" + getUrl.host;
 		var urlLink = baseUrl+"/referalLink?referType=agent&idNum="+currentUser.id+"&referBy="+currentUser.username;
 
 		$("#copyLink").val(urlLink)
@@ -34,8 +34,21 @@
 
 
 	$("#copyLink_btn").on("click",function(){
-		var copiedLink = $("#copyLink").val()
-		navigator.clipboard.writeText(copiedLink);
+		$("#copyLink").select();
+		document.execCommand("copy");
+		document.getSelection().removeAllRanges();
+
+		$.toast({
+		    heading: '<h6>Copied your Address</h6>',
+		    text: 'You can now paste your address',
+		    showHideTransition: 'slide',
+		    icon: 'success',
+		    position: 'bottom-center'
+		})
+	});
+
+	$("#copy_tron_btn").on('click',function(){
+		
 	});
 
 </script>

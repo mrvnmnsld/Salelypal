@@ -152,7 +152,7 @@
 	    <tr>
 	      <th scope="col">Token</th>
 	      <th scope="col">Amount</th>
-	      <th scope="col">Type</th>
+	      <th scope="col">USD Amount</th>
 	      <th scope="col">Date</th>
 	    </tr>
 	  </thead>

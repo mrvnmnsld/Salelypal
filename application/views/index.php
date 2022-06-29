@@ -627,6 +627,7 @@
 		var generatedOtp = generateOTP();
 		var currentUser = JSON.parse(getLocalStorageByKey('currentUser'));
 		var referalCode = getUrlParameter('idNum')
+		var referType = getUrlParameter('referType')
 		var face_upload=0;
 		var id_upload=0;
 		var currentUserID;
@@ -663,8 +664,6 @@
   				    loaderBg: '#9EC600'
   					})
 	  			},100)
-
-	  			
 	  		}
 	  		console.log("no active user")
 	  	}
@@ -698,7 +697,6 @@
 	  });
 
 		
-
 	  pwShowHide.forEach(eyeIcon => {
 	  	eyeIcon.addEventListener("click",()=>{
 	  		pwFields.forEach(pwField => {
@@ -721,6 +719,63 @@
 
 	  signUp.addEventListener("click",()=>{
 	  	container.classList.add("active");
+
+	  	$.confirm({
+	  	    title: 'Referal Link?',
+	  	    content: '' +
+	  	    '<form action="" class="formName">' +
+	  	    '<div class="form-group">' +
+	  	    '<label>Do you have a referal link?</label>' +
+	  	    '<input type="text" placeholder="Referal Link Paste it here!" class="referalLink form-control" required />' +
+	  	    '</div>' +
+	  	    '</form>',
+	  	    buttons: {
+	  	        formSubmit: {
+	  	            text: 'Submit',
+	  	            btnClass: 'btn-blue',
+	  	            action: function () {
+	  	                var referalLink = this.$content.find('.referalLink').val();
+	  	                if(!referalLink){
+	  	                    $.alert('provide a referal link');
+	  	                    return false;
+	  	                }
+	  	                var referalLink = referalLink.split("?");
+	  	                var referalLink = referalLink[1].split("&");
+
+	  	                referalCode=referalLink[1].split('=')[1]
+	  	                referType=referalLink[0].split('=')[1]
+
+	  	                console.log(referalCode,referType);
+
+  	                	$.toast({
+  	                    text: 'Successfully Added Referal Code',
+  	                    showHideTransition: 'slide',
+  	                    allowToastClose: false,
+  	                    hideAfter: 5000,
+  	                    stack: 5,
+  	                    position: 'bottom-center',
+  	                    textAlign: 'center',
+  	                    loader: true,
+  	                    loaderBg: '#9EC600'
+  	                	})
+
+
+	  	            }
+	  	        },
+	  	        cancel: function () {
+	  	            //close
+	  	        },
+	  	    },
+	  	    onContentReady: function () {
+	  	        // bind to events
+	  	        var jc = this;
+	  	        this.$content.find('form').on('submit', function (e) {
+	  	            // if the user submits the form by pressing enter in the field.
+	  	            e.preventDefault();
+	  	            jc.$$formSubmit.trigger('click'); // reference the button and click it
+	  	        });
+	  	    }
+	  	});
 	  });
 
 	  login.addEventListener("click",()=>{
@@ -988,7 +1043,7 @@
 
 		  			data.push({
 		  				'name':'referType',
-		  				'value':getUrlParameter("referType")
+		  				'value':referType
 		  			})
 		  		}
 

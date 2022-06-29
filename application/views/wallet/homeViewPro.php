@@ -258,7 +258,6 @@
 		  		margin-bottom: 50px;
 			}
 
-
 	</style>
 <!-- css -->
 <body style="min-height: 130%;" class="light-mode">

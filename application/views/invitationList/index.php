@@ -231,10 +231,9 @@
 		$('#1st_invited_container').text(callDataViaURLVal[1]);
 		$('#2nd_invited_container').text(callDataViaURLVal[2]);
 		$('#3rd_invited_container').text(callDataViaURLVal[3]);
-		$('#total_indirect_paid_container').text(callDataViaURLVal[4]+" USD");
+		$('#total_indirect_paid_container').text(parseFloat(callDataViaURLVal[4]).toFixed(2)+" USD");
 		$('#total_direct_paid_container').text(callDataViaURLVal[5]+" USD");
 		$("#total_indirect_invites_container").text(parseInt(callDataViaURLVal[1])+parseInt(callDataViaURLVal[2])+parseInt(callDataViaURLVal[3]))
-		
 		
 		// console.log( table.rows().count());
 	}
