@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="color-scheme" content="light" />
 	<title>SafetyPal - Client Login</title>
-	<link rel="icon" type="image/png" href="assets/imgs/ezpayex_logo.png"/>
+	<link rel="icon" type="image/png" href="assets/imgs/safetypal_logo.png"/>
 </head>
 
 <!-- libraries needed -->
