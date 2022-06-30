@@ -85,6 +85,9 @@ $route['saveBirthday'] = 'main/saveBirthday';
 	$route['admin/addFutureRisefallOption'] = 'admin/addFutureRisefallOption';
 	$route['admin/updateFutureRisefallOption'] = 'admin/updateFutureRisefallOption';
 	$route['admin/deleteFutureRisefallOption'] = 'admin/deleteFutureRisefallOption';
+
+	$route['volumeControl'] = 'admin/volumeControl';
+
 // Admin
 
 // MainWallet

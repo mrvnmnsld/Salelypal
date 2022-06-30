@@ -1,4 +1,4 @@
-<div id="innerContainer" style="display:none" class="card">
+<div id="innerContainer" style="display:none" class="card"><br>
 	<div class="p-4">
 		<div class="pagetitle">
 	      	<h1>REFERAL LINK</h1>
