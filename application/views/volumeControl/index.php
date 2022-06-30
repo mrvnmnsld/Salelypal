@@ -37,7 +37,7 @@
 	  text-indent: -9999px;
 	  width: 100px;
 	  height: 50px;
-	  background: grey;
+	  background: #5426de;
 	  display: block;
 	  border-radius: 100px;
 	  position: relative;
@@ -56,7 +56,7 @@
 	}
 
 	#switch:checked + label {
-	  background: #5426de;
+	  background: grey;
 	}
 
 	#switch:checked + label:after {
