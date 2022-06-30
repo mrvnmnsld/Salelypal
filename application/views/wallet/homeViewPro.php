@@ -6,6 +6,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="color-scheme" content="light" />
+
 	<title>[Testing Platform] Security Wallet</title>
 
 	<link rel="icon" type="image/png" href="assets/imgs/logo_main_no_text.png"/>
@@ -14,6 +16,7 @@
 <!-- libraries needed -->
 	<script src="assets/js/common.js"></script>
 	<script src="assets/js/admin/common.js"></script>
+	<!-- <script src="cordova.js"></script> -->
 
 	<link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
@@ -1004,32 +1007,32 @@
 			});
 
 			$('#assets_btn').on('click',function(){
-			console.log($('#assets_container').css("display"));
-			if ($('#assets_container').css("display") == 'none') {
-				addBreadCrumbs("assets_container")
+				console.log($('#assets_container').css("display"));
+				if ($('#assets_container').css("display") == 'none') {
+					addBreadCrumbs("assets_container")
 
-				$("html, body").animate({ scrollTop: 0 }, "slow");
-	  			$("#container").empty();
+					$("html, body").animate({ scrollTop: 0 }, "slow");
+		  			$("#container").empty();
 
-				$("#profile_btn").css('display',"block")
-				$("#top_back_btn").css('display',"none")
+					$("#profile_btn").css('display',"block")
+					$("#top_back_btn").css('display',"none")
 
-		  		$("#container").fadeOut(animtionSpeed, function() {
-				  	// $("#loadSpinner").fadeIn(animtionSpeed,function(){
-			  			// $("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/buyCrypto'}));
+			  		$("#container").fadeOut(animtionSpeed, function() {
+					  	// $("#loadSpinner").fadeIn(animtionSpeed,function(){
+				  			// $("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/buyCrypto'}));
 
-			  			// setTimeout(function(){
-			  				// $("#loadSpinner").fadeOut(animtionSpeed,function(){
-								$('#assets_container').fadeIn(animtionSpeed);
-								// $('#topNavBar').toggle();
-			  					// $('#bottomNavBar').toggle();
-			  					$("#container").fadeIn(animtionSpeed);
-			  				// });
-			  			// }, 1000);
-				  		
-			    	// });
-			  	});
-			}
+				  			// setTimeout(function(){
+				  				// $("#loadSpinner").fadeOut(animtionSpeed,function(){
+									$('#assets_container').fadeIn(animtionSpeed);
+									// $('#topNavBar').toggle();
+				  					// $('#bottomNavBar').toggle();
+				  					$("#container").fadeIn(animtionSpeed);
+				  				// });
+				  			// }, 1000);
+					  		
+				    	// });
+				  	});
+				}
 			});
 
 			$('#buyCrypto_btn, #buy_btn_option').on('click',function(){

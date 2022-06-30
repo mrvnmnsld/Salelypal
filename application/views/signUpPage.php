@@ -198,6 +198,7 @@
 
     $('#faceUpload').change(function(){
 		$.confirm({
+			theme: "dark",,
 		    title: 'KYC - Face upload',
 		    columnClass: 'col-md-6 col-md-offset-6',
 		    content: 'Are you sure you want to upload image?',
@@ -226,6 +227,7 @@
 
 	$('#IDUpload').change(function(){
 		$.confirm({
+			theme: "dark",
 		    title: 'KYC - ID upload',
 		    columnClass: 'col-md-6 col-md-offset-6',
 		    content: 'Are you sure you want to upload image?',

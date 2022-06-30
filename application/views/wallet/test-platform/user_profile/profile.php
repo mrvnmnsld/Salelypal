@@ -68,7 +68,7 @@
 </div>
 
 <script>
-    var profiledetails = ajaxShortLink('userWallet/getProfileDetails',{'userID':15});
+    var profiledetails = ajaxShortLink('userWallet/getProfileDetails',{'userID':currentUser.userID});
     var userID = profiledetails[0].userID;
     var fullName = profiledetails[0].fullname;
     var email = profiledetails[0].email;
