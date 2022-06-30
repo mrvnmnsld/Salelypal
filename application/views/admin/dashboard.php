@@ -14,7 +14,7 @@ if (!isset($_SESSION["currentUser"])) {
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <link rel="icon" type="image/png" href="assets/imgs/logo_safetypal_bottom_text.png"/>
+  <link rel="icon" type="image/png" href="assets/imgs/safetypal_logo.png"/>
   <title>SafetyPal Dashboard</title>
   <meta content="" name="description">
   <meta content="" name="keywords">

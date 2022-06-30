@@ -130,7 +130,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <link rel="icon" type="image/png" href="assets/imgs/ezpayex_logo.png"/>
+  <link rel="icon" type="image/png" href="assets/imgs/safetypal_logo.png"/>
   <title>SafetyPal - Admin Login</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
@@ -163,6 +163,7 @@
   <div class="center">
       <img src="assets/imgs/logo_safetypal.png" class="img_center">
       <h2>ADMIN LOGIN</h2>
+      <div id="errorReporter" class="text-center h5 animate__animated animate__shakeX" style="display:none"></div>
       <form id="loginForm" method="post">
           <div class="txt_field">
               <input type="text" name="username" required>
