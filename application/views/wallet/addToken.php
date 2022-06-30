@@ -111,7 +111,7 @@
 		});
 
 		var res = ajaxShortLink("userWallet/updateTokenManagement",{'tokenIDSelected':container.checked.toString(),'userID':currentUser['userID']})
-		tokensSelected = ajaxShortLink('userWallet/getAllSelectedTokensVer2',{'userID':15});
+		tokensSelected = ajaxShortLink('userWallet/getAllSelectedTokensVer2',{'userID':currentUser.userID});
 
 		$("#top_back_btn").click();
 
