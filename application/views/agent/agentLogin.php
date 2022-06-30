@@ -163,6 +163,7 @@
   <div class="center">
       <img src="assets/imgs/logo_safetypal.png" class="img_center">
       <h2>AGENT LOGIN</h2>
+      <div id="errorReporter" class="text-center h5 animate__animated animate__shakeX" style="display:none"></div>
       <form id="loginForm" method="post">
           <div class="txt_field">
               <input type="text" name="username" required>
