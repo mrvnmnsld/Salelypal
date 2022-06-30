@@ -357,6 +357,13 @@ $route['testing'] = 'main/testing';
 	// tests
 
 
+		$route["privacyPolicy"] = 'main/privacyPolicy';
+		$route["termsAndConditions"] = 'main/termsAndConditions';
+
+
+
+
+
 	
 
 

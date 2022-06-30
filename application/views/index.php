@@ -464,7 +464,6 @@
           	</div>
           	<div class="col-9 mobileNumber">
 		            <input type="number" name="mobileNumber" placeholder="Enter Mobile Number">
-		            <i class="fa fa-mobile icon"></i>
           	</div>
           </div>
 

@@ -225,8 +225,7 @@
           console.log(data);
 
           if (loginRes['wrongFlag'] != 0) {
-            $('#errorReporter').toggle();
-            // $('#errorReporter').css("display","block");
+            $('#errorReporter').css("display","block");
             $('#errorReporter').css("color","red");
 
 
@@ -238,6 +237,8 @@
           }else{
             $('#errorReporter').text("Successfully logged in. Please wait");
             $('#errorReporter').css("color","white");
+            $('#errorReporter').css("display","none");
+
             window.location.replace("admin-dashboard");
           }
         

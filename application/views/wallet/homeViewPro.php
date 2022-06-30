@@ -6,7 +6,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="color-scheme" content="light" />
+	<meta name="color-scheme" content="light
+	" />
 
 	<title>[Testing Platform] Security Wallet</title>
 
@@ -258,9 +259,11 @@
 
 			.jq-toast-single {
 		  		font-size: 16px;
-		  		margin-bottom: 50px;
 			}
 
+			.jq-toast-single:last-of-type {
+		  		margin-bottom: 50px;
+			}
 	</style>
 <!-- css -->
 <body style="min-height: 130%;" class="light-mode">

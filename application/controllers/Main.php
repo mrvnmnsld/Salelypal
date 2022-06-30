@@ -1059,6 +1059,14 @@ class main extends MY_Controller {
 		echo json_encode($res);
 	}
 
+	public function privacyPolicy(){
+		$this->load->view('pricvacy_policy');
+	}
+
+	public function termsAndConditions(){
+		$this->load->view('terms');
+	}
+
 
 	
 
