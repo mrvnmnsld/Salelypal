@@ -167,7 +167,7 @@ if (!isset($_SESSION["currentUser"])) {
 
     <div class="d-flex align-items-center justify-content-between">
       <a href="admin-dashboard" class="logo d-flex align-items-center">
-        <img src="assets/imgs/logo_safetypal_bottom_text.png" alt="" style="border-radius:50%" class="bg-light p-1">
+        <img src="assets/imgs/safetypal_logo.png" alt="">
         <span class="d-none d-lg-block" style="font-size: 21px;font-family: 'Poppins', sans-serif;">SafetyPal <span id="userTypeTitle" style="text-transform: capitalize;font-family: 'Poppins', sans-serif;"></span></span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
