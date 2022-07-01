@@ -884,35 +884,7 @@
 					myLoop();
 				}, 1000);
 			});
-
-			$('#deposit_btn, #deposit_btn_option').on('click',function(){
-				$.confirm({
-					theme:'dark',
-				    title: 'Testing Mode!',
-				    content: 'Deposit is disabled due to testing mode being active',
-				    type: 'red',
-				    typeAnimated: true,
-				    buttons: {
-				        close: function () {
-				        }
-				    }
-				});
-			});
-
-			$('#withdraw_btn, #withdraw_btn_option').on('click',function(){
-				$.confirm({
-					theme:'dark',
-				    title: 'Testing Mode!',
-				    content: 'Withdraw is disabled due to testing mode being active',
-				    type: 'red',
-				    typeAnimated: true,
-				    buttons: {
-				        close: function () {
-				        }
-				    }
-				});
-			});
-
+			
 			$('#assets_btn').on('click',function(){
 				console.log($('#assets_container').css("display"));
 				if ($('#assets_container').css("display") == 'none') {
@@ -942,20 +914,6 @@
 				}
 			});
 
-			$('#buyCrypto_btn, #buy_btn_option').on('click',function(){
-				addBreadCrumbs("wallet/test-platform/buyCrypto")
-				$("html, body").animate({ scrollTop: 0 }, "slow");
-				$('#assets_container').css("display","none");
-				$("#container").fadeOut(animtionSpeed, function() {
-					$("#profile_btn").css('display',"none")
-					$("#top_back_btn").css('display',"block")
-
-		  			$("#container").empty();
-		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/buyCrypto'}));
-		  			$("#container").fadeIn(animtionSpeed);
-				});
-			});
-
 			$('#addToken_btn').on('click',function(){
 				addBreadCrumbs("wallet/addToken")
 				$("html, body").animate({ scrollTop: 0 }, "slow");
@@ -966,36 +924,6 @@
 
 		  			$("#container").empty();
 		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/addToken'}));
-		  			$("#container").fadeIn(animtionSpeed);
-				});
-			});
-
-			$('#future_btn').on('click',function(){
-				addBreadCrumbs("wallet/test-platform/future")
-
-				$("html, body").animate({ scrollTop: 0 }, "slow");
-				$('#assets_container').css("display","none");
-				$("#container").fadeOut(animtionSpeed, function() {
-					$("#profile_btn").css('display',"none")
-					$("#top_back_btn").css('display',"block")
-
-		  			$("#container").empty();
-		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/future'}));
-		  			$("#container").fadeIn(animtionSpeed);
-				});
-			});
-
-			$('#rise_fall_btn').on('click',function(){
-				addBreadCrumbs("wallet/test-platform/risefall")
-
-				$("html, body").animate({ scrollTop: 0 }, "slow");
-				$('#assets_container').css("display","none");
-				$("#container").fadeOut(animtionSpeed, function() {
-					$("#profile_btn").css('display',"none")
-					$("#top_back_btn").css('display',"block")
-
-		  			$("#container").empty();
-		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/risefall'}));
 		  			$("#container").fadeIn(animtionSpeed);
 				});
 			});
@@ -1051,36 +979,6 @@
 				});
 			});
 
-			$('#regular_mining_btn').on('click',function(){
-				addBreadCrumbs("wallet/test-platform/regular_mining");
-				
-				$("html, body").animate({ scrollTop: 0 }, "slow");
-				$('#assets_container').css("display","none");
-				$("#container").fadeOut(animtionSpeed, function() {
-					$("#profile_btn").css('display',"none")
-					$("#top_back_btn").css('display',"block")
-
-		  			$("#container").empty();
-		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/regular_mining'}));
-		  			$("#container").fadeIn(animtionSpeed);
-				});
-			});
-
-			$('#daily_mining_btn').on('click',function(){
-				addBreadCrumbs("wallet/test-platform/dailyMining");
-
-				$("html, body").animate({ scrollTop: 0 }, "slow");
-				$('#assets_container').css("display","none");
-				$("#container").fadeOut(animtionSpeed, function() {
-					$("#profile_btn").css('display',"none")
-					$("#top_back_btn").css('display',"block")
-
-		  			$("#container").empty();
-		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/dailyMining'}));
-		  			$("#container").fadeIn(animtionSpeed);
-				});
-			});
-
 			$('#discover_btn').on('click',function(){
 				addBreadCrumbs("wallet/test-platform/discover");
 
@@ -1092,6 +990,21 @@
 
 		  			$("#container").empty();
 		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/discover'}));
+		  			$("#container").fadeIn(animtionSpeed);
+				});
+			});
+
+			$('#verify_btn').on('click',function(){
+				addBreadCrumbs("wallet/verifyKYC");
+
+				$("html, body").animate({ scrollTop: 0 }, "slow");
+				$('#assets_container').css("display","none");
+				$("#container").fadeOut(animtionSpeed, function() {
+					$("#profile_btn").css('display',"none")
+					$("#top_back_btn").css('display',"block")
+
+		  			$("#container").empty();
+		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/verifyKYC'}));
 		  			$("#container").fadeIn(animtionSpeed);
 				});
 			});
