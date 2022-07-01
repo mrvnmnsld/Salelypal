@@ -1,16 +1,34 @@
 <div id="innerContainer" style="display:none" class="card"><br>
 	<div class="p-4">
 		<div class="pagetitle">
-	      	<h1>REFERAL LINK</h1>
-  			<sub class="fw-bold">Link this url to post and get rewards for every users invited</sub>
+	      	<h1>REFERRAL LINK</h1>
 	    </div>
-
-	    <hr>
 		
-		<div class="input-group mb-5 w-100">
-		  <input type="text" id="copyLink" class="form-control" placeholder="Link" aria-label="Link" aria-describedby="button-addon2" readonly>
-		  <button class="btn btn-outline-secondary" type="button" id="copyLink_btn">Copy Link</button>		  
-		</div>
+		<hr>
+
+		<section class="section dashboard">
+
+			<div class="row">
+			
+				<div class="col-md-6">
+					<div class="card info-card sales-card">
+						<div class="card-body">
+							<h5 class="card-title fw-bold">Link this url to post and get rewards for every users invited</h5>
+							<div class="d-flex align-items-center">
+							  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+							    <i class="fa fa-files-o"></i>
+							  </div>
+							    <div class="input-group w-145 ml-2">
+								  <input type="text" id="copyLink" class="form-control" placeholder="Link" aria-label="Link" aria-describedby="button-addon2" readonly>
+								  <button class="btn btn-outline-secondary" type="button" id="copyLink_btn">Copy Link</button>		  
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</section>
 	</div>
 </div>
 
@@ -26,7 +44,7 @@
 		});
 
 		var getUrl = window.location;
-		var baseUrl = getUrl.protocol + "//" + getUrl.host;
+		var baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
 		var urlLink = baseUrl+"/referalLink?referType=agent&idNum="+currentUser.id+"&referBy="+currentUser.username;
 
 		$("#copyLink").val(urlLink)
@@ -46,9 +64,4 @@
 		    position: 'bottom-center'
 		})
 	});
-
-	$("#copy_tron_btn").on('click',function(){
-		
-	});
-
-</script>
+</script>      

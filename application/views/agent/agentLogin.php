@@ -214,6 +214,9 @@
             username: "required",
             password: "required",
         },
+        errorPlacement: function(error, element) {
+          element.parent("div").after(error);
+        },
         submitHandler: function(form){
           var data = $('#loginForm').serializeArray();
           var loginRes = ajaxShortLink('agent/checkLoginCredentials',data);
@@ -222,20 +225,16 @@
 
           if (loginRes['wrongFlag'] != 0) {
             $('#errorReporter').css("display","block");
-
-            
-
             $('#errorReporter').css("color","red");
 
             if (loginRes['wrongFlag'] == 2 || loginRes['wrongFlag'] == 1) {
               $('#errorReporter').text("Wrong Credentials.");
+            }else if(loginRes['wrongFlag'] == 3){
+              $('#errorReporter').html("Account frozen!");
             }
-
           }else{
             ('#errorReporter').text("Successfully logged in. Please wait");
             $('#errorReporter').css("color","white");
-            $('#errorReporter').css("display","none");
-
             window.location.replace("admin-dashboard");
           }
         
