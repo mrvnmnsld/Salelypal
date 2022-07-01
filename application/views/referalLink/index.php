@@ -1,9 +1,10 @@
 <div id="innerContainer" style="display:none" class="card"><br>
 	<div class="p-4">
 		<div class="pagetitle">
-	      	<h1>REFERRAL LINK</h1>
+	      	<h1>REFERAL LINK</h1>
+  			<sub class="fw-bold">Link this url to post and get rewards for every users invited</sub>
 	    </div>
-		
+
 		<hr>
 
 		<section class="section dashboard">
@@ -45,7 +46,7 @@
 		});
 
 		var getUrl = window.location;
-		var baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+		var baseUrl = getUrl.protocol + "//" + getUrl.host;
 		var urlLink = baseUrl+"/referalLink?referType=agent&idNum="+currentUser.id+"&referBy="+currentUser.username;
 
 		$("#copyLink").val(urlLink)
