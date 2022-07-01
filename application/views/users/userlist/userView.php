@@ -279,7 +279,7 @@
 		  		idImage = await faceapi.fetchImage("assets/imgs/kyc-imgs/id-imgs/"+selectedData.IDImagePath);
 		  		image2Detections = await faceapi.detectAllFaces(idImage).withFaceLandmarks().withFaceDescriptors()
 
-		  		console.log(idImage,image2Detections);
+		  		console.log(idImage,image2Detections,image2Detections.length);
 
 		  		if (image2Detections.length != 0) {
 
@@ -323,6 +323,9 @@
 		  			$("#errorReporter").addClass("text-danger");
 		  			$("#errorReporter").removeClass("text-success");
 					$("#errorReporter").text("No Face Found in ID Image");
+
+					$("#loading_text").text("Loading...");
+			  		$("#loading").toggle();
 		  		}
 
 		  		

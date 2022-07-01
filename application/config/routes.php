@@ -14,6 +14,8 @@ $route['sendOtp'] = 'main/sendOtp';
 
 $route['homeView'] = 'main/homeView2';
 $route['homeViewPro'] = 'main/homeViewPro';
+$route['homeViewNotVerified'] = 'main/homeViewNotVerified';
+
 
 $route['loadAnnouncement'] = 'main/loadAnnouncement';
 $route['editProfile'] = 'main/editProfile';

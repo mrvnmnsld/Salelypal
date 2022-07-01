@@ -23,13 +23,15 @@ class main extends MY_Controller {
 		$this->load->view('wallet/index2');
 	}
 
-	public function homeView(){
-		$this->load->view('wallet/index');
-	}
-
 	public function homeViewPro(){
 		$this->load->view('wallet/homeViewPro');
 	}
+
+	public function homeViewNotVerified(){
+		$this->load->view('wallet/homeViewNotVerified');
+	}
+
+	
 
 	public function paypaltest(){
 		$this->load->view('paypal/paypaltest');
@@ -90,6 +92,7 @@ class main extends MY_Controller {
 					$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
 					// correct sila
    				}else{
+   					$dataToSend = $test[0];
 	   				$wrongFlag = 4;
 	   				//not verified	
    				}

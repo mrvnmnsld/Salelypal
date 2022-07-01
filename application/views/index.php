@@ -719,66 +719,6 @@
 
 	  signUp.addEventListener("click",()=>{
 	  	container.classList.add("active");
-	  		if (referalCode == false) {
-			  	$.confirm({
-			  	    title: 'Referal Link?',
-			  	    content: '' +
-			  	    '<form action="" class="formName">' +
-			  	    '<div class="form-group">' +
-			  	    '<label>Do you have a referal link?</label>' +
-			  	    '<input type="text" placeholder="Referal Link Paste it here!" class="referalLink form-control" required />' +
-			  	    '</div>' +
-			  	    '</form>',
-			  	    buttons: {
-			  	        formSubmit: {
-			  	            text: 'Submit',
-			  	            btnClass: 'btn-blue',
-			  	            action: function () {
-			  	                var referalLink = this.$content.find('.referalLink').val();
-			  	                if(!referalLink){
-			  	                    $.alert('provide a referal link');
-			  	                    return false;
-			  	                }
-			  	                var referalLink = referalLink.split("?");
-			  	                var referalLink = referalLink[1].split("&");
-
-			  	                referalCode=referalLink[1].split('=')[1]
-			  	                referType=referalLink[0].split('=')[1]
-
-			  	                console.log(referalCode,referType);
-
-		  	                	$.toast({
-		  	                    text: 'Successfully Added Referal Code',
-		  	                    showHideTransition: 'slide',
-		  	                    allowToastClose: false,
-		  	                    hideAfter: 5000,
-		  	                    stack: 5,
-		  	                    position: 'bottom-center',
-		  	                    textAlign: 'center',
-		  	                    loader: true,
-		  	                    loaderBg: '#9EC600'
-		  	                	})
-
-
-			  	            }
-			  	        },
-			  	        cancel: function () {
-			  	            //close
-			  	        },
-			  	    },
-			  	    onContentReady: function () {
-			  	        // bind to events
-			  	        var jc = this;
-			  	        this.$content.find('form').on('submit', function (e) {
-			  	            // if the user submits the form by pressing enter in the field.
-			  	            e.preventDefault();
-			  	            jc.$$formSubmit.trigger('click'); // reference the button and click it
-			  	        });
-			  	    }
-			  	});
-	  		}
-
-	  	
 	  });
 
 	  login.addEventListener("click",()=>{
@@ -870,7 +810,18 @@
 				}else if(loginRes['wrongFlag'] == 3){
 					$('#errorReporter').html("Account Blocked.");
 				}else if(loginRes['wrongFlag'] == 4){
-					$('#errorReporter').html("Account not yet verified. Please wait while we process your verification");
+					$("#submit_login_btn").empty().append(
+						'<span class="spinner-border" role="status">'+
+							'<span class="sr-only">Loading...</span>'+
+						'</span>'+
+						"&nbsp Success Login"
+					).attr('disabled',true);
+
+					setLocalStorageByKey('currentUser',JSON.stringify(loginRes['data']));
+
+					window.location.replace("homeViewNotVerified");
+
+					// $('#errorReporter').html("Account not yet verified. Please wait while we process your verification");
 				}else if(loginRes['wrongFlag'] == 0){
 
 					$("#submit_login_btn").empty().append(
@@ -883,10 +834,10 @@
 					setLocalStorageByKey('currentUser',JSON.stringify(loginRes['data']));
 
 					if(loginRes.data.isPro == 0){
-							window.location.replace("homeView");
-						}else {
-							window.location.replace("homeViewPro");
-						}
+						window.location.replace("homeView");
+					}else {
+						window.location.replace("homeViewPro");
+					}
 
 				}
 			}
@@ -1048,7 +999,17 @@
 		  				'name':'referType',
 		  				'value':referType
 		  			})
+		  		}else{
+		  			// var referalLink = referalLink.split("?");
+		  			// var referalLink = referalLink[1].split("&");
+
+		  			// referalCode=referalLink[1].split('=')[1]
+		  			// referType=referalLink[0].split('=')[1]
+
+		  			// console.log(referalCode,referType);
 		  		}
+
+		  		
 
 			    console.log(data);
 
