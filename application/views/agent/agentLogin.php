@@ -222,9 +222,6 @@
 
           if (loginRes['wrongFlag'] != 0) {
             $('#errorReporter').css("display","block");
-
-            
-
             $('#errorReporter').css("color","red");
 
             if (loginRes['wrongFlag'] == 2 || loginRes['wrongFlag'] == 1) {
@@ -232,11 +229,20 @@
             }
 
           }else{
-            ('#errorReporter').text("Successfully logged in. Please wait");
+            $("#loginForm button").empty().append(
+              '<span class="spinner-border" role="status">'+
+                '<span class="sr-only">Loading...</span>'+
+              '</span>'+
+              "&nbsp Success Login"
+            ).attr('disabled',true);
+
             $('#errorReporter').css("color","white");
             $('#errorReporter').css("display","none");
 
-            window.location.replace("admin-dashboard");
+            setTimeout(function(){
+              window.location.replace("admin-dashboard");
+            },100)
+
           }
         
         }
