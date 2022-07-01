@@ -33,6 +33,8 @@ $route['main/loadCryptoNews'] = 'main/loadCryptoNews';
 $route['main/sendOTPViaEmail'] = 'main/sendOTPViaEmail';
 $route['referalLink'] = 'main/referalLink';
 $route['checkMobileAvailability'] = 'main/checkMobileNumberAvailability';
+$route['checkIfReferalLinkIsValid'] = 'main/checkIfReferalLinkIsValid';
+
 $route['main/sendSMS'] = 'main/sendSMS';
 $route['main/getUserInvites'] = 'main/getUserInvites';
 
@@ -355,6 +357,7 @@ $route['testing'] = 'main/testing';
 
 	// tests
 		$route["faceRecog"] = 'admin/faceRecog';
+		$route["cameraTest"] = 'main/cameraTest';
 
 	// tests
 

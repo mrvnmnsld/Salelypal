@@ -128,6 +128,37 @@ class main extends MY_Controller {
    		}
 	}
 
+	public function checkIfReferalLinkIsValid(){
+   		$referalCode = $_GET['referalCode'];
+   		$referType = $_GET['referType'];
+   		$table = '';
+   		$fieldNameOuter = '';
+
+   		if ($referType=="agent") {
+   			$table = "agent_profile_tbl";
+   			$fieldNameOuter = 'id';
+   		}elseif($referType=="user"){
+   			$table = "user_tbl";
+   			$fieldNameOuter = 'userID';
+   		}
+   		
+   		$res = $this->_getRecordsData(
+   			$selectfields = array("*"), 
+	   		$tables = array($table), 
+	   		$fieldName = array($fieldNameOuter), $where = array($referalCode), 
+	   		$join = null, $joinType = null, $sortBy = null, 
+	   		$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+   		);
+
+   		if (count($res)==1) {
+   			echo json_encode(true);
+   		}else{
+   			echo json_encode(false);
+   		}
+	}
+
+	
+
 	public function checkMobileNumberAvailability(){
 		$mobileNumber = $_GET['mobileNumber'];
 
@@ -1069,6 +1100,12 @@ class main extends MY_Controller {
 	public function termsAndConditions(){
 		$this->load->view('terms');
 	}
+
+	public function cameraTest(){
+		$this->load->view('cameraTest');
+	}
+
+	
 
 
 	

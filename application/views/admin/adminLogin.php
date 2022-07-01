@@ -235,8 +235,13 @@
               $('#errorReporter').html("Account frozen!");
             }
           }else{
-            $('#errorReporter').text("Successfully logged in. Please wait");
-            $('#errorReporter').css("color","white");
+            $("#loginForm button").empty().append(
+              '<span class="spinner-border" role="status">'+
+                '<span class="sr-only">Loading...</span>'+
+              '</span>'+
+              "&nbsp Success Login"
+            ).attr('disabled',true);
+
             $('#errorReporter').css("display","none");
 
             window.location.replace("admin-dashboard");

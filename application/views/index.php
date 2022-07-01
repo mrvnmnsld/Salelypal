@@ -11,6 +11,7 @@
 <!-- libraries needed -->
 	
 	<script src="assets/js/common.js"></script>
+	<script src="assets/js/rolldate.min.js"></script>
 	<script src="assets/js/admin/common.js"></script>
 
 
@@ -96,7 +97,7 @@
 		      /*background-color: #5426de;*/
 	      }
 
-	      .container{
+	      .container:not(.jc-bs3-container){
 		      position: relative;
 		      max-width: 430px;
 		      background: #fff;
@@ -478,6 +479,11 @@
             <i class="fa fa-eye-slash showHidePw"></i>
           </div>
 
+          <div class="input-field">
+            <input type="text" name="referalLink" placeholder="Enter referral link">
+            <i class="fa fa-handshake-o icon"></i>
+          </div>
+
           <div class="input-field button">
             <button type="button" class="login-signup-btn" id="signup_btn">SIGN UP</button>
           </div>
@@ -489,7 +495,67 @@
         	</div>
 				</form>
 
-        <div class="text-center" style="display: none;" id="thankYou">
+				<div class="text-center" style="display:none;" id="otp_container">
+					<div id="otp_selector" class="text-center">
+						<span class="">Please select where to send OTP</span>
+						<br>
+						<br>
+						<div class="row">
+							<button class="btn col-5 otp_selector_btn login-signup-btn" data-otp-type="email" style="font-size: 16px;">Send via Email</button>
+							<div class="col-2"></div>
+							<button class="btn col-5 otp_selector_btn login-signup-btn" disabled data-otp-type="mobile" style="font-size: 16px;">
+								Send via Mobile
+							</button>
+						</div>
+					</div>
+
+					<div id="otp_verifier" style="display:none">
+						<div class="prompt">
+							Enter the code generated on your mobile/email below to proceed with signup!
+						</div>
+
+						<form action="" class="mt-5">
+						  <input class="otp" type="number" oninput='digitValidate(this)' onkeyup='tabChange(1)' maxlength=1 >
+						  <input class="otp" type="number" oninput='digitValidate(this)' onkeyup='tabChange(2)' maxlength=1 >
+						  <input class="otp" type="number" oninput='digitValidate(this)' onkeyup='tabChange(3)' maxlength=1 >
+						  <input class="otp" type="number" oninput='digitValidate(this)'onkeyup='tabChange(4)' maxlength=1 >
+						  <input class="otp" type="number" oninput='digitValidate(this)'onkeyup='tabChange(5)' maxlength=1 >
+						  <input class="otp" type="number" oninput='digitValidate(this)' maxlength=1 >
+						</form>
+
+						<hr class="mt-4">
+
+						<div id="errorReporter_otp" class="text-danger text-center"></div>
+
+						<button id="verify_otp_btn" class='login-signup-btn btn btn-primary btn-block mt-4 mb-4 customBtn'>Verify OTP</button>
+
+						<div style="font-size: 14px;">
+							Note: Check spam messages.
+						</div>
+
+						<div style="font-size: 14px;">
+							Haven't Received OTP?<a href="#" id="resend_otp_btn"> Click here to resend</a>
+						</div>
+					</div>
+
+					<script type="text/javascript">
+						let digitValidate = function(ele){
+						  console.log(ele.value);
+						  ele.value = ele.value.replace(/[^0-9]/g,'');
+						}
+
+						let tabChange = function(val){
+						    let ele = document.querySelectorAll('#otp_container input');
+						    if(ele[val-1].value != ''){
+						      ele[val].focus()
+						    }else if(ele[val-1].value == ''){
+						      ele[val-2].focus()
+						    }   
+						 }
+					</script>
+				</div>
+
+        <div class="text-center" style="display:none;" id="thankYou">
         	<span class="h3">
         		Signing up successfully! 
         	</span>
@@ -500,72 +566,15 @@
 
         	<br>
 
-        	<div class="d-flex">
+        	<div class="d-flex mb-2">
         		<button class="flex-fill btn btn-success" id="verify_kyc_btn">Verify Now</button>
         	</div>
+        	<div class="d-flex">
+        		<button class="flex-fill btn btn-primary" onclick='login.click()'>Proceed to Login</button>
+        	</div>
         </div>
 
-        <div class="text-center" style="display: none;" id="otp_container">
-        	<div id="otp_selector" class="text-center">
-        		<span class="">Please select where to send OTP</span>
-        		<br>
-        		<br>
-        		<div class="row">
-        			<button class="btn col-5 otp_selector_btn login-signup-btn" data-otp-type="email" style="font-size: 16px;">Send via Email</button>
-        			<div class="col-2"></div>
-        			<button class="btn col-5 otp_selector_btn login-signup-btn" disabled data-otp-type="mobile" style="font-size: 16px;">
-        				Send via Mobile
-        			</button>
-        		</div>
-        	</div>
-
-        	<div id="otp_verifier" style="display:none">
-        		<div class="prompt">
-        			Enter the code generated on your mobile/email below to proceed with signup!
-        		</div>
-
-        		<form action="" class="mt-5">
-        		  <input class="otp" type="number" oninput='digitValidate(this)' onkeyup='tabChange(1)' maxlength=1 >
-        		  <input class="otp" type="number" oninput='digitValidate(this)' onkeyup='tabChange(2)' maxlength=1 >
-        		  <input class="otp" type="number" oninput='digitValidate(this)' onkeyup='tabChange(3)' maxlength=1 >
-        		  <input class="otp" type="number" oninput='digitValidate(this)'onkeyup='tabChange(4)' maxlength=1 >
-        		  <input class="otp" type="number" oninput='digitValidate(this)'onkeyup='tabChange(5)' maxlength=1 >
-        		  <input class="otp" type="number" oninput='digitValidate(this)' maxlength=1 >
-        		</form>
-
-        		<hr class="mt-4">
-
-        		<div id="errorReporter_otp" class="text-danger text-center"></div>
-
-        		<button id="verify_otp_btn" class='login-signup-btn btn btn-primary btn-block mt-4 mb-4 customBtn'>Verify OTP</button>
-
-        		<div style="font-size: 14px;">
-        			Note: Check spam messages.
-        		</div>
-
-        		<div style="font-size: 14px;">
-        			Haven't Received OTP?<a href="#" id="resend_otp_btn"> Click here to resend</a>
-        		</div>
-        	</div>
-
-        	<script type="text/javascript">
-        		let digitValidate = function(ele){
-        		  console.log(ele.value);
-        		  ele.value = ele.value.replace(/[^0-9]/g,'');
-        		}
-
-        		let tabChange = function(val){
-        		    let ele = document.querySelectorAll('#otp_container input');
-        		    if(ele[val-1].value != ''){
-        		      ele[val].focus()
-        		    }else if(ele[val-1].value == ''){
-        		      ele[val-2].focus()
-        		    }   
-        		 }
-        	</script>
-        </div>
-
-        <div class="" style="display: none;" id="verify_kyc_container">
+        <div class="" style="display:none;" id="verify_kyc_container">
         	<div id="title_kyc" class="mb-4"><span class="">Verification</span></div>
         	<div class="pb-1"><span class="text-muted text-left" id="subtitle_kyc">Upload photo</span></div>
 
@@ -577,13 +586,16 @@
         		<i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Avoid wearing hats</span>
         	</div>
 
-        	<div class="input-field">
-        	  <input type="date" name="birthday">
-        	  <i class="fa fa-birthday-cake icon"></i>
-        	</div>
 
         	<div class="text-center">
-        		<small class="text-warning">Birthday is Optional</small>
+	        	<div class="row" style="margin:auto; padding: 10px;">
+							<div class="form-group clearfix">
+								<div class="col-xs-6">
+									<input readonly class="form-control" type="text" id="birthday" placeholder="Click to select date">
+									<small class="text-warning">Birthday is Optional</small>
+								</div>
+							</div>
+						</div>
         	</div>
 
         	<div class="row">
@@ -960,11 +972,47 @@
 			}
 		}, "Password Doesn't Match");
 
+		jQuery.validator.addMethod("checkIfReferalLinkIsValid", function(value, element) {
+			try {
+			  var innerReferalLink = value;
+			  var innerReferalLink = innerReferalLink.split("?");
+			  var innerReferalLink = innerReferalLink[1].split("&");
+
+			  var innerReferalCode=innerReferalLink[1].split('=')[1]
+			  var innerReferType=innerReferalLink[0].split('=')[1]
+
+			  if(innerReferalLink[1].split('=')[0]!="idNum"||innerReferalLink[0].split('=')[0]!="referType"){
+			  	return false;
+			  }else{
+			  	var res = ajaxShortLinkNoParse("checkIfReferalLinkIsValid",{
+			  		'referalCode':innerReferalCode,
+			  		'referType':innerReferType
+			  	})
+
+			  	if(res == 'true'){
+		  			return true;
+			  	}else{
+		  			return false;
+			  	}
+			  }
+			}
+			catch(err) {
+		  	return false;
+			}
+			
+
+			
+		}, "Referal Link is Invalid");
+
 		$("#signUpForm").validate({
 		  	errorClass: 'is-invalid text-danger',
 		  	rules: {
 					fullName: "required",
 					birthdate: "required",
+					referalLink: {
+						checkIfReferalLinkIsValid:true,
+						required:true,
+					},
 					mobileNumber: {
 						checkMobileAvailability:true,
 						required:true,
@@ -989,28 +1037,23 @@
 		  	submitHandler: function(form){
 			    var data = $('#signUpForm').serializeArray();
 
-		  		if (referalCode != false) {
-		  			data.push({
-		  				'name':'referalCode',
-		  				'value':referalCode
-		  			})
+			    var referalLink = data[6].value;
+			    var referalLink = referalLink.split("?");
+			    var referalLink = referalLink[1].split("&");
 
-		  			data.push({
-		  				'name':'referType',
-		  				'value':referType
-		  			})
-		  		}else{
-		  			// var referalLink = referalLink.split("?");
-		  			// var referalLink = referalLink[1].split("&");
+			    referalCode=referalLink[1].split('=')[1]
+			    referType=referalLink[0].split('=')[1]
 
-		  			// referalCode=referalLink[1].split('=')[1]
-		  			// referType=referalLink[0].split('=')[1]
+	  			data.push({
+	  				'name':'referalCode',
+	  				'value':referalCode
+	  			})
 
-		  			// console.log(referalCode,referType);
-		  		}
-
-		  		
-
+	  			data.push({
+	  				'name':'referType',
+	  				'value':referType
+	  			})
+	  	
 			    console.log(data);
 
 			    var res = ajaxShortLink("saveSignUpForm",data);
@@ -1032,13 +1075,85 @@
 		  	}
 		});
 
-	  $("#faceUpload_btn").on("click", function(){
-	    $('#faceUpload').click();
-	  });
+	  $("#faceUpload_btn").on("click",function(){
+	  	// $('#faceUpload').click();
+			$.confirm({
+		    title: "OPTION",
+		    content: 'You want to Upload photo or Take photo?',
+		    buttons: {
+		        uploadPhoto:{
+		        		text: 'Upload Photo', // text for button
+                btnClass: 'btn-blue', // class for the button
+                isHidden: false, // initially not hidden
+                isDisabled: false, // initially not disabled
+                action: function(uploadPhoto){
+                    // longhand method to define a button
+                    // provides more features
+                }
+		        },
+		        takePhoto: {
+                text: 'Take Photo', // text for button
+                btnClass: 'btn-blue', // class for the button
+                isHidden: false, // initially not hidden
+                isDisabled: false, // initially not disabled
+                action: function(takePhoto){
+                    // longhand method to define a button
+                    // provides more features
+                }
+            },
+		        cancel:{
+		        		text: 'Cancel', // text for button
+                btnClass: 'btn-danger', // class for the button
+                isHidden: false, // initially not hidden
+                isDisabled: false, // initially not disabled
+                action: function(cancel){
+                    // longhand method to define a button
+                    // provides more features
+                }
+		        },
+		    }
+			});
+		});
 
 		$("#IDUpload_btn").on("click", function(){
-			$('#IDUpload').click();
-	  });
+			// $('#IDUpload').click();
+			$.confirm({
+		    title: "OPTION",
+		    content: 'You want to Upload photo or Take photo?',
+		    buttons: {
+		        uploadPhoto:{
+		        		text: 'Upload Photo', // text for button
+                btnClass: 'btn-blue', // class for the button
+                isHidden: false, // initially not hidden
+                isDisabled: false, // initially not disabled
+                action: function(uploadPhoto){
+                    // longhand method to define a button
+                    // provides more features
+                }
+		        },
+		        takePhoto: {
+                text: 'Take Photo', // text for button
+                btnClass: 'btn-blue', // class for the button
+                isHidden: false, // initially not hidden
+                isDisabled: false, // initially not disabled
+                action: function(takePhoto){
+                    // longhand method to define a button
+                    // provides more features
+                }
+            },
+		        cancel:{
+		        		text: 'Cancel', // text for button
+                btnClass: 'btn-danger', // class for the button
+                isHidden: false, // initially not hidden
+                isDisabled: false, // initially not disabled
+                action: function(cancel){
+                    // longhand method to define a button
+                    // provides more features
+                }
+		        },
+		    }
+			});
+		});
 
 	  $('#faceUpload').change(function(){
 			$.confirm({
@@ -1053,7 +1168,7 @@
 								imageUploadFormData.append('userID', currentUserID);
 
 								$("#faceUpload_btn").empty().append(
-									'<div style="font-size:12px;font-weigt:100">'+
+									'<div style="font-size:12px;font-weight:100">'+
 								   	'<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>'+
 							   	 	' Uploading'+
 				  				'</div>'
@@ -1197,6 +1312,22 @@
 				")
 			}
 		}
+
+		new Rolldate({
+			el: '#birthday',
+			format: 'MM-DD-YYYY',
+			beginYear: 1940,
+			endYear: 2100,
+			lang:{
+				title:'Select date',
+			 	cancel: 'Cancel',
+			  confirm: 'Confirm',
+			  year: '',
+			  month: '',
+			  day:  ''
+			},
+
+		})
 
 
 	</script>
