@@ -355,6 +355,7 @@ $route['testing'] = 'main/testing';
 
 	// tests
 		$route["faceRecog"] = 'admin/faceRecog';
+		$route["cameraTest"] = 'main/cameraTest';
 
 	// tests
 

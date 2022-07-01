@@ -1070,6 +1070,12 @@ class main extends MY_Controller {
 		$this->load->view('terms');
 	}
 
+	public function cameraTest(){
+		$this->load->view('cameraTest');
+	}
+
+	
+
 
 	
 
