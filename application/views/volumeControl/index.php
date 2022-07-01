@@ -111,7 +111,7 @@
 
 	$(document).ready(function(){
 	  $("#switch").click(function(){
-	    $(".section-dashboard").toggle();
+	    $(".section-dashboard").toggle("swing");
 	  });
 	});
 

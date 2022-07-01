@@ -11,6 +11,7 @@
 			<div class="row">
 			
 				<div class="col-md-12">
+
 					<div class="card info-card sales-card">
 						<div class="card-body">
 							<h5 class="card-title fw-bold">Link this url to post and get rewards for every users invited</h5>
@@ -64,4 +65,4 @@
 		    position: 'bottom-center'
 		})
 	});
-</script>
+</script>      
