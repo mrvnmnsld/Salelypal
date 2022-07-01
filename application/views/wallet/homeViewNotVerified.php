@@ -264,6 +264,12 @@
 			.jq-toast-single:last-of-type {
 		  		margin-bottom: 50px;
 			}
+
+			.sec-color{color:#b0de26;}
+			.sec-bgcolor{background-color:#b0de26;}
+			.font-light{color:#F3F8F8}
+
+			
 	</style>
 <!-- css -->
 <body style="min-height: 130%;" class="light-mode">
@@ -289,19 +295,16 @@
 	<div id="assets_container" style="display:none;">
 		<div id="header_inner_container" class="main-color-bg py-2" style="display:none;">
 			<div class="font-weight-bold text-center m-3">
-				<span class="h6 text-muted" style="color:white;">
+				<div class="display-4" style="color:white; font-weight:600;">
+					Unverified 
+				</div>
 					
-					<span id="" class="font-size-2p5em title-color-text notranslate">
-						Complete Verification
-					</span>
-					<br>
-
-					Verify your account to enable Deposit, Withdraw, Buy & Trade
-
-					<div>
-						<button class="btn btn-rounded btn-success">Verify Account Now!</button>
-					</div>
-				</span>
+				<div class="text-muted mx-2 mb-4 mt-1">
+					Verify your account to unlock all features!
+				</div>
+				<div>
+					<button id="verify_btn" type="button" class="px-3 py-2" style="font-weight:bolder">Verify Account Now!</button>
+				</div>
 			</div>
 		</div>
 
