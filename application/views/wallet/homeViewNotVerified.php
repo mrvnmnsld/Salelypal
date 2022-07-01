@@ -303,7 +303,7 @@
 					Verify your account to unlock all features!
 				</div>
 				<div>
-					<button id="verify_btn" type="button" class="px-3 py-2" style="font-weight:bolder">Verify Account Now!</button>
+					<button id="verify_btn" type="button" class="px-3 py-2" style="font-weight:bolder">Verify Account Now</button>
 				</div>
 			</div>
 		</div>
