@@ -591,7 +591,7 @@
 	        	<div class="row" style="margin:auto; padding: 10px;">
 							<div class="form-group clearfix">
 								<div class="col-xs-6">
-									<input readonly class="form-control" type="text" id="birthday" name="" placeholder="MM-DD-YYYY">
+									<input readonly class="form-control" type="text" id="birthday" placeholder="Click to select date">
 									<small class="text-warning">Birthday is Optional</small>
 								</div>
 							</div>
