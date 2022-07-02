@@ -1,8 +1,7 @@
 <div id="innerContainer" style="display:none" class="card"><br>
 	<div class="p-4">
 		<div class="pagetitle">
-	      	<h1>REFERAL LINK</h1>
-  			<sub class="fw-bold">Link this url to post and get rewards for every users invited</sub>
+	      	<h1>REFERRAL LINK</h1>
 	    </div>
 
 		<hr>
@@ -11,7 +10,7 @@
 
 			<div class="row">
 			
-				<div class="col-md-12">
+				<div class="col-md-6">
 
 					<div class="card info-card sales-card">
 						<div class="card-body">

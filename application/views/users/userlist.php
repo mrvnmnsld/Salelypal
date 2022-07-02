@@ -18,6 +18,8 @@
                 <th>Last login IP Address</th>
                 <th>Verified</th>
                 <th>Blocked</th>
+                <th>Referred User ID</th>
+                <th>Refer Type</th>
                 <th>Date Joined</th>
 
             </tr>
@@ -67,6 +69,8 @@
 				{ data:'ip_lastLogin'},
 				{ data:'verified'},
 				{ data:'isBlocked'},
+				{ data:'referred_user_id'},
+				{ data:'referType'},
 				{ data:'timestamp'},
 	        ],
 			"columnDefs": [

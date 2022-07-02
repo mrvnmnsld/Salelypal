@@ -192,6 +192,7 @@ class agent extends MY_Controller {
 
 	public function updateAgentInfo(){
 		$insertRecord = array(
+			'isShareContract' => $_GET['isShareUpdate'],
 			'email' => $_GET['email'],
 			'fullname' => $_GET['fullname'],
 			'country' => $_GET['country'],

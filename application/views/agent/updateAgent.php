@@ -3,12 +3,10 @@
 	.modal-footer{
 		display: none;
 	}
-
 	label.is-invalid{
 		text-align: center;
 		color: red;
 	}
-
 	.icon-size{
 		font-size: 1.4em;
 		max-width: 2em;
@@ -33,6 +31,57 @@
 		box-shadow: 10px 15px 25px rgba(0, 0, 0, .8);
 		padding: 20px;
 	}
+	.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    }
+    .switch .toggle { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+    }
+    .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+    }
+    .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    }
+    .toggle:checked + .slider {
+    background-color: #5426de;
+    }
+    toggle:focus + .slider {
+    box-shadow: 0 0 1px #5426de;
+    }
+    .toggle:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+    }
+    /* Rounded sliders */
+    .slider.round {
+    border-radius: 34px;
+    }
+    .slider.round:before {
+    border-radius: 50%;
+    }
 </style>
 
 <div id="pagetitle_background" class="text-center">
@@ -69,19 +118,27 @@
 		<label class="fw-bold">Username</label>	
 		<div class="input-group row m-1 mb-3">
 			<i class="input-group-text fa fa-user-circle icon-size" aria-hidden="true"></i>
-		  <input type="text" class="form-control" id="username_input" name="username" placeholder="Username">
+		  	<input type="text" class="form-control" id="username_input" name="username" placeholder="Username">
 		</div>
 
 		<label class="fw-bold">Password</label>
 		<div class="input-group row m-1 mb-3">
 			<i class="input-group-text fa fa-key icon-size" aria-hidden="true"></i>
-		  <input type="password" class="form-control" id="password" name="password" placeholder="*Note: Only enter value if changing">
+		  	<input type="password" class="form-control" id="password" name="password" placeholder="*Note: Only enter value if changing">
 		</div>
 
 		<label class="fw-bold">Confirm Password</label>
 		<div class="input-group row m-1 mb-3">
 			<i class="input-group-text fa fa-key icon-size" aria-hidden="true"></i>
-		  <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm Password">
+		  	<input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm Password">
+		</div>
+
+		<label class="fw-bold">Share Contract Control </label>
+		<div class="input-group row m-1 mb-3">
+			<label class="switch">
+			  <input id="isShareContract" onclick="toggle_btn()" class="toggle" type="checkbox">
+			  <span class="slider round"></span>
+			</label>
 		</div>
 
 		<hr>
@@ -97,6 +154,25 @@
 
 <script type="text/javascript">
 
+	var isShare = selectedData.isShareContract;
+	var isShareUpdate;
+	var isChangedBoolean;
+
+	if (isShare==1) {
+		$('#isShareContract').prop('checked',true);
+
+	}else{
+		$('#isShareContract').prop('checked',false);
+	}
+
+	function toggle_btn(){
+		if ($('#isShareContract').is(":checked")==true) {
+			isShareUpdate = 1;
+		}else{
+			isShareUpdate = 0;
+		}
+	}
+
 	$("#email_input").val(selectedData.email);
 	$("#fullname_input").val(selectedData.fullname);
 	$("#country_input").val(selectedData.country);
@@ -106,6 +182,12 @@
 	// console.log(selectedData.email)
 
 	$("#save_btn").on("click",function(){
+		if($("#email_input").val() == selectedData.email) {
+			isChangedBoolean = false;
+			
+		}else{
+			isChangedBoolean = true;
+		}
 		$("#update_agent_form").submit();
 	});
 
@@ -119,7 +201,6 @@
 	            var res = ajaxShortLink('agent/deleteAgent',{
 	            	"id":selectedData.id
 	            });
-
 
 	            if(res == 1){
 	            	$.toast({
@@ -152,8 +233,6 @@
 		bootbox.hideAll();
 	});
 
-
-
 	jQuery.validator.addMethod("checkUserNameAvailability", function(value, element) {
 		if (selectedData.username == value) {
 			return true
@@ -170,13 +249,14 @@
 		if (value == $("#password").val()) return true
 	}, "Password Doesn't Match");
 
+
 	$("#update_agent_form").validate({
 	  	errorClass: 'is-invalid',
 	  	rules: {
 	  		email: {
-	  			required:true,
+	  			required: isChangedBoolean,
 				minlength:8,
-				checkAgentEmailAvailability: true,
+				checkAgentEmailAvailability: isChangedBoolean,
 	  		},
 			fullname: {
 				required:true,
@@ -202,6 +282,11 @@
 		    		"value":selectedData.id
 		    });
 
+		    data.push({
+		    		"name":"isShareUpdate",
+		    		"value": isShareUpdate
+		    });
+
 		    var res = ajaxShortLink('agent/updateAgentInfo',data);
 
 		    console.log(data,res);
@@ -225,5 +310,9 @@
 
 	  	}
 	});
+
+
+
+
 		
 </script>
