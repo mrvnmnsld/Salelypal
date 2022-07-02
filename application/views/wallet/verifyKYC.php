@@ -1,0 +1,615 @@
+<script src="assets/js/rolldate.min.js"></script>
+<style>
+    /*@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');*/
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap%27');
+        *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+    }
+    
+        .container:not(.jc-bs3-container){
+        position: relative;
+        max-width: 430px;
+        background: #fff;
+        box-shadow: rgba(0, 0, 0, 0.5) 0px 19px 38px, rgba(0, 0, 0, 0.30) 0px 15px 12px;
+        overflow: hidden;
+        background-color: red;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        background: linear-gradient(135deg, #a10396, #4158d0);
+    }
+
+    .container .forms{
+        display: flex;
+        align-items: center;
+        height: 400px;
+        width: 200%;
+        transition: height 0.2s ease;
+    }
+
+    .container .form{
+        width: 50%;
+        padding: 45px;
+        background-color: #fff;
+        transition: margin-left 0.18s ease;
+    }
+
+    .container.active .login{
+        margin-left: -50%;
+        opacity: 0;
+        transition: margin-left 0.18s ease, opacity 0.15s ease;
+    }
+
+    .container .signup{
+        opacity: 0;
+        transition: opacity 0.09s ease;
+    }
+
+    .container.active .signup{
+        opacity: 1;
+        transition: opacity 0.2s ease;
+    }
+
+    .container.active .forms{
+    height: auto;
+    }
+
+    .container .form .title{
+        position: relative;
+        font-size: 27px;
+        font-weight: 600;
+        color: #5426de;
+    }
+
+    .form .title::before{
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 3px;
+        width: 30px;
+        background-color: #5426de;
+    }
+
+    .form .input-field{
+        position: relative;
+        height: 50px;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .input-field input:not(.form-control){
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        padding: 0 35px;
+        border: none;
+        outline: none;
+        font-size: 16px;
+        border-bottom: 2px solid #ccc;
+        border-top: 2px solid transparent;
+        transition: all 0.2s ease;
+    }
+
+    .input-field input:is(:focus){
+    border-bottom-color: #5426de;
+    }
+
+    .input-field i{
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #999;
+        font-size: 20px;
+    }
+
+    .input-field input:is(:focus) ~ i{
+    color: #5426de;
+    }
+    
+    .input-field i.icon{
+    left: 0;
+    }
+
+    .mobileNumber input{
+    position: absolute;
+        height: 100%;
+        width: 88%;
+        padding: 0 25px;
+        border: none;
+        outline: none;
+        font-size: 16px;
+        border-bottom: 2px solid #ccc;
+        border-top: 2px solid transparent;
+        transition: all 0.2s ease;
+    }
+
+    .mobileNumber input:is(:focus){
+    border-bottom-color: #5426de;
+    }
+
+    /*.mobileNumber i{
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #999;
+        font-size: 20px;
+    }
+
+    .mobileNumber input:is(:focus) ~ i{
+    color: #5426de;
+    }
+
+    .mobileNumber i.icon{
+    left: 10;
+    }*/
+
+    .input-field i.showHidePw{
+        right: 0;
+        cursor: pointer;
+        padding: 10px;
+    }
+
+    .input-field i.switchUserInput{
+            right: 0;
+            cursor: pointer;
+            padding: 10px;
+    }
+
+    .form .text{
+        color: #333;
+        font-size: 14px;
+    }
+
+    .form a.text{
+        color: #5426de;
+        text-decoration: none;
+    }
+
+    .form a:hover{
+    text-decoration: underline;
+    }
+
+    .login-signup-btn{
+        width: 100%;
+        height: 100%;
+        border: none;
+        color: #fff;
+        font-size: 20px;
+        font-weight: 1000;
+        letter-spacing: 2px;
+        background-color: #5426de;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .login-signup-btn:hover{
+    background-color: #9e68e8;
+    }
+
+    button:disabled,
+    button[disabled]{
+    border: 1px solid #ac7eeb;
+    background-color: #ac7eeb;
+    }
+
+    .form .login-signup{
+        margin-top: 30px;
+        text-align: center;
+    }
+
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+    -moz-appearance: textfield;
+    }
+
+    /*kyc*/
+    #title_kyc{
+        /* font-size: 3rem; */
+        /* font-weight: bold; */
+        /* text-align:center; */
+        position: relative;
+        font-size: 35px;
+        font-weight: 600;
+        color: #5426de;
+    }
+    
+    #title_kyc:before{
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 3px;
+        width: 30px;
+        background-color: #5426de;
+    }
+
+    #subtitle_kyc {
+        font-size:1rem;
+        position: relative;
+        /* line-height:2; */
+    }
+
+    #subtitle_kyc:before {
+        display: inline-block;
+        content: "";
+        height: 1px;
+        background: #939ba2!important;
+        position: absolute;
+        width: 170%;
+        top: 50%;
+        margin-left: 120px;
+    }
+
+    .icon_kyc{
+        font-size:1rem!important;
+        color:#5426de!important;
+    }
+
+    #instruction_kyc{
+        font-size:1rem;
+        text-align: justify;
+        font-weight: 150;
+        color: #939ba2!important;
+        /* color:#5426de!important; */
+    }
+
+    .font2rem{
+        font-size:2rem;
+    }
+
+    .font1rem{
+        font-size:1rem!important;
+    }
+
+    .upload_button{
+        width: 100%;
+        height: 50px;
+        border: none;
+        color: #fff;
+        font-size: 1rem;
+        font-weight: 900;
+        letter-spacing: 3px;
+        background-color: #5426de;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top:10px;
+        border-radius: 0.25rem;
+    }
+
+    .upload_button:hover{
+        background-color: #9e68e8;
+    }
+
+    .check_upload{
+        color:green;
+    }
+    /*kyc*/
+
+    /*otp*/
+    #otp_container input{
+        display:inline-block;
+        width:2.5rem;
+        height:2.5rem;
+        text-align:center;
+    }
+    /*otp*/
+
+    .is-invalid[for="mobileNumber"] {
+    margin-left: 15px;
+    }
+    .bootstrap-select > select.mobile-device:focus + .dropdown-toggle, .bootstrap-select .dropdown-toggle:focus{
+    box-shadow: none;
+    outline: none !important;
+    }
+    .rolldate-panel {
+        z-index: 1031!important;
+    }
+</style>
+<div class="px-3 py-5" style="display:block;" id="verify_kyc_container">
+    <div id="title_kyc" class="mb-4"><span class="">Verification</span></div>
+    <div class="pb-1"><span class="text-muted text-left" id="subtitle_kyc">Upload photo</span></div>
+
+    <div id="noteslist_kyc" class="m-2"> 
+        <div class="text-left font1rem"><b>Important Notes</b></div>
+        <i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Don't use photo filter</span><br>
+        <i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Avoid wearing make up</span><br>
+        <i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Avoid wearing glasses</span><br>
+        <i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Avoid wearing hats</span>
+    </div>
+
+    <div class="text-center">
+        <div class="row" style="margin:auto; padding: 10px;">
+                    <div class="form-group clearfix">
+                        <div class="col-xs-6">
+                            <input readonly class="form-control" type="text" id="birthday" placeholder="Click to select date">
+                            <small class="text-warning">Birthday is Optional</small>
+                        </div>
+                    </div>
+                </div>
+    </div>
+
+    <div class="row">
+            <div class="col-6 d-flex flex-row-reverse">
+                <button id="faceUpload_btn" class="upload_button face_upload_btn" type="button">
+                    <span><i id="faceCheckUpload_kyc" class="fa fa-picture-o fa-inverse"></i></span>
+                    <span  class="">Face</span>
+                </button>
+                <input class="form-control d-none" type="file" name="faceUpload" id="faceUpload" accept="image/png, image/gif, image/jpeg" >
+            </div>
+            <div class="col-6 d-flex flex-row-reverse">
+                <button id="IDUpload_btn" class="upload_button id_upload_btn" type="button">
+                    <span><i id="IDCheckUpload_kyc" class="fa fa-picture-o fa-inverse"></i></span>
+                    <span  class="">ID</span>
+                </button>
+                <input class="form-control d-none" type="file" name="IDUpload" id="IDUpload" accept="image/png, image/gif, image/jpeg" >
+            </div>
+        </div>
+        <div id="instruction_kyc" class="text-left pt-3">
+            <span>Ensure that face is centered and visible when capturing the photo to avoid facial recognition errors</span>
+        </div>
+</div>
+
+<script>
+    $("#faceUpload_btn").on("click",function(){
+    // $('#faceUpload').click();
+        $.confirm({
+        title: "OPTION",
+        content: 'You want to Upload photo or Take photo?',
+        buttons: {
+            uploadPhoto:{
+                    text: 'Upload Photo', // text for button
+            btnClass: 'btn-blue', // class for the button
+            isHidden: false, // initially not hidden
+            isDisabled: false, // initially not disabled
+            action: function(uploadPhoto){
+                // longhand method to define a button
+                // provides more features
+            }
+            },
+            takePhoto: {
+            text: 'Take Photo', // text for button
+            btnClass: 'btn-blue', // class for the button
+            isHidden: false, // initially not hidden
+            isDisabled: false, // initially not disabled
+            action: function(takePhoto){
+                // longhand method to define a button
+                // provides more features
+            }
+        },
+            cancel:{
+                    text: 'Cancel', // text for button
+            btnClass: 'btn-danger', // class for the button
+            isHidden: false, // initially not hidden
+            isDisabled: false, // initially not disabled
+            action: function(cancel){
+                // longhand method to define a button
+                // provides more features
+            }
+            },
+        }
+        });
+    });
+
+    $("#IDUpload_btn").on("click", function(){
+        // $('#IDUpload').click();
+        $.confirm({
+        title: "OPTION",
+        content: 'You want to Upload photo or Take photo?',
+        buttons: {
+            uploadPhoto:{
+                    text: 'Upload Photo', // text for button
+            btnClass: 'btn-blue', // class for the button
+            isHidden: false, // initially not hidden
+            isDisabled: false, // initially not disabled
+            action: function(uploadPhoto){
+                // longhand method to define a button
+                // provides more features
+            }
+            },
+            takePhoto: {
+            text: 'Take Photo', // text for button
+            btnClass: 'btn-blue', // class for the button
+            isHidden: false, // initially not hidden
+            isDisabled: false, // initially not disabled
+            action: function(takePhoto){
+                // longhand method to define a button
+                // provides more features
+            }
+        },
+            cancel:{
+                    text: 'Cancel', // text for button
+            btnClass: 'btn-danger', // class for the button
+            isHidden: false, // initially not hidden
+            isDisabled: false, // initially not disabled
+            action: function(cancel){
+                // longhand method to define a button
+                // provides more features
+            }
+            },
+        }
+        });
+    });
+
+    $('#faceUpload').change(function(){
+        $.confirm({
+            title: 'KYC - Face upload',
+            columnClass: 'col-md-6 col-md-offset-6',
+            content: 'Are you sure you want to upload image?',
+            buttons: {
+                confirm: function () {
+                    var imageUploadFormData = new FormData();
+
+                    imageUploadFormData.append(currentUserID+"_faceImage", $('#faceUpload')[0].files[0],currentUserID+"_faceImage");
+                            imageUploadFormData.append('userID', currentUserID);
+
+                            $("#faceUpload_btn").empty().append(
+                                '<div style="font-size:12px;font-weight:100">'+
+                                '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>'+
+                                ' Uploading'+
+                            '</div>'
+                            ).attr('disabled',true);
+
+                            var res;
+
+                            setTimeout(function(){
+                            res = JSON.parse(backendHandleFormData('saveFaceImageKyc',imageUploadFormData));
+
+                            $("#faceUpload_btn").empty().append(
+                                '<span><i id="faceCheckUpload_kyc" class="fa fa-picture-o fa-inverse"></i></span>'+
+                                '<span class="">Face</span>'
+                            ).removeAttr('disabled');
+
+                            console.log(res);
+
+                            if (res.error==0) {
+                                face_upload = 1;
+                                checkupload();
+
+                        $.toast({
+                            heading: '<h6>Face Image Uploaded</h6>',
+                            text: 'Successfull!',
+                            showHideTransition: 'slide',
+                            icon: 'success',
+                            position: 'bottom-center'
+                        })
+                            }else{
+                                $.toast({
+                                    heading: '<h6>Error In uploading. Please check if network is strong and contact system admin</h6>',
+                                    text: 'Successfull!',
+                                    showHideTransition: 'slide',
+                                    icon: 'success',
+                                    position: 'bottom-center'
+                                })
+                            }
+                            },2000)
+
+                        
+                },cancel: function () {
+                    
+                },
+            }
+        });
+    });
+
+    $('#IDUpload').change(function(){
+        $.confirm({
+            title: 'KYC - ID upload',
+            columnClass: 'col-md-6 col-md-offset-6',
+            content: 'Are you sure you want to upload image?',
+            buttons: {
+                confirm: function () {
+                    var imageUploadFormData = new FormData();
+
+                            imageUploadFormData.append(currentUserID+"_IDImage", $('#IDUpload')[0].files[0],currentUserID+"_IDImage");
+                            imageUploadFormData.append('userID', currentUserID);
+
+                            $("#IDUpload_btn").empty().append(
+                            '<div style="font-size:12px;font-weigt:100">'+
+                            '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>'+
+                            ' Uploading'+
+                        '</div>'
+                            ).attr('disabled',true);
+
+                            var res;
+
+                            setTimeout(function(){
+                            var res = JSON.parse(backendHandleFormData('saveIDImageKyc',imageUploadFormData));
+                                    console.log(res);
+
+                                $("#IDUpload_btn").empty().append(
+                                    '<span><i id="IDCheckUpload_kyc" class="fa fa-picture-o fa-inverse"></i></span>'+
+                                    '<span  class="">ID</span>'
+                                ).removeAttr('disabled');
+
+                                    if (res.error==0) {
+                                        id_upload = 1;
+                                        checkupload();
+
+                                $.toast({
+                                    heading: '<h6>ID Image Uploaded</h6>',
+                                    text: 'Successfull!',
+                                    showHideTransition: 'slide',
+                                    icon: 'success',
+                                    position: 'bottom-center'
+                                })
+                                    }else{
+                                        $.toast({
+                                            heading: '<h6>Error In uploading. Please check if network is strong and contact system admin</h6>',
+                                            text: 'Successfull!',
+                                            showHideTransition: 'slide',
+                                            icon: 'success',
+                                            position: 'bottom-center'
+                                        })
+                                    }
+                            },2000)
+
+                            
+
+                            
+                },cancel: function () {
+                    
+                },
+            }
+        });
+    });
+
+    $('input[name="birthday"]').change(function(){
+        var res = ajaxShortLink("saveBirthday",{
+            "birthday":$(this).val(),
+            "userID":currentUserID,
+        });
+
+        if(res==false){
+            $.alert("Error in Uploading Birthdate, please contact system admin.<hr><div><b class='text-center'> ErrorCode:521</b></div>");
+        }
+    });
+
+    function checkupload(){
+        if (id_upload == 1 && face_upload == 0){
+            $('#instruction_kyc').html("\
+            <span>Ensure that face is centered and visible when capturing the photo to avoid facial recognition errors</span>\
+            <br><i class='fa fa-check check_upload' aria-hidden='true'></i><span class='check_upload'> ID uploaded</span>\
+            ")
+        }else if(face_upload == 1 && id_upload == 0){
+            $('#instruction_kyc').html("\
+            <span>Ensure that face is centered and visible when capturing the photo to avoid facial recognition errors</span>\
+            <br><i class='fa fa-check check_upload' aria-hidden='true'></i><span class='check_upload'> Face uploaded</span>\
+            ")
+        }else{
+            // $('#noteslist_kyc').toggle();
+            $('#instruction_kyc').html("\
+            <i class='fa fa-check check_upload' aria-hidden='true'></i><span class='check_upload'> ID uploaded</span>\
+            <i class='fa fa-check check_upload' aria-hidden='true'></i><span class='check_upload'> Face uploaded</span><br>\
+            <span style='color:black;'> Uploaded! Kindly wait 1-3 working days for verification. Thank you</span>\
+            <button id='login_verify' class='login-signup-btn' onclick='login.click()' type='button'>\
+                <span>Proceed to login</span>\
+            </button>\
+            ")
+        }
+    }
+
+    new Rolldate({
+        el: '#birthday',
+        format: 'MM-DD-YYYY',
+        beginYear: 1940,
+        endYear: 2100,
+        lang:{
+            title:'Select date',
+            cancel: 'Cancel',
+            confirm: 'Confirm',
+            year: '',
+            month: '',
+            day:  ''
+        },
+    })
+</script>
