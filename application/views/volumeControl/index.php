@@ -37,7 +37,7 @@
 	  text-indent: -9999px;
 	  width: 100px;
 	  height: 50px;
-	  background: #5426de;
+	  background: grey;
 	  display: block;
 	  border-radius: 100px;
 	  position: relative;
@@ -56,7 +56,7 @@
 	}
 
 	#switch:checked + label {
-	  background: grey;
+	  background: #5426de;
 	}
 
 	#switch:checked + label:after {
@@ -76,7 +76,7 @@
 			<sub class="fw-bold">Click the toggle button if you want to enable the percentage selector</sub>
 	    </div>
 
-	    <input type="checkbox" id="switch" /><label for="switch">Toggle</label>
+	    <input type="checkbox" id="switch" onclick="toggle_btn()" /><label for="switch">Toggle</label>
 
 	    <br>
 
@@ -108,17 +108,19 @@
 </div>
 
 <script>
-
-	$(document).ready(function(){
-	  $("#switch").click(function(){
-	    $(".section-dashboard").toggle();
-	  });
-	});
+	function toggle_btn(){
+		if ($('#switch').is(":checked")==true) {
+			$(".section-dashboard").show();
+		}else{
+			$(".section-dashboard").toggle();
+		}
+	}
 
 	$(document).ready(function() {
 		$("#loading").toggle();
 		$("#footer").toggle();
 		$("#innerContainer").toggle();
+		$(".section-dashboard").toggle();
 	});
 
 	function rangeSlide(value) {
