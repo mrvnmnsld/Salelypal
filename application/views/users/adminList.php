@@ -66,8 +66,6 @@
 		});
 	});
 
-
-
 	function loadDatatable(url,data){
 		var callDataViaURLVal = ajaxShortLink(url,data);
 		$('#tableContainer').DataTable().destroy();
@@ -77,7 +75,7 @@
 	        buttons: [
 	            'copyHtml5',
 	            {
-                    extend: 'excelHtml5',
+                  extend: 'excelHtml5',
 	                title: 'data_export'
 	            },
 	            {

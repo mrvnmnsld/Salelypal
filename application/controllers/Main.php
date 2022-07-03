@@ -31,8 +31,6 @@ class main extends MY_Controller {
 		$this->load->view('wallet/homeViewNotVerified');
 	}
 
-	
-
 	public function paypaltest(){
 		$this->load->view('paypal/paypaltest');
 	}
@@ -156,8 +154,6 @@ class main extends MY_Controller {
    			echo json_encode(false);
    		}
 	}
-
-	
 
 	public function checkMobileNumberAvailability(){
 		$mobileNumber = $_GET['mobileNumber'];
@@ -551,7 +547,7 @@ class main extends MY_Controller {
 				$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
 
 				if ($checkIfExist[0]->IDImagePath != "") {
-					unlink($config['upload_path'].'/'.$_POST['userID'].'_idImage'.'.'.explode("/",$_FILES[$key]['type'])[1]);
+					unlink($config['upload_path'].'/'.$_POST['userID'].'_IDImage'.'.'.explode("/",$_FILES[$key]['type'])[1]);
 				}
 
 			}
@@ -1104,6 +1100,21 @@ class main extends MY_Controller {
 	public function cameraTest(){
 		$this->load->view('cameraTest');
 	}
+
+	public function checkIfKYCPhotoExists(){
+		$checkIfExist = $this->_getRecordsData(
+			$selectfields = array("kyc_image_tbl.*,user_tbl.birthday"), 
+			$tables = array('kyc_image_tbl','user_tbl'), 
+			$fieldName = array('kyc_image_tbl.userID'), $where = array($_GET['userID']), 
+			$join = array("kyc_image_tbl.userID = user_tbl.userID"), $joinType = array("inner"), $sortBy = null, 
+			$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+		);
+
+		echo json_encode($checkIfExist[0]);
+	}
+
+
+	
 
 	
 

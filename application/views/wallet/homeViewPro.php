@@ -581,6 +581,22 @@
 
 <script type="text/javascript">
 
+		var currentUser = JSON.parse(getLocalStorageByKey('currentUser'));
+
+		if (getLocalStorageByKey('currentUser')!=null) {
+			if (currentUser.verified==0) {
+				window.location.href = 'homeViewNotVerified';
+			}else{
+				if (currentUser.isPro==1) {
+					console.log("%cContinue!!","color: red; font-family:monospace; font-size: 30px");
+				}else{
+					window.location.href = 'homeView';
+				}
+			}
+		}else{
+			window.location.href = 'index';
+		}
+
 		$.confirm({
 			theme: 'dark',
 		    title: 'Testing Mode!',
@@ -592,8 +608,6 @@
 		    }
 		});
 
-		var currentUser = JSON.parse(getLocalStorageByKey('currentUser'));
-		// var currentUser = {'userID':"15","displayCurrency":"USD"}
 		var animtionSpeed = 250;
 		var	SelectedtransactionDetails = [];
 		var totalInUsd = 0;
@@ -1097,18 +1111,39 @@
 			});
 
 			$('#profile_btn').on('click',function(){
-				addBreadCrumbs("wallet/test-platform/user_profile/profile");
+				$("#profile_btn").css("pointer-events", "none");
+				$(this).css("pointer-events", "none");
 
-				$("html, body").animate({ scrollTop: 0 }, "slow");
-				$('#assets_container').css("display","none");
-				$("#container").fadeOut(animtionSpeed, function() {
-					$("#profile_btn").css('display',"none")
-					$("#top_back_btn").css('display',"block")
+				setTimeout(function(){
+					$(this).css("pointer-events", "auto");
+					$("#profile_btn").css("pointer-events", "auto");
+				},3000);
 
-		  			$("#container").empty();
-		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/user_profile/profile'}));
-		  			$("#container").fadeIn(animtionSpeed);
-				});
+				if ($('#assets_container').css("display") == 'none') {
+					continueThis()
+				}else{
+					setTimeout(function(){
+						continueThis()
+					},300);					
+				}
+
+				function continueThis(){
+					addBreadCrumbs("wallet/test-platform/user_profile/profile");
+
+					$("html, body").animate({ scrollTop: 0 }, "slow");
+					$('#assets_container').css("display","none");
+					$("#container").fadeOut(animtionSpeed, function() {
+						$("#profile_btn").css('display',"none")
+						$("#top_back_btn").css('display',"block")
+
+			  			$("#container").empty();
+			  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/user_profile/profile'}));
+			  			$("#container").fadeIn(animtionSpeed);
+					});
+				}
+
+
+				
 			});
 
 			$('#notif_btn').on('click',function(){
@@ -1379,6 +1414,14 @@
 		}
 
 		$("#top_back_btn").on("click",function(){
+			$("#profile_btn").css("pointer-events", "none");
+			$(this).css("pointer-events", "none");
+
+			setTimeout(function(){
+				$(this).css("pointer-events", "auto");
+				$("#profile_btn").css("pointer-events", "auto");
+			},3000);
+
 			breadCrumbs.pop()
 			// console.log(breadCrumbs[breadCrumbs.length-1]);
 			if (typeof tokenPriceInterval  != 'undefined') {
@@ -1390,23 +1433,15 @@
 			}else if(breadCrumbs[breadCrumbs.length-1]==undefined){
 				$.toast({
 				    text: "Can't go back, already on the first page", // Text that is to be shown in the toast
-				    
 				    icon: 'info', // Type of toast icon
 				    showHideTransition: 'slide', // fade, slide or plain
 				    allowToastClose: true, // Boolean value true or false
 				    hideAfter: 3000, // false to make it sticky or number representing the miliseconds as time after which toast needs to be hidden
 				    stack: false, // false if there should be only one toast at a time or a number representing the maximum number of toasts to be shown at a time
 				    position: 'bottom-center', // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
-				    
-				    
-				    
 				    textAlign: 'left',  // Text alignment i.e. left, right or center
 				    loader: true,  // Whether to show loader or not. True by default
 				    loaderBg: '#9EC600',  // Background color of the toast loader
-				    beforeShow: function () {}, // will be triggered before the toast is shown
-				    afterShown: function () {}, // will be triggered after the toat has been shown
-				    beforeHide: function () {}, // will be triggered before the toast gets hidden
-				    afterHidden: function () {}  // will be triggered after the toast has been hidden
 				});
 			}else{
 				$("html, body").animate({ scrollTop: 0 }, "slow");
@@ -1418,6 +1453,7 @@
 				  	$("#loading_text_container").text("Please wait");
 				});
 			}
+			
 		});
 
 

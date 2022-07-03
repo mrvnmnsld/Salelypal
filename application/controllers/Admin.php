@@ -73,6 +73,36 @@ class admin extends MY_Controller {
 	   		$sortOrder = array('desc'), $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
    		);
 
+   		foreach ($users as $key => $value) {
+   			if ($value->referType!=null&&$value->referType!=null) {
+	   			if ($value->referType == "agent") {
+			   		$res = $this->_getRecordsData(
+			   			$selectfields = array("agent_profile_tbl.*"), 
+				   		$tables = array('agent_profile_tbl'), 
+				   		$fieldName = array("id"), $where = array($value->referred_user_id), 
+				   		$join = null, $joinType = null, $sortBy = null, 
+				   		$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+			   		);
+	   			}else{
+	   				$res = $this->_getRecordsData(
+			   			$selectfields = array("user_tbl.*"), 
+				   		$tables = array('user_tbl'), 
+				   		$fieldName = array("userID"), $where = array($value->referred_user_id), 
+				   		$join = null, $joinType = null, $sortBy = null, 
+				   		$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+			   		);
+	   			}
+   				// echo $res[0]->fullname;
+				$users[$key]->referedConcat = ucfirst($value->referType).": ".$res[0]->email;
+
+   			}else{
+				$users[$key]->referedConcat = "No referral";
+   			}
+   			
+
+
+   		}
+
    		echo json_encode($users);
     }
 

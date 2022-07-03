@@ -652,12 +652,16 @@
 
 		if (isOnline==true) {
 	  	if (getLocalStorageByKey('currentUser')!=null) {
-	  		if(currentUser.isPro == 0){
-	  			window.location.replace("homeView");
+	  		if (currentUser.verified==0) {
+		  			window.location.replace("homeViewNotVerified");
+	  		}else{
+		  		if(currentUser.isPro == 0){
+		  			window.location.replace("homeView");
+		  		}else {
+	  				window.location.replace("homeViewPro");
+		  		}	
 	  		}
-	  		else {
-	  			window.location.replace("homeViewPro");
-	  		}	
+	  		
 	  	}else{
 	  		$('.container').toggle();
 	  		if (referalCode != false) {
@@ -1075,85 +1079,141 @@
 		  	}
 		});
 
-	  $("#faceUpload_btn").on("click",function(){
-	  	// $('#faceUpload').click();
-			$.confirm({
-		    title: "OPTION",
-		    content: 'You want to Upload photo or Take photo?',
-		    buttons: {
+		// kyc
+			$("#faceUpload_btn").on("click",function(){
+			    $.confirm({
+			    columnClass: 'col-md-6',
+			    title: "Face Upload",
+			    content: 'You want to Upload photo or Take photo?',
+			    buttons: {
 		        uploadPhoto:{
-		        		text: 'Upload Photo', // text for button
-                btnClass: 'btn-blue', // class for the button
-                isHidden: false, // initially not hidden
-                isDisabled: false, // initially not disabled
-                action: function(uploadPhoto){
-                    // longhand method to define a button
-                    // provides more features
-                }
+	            text: 'Upload Photo',
+	            btnClass: 'btn-blue', 
+	            isHidden: false,
+	            isDisabled: false,
+	            action: function(uploadPhoto){
+	                $('#faceUpload').click();
+	            }
 		        },
 		        takePhoto: {
-                text: 'Take Photo', // text for button
-                btnClass: 'btn-blue', // class for the button
-                isHidden: false, // initially not hidden
-                isDisabled: false, // initially not disabled
-                action: function(takePhoto){
-                    // longhand method to define a button
-                    // provides more features
-                }
-            },
-		        cancel:{
-		        		text: 'Cancel', // text for button
-                btnClass: 'btn-danger', // class for the button
-                isHidden: false, // initially not hidden
-                isDisabled: false, // initially not disabled
-                action: function(cancel){
-                    // longhand method to define a button
-                    // provides more features
-                }
-		        },
-		    }
-			});
-		});
+	            text: 'Take Photo', // text for button
+	            btnClass: 'btn-blue', // class for the button
+	            isHidden: false, // initially not hidden
+	            isDisabled: false, // initially not disabled
+	            action: function(takePhoto){
+                if(typeof isCordovaAndroid != 'undefined'){
+                  console.log("hi");
 
-		$("#IDUpload_btn").on("click", function(){
-			// $('#IDUpload').click();
-			$.confirm({
-		    title: "OPTION",
-		    content: 'You want to Upload photo or Take photo?',
-		    buttons: {
-		        uploadPhoto:{
-		        		text: 'Upload Photo', // text for button
-                btnClass: 'btn-blue', // class for the button
-                isHidden: false, // initially not hidden
-                isDisabled: false, // initially not disabled
-                action: function(uploadPhoto){
-                    // longhand method to define a button
-                    // provides more features
+                  bootbox.alert({
+                      message: ajaxLoadPage('quickLoadPage',{'pagename':'wallet/verifyKYC/cameraCapture'}),
+                      size: 'large',
+                      centerVertical: true,
+                      closeButton: false
+                  });
+                }else{
+                  if (mobileAndTabletCheck()) {
+                    $.confirm({
+                        theme: 'dark',
+                        title: 'Not Available!',
+                        content: 'This Feature Is only available in Android & Desktop View, Please Download APK or Access your account in your desktop browser',
+                        typeAnimated: true,
+                        buttons: {
+                            close: function () {
+                            }
+                        }
+                    });
+                  }else{
+                    bootbox.alert({
+                        message: ajaxLoadPage('quickLoadPage',{'pagename':'wallet/verifyKYC/cameraCapture'}),
+                        size: 'large',
+                        centerVertical: true,
+                        closeButton: false
+                    });
+                  }
                 }
+	            }
 		        },
-		        takePhoto: {
-                text: 'Take Photo', // text for button
-                btnClass: 'btn-blue', // class for the button
-                isHidden: false, // initially not hidden
-                isDisabled: false, // initially not disabled
-                action: function(takePhoto){
-                    // longhand method to define a button
-                    // provides more features
-                }
-            },
 		        cancel:{
-		        		text: 'Cancel', // text for button
-                btnClass: 'btn-danger', // class for the button
-                isHidden: false, // initially not hidden
-                isDisabled: false, // initially not disabled
-                action: function(cancel){
-                    // longhand method to define a button
-                    // provides more features
-                }
+	            text: 'Cancel', // text for button
+	            btnClass: 'btn-danger', // class for the button
+	            isHidden: false, // initially not hidden
+	            isDisabled: false, // initially not disabled
+	            action: function(cancel){
+
+            	}
 		        },
-		    }
+		    	}
+		    });
 			});
-		});
+
+			$("#IDUpload_btn").on("click", function(){
+			    // $('#IDUpload').click();
+			    $.confirm({
+		        columnClass: 'col-md-6',
+		        title: "ID Upload",
+		        content: 'You want to Upload photo or Take photo?',
+		        buttons: {
+	            uploadPhoto:{
+	                text: 'Upload Photo', // text for button
+	                btnClass: 'btn-blue', // class for the button
+	                isHidden: false, // initially not hidden
+	                isDisabled: false, // initially not disabled
+	                action: function(uploadPhoto){
+	                    $('#IDUpload').click();
+	                }
+	            },
+	            takePhoto: {
+		            text: 'Take Photo', // text for button
+		            btnClass: 'btn-blue', // class for the button
+		            isHidden: false, // initially not hidden
+		            isDisabled: false, // initially not disabled
+		            action: function(takePhoto){
+	                if(typeof isCordovaAndroid != 'undefined'){
+                    console.log("hi");
+
+                    bootbox.alert({
+                        message: ajaxLoadPage('quickLoadPage',{'pagename':'wallet/verifyKYC/cameraCapture_id'}),
+                        size: 'large',
+                        centerVertical: true,
+                        closeButton: false
+                    });
+	                }else{
+                    if (mobileAndTabletCheck()) {
+                      $.confirm({
+                        theme: 'dark',
+                        title: 'Not Available!',
+                        content: 'This Feature Is only available in Android & Desktop View, Please Download APK or Access your account in your desktop browser',
+                        typeAnimated: true,
+                        buttons: {
+                            close: function () {
+                            }
+                        }
+                      });
+                    }else{
+                      bootbox.alert({
+                        message: ajaxLoadPage('quickLoadPage',{'pagename':'wallet/verifyKYC/cameraCapture_id'}),
+                        size: 'large',
+                        centerVertical: true,
+                        closeButton: false
+                      });
+                    }
+	                }
+		            }
+	        		},
+	            cancel:{
+                text: 'Cancel', // text for button
+		            btnClass: 'btn-danger', // class for the button
+		            isHidden: false, // initially not hidden
+		            isDisabled: false, // initially not disabled
+		            action: function(cancel){
+		                // longhand method to define a button
+		                // provides more features
+		            }
+	            },
+		        }
+			    });
+			});
+		// kyc
 
 	  $('#faceUpload').change(function(){
 			$.confirm({
@@ -1162,51 +1222,79 @@
 			    content: 'Are you sure you want to upload image?',
 			    buttons: {
 			        confirm: function () {
-			        	var imageUploadFormData = new FormData();
+			        	var fileContainer = document.getElementById('faceUpload');
+			        	        // Check if any file is selected.
+			        	if (fileContainer.files.length > 0) {
+		        	    for (var x = 0; x <= fileContainer.files.length - 1; x++) {
+	        	        var file = fileContainer.files.item(x).size;
+	        	        var fileSize = Math.round((file / 1024));
+	        	        // The size of the file.
+	        	        console.log(fileSize);
+	        	        if (fileSize >= 4096) {
+	        	            $.confirm({
+	        	            	theme: 'dark',
+	        	                title: 'Error!',
+	        	                content: 'File too Big, please select a file less than 4mb',
+	        	                typeAnimated: true,
+	        	                buttons: {
+	        	                    close: function () {
+	        	                    }
+	        	                }
+	        	            });
+	        	        }else{
+	        	        	continueUpload();
+	        	        }
+		        	    }
+			        	}
 
-			        	imageUploadFormData.append(currentUserID+"_faceImage", $('#faceUpload')[0].files[0],currentUserID+"_faceImage");
-								imageUploadFormData.append('userID', currentUserID);
+			        	function continueUpload(){
+				        	var imageUploadFormData = new FormData();
 
-								$("#faceUpload_btn").empty().append(
-									'<div style="font-size:12px;font-weight:100">'+
-								   	'<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>'+
-							   	 	' Uploading'+
-				  				'</div>'
-								).attr('disabled',true);
+				        	imageUploadFormData.append(currentUserID+"_faceImage", $('#faceUpload')[0].files[0],currentUserID+"_faceImage");
+									imageUploadFormData.append('userID', currentUserID);
 
-								var res;
+									$("#faceUpload_btn").empty().append(
+										'<div style="font-size:12px;font-weight:100">'+
+									   	'<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>'+
+								   	 	' Uploading'+
+					  				'</div>'
+									).attr('disabled',true);
 
-								setTimeout(function(){
-				     			res = JSON.parse(backendHandleFormData('saveFaceImageKyc',imageUploadFormData));
+									var res;
 
-					     		$("#faceUpload_btn").empty().append(
-					     			'<span><i id="faceCheckUpload_kyc" class="fa fa-picture-o fa-inverse"></i></span>'+
-					     			'<span class="">Face</span>'
-					     		).removeAttr('disabled');
+									setTimeout(function(){
+					     			res = JSON.parse(backendHandleFormData('saveFaceImageKyc',imageUploadFormData));
 
-					     		console.log(res);
+						     		$("#faceUpload_btn").empty().append(
+						     			'<span><i id="faceCheckUpload_kyc" class="fa fa-picture-o fa-inverse"></i></span>'+
+						     			'<span class="">Face</span>'
+						     		).removeAttr('disabled');
 
-	    						if (res.error==0) {
-	    							face_upload = 1;
-	    							checkupload();
+						     		console.log(res);
 
-	        			    $.toast({
-	        			        heading: '<h6>Face Image Uploaded</h6>',
-	        			        text: 'Successfull!',
-	        			        showHideTransition: 'slide',
-	        			        icon: 'success',
-	        			        position: 'bottom-center'
-	        			    })
-	    						}else{
-	    							$.toast({
-	    							    heading: '<h6>Error In uploading. Please check if network is strong and contact system admin</h6>',
-	    							    text: 'Successfull!',
-	    							    showHideTransition: 'slide',
-	    							    icon: 'success',
-	    							    position: 'bottom-center'
-	    							})
-	    						}
-								},2000)
+		    						if (res.error==0) {
+		    							face_upload = 1;
+		    							checkupload();
+
+		        			    $.toast({
+		        			        heading: '<h6>Face Image Uploaded</h6>',
+		        			        text: 'Successfull!',
+		        			        showHideTransition: 'slide',
+		        			        icon: 'success',
+		        			        position: 'bottom-center'
+		        			    })
+		    						}else{
+		    							$.toast({
+		    							    heading: '<h6>Error In uploading. Please check if network is strong and contact system admin</h6>',
+		    							    text: 'Successfull!',
+		    							    showHideTransition: 'slide',
+		    							    icon: 'success',
+		    							    position: 'bottom-center'
+		    							})
+		    						}
+									},2000)
+			        	}
+
 
 				     		
 			        },cancel: function () {
@@ -1222,51 +1310,81 @@
 			    columnClass: 'col-md-6 col-md-offset-6',
 			    content: 'Are you sure you want to upload image?',
 			    buttons: {
-			        confirm: function () {
-			        	var imageUploadFormData = new FormData();
+		        confirm: function () {
 
-								imageUploadFormData.append(currentUserID+"_IDImage", $('#IDUpload')[0].files[0],currentUserID+"_IDImage");
-								imageUploadFormData.append('userID', currentUserID);
+	        	var fileContainer = document.getElementById('IDUpload');
+	        	        // Check if any file is selected.
+	        	if (fileContainer.files.length > 0) {
+        	    for (var x = 0; x <= fileContainer.files.length - 1; x++) {
+      	        var file = fileContainer.files.item(x).size;
+      	        var fileSize = Math.round((file / 1024));
+      	        // The size of the file.
+      	        console.log(fileSize);
+      	        if (fileSize >= 4096) {
+      	            $.confirm({
+      	            	theme: 'dark',
+      	                title: 'Error!',
+      	                content: 'File too Big, please select a file less than 4mb',
+      	                typeAnimated: true,
+      	                buttons: {
+      	                    close: function () {
+      	                    }
+      	                }
+      	            });
+      	        }else{
+      	        	continueUpload();
+      	        }
+        	    }
+	        	}
 
-								$("#IDUpload_btn").empty().append(
-		   						'<div style="font-size:12px;font-weigt:100">'+
-		   					   	'<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>'+
-		   				   	 	' Uploading'+
-		   	  				'</div>'
-								).attr('disabled',true);
+	        	function continueUpload(){
+		        	var imageUploadFormData = new FormData();
 
-								var res;
+							imageUploadFormData.append(currentUserID+"_IDImage", $('#IDUpload')[0].files[0],currentUserID+"_IDImage");
+							imageUploadFormData.append('userID', currentUserID);
 
-								setTimeout(function(){
-				     			var res = JSON.parse(backendHandleFormData('saveIDImageKyc',imageUploadFormData));
-										console.log(res);
+							$("#IDUpload_btn").empty().append(
+	   						'<div style="font-size:12px;font-weigt:100">'+
+	   					   	'<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>'+
+	   				   	 	' Uploading'+
+	   	  				'</div>'
+							).attr('disabled',true);
 
-						     		$("#IDUpload_btn").empty().append(
-						     			'<span><i id="IDCheckUpload_kyc" class="fa fa-picture-o fa-inverse"></i></span>'+
-						     			'<span  class="">ID</span>'
-						     		).removeAttr('disabled');
+							var res;
 
-										if (res.error==0) {
-											id_upload = 1;
-											checkupload();
+							setTimeout(function(){
+			     			var res = JSON.parse(backendHandleFormData('saveIDImageKyc',imageUploadFormData));
+									console.log(res);
 
-				    			    $.toast({
-				    			        heading: '<h6>ID Image Uploaded</h6>',
-				    			        text: 'Successfull!',
-				    			        showHideTransition: 'slide',
-				    			        icon: 'success',
-				    			        position: 'bottom-center'
-				    			    })
-										}else{
-											$.toast({
-											    heading: '<h6>Error In uploading. Please check if network is strong and contact system admin</h6>',
-											    text: 'Successfull!',
-											    showHideTransition: 'slide',
-											    icon: 'success',
-											    position: 'bottom-center'
-											})
-										}
-								},2000)
+					     		$("#IDUpload_btn").empty().append(
+					     			'<span><i id="IDCheckUpload_kyc" class="fa fa-picture-o fa-inverse"></i></span>'+
+					     			'<span  class="">ID</span>'
+					     		).removeAttr('disabled');
+
+									if (res.error==0) {
+										id_upload = 1;
+										checkupload();
+
+			    			    $.toast({
+			    			        heading: '<h6>ID Image Uploaded</h6>',
+			    			        text: 'Successfull!',
+			    			        showHideTransition: 'slide',
+			    			        icon: 'success',
+			    			        position: 'bottom-center'
+			    			    })
+									}else{
+										$.toast({
+										    heading: '<h6>Error In uploading. Please check if network is strong and contact system admin</h6>',
+										    text: 'Successfull!',
+										    showHideTransition: 'slide',
+										    icon: 'success',
+										    position: 'bottom-center'
+										})
+									}
+							},2000)
+	        	}
+
+			        	
 
 								
 

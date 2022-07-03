@@ -484,6 +484,23 @@
 <!-- translate -->
 
 <script type="text/javascript">
+		var currentUser = JSON.parse(getLocalStorageByKey('currentUser'));
+
+		if (getLocalStorageByKey('currentUser')!=null) {
+			if (currentUser.verified==0) {
+				// window.location.href = 'homeViewNotVerified';
+				console.log("%cContinue!!","color: red; font-family:monospace; font-size: 30px");
+			}else{
+				if (currentUser.isPro==1) {
+					window.location.href = 'homeViewPro';
+				}else{
+					window.location.href = 'homeView';
+				}
+			}
+		}else{
+			window.location.href = 'index';
+
+		}
 
 		$.confirm({
 			theme: 'dark',
@@ -496,7 +513,6 @@
 		    }
 		});
 
-		var currentUser = JSON.parse(getLocalStorageByKey('currentUser'));
 		// var currentUser = {'userID':"15","displayCurrency":"USD"}
 		var animtionSpeed = 250;
 		var	SelectedtransactionDetails = [];
@@ -520,6 +536,7 @@
 
 
 		//initial
+			
 			$("#username_container").text(currentUser.fullname.split(" ")[0]);
 
 			var priceAlert = ajaxShortLink('userWallet/triggerPriceAlerts',{'userID':

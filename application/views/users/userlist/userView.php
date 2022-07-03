@@ -68,6 +68,12 @@
 		<div class="col-md" id="mobileNumberContainer"></div>	
 	</div>
 
+
+	<div class="row mt-1">
+		<div class="col-md-3 pl-3"><b>Referred By:</b></div>	
+		<div class="col-md" id="referredByContainer"></div>	
+	</div>
+
 	<div class="row mt-1">
 		<div class="col-md-3 pl-3"><b>Block:</b></div>	
 		<div class="col-md" id="blockContainer"></div>	
@@ -129,7 +135,8 @@
 	$("#birthdayContainer").append(selectedData["birthday"]);
 	$("#mobileNumberContainer").append(selectedData["mobileNumber"]);
 	// $("#ipContainer").append(selectedData["ip_lastLogin"]);
-	$("#vipContainer").append("VIP "+selectedData["vip_id"]);
+	$("#referredByContainer").append(selectedData["referedConcat"]);
+
 	
 	console.log(selectedData);
 
@@ -146,6 +153,12 @@
 		$('#lastLoginContainer').text("No Data");
 	}else{
 		$("#lastLoginContainer").append(selectedData["lastLoginDate"]+" IP: "+selectedData["ip_lastLogin"]);
+	}
+
+	if (selectedData["birthday"] == null) {
+		$('#birthdayContainer').text("No Data");
+	}else{
+		$("#birthdayContainer").append(selectedData["birthday"]+" IP: "+selectedData["ip_lastLogin"]);
 	}
 
 	if (selectedData["verified"] == 1) {

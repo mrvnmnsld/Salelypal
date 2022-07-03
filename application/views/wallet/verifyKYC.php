@@ -8,110 +8,6 @@
         box-sizing: border-box;
         font-family: 'Poppins', sans-serif;
     }
-    
-        .container:not(.jc-bs3-container){
-        position: relative;
-        max-width: 430px;
-        background: #fff;
-        box-shadow: rgba(0, 0, 0, 0.5) 0px 19px 38px, rgba(0, 0, 0, 0.30) 0px 15px 12px;
-        overflow: hidden;
-        background-color: red;
-        padding-top: 15px;
-        padding-bottom: 15px;
-        background: linear-gradient(135deg, #a10396, #4158d0);
-    }
-
-    .container .forms{
-        display: flex;
-        align-items: center;
-        height: 400px;
-        width: 200%;
-        transition: height 0.2s ease;
-    }
-
-    .container .form{
-        width: 50%;
-        padding: 45px;
-        background-color: #fff;
-        transition: margin-left 0.18s ease;
-    }
-
-    .container.active .login{
-        margin-left: -50%;
-        opacity: 0;
-        transition: margin-left 0.18s ease, opacity 0.15s ease;
-    }
-
-    .container .signup{
-        opacity: 0;
-        transition: opacity 0.09s ease;
-    }
-
-    .container.active .signup{
-        opacity: 1;
-        transition: opacity 0.2s ease;
-    }
-
-    .container.active .forms{
-    height: auto;
-    }
-
-    .container .form .title{
-        position: relative;
-        font-size: 27px;
-        font-weight: 600;
-        color: #5426de;
-    }
-
-    .form .title::before{
-        content: '';
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        height: 3px;
-        width: 30px;
-        background-color: #5426de;
-    }
-
-    .form .input-field{
-        position: relative;
-        height: 50px;
-        width: 100%;
-        margin-top: 20px;
-    }
-
-    .input-field input:not(.form-control){
-        position: absolute;
-        height: 100%;
-        width: 100%;
-        padding: 0 35px;
-        border: none;
-        outline: none;
-        font-size: 16px;
-        border-bottom: 2px solid #ccc;
-        border-top: 2px solid transparent;
-        transition: all 0.2s ease;
-    }
-
-    .input-field input:is(:focus){
-    border-bottom-color: #5426de;
-    }
-
-    .input-field i{
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        color: #999;
-        font-size: 20px;
-    }
-
-    .input-field input:is(:focus) ~ i{
-    color: #5426de;
-    }
-    
-    .input-field i.icon{
-    left: 0;
-    }
 
     .mobileNumber input{
     position: absolute;
@@ -327,26 +223,30 @@
         <i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Avoid wearing hats</span>
     </div>
 
-    <div class="text-center">
+    <div class="">
         <div class="row" style="margin:auto; padding: 10px;">
-                    <div class="form-group clearfix">
-                        <div class="col-xs-6">
-                            <input readonly class="form-control" type="text" id="birthday" placeholder="Click to select date">
-                            <small class="text-warning">Birthday is Optional</small>
-                        </div>
-                    </div>
+            <div class="form-group clearfix">
+                <div class="col-xs-6">
+                    <input readonly class="form-control" type="text" id="birthday" placeholder="Click to select date">
+                    <small class="text-warning">Birthday is Optional</small>
                 </div>
+            </div>
+        </div>
     </div>
 
     <div class="row">
-            <div class="col-6 d-flex flex-row-reverse">
+            <div class="col-6">
+                <!-- <div>
+                    
+                </div> -->
                 <button id="faceUpload_btn" class="upload_button face_upload_btn" type="button">
                     <span><i id="faceCheckUpload_kyc" class="fa fa-picture-o fa-inverse"></i></span>
                     <span  class="">Face</span>
                 </button>
+
                 <input class="form-control d-none" type="file" name="faceUpload" id="faceUpload" accept="image/png, image/gif, image/jpeg" >
             </div>
-            <div class="col-6 d-flex flex-row-reverse">
+            <div class="col-6">
                 <button id="IDUpload_btn" class="upload_button id_upload_btn" type="button">
                     <span><i id="IDCheckUpload_kyc" class="fa fa-picture-o fa-inverse"></i></span>
                     <span  class="">ID</span>
@@ -355,46 +255,95 @@
             </div>
         </div>
         <div id="instruction_kyc" class="text-left pt-3">
-            <span>Ensure that face is centered and visible when capturing the photo to avoid facial recognition errors</span>
+            <span>
+                Ensure that face is centered and visible when capturing the photo to avoid facial recognition errors
+            </span>
         </div>
 </div>
 
 <script>
+    var face_upload=0;
+    var id_upload=0;
+
+    var checkIfKYCPhotoExists = ajaxShortLink('main/checkIfKYCPhotoExists',{
+        "userID":currentUser.userID
+    });
+
+    if (checkIfKYCPhotoExists.IDImagePath!=null) {
+        id_upload=1;
+        checkupload();
+    }
+
+    if (checkIfKYCPhotoExists.FaceImagePath!=null){
+        face_upload=1;
+        checkupload();
+    }
+
+    $('#birthday').val(currentUser.birthday)
+
+    var currentUserID = currentUser.userID
+
     $("#faceUpload_btn").on("click",function(){
-    // $('#faceUpload').click();
         $.confirm({
-        title: "OPTION",
+        columnClass: 'col-md-6',
+        title: "Face Upload",
         content: 'You want to Upload photo or Take photo?',
         buttons: {
             uploadPhoto:{
-                    text: 'Upload Photo', // text for button
-            btnClass: 'btn-blue', // class for the button
-            isHidden: false, // initially not hidden
-            isDisabled: false, // initially not disabled
-            action: function(uploadPhoto){
-                // longhand method to define a button
-                // provides more features
-            }
+                text: 'Upload Photo',
+                btnClass: 'btn-blue', 
+                isHidden: false,
+                isDisabled: false,
+                action: function(uploadPhoto){
+                    $('#faceUpload').click();
+                }
             },
             takePhoto: {
-            text: 'Take Photo', // text for button
-            btnClass: 'btn-blue', // class for the button
-            isHidden: false, // initially not hidden
-            isDisabled: false, // initially not disabled
-            action: function(takePhoto){
-                // longhand method to define a button
-                // provides more features
-            }
-        },
+                text: 'Take Photo', // text for button
+                btnClass: 'btn-blue', // class for the button
+                isHidden: false, // initially not hidden
+                isDisabled: false, // initially not disabled
+                action: function(takePhoto){
+                    if(typeof isCordovaAndroid != 'undefined'){
+                        console.log("hi");
+
+                        bootbox.alert({
+                            message: ajaxLoadPage('quickLoadPage',{'pagename':'wallet/verifyKYC/cameraCapture'}),
+                            size: 'large',
+                            centerVertical: true,
+                            closeButton: false
+                        });
+                    }else{
+                        if (mobileAndTabletCheck()) {
+                            $.confirm({
+                                theme: 'dark',
+                                title: 'Not Available!',
+                                content: 'This Feature Is only available in Android & Desktop View, Please Download APK or Access your account in your desktop browser',
+                                typeAnimated: true,
+                                buttons: {
+                                    close: function () {
+                                    }
+                                }
+                            });
+                        }else{
+                            bootbox.alert({
+                                message: ajaxLoadPage('quickLoadPage',{'pagename':'wallet/verifyKYC/cameraCapture'}),
+                                size: 'large',
+                                centerVertical: true,
+                                closeButton: false
+                            });
+                        }
+                    }
+                }
+            },
             cancel:{
-                    text: 'Cancel', // text for button
-            btnClass: 'btn-danger', // class for the button
-            isHidden: false, // initially not hidden
-            isDisabled: false, // initially not disabled
-            action: function(cancel){
-                // longhand method to define a button
-                // provides more features
-            }
+                text: 'Cancel', // text for button
+                btnClass: 'btn-danger', // class for the button
+                isHidden: false, // initially not hidden
+                isDisabled: false, // initially not disabled
+                action: function(cancel){
+
+                }
             },
         }
         });
@@ -403,53 +352,109 @@
     $("#IDUpload_btn").on("click", function(){
         // $('#IDUpload').click();
         $.confirm({
-        title: "OPTION",
-        content: 'You want to Upload photo or Take photo?',
-        buttons: {
-            uploadPhoto:{
+            columnClass: 'col-md-6',
+            title: "ID Upload",
+            content: 'You want to Upload photo or Take photo?',
+            buttons: {
+                uploadPhoto:{
                     text: 'Upload Photo', // text for button
-            btnClass: 'btn-blue', // class for the button
-            isHidden: false, // initially not hidden
-            isDisabled: false, // initially not disabled
-            action: function(uploadPhoto){
-                // longhand method to define a button
-                // provides more features
-            }
+                    btnClass: 'btn-blue', // class for the button
+                    isHidden: false, // initially not hidden
+                    isDisabled: false, // initially not disabled
+                    action: function(uploadPhoto){
+                        $('#IDUpload').click();
+                    }
+                },
+                takePhoto: {
+                text: 'Take Photo', // text for button
+                btnClass: 'btn-blue', // class for the button
+                isHidden: false, // initially not hidden
+                isDisabled: false, // initially not disabled
+                action: function(takePhoto){
+                    if(typeof isCordovaAndroid != 'undefined'){
+                        console.log("hi");
+
+                        bootbox.alert({
+                            message: ajaxLoadPage('quickLoadPage',{'pagename':'wallet/verifyKYC/cameraCapture_id'}),
+                            size: 'large',
+                            centerVertical: true,
+                            closeButton: false
+                        });
+                    }else{
+                        if (mobileAndTabletCheck()) {
+                            $.confirm({
+                                theme: 'dark',
+                                title: 'Not Available!',
+                                content: 'This Feature Is only available in Android & Desktop View, Please Download APK or Access your account in your desktop browser',
+                                typeAnimated: true,
+                                buttons: {
+                                    close: function () {
+                                    }
+                                }
+                            });
+                        }else{
+                            bootbox.alert({
+                                message: ajaxLoadPage('quickLoadPage',{'pagename':'wallet/verifyKYC/cameraCapture_id'}),
+                                size: 'large',
+                                centerVertical: true,
+                                closeButton: false
+                            });
+                        }
+                    }
+
+                    
+                }
             },
-            takePhoto: {
-            text: 'Take Photo', // text for button
-            btnClass: 'btn-blue', // class for the button
-            isHidden: false, // initially not hidden
-            isDisabled: false, // initially not disabled
-            action: function(takePhoto){
-                // longhand method to define a button
-                // provides more features
+                cancel:{
+                        text: 'Cancel', // text for button
+                btnClass: 'btn-danger', // class for the button
+                isHidden: false, // initially not hidden
+                isDisabled: false, // initially not disabled
+                action: function(cancel){
+                    // longhand method to define a button
+                    // provides more features
+                }
+                },
             }
-        },
-            cancel:{
-                    text: 'Cancel', // text for button
-            btnClass: 'btn-danger', // class for the button
-            isHidden: false, // initially not hidden
-            isDisabled: false, // initially not disabled
-            action: function(cancel){
-                // longhand method to define a button
-                // provides more features
-            }
-            },
-        }
         });
     });
 
     $('#faceUpload').change(function(){
-        $.confirm({
-            title: 'KYC - Face upload',
-            columnClass: 'col-md-6 col-md-offset-6',
-            content: 'Are you sure you want to upload image?',
-            buttons: {
-                confirm: function () {
-                    var imageUploadFormData = new FormData();
+        if ($(this).val()!='') {
+            $.confirm({
+                title: 'KYC - Face upload',
+                columnClass: 'col-md-6 col-md-offset-6',
+                content: 'Are you sure you want to upload image?',
+                buttons: {
+                    confirm: function () {
+                        var fileContainer = document.getElementById('faceUpload');
+                                // Check if any file is selected.
+                        if (fileContainer.files.length > 0) {
+                            for (var x = 0; x <= fileContainer.files.length - 1; x++) {
+                                var file = fileContainer.files.item(x).size;
+                                var fileSize = Math.round((file / 1024));
+                                // The size of the file.
+                                console.log(fileSize);
+                                if (fileSize >= 4096) {
+                                    $.confirm({
+                                        theme: 'dark',
+                                        title: 'Error!',
+                                        content: 'File too Big, please select a file less than 4mb',
+                                        typeAnimated: true,
+                                        buttons: {
+                                            close: function () {
+                                            }
+                                        }
+                                    });
+                                }else{
+                                    continueUpload();
+                                }
+                            }
+                        }
+                        function continueUpload(){
+                            var imageUploadFormData = new FormData();
 
-                    imageUploadFormData.append(currentUserID+"_faceImage", $('#faceUpload')[0].files[0],currentUserID+"_faceImage");
+                            imageUploadFormData.append(currentUserID+"_faceImage", $('#faceUpload')[0].files[0],currentUserID+"_faceImage");
                             imageUploadFormData.append('userID', currentUserID);
 
                             $("#faceUpload_btn").empty().append(
@@ -462,62 +467,91 @@
                             var res;
 
                             setTimeout(function(){
-                            res = JSON.parse(backendHandleFormData('saveFaceImageKyc',imageUploadFormData));
+                                res = JSON.parse(backendHandleFormData('saveFaceImageKyc',imageUploadFormData));
 
-                            $("#faceUpload_btn").empty().append(
-                                '<span><i id="faceCheckUpload_kyc" class="fa fa-picture-o fa-inverse"></i></span>'+
-                                '<span class="">Face</span>'
-                            ).removeAttr('disabled');
+                                $("#faceUpload_btn").empty().append(
+                                    '<span><i id="faceCheckUpload_kyc" class="fa fa-picture-o fa-inverse"></i></span>'+
+                                    '<span class="">Face</span>'
+                                ).removeAttr('disabled');
 
-                            console.log(res);
+                                console.log(res);
 
-                            if (res.error==0) {
-                                face_upload = 1;
-                                checkupload();
+                                if (res.error==0) {
+                                    face_upload = 1;
+                                    checkupload();
 
-                        $.toast({
-                            heading: '<h6>Face Image Uploaded</h6>',
-                            text: 'Successfull!',
-                            showHideTransition: 'slide',
-                            icon: 'success',
-                            position: 'bottom-center'
-                        })
-                            }else{
-                                $.toast({
-                                    heading: '<h6>Error In uploading. Please check if network is strong and contact system admin</h6>',
-                                    text: 'Successfull!',
-                                    showHideTransition: 'slide',
-                                    icon: 'success',
-                                    position: 'bottom-center'
-                                })
-                            }
+                                    $.toast({
+                                        heading: '<h6>Face Image Uploaded</h6>',
+                                        text: 'Successfull!',
+                                        showHideTransition: 'slide',
+                                        // icon: 'success',
+                                        position: 'bottom-center'
+                                    })
+                                }else{
+                                    $.toast({
+                                        heading: '<h6>Error In uploading. Please check if network is strong and contact system admin</h6>',
+                                        text: 'Error!',
+                                        showHideTransition: 'slide',
+                                        // icon: 'success',
+                                        position: 'bottom-center'
+                                    })
+                                }
                             },2000)
-
+                        }
                         
-                },cancel: function () {
-                    
-                },
-            }
-        });
+                    },cancel: function () {
+                        
+                    },
+                }
+            });
+        }        
     });
 
     $('#IDUpload').change(function(){
-        $.confirm({
-            title: 'KYC - ID upload',
-            columnClass: 'col-md-6 col-md-offset-6',
-            content: 'Are you sure you want to upload image?',
-            buttons: {
-                confirm: function () {
-                    var imageUploadFormData = new FormData();
+        if ($(this).val()!='') {
+            $.confirm({
+                title: 'KYC - ID upload',
+                columnClass: 'col-md-6 col-md-offset-6',
+                content: 'Are you sure you want to upload image?',
+                buttons: {
+                    confirm: function () {
+
+                        var fileContainer = document.getElementById('IDUpload');
+                        
+                        if (fileContainer.files.length > 0) {
+                            for (var x = 0; x <= fileContainer.files.length - 1; x++) {
+                                var file = fileContainer.files.item(x).size;
+                                var fileSize = Math.round((file / 1024));
+                                // The size of the file.
+                                console.log(fileSize);
+                                if (fileSize >= 4096) {
+                                    $.confirm({
+                                        theme: 'dark',
+                                        title: 'Error!',
+                                        content: 'File too Big, please select a file less than 4mb',
+                                        typeAnimated: true,
+                                        buttons: {
+                                            close: function () {
+                                            }
+                                        }
+                                    });
+                                }else{
+                                    continueUpload();
+                                }
+                            }
+                        }
+
+                        function continueUpload(){
+                            var imageUploadFormData = new FormData();
 
                             imageUploadFormData.append(currentUserID+"_IDImage", $('#IDUpload')[0].files[0],currentUserID+"_IDImage");
                             imageUploadFormData.append('userID', currentUserID);
 
                             $("#IDUpload_btn").empty().append(
-                            '<div style="font-size:12px;font-weigt:100">'+
-                            '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>'+
-                            ' Uploading'+
-                        '</div>'
+                                '<div style="font-size:12px;font-weigt:100">'+
+                                '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>'+
+                                ' Uploading'+
+                                '</div>'
                             ).attr('disabled',true);
 
                             var res;
@@ -531,39 +565,36 @@
                                     '<span  class="">ID</span>'
                                 ).removeAttr('disabled');
 
-                                    if (res.error==0) {
-                                        id_upload = 1;
-                                        checkupload();
+                                if (res.error==0) {
+                                    id_upload = 1;
+                                    checkupload();
 
-                                $.toast({
-                                    heading: '<h6>ID Image Uploaded</h6>',
-                                    text: 'Successfull!',
-                                    showHideTransition: 'slide',
-                                    icon: 'success',
-                                    position: 'bottom-center'
-                                })
-                                    }else{
-                                        $.toast({
-                                            heading: '<h6>Error In uploading. Please check if network is strong and contact system admin</h6>',
-                                            text: 'Successfull!',
-                                            showHideTransition: 'slide',
-                                            icon: 'success',
-                                            position: 'bottom-center'
-                                        })
-                                    }
+                                    $.toast({
+                                        heading: '<h6>ID Image Uploaded</h6>',
+                                        text: 'Successfull!',
+                                        showHideTransition: 'slide',
+                                        position: 'bottom-center'
+                                    })
+                                }else{
+                                    $.toast({
+                                        heading: '<h6>Error In uploading. Please check if network is strong and contact system admin</h6>',
+                                        text: 'Error!',
+                                        showHideTransition: 'slide',
+                                        position: 'bottom-center'
+                                    })
+                                }
                             },2000)
-
-                            
-
-                            
-                },cancel: function () {
-                    
-                },
-            }
-        });
+                        }
+                                
+                    },cancel: function () {
+                        
+                    },
+                }
+            });
+        }
     });
 
-    $('input[name="birthday"]').change(function(){
+    $('#birthday').change(function(){
         var res = ajaxShortLink("saveBirthday",{
             "birthday":$(this).val(),
             "userID":currentUserID,
@@ -588,12 +619,9 @@
         }else{
             // $('#noteslist_kyc').toggle();
             $('#instruction_kyc').html("\
-            <i class='fa fa-check check_upload' aria-hidden='true'></i><span class='check_upload'> ID uploaded</span>\
-            <i class='fa fa-check check_upload' aria-hidden='true'></i><span class='check_upload'> Face uploaded</span><br>\
+            <i class='fa fa-check check_upload' aria-hidden='true'></i><span class='check_upload'> ID uploaded</span><br>\
+            <i class='fa fa-check check_upload' aria-hidden='true'></i><span class='check_upload'> Face uploaded</span><br><br>\
             <span style='color:black;'> Uploaded! Kindly wait 1-3 working days for verification. Thank you</span>\
-            <button id='login_verify' class='login-signup-btn' onclick='login.click()' type='button'>\
-                <span>Proceed to login</span>\
-            </button>\
             ")
         }
     }
@@ -611,5 +639,12 @@
             month: '',
             day:  ''
         },
+        // init: function(){
+        //     body.style.overflow = "hidden";
+        // },confirm: function(date) {
+        //     body.style.overflow = "auto";
+        // },cancel: function(date) {
+        //     body.style.overflow = "auto";
+        // }
     })
 </script>

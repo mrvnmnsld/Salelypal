@@ -28,6 +28,9 @@ $route['main/getTokenInfoViaID'] = 'main/getTokenInfoViaID';
 
 $route['saveFaceImageKyc'] = 'main/saveFaceImageKyc';
 $route['saveIDImageKyc'] = 'main/saveIDImageKyc';
+$route['main/checkIfKYCPhotoExists'] = 'main/checkIfKYCPhotoExists';
+
+
 
 $route['main/loadCryptoNews'] = 'main/loadCryptoNews';
 $route['main/sendOTPViaEmail'] = 'main/sendOTPViaEmail';
