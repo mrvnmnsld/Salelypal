@@ -91,7 +91,7 @@
 		    	mobileNumber = profiledetails[0].mobileNumber;
 		    	birthday = profiledetails[0].birthday;
 		    	profilePic = profiledetails[0].profile_pic;
-		    	
+
 		    	$("#mobileNumber").text($("input[name='mobileNumberEdit']").val())
 		    	$("#birthday").text($("input[name='birthdayEdit']").val())
 		    	$('#fullname').text($("input[name='fullNameEdit']").val());
@@ -133,6 +133,7 @@
   		readURL(this);
 
 		$.confirm({
+			theme: "dark",
 			icon: 'fa fa-plus-circle',
 		    title: 'New Profile Pic?',
 		    columnClass: 'col-md-6 col-md-offset-6',

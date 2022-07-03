@@ -212,7 +212,7 @@
     }
 </style>
 <div class="px-3 py-5" style="display:block;" id="verify_kyc_container">
-    <div id="title_kyc" class="mb-4"><span class="">Verification</span></div>
+    <div id="title_kyc" class="mb-4 main-color-text"><span class="">Verification</span></div>
     <div class="pb-1"><span class="text-muted text-left" id="subtitle_kyc">Upload photo</span></div>
 
     <div id="noteslist_kyc" class="m-2"> 
@@ -626,7 +626,7 @@
             $('#instruction_kyc').html("\
             <i class='fa fa-check check_upload' aria-hidden='true'></i><span class='check_upload'> ID uploaded</span><br>\
             <i class='fa fa-check check_upload' aria-hidden='true'></i><span class='check_upload'> Face uploaded</span><br><br>\
-            <span style='color:black;'> Uploaded! Kindly wait 1-3 working days for verification. Thank you</span>\
+            <span style='color:black;' class='main-color-text'> Uploaded! Kindly wait 1-3 working days for verification. Thank you</span>\
             ")
         }
     }
