@@ -1112,10 +1112,10 @@
 
 			$('#profile_btn').on('click',function(){
 				$("#profile_btn").css("pointer-events", "none");
-				$(this).css("pointer-events", "none");
+				$("#top_back_btn").css("pointer-events", "none");
 
 				setTimeout(function(){
-					$(this).css("pointer-events", "auto");
+					$("#top_back_btn").css("pointer-events", "auto");
 					$("#profile_btn").css("pointer-events", "auto");
 				},3000);
 
@@ -1415,10 +1415,10 @@
 
 		$("#top_back_btn").on("click",function(){
 			$("#profile_btn").css("pointer-events", "none");
-			$(this).css("pointer-events", "none");
+			$("#top_back_btn").css("pointer-events", "none");
 
 			setTimeout(function(){
-				$(this).css("pointer-events", "auto");
+				$("#top_back_btn").css("pointer-events", "auto");
 				$("#profile_btn").css("pointer-events", "auto");
 			},3000);
 
