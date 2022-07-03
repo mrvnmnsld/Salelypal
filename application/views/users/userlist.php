@@ -69,7 +69,7 @@
 				{ data:'isBlocked'},
 				{ data:'referedConcat'},
 				{ data:'timestamp'},
-	        ],
+      ],
 			"columnDefs": [
 				{
 					"targets": 0,
