@@ -1110,7 +1110,12 @@ class main extends MY_Controller {
 			$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
 		);
 
-		echo json_encode($checkIfExist[0]);
+		if (count($checkIfExist)>=1) {
+			echo json_encode($checkIfExist[0]);
+		}else{
+			echo json_encode(false);
+		}
+
 	}
 
 

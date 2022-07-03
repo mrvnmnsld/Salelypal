@@ -269,14 +269,16 @@
         "userID":currentUser.userID
     });
 
-    if (checkIfKYCPhotoExists.IDImagePath!=null) {
-        id_upload=1;
-        checkupload();
-    }
+    if (checkIfKYCPhotoExists!=false) {
+        if (checkIfKYCPhotoExists.IDImagePath!=false) {
+            id_upload=1;
+            checkupload();
+        }
 
-    if (checkIfKYCPhotoExists.FaceImagePath!=null){
-        face_upload=1;
-        checkupload();
+        if (checkIfKYCPhotoExists.FaceImagePath!=false){
+            face_upload=1;
+            checkupload();
+        }
     }
 
     $('#birthday').val(currentUser.birthday)
