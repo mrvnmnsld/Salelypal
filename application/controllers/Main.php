@@ -44,6 +44,7 @@ class main extends MY_Controller {
 		$mobileNumber = $_GET['mobileNumber'];
    		$userPassInput = $_GET['password'];
    		$ip = $_GET['ip'];
+   		$test=null;
 
 		if($email!=''){
 			$test = $this->_getRecordsData(
@@ -66,8 +67,10 @@ class main extends MY_Controller {
    		$wrongFlag = 0;
    		$dataToSend = "";
 
-   		if (count($test) == 1) {
+   		if (count($test) >= 1) {
 	    	session_start();
+			$dataToSend = $test;
+
 
    			if (md5($userPassInput) == $test[0]->password) {
    				if ($test[0]->isBlocked == 1) {

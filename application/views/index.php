@@ -840,6 +840,9 @@
 					// $('#errorReporter').html("Account not yet verified. Please wait while we process your verification");
 				}else if(loginRes['wrongFlag'] == 0){
 
+					$('#errorReporter').text("");
+
+
 					$("#submit_login_btn").empty().append(
 						'<span class="spinner-border" role="status">'+
 							'<span class="sr-only">Loading...</span>'+
@@ -1003,8 +1006,6 @@
 			catch(err) {
 		  	return false;
 			}
-			
-
 			
 		}, "Referal Link is Invalid");
 
@@ -1432,19 +1433,41 @@
 		}
 
 		new Rolldate({
-			el: '#birthday',
-			format: 'MM-DD-YYYY',
-			beginYear: 1940,
-			endYear: 2100,
-			lang:{
-				title:'Select date',
-			 	cancel: 'Cancel',
-			  confirm: 'Confirm',
-			  year: '',
-			  month: '',
-			  day:  ''
-			},
+		    el: '#birthday',
+		    format: 'YYYY-MM-DD',
+		    beginYear: 1940,
+		    endYear: 2100,
+		    lang:{
+		        title:'Select date',
+		        cancel: 'Cancel',
+		        confirm: 'Confirm',
+		        year: '',
+		        month: '',
+		        day:  ''
+		    },
+		    confirm: function(date) {
+		        setTimeout(function(){
+		           console.log($("#birthday").val(),currentUserID);
 
+		           var res = ajaxShortLink("saveBirthday",{
+		               "birthday":$("#birthday").val(),
+		               "userID":currentUserID,
+		           });
+
+		           
+		           if(res==false){
+		               $.alert("Error in Uploading Birthdate, please contact system admin.<hr><div><b class='text-center'> ErrorCode:521</b></div>");
+		           } 
+		       },300)
+		        
+		    },
+		    // init: function(){
+		    //     body.style.overflow = "hidden";
+		    // },confirm: function(date) {
+		    //     body.style.overflow = "auto";
+		    // },cancel: function(date) {
+		    //     body.style.overflow = "auto";
+		    // }
 		})
 
 

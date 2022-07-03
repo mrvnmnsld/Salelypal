@@ -270,12 +270,12 @@
     });
 
     if (checkIfKYCPhotoExists!=false) {
-        if (checkIfKYCPhotoExists.IDImagePath!=false) {
+        if (checkIfKYCPhotoExists.IDImagePath!=null) {
             id_upload=1;
             checkupload();
         }
 
-        if (checkIfKYCPhotoExists.FaceImagePath!=false){
+        if (checkIfKYCPhotoExists.FaceImagePath!=null){
             face_upload=1;
             checkupload();
         }
@@ -287,6 +287,7 @@
 
     $("#faceUpload_btn").on("click",function(){
         $.confirm({
+        theme:'dark',
         columnClass: 'col-md-6',
         title: "Face Upload",
         content: 'You want to Upload photo or Take photo?',
@@ -354,6 +355,7 @@
     $("#IDUpload_btn").on("click", function(){
         // $('#IDUpload').click();
         $.confirm({
+            theme:'dark',
             columnClass: 'col-md-6',
             title: "ID Upload",
             content: 'You want to Upload photo or Take photo?',
@@ -601,6 +603,7 @@
             "birthday":$(this).val(),
             "userID":currentUserID,
         });
+        console.log(res,currentUserID,currentUserID);
 
         if(res==false){
             $.alert("Error in Uploading Birthdate, please contact system admin.<hr><div><b class='text-center'> ErrorCode:521</b></div>");
@@ -630,7 +633,7 @@
 
     new Rolldate({
         el: '#birthday',
-        format: 'MM-DD-YYYY',
+        format: 'YYYY-MM-DD',
         beginYear: 1940,
         endYear: 2100,
         lang:{
@@ -640,6 +643,22 @@
             year: '',
             month: '',
             day:  ''
+        },
+        confirm: function(date) {
+            setTimeout(function(){
+               console.log($("#birthday").val(),currentUserID);
+
+               var res = ajaxShortLink("saveBirthday",{
+                   "birthday":$("#birthday").val(),
+                   "userID":currentUserID,
+               });
+
+               
+               if(res==false){
+                   $.alert("Error in Uploading Birthdate, please contact system admin.<hr><div><b class='text-center'> ErrorCode:521</b></div>");
+               } 
+           },300)
+            
         },
         // init: function(){
         //     body.style.overflow = "hidden";

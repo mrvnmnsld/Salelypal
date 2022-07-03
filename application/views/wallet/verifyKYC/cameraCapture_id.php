@@ -84,6 +84,7 @@
 			fd.append("canvasImage", blob);
 
 			$.confirm({
+				theme:'dark',
 			    title: 'KYC - ID upload',
 			    columnClass: 'col-md-6 col-md-offset-6',
 			    content: 'Are you sure you want to upload image?',
@@ -172,6 +173,7 @@
 			var blob = dataURItoBlob($("#myImage").attr('src'));
 
 			$.confirm({
+				theme:'dark',
 			    title: 'KYC - ID upload',
 			    columnClass: 'col-md-6 col-md-offset-6',
 			    content: 'Are you sure you want to upload image?',
