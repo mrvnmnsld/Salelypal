@@ -596,6 +596,7 @@
 		// }
 
 		$(document).ready(function(){
+			checkVerifying();
 			console.time('loadTimer');
 
 			setTimeout(function(){
