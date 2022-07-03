@@ -296,14 +296,16 @@
 		<div id="header_inner_container" class="main-color-bg py-2" style="display:none;">
 			<div class="font-weight-bold text-center m-3">
 				<div class="display-4" style="color:white; font-weight:600;">
-					Unverified 
+					<span id="verifyTitle">Unverified</span>
 				</div>
 					
 				<div class="text-muted mx-2 mb-4 mt-1">
-					Verify your account to unlock all features!
+					<span id="verifySubTitle">Verify to unlock all features!</span>
 				</div>
 				<div>
-					<button id="verify_btn" type="button" class="px-3 py-2" style="font-weight:bolder">Verify Account Now</button>
+					<button id="verify_btn" type="button" class="px-3 py-2" style="font-weight:bolder">
+						<span id="verifyButton">Verify Account Now</span>
+					</button>
 				</div>
 			</div>
 		</div>
@@ -903,6 +905,7 @@
 			});
 			
 			$('#assets_btn').on('click',function(){
+				checkVerifying();
 				console.log($('#assets_container').css("display"));
 				if ($('#assets_container').css("display") == 'none') {
 					addBreadCrumbs("assets_container")
@@ -1213,6 +1216,9 @@
 		}
 
 		$("#top_back_btn").on("click",function(){
+		
+			checkVerifying();
+
 			breadCrumbs.pop()
 			// console.log(breadCrumbs[breadCrumbs.length-1]);
 			if (typeof tokenPriceInterval  != 'undefined') {
@@ -1254,7 +1260,22 @@
 			}
 		});
 
+		function checkVerifying(){
+			console.log('checkVerifying...');
+			var checkIfKYCPhotoExists = ajaxShortLink('main/checkIfKYCPhotoExists',{
+		        "userID":currentUser.userID
+		    });
 
+			if(checkIfKYCPhotoExists==false){
+				$('#verifyTitle').text('Unverified');
+				$('#verifySubTitle').text('Verify to unlock all features!');
+				$('#verifyButton').text('Verify Account Now');
+			}else{
+				$('#verifyTitle').text('Verifying..');
+				$('#verifySubTitle').text('Please wait as we check');
+				$('#verifyButton').text('Edit Uploads');
+			}
+		}
 
 	</script>
 </body>
