@@ -72,6 +72,7 @@ class admin extends MY_Controller {
 	   		$join = array("user_tbl.userID = kyc_image_tbl.userID"), $joinType = array('left'), $sortBy = array('userID'), 
 	   		$sortOrder = array('desc'), $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
    		);
+   		$res = NULL;
 
    		foreach ($users as $key => $value) {
    			if ($value->referType!=null&&$value->referType!=null) {
@@ -92,14 +93,16 @@ class admin extends MY_Controller {
 				   		$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
 			   		);
 	   			}
-   				// echo $res[0]->fullname;
-				$users[$key]->referedConcat = ucfirst($value->referType).": ".$res[0]->email;
+	   			if (count($res)>=1) {
+	   				$users[$key]->referedConcat = ucfirst($value->referType).": ".$res[0]->email;
+	   			}else{
+					$users[$key]->referedConcat = "No User/Agent ";
 
+	   			}
+   				// echo json_encode($res);
    			}else{
 				$users[$key]->referedConcat = "No referral";
    			}
-   			
-
 
    		}
 
@@ -1003,5 +1006,23 @@ class admin extends MY_Controller {
 		$this->load->view('volumeControl/selectPercentage');
 	}
 
-	
+	public function updateProStatus(){
+		$insertRecord = array(
+			'isPro' => $_GET['isPro'],
+		);
+
+		$tableName="user_tbl";
+		$fieldName='userID';
+		$where= $_GET['userID'];
+
+		$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
+
+		if($updateRecordsRes){
+			echo json_encode(true);
+		}else{
+			echo json_encode(false);
+		}
+	}
+
+
 }

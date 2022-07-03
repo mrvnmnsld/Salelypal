@@ -59,6 +59,7 @@ $route['saveBirthday'] = 'main/saveBirthday';
 		$route['admin/userlist/resetPassword'] = 'admin/resetPassword';
 		$route['admin/userlist/verify'] = 'admin/verifyUser';
 		$route['admin/getKYCImages'] = 'admin/getKYCImages';
+		$route['admin/updateProStatus'] = 'admin/updateProStatus';
 	//USERS
 
 	//ADMIN Users
@@ -67,6 +68,7 @@ $route['saveBirthday'] = 'main/saveBirthday';
 		$route['admin/adminList/blockAdmin'] = 'admin/blockAdmin';
 		$route['admin/adminList/resetAdminPassword'] = 'admin/resetAdminPassword';
 		$route['admin/adminList/saveNewAdminUser'] = 'admin/saveNewAdminUser';
+
 	//ADMIN Users
 
 	$route['admin/getAllUserTypes'] = 'admin/getAllUserTypes';

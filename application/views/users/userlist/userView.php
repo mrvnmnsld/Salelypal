@@ -74,22 +74,47 @@
 		<div class="col-md" id="referredByContainer"></div>	
 	</div>
 
-	<div class="row mt-1">
-		<div class="col-md-3 pl-3"><b>Block:</b></div>	
-		<div class="col-md" id="blockContainer"></div>	
-	</div>
-
 	<div class="row mt-1 mb-2">
 		<div class="col-md-3 pl-3"><b>Last login:</b></div>	
 		<div class="col-md" id="lastLoginContainer"></div>	
 	</div>
 
-	<!-- <hr> -->
+	<div class="row mt-1 mb-2">
+		<div class="col-md-3 pl-3"><b>Pro User:</b></div>	
+		<div class="col-md" id="">
+			<div class="form-check form-check-inline">
+			  <input class="form-check-input" type="radio" name="isProContainer" id="isProContainerYes" value="true">
+			  <label class="form-check-label" for="isProContainerYes">Yes</label>
+			</div>
+			<div class="form-check form-check-inline">
+			  <input class="form-check-input" type="radio" name="isProContainer" id="isProContainerNo" value="false">
+			  <label class="form-check-label" for="isProContainerNo">No</label>
+			</div>
+		</div>	
+	</div>
+
+	<div class="row mt-1 mb-2">
+		<div class="col-md-3 pl-3"><b>Block:</b></div>	
+		<div class="col-md" id="">
+			<div class="form-check form-check-inline">
+			  <input class="form-check-input" type="radio" name="blockContainer" id="blockContainerYes" value="true">
+			  <label class="form-check-label" for="blockContainerYes">Yes</label>
+			</div>
+			<div class="form-check form-check-inline">
+			  <input class="form-check-input" type="radio" name="blockContainer" id="blockContainerNo" value="false">
+			  <label class="form-check-label" for="blockContainerNo">No</label>
+			</div>
+		</div>	
+	</div>
+
+	
+
+	<hr>
 
 	<div>
 		<button class="btn-block btn btn-sm btn-success mt-1" id="verifyBtn">Verify KYC</button>
-		<button class="btn-block btn btn-sm btn-primary mt-1" id="blockBtn">Block User</button>
-		<button class="btn-block btn btn-sm btn-primary mt-1" id="unblockBtn">Unblock User</button>
+		<!-- <button class="btn-block btn btn-sm btn-primary mt-1" id="blockBtn">Block User</button> -->
+		<!-- <button class="btn-block btn btn-sm btn-primary mt-1" id="unblockBtn">Unblock User</button> -->
 		<button class="btn-block btn btn-sm btn-success mt-1" id="resetBtn">Reset Password</button>
 		<button class="btn-block btn btn-sm btn-danger mt-1" id="closeBtn">Close</button>
 	</div>
@@ -137,16 +162,18 @@
 	// $("#ipContainer").append(selectedData["ip_lastLogin"]);
 	$("#referredByContainer").append(selectedData["referedConcat"]);
 
-	
 	console.log(selectedData);
 
 	if (selectedData["isBlocked"] == 1) {
-		$('#blockBtn').addClass('disabled');
-		$('#blockContainer').addClass('text-danger font-weight-bold');
-		$('#blockContainer').text('Yes');
+		$("#blockContainerYes").attr('checked', 'checked');
 	}else{
-		$('#blockContainer').text('No');
-		$('#unblockBtn').addClass('disabled');
+		$("#blockContainerNo").attr('checked', 'checked');
+	}
+
+	if (selectedData["isPro"] == 1) {
+		$("#isProContainerYes").attr('checked', 'checked');
+	}else{
+		$("#isProContainerNo").attr('checked', 'checked');
 	}
 
 	if (selectedData["lastLoginDate"] == null) {
@@ -170,6 +197,7 @@
 	// initial Modal
 		$("#closeBtn").on('click', function(){
 			bootbox.hideAll();
+        	loadDatatable('admin/getAllUsers');
 		});
 
 		$("#topUpBtn").on('click', function(){
@@ -180,62 +208,6 @@
 			    size: 'large',
 			    centerVertical: true,
 			    closeButton: false
-			});
-		});
-
-		$("#unblockBtn").on('click', function(){
-			$.confirm({
-				icon: 'fa fa-ban',
-			    title: 'Blocking?',
-			    columnClass: 'col-md-6 col-md-offset-6',
-			    content: 'Are you sure you want to <b>UNBLOCK</b> this user?',
-			    buttons: {
-			        confirm: function () {
-			        	ajaxShortLink('admin/userlist/unblockuser',{'userID':selectedData['userID']});
-			        	loadDatatable('admin/getAllUsers');
-			        	bootbox.hideAll();
-
-			        	$.toast({
-	    			        heading: '<h6>Success!</h6>',
-	    			        text: 'Successfully unblocked the user!',
-	    			        showHideTransition: 'slide',
-	    			        icon: 'success',
-	    			        position: 'bottom-left'
-	    			        // position: 'bottom-center'
-	    			    })
-			        },
-			        cancel: function () {
-
-			        },
-			    }
-			});
-		});
-
-		$("#blockBtn").on('click', function(){
-			$.confirm({
-				icon: 'fa fa-ban',
-			    title: 'Blocking?',
-			    columnClass: 'col-md-6 col-md-offset-6',
-			    content: 'Are you sure you want to block this user?',
-			    buttons: {
-			        confirm: function () {
-			        	ajaxShortLink('admin/userlist/blockuser',{'userID':selectedData['userID']});
-			        	loadDatatable('admin/getAllUsers');
-			        	bootbox.hideAll();
-
-			        	$.toast({
-	    			        heading: '<h6>Success!</h6>',
-	    			        text: 'Successfully Blocked the user!',
-	    			        showHideTransition: 'slide',
-	    			        icon: 'success',
-	    			        position: 'bottom-left'
-	    			        // position: 'bottom-center'
-	    			    })
-			        },
-			        cancel: function () {
-
-			        },
-			    }
 			});
 		});
 
@@ -351,6 +323,41 @@
 
 			}
 		});
+
+		$('input[type=radio][name=isProContainer]').change(function() {
+		    console.log(this.value);
+		    var status;
+
+			if (this.value=='false') {
+				status=0
+			}else{
+				status=1
+			}
+
+			var res = ajaxShortLink("admin/updateProStatus",{
+				'isPro':status,
+				'userID':selectedData.userID,
+			});
+
+			if (res==false) {
+	        	$.toast({
+			        heading: '<h6>ERROR!</h6>',
+			        text: 'Please contact system admin!',
+			        showHideTransition: 'slide',
+			        position: 'bottom-left'
+			        // position: 'bottom-center'
+			    })
+			}
+		});
+
+		$('input[type=radio][name=blockContainer]').change(function() {
+			if (this.value=='false') {
+				ajaxShortLink('admin/userlist/unblockuser',{'userID':selectedData['userID']});
+			}else{
+				ajaxShortLink('admin/userlist/blockuser',{'userID':selectedData['userID']});
+			}
+		});
+
 	// initial Modal
 
 	// kyc Modal
