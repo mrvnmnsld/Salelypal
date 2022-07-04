@@ -396,6 +396,7 @@
 			        confirm: function () {
 			        	ajaxShortLink('admin/userlist/verify',{'userID':selectedData['userID']});
 			        	loadDatatable('admin/getAllUsers');
+			        	pushNewNotif("Verified!","Account Successfully verified. Enjoy Trading & Buying crypto with lower rates!",selectedData['userID'])
 			        	bootbox.hideAll();
 
 			        	$.toast({
