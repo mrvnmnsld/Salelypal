@@ -1422,6 +1422,33 @@
 				$("#profile_btn").css("pointer-events", "auto");
 			},3000);
 
+			var id = window.setTimeout(function() {}, 0);
+
+			while (id--) {
+			    window.clearTimeout(id); // will do nothing if no timeout with id is present
+			}
+
+			(function(w){w = w || window; var i = w.setInterval(function(){},100000); while(i>=0) { w.clearInterval(i--); }})(/*window*/);
+
+			// for(i=0; i<100; i++)
+			// {
+			//     window.clearInterval(i);
+			// }
+
+			const newNotifChecker = setInterval(function() {
+			    var notifList = ajaxShortLink("getNewNotifs",{
+			    	'userID':currentUser.userID
+			    });
+
+			    if(notifList.length>=1){
+					$("#notif_counter_number").text(notifList.length);
+					$("#notif_counter_number").addClass("animate__animated animate__heartBeat animate__repeat-2");
+					$("#notif_counter_number").css("display", "block");
+			    }
+
+			    console.log(notifList);
+			}, 20000);	
+
 			breadCrumbs.pop()
 			// console.log(breadCrumbs[breadCrumbs.length-1]);
 			if (typeof tokenPriceInterval  != 'undefined') {

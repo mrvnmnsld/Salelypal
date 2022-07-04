@@ -290,13 +290,13 @@
     var face_upload=0;
     var id_upload=0;
     var countryCodes = loadJsonViaURL("assets/json/countryCodes.json");
+    $("#fullName_kyc").val(currentUser.fullname);
 
     for (var i = 0; i < countryCodes.length; i++) {
         $('#country_select').append(
             '<option value="'+countryCodes[i].name+'">'+countryCodes[i].name+'</option>'
         );
     }
-
 
     $('#country_select').selectpicker({
         style: '',
@@ -666,6 +666,16 @@
             "fullname":$(this).val(),
             "userID":currentUserID,
         });
+
+        var loginRes = ajaxShortLink("checkLoginCredentials",{
+            "emailAddress":currentUser.email,
+            "mobileNumber":currentUser.mobileNumber,
+            "password":currentUser.password,
+            "ip":null
+        });
+
+        setLocalStorageByKey('currentUser',JSON.stringify(loginRes['data'][0]));
+        console.log(loginRes['data'][0].isPro==1,JSON.parse(getLocalStorageByKey('currentUser')));
 
         if(res==false){
             $.alert("Error in Uploading name, please contact system admin.<hr><div><b class='text-center'> ErrorCode:521</b></div>");

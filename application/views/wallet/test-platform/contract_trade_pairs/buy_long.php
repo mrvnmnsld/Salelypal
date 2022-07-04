@@ -117,6 +117,7 @@
 
     <div>
         <button class="btn btn-block btn-sm btn-warning modalMinimize">Toggle chart view</button>
+        <button class="btn btn-block btn-sm btn-danger mt-2" id="forfeit_btn">Forfeit</button>
     </div>
 </div>
 
@@ -143,6 +144,8 @@
 <script type="text/javascript">
     isMinimized = 0;
     var bettingSettings = ajaxShortLink("admin/getBettingSettings");
+    var resolvedPriceCountdown;
+    var idToResolve;
     
     var balanceUsdt = ajaxShortLink('test-platform/getTokenBalanceBySmartAddress',{
         // 'trc20Address':currentUser['trc20_wallet'],
@@ -223,8 +226,9 @@
                                 var now = new Date();
                                 var timeStampJSObj = new Date(timeStamp);
                                 var seconds = (timeStampJSObj.getTime() - now.getTime()) / 1000;
+                                idToResolve = res;
 
-                                setTimeout(function(){
+                                resolvedPriceCountdown = setTimeout(function(){
                                     resolveThisID(res)
                                 }, seconds*1000);
 
@@ -377,69 +381,92 @@
     	    }
 
     	    reloadPositions()
-    	}else{       
-    	    var positionsOpened = ajaxShortLink("userWallet/future/getPositionDetails",{"id":id});
-    	    console.log(positionsOpened);
+    	}else{    
+            var positionsOpened = ajaxShortLink("userWallet/future/getPositionDetails",{"id":id});
+            var closeTokenValue = "Forfeit";
 
-    	    var timeNow = Date.parse(getTimeDateNonFormated());
-    	    var positionOpenedTimeStamp = Date.parse(positionsOpened[0].timeStamp);
-    	    var currentPrice = positionsOpened[0].currentPrice;
-    	    var buyType = positionsOpened[0].buyType;
-    	    var statusClass = "";
+            if (isForfeited!=undefined) {
+                status = "LOSE";
+                statusClass = 'text-danger';
 
-    	    var ohlcTimeStamp = ajaxShortLinkNoParse("https://api.binance.com/api/v3/klines?symbol="+tokenPairArray.tokenPairID+"&interval=1m&limit=1&startTime="+(positionOpenedTimeStamp-60000)+"&endTime="+Date.parse(getTimeDateNonFormated()));
-    	    var closeTokenValue = ohlcTimeStamp[0][4];
-    	    var status = '';
-    	    var newIncome = parseFloat(positionsOpened[0].amount).toFixed(2);
+                console.log($("#sec_modal_container").length);
 
-    	    console.log(currentPrice,closeTokenValue);
+                $("#sec_modal_container").css("display",'none');
+                $("#resolve_modal_container").css("display",'block');
 
-    	    if (parseFloat(positionsOpened[0].riskPrice)==parseFloat(closeTokenValue)) {
-    	        status = "WIN";
-    	        statusClass = 'text-success';
+                $("#resolve_text_container").text("Position LOST!");
+                $("#resolve_text_container").addClass("text-danger");
+                
+                $("#amount_won").text("-"+positionsOpened[0].amount);
+                $("#amount_won").addClass("text-danger");
 
-    	        $("#sec_modal_container").css("display",'none');
-    	        $("#resolve_modal_container").css("display",'block');
+                $("#2_amount_staked_container").text(positionsOpened[0].amount);
+                $("#2_trade_pair_container").text(positionsOpened[0].tradePair);
+                $("#resolved_price_container").text("Forfeited");
+            }else{
+                console.log(positionsOpened);
 
-    	        $("#resolve_text_container").text("Position WON!");
-    	        $("#resolve_text_container").addClass("text-success");
+                var timeNow = Date.parse(getTimeDateNonFormated());
+                var positionOpenedTimeStamp = Date.parse(positionsOpened[0].timeStamp);
+                var currentPrice = positionsOpened[0].currentPrice;
+                var buyType = positionsOpened[0].buyType;
+                var statusClass = "";
 
-    	        $("#amount_won").text("+"+newIncome);
-    	        $("#amount_won").addClass("text-success");
+                var ohlcTimeStamp = ajaxShortLinkNoParse("https://api.binance.com/api/v3/klines?symbol="+tokenPairArray.tokenPairID+"&interval=1m&limit=1&startTime="+(positionOpenedTimeStamp-60000)+"&endTime="+Date.parse(getTimeDateNonFormated()));
+                var closeTokenValue = ohlcTimeStamp[0][4];
+                var status = '';
+                var newIncome = parseFloat(positionsOpened[0].amount).toFixed(2);
 
-    	        $("#2_amount_staked_container").text(positionsOpened[0].amount);
-    	        $("#2_trade_pair_container").text(positionsOpened[0].tradePair);
-    	        $("#resolved_price_container").text(closeTokenValue);
+                console.log(currentPrice,closeTokenValue);
 
-    	        // sendTransaction Wallet
-    	        // test-platform
-    	            var newBalanceRes = ajaxShortLink("test-platform/newBalance",{
-    	               'tokenName':'usdt',
-    	               'smartAddress':null,
-    	               'newAmount':parseFloat(balanceUsdtInner)+parseFloat(newIncome)+parseFloat(positionsOpened[0].amount),
-    	            })    
-    	        // test-platform 
+                if (parseFloat(positionsOpened[0].riskPrice)==parseFloat(closeTokenValue)) {
+                    status = "WIN";
+                    statusClass = 'text-success';
 
-    	        pushNewNotif("Position Won!(TESTING)","You have won "+newIncome+" USDT",currentUser.userID)
-    	    }else{
-    	        status = "LOSE";
-    	        statusClass = 'text-danger';
+                    $("#sec_modal_container").css("display",'none');
+                    $("#resolve_modal_container").css("display",'block');
 
-    	        console.log($("#sec_modal_container").length);
+                    $("#resolve_text_container").text("Position WON!");
+                    $("#resolve_text_container").addClass("text-success");
 
-    	        $("#sec_modal_container").css("display",'none');
-    	        $("#resolve_modal_container").css("display",'block');
+                    $("#amount_won").text("+"+newIncome);
+                    $("#amount_won").addClass("text-success");
 
-    	        $("#resolve_text_container").text("Position LOST!");
-    	        $("#resolve_text_container").addClass("text-danger");
-    	        
-    	        $("#amount_won").text("-"+positionsOpened[0].amount);
-    	        $("#amount_won").addClass("text-danger");
+                    $("#2_amount_staked_container").text(positionsOpened[0].amount);
+                    $("#2_trade_pair_container").text(positionsOpened[0].tradePair);
+                    $("#resolved_price_container").text(closeTokenValue);
 
-    	        $("#2_amount_staked_container").text(positionsOpened[0].amount);
-    	        $("#2_trade_pair_container").text(positionsOpened[0].tradePair);
-    	        $("#resolved_price_container").text(closeTokenValue);
-    	    }
+                    // sendTransaction Wallet
+                    // test-platform
+                        var newBalanceRes = ajaxShortLink("test-platform/newBalance",{
+                           'tokenName':'usdt',
+                           'smartAddress':null,
+                           'newAmount':parseFloat(balanceUsdtInner)+parseFloat(newIncome)+parseFloat(positionsOpened[0].amount),
+                        })    
+                    // test-platform 
+
+                    pushNewNotif("Position Won!(TESTING)","You have won "+newIncome+" USDT",currentUser.userID)
+                }else{
+                    status = "LOSE";
+                    statusClass = 'text-danger';
+
+                    console.log($("#sec_modal_container").length);
+
+                    $("#sec_modal_container").css("display",'none');
+                    $("#resolve_modal_container").css("display",'block');
+
+                    $("#resolve_text_container").text("Position LOST!");
+                    $("#resolve_text_container").addClass("text-danger");
+                    
+                    $("#amount_won").text("-"+positionsOpened[0].amount);
+                    $("#amount_won").addClass("text-danger");
+
+                    $("#2_amount_staked_container").text(positionsOpened[0].amount);
+                    $("#2_trade_pair_container").text(positionsOpened[0].tradePair);
+                    $("#resolved_price_container").text(closeTokenValue);
+                }
+            }
+    	    
     	   
     	    // resolve here
     	        ajaxShortLink("userWallet/future/resolvePosition",{
@@ -472,5 +499,24 @@
 
         isMinimized = 0
       }
+    });
+
+    $("#forfeit_btn").on("click", function(){
+        $.confirm({
+            title: 'Forfeiting?',
+            theme: 'dark',
+            content: 'Are you sure you want to <b>Forfeit this position?</b>',
+            buttons: {
+                confirm: function () {
+                    clearTimeout(resolvedPriceCountdown);
+                    resolveThisID(idToResolve,true);
+                },
+
+                cancel: function () {
+
+                },
+            },
+            theme: 'dark'
+        });
     });
 </script>
