@@ -54,6 +54,7 @@
 	<div class="d-flex flex-row-reverse">
 		<button type="button" class="btn btn-sm btn-danger" id="close_btn">Close</button>
 		<button type="button" class="btn btn-success mr-1" id="update_btn">Update Account</button>
+		<button type="button" class="btn btn-primary mr-1" id="manage_balance_btn">Manage Balance</button>
 	</div>
 
 </div>
@@ -65,6 +66,8 @@
 	$("#username").append(selectedData["username"]);
 	$("#dateCreated").append(selectedData["dateCreated"]);
 
+	// console.log(selectedData["userID"])
+
 	$("#close_btn").on('click', function(){
 		bootbox.hideAll();
 	});
@@ -72,6 +75,15 @@
 	$("#update_btn").on('click',function(){
 		bootbox.alert({
 			message: ajaxLoadPage('quickLoadPage',{'pagename':'users/testAccount/updateAccount'}),
+			size: 'large',
+			centerVertical: true,
+			closeButton: false
+		});
+	});
+
+	$("#manage_balance_btn").on('click',function(){
+		bootbox.alert({
+			message: ajaxLoadPage('quickLoadPage',{'pagename':'users/testAccount/manageBalance'}),
 			size: 'large',
 			centerVertical: true,
 			closeButton: false

@@ -1051,5 +1051,48 @@ class admin extends MY_Controller {
 		echo json_encode($deleteQuery);
 	}
 
+	// public function updateManageBalance(){
+	// 	$insertRecord = array(
+	// 		// 'balance' => $_GET['balance'], 
+	// 		'smartContract' => $_GET['smartContract'],
+
+	// 	);
+
+	// 	// if ($_GET['password']!="") {
+	// 	// 	$insertRecord['password'] = MD5($_GET['password']);
+	// 	// }
+
+	// 	// $tableName="test_account_token_bal_tbl";
+	// 	// $fieldName='userID';
+	// 	// $where= $_GET['userID'];
+
+	// 	// $updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
+
+	// 	// if($updateRecordsRes){
+	// 	// 	echo json_encode(true);
+	// 	// }else{
+	// 	// 	echo json_encode(false);
+	// 	// }
+	// 	echo json_encode($insertRecord);
+	// }
+
+	public function updateManageBalance(){
+		$insertRecord = array(
+			// 'smartContract' => $_GET['smartContract'],
+			// 'username' => $_GET['username'],
+			// 'password' => MD5($_GET['password']),
+			// 'dateCreated' => $this->_getTimeStamp24Hours(),
+		);
+
+		// $saveQueryNotif = $this->_insertRecords($tableName = 'test_account_token_bal_tbl', $insertRecord);
+
+		// if($saveQueryNotif){
+		// 	echo json_encode(true);
+		// }else{
+		// 	echo json_encode(false);
+		// }
+		echo json_encode($insertRecord);
+	}
+
 
 }

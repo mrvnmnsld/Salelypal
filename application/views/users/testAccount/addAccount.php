@@ -7,9 +7,6 @@
 		text-align: center;
 		color: red;
 	}
-	.error{
-		color: red;
-	}
 	.icon-size{
 		font-size: 1.4em;
 		max-width: 2em;

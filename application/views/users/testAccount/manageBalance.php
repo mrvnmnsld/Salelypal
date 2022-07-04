@@ -1,67 +1,85 @@
 <style type="text/css">
-  .is-invalid{
-    text-align:center;
+  .modal-footer{
+    display: none;
+  }
+  label.is-invalid{
+    text-align: center;
+    color: red;
+  }
+  .form-control { /* seems working on other ui bugs, no changes on current ui screens */
+    height: 2.7em; 
+  }
+  .modal-content{
+    background: transparent;
+    border: 0;
+  }
+  #pagetitle_background{
+    background: #293038;
+    color: white;
+    padding: 15px;
+    border-radius: 20px 20px 0px 0px;
+    box-shadow: 10px 15px 25px rgba(0, 0, 0, .8);
+  }
+  #main_modal_container{
+    background-color: #F2F4F4;
+    border-radius:0px 0px 20px 20px;
+    box-shadow: 10px 15px 25px rgba(0, 0, 0, .8);
+    padding: 20px;
   }
 </style>
-<div id="innerContainer" style="display:none" class="card"><br>
-      <div class="card-body">
-        <div class="pagetitle">
-          <h1>Main Wallet</h1>
-          <sub class="fw-bold">Viewing of Main Wallet Settings</sub>
+
+<div id="pagetitle_background" class="text-center">
+  <label class="h2 mt-2 fw-bold">Manage Balance</label>
+</div>
+
+<div id="main_modal_container">
+
+  <form id="update_manage_form">
+
+      <label class="fw-bold">Please Select Token</label>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text text fa fa-btc" aria-hidden="true"></span>
         </div>
-        <hr>
-
-        <div  class="form-group">
-          <form id="withdraw_deposit_form">
-            <div style="padding: 20px;">
-
-              <label class="fw-bold">Please Select Token</label>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text text fa fa-btc" aria-hidden="true"></span>
-                </div>
-                <select id="token_select" name="token_select" class="js-example-basic-single form-control" data-live-search="true">
-                    <optgroup id="erc20_tokens_container" label="Ethereum Mainet"></optgroup>
-                    <optgroup id="bsc_tokens_container" label="Binance Smart Chain"></optgroup>
-                    <optgroup id="tron_tokens_container" label="Tron Mainet"></optgroup>
-                </select>
-              </div>
-
-              <div class="row mt-1">
-                <div class="col-md-3 pl-3"><b>Token Name:</b></div>  
-                <div class="col-md" id="token"></div>  
-              </div>
-
-              <div class="row mt-1">
-                <div class="col-md-3 pl-3"><b>Network:</b></div> 
-                <div class="col-md" id="network"></div>  
-              </div>
-
-              <div class="row mt-1">
-                <div class="col-md-3 pl-3"><b>Available Balance:</b></div> 
-                <div class="col-md" id="balance"></div> 
-              </div>
-
-              <hr>
-
-              <div class="d-flex">
-                <button type="button" class="btn btn-success flex-fill ml-2 btn-sm" id="deposit_btn">Deposit</button>
-                <button type="button" class="btn btn-primary flex-fill ml-2 btn-sm" id="withdraw_btn">Withdraw</button>
-              </div>
-
-            </div>
-          </form>
-        </div>
+        <select id="token_select" name="token_select" class="js-example-basic-single form-control" data-live-search="true">
+            <optgroup id="erc20_tokens_container" label="Ethereum Mainet"></optgroup>
+            <optgroup id="bsc_tokens_container" label="Binance Smart Chain"></optgroup>
+            <optgroup id="tron_tokens_container" label="Tron Mainet"></optgroup>
+        </select>
       </div>
+
+      <div class="row mt-1">
+        <div class="col-md-4 pl-3"><b>Token Name:</b></div>  
+        <div class="col-md" id="token"></div>  
+      </div>
+
+      <div class="row mt-1">
+        <div class="col-md-4 pl-3"><b>Network:</b></div> 
+        <div class="col-md" id="network"></div>  
+      </div>
+
+      <div class="row mt-1">
+        <div class="col-md-4 pl-3"><b>Available Balance:</b></div> 
+        <input class="col-md" id="balance_input">
+      </div>
+
+      <hr>
+
+      <div class="d-flex flex-row-reverse">
+        <button type="button" class="btn btn-danger mr-1" id="back_manage_btn">Close</button>
+        <button type="button" class="btn btn-success mr-1" id="update_balance_btn">Update</button>
+      </div>
+
+  </form>
+
 </div>
 
 
 <script type="text/javascript">
-  $("#loading").css('display','none')
-  $("#innerContainer").css('display','block')
-  $("#footer").toggle();
 
   var selectedData;
+  var globalSmartAddressContainer;
+  var globalAvailBalance;  
 
   var allTokens = ajaxShortLink('userWallet/getAllTokensV2');
 
@@ -112,6 +130,9 @@
     var tokenIndex = $(this).prop('selectedIndex');
     var selectedTokenInfo = allTokens[tokenIndex];  
     var availBalance;
+
+    // globalSmartAddressContainer = smartAddressContainer;
+    // globalAvailBalance = availBalance;
 
     function balanceDisplay(){
       $('#balance').text(parseFloat(availBalance).toFixed(selectedTokenInfo.decimal)); 
@@ -204,35 +225,54 @@
       "balance":availBalance
     }
 
-    
-  });
-   
-  $("#deposit_btn").on('click',function(){
-    // console.log(selectedData);
-    if ($("#token_select").val()=="") {
-      $.alert("Select Token First!")
-    }else{
-      bootbox.alert({
-        message: ajaxLoadPage('quickLoadPage',{'pagename':'mainWallet/deposit'}),
-        size: 'large',
-        centerVertical: true,
-        closeButton: false
-      });
-    }   
+    $("#balance_input").val(availBalance);
+
+    console.log(smartAddressContainer,availBalance,)
   });
 
-  $("#withdraw_btn").on('click',function(){
-    // console.log(selectedData);
-    if ($("#token_select").val()=="") {
-      $.alert("Select Token First!")
-    }else{
-      bootbox.alert({
-        message: ajaxLoadPage('quickLoadPage',{'pagename':'mainWallet/withdraw'}),
-        size: 'large',
-        centerVertical: true,
-        closeButton: false
-      });
-    }   
+  $("#update_balance_btn").on("click",function(){
+    $("#update_manage_form").submit();
+  });
+
+  $("#update_manage_form").validate({
+      errorClass: 'is-invalid',
+      rules: {
+      
+      },
+      submitHandler: function(form){
+        var data = $('#update_manage_form').serializeArray();
+          data.push({
+            "name":"userID",
+            "value":selectedData["userID"]
+          });
+
+        var res = ajaxShortLink('admin/updateManageBalance',data);
+
+        console.log(data,res);
+
+        // if(res == true){
+        //   $.toast({
+        //       heading: 'Success!!!',
+        //       text: 'Balance Successfully Updated',
+        //       icon: 'success',
+        //   })
+
+        //   bootbox.hideAll();
+        //   loadDatatable('admin/getTestAccount');
+        // }else{
+        //   $.toast({
+        //       heading: 'Error!!!',
+        //       text: 'System Error, Please Contact System Admin',
+        //       icon: 'error',
+        //   })
+        // }
+
+      }
+  });
+
+  $("#back_manage_btn").on('click', function(){
+    $(".bootbox")[1].remove();
+    $(".modal-backdrop")[1].remove();
   });
 
 
