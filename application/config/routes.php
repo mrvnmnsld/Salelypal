@@ -365,14 +365,16 @@ $route['testing'] = 'main/testing';
 		$route["privacyPolicy"] = 'main/privacyPolicy';
 		$route["termsAndConditions"] = 'main/termsAndConditions';
 
-
-
-
-
-	
-
+	//test account
+		$route['admin/getTestAccount'] = 'admin/getTestAccount';
+		$route['admin/saveNewAccount'] = 'admin/saveNewAccount';
+		$route['admin/updateAccountInfo'] = 'admin/updateAccountInfo';
+		$route['admin/deleteAccount'] = 'admin/deleteAccount';
+		$route['admin/checkUserNameAvailability'] = 'admin/checkUserNameAvailability';
+	//test account
 
 
 
 
 $route[(':any')] = 'main/error';
+

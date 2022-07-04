@@ -970,8 +970,86 @@ class admin extends MY_Controller {
 	}
 
 	public function volumeControl(){
-		$this->load->view('volumeControl/selectPercentage');
+		$this->load->view('volumeControl/index');
 	}
 
-	
+	public function getTestAccount(){
+   		$users = $this->_getRecordsData(
+   			$selectfields = array('test_accounts_tbl.*'), 
+	   		$tables = array('test_accounts_tbl'), 
+	   		$fieldName = null, $where = null, 
+	   		$join = null, $joinType = null, $sortBy = array('userID'), 
+	   		$sortOrder = array('desc'), $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+   		);
+
+   		echo json_encode($users);
+    }
+
+    public function saveNewAccount(){
+		$insertRecord = array(
+			'username' => $_GET['username'],
+			'password' => MD5($_GET['password']),
+			'dateCreated' => $this->_getTimeStamp24Hours(),
+		);
+
+		$saveQueryNotif = $this->_insertRecords($tableName = 'test_accounts_tbl', $insertRecord);
+
+		if($saveQueryNotif){
+			echo json_encode(true);
+		}else{
+			echo json_encode(false);
+		}
+	}
+
+    public function checkUserNameAvailability(){
+   		$username = $_GET['username'];
+
+   		$test = $this->_getRecordsData(
+   			$selectfields = array("*"), 
+	   		$tables = array('test_accounts_tbl'), 
+	   		$fieldName = array('username'), $where = array($username), 
+	   		$join = null, $joinType = null, $sortBy = null, 
+	   		$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+   		);
+
+   		if (count($test)==0) {
+   			echo true;
+   		}else{
+   			echo false;
+   		}
+	}
+
+	public function updateAccountInfo(){
+		$insertRecord = array(
+			'username' => $_GET['username'],
+		);
+
+		if ($_GET['password']!="") {
+			$insertRecord['password'] = MD5($_GET['password']);
+		}
+
+		$tableName="test_accounts_tbl";
+		$fieldName='userID';
+		$where= $_GET['userID'];
+
+		$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
+
+		if($updateRecordsRes){
+			echo json_encode(true);
+		}else{
+			echo json_encode(false);
+		}
+		// echo json_encode($insertRecord);
+	}
+
+	public function deleteAccount(){
+		$deleteQuery = $this->_deleteRecords(
+			$tableName = "test_accounts_tbl",
+		 	$fieldName = array("userID"),
+		  	$where = array($_GET['userID'])
+		);
+		echo json_encode($deleteQuery);
+	}
+
+
 }

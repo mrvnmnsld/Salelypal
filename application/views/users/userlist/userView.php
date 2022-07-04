@@ -44,37 +44,37 @@
 <div id="initial_modal">
 
 	<div class="row mt-1">
-		<div class="col-md-3 pl-3"><b>Email:</b></div>	
+		<div class="col-md-2 pl-3"><b>Email:</b></div>	
 		<div class="col-md" id="emailContainer"></div>	
 	</div>
 
 	<div class="row mt-1">
-		<div class="col-md-3 pl-3"><b>Name:</b></div>	
+		<div class="col-md-2 pl-3"><b>Name:</b></div>	
 		<div class="col-md" id="fullnameContainer"></div>	
 	</div>
 
 	<div class="row mt-1">
-		<div class="col-md-3 pl-3"><b>Date Joined:</b></div>	
+		<div class="col-md-2 pl-3"><b>Date Joined:</b></div>	
 		<div class="col-md" id="dateContainer"></div>	
 	</div>
 
 	<div class="row mt-1">
-		<div class="col-md-3 pl-3"><b>Birthday:</b></div>	
+		<div class="col-md-2 pl-3"><b>Birthday:</b></div>	
 		<div class="col-md" id="birthdayContainer"></div>	
 	</div>
 
 	<div class="row mt-1">
-		<div class="col-md-3 pl-3"><b>Mobile:</b></div>	
+		<div class="col-md-2 pl-3"><b>Mobile:</b></div>	
 		<div class="col-md" id="mobileNumberContainer"></div>	
 	</div>
 
 	<div class="row mt-1">
-		<div class="col-md-3 pl-3"><b>Block:</b></div>	
+		<div class="col-md-2 pl-3"><b>Block:</b></div>	
 		<div class="col-md" id="blockContainer"></div>	
 	</div>
 
 	<div class="row mt-1 mb-2">
-		<div class="col-md-3 pl-3"><b>Last login:</b></div>	
+		<div class="col-md-2 pl-3"><b>Last login:</b></div>	
 		<div class="col-md" id="lastLoginContainer"></div>	
 	</div>
 
