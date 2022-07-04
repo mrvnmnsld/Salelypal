@@ -716,17 +716,21 @@
     });
 
     function checkupload(){
-        if (id_upload == 1 && face_upload == 0){
+        if  (id_upload == 1){
+            $('#id_checkedi').addClass('checked_upload');
+            $('#id_checkedt').addClass('checked_upload');
             $('#instruction_kyc').html("\
             <span>Ensure that face is centered and visible when capturing the photo to avoid facial recognition errors</span>\
-            <br><span><b>ID photo uploaded</b></span>\
             ")
-        }else if(face_upload == 1 && id_upload == 0){
+        }else if(face_upload == 1){
             $('#instruction_kyc').html("\
             <span>Ensure that face is centered and visible when capturing the photo to avoid facial recognition errors</span>\
-            <br><span><b>Face photo uploaded</b></span>\
             ")
-        }else{
+            $('#face_checkedi').addClass('checked_upload');
+            $('#face_checkedt').addClass('checked_upload');
+        }
+
+        if(face_upload !=0 && id_upload != 0){
             $('#instruction_kyc').html("\
             <span style='color:black;' class='main-color-text'> Face and ID uploaded successfull! you can also retake photo.</span>\
             ")
