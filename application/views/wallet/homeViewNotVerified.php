@@ -493,15 +493,10 @@
 				// window.location.href = 'homeViewNotVerified';
 				console.log("%cContinue!!","color: red; font-family:monospace; font-size: 30px");
 			}else{
-				if (currentUser.isPro==1) {
-					window.location.href = 'homeViewPro';
-				}else{
-					window.location.href = 'homeView';
-				}
+				checkVerifying();
 			}
 		}else{
 			window.location.href = 'index';
-
 		}
 
 		$.confirm({
@@ -535,7 +530,6 @@
 		}; // for mining
 
 		var coinIds = [];
-
 
 		//initial
 			
@@ -1267,14 +1261,34 @@
 		        "userID":currentUser.userID
 		    });
 
-			if(checkIfKYCPhotoExists==false){
+
+			if(checkIfKYCPhotoExists==false||(checkIfKYCPhotoExists.IDImagePath==null||checkIfKYCPhotoExists.FaceImagePath==null||checkIfKYCPhotoExists.birthday==null||checkIfKYCPhotoExists.fullame==null||checkIfKYCPhotoExists.country==null)==false){
 				$('#verifyTitle').text('Unverified');
 				$('#verifySubTitle').text('Verify to unlock all features!');
 				$('#verifyButton').text('Verify Account Now');
 			}else{
-				$('#verifyTitle').text('Verifying..');
+				$('#verifyTitle').text('Verifying...');
 				$('#verifySubTitle').text('Please wait as we check');
 				$('#verifyButton').text('Edit Uploads');
+
+				if (checkIfKYCPhotoExists.verified == 1) {
+					var loginRes = ajaxShortLink("checkLoginCredentials",{
+						"emailAddress":currentUser.email,
+						"mobileNumber":currentUser.mobileNumber,
+						"password":currentUser.password,
+						"ip":null
+					});
+
+					setLocalStorageByKey('currentUser',JSON.stringify(loginRes['data'][0]));
+		    		console.log(loginRes['data'][0].isPro==1,JSON.parse(getLocalStorageByKey('currentUser')));
+
+					if (loginRes['data'][0].isPro==1) {
+						window.location.href = 'homeViewPro';
+					}else{
+						window.location.href = 'homeView';
+					}
+				}
+				
 			}
 		}
 

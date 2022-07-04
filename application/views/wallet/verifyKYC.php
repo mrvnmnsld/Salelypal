@@ -223,12 +223,37 @@
         <i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Avoid wearing hats</span>
     </div>
 
-    <div class="">
+    <div class="text-center">
         <div class="row" style="margin:auto; padding: 10px;">
             <div class="form-group clearfix">
-                <div class="col-xs-6">
+                <div class="col-12">
+                    <label class="text-left">Birthday</label>
                     <input readonly class="form-control" type="text" id="birthday" placeholder="Click to select date">
-                    <small class="text-warning">Birthday is Optional</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center">
+        <div class="row" style="margin:auto; padding: 10px;">
+            <div class="form-group clearfix">
+                <div class="col-12">
+                    <label class="text-left">Full Name</label>
+                    <input class="form-control" type="text" id="fullName_kyc" placeholder="Enter Full Name">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center">
+        <div class="row" style="margin:auto; padding: 10px;">
+            <div class="form-group clearfix">
+                <div class="col-12">
+                    <label class="text-left">Country</label>
+
+                    <div class="" style="border-bottom: 2px solid #ccc;">
+                        <select id="country_select" name="country_select"></select>
+                    </div>
                 </div>
             </div>
         </div>
@@ -264,6 +289,21 @@
 <script>
     var face_upload=0;
     var id_upload=0;
+    var countryCodes = loadJsonViaURL("assets/json/countryCodes.json");
+
+    for (var i = 0; i < countryCodes.length; i++) {
+        $('#country_select').append(
+            '<option value="'+countryCodes[i].name+'">'+countryCodes[i].name+'</option>'
+        );
+    }
+
+
+    $('#country_select').selectpicker({
+        style: '',
+        size: 8,
+        // showSubtext :true,
+        liveSearch: true
+     });
 
     var checkIfKYCPhotoExists = ajaxShortLink('main/checkIfKYCPhotoExists',{
         "userID":currentUser.userID
@@ -607,6 +647,40 @@
 
         if(res==false){
             $.alert("Error in Uploading Birthdate, please contact system admin.<hr><div><b class='text-center'> ErrorCode:521</b></div>");
+        }
+    });
+
+    $('input[name="birthday"]').change(function(){
+        var res = ajaxShortLink("saveBirthday",{
+            "birthday":$(this).val(),
+            "userID":currentUserID,
+        });
+
+        if(res==false){
+            $.alert("Error in Uploading Birthdate, please contact system admin.<hr><div><b class='text-center'> ErrorCode:521</b></div>");
+        }
+    });
+
+    $('#fullName_kyc').change(function(){
+        var res = ajaxShortLink("saveName",{
+            "fullname":$(this).val(),
+            "userID":currentUserID,
+        });
+
+        if(res==false){
+            $.alert("Error in Uploading name, please contact system admin.<hr><div><b class='text-center'> ErrorCode:521</b></div>");
+        }
+    });
+
+    $('#country_select').change(function(){
+        console.log($(this).val());
+        var res = ajaxShortLink("saveCountry",{
+            "country":$(this).val(),
+            "userID":currentUserID,
+        });
+
+        if(res==false){
+            $.alert("Error in Uploading name, please contact system admin.<hr><div><b class='text-center'> ErrorCode:521</b></div>");
         }
     });
 

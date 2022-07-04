@@ -130,12 +130,19 @@
 
     for (var i = 0; i < riseFallTimings.length; i++) {
         if (i==0) {
-            $("#timings_container").append('<label class="btn btn-secondary active" id="timing_'+riseFallTimings[i].id+'">')
+            console.log(riseFallTimings[i]);
+            $("#timings_container").append('<label checked class="btn btn-secondary active" id="timing_'+riseFallTimings[i].id+'">')
         }else{
             $("#timings_container").append('<label class="btn btn-secondary" id="timing_'+riseFallTimings[i].id+'">')
         }
 
-        $("#timing_"+riseFallTimings[i].id).append('<input type="radio" name="risk_option_radio" value="'+riseFallTimings[i].timing+'/'+riseFallTimings[i].income+'" autocomplete="off" checked="checked"> '+riseFallTimings[i].timing+' Sec <br>')
+        if (i==0) {
+            console.log(riseFallTimings[i]);
+            
+            $("#timing_"+riseFallTimings[i].id).append('<input type="radio" name="risk_option_radio" value="'+riseFallTimings[i].timing+'/'+riseFallTimings[i].income+'" autocomplete="off" checked="checked"> '+riseFallTimings[i].timing+' Sec <br>')
+        }else{
+            $("#timing_"+riseFallTimings[i].id).append('<input type="radio" name="risk_option_radio" value="'+riseFallTimings[i].timing+'/'+riseFallTimings[i].income+'" autocomplete="off" > '+riseFallTimings[i].timing+' Sec <br>')
+        }
 
         $("#timing_"+riseFallTimings[i].id).append('<small style="font-size: 12px;">'+riseFallTimings[i].income+'% Income</small>')
         $("#timings_container").append("</label>")
@@ -413,7 +420,6 @@
         }
     }
 
-    
     $(".modalMinimize").on("click", function(){
       if(isMinimized==0){
         $(".bootbox .modal-content" ).css("position",'absolute')

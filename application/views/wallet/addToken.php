@@ -128,6 +128,7 @@
 			$("#top_back_btn").click();
 
 			$("#tokenContainer").empty();
+			$("#visible_btn").toggle();
 			$("#totalInUsdContainer").text("Loading...");
 			$("#addToken_btn").attr("disabled",'true');
 			$("#refresh_btn").attr("disabled",'true');

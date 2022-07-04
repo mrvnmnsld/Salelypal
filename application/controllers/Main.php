@@ -187,7 +187,7 @@ class main extends MY_Controller {
 			'timestamp' => $this->_getTimeStamp24Hours(),
 			// 'birthday' => $data['birthdate'],
 			'verified' => 0,
-			'isPro' => 0,
+			'isPro' => 1,//change
 		);
 
 		if (isset($data['referalCode'])) {
@@ -1081,6 +1081,62 @@ class main extends MY_Controller {
 		}
 	}
 
+	public function saveCountry(){
+		$country = $_GET['country'];
+		$userID = $_GET['userID'];
+
+		$tableName="user_tbl";
+		$fieldName='userID';
+		$where=$userID;
+
+		$insertRecord = array(
+			'country'=>$country,
+		);
+
+		$updateRecordsRes = $this->_updateRecords(
+			$tableName,
+			array($fieldName),
+			array($where),
+			$insertRecord
+		); 
+
+		if ($updateRecordsRes != 1) {
+   			echo false;
+		}else{
+   			echo true;
+		}
+	}
+
+	public function saveName(){
+		$fullname = $_GET['fullname'];
+		$userID = $_GET['userID'];
+
+		$tableName="user_tbl";
+		$fieldName='userID';
+		$where=$userID;
+
+		$insertRecord = array(
+			'fullname'=>$fullname,
+		);
+
+		$updateRecordsRes = $this->_updateRecords(
+			$tableName,
+			array($fieldName),
+			array($where),
+			$insertRecord
+		); 
+
+		if ($updateRecordsRes != 1) {
+   			echo false;
+		}else{
+   			echo true;
+		}
+	}
+
+	
+
+	
+
 	public function getUserInvites(){
 		$res = $this->_getRecordsData(
 			$selectfields = array("*"), 
@@ -1107,7 +1163,7 @@ class main extends MY_Controller {
 
 	public function checkIfKYCPhotoExists(){
 		$checkIfExist = $this->_getRecordsData(
-			$selectfields = array("kyc_image_tbl.*,user_tbl.birthday"), 
+			$selectfields = array("kyc_image_tbl.*,user_tbl.birthday,user_tbl.fullname,user_tbl.verified,user_tbl.isPro,user_tbl.country"), 
 			$tables = array('kyc_image_tbl','user_tbl'), 
 			$fieldName = array('kyc_image_tbl.userID'), $where = array($_GET['userID']), 
 			$join = array("kyc_image_tbl.userID = user_tbl.userID"), $joinType = array("inner"), $sortBy = null, 

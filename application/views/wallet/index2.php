@@ -195,13 +195,6 @@
 				<div style="font-size:.8em;">Purchase</div>
 			</button>
 		</div>
-		
-
-		<!-- <hr style="
-		    height: 1.5px;
-		    width: 100%;
-		    background-color: #a0abaf;
-		" class=""> -->
 
 		<div id="tokenContainer">
 			<div style="font-size: 2rem;;" class="text-center text-muted font-weight-bold mt-3 ">TOKENS</div>

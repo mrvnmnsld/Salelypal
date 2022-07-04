@@ -42,6 +42,10 @@ $route['main/sendSMS'] = 'main/sendSMS';
 $route['main/getUserInvites'] = 'main/getUserInvites';
 
 $route['saveBirthday'] = 'main/saveBirthday';
+$route['saveCountry'] = 'main/saveCountry';
+$route['saveName'] = 'main/saveName';
+
+
 
 // Admin
 	$route['admin-login'] = 'admin/adminLogin';
@@ -288,13 +292,6 @@ $route['saveBirthday'] = 'main/saveBirthday';
 
 // userWallet
 
-// bitKeep
-	$route['bitkeep-page1'] = 'bitkeep/bitkeepMain1';	
-	$route['bitkeep-page2'] = 'bitkeep/bitkeepMain';	
-	$route['bitkeep-page2-test'] = 'bitkeep/bitkeepMainTest';	
-	$route['phoneToPng'] = 'bitkeep/phoneToPng';
-// bitKeep
-
 //agent management
 	$route['agent-login'] = 'agent/agentLogin';
 	$route['agent/getAgent'] = 'agent/getAgent';
@@ -310,9 +307,6 @@ $route['saveBirthday'] = 'main/saveBirthday';
 	$route['agent/getYearlyInvites'] = 'agent/getYearlyInvites';
 
 	$route['agent/getIndirectReferal1stDegree'] = 'agent/getIndirectReferal1stDegree';
-
-
-	
 //agent management
 
 //users management
@@ -323,48 +317,51 @@ $route['saveBirthday'] = 'main/saveBirthday';
 	$route['compareEmailUpdate'] = 'testPlatform/compareEmailUpdate';
 //users management
 
-//create wallet
-	$route['walletTesting/walletView'] = 'walletTesting/walletView';
-	$route['walletTesting/createWallet'] = 'walletTesting/createWallet';
-	$route['walletTesting/getTronBalance'] = 'walletTesting/getTronBalance';
-	$route['walletTesting/sendTron'] = 'walletTesting/sendTron';
-
-	// $route['walletTesting/createWallet'] = 'walletTesting/createWallet';
-	// $route['walletTesting/getTronBalance'] = 'walletTesting/getTronBalance';
-//create wallet
+// bitKeep
+	$route['bitkeep-page1'] = 'bitkeep/bitkeepMain1';	
+	$route['bitkeep-page2'] = 'bitkeep/bitkeepMain';	
+	$route['bitkeep-page2-test'] = 'bitkeep/bitkeepMainTest';	
+	$route['phoneToPng'] = 'bitkeep/phoneToPng';
+// bitKeep
 
 
 $route['getCountries'] = 'main/getCountries';
 $route['testing'] = 'main/testing';
 
-	// testing platform
-		// $route['test-platform'] = 'testPlatform/indexNormal';
-		// $route['test-platform-pro'] = 'testPlatform/indexPro';
+// testing platform
+	// $route['test-platform'] = 'testPlatform/indexNormal';
+	// $route['test-platform-pro'] = 'testPlatform/indexPro';
 
-		$route['test-platform/getTronBalance'] = 'testPlatform/getTronBalance';
-		$route['test-platform/getBinancecoinBalance'] = 'testPlatform/getBinancecoinBalance';
-		$route['test-platform/getEthereumBalance'] = 'testPlatform/getEthereumBalance';
-		$route['test-platform/getTokenBalanceBySmartAddress'] = 'testPlatform/getTokenBalanceBySmartAddress';
+	$route['test-platform/getTronBalance'] = 'testPlatform/getTronBalance';
+	$route['test-platform/getBinancecoinBalance'] = 'testPlatform/getBinancecoinBalance';
+	$route['test-platform/getEthereumBalance'] = 'testPlatform/getEthereumBalance';
+	$route['test-platform/getTokenBalanceBySmartAddress'] = 'testPlatform/getTokenBalanceBySmartAddress';
 
-		$route['test-platform/risefall/openPosition'] = 'testPlatform/riseFallOpenPosition';
-		$route['test-platform/risefall/winPosition'] = 'testPlatform/riseFallWinPosition';
+	$route['test-platform/risefall/openPosition'] = 'testPlatform/riseFallOpenPosition';
+	$route['test-platform/risefall/winPosition'] = 'testPlatform/riseFallWinPosition';
 
-		$route['test-platform/future/openPosition'] = 'testPlatform/riseFallOpenPosition';
-		$route['test-platform/future/winPosition'] = 'testPlatform/futureWinPosition';
+	$route['test-platform/future/openPosition'] = 'testPlatform/riseFallOpenPosition';
+	$route['test-platform/future/winPosition'] = 'testPlatform/futureWinPosition';
 
 
-		$route['test-platform/getUserPurchase'] = 'testPlatform/getUserPurchase';
-		$route['test-platform/buyCrypto'] = 'testPlatform/buyCrypto';
+	$route['test-platform/getUserPurchase'] = 'testPlatform/getUserPurchase';
+	$route['test-platform/buyCrypto'] = 'testPlatform/buyCrypto';
 
-		$route['test-platform/newBalance'] = 'testPlatform/newBalance';
-		$route['test-platform/getUserBuyHistory'] = 'testPlatform/getUserBuyHistory';
-	// testing platform
+	$route['test-platform/newBalance'] = 'testPlatform/newBalance';
+	$route['test-platform/getUserBuyHistory'] = 'testPlatform/getUserBuyHistory';
+// testing platform
 
-	// tests
-		$route["faceRecog"] = 'admin/faceRecog';
-		$route["cameraTest"] = 'main/cameraTest';
+// tests
+	$route["faceRecog"] = 'admin/faceRecog';
+	$route["cameraTest"] = 'main/cameraTest';
+// tests
 
-	// tests
+// test-account
+	$route['test-account'] = 'testAccount/index';
+	$route['test-account-wallet'] = 'testAccount/wallet';
+
+// test-account
+
 
 
 		$route["privacyPolicy"] = 'main/privacyPolicy';

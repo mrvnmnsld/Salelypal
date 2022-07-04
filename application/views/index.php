@@ -74,334 +74,332 @@
 <!-- custom libraries -->
 
 
-	<style>
-			.jq-toast-single {
-		  		font-size: 16px;
-			}
+<style>
+		.jq-toast-single {
+	  		font-size: 16px;
+		}
 
-			/*@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');*/
-			@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap%27');
-	 		 *{
-		      margin: 0;
-		      padding: 0;
-		      box-sizing: border-box;
-		      font-family: 'Poppins', sans-serif;
-	      }
+		/*@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');*/
+		@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap%27');
+ 		 *{
+	      margin: 0;
+	      padding: 0;
+	      box-sizing: border-box;
+	      font-family: 'Poppins', sans-serif;
+      }
 
-	      body{
-		      height: 100vh;
-		      display: flex;
-		      align-items: center;
-		      justify-content: center;
-		      background: linear-gradient(-135deg, #a10396, #4158d0);
-		      /*background-color: #5426de;*/
-	      }
+      body{
+	      height: 100vh;
+	      display: flex;
+	      align-items: center;
+	      justify-content: center;
+	      background: linear-gradient(-135deg, #a10396, #4158d0);
+	      /*background-color: #5426de;*/
+      }
 
-	      .container:not(.jc-bs3-container){
-		      position: relative;
-		      max-width: 430px;
-		      background: #fff;
-		      box-shadow: rgba(0, 0, 0, 0.5) 0px 19px 38px, rgba(0, 0, 0, 0.30) 0px 15px 12px;
-		      overflow: hidden;
-		      background-color: red;
-		      padding-top: 15px;
-		      padding-bottom: 15px;
-		      background: linear-gradient(135deg, #a10396, #4158d0);
-	      }
+      .container:not(.jc-bs3-container){
+	      position: relative;
+	      max-width: 430px;
+	      background: #fff;
+	      box-shadow: rgba(0, 0, 0, 0.5) 0px 19px 38px, rgba(0, 0, 0, 0.30) 0px 15px 12px;
+	      overflow: hidden;
+	      background-color: red;
+	      padding-top: 15px;
+	      padding-bottom: 15px;
+	      background: linear-gradient(135deg, #a10396, #4158d0);
+      }
 
-	      .container .forms{
-		      display: flex;
-		      align-items: center;
-		      height: 400px;
-		      width: 200%;
-		      transition: height 0.2s ease;
-	      }
+      .container .forms{
+	      display: flex;
+	      align-items: center;
+	      height: 400px;
+	      width: 200%;
+	      transition: height 0.2s ease;
+      }
 
-	      .container .form{
-		      width: 50%;
-		      padding: 45px;
-		      background-color: #fff;
-		      transition: margin-left 0.18s ease;
-	      }
+      .container .form{
+	      width: 50%;
+	      padding: 45px;
+	      background-color: #fff;
+	      transition: margin-left 0.18s ease;
+      }
 
-	      .container.active .login{
-		      margin-left: -50%;
-		      opacity: 0;
-		      transition: margin-left 0.18s ease, opacity 0.15s ease;
-	      }
+      .container.active .login{
+	      margin-left: -50%;
+	      opacity: 0;
+	      transition: margin-left 0.18s ease, opacity 0.15s ease;
+      }
 
-	      .container .signup{
-		      opacity: 0;
-		      transition: opacity 0.09s ease;
-	      }
+      .container .signup{
+	      opacity: 0;
+	      transition: opacity 0.09s ease;
+      }
 
-	      .container.active .signup{
-		      opacity: 1;
-		      transition: opacity 0.2s ease;
-	      }
+      .container.active .signup{
+	      opacity: 1;
+	      transition: opacity 0.2s ease;
+      }
 
-	      .container.active .forms{
-	      	height: auto;
-	      }
+      .container.active .forms{
+      	height: auto;
+      }
 
-	      .container .form .title{
-		      position: relative;
-		      font-size: 27px;
-		      font-weight: 600;
-		      color: #5426de;
-	      }
+      .container .form .title{
+	      position: relative;
+	      font-size: 27px;
+	      font-weight: 600;
+	      color: #5426de;
+      }
 
-	      .form .title::before{
-		      content: '';
-		      position: absolute;
-		      left: 0;
-		      bottom: 0;
-		      height: 3px;
-		      width: 30px;
-		      background-color: #5426de;
-	      }
+      .form .title::before{
+	      content: '';
+	      position: absolute;
+	      left: 0;
+	      bottom: 0;
+	      height: 3px;
+	      width: 30px;
+	      background-color: #5426de;
+      }
 
-	      .form .input-field{
-		      position: relative;
-		      height: 50px;
-		      width: 100%;
-		      margin-top: 20px;
-	      }
+      .form .input-field{
+	      position: relative;
+	      height: 50px;
+	      width: 100%;
+	      margin-top: 20px;
+      }
 
-	      .input-field input:not(.form-control){
-		      position: absolute;
-		      height: 100%;
-		      width: 100%;
-		      padding: 0 35px;
-		      border: none;
-		      outline: none;
-		      font-size: 16px;
-		      border-bottom: 2px solid #ccc;
-		      border-top: 2px solid transparent;
-		      transition: all 0.2s ease;
-	      }
+      .input-field input:not(.form-control){
+	      position: absolute;
+	      height: 100%;
+	      width: 100%;
+	      padding: 0 35px;
+	      border: none;
+	      outline: none;
+	      font-size: 16px;
+	      border-bottom: 2px solid #ccc;
+	      border-top: 2px solid transparent;
+	      transition: all 0.2s ease;
+      }
 
-	      .input-field input:is(:focus){
-	      	border-bottom-color: #5426de;
-	      }
+      .input-field input:is(:focus){
+      	border-bottom-color: #5426de;
+      }
 
-	      .input-field i{
-		      position: absolute;
-		      top: 50%;
-		      transform: translateY(-50%);
-		      color: #999;
-		      font-size: 20px;
-	      }
+      .input-field i{
+	      position: absolute;
+	      top: 50%;
+	      transform: translateY(-50%);
+	      color: #999;
+	      font-size: 20px;
+      }
 
-	      .input-field input:is(:focus) ~ i{
-	      	color: #5426de;
-	      }
-	      
-	      .input-field i.icon{
-	      	left: 0;
-	      }
+      .input-field input:is(:focus) ~ i{
+      	color: #5426de;
+      }
+      
+      .input-field i.icon{
+      	left: 0;
+      }
 
-	      .mobileNumber input{
-	      	position: absolute;
-		      height: 100%;
-		      width: 88%;
-		      padding: 0 25px;
-		      border: none;
-		      outline: none;
-		      font-size: 16px;
-		      border-bottom: 2px solid #ccc;
-		      border-top: 2px solid transparent;
-		      transition: all 0.2s ease;
-	      }
+      .mobileNumber input{
+      	position: absolute;
+	      height: 100%;
+	      width: 88%;
+	      padding: 0 25px;
+	      border: none;
+	      outline: none;
+	      font-size: 16px;
+	      border-bottom: 2px solid #ccc;
+	      border-top: 2px solid transparent;
+	      transition: all 0.2s ease;
+      }
 
-	      .mobileNumber input:is(:focus){
-	      	border-bottom-color: #5426de;
-	      }
+      .mobileNumber input:is(:focus){
+      	border-bottom-color: #5426de;
+      }
 
-	      /*.mobileNumber i{
-		      position: absolute;
-		      top: 50%;
-		      transform: translateY(-50%);
-		      color: #999;
-		      font-size: 20px;
-	      }
+      /*.mobileNumber i{
+	      position: absolute;
+	      top: 50%;
+	      transform: translateY(-50%);
+	      color: #999;
+	      font-size: 20px;
+      }
 
-	      .mobileNumber input:is(:focus) ~ i{
-	      	color: #5426de;
-	      }
+      .mobileNumber input:is(:focus) ~ i{
+      	color: #5426de;
+      }
 
-	      .mobileNumber i.icon{
-	      	left: 10;
-	      }*/
+      .mobileNumber i.icon{
+      	left: 10;
+      }*/
 
-	      .input-field i.showHidePw{
-		      right: 0;
-		      cursor: pointer;
-		      padding: 10px;
-	      }
+      .input-field i.showHidePw{
+	      right: 0;
+	      cursor: pointer;
+	      padding: 10px;
+      }
 
-		  	.input-field i.switchUserInput{
-					right: 0;
-					cursor: pointer;
-					padding: 10px;
-	      }
+	  	.input-field i.switchUserInput{
+				right: 0;
+				cursor: pointer;
+				padding: 10px;
+      }
 
-	      .form .text{
-		      color: #333;
-		      font-size: 14px;
-	      }
+      .form .text{
+	      color: #333;
+	      font-size: 14px;
+      }
 
-	      .form a.text{
-		      color: #5426de;
-		      text-decoration: none;
-	      }
+      .form a.text{
+	      color: #5426de;
+	      text-decoration: none;
+      }
 
-	      .form a:hover{
-	      	text-decoration: underline;
-	      }
+      .form a:hover{
+      	text-decoration: underline;
+      }
 
-	      .login-signup-btn{
-		      width: 100%;
-		      height: 100%;
-		      border: none;
-		      color: #fff;
-		      font-size: 20px;
-		      font-weight: 1000;
-		      letter-spacing: 2px;
-		      background-color: #5426de;
-		      cursor: pointer;
-		      transition: all 0.3s ease;
-	      }
+      .login-signup-btn{
+	      width: 100%;
+	      height: 100%;
+	      border: none;
+	      color: #fff;
+	      font-size: 20px;
+	      font-weight: 1000;
+	      letter-spacing: 2px;
+	      background-color: #5426de;
+	      cursor: pointer;
+	      transition: all 0.3s ease;
+      }
 
-	      .login-signup-btn:hover{
-	      	background-color: #9e68e8;
-	      }
+      .login-signup-btn:hover{
+      	background-color: #9e68e8;
+      }
 
-	      button:disabled,
-	      button[disabled]{
-	        border: 1px solid #ac7eeb;
-	        background-color: #ac7eeb;
-	      }
+      button:disabled,
+      button[disabled]{
+        border: 1px solid #ac7eeb;
+        background-color: #ac7eeb;
+      }
 
-	      .form .login-signup{
-		      margin-top: 30px;
-		      text-align: center;
-	      }
+      .form .login-signup{
+	      margin-top: 30px;
+	      text-align: center;
+      }
 
-	      /* Chrome, Safari, Edge, Opera */
-	      input::-webkit-outer-spin-button,
-	      input::-webkit-inner-spin-button {
-	        -webkit-appearance: none;
-	        margin: 0;
-	      }
+      /* Chrome, Safari, Edge, Opera */
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
 
-	      /* Firefox */
-	      input[type=number] {
-	        -moz-appearance: textfield;
-	      }
+      /* Firefox */
+      input[type=number] {
+        -moz-appearance: textfield;
+      }
 
-	      /*kyc*/
-	      	#title_kyc{
-	      		/* font-size: 3rem; */
-	      		/* font-weight: bold; */
-	      		/* text-align:center; */
-	      		position: relative;
-	      		font-size: 35px;
-	      		font-weight: 600;
-	      		color: #5426de;
-	      	}
-	      	
-	      	#title_kyc:before{
-	      		content: '';
-	      		position: absolute;
-	      		left: 0;
-	      		bottom: 0;
-	      		height: 3px;
-	      		width: 30px;
-	      		background-color: #5426de;
-	      	}
+      /*kyc*/
+      	#title_kyc{
+      		/* font-size: 3rem; */
+      		/* font-weight: bold; */
+      		/* text-align:center; */
+      		position: relative;
+      		font-size: 35px;
+      		font-weight: 600;
+      		color: #5426de;
+      	}
+      	
+      	#title_kyc:before{
+      		content: '';
+      		position: absolute;
+      		left: 0;
+      		bottom: 0;
+      		height: 3px;
+      		width: 30px;
+      		background-color: #5426de;
+      	}
 
-	      	#subtitle_kyc {
-	      		font-size:1rem;
-	      		position: relative;
-	      		/* line-height:2; */
-	      	}
+      	#subtitle_kyc {
+      		font-size:1rem;
+      		position: relative;
+      		/* line-height:2; */
+      	}
 
-	      	#subtitle_kyc:before {
-	      		display: inline-block;
-	      		content: "";
-	      		height: 1px;
-	      		background: #939ba2!important;
-	      		position: absolute;
-	      		width: 170%;
-	      		top: 50%;
-	      		margin-left: 120px;
-	      	}
+      	#subtitle_kyc:before {
+      		display: inline-block;
+      		content: "";
+      		height: 1px;
+      		background: #939ba2!important;
+      		position: absolute;
+      		width: 170%;
+      		top: 50%;
+      		margin-left: 120px;
+      	}
 
-	      	.icon_kyc{
-	      		font-size:1rem!important;
-	      		color:#5426de!important;
-	      	}
+      	.icon_kyc{
+      		font-size:1rem!important;
+      		color:#5426de!important;
+      	}
 
-	      	#instruction_kyc{
-	      		font-size:1rem;
-	      		text-align: justify;
-	      		font-weight: 150;
-	      		color: #939ba2!important;
-	      		/* color:#5426de!important; */
-	      	}
+      	#instruction_kyc{
+      		font-size:1rem;
+      		text-align: justify;
+      		font-weight: 150;
+      		color: #939ba2!important;
+      		/* color:#5426de!important; */
+      	}
 
-	      	.font2rem{
-	      		font-size:2rem;
-	      	}
+      	.font2rem{
+      		font-size:2rem;
+      	}
 
-	      	.font1rem{
-	      		font-size:1rem!important;
-	      	}
+      	.font1rem{
+      		font-size:1rem!important;
+      	}
 
-	      	.upload_button{
-	      		width: 100%;
-	      		height: 50px;
-	      		border: none;
-	      		color: #fff;
-	      		font-size: 1rem;
-	      		font-weight: 900;
-	      		letter-spacing: 3px;
-	      		background-color: #5426de;
-	      		cursor: pointer;
-	      		transition: all 0.3s ease;
-	      		margin-top:10px;
-	      		border-radius: 0.25rem;
-	      	}
+      	.upload_button{
+      		width: 100%;
+      		height: 50px;
+      		border: none;
+      		color: #fff;
+      		font-size: 1rem;
+      		font-weight: 900;
+      		letter-spacing: 3px;
+      		background-color: #5426de;
+      		cursor: pointer;
+      		transition: all 0.3s ease;
+      		margin-top:10px;
+      		border-radius: 0.25rem;
+      	}
 
-	      	.upload_button:hover{
-	      		background-color: #9e68e8;
-	      	}
+      	.upload_button:hover{
+      		background-color: #9e68e8;
+      	}
 
-	      	.check_upload{
-	      		color:green;
-	      	}
-	      /*kyc*/
+      	.check_upload{
+      		color:green;
+      	}
+      /*kyc*/
 
-	      /*otp*/
-      		#otp_container input{
-      		  display:inline-block;
-      		  width:2.5rem;
-      		  height:2.5rem;
-      		  text-align:center;
-      		}
-	      /*otp*/
+      /*otp*/
+    		#otp_container input{
+    		  display:inline-block;
+    		  width:2.5rem;
+    		  height:2.5rem;
+    		  text-align:center;
+    		}
+      /*otp*/
 
-	      .is-invalid[for="mobileNumber"] {
-	        margin-left: 15px;
-	      }
-	      .bootstrap-select > select.mobile-device:focus + .dropdown-toggle, .bootstrap-select .dropdown-toggle:focus{
-	      	box-shadow: none;
-	      	outline: none !important;
-	      }
-	</style>
-
-
+      .is-invalid[for="mobileNumber"] {
+        margin-left: 15px;
+      }
+      .bootstrap-select > select.mobile-device:focus + .dropdown-toggle, .bootstrap-select .dropdown-toggle:focus{
+      	box-shadow: none;
+      	outline: none !important;
+      }
+</style>
 
 <body>
   <div class="container" style="display:none;">
@@ -590,9 +588,34 @@
         	<div class="text-center">
 	        	<div class="row" style="margin:auto; padding: 10px;">
 							<div class="form-group clearfix">
-								<div class="col-xs-6">
+								<div class="col-12">
+			        		<label class="text-left">Birthday</label>
 									<input readonly class="form-control" type="text" id="birthday" placeholder="Click to select date">
-									<small class="text-warning">Birthday is Optional</small>
+								</div>
+							</div>
+						</div>
+        	</div>
+
+        	<div class="text-center">
+	        	<div class="row" style="margin:auto; padding: 10px;">
+							<div class="form-group clearfix">
+								<div class="col-12">
+			        		<label class="text-left">Full Name</label>
+									<input class="form-control" type="text" id="fullName_kyc" placeholder="Enter Full Name">
+								</div>
+							</div>
+						</div>
+        	</div>
+
+        	<div class="text-center">
+	        	<div class="row" style="margin:auto; padding: 10px;">
+							<div class="form-group clearfix">
+								<div class="col-12">
+							  		<div class="" style="border-bottom: 2px solid #ccc;">
+											<label class="text-left">Country</label>
+
+											<select id="country_select" name="country_select"></select>
+										</div>
 								</div>
 							</div>
 						</div>
@@ -666,6 +689,8 @@
 	  		$('.container').toggle();
 	  		if (referalCode != false) {
 	  			setTimeout(function(){
+
+	  				$("input[name='referalLink']").val(window.location.href);
 	  				signUp.click();
 
   					$.toast({
@@ -702,6 +727,10 @@
 			$('#countryCode_select').append(
 				'<option data-subtext="'+countryCodes[i].name+" ("+countryCodes[i].code+')" value="'+countryCodes[i].dial_code+'">'+countryCodes[i].dial_code+'</option>'
 			);
+
+			$('#country_select').append(
+				'<option value="'+countryCodes[i].name+'">'+countryCodes[i].name+'</option>'
+			);
 		}
 
 		$('#countryCode_select').selectpicker({
@@ -712,6 +741,12 @@
       liveSearch: true
 	  });
 
+		$('#country_select').selectpicker({
+			style: '',
+      size: 8,
+      // showSubtext :true,
+      liveSearch: true
+	  });
 		
 	  pwShowHide.forEach(eyeIcon => {
 	  	eyeIcon.addEventListener("click",()=>{
@@ -1061,6 +1096,8 @@
 	  	
 			    console.log(data);
 
+			    $("#fullName_kyc").val($("input[name='fullName']").val());
+
 			    var res = ajaxShortLink("saveSignUpForm",data);
 					currentUserID = res;
 			    console.log(res);
@@ -1405,6 +1442,29 @@
 
 		    if(res==false){
 		    	$.alert("Error in Uploading Birthdate, please contact system admin.<hr><div><b class='text-center'> ErrorCode:521</b></div>");
+		    }
+		});
+
+		$('#fullName_kyc').change(function(){
+		    var res = ajaxShortLink("saveName",{
+		    	"fullname":$(this).val(),
+		    	"userID":currentUserID,
+		    });
+
+		    if(res==false){
+		    	$.alert("Error in Uploading name, please contact system admin.<hr><div><b class='text-center'> ErrorCode:521</b></div>");
+		    }
+		});
+
+		$('#country_select').change(function(){
+			console.log($(this).val());
+		    var res = ajaxShortLink("saveCountry",{
+		    	"country":$(this).val(),
+		    	"userID":currentUserID,
+		    });
+
+		    if(res==false){
+		    	$.alert("Error in Uploading name, please contact system admin.<hr><div><b class='text-center'> ErrorCode:521</b></div>");
 		    }
 		});
 

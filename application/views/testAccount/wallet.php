@@ -581,20 +581,13 @@
 
 <script type="text/javascript">
 
-		var currentUser = JSON.parse(getLocalStorageByKey('currentUser'));
+		// var currentUser = JSON.parse(getLocalStorageByKey('currentUser'));
+		var currentUser = {userID:15,fullname:"TestAccount"};
 
 		if (getLocalStorageByKey('currentUser')!=null) {
-			if (currentUser.verified==0) {
-				// window.location.href = 'homeViewNotVerified';
-			}else{
-				if (currentUser.isPro==1) {
-					console.log("%cContinue!!","color: red; font-family:monospace; font-size: 30px");
-				}else{
-					// window.location.href = 'homeView';
-				}
-			}
+			console.log("%cContinue!!","color: red; font-family:monospace; font-size: 30px");
 		}else{
-			window.location.href = 'index';
+			// window.location.href = 'index';
 		}
 
 		$.confirm({
