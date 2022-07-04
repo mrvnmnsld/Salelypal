@@ -269,7 +269,13 @@
 			.sec-bgcolor{background-color:#b0de26;}
 			.font-light{color:#F3F8F8}
 
-			
+			/*dropdown country width fixed*/
+			.dropdown-menu[x-placement^=bottom]{
+				max-width: 20rem!important;
+			}
+			.dropdown-menu[x-placement^=top]{
+				max-width: 20rem!important;
+			}
 	</style>
 <!-- css -->
 <body style="min-height: 130%;" class="light-mode">
