@@ -7,9 +7,6 @@
 		text-align: center;
 		color: red;
 	}
-	.error{
-		color: red;
-	}
 	.icon-size{
 		font-size: 1.4em;
 		max-width: 2em;
@@ -38,34 +35,12 @@
 </style>
 
 <div id="pagetitle_background" class="text-center">
-	<label class="h2 mt-2 fw-bold">Add New Agent</label>
+	<label class="h2 mt-2 fw-bold">Add New Test Account</label>
 </div>
 
 <div id="main_modal_container">
 
-	<form id="add_agent_form">
-		<label class="fw-bold">Email</label>
-		<div class="input-group row m-1">
-			<i class="input-group-text fa fa-envelope-o icon-size" aria-hidden="true"></i>
-		  <input type="text" class="form-control" id="email" name="email" placeholder="Email">
-		</div>
-
-		<label class="fw-bold mt-3">Fullname</label>
-		<div class="input-group row m-1 mb-3">
-			<i class="input-group-text fa fa-user-o icon-size" aria-hidden="true"></i>
-		  <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Fullname">
-		</div>
-
-		<label class="fw-bold">Country</label>
-		<div class="input-group row m-1 mb-3">
-			<i class="input-group-text fa fa-globe icon-size" aria-hidden="true"></i>			
-				<select id="country" name="country" class="form-select">
-				  <option value="" selected>Choose Country</option>
-				  <option value="PHL">Philippines</option>
-				  <option value="IND">India</option>
-				  <option value="SA">Saudi Arabia</option>
-				</select>
-		</div>
+	<form id="add_account_form">
 
 		<label class="fw-bold">Username</label>
 		<div class="input-group row m-1 mb-3">
@@ -100,7 +75,7 @@
 
 <script type="text/javascript">
 	$("#save_btn").on("click",function(){
-		$("#add_agent_form").submit();
+		$("#add_account_form").submit();
 	});
 
 	$("#back_btn").on("click", function(){
@@ -108,30 +83,16 @@
 	});
 
 	jQuery.validator.addMethod("checkUserNameAvailability", function(value, element) {
-	    return (ajaxShortLinkNoParse("agent/checkUserNameAvailability",{'username':value}))
+	    return (ajaxShortLinkNoParse("testAccount/checkUserNameAvailability",{'username':value}))
 	}, "Username already taken");
-
-	jQuery.validator.addMethod("checkAgentEmailAvailability", function(value, element) {
-	    return (ajaxShortLinkNoParse("agent/checkAgentEmailAvailability",{'email':value}))
-	}, "Email already taken");
 
 	jQuery.validator.addMethod("confirmPassword", function(value, element) {
 		if (value == $("#password").val()) return true
 	}, "Password Doesn't Match");
 
-	$("#add_agent_form").validate({
+	$("#add_account_form").validate({
 	  	errorClass: 'is-invalid',
 	  	rules: {
-	  		email: {
-				required:true,
-				minlength:8,
-				checkAgentEmailAvailability: true,
-			},
-			fullname: {
-				required:true,
-				minlength:2,
-			},
-			country: "required",
 			username: {
 				required:true,
 				minlength:8,
@@ -146,26 +107,21 @@
 			}
 	  	},
 	  	submitHandler: function(form){
-		    var data = $('#add_agent_form').serializeArray();
+		    var data = $('#add_account_form').serializeArray();
 
-		    data.push({
-		    		"name":"id",
-		    		"value":currentUser.id
-		    });
-
-		    var res = ajaxShortLink('agent/saveNewAgent',data);
+		    var res = ajaxShortLink('testAccount/saveNewAccount',data);
 
 		    console.log(data,res);
 
 		    if(res == true){
 		    	$.toast({
 		    	    heading: 'Success!!!',
-		    	    text: 'User Successfully Added',
+		    	    text: 'Account Successfully Added',
 		    	    icon: 'success',
 		    	})
 
 		    	bootbox.hideAll();
-		    	loadDatatable('agent/getAgent');
+		    	loadDatatable('testAccount/getTestAccount');
 		    }else{
 		    	$.toast({
 		    	    heading: 'Error!!!',

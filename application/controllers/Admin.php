@@ -1003,7 +1003,7 @@ class admin extends MY_Controller {
 	}
 
 	public function volumeControl(){
-		$this->load->view('volumeControl/selectPercentage');
+		$this->load->view('volumeControl/index');
 	}
 
 	public function updateProStatus(){
@@ -1022,6 +1022,7 @@ class admin extends MY_Controller {
 		}else{
 			echo json_encode(false);
 		}
+		// echo json_encode($insertRecord);
 	}
 
 

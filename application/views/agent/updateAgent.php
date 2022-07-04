@@ -10,6 +10,7 @@
 	.icon-size{
 		font-size: 1.4em;
 		max-width: 2em;
+		padding-top: 10px;
 	}
 	.form-control { /* seems working on other ui bugs, no changes on current ui screens */
 		height: 2.7em; 
