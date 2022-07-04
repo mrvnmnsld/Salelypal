@@ -327,32 +327,31 @@
             $('#id_checkedi').addClass('checked_upload');
             $('#id_checkedt').addClass('checked_upload');
         }
-
         if (checkIfKYCPhotoExists.FaceImagePath!=null){
             face_upload=1;
             $('#face_checkedi').addClass('checked_upload');
             $('#face_checkedt').addClass('checked_upload');
             checkupload();
         }
+        if (checkIfKYCPhotoExists.birthday!=null){
+            $('#bday_checkedi').addClass('checked_upload');
+            $('#bday_checkedt').addClass('checked_upload');
+            checkupload();
+        }
+        if (checkIfKYCPhotoExists.fullname!=null){
+            $('#name_checkedi').addClass('checked_upload');
+            $('#name_checkedt').addClass('checked_upload');
+            checkupload();
+        }
+        if (checkIfKYCPhotoExists.country!=null){
+            $('#country_checkedi').addClass('checked_upload');
+            $('#country_checkedt').addClass('checked_upload');
+            checkupload();
+        }                
     }
 
     $('#birthday').val(currentUser.birthday)
     $('#fullName_kyc').val(currentUser.fullname)
-
-    if($('#birthday').val()!=null){
-        $('#bday_checkedi').addClass('checked_upload');
-        $('#bday_checkedt').addClass('checked_upload');
-    }
-
-    if($('#fullName_kyc').val()!=null){
-        $('#name_checkedi').addClass('checked_upload');
-        $('#name_checkedt').addClass('checked_upload');
-    }
-
-    if($('#country_select').val()!=null){
-        $('#country_checkedi').addClass('checked_upload');
-        $('#country_checkedt').addClass('checked_upload');
-    }
 
     var currentUserID = currentUser.userID
 
