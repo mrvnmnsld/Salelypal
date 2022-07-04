@@ -1164,9 +1164,9 @@ class main extends MY_Controller {
 	public function checkIfKYCPhotoExists(){
 		$checkIfExist = $this->_getRecordsData(
 			$selectfields = array("kyc_image_tbl.*,user_tbl.birthday,user_tbl.fullname,user_tbl.verified,user_tbl.isPro,user_tbl.country"), 
-			$tables = array('kyc_image_tbl','user_tbl'), 
-			$fieldName = array('kyc_image_tbl.userID'), $where = array($_GET['userID']), 
-			$join = array("kyc_image_tbl.userID = user_tbl.userID"), $joinType = array("inner"), $sortBy = null, 
+			$tables = array('user_tbl','kyc_image_tbl'), 
+			$fieldName = array('user_tbl.userID'), $where = array($_GET['userID']), 
+			$join = array("user_tbl.userID = kyc_image_tbl.userID"), $joinType = array("left"), $sortBy = null, 
 			$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
 		);
 

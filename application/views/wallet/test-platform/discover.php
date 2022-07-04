@@ -42,9 +42,9 @@
 	</style>
 
 <div class="card px-1 py-2 rounded shadow-lg main-card-ui m-2 cardshad">
-	<div class="card px-2 pt-4 mt-2 rounded shadow-lg main-card-ui m-2 cardshad1">
+	<div class="card px-2 py- pt-4 mt-2 rounded shadow-lg main-card-ui m-2 cardshad1">
 		<span class="main-color-text text-start text-bold font-lg">Invite friends and earn USDT</span>
-		<span class="font-xsm text-muted text-start pb-1 text-bold line1 display-4">Copy the link and send it to your friends </span> 
+		<span class="font-xsm text-muted text-start py-1 text-bold line1 display-4">Copy the link and send it to your friends & wait for the rewards to be sent</span> 
 
 		<div class="input-group mb-1">
 		  <input type="text" class="form-control" id="referal_link_container" readonly>

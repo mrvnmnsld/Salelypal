@@ -255,7 +255,9 @@
         <div class="row">
             <div class="col-6" >
                 <span class="main-color-text">Country</span><br>
-                <select id="country_select" name="country_select"></select>
+                <select id="country_select" name="country_select">
+                    <option disabled>Please Select Country...</option>
+                </select>
             </div>
             <div class="col-6">
                 <span class="main-color-text">Birthday</span>
@@ -305,11 +307,24 @@
     var countryCodes = loadJsonViaURL("assets/json/countryCodes.json");
     $("#fullName_kyc").val(currentUser.fullname);
 
+    var checkIfKYCPhotoExists = ajaxShortLink('main/checkIfKYCPhotoExists',{
+        "userID":currentUser.userID
+    });
+
     for (var i = 0; i < countryCodes.length; i++) {
+        var isSelected = '';
+
+        if (checkIfKYCPhotoExists.country!=null&&countryCodes[i].name==checkIfKYCPhotoExists.country) {
+            isSelected= "selected"
+        }
+
         $('#country_select').append(
-            '<option value="'+countryCodes[i].name+'">'+countryCodes[i].name+'</option>'
+            '<option '+isSelected+' value="'+countryCodes[i].name+'" data-subtext="'+countryCodes[i].name+'">'+countryCodes[i].code+'</option>'
         );
     }
+
+    
+    
 
     $('#country_select').selectpicker({
         style: '',
@@ -318,9 +333,6 @@
         liveSearch: true
      });
 
-    var checkIfKYCPhotoExists = ajaxShortLink('main/checkIfKYCPhotoExists',{
-        "userID":currentUser.userID
-    });
 
     if (checkIfKYCPhotoExists!=false) {
         if (checkIfKYCPhotoExists.IDImagePath!=null) {
