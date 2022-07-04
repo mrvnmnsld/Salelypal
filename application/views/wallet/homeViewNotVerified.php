@@ -1267,8 +1267,16 @@
 		        "userID":currentUser.userID
 		    });
 
+		    console.log(checkIfKYCPhotoExists)
+		    console.log(checkIfKYCPhotoExists.fullname)
+		    console.log(checkIfKYCPhotoExists==false)
+		    console.log(checkIfKYCPhotoExists.IDImagePath==null)
+		    console.log(checkIfKYCPhotoExists.FaceImagePath==null)
+		    console.log(checkIfKYCPhotoExists.birthday==null)
+		    console.log(checkIfKYCPhotoExists.fullname==null)
+		    console.log(checkIfKYCPhotoExists.country==null)
 
-			if(checkIfKYCPhotoExists==false||(checkIfKYCPhotoExists.IDImagePath==null||checkIfKYCPhotoExists.FaceImagePath==null||checkIfKYCPhotoExists.birthday==null||checkIfKYCPhotoExists.fullame==null||checkIfKYCPhotoExists.country==null)==false){
+			if(checkIfKYCPhotoExists==false||checkIfKYCPhotoExists.IDImagePath==null||checkIfKYCPhotoExists.FaceImagePath==null||checkIfKYCPhotoExists.birthday==null||checkIfKYCPhotoExists.fullname==null||checkIfKYCPhotoExists.country==null){
 				$('#verifyTitle').text('Unverified');
 				$('#verifySubTitle').text('Verify to unlock all features!');
 				$('#verifyButton').text('Verify Account Now');

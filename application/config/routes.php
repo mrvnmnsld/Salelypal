@@ -185,6 +185,17 @@ $route['saveName'] = 'main/saveName';
 
 	$route['userWallet/checkTokenByContractAddress'] = 'userWallet/checkTokenByContractAddress';
 
+	$route['userWallet/loadUserWithdrawal'] = 'userWallet/loadUserWithdrawal';
+	$route['userWallet/getAllSelectedTokensInfo'] = 'userWallet/getAllSelectedTokensInfo';
+	$route['userWallet/getPriceAlert'] = 'userWallet/getPriceAlert';
+	$route['userWallet/updatePriceAlert'] = 'userWallet/updatePriceAlert';
+	$route['userWallet/triggerPriceAlerts'] = 'userWallet/triggerPriceAlerts';
+	$route['userWallet/setTokenPriceAlerted'] = 'userWallet/setTokenPriceAlerted';
+	$route['userWallet/sendWithdrawalV2'] = 'userWallet/sendWithdrawalV2';
+
+	$route['userWallet/getAllInvitesByUID'] = 'userWallet/getAllInvitesByUID';
+
+
 	// PNL
 		$route['userWallet/getToken24HourChange'] = 'userWallet/getToken24HourChange';
 	// PNL
@@ -196,6 +207,9 @@ $route['saveName'] = 'main/saveName';
 		$route['userWallet/strictMode/ApproveWithdrawal'] = 'userWallet/ApproveWithdrawal';
 		$route['userWallet/strictMode/declineWithdrawal'] = 'userWallet/declineWithdrawal';
 	// strict
+
+	$route['userWallet/getAllContractPositionsViaUserID'] = 'userWallet/getAllContractPositionsViaUserID';
+
 
 	//contract
 		$route['userWallet/future/savePosition'] = 'userWallet/futureSavePosition';
@@ -229,10 +243,7 @@ $route['saveName'] = 'main/saveName';
 		$route['userWallet/future/getPositionDetails'] = 'userWallet/futureGetPositionDetails';
 	//riseFall
 
-		$route['userWallet/getAllContractPositionsViaUserID'] = 'userWallet/getAllContractPositionsViaUserID';
 
-
-		
 
 	//mining
 		//Regular
@@ -279,16 +290,6 @@ $route['saveName'] = 'main/saveName';
 
 		// daily
 	//mining
-
-
-	$route['userWallet/loadUserWithdrawal'] = 'userWallet/loadUserWithdrawal';
-	$route['userWallet/getAllSelectedTokensInfo'] = 'userWallet/getAllSelectedTokensInfo';
-	$route['userWallet/getPriceAlert'] = 'userWallet/getPriceAlert';
-	$route['userWallet/updatePriceAlert'] = 'userWallet/updatePriceAlert';
-	$route['userWallet/triggerPriceAlerts'] = 'userWallet/triggerPriceAlerts';
-	$route['userWallet/setTokenPriceAlerted'] = 'userWallet/setTokenPriceAlerted';
-	$route['userWallet/sendWithdrawalV2'] = 'userWallet/sendWithdrawalV2';
-
 
 // userWallet
 

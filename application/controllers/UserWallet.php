@@ -1992,7 +1992,7 @@ class userWallet extends MY_Controller {
 
 		$average = array_sum($day14ContainerArray)/count($day14ContainerArray);
 		array_push($container,round($average,2));
-		
+
 		echo json_encode($container);
 	}
 
@@ -2023,6 +2023,24 @@ class userWallet extends MY_Controller {
 
 		echo json_encode(array($future,$risefall));
 	}
+
+	public function getAllInvitesByUID(){
+		$res = $this->_getRecordsData(
+			$selectfields = array("*"), 
+	   		$tables = array('user_tbl'),
+	   		$fieldName = array('referred_user_id','referType'), $where = array($_GET['userID'],"user"), 
+	   		$join = null, $joinType = null,
+	   		$sortBy = null, $sortOrder = null, 
+	   		$limit = null, 
+	   		$fieldNameLike = null, $like = null,
+	   		$whereSpecial = null, 
+	   		$groupBy = null 
+		);
+
+		echo json_encode($res);
+	}
+
+	
 
 
 
