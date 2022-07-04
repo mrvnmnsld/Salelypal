@@ -1892,14 +1892,6 @@ class userWallet extends MY_Controller {
 
 	public function getToken24HourChange(){
 		$container = array();
-		$day1Container = 0;
-		$day2Container = 0;
-		$day3Container = 0;
-		$day4Container = 0;
-		$day5Container = 0;
-		$day6Container = 0;
-		$day6Container = 0;
-
 		$day1ContainerArray = array();
 		$day2ContainerArray = array();
 		$day3ContainerArray = array();
@@ -1908,15 +1900,22 @@ class userWallet extends MY_Controller {
 		$day6ContainerArray = array();
 		$day6ContainerArray = array();
 		$day7ContainerArray = array();
+		$day8ContainerArray = array();
+		$day9ContainerArray = array();
+		$day10ContainerArray = array();
+		$day11ContainerArray = array();
+		$day12ContainerArray = array();
+		$day13ContainerArray = array();
+		$day14ContainerArray = array();
 
-		// $coinIds = ['binancecoin','tron','bitcoin'];
 		$coinIds = explode(",", $_GET['coinIds']);
+		// $coinIds = ['binancecoin'];
 
 		foreach ($coinIds as $id) {
 			$url = 'https://api.coingecko.com/api/v3/coins/'.$id.'/market_chart';
 			$params =[
 			  	'vs_currency' => 'usd',
-			  	'days' => '8',
+			  	'days' => '15',
 			];
 
 			$curl = curl_init();
@@ -1935,13 +1934,22 @@ class userWallet extends MY_Controller {
 		   	array_push($day4ContainerArray, round($this->_getPercentageChange($original = $resp->prices[72][1],$current = $resp->prices[96][1]),2));
 		   	array_push($day5ContainerArray, round($this->_getPercentageChange($original = $resp->prices[120][1],$current = $resp->prices[144][1]),2));
 		   	array_push($day6ContainerArray, round($this->_getPercentageChange($original = $resp->prices[144][1],$current = $resp->prices[168][1]),2));
+		   	array_push($day7ContainerArray, round($this->_getPercentageChange($original = $resp->prices[168][1],$current = $resp->prices[192][1]),2));
+		   	array_push($day8ContainerArray, round($this->_getPercentageChange($original = $resp->prices[192][1],$current = $resp->prices[216][1]),2));
+		   	array_push($day9ContainerArray, round($this->_getPercentageChange($original = $resp->prices[216][1],$current = $resp->prices[240][1]),2));
+		   	array_push($day10ContainerArray, round($this->_getPercentageChange($original = $resp->prices[240][1],$current = $resp->prices[264][1]),2));
+		   	array_push($day11ContainerArray, round($this->_getPercentageChange($original = $resp->prices[264][1],$current = $resp->prices[288][1]),2));
+		   	array_push($day12ContainerArray, round($this->_getPercentageChange($original = $resp->prices[288][1],$current = $resp->prices[312][1]),2));
+		   	array_push($day13ContainerArray, round($this->_getPercentageChange($original = $resp->prices[312][1],$current = $resp->prices[336][1]),2));
 
-		   	if (isset($resp->prices[192][1])) {
-		   		array_push($day7ContainerArray, round($this->_getPercentageChange($original = $resp->prices[168][1],$current = $resp->prices[192][1]),2));
+		   	if (isset($resp->prices[360][1])) {
+		   		array_push($day14ContainerArray, round($this->_getPercentageChange($original = $resp->prices[336][1],$current = $resp->prices[360][1]),2));
 		   	}else{
-		   		array_push($day7ContainerArray,0);
+		   		array_push($day14ContainerArray,0);
 		   	}
 		}
+
+		// echo json_encode($resp);
 
 		$average = array_sum($day1ContainerArray)/count($day1ContainerArray);
 		array_push($container,round($average,2));
@@ -1949,24 +1957,40 @@ class userWallet extends MY_Controller {
 		$average = array_sum($day2ContainerArray)/count($day2ContainerArray);
 		array_push($container,round($average,2));
 
-
 		$average = array_sum($day3ContainerArray)/count($day3ContainerArray);
 		array_push($container,round($average,2));
-
 
 		$average = array_sum($day4ContainerArray)/count($day4ContainerArray);
 		array_push($container,round($average,2));
 
-
 		$average = array_sum($day5ContainerArray)/count($day5ContainerArray);
 		array_push($container,round($average,2));
-
 
 		$average = array_sum($day6ContainerArray)/count($day6ContainerArray);
 		array_push($container,round($average,2));
 
-
 		$average = array_sum($day7ContainerArray)/count($day7ContainerArray);
+		array_push($container,round($average,2));
+
+		$average = array_sum($day8ContainerArray)/count($day8ContainerArray);
+		array_push($container,round($average,2));
+
+		$average = array_sum($day9ContainerArray)/count($day9ContainerArray);
+		array_push($container,round($average,2));
+
+		$average = array_sum($day10ContainerArray)/count($day10ContainerArray);
+		array_push($container,round($average,2));
+
+		$average = array_sum($day11ContainerArray)/count($day11ContainerArray);
+		array_push($container,round($average,2));
+
+		$average = array_sum($day12ContainerArray)/count($day12ContainerArray);
+		array_push($container,round($average,2));
+
+		$average = array_sum($day13ContainerArray)/count($day13ContainerArray);
+		array_push($container,round($average,2));
+
+		$average = array_sum($day14ContainerArray)/count($day14ContainerArray);
 		array_push($container,round($average,2));
 
 		echo json_encode($container);
@@ -1999,6 +2023,24 @@ class userWallet extends MY_Controller {
 
 		echo json_encode(array($future,$risefall));
 	}
+
+	public function getAllInvitesByUID(){
+		$res = $this->_getRecordsData(
+			$selectfields = array("*"), 
+	   		$tables = array('user_tbl'),
+	   		$fieldName = array('referred_user_id','referType'), $where = array($_GET['userID'],"user"), 
+	   		$join = null, $joinType = null,
+	   		$sortBy = null, $sortOrder = null, 
+	   		$limit = null, 
+	   		$fieldNameLike = null, $like = null,
+	   		$whereSpecial = null, 
+	   		$groupBy = null 
+		);
+
+		echo json_encode($res);
+	}
+
+	
 
 
 

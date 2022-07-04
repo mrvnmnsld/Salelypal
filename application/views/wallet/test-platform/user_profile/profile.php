@@ -16,6 +16,30 @@
     #goBackLink{
         color:#004999;
     }
+    /*tooltips*/
+        #tooltipemail {
+            position: relative;
+            display: inline-block;
+            border-bottom: 1px dotted black;
+        }
+
+        #emailDiv #tooltipemail {
+            visibility: hidden;
+            width: auto;
+            background-color: rgb(50, 50, 50);
+            color: #94abef;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 5px;
+
+        /* Position the tooltip */
+            position: absolute;
+            z-index: 1;
+        }
+
+        #emailDiv:hover #tooltipemail {
+            visibility: visible;
+        }
 </style>
 
 <link href="https://fonts.googleapis.com/css?family=Oswald" rel=“stylesheet”>
@@ -40,9 +64,10 @@
             
             <hr class="mt-0 mb-4">
             <div class="row pt-1">
-                <div class="col-6 mb-3">
+                <div id="emailDiv" class="col-6 mb-3">
                     <h6> Email </h6>
-                    <p id="email" class="text-muted">info@email.com</p>
+                    <p id="email" class="text-truncate text-muted">info@email.com</p>
+                     <span id="tooltipemail"></span>
                 </div>
             <div class="col-6 mb-3">
                 <h6> Phone Number</i></h6>
@@ -85,6 +110,7 @@
     $('#email').text(email);
     $('#mobileNumber').text(mobileNumber);
     $('#birthday').text(birthday);
+    $('#tooltipemail').text(email);
 
     $("#edit_profile_btn").on('click',function(){
 
@@ -95,6 +121,9 @@
             closeButton: false
         });
     });
+
+    console
+
 </script>
 
 

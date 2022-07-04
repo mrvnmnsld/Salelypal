@@ -91,6 +91,7 @@
 
     <div>
         <button class="btn btn-block btn-sm btn-warning modalMinimize mt-2">Toggle chart view</button>
+        <button class="btn btn-block btn-sm btn-danger mt-2" id="forfeit_btn">Forfeit</button>
     </div>
 </div>
 
@@ -113,7 +114,7 @@
 
     <div>
         <span>Resolved Price:</span>
-        <span id="resolved_price_container">29212</span> 
+        <span id="resolved_price_container"></span> 
     </div>
 
     <br>
@@ -122,20 +123,28 @@
 </div>
 
 <script type="text/javascript">
-    isMinimized = 0;
+    isMinimized = 1;
     var bettingSettings = ajaxShortLink("admin/getBettingSettings");
+    var resolvedPriceCountdown;
 
     var riseFallTimings = ajaxShortLink("admin/getFutureRisefallTimings");
     console.log(riseFallTimings)
 
     for (var i = 0; i < riseFallTimings.length; i++) {
         if (i==0) {
-            $("#timings_container").append('<label class="btn btn-secondary active" id="timing_'+riseFallTimings[i].id+'">')
+            console.log(riseFallTimings[i]);
+            $("#timings_container").append('<label checked class="btn btn-secondary active" id="timing_'+riseFallTimings[i].id+'">')
         }else{
             $("#timings_container").append('<label class="btn btn-secondary" id="timing_'+riseFallTimings[i].id+'">')
         }
 
-        $("#timing_"+riseFallTimings[i].id).append('<input type="radio" name="risk_option_radio" value="'+riseFallTimings[i].timing+'/'+riseFallTimings[i].income+'" autocomplete="off" checked="checked"> '+riseFallTimings[i].timing+' Sec <br>')
+        if (i==0) {
+            console.log(riseFallTimings[i]);
+            
+            $("#timing_"+riseFallTimings[i].id).append('<input type="radio" name="risk_option_radio" value="'+riseFallTimings[i].timing+'/'+riseFallTimings[i].income+'" autocomplete="off" checked="checked"> '+riseFallTimings[i].timing+' Sec <br>')
+        }else{
+            $("#timing_"+riseFallTimings[i].id).append('<input type="radio" name="risk_option_radio" value="'+riseFallTimings[i].timing+'/'+riseFallTimings[i].income+'" autocomplete="off" > '+riseFallTimings[i].timing+' Sec <br>')
+        }
 
         $("#timing_"+riseFallTimings[i].id).append('<small style="font-size: 12px;">'+riseFallTimings[i].income+'% Income</small>')
         $("#timings_container").append("</label>")
@@ -212,16 +221,24 @@
                         var timeStampJSObj = new Date(timeStamp);
                         var seconds = (timeStampJSObj.getTime() - now.getTime()) / 1000;
 
-                        console.log(idToResolve);
+                        console.log(idToResolve,seconds-3);
 
                         console.log(
                             unixTimeToDate13CharNonFormated(date+(timer*1000)),
                             formatDateObject(unixTimeToDate13CharNonFormated(date+(timer*1000)))
                         )
 
-                        setTimeout(function(){
+                        resolvedPriceCountdown = setTimeout(function(){
                             resolveThisID(idToResolve)
                         }, seconds*1000);
+
+                        setTimeout(function(){
+                            console.log("IM HERE");
+                            if ($(".jconfirm-box").length==1) {
+                                jconfirm.instances[0].close();
+                                $("#forfeit_btn").attr("disabled",true);
+                            }
+                        }, (seconds-3)*1000);
 
                         $('[data-countdown]').each(function() {
                             var $this = $(this), finalDate = $(this).data('countdown');
@@ -273,7 +290,7 @@
         }
     })
 
-    function resolveThisID(id){
+    function resolveThisID(id,isForfeited){
 
         $(".modalMinimize").click();
 
@@ -285,6 +302,7 @@
         // test-platform
 
         console.log(balanceUsdtInner);
+        console.log(isForfeited);
 
         var checkSet = ajaxShortLink('userWallet/riseFall/checkIfSet',{'id':id});
         console.log(checkSet);
@@ -358,34 +376,8 @@
 
             console.log(currentPrice,closeTokenValue);
 
-            if (parseFloat(currentPrice)<parseFloat(closeTokenValue)) {
-                status = "WIN";
-                statusClass = 'text-success';
-
-                $("#sec_modal_container").css("display",'none');
-                $("#resolve_modal_container").css("display",'block');
-
-                $("#resolve_text_container").text("Position WON!");
-                $("#resolve_text_container").addClass("text-success");
-
-                $("#amount_won").text("+"+newIncome);
-                $("#amount_won").addClass("text-success");
-
-                $("#2_amount_staked_container").text(positionsOpened[0].amount);
-                $("#2_trade_pair_container").text(positionsOpened[0].tradePair);
-                $("#resolved_price_container").text(closeTokenValue);
-
-                // sendTransaction Wallet
-                // test-platform
-                    var newBalanceRes = ajaxShortLink("test-platform/newBalance",{
-                       'tokenName':'usdt',
-                       'smartAddress':null,
-                       'newAmount':parseFloat(balanceUsdtInner)+parseFloat(newIncome)+parseFloat(positionsOpened[0].amount),
-                    })    
-                // test-platform 
-
-                pushNewNotif("Position Won!(TESTING)","You have won "+newIncome+" USDT",currentUser.userID)
-            }else{
+            if (isForfeited!=undefined) {
+                console.log("Forfeit");
                 status = "LOSE";
                 statusClass = 'text-danger';
 
@@ -394,7 +386,7 @@
                 $("#sec_modal_container").css("display",'none');
                 $("#resolve_modal_container").css("display",'block');
 
-                $("#resolve_text_container").text("Position LOST!");
+                $("#resolve_text_container").text("Position Forfeited!");
                 $("#resolve_text_container").addClass("text-danger");
 
                 $("#amount_won").text("-"+positionsOpened[0].amount);
@@ -402,8 +394,56 @@
 
                 $("#2_amount_staked_container").text(positionsOpened[0].amount);
                 $("#2_trade_pair_container").text(positionsOpened[0].tradePair);
-                $("#resolved_price_container").text(closeTokenValue);
+                // $("#resolved_price_container").text(closeTokenValue);
+            }else{
+                if (parseFloat(currentPrice)<parseFloat(closeTokenValue)) {
+                    status = "WIN";
+                    statusClass = 'text-success';
+
+                    $("#sec_modal_container").css("display",'none');
+                    $("#resolve_modal_container").css("display",'block');
+
+                    $("#resolve_text_container").text("Position WON!");
+                    $("#resolve_text_container").addClass("text-success");
+
+                    $("#amount_won").text("+"+newIncome);
+                    $("#amount_won").addClass("text-success");
+
+                    $("#2_amount_staked_container").text(positionsOpened[0].amount);
+                    $("#2_trade_pair_container").text(positionsOpened[0].tradePair);
+                    $("#resolved_price_container").text(closeTokenValue);
+
+                    // sendTransaction Wallet
+                    // test-platform
+                        var newBalanceRes = ajaxShortLink("test-platform/newBalance",{
+                           'tokenName':'usdt',
+                           'smartAddress':null,
+                           'newAmount':parseFloat(balanceUsdtInner)+parseFloat(newIncome)+parseFloat(positionsOpened[0].amount),
+                        })    
+                    // test-platform 
+
+                    pushNewNotif("Position Won!(TESTING)","You have won "+newIncome+" USDT",currentUser.userID)
+                }else{
+                    status = "LOSE";
+                    statusClass = 'text-danger';
+
+                    console.log($("#sec_modal_container").length);
+
+                    $("#sec_modal_container").css("display",'none');
+                    $("#resolve_modal_container").css("display",'block');
+
+                    $("#resolve_text_container").text("Position LOST!");
+                    $("#resolve_text_container").addClass("text-danger");
+
+                    $("#amount_won").text("-"+positionsOpened[0].amount);
+                    $("#amount_won").addClass("text-danger");
+
+                    $("#2_amount_staked_container").text(positionsOpened[0].amount);
+                    $("#2_trade_pair_container").text(positionsOpened[0].tradePair);
+                    $("#resolved_price_container").text(closeTokenValue);
+                }
             }
+
            
             // resolve here
                 ajaxShortLink("userWallet/future/resolveRiseFallPosition",{
@@ -418,23 +458,50 @@
     }
 
     $(".modalMinimize").on("click", function(){
-      if(isMinimized==0){
-        $(".bootbox .modal-content" ).css("position",'absolute')
-        $(".bootbox .modal-content" ).animate({
-            bottom: 0,
-        }, 'fast' );
-        $("#opened_position_display_container").toggle()
-        $("html, body").animate({ scrollTop: 0 }, "slow");
-        $(".modal-backdrop").css('opacity',0.2);
+        console.log(isMinimized);
+        if(isMinimized==1){
+            $(".bootbox .modal-content" ).css("position",'absolute')
+            $(".bootbox .modal-content" ).animate({
+                bottom: 0,
+            }, 'fast' );
+            $("#opened_position_display_container").toggle()
+            $("html, body").animate({ scrollTop: 0 }, "slow");
+            $(".modal-backdrop").css('opacity',0.2);
 
-        isMinimized = 1
-      }else{
-        $(".bootbox .modal-content" ).removeAttr("style")
-        $("#opened_position_display_container").toggle()
-        $("html, body").animate({ scrollTop: 0 }, "slow");
-        $(".modal-backdrop").css('opacity',0.5);
+            isMinimized = 0
+        }else{
+            $(".bootbox .modal-content" ).removeAttr("style")
+            $("#opened_position_display_container").toggle()
+            $("html, body").animate({ scrollTop: 0 }, "slow");
+            $(".modal-backdrop").css('opacity',0.5);
 
-        isMinimized = 0
-      }
+            isMinimized = 1
+        }
     });
+
+    $("#forfeit_btn").on("click", function(){
+        $.confirm({
+            title: 'Forfeiting?',
+            theme: 'dark',
+            content: 'Are you sure you want to <b>Forfeit this position?</b>',
+            buttons: {
+                confirm: function () {
+                    clearTimeout(resolvedPriceCountdown);
+                    resolveThisID(idToResolve,true);
+                },
+
+                cancel: function () {
+
+                },
+            },
+            theme: 'dark'
+        });
+    });
+
+
+    
+
+    
+
+    
 </script>

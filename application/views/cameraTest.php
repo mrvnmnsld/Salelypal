@@ -3,6 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+
 	<title>Camera</title>
 </head>
 <body>
@@ -28,10 +29,12 @@
 
 	<!-- Configure a few settings and attach camera -->
 	<script language="JavaScript">
+
 		function take_snapshot() {
 		 
 		   // take snapshot and get image data
 		   Webcam.snap( function(data_uri) {
+		   	console.log(data_uri);
 		       // display results in page
 		       document.getElementById('results').innerHTML = 
 		        '<img src="'+data_uri+'"/>';
@@ -49,7 +52,7 @@
 
 
 		setTimeout(function(){
-			if((typeof isCordova != 'undefined' || typeof isCordova != undefined) == true){
+			if(typeof isCordova != 'undefined' == true){
 				navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
 				    destinationType: Camera.DestinationType.DATA_URL
 			 	}); 
@@ -62,7 +65,8 @@
 					width: 320,
 					height: 240,
 					image_format: 'jpeg',
-					jpeg_quality: 90
+					jpeg_quality: 90,
+					facingMode: "environment"
 			 	});
 			 	Webcam.attach('#my_camera');
 			}

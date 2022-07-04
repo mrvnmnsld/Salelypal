@@ -240,21 +240,15 @@
 
 				pushNewNotif("Claimed Mined Tokens (TESTING)","Successfully claimed "+claimIncomeValue+' '+tokenName.toUpperCase(),currentUser.userID)
 
-				$.when(closeNav()).then(function() {
-					$('#topNavBar').toggle();
-			  		$("#container").fadeOut(animtionSpeed, function() {
-					  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
-				  			$("#container").empty();
-				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/regular_mining'}));
+				$("html, body").animate({ scrollTop: 0 }, "slow");
+				$('#assets_container').css("display","none");
+				$("#container").fadeOut(animtionSpeed, function() {
+					$("#profile_btn").css('display',"none")
+					$("#top_back_btn").css('display',"block")
 
-				  			setTimeout(function(){
-				  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
-				  					$('#topNavBar').toggle();
-				  					$("#container").fadeIn(animtionSpeed);
-				  				});
-				  			}, 2000);
-				    	});
-				  	});
+		  			$("#container").empty();
+		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/regular_mining'}));
+		  			$("#container").fadeIn(animtionSpeed);
 				});
     		// test-platform
     	}else{

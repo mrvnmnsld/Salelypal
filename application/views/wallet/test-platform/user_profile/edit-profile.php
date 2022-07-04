@@ -56,6 +56,7 @@
 		$('#profilePicEdit').attr('src','assets/imgs/profile_pic/'+profiledetails[0].profile_pic);
 	}
 
+
     $("#cancelEdit_btn").on("click", function(){
 		bootbox.hideAll();
 	});
@@ -81,7 +82,20 @@
 
 		    console.log(data,res);
 
+
 		    if(res == true){
+		    	profiledetails = ajaxShortLink('userWallet/getProfileDetails',{'userID':currentUser.userID});
+		    	userID = profiledetails[0].userID;
+		    	fullName = profiledetails[0].fullname;
+		    	email = profiledetails[0].email;
+		    	mobileNumber = profiledetails[0].mobileNumber;
+		    	birthday = profiledetails[0].birthday;
+		    	profilePic = profiledetails[0].profile_pic;
+
+		    	$("#mobileNumber").text($("input[name='mobileNumberEdit']").val())
+		    	$("#birthday").text($("input[name='birthdayEdit']").val())
+		    	$('#fullname').text($("input[name='fullNameEdit']").val());
+
 		    	$.toast({
 		    	    text: 'Profile Successfully Updated',
 		    	    showHideTransition: 'slide',
@@ -119,6 +133,7 @@
   		readURL(this);
 
 		$.confirm({
+			theme: "dark",
 			icon: 'fa fa-plus-circle',
 		    title: 'New Profile Pic?',
 		    columnClass: 'col-md-6 col-md-offset-6',

@@ -18,10 +18,8 @@
                 <th>Last login IP Address</th>
                 <th>Verified</th>
                 <th>Blocked</th>
-                <th>Referred User ID</th>
-                <th>Refer Type</th>
+                <th>Referred By</th>
                 <th>Date Joined</th>
-
             </tr>
         </thead>
     </table>
@@ -69,10 +67,9 @@
 				{ data:'ip_lastLogin'},
 				{ data:'verified'},
 				{ data:'isBlocked'},
-				{ data:'referred_user_id'},
-				{ data:'referType'},
+				{ data:'referedConcat'},
 				{ data:'timestamp'},
-	        ],
+      ],
 			"columnDefs": [
 				{
 					"targets": 0,

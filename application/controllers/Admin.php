@@ -72,6 +72,39 @@ class admin extends MY_Controller {
 	   		$join = array("user_tbl.userID = kyc_image_tbl.userID"), $joinType = array('left'), $sortBy = array('userID'), 
 	   		$sortOrder = array('desc'), $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
    		);
+   		$res = NULL;
+
+   		foreach ($users as $key => $value) {
+   			if ($value->referType!=null&&$value->referType!=null) {
+	   			if ($value->referType == "agent") {
+			   		$res = $this->_getRecordsData(
+			   			$selectfields = array("agent_profile_tbl.*"), 
+				   		$tables = array('agent_profile_tbl'), 
+				   		$fieldName = array("id"), $where = array($value->referred_user_id), 
+				   		$join = null, $joinType = null, $sortBy = null, 
+				   		$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+			   		);
+	   			}else{
+	   				$res = $this->_getRecordsData(
+			   			$selectfields = array("user_tbl.*"), 
+				   		$tables = array('user_tbl'), 
+				   		$fieldName = array("userID"), $where = array($value->referred_user_id), 
+				   		$join = null, $joinType = null, $sortBy = null, 
+				   		$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+			   		);
+	   			}
+	   			if (count($res)>=1) {
+	   				$users[$key]->referedConcat = ucfirst($value->referType).": ".$res[0]->email;
+	   			}else{
+					$users[$key]->referedConcat = "No User/Agent ";
+
+	   			}
+   				// echo json_encode($res);
+   			}else{
+				$users[$key]->referedConcat = "No referral";
+   			}
+
+   		}
 
    		echo json_encode($users);
     }
@@ -1029,6 +1062,14 @@ class admin extends MY_Controller {
 		}
 
 		$tableName="test_accounts_tbl";
+	}
+
+	public function updateProStatus(){
+		$insertRecord = array(
+			'isPro' => $_GET['isPro'],
+		);
+
+		$tableName="user_tbl";
 		$fieldName='userID';
 		$where= $_GET['userID'];
 

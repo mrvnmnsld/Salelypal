@@ -264,6 +264,18 @@
 			.jq-toast-single:last-of-type {
 		  		margin-bottom: 50px;
 			}
+
+			.sec-color{color:#b0de26;}
+			.sec-bgcolor{background-color:#b0de26;}
+			.font-light{color:#F3F8F8}
+
+			/*dropdown country width fixed*/
+			.dropdown-menu[x-placement^=bottom]{
+				max-width: 20rem!important;
+			}
+			.dropdown-menu[x-placement^=top]{
+				max-width: 20rem!important;
+			}
 	</style>
 <!-- css -->
 <body style="min-height: 130%;" class="light-mode">
@@ -289,19 +301,18 @@
 	<div id="assets_container" style="display:none;">
 		<div id="header_inner_container" class="main-color-bg py-2" style="display:none;">
 			<div class="font-weight-bold text-center m-3">
-				<span class="h6 text-muted" style="color:white;">
+				<div class="display-4" style="color:white; font-weight:600;">
+					<span id="verifyTitle">Unverified</span>
+				</div>
 					
-					<span id="" class="font-size-2p5em title-color-text notranslate">
-						Complete Verification
-					</span>
-					<br>
-
-					Verify your account to enable Deposit, Withdraw, Buy & Trade
-
-					<div>
-						<button class="btn btn-rounded btn-success">Verify Account Now!</button>
-					</div>
-				</span>
+				<div class="text-muted mx-2 mb-4 mt-1">
+					<span id="verifySubTitle">Verify to unlock all features!</span>
+				</div>
+				<div>
+					<button id="verify_btn" type="button" class="px-3 py-2" style="font-weight:bolder">
+						<span id="verifyButton">Verify Account Now</span>
+					</button>
+				</div>
 			</div>
 		</div>
 
@@ -481,6 +492,18 @@
 <!-- translate -->
 
 <script type="text/javascript">
+		var currentUser = JSON.parse(getLocalStorageByKey('currentUser'));
+
+		if (getLocalStorageByKey('currentUser')!=null) {
+			if (currentUser.verified==0) {
+				// window.location.href = 'homeViewNotVerified';
+				console.log("%cContinue!!","color: red; font-family:monospace; font-size: 30px");
+			}else{
+				checkVerifying();
+			}
+		}else{
+			window.location.href = 'index';
+		}
 
 		$.confirm({
 			theme: 'dark',
@@ -493,7 +516,6 @@
 		    }
 		});
 
-		var currentUser = JSON.parse(getLocalStorageByKey('currentUser'));
 		// var currentUser = {'userID':"15","displayCurrency":"USD"}
 		var animtionSpeed = 250;
 		var	SelectedtransactionDetails = [];
@@ -515,8 +537,8 @@
 
 		var coinIds = [];
 
-
 		//initial
+			
 			$("#username_container").text(currentUser.fullname.split(" ")[0]);
 
 			var priceAlert = ajaxShortLink('userWallet/triggerPriceAlerts',{'userID':
@@ -574,6 +596,7 @@
 		// }
 
 		$(document).ready(function(){
+			checkVerifying();
 			console.time('loadTimer');
 
 			setTimeout(function(){
@@ -881,36 +904,9 @@
 					myLoop();
 				}, 1000);
 			});
-
-			$('#deposit_btn, #deposit_btn_option').on('click',function(){
-				$.confirm({
-					theme:'dark',
-				    title: 'Testing Mode!',
-				    content: 'Deposit is disabled due to testing mode being active',
-				    type: 'red',
-				    typeAnimated: true,
-				    buttons: {
-				        close: function () {
-				        }
-				    }
-				});
-			});
-
-			$('#withdraw_btn, #withdraw_btn_option').on('click',function(){
-				$.confirm({
-					theme:'dark',
-				    title: 'Testing Mode!',
-				    content: 'Withdraw is disabled due to testing mode being active',
-				    type: 'red',
-				    typeAnimated: true,
-				    buttons: {
-				        close: function () {
-				        }
-				    }
-				});
-			});
-
+			
 			$('#assets_btn').on('click',function(){
+				checkVerifying();
 				console.log($('#assets_container').css("display"));
 				if ($('#assets_container').css("display") == 'none') {
 					addBreadCrumbs("assets_container")
@@ -939,20 +935,6 @@
 				}
 			});
 
-			$('#buyCrypto_btn, #buy_btn_option').on('click',function(){
-				addBreadCrumbs("wallet/test-platform/buyCrypto")
-				$("html, body").animate({ scrollTop: 0 }, "slow");
-				$('#assets_container').css("display","none");
-				$("#container").fadeOut(animtionSpeed, function() {
-					$("#profile_btn").css('display',"none")
-					$("#top_back_btn").css('display',"block")
-
-		  			$("#container").empty();
-		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/buyCrypto'}));
-		  			$("#container").fadeIn(animtionSpeed);
-				});
-			});
-
 			$('#addToken_btn').on('click',function(){
 				addBreadCrumbs("wallet/addToken")
 				$("html, body").animate({ scrollTop: 0 }, "slow");
@@ -963,36 +945,6 @@
 
 		  			$("#container").empty();
 		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/addToken'}));
-		  			$("#container").fadeIn(animtionSpeed);
-				});
-			});
-
-			$('#future_btn').on('click',function(){
-				addBreadCrumbs("wallet/test-platform/future")
-
-				$("html, body").animate({ scrollTop: 0 }, "slow");
-				$('#assets_container').css("display","none");
-				$("#container").fadeOut(animtionSpeed, function() {
-					$("#profile_btn").css('display',"none")
-					$("#top_back_btn").css('display',"block")
-
-		  			$("#container").empty();
-		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/future'}));
-		  			$("#container").fadeIn(animtionSpeed);
-				});
-			});
-
-			$('#rise_fall_btn').on('click',function(){
-				addBreadCrumbs("wallet/test-platform/risefall")
-
-				$("html, body").animate({ scrollTop: 0 }, "slow");
-				$('#assets_container').css("display","none");
-				$("#container").fadeOut(animtionSpeed, function() {
-					$("#profile_btn").css('display',"none")
-					$("#top_back_btn").css('display',"block")
-
-		  			$("#container").empty();
-		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/risefall'}));
 		  			$("#container").fadeIn(animtionSpeed);
 				});
 			});
@@ -1048,36 +1000,6 @@
 				});
 			});
 
-			$('#regular_mining_btn').on('click',function(){
-				addBreadCrumbs("wallet/test-platform/regular_mining");
-				
-				$("html, body").animate({ scrollTop: 0 }, "slow");
-				$('#assets_container').css("display","none");
-				$("#container").fadeOut(animtionSpeed, function() {
-					$("#profile_btn").css('display',"none")
-					$("#top_back_btn").css('display',"block")
-
-		  			$("#container").empty();
-		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/regular_mining'}));
-		  			$("#container").fadeIn(animtionSpeed);
-				});
-			});
-
-			$('#daily_mining_btn').on('click',function(){
-				addBreadCrumbs("wallet/test-platform/dailyMining");
-
-				$("html, body").animate({ scrollTop: 0 }, "slow");
-				$('#assets_container').css("display","none");
-				$("#container").fadeOut(animtionSpeed, function() {
-					$("#profile_btn").css('display',"none")
-					$("#top_back_btn").css('display',"block")
-
-		  			$("#container").empty();
-		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/dailyMining'}));
-		  			$("#container").fadeIn(animtionSpeed);
-				});
-			});
-
 			$('#discover_btn').on('click',function(){
 				addBreadCrumbs("wallet/test-platform/discover");
 
@@ -1089,6 +1011,21 @@
 
 		  			$("#container").empty();
 		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/discover'}));
+		  			$("#container").fadeIn(animtionSpeed);
+				});
+			});
+
+			$('#verify_btn').on('click',function(){
+				addBreadCrumbs("wallet/verifyKYC");
+
+				$("html, body").animate({ scrollTop: 0 }, "slow");
+				$('#assets_container').css("display","none");
+				$("#container").fadeOut(animtionSpeed, function() {
+					$("#profile_btn").css('display',"none")
+					$("#top_back_btn").css('display',"block")
+
+		  			$("#container").empty();
+		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/verifyKYC'}));
 		  			$("#container").fadeIn(animtionSpeed);
 				});
 			});
@@ -1280,6 +1217,9 @@
 		}
 
 		$("#top_back_btn").on("click",function(){
+		
+			checkVerifying();
+
 			breadCrumbs.pop()
 			// console.log(breadCrumbs[breadCrumbs.length-1]);
 			if (typeof tokenPriceInterval  != 'undefined') {
@@ -1321,7 +1261,50 @@
 			}
 		});
 
+		function checkVerifying(){
+			console.log('checkVerifying...');
+			var checkIfKYCPhotoExists = ajaxShortLink('main/checkIfKYCPhotoExists',{
+		        "userID":currentUser.userID
+		    });
 
+		    console.log(checkIfKYCPhotoExists)
+		    console.log(checkIfKYCPhotoExists.fullname)
+		    console.log(checkIfKYCPhotoExists==false)
+		    console.log(checkIfKYCPhotoExists.IDImagePath==null)
+		    console.log(checkIfKYCPhotoExists.FaceImagePath==null)
+		    console.log(checkIfKYCPhotoExists.birthday==null)
+		    console.log(checkIfKYCPhotoExists.fullname==null)
+		    console.log(checkIfKYCPhotoExists.country==null)
+
+			if(checkIfKYCPhotoExists==false||checkIfKYCPhotoExists.IDImagePath==null||checkIfKYCPhotoExists.FaceImagePath==null||checkIfKYCPhotoExists.birthday==null||checkIfKYCPhotoExists.fullname==null||checkIfKYCPhotoExists.country==null){
+				$('#verifyTitle').text('Unverified');
+				$('#verifySubTitle').text('Verify to unlock all features!');
+				$('#verifyButton').text('Verify Account Now');
+			}else{
+				$('#verifyTitle').text('Verifying...');
+				$('#verifySubTitle').text('Please wait as we check');
+				$('#verifyButton').text('Edit Uploads');
+
+				if (checkIfKYCPhotoExists.verified == 1) {
+					var loginRes = ajaxShortLink("checkLoginCredentials",{
+						"emailAddress":currentUser.email,
+						"mobileNumber":currentUser.mobileNumber,
+						"password":currentUser.password,
+						"ip":null
+					});
+
+					setLocalStorageByKey('currentUser',JSON.stringify(loginRes['data'][0]));
+		    		console.log(loginRes['data'][0].isPro==1,JSON.parse(getLocalStorageByKey('currentUser')));
+
+					if (loginRes['data'][0].isPro==1) {
+						window.location.href = 'homeViewPro';
+					}else{
+						window.location.href = 'homeView';
+					}
+				}
+				
+			}
+		}
 
 	</script>
 </body>
