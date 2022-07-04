@@ -83,7 +83,7 @@
 	});
 
 	jQuery.validator.addMethod("checkUserNameAvailability", function(value, element) {
-	    return (ajaxShortLinkNoParse("admin/checkUserNameAvailability",{'username':value}))
+	    return (ajaxShortLinkNoParse("testAccount/checkUserNameAvailability",{'username':value}))
 	}, "Username already taken");
 
 	jQuery.validator.addMethod("confirmPassword", function(value, element) {
@@ -109,7 +109,7 @@
 	  	submitHandler: function(form){
 		    var data = $('#add_account_form').serializeArray();
 
-		    var res = ajaxShortLink('admin/saveNewAccount',data);
+		    var res = ajaxShortLink('testAccount/saveNewAccount',data);
 
 		    console.log(data,res);
 
@@ -121,7 +121,7 @@
 		    	})
 
 		    	bootbox.hideAll();
-		    	loadDatatable('admin/getTestAccount');
+		    	loadDatatable('testAccount/getTestAccount');
 		    }else{
 		    	$.toast({
 		    	    heading: 'Error!!!',

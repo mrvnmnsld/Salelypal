@@ -88,7 +88,7 @@
 	    content: 'Are you sure you want to delete?',
 	    buttons: {
 	        confirm: function () {
-	            var res = ajaxShortLink('admin/deleteAccount',{
+	            var res = ajaxShortLink('testAccount/deleteAccount',{
 	            	"userID":selectedData.userID
 	            });
 
@@ -100,7 +100,7 @@
 	            	})
 
 	            	bootbox.hideAll();
-	            	loadDatatable('admin/getTestAccount');
+	            	loadDatatable('testAccount/getTestAccount');
 	            }else{
 	            	$.toast({
 	            	    heading: 'Error!!!',
@@ -127,7 +127,7 @@
 		if (selectedData.username == value) {
 			return true
 		}else{
-	    	return (ajaxShortLinkNoParse("admin/checkUserNameAvailability",{'username':value}))
+	    	return (ajaxShortLinkNoParse("testAccount/checkUserNameAvailability",{'username':value}))
 		}
 	}, "Username already taken");
 
@@ -158,7 +158,7 @@
 		    		"value":selectedData.userID
 			    });
 
-		    var res = ajaxShortLink('admin/updateAccountInfo',data);
+		    var res = ajaxShortLink('testAccount/updateAccountInfo',data);
 
 		    console.log(data,res);
 
@@ -170,7 +170,7 @@
 		    	})
 
 		    	bootbox.hideAll();
-		    	loadDatatable('admin/getTestAccount');
+		    	loadDatatable('testAccount/getTestAccount');
 		    }else{
 		    	$.toast({
 		    	    heading: 'Error!!!',

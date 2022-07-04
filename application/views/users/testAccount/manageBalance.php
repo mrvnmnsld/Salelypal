@@ -33,7 +33,6 @@
 </div>
 
 <div id="main_modal_container">
-
   <form id="update_manage_form">
 
       <label class="fw-bold">Please Select Token</label>
@@ -69,9 +68,7 @@
         <button type="button" class="btn btn-danger mr-1" id="back_manage_btn">Close</button>
         <button type="button" class="btn btn-success mr-1" id="update_balance_btn">Update</button>
       </div>
-
   </form>
-
 </div>
 
 
@@ -79,7 +76,7 @@
 
   var selectedData;
   var globalSmartAddressContainer;
-  var globalAvailBalance;  
+  var globalTokenName;  
 
   var allTokens = ajaxShortLink('userWallet/getAllTokensV2');
 
@@ -119,7 +116,6 @@
     $("#token_select").change();
   },1000)
 
-
   $("#token_select").on('change', function(){
     var tokenInfoWithdraw = $(this).val().split("_");
     var tokenNameContainer = tokenInfoWithdraw[0];
@@ -131,7 +127,8 @@
     var selectedTokenInfo = allTokens[tokenIndex];  
     var availBalance;
 
-    // globalSmartAddressContainer = smartAddressContainer;
+    globalSmartAddressContainer = smartAddressContainer;
+    globalTokenName = tokenNameContainer;
     // globalAvailBalance = availBalance;
 
     function balanceDisplay(){
@@ -158,8 +155,8 @@
 
     if (networkNameContainer == 'trx'||networkNameContainer == 'trc20') {
         if (tokenNameContainer.toUpperCase() === 'trx'.toUpperCase()) {
-            availBalance = ajaxShortLink('mainWallet/getTronBalance',{
-            'trc20Address' : 'TCyRBGnjMSLsPos5RJxVfC7fjcWk1vaUqS'
+            availBalance = ajaxShortLink('test-account/getTronBalance',{
+            'userID' : selectedData.userID,
           })['balance'];
 
           balanceDisplay();
@@ -167,9 +164,9 @@
           walletDetailsDisplay();
 
         }else{
-            availBalance = ajaxShortLink('mainWallet/getTRC20Balance',{
+            availBalance = ajaxShortLink('test-account/getTokenBalanceBySmartAddress',{
             'contractaddress':smartAddressContainer,
-            'trc20Address' : 'TCyRBGnjMSLsPos5RJxVfC7fjcWk1vaUqS'
+            'userID' : selectedData.userID,
           })['balance'];
 
           balanceDisplay();
@@ -180,16 +177,16 @@
         selectedNetworkGlobal = networkNameContainer;
     }else if(networkNameContainer =='bsc'){
         if(tokenNameContainer.toUpperCase() === 'bnb'.toUpperCase()){
-            availBalance = ajaxShortLink('mainWallet/getBinancecoinBalance',{
-            'bsc_wallet' : '0xc81441e9529f6c94b4cf9a3de5ddeb16ffbda312'
+            availBalance = ajaxShortLink('test-account/getBinancecoinBalance',{
+            'userID' : selectedData.userID,
           })['balance'];
           balanceDisplay();
           walletDetailsConsolelog();
           walletDetailsDisplay();
         }else{
-            availBalance = ajaxShortLink('mainWallet/getBscTokenBalance',{
+            availBalance = ajaxShortLink('test-account/getTokenBalanceBySmartAddress',{
             'contractaddress' : smartAddressContainer,
-            'bsc_wallet' : '0xc81441e9529f6c94b4cf9a3de5ddeb16ffbda312'
+            'userID' : selectedData.userID,
           })['balance'];
           balanceDisplay();
           walletDetailsConsolelog();
@@ -200,16 +197,16 @@
     }else if(networkNameContainer =='erc20'){
 
         if(tokenNameContainer.toUpperCase() === 'eth'.toUpperCase()){
-            availBalance = ajaxShortLink('mainWallet/getEthereumBalance',{
-            'erc20_address' : '0xaccef84f39a21ce8f04e9ca31c215359af0ad030'
+            availBalance = ajaxShortLink('test-account/getEthereumBalance',{
+            'userID' : selectedData.userID,
           })['balance'];
           balanceDisplay();
           walletDetailsConsolelog();
           walletDetailsDisplay();
         }else{
-            availBalance = ajaxShortLink('mainWallet/getErc20TokenBalance',{
+            availBalance = ajaxShortLink('test-account/getTokenBalanceBySmartAddress',{
             'contractaddress' : smartAddressContainer,
-            'erc20_address' : '0xaccef84f39a21ce8f04e9ca31c215359af0ad030'
+            'userID' : selectedData.userID,
           })['balance'];
           balanceDisplay();
           walletDetailsConsolelog();
@@ -217,12 +214,6 @@
         }
 
         selectedNetworkGlobal = networkNameContainer;
-    }
-
-    selectedData = {
-      "network":networkNameContainer,
-      "description":selectedTokenInfo.description,
-      "balance":availBalance
     }
 
     $("#balance_input").val(availBalance);
@@ -236,36 +227,29 @@
 
   $("#update_manage_form").validate({
       errorClass: 'is-invalid',
-      rules: {
-      
-      },
       submitHandler: function(form){
-        var data = $('#update_manage_form').serializeArray();
-          data.push({
-            "name":"userID",
-            "value":selectedData["userID"]
-          });
+        var res = ajaxShortLink('test-account/updateNewBalance',{
+          "balance":$("#balance_input").val(),
+          'userID' : selectedData.userID,
+          'smartContract' : globalSmartAddressContainer,
+          'tokenName' : globalTokenName,
+        });
 
-        var res = ajaxShortLink('admin/updateManageBalance',data);
+        console.log(res);
 
-        console.log(data,res);
-
-        // if(res == true){
-        //   $.toast({
-        //       heading: 'Success!!!',
-        //       text: 'Balance Successfully Updated',
-        //       icon: 'success',
-        //   })
-
-        //   bootbox.hideAll();
-        //   loadDatatable('admin/getTestAccount');
-        // }else{
-        //   $.toast({
-        //       heading: 'Error!!!',
-        //       text: 'System Error, Please Contact System Admin',
-        //       icon: 'error',
-        //   })
-        // }
+        if(res == true || res == 1){
+          $.toast({
+              heading: 'Success!!!',
+              text: 'Balance Successfully Updated',
+              icon: 'success',
+          })
+        }else{
+          $.toast({
+              heading: 'Error!!!',
+              text: 'System Error, Please Contact System Admin',
+              icon: 'error',
+          })
+        }
 
       }
   });

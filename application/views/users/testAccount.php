@@ -26,7 +26,7 @@
 <script>
 	var selectedData = [];
 	$(document).ready(function() {
-		loadDatatable('admin/getTestAccount');
+		loadDatatable('testAccount/getTestAccount');
 		$("#loading").toggle();
 		$("#footer").toggle();
 		$("#innerContainer").toggle();

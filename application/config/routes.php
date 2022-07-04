@@ -361,21 +361,26 @@ $route['testing'] = 'main/testing';
 	$route['test-account'] = 'testAccount/index';
 	$route['test-account-wallet'] = 'testAccount/wallet';
 
+		$route['test-account/getTestAccount'] = 'testAccount/getTestAccount';
+		$route['test-account/saveNewAccount'] = 'testAccount/saveNewAccount';
+		$route['test-account/updateAccountInfo'] = 'testAccount/updateAccountInfo';
+		$route['test-account/deleteAccount'] = 'testAccount/deleteAccount';
+		$route['test-account/updateManageBalance'] = 'testAccount/updateManageBalance';
+		$route['test-account/checkUserNameAvailability'] = 'testAccount/checkUserNameAvailability';
+
+	// balance
+		$route['test-account/getTronBalance'] = 'testAccount/getTronBalance';
+		$route['test-account/getTokenBalanceBySmartAddress'] = 'testAccount/getTokenBalanceBySmartAddress';
+		$route['test-account/getBinancecoinBalance'] = 'testAccount/getBinancecoinBalance';
+		$route['test-account/getEthereumBalance'] = 'testAccount/getEthereumBalance';
+		$route['test-account/updateNewBalance'] = 'testAccount/updateNewBalance';
+	// balance
+
 // test-account
-
-
 
 		$route["privacyPolicy"] = 'main/privacyPolicy';
 		$route["termsAndConditions"] = 'main/termsAndConditions';
 
-	//test account
-		$route['admin/getTestAccount'] = 'admin/getTestAccount';
-		$route['admin/saveNewAccount'] = 'admin/saveNewAccount';
-		$route['admin/updateAccountInfo'] = 'admin/updateAccountInfo';
-		$route['admin/deleteAccount'] = 'admin/deleteAccount';
-		$route['admin/updateManageBalance'] = 'admin/updateManageBalance';
-		$route['admin/checkUserNameAvailability'] = 'admin/checkUserNameAvailability';
-	//test account
 
 
 
