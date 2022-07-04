@@ -223,7 +223,7 @@
         border-radius: 10px;
     }
 </style>
-    <div class="px-3 py-5" style="display:block;" id="verify_kyc_container">
+<div class="px-3 py-5" style="display:block;" id="verify_kyc_container">
     <div id="title_kyc" class="mb-4 main-color-text"><span class="">Verification</span></div>
     <div class="pb-1"><span class="text-muted text-left" id="subtitle_kyc">Upload photo</span></div>
 
@@ -269,6 +269,7 @@
         <input class="form-control" type="text" id="fullName_kyc" placeholder="Enter Full Name">
     </div>
     <hr>
+
     <div id="verify_status_container" class="py-3 px-5 my-3 check_upload text-start borderstatuscontainer">
         <div class="row">
             <div class="col-6 p-0">
@@ -282,6 +283,7 @@
             </div>
         </div>
     </div>
+
     <div id="noteslist_kyc" class="m-2"> 
         <div class="text-left main-color-text py-2" style="font-size: 1.5rem;"><b>Important Notes</b></div>
         <div class="row justify-content-around px-3">
@@ -476,7 +478,6 @@
                         }
                     }
 
-                    
                 }
             },
                 cancel:{

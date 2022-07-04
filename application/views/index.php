@@ -119,7 +119,7 @@
 
       .container .form{
 	      width: 50%;
-	      padding: 45px;
+	      padding: 25px;
 	      background-color: #fff;
 	      transition: margin-left 0.18s ease;
       }
@@ -378,9 +378,12 @@
       		background-color: #9e68e8;
       	}
 
-      	.check_upload{
-      		color:green;
-      	}
+		    .check_upload{
+		        color:rgba(0, 0, 0, 0.5);
+		    }
+		    .checked_upload{
+		        color:green!important;
+		    }
       /*kyc*/
 
       /*otp*/
@@ -399,13 +402,6 @@
       	box-shadow: none;
       	outline: none !important;
       }
-			/*dropdown country width fixed*/
-			.dropdown-menu[x-placement^=bottom]{
-				max-width: 20rem!important;
-			}
-			.dropdown-menu[x-placement^=top]{
-				max-width: 20rem!important;
-			}
 </style>
 
 <body>
@@ -560,7 +556,7 @@
 					</script>
 				</div>
 
-        <div class="text-center" style="display:;" id="thankYou">
+        <div class="text-center" style="display:none;" id="thankYou">
         	<span class="h3">
         		Signing up successfully! 
         	</span>
@@ -579,79 +575,78 @@
         	</div>
         </div>
 
-        <div class="px-3 py-5" style="display:block;" id="verify_kyc_container">
-    <div id="title_kyc" class="mb-4 main-color-text"><span class="">Verification</span></div>
-    <div class="pb-1"><span class="text-muted text-left" id="subtitle_kyc">Upload photo</span></div>
+        <div class="" style="display:none;" id="verify_kyc_container">
+        	<div id="title_kyc" class="mb-4 main-color-text"><span class="">Verification</span></div>
+        	<div class="pb-1"><span class="text-muted text-left" id="subtitle_kyc">Upload photo</span></div>
 
-    <div id="instruction_kyc" class="text-start pt-3">
-        <span>
-            Ensure that face is centered and visible when capturing the photo to avoid facial recognition errors
-        </span>
-    </div>
+        	<div id="instruction_kyc" class="text-start pt-3">
+        	    <span>
+        	        Ensure that face is centered and visible when capturing the photo to avoid facial recognition errors
+        	    </span>
+        	</div>
 
-    <div class="row pt-2">
-        <div class="col-6">
-            <button id="faceUpload_btn" class="upload_button face_upload_btn" type="button">
-                <span><i id="faceCheckUpload_kyc" class="fa fa-picture-o fa-inverse"></i></span>
-                <span  class="">Face</span>
-            </button>
+        	<div class="row pt-2">
+        	    <div class="col-6">
+        	        <button id="faceUpload_btn" class="upload_button face_upload_btn" type="button">
+        	            <span><i id="faceCheckUpload_kyc" class="fa fa-picture-o fa-inverse"></i></span>
+        	            <span  class="">Face</span>
+        	        </button>
 
-            <input class="form-control d-none" type="file" name="faceUpload" id="faceUpload" accept="image/png, image/gif, image/jpeg" >
-        </div>
-        <div class="col-6">
-            <button id="IDUpload_btn" class="upload_button id_upload_btn" type="button">
-                <span><i id="IDCheckUpload_kyc" class="fa fa-picture-o fa-inverse"></i></span>
-                <span  class="">ID</span>
-            </button>
-            <input class="form-control d-none" type="file" name="IDUpload" id="IDUpload" accept="image/png, image/gif, image/jpeg" >
-        </div>
-    </div>
+        	        <input class="form-control d-none" type="file" name="faceUpload" id="faceUpload" accept="image/png, image/gif, image/jpeg" >
+        	    </div>
+        	    <div class="col-6">
+        	        <button id="IDUpload_btn" class="upload_button id_upload_btn" type="button">
+        	            <span><i id="IDCheckUpload_kyc" class="fa fa-picture-o fa-inverse"></i></span>
+        	            <span  class="">ID</span>
+        	        </button>
+        	        <input class="form-control d-none" type="file" name="IDUpload" id="IDUpload" accept="image/png, image/gif, image/jpeg" >
+        	    </div>
+        	</div>
 
-    <div class="py-3">
-        <div class="row">
-            <div class="col-6" >
-                <span class="main-color-text">Country</span><br>
-                <select id="country_select" name="country_select"></select>
-            </div>
-            <div class="col-6">
-                <span class="main-color-text">Birthday</span>
-                <input readonly class="form-control" type="text" id="birthday" placeholder="Click to select date">
-            </div>
-        </div>
+        	<div class="py-3">
+        	    <div class="row">
+        	        <div class="col-6" >
+        	            <span class="main-color-text">Country</span><br>
+        	            <select id="country_select" name="country_select"></select>
+        	        </div>
+        	        <div class="col-6">
+        	            <span class="main-color-text">Birthday</span>
+        	            <input readonly class="form-control" type="text" id="birthday" placeholder="Click to select date">
+        	        </div>
+        	    </div>
 
-    </div>
-    <div class="pb-3">
-        <span class="main-color-text">Full Name</span>
-        <input class="form-control" type="text" id="fullName_kyc" placeholder="Enter Full Name">
-    </div>
-    <hr>
-    <div id="verify_status_container" class="py-3 px-5 my-3 check_upload text-start borderstatuscontainer">
-        <div class="row">
-            <div class="col-6 p-0">
-                <i id="id_checkedi" class='fa fa-check check_upload ' aria-hidden='true'></i><span id="id_checkedt" class='check_upload'> ID uploaded</span><br>
-                <i id="face_checkedi" class='fa fa-check check_upload' aria-hidden='true'></i><span id="face_checkedt" class='check_upload'> Face uploaded</span>
-                <i id="bday_checkedi" class='fa fa-check check_upload' aria-hidden='true'></i><span id="bday_checkedt" class='check_upload'> Birthday</span>
-            </div>
-            <div class="col-6 text-start">
-                <i id="name_checkedi" class='fa fa-check check_upload' aria-hidden='true'></i><span id="name_checkedt" class='check_upload'> Full name</span><br>
-                <i id="country_checkedi" class='fa fa-check check_upload' aria-hidden='true'></i><span id="country_checkedt" class='check_upload'> Country</span>
-            </div>
+        	</div>
+        	<div class="pb-3">
+        	    <span class="main-color-text">Full Name</span>
+        	    <input class="form-control" type="text" id="fullName_kyc" placeholder="Enter Full Name">
+        	</div>
+        	<hr>
+
+        	<div id="verify_status_container" class="check_upload text-start borderstatuscontainer">
+            <i id="id_checkedi" class='fa fa-check check_upload ' aria-hidden='true'></i><span id="id_checkedt" class='check_upload'> ID uploaded</span><br>
+            <i id="face_checkedi" class='fa fa-check check_upload' aria-hidden='true'></i><span id="face_checkedt" class='check_upload'> Face uploaded</span><br>
+            <i id="bday_checkedi" class='fa fa-check check_upload' aria-hidden='true'></i><span id="bday_checkedt" class='check_upload'> Birthday</span><br>
+            <i id="name_checkedi" class='fa fa-check check_upload' aria-hidden='true'></i><span id="name_checkedt" class='check_upload'> Full name</span><br>
+            <i id="country_checkedi" class='fa fa-check check_upload' aria-hidden='true'></i><span id="country_checkedt" class='check_upload'> Country</span><br>
+        	</div>
+
+        	<div id="noteslist_kyc" class="m-2"> 
+        	    <div class="text-left main-color-text py-2" style="font-size: 1.5rem;"><b>Important Notes</b></div>
+        	    <div class="row justify-content-around px-3">
+        	        <div class="col p-0">
+        	            <i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Don't use photo filter</span><br>
+        	            <i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Avoid wearing make up</span>
+        	        </div>
+        	        <div class="col text-start">
+        	            <i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Avoid wearing glasses</span><br>
+      	             	<i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Avoid wearing hats</span>
+        	        </div>
+        	    </div>
+        	</div>
         </div>
+      </div>
     </div>
-    <div id="noteslist_kyc" class="m-2"> 
-        <div class="text-left main-color-text py-2" style="font-size: 1.5rem;"><b>Important Notes</b></div>
-        <div class="row justify-content-around px-3">
-            <div class="col p-0">
-                <i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Don't use photo filter</span><br>
-                <i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Avoid wearing make up</span>
-            </div>
-            <div class="col text-start">
-                <i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Avoid wearing glasses</span><br>
-                 <i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Avoid wearing hats</span>
-            </div>
-        </div>
-    </div>
-</div>
+  </div>
 
   <!-- sliderCaptchaModal -->
     <div class="modal fade" id="sliderCaptchaModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -751,6 +746,7 @@
 		$('#country_select').selectpicker({
 			style: '',
       size: 8,
+      width: 150,
       // showSubtext :true,
       liveSearch: true
 	  });
@@ -1441,6 +1437,14 @@
 			});
 		});
 
+		    if($('#fullName_kyc').val()!=null){
+		    	$('#name_checkedi').addClass('checked_upload');
+          $('#name_checkedt').addClass('checked_upload');
+		    }else{
+		    	$('#name_checkedi').removeClass('checked_upload');
+          $('#name_checkedt').removeClass('checked_upload');
+		    }
+
 		$('input[name="birthday"]').change(function(){
 		    var res = ajaxShortLink("saveBirthday",{
 		    	"birthday":$(this).val(),
@@ -1450,6 +1454,7 @@
 		    if(res==false){
 		    	$.alert("Error in Uploading Birthdate, please contact system admin.<hr><div><b class='text-center'> ErrorCode:521</b></div>");
 		    }
+
 		});
 
 		$('#fullName_kyc').change(function(){
@@ -1473,31 +1478,37 @@
 		    if(res==false){
 		    	$.alert("Error in Uploading name, please contact system admin.<hr><div><b class='text-center'> ErrorCode:521</b></div>");
 		    }
+
+		    if($('#country_select').val()!=null){
+		    	$('#country_checkedi').addClass('checked_upload');
+          $('#country_checkedt').addClass('checked_upload');
+		    }else{
+		    	$('#country_checkedi').removeClass('checked_upload');
+          $('#country_checkedt').removeClass('checked_upload');
+		    }
 		});
 
 		function checkupload(){
-			if (id_upload == 1 && face_upload == 0){
-				$('#instruction_kyc').html("\
-				<span>Ensure that face is centered and visible when capturing the photo to avoid facial recognition errors</span>\
-				<br><i class='fa fa-check check_upload' aria-hidden='true'></i><span class='check_upload'> ID uploaded</span>\
-				")
-			}else if(face_upload == 1 && id_upload == 0){
-				$('#instruction_kyc').html("\
-				<span>Ensure that face is centered and visible when capturing the photo to avoid facial recognition errors</span>\
-				<br><i class='fa fa-check check_upload' aria-hidden='true'></i><span class='check_upload'> Face uploaded</span>\
-				")
-			}else{
-				// $('#noteslist_kyc').toggle();
-				$('#instruction_kyc').html("\
-				<i class='fa fa-check check_upload' aria-hidden='true'></i><span class='check_upload'> ID uploaded</span>\
-				<i class='fa fa-check check_upload' aria-hidden='true'></i><span class='check_upload'> Face uploaded</span><br>\
-				<span style='color:black;'> Uploaded! Kindly wait 1-3 working days for verification. Thank you</span>\
-				<button id='login_verify' class='login-signup-btn' onclick='login.click()' type='button'>\
-					<span>Proceed to login</span>\
-				</button>\
-				")
-			}
-		}
+        if  (id_upload == 1){
+            $('#id_checkedi').addClass('checked_upload');
+            $('#id_checkedt').addClass('checked_upload');
+            $('#instruction_kyc').html("\
+            <span>Ensure that face is centered and visible when capturing the photo to avoid facial recognition errors</span>\
+            ")
+        }else if(face_upload == 1){
+            $('#instruction_kyc').html("\
+            <span>Ensure that face is centered and visible when capturing the photo to avoid facial recognition errors</span>\
+            ")
+            $('#face_checkedi').addClass('checked_upload');
+            $('#face_checkedt').addClass('checked_upload');
+        }
+
+        if(face_upload !=0 && id_upload != 0){
+            $('#instruction_kyc').html("\
+            <span style='color:black;' class='main-color-text'> Face and ID uploaded successfull! you can also retake photo.</span>\
+            ")
+        }
+    }
 
 		new Rolldate({
 		    el: '#birthday',
@@ -1525,6 +1536,15 @@
 		           if(res==false){
 		               $.alert("Error in Uploading Birthdate, please contact system admin.<hr><div><b class='text-center'> ErrorCode:521</b></div>");
 		           } 
+
+	   		  if($('#birthday').val()!=''){
+			    	$('#bday_checkedi').addClass('checked_upload');
+	          $('#bday_checkedt').addClass('checked_upload');
+			    }else{
+			    	$('#bday_checkedi').removeClass('checked_upload');
+	          $('#bday_checkedt').removeClass('checked_upload');
+			    }
+			    
 		       },300)
 		        
 		    },
