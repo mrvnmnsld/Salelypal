@@ -385,12 +385,47 @@ $route['testing'] = 'main/testing';
 	$route['test-account/getBettingSettings'] = 'testAccount/getBettingSettings';
 	$route['test-account/getFutureRisefallTimings'] = 'testAccount/getFutureRisefallTimings';
 
-	// risefall	
-		$route['test-account/risefall/getClosedRiseFallPositions'] = 'testAccount/getClosedRiseFallPositions';
+	//betting risefall	longshort settings
 
-		
-	// risefall	
-		
+		$route['test-account/risefall/getClosedRiseFallPositions'] = 'testAccount/getClosedRiseFallPositions';
+		$route['test-account/riseFall/getAllRiseFall'] = 'testAccount/getAllRiseFall';
+		$route['test-account/future/resolveRiseFallPosition'] = 'testAccount/futureResolveRiseFallPosition';
+		$route['test-account/future/setRiseFallPosition'] = 'testAccount/setRiseFallPosition';
+		$route['test-account/future/getAllContractPositions'] = 'testAccount/getAllContractPositions';
+		$route['test-account/future/resolvePosition'] = 'testAccount/futureResolvePosition';
+		$route['test-account/future/setContractPosition'] = 'testAccount/setContractPosition';
+
+		$route['test-account/saveBettingSettings'] = 'testAccount/saveBettingSettings';
+		$route['test-account/deleteFutureRisefallOption'] = 'testAccount/deleteFutureRisefallOption';
+		$route['test-account/updateFutureRisefallOption'] = 'testAccount/updateFutureRisefallOption';
+		$route['test-account/addFutureRisefallOption'] = 'testAccount/addFutureRisefallOption';
+
+	//betting risefall longshort settings	
+
+	//mining regular/daily settings & regular/daily entry
+
+		$route['test-account/getRegularMiningSettings'] = 'testAccount/getRegularMiningSettings';
+		$route['test-account/getAllTokensV2'] = 'testAccount/getAllTokensV2';
+		$route['test-account/saveNewToken'] = 'testAccount/saveNewToken';
+		$route['test-account/regular/deleteToken'] = 'testAccount/deleteRegularToken';
+		$route['test-account/saveEditToken'] = 'testAccount/saveEditToken';
+		$route['test-account/getAllRegularMiningEntries'] = 'testAccount/getAllRegularMiningEntries';		
+		$route['test-account/editMiningEntry'] = 'testAccount/editMiningEntry';	
+
+		$route['test-account/daily/getDailySettings'] = 'testAccount/getDailySettings';	
+		$route['test-account/daily/getAddDays'] = 'testAccount/getAddDays';
+		$route['test-account/daily/saveNewDailyToken'] = 'testAccount/saveNewDailyToken';
+		$route['test-account/daily/saveDays'] = 'testAccount/saveDays';
+		$route['test-account/daily/deleteToken'] = 'testAccount/deleteDailyToken';
+		$route['test-account/daily/saveEditDailyToken'] = 'testAccount/saveEditDailyToken';
+		$route['test-account/daily/updateDays'] = 'testAccount/updateDays';
+
+		$route['test-account/daily/getAllDailyEntries'] = 'testAccount/getAllDailyEntries';
+		$route['test-account/daily/editMiningEntry'] = 'testAccount/editDailyMiningEntry';
+
+
+
+	//mining regular/daily settings & regular/daily entry 	
 
 // test-account
 

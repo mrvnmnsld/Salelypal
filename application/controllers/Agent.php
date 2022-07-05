@@ -171,9 +171,9 @@ class agent extends MY_Controller {
 
 	public function saveNewAgent(){
 		$insertRecord = array(
-			'email' => $_GET['email'],
-			'fullname' => $_GET['fullname'],
-			'country' => $_GET['country'],
+			// 'email' => $_GET['email'],
+			// 'fullname' => $_GET['fullname'],
+			// 'country' => $_GET['country'],
 			'password' => MD5($_GET['password']),
 			'username' => $_GET['username'],
 			'timestamp' => $this->_getTimeStamp24Hours(),
@@ -193,9 +193,9 @@ class agent extends MY_Controller {
 	public function updateAgentInfo(){
 		$insertRecord = array(
 			'isShareContract' => $_GET['isShareUpdate'],
-			'email' => $_GET['email'],
-			'fullname' => $_GET['fullname'],
-			'country' => $_GET['country'],
+			// 'email' => $_GET['email'],
+			// 'fullname' => $_GET['fullname'],
+			// 'country' => $_GET['country'],
 			'username' => $_GET['username'],
 		);
 

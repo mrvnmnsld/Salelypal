@@ -93,9 +93,9 @@
 
 
 				if (data['verified'] == 0) {
-					if(data['FaceImagePath'] != null && data['IDImagePath'] != null) {
+					if(data.IDImagePath!=null && data.FaceImagePath!=null && data.fullname!=null && data.birthday!=null &&data.country!=null) {
 						$(row).find("td:eq(5)").addClass('text-warning').text("Pending");
-					}else if((data['FaceImagePath'] == null || data['IDImagePath'] == null) && (data['FaceImagePath'] == null && data['IDImagePath'] == null)){
+					}else if(data.IDImagePath!=null || data.FaceImagePath!=null || data.fullname!=null ||  data.birthday!=null || data.country!=null){
 						$(row).find("td:eq(5)").addClass('text-danger').text("Incomplete");
 					}
 				}else{
