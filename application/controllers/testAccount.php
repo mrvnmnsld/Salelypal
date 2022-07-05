@@ -251,6 +251,114 @@ class testAccount extends MY_Controller {
 		echo $updateRecordsRes;
 	}
 
+	public function checkLoginCredentials(){
+   		$username = $_GET['username'];
+   		$userPassInput = $_GET['password'];
+
+		$res = $this->_getRecordsData(
+			$selectfields = array("*"), 
+			$tables = array('test_accounts_tbl'), 
+			$fieldName = array('test_accounts_tbl.username'), $where = array($username), 
+			$join = null, $joinType = null, $sortBy = null, 
+			$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+		);
+
+   		$wrongFlag = 0;
+   		$dataToSend = "";
+
+   		if (count($res) >= 1) {
+	    	session_start();
+			$dataToSend = $res;
+
+   			if (md5($userPassInput) == $res[0]->password) {
+   				$dataToSend = $res[0];
+   				$_SESSION["currentUser"] = $dataToSend;
+				$wrongFlag = 0;	
+				// correct sila
+   			} else {
+   				$wrongFlag = 2;
+				//means wrong pass
+   			}
+   		}else{
+   			$wrongFlag = 1;
+   			//wrong user
+   		}
+   		
+   		echo json_encode(array("errorCode" => '',"wrongFlag" => $wrongFlag,"data"=>$dataToSend));
+   		// echo json_encode(array($_GET));
+	}
+
+	public function getAllSelectedTokensVer2(){
+		$tokenSelectedTable = $this->_getRecordsData(
+			$selectfields = array("*"), 
+	   		$tables = array('test_accounts_token_selected'),
+	   		$fieldName = array('userID'), $where = array($_GET['userID']), 
+	   		$join = null, $joinType = null,
+	   		$sortBy = null, $sortOrder = null, 
+	   		$limit = null, 
+	   		$fieldNameLike = null, $like = null,
+	   		$whereSpecial = null, $groupBy = null 
+		);
+
+		// echo json_encode($test);
+		
+		$selectfieldsString = '';
+
+		foreach (explode(",", $tokenSelectedTable[0]->tokenIDSelected) as $value) {
+			if ($selectfieldsString == '') {
+				$selectfieldsString = 'token_reference.id ='.$value;
+			}else{
+				$selectfieldsString = $selectfieldsString.' OR token_reference.id ='.$value;
+
+			}
+		}
+
+		$selectedTokens = $this->_getRecordsData(
+			$selectfields = array("token_reference.*,network_reference.network as networkName"), 
+	   		$tables = array('token_reference','network_reference'),
+	   		$fieldName = null, $where = null, 
+	   		$join = array('token_reference.networkID = network_reference.id'), $joinType = array('inner'),
+	   		$sortBy = null, $sortOrder = null, 
+	   		$limit = null, 
+	   		$fieldNameLike = null, $like = null,
+	   		$whereSpecial = array($selectfieldsString), $groupBy = null 
+		);
+
+		echo json_encode($selectedTokens);
+	}
+
+	public function getClosedRiseFallPositions(){
+		$res = $this->_getRecordsData(
+			$selectfields = array("*"), 
+	   		$tables = array('test_account_future_risefall_positions'),
+	   		$fieldName = array('userID','tradePair'), $where = array($_GET['userID'],$_GET['tradePair']), 
+	   		$join = null, $joinType = null,
+	   		$sortBy = array('id'), $sortOrder = array('desc'), 
+	   		$limit = null, 
+	   		$fieldNameLike = null, $like = null,
+	   		$whereSpecial = array("status != 'PENDING'"), 
+	   		$groupBy = null 
+		);
+
+		echo json_encode(array_slice($res, 0, 10));
+	}
+
+	public function getNewNotifs(){
+		$userID = $_GET['userID'];
+
+		$notif = 
+			$this->_getRecordsData($selectfields = array("*"), 
+			$tables = array('test_account_notif_center'), 
+			$fieldName = array('userID','isViewed'),  $where = array($userID,0), 
+			$join = null, $joinType = null, $sortBy = null, 
+			$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+		);
+
+		
+   		echo json_encode($notif);
+	}
+
+
 	
 
 	

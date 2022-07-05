@@ -640,13 +640,16 @@
         	        <div class="col text-start">
         	            <i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Avoid wearing glasses</span><br>
       	             	<i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> Avoid wearing hats</span>
+      	             	<i class="fa fa-caret-right icon_kyc" aria-hidden="true"></i><span> You can still proceed with the verification later</span>
         	        </div>
         	    </div>
         	</div>
 
         	<div class="d-flex">
-        		<button class="flex-fill btn btn-primary" onclick='login.click()'>Verify Later</button>
+        		<button class="flex-fill btn btn-primary" onclick='login.click()'>Back to login</button>
         	</div>
+
+
 
         </div>
       </div>
@@ -859,9 +862,17 @@
 			},
 			submitHandler: function(form){
 				captcha.reset();
+				var ipAddress = '';
+
+				try {
+				  ipAddress = getIpAddress()["ip"];
+				}
+				catch(err) {
+					ipAddress = "Cant Fetch Network Error";
+				}
 
 				var data = $('#loginForm').serializeArray();
-				data.push({"name":'ip','value':getIpAddress()["ip"]});
+				data.push({"name":'ip','value':ipAddress});
 				var loginRes = ajaxShortLink('checkLoginCredentials',data);
 
 				if (loginRes['wrongFlag'] == 2 || loginRes['wrongFlag'] == 1) {

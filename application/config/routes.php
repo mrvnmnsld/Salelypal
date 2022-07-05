@@ -359,14 +359,20 @@ $route['testing'] = 'main/testing';
 
 // test-account
 	$route['test-account'] = 'testAccount/index';
+	$route['test-account/checkLoginCredentials'] = 'testAccount/checkLoginCredentials';
+	$route['test-account/getAllSelectedTokensVer2'] = 'testAccount/getAllSelectedTokensVer2';
+	$route['test-account/getNewNotifs'] = 'testAccount/getNewNotifs';
+
 	$route['test-account-wallet'] = 'testAccount/wallet';
 
+	// accounts
 		$route['test-account/getTestAccount'] = 'testAccount/getTestAccount';
 		$route['test-account/saveNewAccount'] = 'testAccount/saveNewAccount';
 		$route['test-account/updateAccountInfo'] = 'testAccount/updateAccountInfo';
 		$route['test-account/deleteAccount'] = 'testAccount/deleteAccount';
 		$route['test-account/updateManageBalance'] = 'testAccount/updateManageBalance';
 		$route['test-account/checkUserNameAvailability'] = 'testAccount/checkUserNameAvailability';
+	// accounts
 
 	// balance
 		$route['test-account/getTronBalance'] = 'testAccount/getTronBalance';
@@ -375,6 +381,13 @@ $route['testing'] = 'main/testing';
 		$route['test-account/getEthereumBalance'] = 'testAccount/getEthereumBalance';
 		$route['test-account/updateNewBalance'] = 'testAccount/updateNewBalance';
 	// balance
+
+	// risefall	
+		$route['test-account/risefall/getClosedRiseFallPositions'] = 'testAccount/getClosedRiseFallPositions';
+
+		
+	// risefall	
+		
 
 // test-account
 

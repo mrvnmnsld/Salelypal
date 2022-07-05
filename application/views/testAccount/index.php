@@ -583,10 +583,6 @@
 			$('#emailSwitchID').on('click',function(){
 				switchInput($(this).attr('from'));
 			});
-			
-			$('#mobileSwitchID').on('click',function(){
-				switchInput($(this).attr('from'));
-			});
 		//userinput_switch
 
 		$("#loginForm").validate({
@@ -605,30 +601,17 @@
 
 				var data = $('#loginForm').serializeArray();
 				data.push({"name":'ip','value':getIpAddress()["ip"]});
-				var loginRes = ajaxShortLink('checkLoginCredentials',data);
+				var loginRes = ajaxShortLink('test-account/checkLoginCredentials',data);
+
+				console.log(loginRes);
 
 				if (loginRes['wrongFlag'] == 2 || loginRes['wrongFlag'] == 1) {
+
 					$('#errorReporter').text("Wrong Credentials.");
-				}else if(loginRes['wrongFlag'] == 3){
-					$('#errorReporter').html("Account Blocked.");
-				}else if(loginRes['wrongFlag'] == 4){
-					$("#submit_login_btn").empty().append(
-						'<span class="spinner-border" role="status">'+
-							'<span class="sr-only">Loading...</span>'+
-						'</span>'+
-						"&nbsp Success Login"
-					).attr('disabled',true);
 
-					setLocalStorageByKey('currentUser',JSON.stringify(loginRes['data']));
-
-					window.location.replace("homeViewNotVerified");
-
-					// $('#errorReporter').html("Account not yet verified. Please wait while we process your verification");
 				}else if(loginRes['wrongFlag'] == 0){
 
 					$('#errorReporter').text("");
-
-
 					$("#submit_login_btn").empty().append(
 						'<span class="spinner-border" role="status">'+
 							'<span class="sr-only">Loading...</span>'+
@@ -638,11 +621,7 @@
 
 					setLocalStorageByKey('currentUser',JSON.stringify(loginRes['data']));
 
-					if(loginRes.data.isPro == 0){
-						window.location.replace("homeView");
-					}else {
-						window.location.replace("homeViewPro");
-					}
+					window.location.replace("test-account-wallet");
 
 				}
 			}
