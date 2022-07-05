@@ -76,6 +76,8 @@
 
 	<!-- NEW -->
 		<script src="assets/lib/jquery.countdown-2.2.0/jquery.countdown.js"></script>
+		<script src="assets/lib/lodash.min.js"></script>
+		
 	<!-- NEW -->
 					
 	
@@ -1215,7 +1217,7 @@
 			});
 
 			$('#rise_fall_btn').on('click',function(){
-				addBreadCrumbs("testAccount/risefall")
+				addBreadCrumbs("testAccount/riseFall")
 
 				$("html, body").animate({ scrollTop: 0 }, "slow");
 				$('#assets_container').css("display","none");
@@ -1224,7 +1226,7 @@
 					$("#top_back_btn").css('display',"block")
 
 		  			$("#container").empty();
-		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'testAccount/risefall'}));
+		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'testAccount/riseFall'}));
 		  			$("#container").fadeIn(animtionSpeed);
 				});
 			});
@@ -1532,7 +1534,7 @@
 				console.log('here');
 			}else{
 				breadCrumbs.pop()
-				
+
 				if(breadCrumbs[breadCrumbs.length-1]=="assets"||breadCrumbs[breadCrumbs.length-1]=="assets_container"){
 					$("#assets_btn").click();
 				}else if(breadCrumbs[breadCrumbs.length-1]==undefined){

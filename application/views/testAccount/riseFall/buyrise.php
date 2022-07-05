@@ -165,6 +165,8 @@
     })
 
     $("#buy_rise_submit_btn").on("click",function(){
+        
+
         var riskOptionVal = $('input[name="risk_option_radio"]:checked').val().split('/');
         var availableAmount = float2DecimalPoints($("#available_amount_container").text().split(' ')[0])
         var buyType = 'rise';
@@ -191,6 +193,8 @@
                content: 'Are you sure you want to proceed with these risks?',
                buttons: {
                    confirm: function () {
+                        $("#buy_rise_submit_btn").attr("disabled",true);
+
                         var res = ajaxShortLink("test-account/future/saveRiseFallPosition",{
                            'currentPrice':currentPrice,
                            'buyType':buyType,
@@ -277,7 +281,7 @@
                        reloadPositions();
                    },
                    cancel: function () {
-
+                    
                    },
                },
                theme: 'dark'

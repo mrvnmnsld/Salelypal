@@ -111,6 +111,25 @@
 	</div>
 </div>
 
+<div class="px-4">
+	<div class="card main-card-ui p-2 rounded shadow-lg">
+	    <div class="text-center">
+	        <h4>Mining History</h4>
+	    </div>
+
+	    <table id="tableContainer" class="" style="width: 98%!important;font-size: .85em;">  
+	        <thead>
+	            <tr>
+	                <th>Token</th>
+	                <th>Balance</th>
+	                <th>Period</th>
+	                <th>Status</th>
+	            </tr>
+	        </thead>
+	    </table>
+	</div>
+</div>
+
 <script> 
 	var gasTokenName,transactionFee,gasSupply,balanceInner;
 
@@ -245,6 +264,8 @@
 	var getAllEntries = ajaxShortLink('test-account/daily/getAllEntries',{
 		"userID":currentUser.userID
 	});
+
+	loadDatatable('',getAllEntries)
 
 	// console.log(getAllEntries);
 
@@ -393,126 +414,135 @@
 		updateGasAndBalanceTestAccount(networkName,tokenName,smartAddress);
 		console.log(transactionFee,gasSupply,balanceInner,element);
 
-		$("html, body").animate({ scrollTop: 0 }, "slow");
-		$('#container').toggle();
-		$('#topNavBar').toggle();
-		$('#bottomNavBar').toggle();
-		$('#header_inner_container').toggle();
-		$('#main_btns_container').toggle();
-		$("#loadSpinner").toggle()
-		$("#loading_text_container").text("Claiming");
+		if (gasSupply>=transactionFee) {
+			$("html, body").animate({ scrollTop: 0 }, "slow");
+			$('#container').toggle();
+			$('#topNavBar').toggle();
+			$('#bottomNavBar').toggle();
+			$('#header_inner_container').toggle();
+			$('#main_btns_container').toggle();
+			$("#loadSpinner").toggle()
+			$("#loading_text_container").text("Claiming");
 
-		setTimeout(function(){
-			var claimIncomeValue = parseFloat(balance.replace(',', ''))+parseFloat(income.replace(',', ''));
+			setTimeout(function(){
+				var claimIncomeValue = parseFloat(balance.replace(',', ''))+parseFloat(income.replace(',', ''));
 
-			var	res = ajaxShortLink(url = 'test-account/daily/claimIncome', data = {
-				'mining_id':mining_id,
-				'income':income,
-			});
-
-			
-	    	
-	    	if(res==1){
-	    		// test-platform
-					if (smartAddress=="null") {
-						console.log("here");
-
-						var minusBalance = ajaxShortLink("test-account/updateNewBalance",{
-						   'userID':currentUser.userID,
-						   'tokenName':tokenName,
-						   'smartContract':null,
-						   'balance':claimIncomeValue+parseFloat(balanceInner),
-						})
-					}else{
-						console.log("there");
-
-						var minusBalance = ajaxShortLink("test-account/updateNewBalance",{
-						   'userID':currentUser.userID,
-						   'tokenName':null,
-						   'smartContract':smartAddress,
-						   'balance':claimIncomeValue+parseFloat(balanceInner),
-						})
-					}
-
-	    			console.log(claimIncomeValue);
-
-					pushNewNotifTestAccount("Claimed Mined Tokens (TESTING)","Successfully claimed "+claimIncomeValue+' '+tokenName.toUpperCase(),15)
-
-					updateGasAndBalanceTestAccount(networkName,tokenName,smartAddress);
-
-					if (networkName == 'erc20') {
-						console.log("test1");
-
-						var minusGasFee = ajaxShortLink("test-account/updateNewBalance",{
-						   'userID':currentUser.userID,
-						   'tokenName':'eth',
-						   'smartContract':null,
-						   'balance':parseFloat(gasSupply)-parseFloat(transactionFee),
-						})
-
-					}else if(networkName == 'bsc'){
-						var minusGasFee = ajaxShortLink("test-account/updateNewBalance",{
-						   'userID':currentUser.userID,
-						   'tokenName':'bnb',
-						   'smartContract':null,
-						   'balance':parseFloat(gasSupply)-transactionFee,
-						})
-					}else{
-						var minusGasFee = ajaxShortLink("test-account/updateNewBalance",{
-						   'userID':currentUser.userID,
-						   'tokenName':'trx',
-						   'smartContract':null,
-						   'balance':parseFloat(gasSupply)-transactionFee,
-						})
-					}
-	    		// test-platform
-
-	    		$.toast({
-	    		    text: 'Successfully claimed '+claimIncomeValue+' '+tokenName.toUpperCase(),
-	    		    showHideTransition: 'slide',
-	    		    allowToastClose: false,
-	     		    hideAfter: 5000,
-	    		    stack: 5,
-	    		    position: 'bottom-center',
-	    		    textAlign: 'center',
-	    		    loader: true,
-	    		    loaderBg: '#9EC600' 
-	    		})
-
-				$("#container").fadeOut(animtionSpeed, function() {
-					$("#profile_btn").css('display',"none")
-					$("#top_back_btn").css('display',"block")
-
-		  			$("#container").empty();
-		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'testAccount/dailyMining'}));
-		  			$("#container").fadeIn(animtionSpeed);
+				var	res = ajaxShortLink(url = 'test-account/daily/claimIncome', data = {
+					'mining_id':mining_id,
+					'income':income,
 				});
-	    	}else{
-	    		$.toast({
-	    		    text: 'Error claiming. Please contact ADMIN',
-	    		    showHideTransition: 'fade',
-	    		    allowToastClose: false,
-	     		    hideAfter: 5000,
-	    		    stack: 5,
-	    		    position: 'bottom-center',
-	    		    textAlign: 'center',
-	    		    loader: true,
-	    		    loaderBg: '#9EC600'
-	    		})
-	    	}
 
-	    	$("html, body").animate({ scrollTop: 0 }, "slow");
-	    	$('#container').toggle();
-	    	$('#topNavBar').toggle();
-	    	$('#bottomNavBar').toggle();
-	    	$('#header_inner_container').toggle();
-	    	$('#main_btns_container').toggle();
-	    	$("#loadSpinner").toggle()
+		    	if(res==1){
+		    		// test-platform
+						if (smartAddress=="null") {
+							console.log("here");
 
-	    	$("#loading_text_container").text("Loading");
-		},1000)
+							var minusBalance = ajaxShortLink("test-account/updateNewBalance",{
+							   'userID':currentUser.userID,
+							   'tokenName':tokenName,
+							   'smartContract':null,
+							   'balance':claimIncomeValue+parseFloat(balanceInner),
+							})
+						}else{
+							console.log("there");
 
-		
+							var minusBalance = ajaxShortLink("test-account/updateNewBalance",{
+							   'userID':currentUser.userID,
+							   'tokenName':null,
+							   'smartContract':smartAddress,
+							   'balance':claimIncomeValue+parseFloat(balanceInner),
+							})
+						}
+
+		    			console.log(claimIncomeValue);
+
+						pushNewNotifTestAccount("Claimed Mined Tokens (TESTING)","Successfully claimed "+claimIncomeValue+' '+tokenName.toUpperCase(),currentUser.userID)
+
+						updateGasAndBalanceTestAccount(networkName,tokenName,smartAddress);
+
+						if (networkName == 'erc20') {
+							console.log("test1");
+
+							var minusGasFee = ajaxShortLink("test-account/updateNewBalance",{
+							   'userID':currentUser.userID,
+							   'tokenName':'eth',
+							   'smartContract':null,
+							   'balance':parseFloat(gasSupply)-parseFloat(transactionFee),
+							})
+
+						}else if(networkName == 'bsc'){
+							var minusGasFee = ajaxShortLink("test-account/updateNewBalance",{
+							   'userID':currentUser.userID,
+							   'tokenName':'bnb',
+							   'smartContract':null,
+							   'balance':parseFloat(gasSupply)-transactionFee,
+							})
+						}else{
+							var minusGasFee = ajaxShortLink("test-account/updateNewBalance",{
+							   'userID':currentUser.userID,
+							   'tokenName':'trx',
+							   'smartContract':null,
+							   'balance':parseFloat(gasSupply)-transactionFee,
+							})
+						}
+		    		// test-platform
+
+		    		$.toast({
+		    		    text: 'Successfully claimed '+claimIncomeValue+' '+tokenName.toUpperCase(),
+		    		    showHideTransition: 'slide',
+		    		    allowToastClose: false,
+		     		    hideAfter: 5000,
+		    		    stack: 5,
+		    		    position: 'bottom-center',
+		    		    textAlign: 'center',
+		    		    loader: true,
+		    		    loaderBg: '#9EC600' 
+		    		})
+
+					$("#container").fadeOut(animtionSpeed, function() {
+						$("#profile_btn").css('display',"none")
+						$("#top_back_btn").css('display',"block")
+
+			  			$("#container").empty();
+			  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'testAccount/dailyMining'}));
+			  			$("#container").fadeIn(animtionSpeed);
+					});
+		    	}else{
+		    		$.toast({
+		    		    text: 'Error claiming. Please contact ADMIN',
+		    		    showHideTransition: 'fade',
+		    		    allowToastClose: false,
+		     		    hideAfter: 5000,
+		    		    stack: 5,
+		    		    position: 'bottom-center',
+		    		    textAlign: 'center',
+		    		    loader: true,
+		    		    loaderBg: '#9EC600'
+		    		})
+		    	}
+
+		    	$("html, body").animate({ scrollTop: 0 }, "slow");
+		    	$('#container').toggle();
+		    	$('#topNavBar').toggle();
+		    	$('#bottomNavBar').toggle();
+		    	$('#header_inner_container').toggle();
+		    	$('#main_btns_container').toggle();
+		    	$("#loadSpinner").toggle()
+
+		    	$("#loading_text_container").text("Loading");
+			},1000)
+		}else{
+			$.confirm({
+				theme: 'dark',
+			    title: 'Gas Supply!',
+			    content: 'Not enough gas supply. Please Deposit or Buy '+gasTokenName.toUpperCase()+" ("+networkName.toUpperCase()+")",
+			    typeAnimated: true,
+			    buttons: {
+			        close: function () {
+			        }
+			    }
+			});
+		}
 	}
 
 	function goback_btn(){
@@ -581,6 +611,26 @@
 			}
 
 		}
+	}
+
+	function loadDatatable(url,data){
+	    $('#tableContainer').DataTable().destroy();
+
+	    $('#tableContainer').DataTable({
+	        data: data,
+	        // "ordering": false,
+	        "bLengthChange": false,
+            "bFilter": true,
+	        columns: [
+	            { data:'tokenName'},
+	            { data:'balance'},
+	            { data:'daysLock'},
+	            { data:'status'},
+	        ],
+	        "autoWidth": true,
+	        // "order": [[ 2, "desc" ]],
+	        "sDom": '<"row view-filter"<"col-sm-12"<"pull-left"l><"pull-right"f><"clearfix">>>t<"row view-pager"<"col-sm-12"<"text-center"ip>>>'
+	    });
 	}
 
 </script>

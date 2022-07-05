@@ -93,6 +93,7 @@
   					$(row).addClass('bg-success text-light');
   				}
 			},autoWidth: false,
+			order: [[0, 'desc']]
 		});
 
 		$(".dt-button").each(function( index ) {

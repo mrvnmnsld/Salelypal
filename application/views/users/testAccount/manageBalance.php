@@ -218,7 +218,7 @@
 
     $("#balance_input").val(availBalance);
 
-    console.log(smartAddressContainer,availBalance,)
+    console.log(smartAddressContainer,availBalance)
   });
 
   $("#update_balance_btn").on("click",function(){
@@ -228,12 +228,37 @@
   $("#update_manage_form").validate({
       errorClass: 'is-invalid',
       submitHandler: function(form){
-        var res = ajaxShortLink('test-account/updateNewBalance',{
-          "balance":$("#balance_input").val(),
-          'userID' : selectedData.userID,
-          'smartContract' : globalSmartAddressContainer,
-          'tokenName' : globalTokenName,
-        });
+        if (globalTokenName=="trx".toUpperCase()) {
+          var res = ajaxShortLink('test-account/updateNewBalance',{
+              "balance":$("#balance_input").val(),
+              'userID' : selectedData.userID,
+              'smartContract' : null,
+              'tokenName' : 'trx',
+            });
+        }else if(globalTokenName=="bnb".toUpperCase()){
+          var res = ajaxShortLink('test-account/updateNewBalance',{
+            "balance":$("#balance_input").val(),
+            'userID' : selectedData.userID,
+            'smartContract' : null,
+            'tokenName' : 'bnb',
+          });
+        }else if(globalTokenName=="eth".toUpperCase()){
+          var res = ajaxShortLink('test-account/updateNewBalance',{
+            "balance":$("#balance_input").val(),
+            'userID' : selectedData.userID,
+            'smartContract' : null,
+            'tokenName' : 'eth',
+          });
+        }else{
+          var res = ajaxShortLink('test-account/updateNewBalance',{
+            "balance":$("#balance_input").val(),
+            'userID' : selectedData.userID,
+            'smartContract' : globalSmartAddressContainer,
+            'tokenName' : null,
+          });
+        }
+
+        
 
         console.log(res);
 

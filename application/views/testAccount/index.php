@@ -408,6 +408,7 @@
     <div class="forms">
 
       <div class="form login">
+      	<br>
         <span class="title">SafetyPal</span>
 
         <form id="loginForm">
@@ -429,11 +430,14 @@
           </div>
         </form>
 
-        <div class="login-signup">
+        <br>
+
+
+        <!-- <div class="login-signup">
           <span class="text">Not a member?
             <a href="#" class="text signup-link">Sign up now</a>
           </span>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -462,8 +466,7 @@
 
 		const container = document.querySelector(".container"),
 		  pwShowHide = document.querySelectorAll(".showHidePw"),
-		  pwFields = document.querySelectorAll(".password"),
-		  signUp = document.querySelector(".signup-link")
+		  pwFields = document.querySelectorAll(".password")
 
 		if (isOnline==true) {
 	  	if (getLocalStorageByKey('currentUser')!=null) {
@@ -521,11 +524,6 @@
 	  		})
 	  	})
 	  })
-
-	  signUp.addEventListener("click",()=>{
-	  	container.classList.add("active");
-	  });
-
 
 		var captcha = sliderCaptcha({
 			id: 'captcha',
