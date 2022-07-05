@@ -68,9 +68,14 @@
 		<div class="col-md" id="mobileNumberContainer"></div>	
 	</div>
 
+	<div class="row mt-1">
+		<div class="col-md-2 pl-3"><b>Country:</b></div>	
+		<div class="col-md" id="countryContainer"></div>	
+	</div>
+
 
 	<div class="row mt-1">
-		<div class="col-md-3 pl-3"><b>Referred By:</b></div>	
+		<div class="col-md-2 pl-3"><b>Referred By:</b></div>	
 		<div class="col-md" id="referredByContainer"></div>	
 	</div>
 
@@ -80,7 +85,7 @@
 	</div>
 
 	<div class="row mt-1 mb-2">
-		<div class="col-md-3 pl-3"><b>Pro User:</b></div>	
+		<div class="col-md-2 pl-3"><b>Pro User:</b></div>	
 		<div class="col-md" id="">
 			<div class="form-check form-check-inline">
 			  <input class="form-check-input" type="radio" name="isProContainer" id="isProContainerYes" value="true">
@@ -94,7 +99,7 @@
 	</div>
 
 	<div class="row mt-1 mb-2">
-		<div class="col-md-3 pl-3"><b>Block:</b></div>	
+		<div class="col-md-2 pl-3"><b>Block:</b></div>	
 		<div class="col-md" id="">
 			<div class="form-check form-check-inline">
 			  <input class="form-check-input" type="radio" name="blockContainer" id="blockContainerYes" value="true">
@@ -106,8 +111,6 @@
 			</div>
 		</div>	
 	</div>
-
-	
 
 	<hr>
 
@@ -121,6 +124,20 @@
 </div>
 
 <div id="kyc_modal" style="display:none">
+
+	<div class="row mt-1">
+		<div class="col-md-2 pl-3"><b>Fullname:</b></div>	
+		<div class="col-md" id="fullnameContainer_kyc"></div>	
+	</div>
+	<div class="row mt-1">
+		<div class="col-md-2 pl-3"><b>Birthday:</b></div>	
+		<div class="col-md" id="birthdayContainer_kyc"></div>	
+	</div>
+	<div class="row mt-1">
+		<div class="col-md-2 pl-3"><b>Country:</b></div>	
+		<div class="col-md" id="countryContainer_kyc"></div>	
+	</div>
+
 
 	<div class="d-flex">
 		<div class="p-2">
@@ -154,15 +171,48 @@
 
 
 <script type="text/javascript">
+	var globalFullnameContainer;
+	var globalBirthdayContainer;
+
 	$("#emailContainer").append(selectedData["email"]);
-	$("#fullnameContainer").append(selectedData["fullname"]);
 	$("#dateContainer").append(selectedData["timestamp"]);
-	$("#birthdayContainer").append(selectedData["birthday"]);
 	$("#mobileNumberContainer").append(selectedData["mobileNumber"]);
 	// $("#ipContainer").append(selectedData["ip_lastLogin"]);
 	$("#referredByContainer").append(selectedData["referedConcat"]);
 
-	console.log(selectedData);
+	$("#countryContainer").append(selectedData["country"]);
+	$("#fullnameContainer").append(selectedData["fullname"]);
+	$("#birthdayContainer").append(selectedData["birthday"]);
+
+	if (selectedData["fullname"] == null) {
+		$("#fullnameContainer_kyc").html("<span class='text-danger'>No data</span>");
+		$("#fullnameContainer").html("<span class='text-danger'>No data</span>");
+
+	}else{
+		$("#fullnameContainer_kyc").html("<span>"+selectedData["fullname"]+"</span>");
+	}
+
+	if (selectedData["birthday"] == null) {
+		$("#birthdayContainer_kyc").html("<span class='text-danger'>No data</span>");
+		$("#birthdayContainer").html("<span class='text-danger'>No data</span>");
+
+	}else{
+		$("#birthdayContainer_kyc").html("<span>"+selectedData["birthday"]+"</span>");
+	}
+
+	if (selectedData["country"] == null) {
+		$("#countryContainer_kyc").html("<span class='text-danger'>No data</span>");
+		$("#countryContainer").html("<span class='text-danger'>No data</span>");
+
+	}else{
+		$("#countryContainer_kyc").html("<span>"+selectedData["country"]+"</span>");
+	}
+
+	if (selectedData["lastLoginDate"] == null) {
+		$('#lastLoginContainer').html("<span class='text-danger'>No data</span>");
+	}else{
+		$("#lastLoginContainer").append(selectedData["lastLoginDate"]+" IP: "+selectedData["ip_lastLogin"]);
+	}
 
 	if (selectedData["isBlocked"] == 1) {
 		$("#blockContainerYes").attr('checked', 'checked');
@@ -176,17 +226,7 @@
 		$("#isProContainerNo").attr('checked', 'checked');
 	}
 
-	if (selectedData["lastLoginDate"] == null) {
-		$('#lastLoginContainer').text("No Data");
-	}else{
-		$("#lastLoginContainer").append(selectedData["lastLoginDate"]+" IP: "+selectedData["ip_lastLogin"]);
-	}
-
-	if (selectedData["birthday"] == null) {
-		$('#birthdayContainer').text("No Data");
-	}else{
-		$("#birthdayContainer").append(selectedData["birthday"]+" IP: "+selectedData["ip_lastLogin"]);
-	}
+	
 
 	if (selectedData["verified"] == 1) {
 		$("#verifyBtn").text("View Verification")
@@ -294,6 +334,7 @@
 			  				$("#errorReporter").removeClass("text-success");
 
 			  				$("#errorReporter").append("Face in images doesn't match");
+			  				$("#verify_user_btn").attr("disabled",true);
 			  			}else{
 			  				$("#errorReporter").removeClass("text-danger");
 			  				$("#errorReporter").addClass("text-success");
@@ -303,17 +344,18 @@
 						$("#errorReporter").addClass("text-danger");
 						$("#errorReporter").removeClass("text-success");
 						$("#errorReporter").text("No Face Found in Face Image");
+		  				$("#verify_user_btn").attr("disabled",true);
+
 			  		}
 		  		}else{
 		  			$("#errorReporter").addClass("text-danger");
 		  			$("#errorReporter").removeClass("text-success");
 					$("#errorReporter").text("No Face Found in ID Image");
-
+	  				$("#verify_user_btn").attr("disabled",true);
+					
 					$("#loading_text").text("Loading...");
 			  		$("#loading").toggle();
 		  		}
-
-		  		
 
 		  		// results.forEach((result, i) => {
 		  		//   var box = resizedDetections[i].detection.box
@@ -366,7 +408,7 @@
 		// })
 
 
-		if (selectedData.IDImagePath!=null && selectedData.FaceImagePath!=null) {
+		if (selectedData.IDImagePath!=null && selectedData.FaceImagePath!=null && selectedData.fullname!=null && selectedData.birthday!=null &&selectedData.country!=null) {
 			$("#id_img_container").attr("src","assets/imgs/kyc-imgs/id-imgs/"+selectedData.IDImagePath);
 			$("#id_img_codownload").attr("href","assets/imgs/kyc-imgs/id-imgs/"+selectedData.IDImagePath);
 			$("#face_img_container").attr("src","assets/imgs/kyc-imgs/face-imgs/"+selectedData.FaceImagePath);
@@ -374,7 +416,7 @@
 
 			// $("#id_img_container").change();
 		}else{
-			$("#verifyBtn").text("Incomplete/No verfication uploaded")
+			$("#verifyBtn").text("Incomplete/No Image Uploaded")
 			$("#verifyBtn").attr("disabled",true)
 		}
 
@@ -395,8 +437,9 @@
 			    buttons: {
 			        confirm: function () {
 			        	ajaxShortLink('admin/userlist/verify',{'userID':selectedData['userID']});
-			        	loadDatatable('admin/getAllUsers');
 			        	pushNewNotif("Verified!","Account Successfully verified. Enjoy Trading & Buying crypto with lower rates!",selectedData['userID'])
+
+			        	loadDatatable('admin/getAllUsers');
 			        	bootbox.hideAll();
 
 			        	$.toast({

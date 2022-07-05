@@ -15,10 +15,10 @@
             <tr>
             		<th></th>
                 <th>ID #</th>
-                <th>Email</th>
-                <th>Fullname</th>
+                <!-- <th>Email</th>
+                <th>Fullname</th> -->
                 <th>Username</th>
-                <th>Country</th>
+                <!-- <th>Country</th> -->
                 <th>Created By</th>
             </tr>
         </thead>
@@ -58,10 +58,10 @@
 			columns: [
 				{ data:''},
 				{ data:'id'},
-				{ data:'email'},
-				{ data:'fullname'},
+				// { data:'email'},
+				// { data:'fullname'},
 				{ data:'username'},
-				{ data:'country'},
+				// { data:'country'},
 				{ data:'createdBy'},
       ],
       "columnDefs": [

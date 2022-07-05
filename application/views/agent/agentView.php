@@ -34,7 +34,7 @@
 
 <div id="main_modal_container">
 
-	<div class="row mt-1">
+	<!-- <div class="row mt-1">
 		<div class="col-md-3 pl-3"><b>Email:</b></div>	
 		<div class="col-md" id="email"></div>	
 	</div>
@@ -42,17 +42,17 @@
 	<div class="row mt-1">
 		<div class="col-md-3 pl-3"><b>Fullname:</b></div>	
 		<div class="col-md" id="fullname"></div>	
-	</div>
-
-	<div class="row mt-1">
-		<div class="col-md-3 pl-3"><b>Country:</b></div>	
-		<div class="col-md" id="country"></div>	
-	</div>
+	</div> -->
 
 	<div class="row mt-1">
 		<div class="col-md-3 pl-3"><b>Username:</b></div>	
 		<div class="col-md" id="username"></div>	
 	</div>
+
+	<!-- <div class="row mt-1">
+		<div class="col-md-3 pl-3"><b>Country:</b></div>	
+		<div class="col-md" id="country"></div>	
+	</div> -->
 
 	<div class="row mt-1">
 		<div class="col-md-3 pl-3"><b>Direct Invited:</b></div>	

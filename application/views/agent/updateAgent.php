@@ -93,7 +93,7 @@
 
 	<form id="update_agent_form">
 
-		<label class="fw-bold">Email</label>
+		<!-- <label class="fw-bold">Email</label>
 		<div class="input-group row m-1 mb-3">
 			<i class="input-group-text fa fa-envelope-o icon-size" aria-hidden="true"></i>
 		  <input type="text" class="form-control" id="email_input" name="email" placeholder="Email">
@@ -103,9 +103,15 @@
 		<div class="input-group row m-1 mb-3">
 			<i class="input-group-text fa fa-user-o icon-size" aria-hidden="true"></i>
 		  <input type="text" class="form-control" id="fullname_input" name="fullname" placeholder="Fullname">
+		</div> -->
+
+		<label class="fw-bold">Username</label>	
+		<div class="input-group row m-1 mb-3">
+			<i class="input-group-text fa fa-user-circle icon-size" aria-hidden="true"></i>
+		  	<input type="text" class="form-control" id="username_input" name="username" placeholder="Username">
 		</div>
 
-		<label class="fw-bold">Country</label>			
+		<!-- <label class="fw-bold">Country</label>			
 		<div class="input-group row m-1 mb-3">
 			<i class="input-group-text fa fa-globe icon-size" aria-hidden="true"></i>
 			<select id="country_input" name="country" class="form-select">
@@ -114,13 +120,7 @@
 			  <option value="IND">India</option>
 			  <option value="SA">Saudi Arabia</option>
 			</select>
-		</div>
-
-		<label class="fw-bold">Username</label>	
-		<div class="input-group row m-1 mb-3">
-			<i class="input-group-text fa fa-user-circle icon-size" aria-hidden="true"></i>
-		  	<input type="text" class="form-control" id="username_input" name="username" placeholder="Username">
-		</div>
+		</div> -->
 
 		<label class="fw-bold">Password</label>
 		<div class="input-group row m-1 mb-3">
@@ -254,16 +254,16 @@
 	$("#update_agent_form").validate({
 	  	errorClass: 'is-invalid',
 	  	rules: {
-	  		email: {
-	  			required: isChangedBoolean,
-				minlength:8,
-				checkAgentEmailAvailability: isChangedBoolean,
-	  		},
-			fullname: {
-				required:true,
-				minlength:2,
-			},
-			country: "required",
+	  // 		email: {
+	  // 			required: isChangedBoolean,
+			// 	minlength:8,
+			// 	checkAgentEmailAvailability: isChangedBoolean,
+	  // 		},
+			// fullname: {
+			// 	required:true,
+			// 	minlength:2,
+			// },
+			// country: "required",
 			username: {
 				required:true,
 				minlength:8,
