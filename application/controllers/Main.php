@@ -814,18 +814,6 @@ class main extends MY_Controller {
 			$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
 		);
 
-		// foreach ($notif as $key => $value) {
-		// 	$tableName="notif_center";
-		// 	$fieldName='id';
-		// 	$where=$value->id;
-
-		// 	$insertRecord = array(
-		// 		'isViewed'=>1,
-		// 	);
-
-		// 	$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
-		// }
-
    		echo json_encode($notif);
 	}
 

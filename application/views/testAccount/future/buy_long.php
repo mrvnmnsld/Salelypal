@@ -143,24 +143,25 @@
 
 <script type="text/javascript">
     isMinimized = 0;
-    var bettingSettings = ajaxShortLink("admin/getBettingSettings");
+    var bettingSettings = ajaxShortLink("test-account/getBettingSettings");
     var resolvedPriceCountdown;
     var idToResolve;
     
-    var balanceUsdt = ajaxShortLink('test-platform/getTokenBalanceBySmartAddress',{
-        // 'trc20Address':currentUser['trc20_wallet'],
+    var balanceUsdt = ajaxShortLink('test-account/getTokenBalanceBySmartAddress',{
+    	'userID':currentUser.userID,
         'contractaddress':'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t',
     })['balance'];
-    var gasSupply = getGasSupplyTestPlatform('trx');
+
+    var gasSupply = ajaxShortLink('test-account/getTronBalance',{
+    	"userID":currentUser.userID,
+    })["balance"]
 
     console.log(bettingSettings)
     console.log(balanceUsdt,gasSupply);
 
-
     $("#available_amount_container").html(parseFloat(balanceUsdt).toFixed(2)+" USDT");
+    $("#available_gas_container").html(parseFloat(gasSupply).toFixed(2)+' '+gasSupply);
 
-    $("#available_gas_container").html(parseFloat(gasSupply.amount).toFixed(2)+' '+gasSupply.gasTokenName);
-    
     $("#customRisk_btn").on("click", function(){
         bootbox.alert({
             message: ajaxLoadPage('quickLoadPage',{'pagename':'wallet/future/customRisk'}),
@@ -184,9 +185,7 @@
                 $.alert("Please Change your predicted time.");
             }else{
                 // test-platform
-                    gasSupply = getGasSupplyTestPlatform('trx')
-
-                    if(parseFloat(gasSupply.amount) >= parseFloat(gasSupply.amount-5)){
+                    if(parseFloat(gasSupply) >= parseFloat(gasSupply-5)){
                         isGasEnough = 1;
                     }
                 // test-platform
@@ -200,13 +199,13 @@
                             confirm: function () {
                             	// console.log(tokenPriceBinanceLastPrice,riskPrice,'long',timeStamp,amount,15,'PENDING',tokenPairArray.tokenPairDescription);
 
-                                var res = ajaxShortLink("userWallet/future/savePosition",{
+                                var res = ajaxShortLink("test-account/future/savePosition",{
                                     'currentPrice':tokenPriceBinanceLastPrice,
                                     'positionType':'long',
                                     'riskPrice':riskPrice,
                                     'timeStamp':timeStamp,
                                     'amount':amount,
-                                    'userID':15,
+                                    'userID':currentUser.userID,
                                     'status':'PENDING',
                                     'tradePair':tokenPairArray.tokenPairDescription,
                                 });
@@ -249,21 +248,19 @@
                                 });
 
                                 // test-platform
-                                	balanceUsdtInner = ajaxShortLink('test-platform/getTokenBalanceBySmartAddress',{
-								        // 'trc20Address':currentUser['trc20_wallet'],
-								        'contractaddress':'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t',
-								    })['balance']
-
-                                	var minusGasFee = ajaxShortLink("test-platform/newBalance",{
-                                	    'tokenName':'trx',
-                                	    'smartAddress':null,
-                                	    'newAmount':parseFloat(gasSupply.amount)-5,
+                                	var minusGasFee = ajaxShortLink("test-account/updateNewBalance",{
+                                	   'userID':currentUser.userID,
+                                	   'tokenName':'trx',
+                                	   'smartContract':null,
+                                	   'balance':parseFloat(gasSupply)-5,
                                 	})
 
-                                	ajaxShortLink('test-platform/future/openPosition',{
-                                	    'amountStaked':amount,
-                                	    'totalAvailAmount':balanceUsdtInner,
-                                	});
+                                	var minusBalance = ajaxShortLink("test-account/updateNewBalance",{
+                                	   'userID':currentUser.userID,
+                                	   'tokenName':null,
+                                	   'smartContract':"TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
+                                	   'balance':parseFloat(balanceUsdt)-amount,
+                                	})
                                 // test-platform
 
 
@@ -315,13 +312,13 @@
 
     function resolveThisID(id,isForfeited){
     	// test-platform
-    	    var balanceUsdtInner = ajaxShortLink('test-platform/getTokenBalanceBySmartAddress',{
-    	        // 'trc20Address':currentUser['trc20_wallet'],
+    	    var balanceUsdtInner = ajaxShortLink('test-account/getTokenBalanceBySmartAddress',{
+        	   	'userID':currentUser.userID,
     	        'contractaddress':'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t',
     	    })['balance'];
     	// test-platform
 
-    	var checkSet = ajaxShortLink('userWallet/future/checkIfSet',{
+    	var checkSet = ajaxShortLink('test-account/future/checkIfSet',{
     	    'id':id,
     	});
 
@@ -350,15 +347,16 @@
     	        $("#resolved_price_container").text(checkSet[0].resolvedPrice);
     	        $("#token_pair_value_container").text(checkSet[0].resolvedPrice);
     	       
-    	        pushNewNotif("Position Won!(TESTING)","You have won "+newIncome+" USDT",currentUser.userID); 
+    	        pushNewNotifTestAccount("Position Won!(TESTING)","You have won "+newIncome+" USDT",currentUser.userID); 
 
     	        // sendTransaction Wallet
     	        // test-platform
-    	            var newBalanceRes = ajaxShortLink("test-platform/newBalance",{
-    	               'tokenName':'usdt',
-    	               'smartAddress':null,
-    	               'newAmount':parseFloat(balanceUsdtInner)+parseFloat(newIncome)+parseFloat(checkSet[0].amount),
-    	            })    
+    	            var newBalanceRes = ajaxShortLink("test-account/updateNewBalance",{
+    	               'userID':currentUser.userID,
+    	               'tokenName':null,
+    	               'smartContract':"TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
+    	               'balance':parseFloat(balanceUsdtInner)+parseFloat(newIncome)+parseFloat(checkSet[0].amount),
+    	            }) 
     	        // test-platform
 
     	    }else if(checkSet[0].status == "LOSE"){
@@ -375,14 +373,12 @@
 
     	        $("#2_amount_staked_container").text(checkSet[0].amount);
     	        $("#2_trade_pair_container").text(checkSet[0].tradePair);
-    	        $("#resolved_price_container").text(checkSet[0].resolvedPrice);
-
-    	        pushNewNotif("Position Won!(TESTING)","You have lost "+amount+" USDT",currentUser.userID);                           
+    	        $("#resolved_price_container").text(checkSet[0].resolvedPrice);                      
     	    }
 
     	    reloadPositions()
     	}else{    
-            var positionsOpened = ajaxShortLink("userWallet/future/getPositionDetails",{"id":id});
+            var positionsOpened = ajaxShortLink("test-account/future/getPositionDetails",{"id":id});
             var closeTokenValue = "Forfeit";
 
             if (isForfeited!=undefined) {
@@ -438,14 +434,15 @@
 
                     // sendTransaction Wallet
                     // test-platform
-                        var newBalanceRes = ajaxShortLink("test-platform/newBalance",{
-                           'tokenName':'usdt',
-                           'smartAddress':null,
-                           'newAmount':parseFloat(balanceUsdtInner)+parseFloat(newIncome)+parseFloat(positionsOpened[0].amount),
-                        })    
+                        var newBalanceRes = ajaxShortLink("test-account/updateNewBalance",{
+                           'userID':currentUser.userID,
+                           'tokenName':null,
+                           'smartContract':"TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
+                           'balance':parseFloat(balanceUsdtInner)+parseFloat(newIncome)+parseFloat(positionsOpened[0].amount),
+                        }) 
                     // test-platform 
 
-                    pushNewNotif("Position Won!(TESTING)","You have won "+newIncome+" USDT",currentUser.userID)
+                    pushNewNotifTestAccount("Position Won!(TESTING)","You have won "+newIncome+" USDT",currentUser.userID)
                 }else{
                     status = "LOSE";
                     statusClass = 'text-danger';
@@ -469,7 +466,7 @@
     	    
     	   
     	    // resolve here
-    	        ajaxShortLink("userWallet/future/resolvePosition",{
+    	        ajaxShortLink("test-account/future/resolvePosition",{
                     'id':positionsOpened[0].id,
                     'resolvedPrice':closeTokenValue,
                     'status':status,

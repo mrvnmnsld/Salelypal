@@ -256,7 +256,7 @@
             <div class="col-6" >
                 <span class="main-color-text">Country</span><br>
                 <select id="country_select" name="country_select">
-                    <option disabled>Please Select Country...</option>
+                    <option disabled selected>Please Select Country...</option>
                 </select>
             </div>
             <div class="col-6">
@@ -323,46 +323,14 @@
         );
     }
 
-    
-    
+    checkupload();
 
     $('#country_select').selectpicker({
         style: '',
         size: 8,
         // showSubtext :true,
         liveSearch: true
-     });
-
-
-    if (checkIfKYCPhotoExists!=false) {
-        if (checkIfKYCPhotoExists.IDImagePath!=null) {
-            id_upload=1;
-            checkupload();
-            $('#id_checkedi').addClass('checked_upload');
-            $('#id_checkedt').addClass('checked_upload');
-        }
-        if (checkIfKYCPhotoExists.FaceImagePath!=null){
-            face_upload=1;
-            $('#face_checkedi').addClass('checked_upload');
-            $('#face_checkedt').addClass('checked_upload');
-            checkupload();
-        }
-        if (checkIfKYCPhotoExists.birthday!=null){
-            $('#bday_checkedi').addClass('checked_upload');
-            $('#bday_checkedt').addClass('checked_upload');
-            checkupload();
-        }
-        if (checkIfKYCPhotoExists.fullname!=null){
-            $('#name_checkedi').addClass('checked_upload');
-            $('#name_checkedt').addClass('checked_upload');
-            checkupload();
-        }
-        if (checkIfKYCPhotoExists.country!=null){
-            $('#country_checkedi').addClass('checked_upload');
-            $('#country_checkedt').addClass('checked_upload');
-            checkupload();
-        }                
-    }
+    });
 
     $('#birthday').val(currentUser.birthday)
     $('#fullName_kyc').val(currentUser.fullname)
@@ -720,6 +688,8 @@
         setLocalStorageByKey('currentUser',JSON.stringify(loginRes['data'][0]));
         console.log(loginRes['data'][0].isPro==1,JSON.parse(getLocalStorageByKey('currentUser')));
 
+        checkupload()
+
         if(res==false){
             $.alert("Error in Uploading name, please contact system admin.<hr><div><b class='text-center'> ErrorCode:521</b></div>");
         }
@@ -732,12 +702,18 @@
             "userID":currentUserID,
         });
 
+        checkupload()
+
         if(res==false){
             $.alert("Error in Uploading name, please contact system admin.<hr><div><b class='text-center'> ErrorCode:521</b></div>");
         }
     });
 
     function checkupload(){
+        var checkIfKYCPhotoExists = ajaxShortLink('main/checkIfKYCPhotoExists',{
+            "userID":currentUser.userID
+        });
+
         if  (id_upload == 1){
             $('#id_checkedi').addClass('checked_upload');
             $('#id_checkedt').addClass('checked_upload');
@@ -757,6 +733,31 @@
             <span style='color:black;' class='main-color-text'> Face and ID uploaded successfull! you can also retake photo.</span>\
             ")
         }
+
+        if (checkIfKYCPhotoExists!=false) {
+            if (checkIfKYCPhotoExists.IDImagePath!=null) {
+                id_upload=1;
+                $('#id_checkedi').addClass('checked_upload');
+                $('#id_checkedt').addClass('checked_upload');
+            }
+            if (checkIfKYCPhotoExists.FaceImagePath!=null){
+                face_upload=1;
+                $('#face_checkedi').addClass('checked_upload');
+                $('#face_checkedt').addClass('checked_upload');
+            }
+            if (checkIfKYCPhotoExists.birthday!=null){
+                $('#bday_checkedi').addClass('checked_upload');
+                $('#bday_checkedt').addClass('checked_upload');
+            }
+            if (checkIfKYCPhotoExists.fullname!=null){
+                $('#name_checkedi').addClass('checked_upload');
+                $('#name_checkedt').addClass('checked_upload');
+            }
+            if (checkIfKYCPhotoExists.country!=null){
+                $('#country_checkedi').addClass('checked_upload');
+                $('#country_checkedt').addClass('checked_upload');
+            }                
+        }
     }
 
     new Rolldate({
@@ -774,14 +775,15 @@
         },
         confirm: function(date) {
             setTimeout(function(){
-               console.log($("#birthday").val(),curntUserID);
+               // console.log($("#birthday").val());
 
                var res = ajaxShortLink("saveBirthday",{
                    "birthday":$("#birthday").val(),
                    "userID":currentUserID,
                });
 
-               
+               checkupload()
+
                if(res==false){
                    $.alert("Error in Uploading Birthdate, please contact system admin.<hr><div><b class='text-center'> ErrorCode:521</b></div>");
                } 

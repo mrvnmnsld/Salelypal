@@ -272,13 +272,13 @@
 		console.log('how_compute_btn clicked');
 		bootbox.dialog({
 			message: 
-				'<div class="container text-center">'+
-					'<div class="text-left" style="font-size:1em;">'+
+				'<div class="text-center">'+
+					'<div class="text-left main-color-text" style="font-size:1em;">'+
 						'<i class="fa fa-question-circle fa-inverse" aria-hidden="true"></i>'+
-						'<span> Usage</span>'+
+						'<span>Usage</span>'+
 					'</div>'+
 			
-					'<div id="process_instruction_container" class="text-justify mt-3">'+
+					'<div id="process_instruction_container" class="text-justify mt-3 main-color-text">'+
 							'Formula for Claiming the mined tokens:<br>'+
 							'(Balance× APY)÷365×Financial cycle'+
 					'</div>'+

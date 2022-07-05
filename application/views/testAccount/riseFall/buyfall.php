@@ -4,15 +4,15 @@
     }
 </style>
 
-<div class="pagetitle text-center text-primary" style="display:none">
-    <h4>Buy Rise</h4>
-    <small>Opening Position</small>
-
-    <hr>
+<div class="pagetitle text-center text-primary d-none">
+  <h4>Buy Fall</h4>
+  <small>Opening Position</small>
 </div>
 
+<!-- <hr> -->
 
-<div id="main_modal_container" style="display:block">
+<div id="main_modal_container">
+
     <div class="btn-group btn-group-toggle d-flex justify-content-center mt-2" data-toggle="buttons" id="timings_container"></div>
 
     <div class="d-flex mt-1 flex-basis: fit-content;">
@@ -41,7 +41,7 @@
 
     <div class="mt-3">
         <button class="btn btn-success btn-block" id="buy_rise_submit_btn">Submit Position</button>
-        <button class="btn btn-danger btn-block close_btn">Close</button>
+        <button class="btn btn-danger btn-block close_btn">Cancel</button>
     </div>
 </div>
 
@@ -96,7 +96,7 @@
 </div>
 
 <div id="resolve_modal_container" style="display:none" class="text-center">
-    <!-- <div class="h3" id="resolve_text_container">Position Won!</div> -->
+
 
     <div>
         <span id="amount_won" class="h4">+ 100 USDT</span>
@@ -114,7 +114,7 @@
 
     <div>
         <span>Resolved Price:</span>
-        <span id="resolved_price_container"></span> 
+        <span id="resolved_price_container">29212</span> 
     </div>
 
     <br>
@@ -167,7 +167,7 @@
     $("#buy_rise_submit_btn").on("click",function(){
         var riskOptionVal = $('input[name="risk_option_radio"]:checked').val().split('/');
         var availableAmount = float2DecimalPoints($("#available_amount_container").text().split(' ')[0])
-        var buyType = 'rise';
+        var buyType = 'fall';
         var currentPrice = $("#token_pair_value_container").text();
         var amountInput = $('#amount_input_container').val();
         var timer = riskOptionVal[0];
@@ -183,6 +183,8 @@
                 isGasEnough = 1;
            	}
         // // test-platform
+
+        // console.log(bettingSettings[0].value,amountInput,amountInput>=bettingSettings[0].value);
 
         if(amountInput!=""&&amountInput<=availableAmount&&isGasEnough==1&&parseFloat(amountInput)>=parseFloat(bettingSettings[0].value)){
            $.confirm({
@@ -288,7 +290,6 @@
     })
 
     function resolveThisID(id,isForfeited){
-
         $(".modalMinimize").click();
 
         // test-platform
@@ -332,7 +333,7 @@
                 // test-platform
                     var newBalanceRes = ajaxShortLink("test-account/updateNewBalance",{
                        'userID':currentUser.userID,
-                       'token':null,
+                       'tokenName':null,
                        'smartContract':"TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
                        'balance':parseFloat(balanceUsdtInner)+parseFloat(newIncome)+parseFloat(checkSet[0].amount),
                     })
@@ -391,7 +392,7 @@
                 $("#2_trade_pair_container").text(positionsOpened[0].tradePair);
                 $("#resolved_price_container").text("Forfeited");
             }else{
-                if (parseFloat(currentPrice)<parseFloat(closeTokenValue)) {
+                if (parseFloat(currentPrice)>parseFloat(closeTokenValue)) {
                     status = "WIN";
                     statusClass = 'text-success';
 
@@ -440,6 +441,8 @@
                 }
             }
 
+
+            
            
             // resolve here
                 ajaxShortLink("test-account/future/resolveRiseFallPosition",{
@@ -493,11 +496,4 @@
             theme: 'dark'
         });
     });
-
-
-    
-
-    
-
-    
 </script>

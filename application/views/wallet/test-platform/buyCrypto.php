@@ -139,9 +139,6 @@
     <!-- <button id="purchaseAppeals_inner_btn" class="btn btn-link btn-block mt-2">Purchase Appeals</button> -->
 </div>
 
-
-
-
 <script>
     $(document).ready(function() {
         loadDatatable('test-platform/getUserPurchase',{'userID':currentUser.userID});

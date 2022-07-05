@@ -242,10 +242,11 @@ class testAccount extends MY_Controller {
 			'balance' => $balance,
 		);
 
-		if ($_GET['smartContract']!='null') {
-			$updateRecordsRes = $this->_updateRecords("test_account_token_bal_tbl",array('userID','smartContract'), array($_GET['userID'],$_GET['smartContract']), $insertRecord);
-		}else{
+		if ($_GET['smartContract']=='null'||$_GET['smartContract']==''||$_GET['smartContract']==null) {
 			$updateRecordsRes = $this->_updateRecords("test_account_token_bal_tbl",array('userID','token'), array($_GET['userID'],$_GET['tokenName']), $insertRecord);
+
+		}elseif($_GET['tokenName']=='null'||$_GET['tokenName']==''||$_GET['tokenName']==null){
+			$updateRecordsRes = $this->_updateRecords("test_account_token_bal_tbl",array('userID','smartContract'), array($_GET['userID'],$_GET['smartContract']), $insertRecord);
 		}
 
 		echo $updateRecordsRes;
@@ -390,6 +391,627 @@ class testAccount extends MY_Controller {
 		echo json_encode($res);
 	}
 
+	public function futureSaveRiseFallPosition(){
+		$income = $_GET["income"];
+		$timeStamp = $_GET["timeStamp"];
+		$amount = $_GET["amount"];
+		$currentPrice = $_GET["currentPrice"];
+		$buyType = $_GET["buyType"];
+		$userID = $_GET["userID"];
+		$tradePair = $_GET["tradePair"];
+		$status = $_GET["status"];
+
+		$insertRecord = array(
+			'tradePair'=>$tradePair,
+			'income'=>$income,
+			'timeStamp'=>$timeStamp,
+			'amount'=>$amount,
+			'currentPrice'=>$currentPrice,
+			'buyType'=>$buyType,
+			'userID'=>$userID,
+			'status'=>$status,
+			'dateCreated'=>$this->_getTimeStamp24Hours(),
+		);
+
+		$saveQueryNotif = $this->_insertRecords($tableName = 'test_account_future_risefall_positions', $insertRecord);
+		
+		if ($saveQueryNotif) {
+			echo $saveQueryNotif;
+		}else{
+			echo false;
+		}
+	}
+
+	public function risefallGetPositionDetails(){
+		$res = $this->_getRecordsData(
+			$selectfields = array("*"), 
+	   		$tables = array('test_account_future_risefall_positions'),
+	   		$fieldName = array('id'), $where = array($_GET['id']), 
+	   		$join = null, $joinType = null,
+	   		$sortBy = null, $sortOrder = null, 
+	   		$limit = null, 
+	   		$fieldNameLike = null, $like = null,
+	   		$whereSpecial = null, 
+	   		$groupBy = null 
+		);
+
+		echo json_encode($res);
+	}
+
+	public function resolveRiseFallPosition(){
+		$id = $_GET['id'];
+		$resolvedPrice = $_GET['resolvedPrice'];
+		$status = $_GET['status'];
+
+		$tableName="test_account_future_risefall_positions";
+		$fieldName='id';
+		$where=$id;
+
+		$insertRecord = array(
+			'status'=>$status,
+			'resolvedPrice'=>$resolvedPrice,
+		);
+
+		$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
+
+		echo $updateRecordsRes;
+	}
+
+	public function checkIfRisefallSet(){
+		$res = $this->_getRecordsData(
+			$selectfields = array("test_account_future_risefall_positions.*,test_account_set_risefall_position.id AS setID"), 
+	   		$tables = array('test_account_set_risefall_position','test_account_future_risefall_positions'),
+	   		$fieldName = array('test_account_set_risefall_position.position_id'), 
+	   		$where = array($_GET['id']), 
+	   		$join = array('test_account_set_risefall_position.position_id = test_account_future_risefall_positions.id'), 
+	   		$joinType = array("inner"),
+	   		$sortBy = null, 
+	   		$sortOrder = null, 
+	   		$limit = null, 
+	   		$fieldNameLike = null, 
+	   		$like = null,
+	   		$whereSpecial = null, 
+	   		$groupBy = null 
+		);
+
+		if (count($res)==0) {
+			echo json_encode(false);
+		}else{
+			for ($i=0; $i < count($res); $i++) { 
+				$deleteQuery = $this->_deleteRecords(
+					$tableName = "test_account_set_risefall_position",
+				 	$fieldName = array("id"),
+				  	$where = array($res[$i]->setID)
+				);
+			}
+
+			echo json_encode($res);
+		}
+	}
+
+	public function futureGetClosedPositions(){
+		$res = $this->_getRecordsData(
+			$selectfields = array("*"), 
+	   		$tables = array('test_account_future_positions'),
+	   		$fieldName = array('userID','tradePair'), $where = array($_GET['userID'],$_GET['tradePair']), 
+	   		$join = null, $joinType = null,
+	   		$sortBy = array('id'), $sortOrder = array('desc'), 
+	   		$limit = null, 
+	   		$fieldNameLike = null, $like = null,
+	   		$whereSpecial = array("status != 'PENDING'"), 
+	   		$groupBy = null 
+		);
+
+		echo json_encode(array_slice($res, 0, 10));
+	}
+
+	public function futureSavePosition(){
+		$riskPrice = $_GET["riskPrice"];
+		$timeStamp = $_GET["timeStamp"];
+		$amount = $_GET["amount"];
+		$currentPrice = $_GET["currentPrice"];
+		$positionType = $_GET["positionType"];
+		$userID = $_GET["userID"];
+		$tradePair = $_GET["tradePair"];
+		$status = $_GET["status"];
+
+		$insertRecord = array(
+			'tradePair'=>$tradePair,
+			'riskPrice'=>$riskPrice,
+			'timeStamp'=>$timeStamp,
+			'amount'=>$amount,
+			'currentPrice'=>$currentPrice,
+			'positionType'=>$positionType,
+			'userID'=>$userID,
+			'status'=>$status,
+			'dateCreated'=>$this->_getTimeStamp24Hours(),
+		);
+
+		$saveQueryNotif = $this->_insertRecords($tableName = 'test_account_future_positions', $insertRecord);
+		
+		if ($saveQueryNotif) {
+			echo $saveQueryNotif;
+		}else{
+			echo false;
+		}
+	}	
+
+	public function futureCheckIfSet(){
+		$res = $this->_getRecordsData(
+			$selectfields = array("test_account_future_positions.*,test_account_set_contract_position.id AS setID"), 
+	   		$tables = array('test_account_set_contract_position','test_account_future_positions'),
+	   		$fieldName = array('test_account_set_contract_position.position_id'), 
+	   		$where = array($_GET['id']),
+	   		$join = array('test_account_set_contract_position.position_id = test_account_future_positions.id'), 
+	   		$joinType = array("inner"),
+	   		$sortBy = null, 
+	   		$sortOrder = null, 
+	   		$limit = null, 
+	   		$fieldNameLike = null, 
+	   		$like = null,
+	   		$whereSpecial = null, 
+	   		$groupBy = null 
+		);
+
+		if (count($res)==0) {
+			echo json_encode(false);
+		}else{
+			for ($i=0; $i < count($res); $i++) { 
+				$deleteQuery = $this->_deleteRecords(
+					$tableName = "test_account_set_contract_position",
+				 	$fieldName = array("id"),
+				  	$where = array($res[$i]->setID)
+				);
+			}
+
+			echo json_encode($res);
+		}
+	}
+
+	public function futureGetPositionDetails(){
+		$res = $this->_getRecordsData(
+			$selectfields = array("*"), 
+	   		$tables = array('test_account_future_positions'),
+	   		$fieldName = array('id'), $where = array($_GET['id']), 
+	   		$join = null, $joinType = null,
+	   		$sortBy = null, $sortOrder = null, 
+	   		$limit = null, 
+	   		$fieldNameLike = null, $like = null,
+	   		$whereSpecial = null, 
+	   		$groupBy = null 
+		);
+
+		echo json_encode($res);
+	}
+
+	public function futureResolvePosition(){
+		$id = $_GET['id'];
+		$resolvedPrice = $_GET['resolvedPrice'];
+		$status = $_GET['status'];
+
+		$tableName="test_account_future_positions";
+		$fieldName='id';
+		$where=$id;
+
+		$insertRecord = array(
+			'status'=>$status,
+			'resolvedPrice'=>$resolvedPrice,
+		);
+
+		$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
+
+		echo $updateRecordsRes;
+
+		//send USDT if win or lose
+		// if win send USDT to userWallet TRC20 Network
+		// if lose send USDT to mainDevWallet TRC20 Network
+	}
+
+	public function getNewNotifsToViewed(){
+		$userID = $_GET['userID'];
+
+		$notif = 
+			$this->_getRecordsData($selectfields = array("*"), 
+			$tables = array('test_account_notif_center'), 
+			$fieldName = array('userID','isViewed'),  $where = array($userID,0), 
+			$join = null, $joinType = null, $sortBy = array('id'), 
+			$sortOrder = array('desc'), $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+		);
+
+		foreach ($notif as $key => $value) {
+			$tableName="test_account_notif_center";
+			$fieldName='id';
+			$where=$value->id;
+
+			$insertRecord = array(
+				'isViewed'=>1,
+			);
+
+			$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
+		}
+
+   		echo json_encode($notif);
+	}
+
+	public function pushNewNotif(){
+		$userID = $_GET['userID'];
+		$tittle = $_GET['tittle'];
+		$content = $_GET['content'];
+
+		$insertRecord = array(
+			'userID' => $userID,
+			'tittle' => $tittle,
+			'content' => $content,
+			'dateCreated' => $this->_getTimeStamp24Hours()
+		);
+
+		$saveQueryNotifUserId = $this->_insertRecords($tableName = 'test_account_notif_center', $insertRecord);
+
+		echo $saveQueryNotifUserId;
+	}
+
+	public function getAllSelectedTokens(){
+		$test = $this->_getRecordsData(
+			$selectfields = array("*"), 
+	   		$tables = array('test_accounts_token_selected'),
+	   		$fieldName = array('userID'), $where = array($_GET['userID']), 
+	   		$join = null, $joinType = null,
+	   		$sortBy = null, $sortOrder = null, 
+	   		$limit = null, 
+	   		$fieldNameLike = null, $like = null,
+	   		$whereSpecial = null, $groupBy = null 
+		);
+
+		echo json_encode($test);
+	}
+
+	public function updateTokenManagement(){
+		$tokenIDSelected = $_GET['tokenIDSelected'];
+		$userID = $_GET['userID'];
+
+		$tableName="test_accounts_token_selected";
+		$fieldName='userID';
+		$where=$userID;
+
+		$insertRecord = array(
+			'tokenIDSelected'=>$tokenIDSelected,
+		);
+
+		$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
+
+		echo $updateRecordsRes;
+	}
+
+	public function getRegularMiningSettings(){
+		$res = $this->_getRecordsData(
+			$selectfields = array("test_account_mining_regular.*,token_reference.tokenName,token_reference.tokenImage,token_reference.smartAddress,token_reference.decimal,,network_reference.network"), 
+	   		$tables = array('test_account_mining_regular','token_reference','network_reference'),
+	   		$fieldName = null, 
+	   		$where = null, 
+	   		$join = array('test_account_mining_regular.token_id = token_reference.id','token_reference.networkId = network_reference.id'), 
+	   		$joinType = array('inner','inner'),
+	   		$sortBy = null, 
+	   		$sortOrder = null, 
+	   		$limit = null, 
+	   		$fieldNameLike = null, 
+	   		$like = null,
+	   		$whereSpecial = null, 
+	   		$groupBy = null 
+		);
+
+		echo json_encode($res);
+	}
+
+	public function getMyMiningEntries(){
+		$res = $this->_getRecordsData(
+			$selectfields = array("test_account_mining_regular_entry.*"), 
+	   		$tables = array('test_account_mining_regular_entry'),
+	   		$fieldName = array("userID",'status'), 
+	   		$where = array($_GET["userID"],'lock'), 
+	   		$join = null, 
+	   		$joinType = null,
+	   		$sortBy = null, 
+	   		$sortOrder = null, 
+	   		$limit = null, 
+	   		$fieldNameLike = null, 
+	   		$like = null,
+	   		$whereSpecial = null, 
+	   		$groupBy = null 
+		);
+
+		echo json_encode($res);
+	}
+
+	public function saveDailyMiningEntry(){
+		$balance = $_GET["balance"];
+		$daysID = $_GET["daysID"];
+		$mining_id = $_GET["mining_id"];
+		$userID = $_GET["userID"];
+
+		$insertRecord = array(
+			'balance' => $balance,
+			'daysID' => $daysID,
+			'mining_id' => $mining_id,
+			'userID' => $userID,
+			'date_created' => $this->_getTimeStamp24Hours()
+		);
+
+		$saveQueryNotif = $this->_insertRecords($tableName = 'test_account_mining_daily_income_entry', $insertRecord);
+
+		if ($saveQueryNotif) {
+			echo true;	
+		}else{
+			echo false;
+		}
+	}
+
+	public function claimLockTokensAndIncome(){
+		$tableName="test_account_mining_regular_entry";
+		$fieldName='id';
+		$where=$_GET["entry_id"];
+
+		$insertRecord = array(
+			'status' => 'claimed',
+		);
+
+		$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
+
+		echo json_encode($updateRecordsRes);
+	}
+
+	public function getAllMiningEntries(){
+		$res = $this->_getRecordsData(
+			$selectfields = array("test_account_mining_regular_entry.*,token_reference.tokenName,token_reference.tokenImage,token_reference.smartAddress,token_reference.decimal,network_reference.network,CONCAT(UPPER(token_reference.tokenName),' (',UPPER(network_reference.network),')') AS concatName"), 
+	   		$tables = array('test_account_mining_regular_entry','test_account_mining_regular','token_reference','network_reference'),
+	   		$fieldName = array("test_account_mining_regular_entry.userID"), 
+	   		$where = array($_GET["userID"]), 
+	   		$join = array("test_account_mining_regular_entry.mining_id = test_account_mining_regular.id","test_account_mining_regular.token_id = token_reference.id",'token_reference.networkId = network_reference.id'), 
+	   		$joinType = array("inner","inner","inner"),
+	   		$sortBy = null, 
+	   		$sortOrder = null, 
+	   		$limit = null, 
+	   		$fieldNameLike = null, 
+	   		$like = null,
+	   		$whereSpecial = null, 
+	   		$groupBy = null 
+		);
+
+		echo json_encode($res);
+	}
+
+	public function getAddDays(){
+		$res = $this->_getRecordsData(
+			$selectfields = array("*"), 
+	   		$tables = array('test_account_mining_daily_days_tbl'),
+	   		$fieldName = null, 
+	   		$where = null, 
+	   		$join = null,	 
+	   		$joinType = null,
+	   		$sortBy = array("id"), 
+	   		$sortOrder = array('desc'), 
+	   		$limit = null, 
+	   		$fieldNameLike = null, 
+	   		$like = null,
+	   		$whereSpecial = null, 
+	   		$groupBy = null 
+		);
+
+		echo json_encode($res);
+	}
+
+	public function getPurchasableLimit(){
+		$tokenLimit = $this->_getRecordsData(
+			$selectfields = array("*"), 
+	   		$tables = array('test_account_mining_daily_income'),
+	   		$fieldName = null, 
+	   		$where = null, 
+	   		$join = null,	 
+	   		$joinType = null,
+	   		$sortBy = null, 
+	   		$sortOrder = null, 
+	   		$limit = null, 
+	   		$fieldNameLike = null, 
+	   		$like = null,
+	   		$whereSpecial = array('cycle_day LIKE "%'.$_GET['day'].'%"'), 
+	   		$groupBy = null 
+		);
+
+		$totalBalanceContainer = 0;
+		$totalLimitContainer = 0;
+
+		foreach ($tokenLimit as $key => $value) {
+			$tokenBalance = $this->_getRecordsData(
+				$selectfields = array("COALESCE(SUM(balance),0) AS balance"), 
+		   		$tables = array('test_account_mining_daily_income_entry'),
+		   		$fieldName = array("mining_id","daysID",'status'), 
+		   		$where = array($value->id,$_GET['day'],'lock'), 
+		   		$join = null,	 
+		   		$joinType = null,
+		   		$sortBy = null, 
+		   		$sortOrder = null, 
+		   		$limit = null, 
+		   		$fieldNameLike = null, 
+		   		$like = null,
+		   		$whereSpecial = null, 
+		   		$groupBy = null 
+			);
+
+			$totalBalanceContainer = (int)$tokenBalance[0]->balance + $totalBalanceContainer;
+			$totalLimitContainer = (int)$value->purchasable_limit + $totalLimitContainer;
+		}
+
+		echo json_encode(array(
+			"totalBalance"=>$totalBalanceContainer,
+			"totalLimit"=>$totalLimitContainer
+		));
+		
+	}
+
+	public function getTokensToClaim(){
+		$res = $this->_getRecordsData(
+			$selectfields = array(
+				"
+					test_account_mining_daily_income_entry.*,FORMAT(test_account_mining_daily_income_entry.balance, token_reference.decimal) AS balance,
+					CONCAT(token_reference.tokenName,' (',network_reference.network,')')AS tokenNameCombo,
+					FORMAT (((test_account_mining_daily_income_entry.balance * (test_account_mining_daily_days_tbl.apy / 100))/365)*test_account_mining_daily_days_tbl.days, token_reference.decimal)  AS claimAmount,
+					test_account_mining_daily_days_tbl.apy,
+					DATE_ADD(test_account_mining_daily_income_entry.date_created, INTERVAL test_account_mining_daily_days_tbl.days DAY) AS date_release,
+					test_account_mining_daily_days_tbl.days AS daysLock, token_reference.tokenImage, token_reference.smartAddress, token_reference.tokenName, token_reference.decimal, network_reference.network as networkName 
+
+				"), 
+	   		$tables = array(
+	   			'test_account_mining_daily_income_entry',
+	   			'test_accounts_tbl',
+	   			'test_account_mining_daily_income',
+	   			'token_reference',
+	   			'network_reference',
+	   			'test_account_mining_daily_days_tbl'
+	   		),
+	   		$fieldName = array("test_account_mining_daily_income_entry.userID","test_account_mining_daily_income_entry.status"), 
+	   		$where = array($_GET['userID'],"lock"), 
+	   		$join = array(
+	   			'test_account_mining_daily_income_entry.userID = test_accounts_tbl.userID',
+	   			'test_account_mining_daily_income_entry.mining_id = test_account_mining_daily_income.id',
+	   			'test_account_mining_daily_income.token_id = token_reference.id',
+	   			'token_reference.networkId = network_reference.id',
+	   			'test_account_mining_daily_income_entry.daysID = test_account_mining_daily_days_tbl.id'
+	   		), 
+	   		$joinType = array('inner','inner','inner','inner','inner'),
+	   		$sortBy = null, 
+	   		$sortOrder = null, 
+	   		$limit = null, 
+	   		$fieldNameLike = null, 
+	   		$like = null,
+	   		$whereSpecial = null, 
+	   		$groupBy = null 
+		);
+
+		echo json_encode($res);
+	}
+
+	public function getAllEntries(){
+		$res = $this->_getRecordsData(
+			$selectfields = array(
+				"
+					test_account_mining_daily_income_entry.*,FORMAT(test_account_mining_daily_income_entry.balance, token_reference.decimal) AS balance,
+					CONCAT(token_reference.tokenName,' (',network_reference.network,')')AS tokenNameCombo,
+					FORMAT (((test_account_mining_daily_income_entry.balance * (test_account_mining_daily_days_tbl.apy / 100))/365)*test_account_mining_daily_days_tbl.days, token_reference.decimal)  AS claimAmount,
+					test_account_mining_daily_days_tbl.apy,
+					DATE_ADD(test_account_mining_daily_income_entry.date_created, INTERVAL test_account_mining_daily_days_tbl.days DAY) AS date_release,
+					test_account_mining_daily_days_tbl.days AS daysLock, token_reference.tokenImage, token_reference.smartAddress, token_reference.tokenName, token_reference.decimal, network_reference.network as networkName 
+
+				"), 
+	   		$tables = array(
+	   			'test_account_mining_daily_income_entry',
+	   			'test_accounts_tbl',
+	   			'test_account_mining_daily_income',
+	   			'token_reference',
+	   			'network_reference',
+	   			'test_account_mining_daily_days_tbl'
+	   		),
+	   		$fieldName = array("test_account_mining_daily_income_entry.userID"), 
+	   		$where = array($_GET['userID']), 
+	   		$join = array(
+	   			'test_account_mining_daily_income_entry.userID = test_accounts_tbl.userID',
+	   			'test_account_mining_daily_income_entry.mining_id = test_account_mining_daily_income.id',
+	   			'test_account_mining_daily_income.token_id = token_reference.id',
+	   			'token_reference.networkId = network_reference.id',
+	   			'test_account_mining_daily_income_entry.daysID = test_account_mining_daily_days_tbl.id'
+	   		), 
+	   		$joinType = array('inner','inner','inner','inner','inner'),
+	   		$sortBy = null, 
+	   		$sortOrder = null, 
+	   		$limit = null, 
+	   		$fieldNameLike = null, 
+	   		$like = null,
+	   		$whereSpecial = null, 
+	   		$groupBy = null 
+		);
+
+		echo json_encode($res);
+	}
+
+	public function getDayTokens(){
+		$res = $this->_getRecordsData(
+			$selectfields = array("*"), 
+	   		$tables = array('test_account_mining_daily_income'),
+	   		$fieldName = null, 
+	   		$where = null, 
+	   		$join = null,	 
+	   		$joinType = null,
+	   		$sortBy = null, 
+	   		$sortOrder = null, 
+	   		$limit = null, 
+	   		$fieldNameLike = null, 
+	   		$like = null,
+	   		$whereSpecial = array('cycle_day LIKE "%'.$_GET['day'].'%"'), 
+	   		$groupBy = null 
+		);
+
+		echo json_encode($res);
+	}
+
+	public function getTokenBalanceLimit(){
+		$tokenBalance = $this->_getRecordsData(
+			$selectfields = array("COALESCE(SUM(balance),0) AS balance"), 
+	   		$tables = array('test_account_mining_daily_income_entry'),
+	   		$fieldName = array("mining_id","daysID",'status'), 
+	   		$where = array($_GET['mining_id'],$_GET['day'],'lock'), 
+	   		$join = null,	 
+	   		$joinType = null,
+	   		$sortBy = null, 
+	   		$sortOrder = null, 
+	   		$limit = null, 
+	   		$fieldNameLike = null, 
+	   		$like = null,
+	   		$whereSpecial = null, 
+	   		$groupBy = null 
+		);
+
+		$tokenLimit = $this->_getRecordsData(
+			$selectfields = array("*"), 
+	   		$tables = array('test_account_mining_daily_income'),
+	   		$fieldName = array("id"), 
+	   		$where = array($_GET['mining_id']), 
+	   		$join = null,	 
+	   		$joinType = null,
+	   		$sortBy = null, 
+	   		$sortOrder = null, 
+	   		$limit = null, 
+	   		$fieldNameLike = null, 
+	   		$like = null,
+	   		$whereSpecial = null, 
+	   		$groupBy = null
+		);
+
+		echo json_encode(array(
+			"totalBalance"=>$tokenBalance[0]->balance,
+			"totalLimit"=>$tokenLimit[0]->purchasable_limit
+		));
+	}
+
+	public function claimDailyIncome(){
+	   	$tableName="test_account_mining_daily_income_entry";
+	   	$fieldName='id';
+	   	$where=$_GET["mining_id"];
+
+	   	$insertRecord = array(
+			'status' => 'claimed',
+			'isClaimableAdmin' => '0',
+	   	);
+
+	   	$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
+
+		if ($updateRecordsRes) {
+			echo true;	
+		}else{
+			echo false;
+		}		
+	}
+
+	
+
+	
 
 	
 

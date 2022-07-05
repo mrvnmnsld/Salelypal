@@ -230,31 +230,9 @@
         }
 
         clearInterval(tokenPriceInterval);
-        // clearInterval(pendingPositionChecker);
 
-        // addBreadCrumbs('wallet/test-platform/risefall_trade_pairs/'+location);
-
-        $.when(closeNav()).then(function() {
-            $('#topNavBar').toggle();
-            $('#bottomNavBar').toggle();
-            $("#container").fadeOut(animtionSpeed, function() {
-                $("#loadSpinner").fadeIn(animtionSpeed,function(){
-                    $("#container").empty();
-                    $("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'test-account/risefall'}));
-
-                    // console.log('wallet/test-platform/risefall_trade_pairs/'+location);
-
-                    setTimeout(function(){
-                        $("#loadSpinner").fadeOut(animtionSpeed,function(){
-                            $('#topNavBar').toggle();
-                            $('#bottomNavBar').toggle();
-                            $("#container").fadeIn(animtionSpeed);
-                        });
-                    }, 500);
-                    
-                });
-            });
-        });
+        $("#container").empty();
+        $("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'testAccount/riseFall'}));
     });
 
     setTimeout(function() {
@@ -313,7 +291,7 @@
         $("#buy_rise_btn").on("click", function(){
 
             bootbox.alert({
-                message: ajaxLoadPage('quickLoadPage',{'pagename':'test-platform/riseFall/buyrise'}),
+                message: ajaxLoadPage('quickLoadPage',{'pagename':'testAccount/riseFall/buyrise'}),
                 size: 'large',
                 centerVertical: true,
                 closeButton: false
@@ -324,7 +302,7 @@
         $("#buy_fall_btn").on("click", function(){
 
             bootbox.alert({
-                message: ajaxLoadPage('quickLoadPage',{'pagename':'test-platform/riseFall/buyfall'}),
+                message: ajaxLoadPage('quickLoadPage',{'pagename':'testAccount/riseFall/buyfall'}),
                 size: 'large',
                 centerVertical: true,
                 closeButton: false

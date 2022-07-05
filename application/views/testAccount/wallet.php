@@ -466,14 +466,14 @@
 					border-bottom: transparent;
 				}
 			</style>
-		</div>
+	</div>
 
-		<div id="container" class="mb-5" style="display:none;min-height: 120%;"></div>
+	<div id="container" class="mb-5" style="display:none;min-height: 120%;"></div>
 
-		<br>
-		<br>
-		<br>
-		<br>
+	<br>
+	<br>
+	<br>
+	<br>
 
 		<!-- modal-mining -->
 			<style>
@@ -581,7 +581,7 @@
 				<!-- <a class="nav-link" style="font-size:.7em; color:#D9E9E8;"  href="#">Settings</a> -->
 			</li>
 		</ul>
-	</body>
+</body>
 
 <!-- translate -->
 	<!-- <script type="text/javascript">
@@ -1186,7 +1186,7 @@
 			});
 
 			$('#addToken_btn').on('click',function(){
-				addBreadCrumbs("wallet/addToken")
+				addBreadCrumbs("testAccount/addToken")
 				$("html, body").animate({ scrollTop: 0 }, "slow");
 				$('#assets_container').css("display","none");
 				$("#container").fadeOut(animtionSpeed, function() {
@@ -1194,7 +1194,7 @@
 					$("#top_back_btn").css('display',"block")
 
 		  			$("#container").empty();
-		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/addToken'}));
+		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'testAccount/addToken'}));
 		  			$("#container").fadeIn(animtionSpeed);
 				});
 			});
@@ -1209,7 +1209,7 @@
 					$("#top_back_btn").css('display',"block")
 
 		  			$("#container").empty();
-		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/future'}));
+		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'testAccount/future'}));
 		  			$("#container").fadeIn(animtionSpeed);
 				});
 			});
@@ -1229,7 +1229,7 @@
 				});
 			});
 
-			$('#profile_btn').on('click',function(){
+			$('#profile_btn').on('click', function(){
 				$.confirm({
 					theme:'dark',
 				    title: 'Testing Mode!',
@@ -1244,7 +1244,7 @@
 			});
 
 			$('#notif_btn').on('click',function(){
-				addBreadCrumbs("wallet/notificationCenter");
+				addBreadCrumbs("testAccount/notificationCenter");
 
 				$("#notif_counter_number").text("");
 				$("#notif_counter_number").removeClass("animate__animated animate__bounce animate__repeat-2");
@@ -1259,7 +1259,7 @@
 					$("#top_back_btn").css('display',"block")
 
 		  			$("#container").empty();
-		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/notificationCenter'}));
+		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'testAccount/notificationCenter'}));
 		  			$("#container").fadeIn(animtionSpeed);
 				});
 			});
@@ -1275,12 +1275,13 @@
 
 		  			$("#container").empty();
 		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings'}));
+		  			$("#security_btn").attr("disabled",true)
 		  			$("#container").fadeIn(animtionSpeed);
 				});
 			});
 
 			$('#regular_mining_btn').on('click',function(){
-				addBreadCrumbs("wallet/test-platform/regular_mining");
+				addBreadCrumbs("testAccount/regular_mining");
 				
 				$("html, body").animate({ scrollTop: 0 }, "slow");
 				$('#assets_container').css("display","none");
@@ -1289,13 +1290,13 @@
 					$("#top_back_btn").css('display',"block")
 
 		  			$("#container").empty();
-		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/regular_mining'}));
+		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'testAccount/regular_mining'}));
 		  			$("#container").fadeIn(animtionSpeed);
 				});
 			});
 
 			$('#daily_mining_btn').on('click',function(){
-				addBreadCrumbs("wallet/test-platform/dailyMining");
+				addBreadCrumbs("testAccount/dailyMining");
 
 				$("html, body").animate({ scrollTop: 0 }, "slow");
 				$('#assets_container').css("display","none");
@@ -1304,7 +1305,7 @@
 					$("#top_back_btn").css('display',"block")
 
 		  			$("#container").empty();
-		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/dailyMining'}));
+		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'testAccount/dailyMining'}));
 		  			$("#container").fadeIn(animtionSpeed);
 				});
 			});
@@ -1447,34 +1448,26 @@
 				// loadTokenInfo(tokensSelected[i].tokenName,tokensSelected[i].coingeckoTokenId)
 
 				$('#'+tokensSelected[i].id+'_container').on('click',function(){
-						addBreadCrumbs("wallet/test-platform/viewTokenInfo");
-
-						$("#loading_text_container").text("Please wait while we load your recent activities");
+						addBreadCrumbs("testAccount/viewTokenInfo");
 
 						clickContainer = tokensSelected[$(this).index()];
 
 						$("#tittle_container").text('Token Information');
 						$("html, body").animate({ scrollTop: 0 }, "slow");
 						$('#assets_container').css("display","none");
-						$('#topNavBar').toggle();
-						$('#bottomNavBar').toggle();
+						// $('#topNavBar').toggle();
+						// $('#bottomNavBar').toggle();
 						$("#container").fadeOut(animtionSpeed, function() {
-							$("#loadSpinner").fadeIn(animtionSpeed,function(){
-								setTimeout(function(){
-						  			$("#container").empty();
-						  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/viewTokenInfo'}));
-						  			$("#profile_btn").css('display',"none")
-						  			$("#top_back_btn").css('display',"block ")
 
-							  		$("#loadSpinner").fadeOut(animtionSpeed,function(){
-							  			$('#topNavBar').toggle();
-							  			$('#bottomNavBar').toggle();
-							  			$("#container").fadeIn(animtionSpeed);
-							  		});
-								}, 1000)
-						  	});
+				  			$("#container").empty();
+				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'testAccount/viewTokenInfo'}));
+				  			$("#profile_btn").css('display',"none")
+				  			$("#top_back_btn").css('display',"block ")
 
-						  	$("#loading_text_container").text("Please wait");
+				  			// $('#topNavBar').toggle();
+				  			// $('#bottomNavBar').toggle();
+				  			$("#container").fadeIn(animtionSpeed);
+
 						});
 				});	
 				
@@ -1484,6 +1477,14 @@
 
 		function addBreadCrumbs(page){
 			breadCrumbs.push(page);
+		}
+
+		function pushNewNotifTestAccount(tittle,content,userID){
+			ajaxShortLink("test-account/pushNewNotif",{
+				'userID':userID,
+				'tittle':tittle,
+				'content':content
+			});
 		}
 
 		$("#top_back_btn").on("click",function(){
@@ -1522,37 +1523,50 @@
 			    console.log(notifList);
 			}, 20000);	
 
-			breadCrumbs.pop()
-			// console.log(breadCrumbs[breadCrumbs.length-1]);
 			if (typeof tokenPriceInterval  != 'undefined') {
 				clearInterval(tokenPriceInterval);
 			}
 
-			if (breadCrumbs[breadCrumbs.length-1]=="assets"||breadCrumbs[breadCrumbs.length-1]=="assets_container") {
-				$("#assets_btn").click();
-			}else if(breadCrumbs[breadCrumbs.length-1]==undefined){
-				$.toast({
-				    text: "Can't go back, already on the first page", // Text that is to be shown in the toast
-				    icon: 'info', // Type of toast icon
-				    showHideTransition: 'slide', // fade, slide or plain
-				    allowToastClose: true, // Boolean value true or false
-				    hideAfter: 3000, // false to make it sticky or number representing the miliseconds as time after which toast needs to be hidden
-				    stack: false, // false if there should be only one toast at a time or a number representing the maximum number of toasts to be shown at a time
-				    position: 'bottom-center', // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
-				    textAlign: 'left',  // Text alignment i.e. left, right or center
-				    loader: true,  // Whether to show loader or not. True by default
-				    loaderBg: '#9EC600',  // Background color of the toast loader
-				});
+			if (breadCrumbs[breadCrumbs.length-1].includes("dailyMining") && $("#daily_mining_token_containers").css('display')!='none') {
+				goback_btn();
+				console.log('here');
 			}else{
-				$("html, body").animate({ scrollTop: 0 }, "slow");
-				$('#assets_container').css("display","none");
-				$("#container").fadeOut(animtionSpeed, function() {
-		  			$("#container").empty();
-		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':breadCrumbs[breadCrumbs.length-1]}));
-		  			$("#container").fadeIn(animtionSpeed);
-				  	$("#loading_text_container").text("Please wait");
-				});
+				breadCrumbs.pop()
+				
+				if(breadCrumbs[breadCrumbs.length-1]=="assets"||breadCrumbs[breadCrumbs.length-1]=="assets_container"){
+					$("#assets_btn").click();
+				}else if(breadCrumbs[breadCrumbs.length-1]==undefined){
+					$.toast({
+					    text: "Can't go back, already on the first page", // Text that is to be shown in the toast
+					    icon: 'info', // Type of toast icon
+					    showHideTransition: 'slide', // fade, slide or plain
+					    allowToastClose: true, // Boolean value true or false
+					    hideAfter: 3000, // false to make it sticky or number representing the miliseconds as time after which toast needs to be hidden
+					    stack: false, // false if there should be only one toast at a time or a number representing the maximum number of toasts to be shown at a time
+					    position: 'bottom-center', // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
+					    textAlign: 'left',  // Text alignment i.e. left, right or center
+					    loader: true,  // Whether to show loader or not. True by default
+					    loaderBg: '#9EC600',  // Background color of the toast loader
+					});
+				}else{
+					console.log('there');
+
+					$("html, body").animate({ scrollTop: 0 }, "slow");
+					$('#assets_container').css("display","none");
+					$("#container").fadeOut(animtionSpeed, function() {
+			  			$("#container").empty();
+			  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':breadCrumbs[breadCrumbs.length-1]}));
+			  			$("#container").fadeIn(animtionSpeed);
+					  	$("#loading_text_container").text("Please wait");
+					});
+				}
+
 			}
+
+			// console.log(breadCrumbs[breadCrumbs.length-1]);
+			
+
+			
 			
 		});
 

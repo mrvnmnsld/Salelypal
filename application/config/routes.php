@@ -360,10 +360,18 @@ $route['testing'] = 'main/testing';
 // test-account
 	$route['test-account'] = 'testAccount/index';
 	$route['test-account/checkLoginCredentials'] = 'testAccount/checkLoginCredentials';
+
 	$route['test-account/getAllSelectedTokensVer2'] = 'testAccount/getAllSelectedTokensVer2';
+	$route['test-account/getAllSelectedTokens'] = 'testAccount/getAllSelectedTokens';
+	$route['test-account/updateTokenManagement'] = 'testAccount/updateTokenManagement';
+
+
 	$route['test-account/getNewNotifs'] = 'testAccount/getNewNotifs';
+	$route['test-account/getNewNotifsToViewed'] = 'testAccount/getNewNotifsToViewed';
+	$route['test-account/pushNewNotif'] = 'testAccount/pushNewNotif';
 
 	$route['test-account-wallet'] = 'testAccount/wallet';
+
 
 	// accounts
 		$route['test-account/getTestAccount'] = 'testAccount/getTestAccount';
@@ -387,9 +395,38 @@ $route['testing'] = 'main/testing';
 
 	// risefall	
 		$route['test-account/risefall/getClosedRiseFallPositions'] = 'testAccount/getClosedRiseFallPositions';
-
-		
+		$route['test-account/future/saveRiseFallPosition'] = 'testAccount/futureSaveRiseFallPosition';
+		$route['test-account/riseFall/getPositionDetails'] = 'testAccount/risefallGetPositionDetails';
+		$route['test-account/future/resolveRiseFallPosition'] = 'testAccount/resolveRiseFallPosition';
+		$route['test-account/riseFall/checkIfSet'] = 'testAccount/checkIfRisefallSet';
 	// risefall	
+
+	// future	
+		$route['test-account/future/getClosedPositions'] = 'testAccount/futureGetClosedPositions';
+		$route['test-account/future/savePosition'] = 'testAccount/futureSavePosition';
+		$route['test-account/future/checkIfSet'] = 'testAccount/futureCheckIfSet';
+		$route['test-account/future/getPositionDetails'] = 'testAccount/futureGetPositionDetails';
+		$route['test-account/future/resolvePosition'] = 'testAccount/futureResolvePosition';
+	// future	
+
+	//mining
+		$route['test-account/getRegularMiningSettings'] = 'testAccount/getRegularMiningSettings';
+		$route['test-account/getMyMiningEntries'] = 'testAccount/getMyMiningEntries';
+		$route['test-account/saveMiningEntry'] = 'testAccount/saveMiningEntry';
+		$route['test-account/claimLockTokensAndIncome'] = 'testAccount/claimLockTokensAndIncome';
+		$route['test-account/getAllMiningEntries'] = 'testAccount/getAllMiningEntries';
+
+		$route['test-account/daily/getAddDays'] = 'testAccount/getAddDays';
+		$route['test-account/daily/getPurchasableLimit'] = 'testAccount/getPurchasableLimit';
+		$route['test-account/daily/getTokensToClaim'] = 'testAccount/getTokensToClaim';
+		$route['test-account/daily/getAllEntries'] = 'testAccount/getAllEntries';
+		$route['test-account/daily/saveMiningEntry'] = 'testAccount/saveDailyMiningEntry';
+		$route['test-account/daily/getDayTokens'] = 'testAccount/getDayTokens';
+		$route['test-account/daily/getTokenBalanceLimit'] = 'testAccount/getTokenBalanceLimit';
+		$route['test-account/daily/claimIncome'] = 'testAccount/claimDailyIncome';
+	//mining
+
+
 		
 
 // test-account
