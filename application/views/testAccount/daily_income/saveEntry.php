@@ -85,6 +85,7 @@
 	$("#cycle_container_bootbox").text(selectedData.cycleSelected+" Day(s)");+
 	$("#balance_container").text(balanceInner);
 	$("#amount_input_container_bootbox").attr("min",selectedData.minimum_entry);
+	$("#amount_input_container_bootbox").attr("max",selectedData.purchasableLimit);
 
 	$("#closeBtn").on('click', function(){
 		bootbox.hideAll();

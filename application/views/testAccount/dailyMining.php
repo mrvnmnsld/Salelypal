@@ -116,12 +116,10 @@
 
 	var getDaysSettings = ajaxShortLink('test-account/daily/getAddDays');
 	for(var i = 0;i<getDaysSettings.length;i++){
-
         var getPurchasableLimit = ajaxShortLink('test-account/daily/getPurchasableLimit',{
 				'day': getDaysSettings[i].id
         });
 
-        // console.log(getDaysSettings[i]);
 
         var ratioLimit =(getPurchasableLimit.totalBalance/getPurchasableLimit.totalLimit)*100;
         var isRatioEnough = "";
@@ -194,8 +192,12 @@
     				'mining_id': getDayTokens[x].id,
                 });
 
+
+
                 var ratioLimit =(getTokenBalanceLimit.totalBalance/getTokenBalanceLimit.totalLimit)*100;
                 var isRatioEnough = '';
+                var purchasableLimit = getTokenBalanceLimit.totalLimit-getTokenBalanceLimit.totalBalance;
+        		console.log(purchasableLimit);
 
                 if(ratioLimit>=100){
                 	isRatioEnough = "disabled"
@@ -227,7 +229,7 @@
 
 						'<div class="m-2">'+
 							"<button type='button' class='btn btn-success btn-block' "+isRatioEnough+" "+isRatioEnough+" onClick='"+
-								'openEntryForm("'+tokenInformation.smartAddress+'","'+getDayTokens[x].id+'","'+token_name_combo+'","'+tokenInformation.network+'","'+tokenInformation.tokenName+'","'+$(this).attr('apy')+'","'+$(this).attr('days')+'","'+$(this).attr('daysID')+'","'+getDayTokens[x].minimum_entry+'")'+
+								'openEntryForm("'+tokenInformation.smartAddress+'","'+getDayTokens[x].id+'","'+token_name_combo+'","'+tokenInformation.network+'","'+tokenInformation.tokenName+'","'+$(this).attr('apy')+'","'+$(this).attr('days')+'","'+$(this).attr('daysID')+'","'+getDayTokens[x].minimum_entry+'","'+purchasableLimit+'")'+
 							"'>Mine Now!</button>"+
 						'</div>'+
 					'</div>'
@@ -259,7 +261,7 @@
 	        	isDisabled = "disabled"
 	        }
 
-	        console.log(getTokensToClaim[i]);
+	        // console.log(getTokensToClaim[i]);
 
 	        $("#claim_tokens_container").append(
 	            '<div id="'+getTokensToClaim[i].id+'_container" class="card main-card-ui shadow-lg rounded p-2 mb-3">'+
@@ -337,7 +339,6 @@
 	    }
 	});
 
-
 	function instruction_btn(){
 		console.log('instruction_btn clicked');
 		bootbox.dialog({
@@ -365,7 +366,8 @@
 		}).find('.modal-content').css({'border-radius':'5%'} );
 	}
 
-	function openEntryForm(smartAddress,mining_id,token_name_combo,networkName,tokenName,apy,cycleSelected,daysID,minimum_entry){	
+	function openEntryForm(smartAddress,mining_id,token_name_combo,networkName,tokenName,apy,cycleSelected,daysID,minimum_entry,purchasableLimit){	
+
 		selectedData = {
 			'cycleSelected':cycleSelected,
 			'smartAddress':smartAddress,
@@ -375,7 +377,8 @@
 			'tokenName':tokenName,
 			'apy':apy,
 			'daysID':daysID,
-			"minimum_entry":minimum_entry
+			"minimum_entry":minimum_entry,
+			"purchasableLimit":purchasableLimit
 		}
 
 		bootbox.alert({
