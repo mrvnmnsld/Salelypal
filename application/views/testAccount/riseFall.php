@@ -301,8 +301,8 @@
     }, 2000);
 
     //callBackEnd
-        balanceUsdt = ajaxShortLink('test-platform/getTokenBalanceBySmartAddress',{
-            // 'trc20Address':currentUser['trc20_wallet'],
+        balanceUsdt = ajaxShortLink('test-account/getTokenBalanceBySmartAddress',{
+        	'userID':currentUser.userID,
             'contractaddress':'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t',
         })['balance'];
 
@@ -313,7 +313,7 @@
         $("#buy_rise_btn").on("click", function(){
 
             bootbox.alert({
-                message: ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/risefall_trade_pairs/buyrise'}),
+                message: ajaxLoadPage('quickLoadPage',{'pagename':'test-platform/riseFall/buyrise'}),
                 size: 'large',
                 centerVertical: true,
                 closeButton: false
@@ -322,12 +322,14 @@
         });
 
         $("#buy_fall_btn").on("click", function(){
+
             bootbox.alert({
-                message: ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/risefall_trade_pairs/buyfall'}),
+                message: ajaxLoadPage('quickLoadPage',{'pagename':'test-platform/riseFall/buyfall'}),
                 size: 'large',
                 centerVertical: true,
                 closeButton: false
             });
+
         });
     //buy
 

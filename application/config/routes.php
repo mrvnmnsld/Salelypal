@@ -382,6 +382,9 @@ $route['testing'] = 'main/testing';
 		$route['test-account/updateNewBalance'] = 'testAccount/updateNewBalance';
 	// balance
 
+	$route['test-account/getBettingSettings'] = 'testAccount/getBettingSettings';
+	$route['test-account/getFutureRisefallTimings'] = 'testAccount/getFutureRisefallTimings';
+
 	// risefall	
 		$route['test-account/risefall/getClosedRiseFallPositions'] = 'testAccount/getClosedRiseFallPositions';
 

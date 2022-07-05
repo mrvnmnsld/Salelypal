@@ -358,16 +358,37 @@ class testAccount extends MY_Controller {
    		echo json_encode($notif);
 	}
 
+	public function getBettingSettings(){
+   		$res = $this->_getRecordsData(
+   			$selectfields = array("*"), 
+	   		$tables = array('test_account_contract_settings_tbl'), 
+	   		$fieldName = null, $where = null, 
+	   		$join = null, $joinType = null, $sortBy = null, 
+	   		$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+   		);
 
-	
+   		echo json_encode($res);
+	}
 
-	
+	public function getFutureRisefallTimings(){
+		$res = $this->_getRecordsData(
+			$selectfields = array("*"), 
+	   		$tables = array('test_account_future_risefall_timings'),
+	   		$fieldName = null, 
+	   		$where = null, 
+	   		$join = null,	 
+	   		$joinType = null,
+	   		$sortBy = array("id"), 
+	   		$sortOrder = array('asc'), 
+	   		$limit = null, 
+	   		$fieldNameLike = null, 
+	   		$like = null,
+	   		$whereSpecial = null, 
+	   		$groupBy = null 
+		);
 
-	
-
-	
-
-	
+		echo json_encode($res);
+	}
 
 
 	
