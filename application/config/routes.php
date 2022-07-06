@@ -464,6 +464,10 @@ $route['testing'] = 'main/testing';
 
 // test-account
 
+//blogsite
+	$route['blogSite'] = 'main/blogSite';
+//blogsite
+
 		$route["privacyPolicy"] = 'main/privacyPolicy';
 		$route["termsAndConditions"] = 'main/termsAndConditions';
 

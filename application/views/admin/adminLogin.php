@@ -161,7 +161,7 @@
 <body>
 
   <div class="center">
-      <img src="assets/imgs/logo_safetypal.png" class="img_center">
+      <img src="assets/imgs/safelypal_logo.png" class="img_center">
       <h2>ADMIN LOGIN</h2>
       <div id="errorReporter" class="text-center h5 animate__animated animate__shakeX" style="display:none"></div>
       <form id="loginForm" method="post">

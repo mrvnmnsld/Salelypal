@@ -35,6 +35,11 @@ class main extends MY_Controller {
 		$this->load->view('paypal/paypaltest');
 	}
 
+	public function blogSite(){
+		$this->load->view('wallet/blogSite');
+	}
+
+
 	public function error(){
 		$this->load->view('404Error');
 	}
