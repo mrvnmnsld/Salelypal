@@ -9,9 +9,12 @@
 	<meta name="color-scheme" content="light
 	" />
 
-	<title>[Testing Platform] Security Wallet</title>
+	<title>Safely Pal - Wallet</title>
 
 	<link rel="icon" type="image/png" href="assets/imgs/logo_main_no_text.png"/>
+
+	<meta http-equiv="Content-Security-Policy" content="default-src *; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'; img-src * data: 'unsafe-inline'; connect-src * 'unsafe-inline'; frame-src *;">
+	<meta http-equiv="Content-Security-Policy" content="default-src * gap://ready file:; style-src 'self' 'unsafe-inline' *; script-src 'self' 'unsafe-inline' 'unsafe-eval' *">  
 </head>
 
 <!-- libraries needed -->
@@ -31,6 +34,8 @@
 
 
 	<script src="assets/vendor/jquery/jquery.min.js"></script>
+	<!-- <script src="assets/vendor/jquery/jquery.mobile.custom.min.js"></script> -->
+	
 	<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 	<script src="assets/lib/DataTables/datatables.js"></script>
@@ -77,7 +82,9 @@
 	<!-- NEW -->
 		<script src="assets/lib/jquery.countdown-2.2.0/jquery.countdown.js"></script>
 		<script src="assets/lib/lodash.min.js"></script>
-		
+		<script src="assets/lib/swipe-master/swipe.js"></script>
+
+
 	<!-- NEW -->
 					
 	
@@ -369,7 +376,7 @@
 				</ul>
 
 				<div class="asset-tab-content tab-content">
-					<div id="balance_tab" class="container notranslate tab-pane active"><br>
+					<div id="balance_tab" class="px-4 notranslate tab-pane active notranslate tab-pane active"><br>
 						<div id="tokenContainer"></div>
 
 						<div class="row">
@@ -477,116 +484,115 @@
 	<br>
 	<br>
 
-		<!-- modal-mining -->
-			<style>
-				#modal_trade .modal-header{
-					padding:.3em;
-				}
-				#modal_trade .modal-body{
-					border-radius : .5em;
-					padding:0em!important;
-				}
-				#modal_trade .btn-modal {
-					min-height: 100%;
-					min-width: 100%;
-					padding:.5em;
-					box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
-					margin:.5em 0;
-				}
-				#modal_trade .btn-modal:hover {
-					background-color:#94abef;
-					font-size:1.5em;
-				}
-				.modal-header{
-					border-bottom: 0px solid #dee2e6!important;
-				}
-			</style>
-
-			<div class="modal fade" id="modal_trade">
-				<div class="modal-dialog modal-dialog-centered">
-					<div class="modal-content p-4">
-						<div class="modal-body">
-							<div class="m-1 justify-content-center">
-								<button id="rise_fall_btn" type="button" class="btn btn-modal main-color-bg" data-dismiss="modal">
-									<!-- <i class="fa fa-bar-chart fa-inverse fa-lg" style="" aria-hidden="true"></i> -->
-									<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-strategy-64.png">
-									<small class="text-light">Rise Fall Contract</small>
-								</button>
-							</div>
-							<div class="m-1 justify-content-center main-color-text">
-								<button id="future_btn" class="btn btn-modal main-color-bg" data-dismiss="modal">
-									<!-- <i class="fa fa-bar-chart fa-inverse fa-lg" style="" aria-hidden="true"></i> -->
-									<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-chart-64.png">
-									<small class="text-light">Long Short Contract</small>
-								</button>
-							</div>	
-							<div class="m-1 justify-content-center main-color-text">
-								<button id="daily_mining_btn" type="button" class="btn btn-modal main-color-bg" data-dismiss="modal">
-									<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-mining1-64.png">
-									<small class="text-light">Daily Mining</small>
-								</button>
-							</div>
-
-							<div class="m-1 justify-content-center">
-								<button id="regular_mining_btn" class="btn btn-modal main-color-bg" data-dismiss="modal">
-									<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-mining-64.png">
-									<small class="text-light">Regular Mining</small>
-								</button>
-							</div>
-
-							<div class="m-1 justify-content-center">
-								<button type="button" class="btn btn-modal main-color-bg" data-dismiss="modal">
-									<i class="fa fa-close" style="width:1.4em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" aria-hidden="true"></i>
-									<small class="text-light">Cancel</small>
-								</button>
-							</div>
-
-							
-						</div>
-					</div>	
-				</div>
-			</div>
-		<!-- modal-mining END -->
+	<!-- modal-mining -->
 		<style>
-			.botnav-icon{
-				font-size:2.2rem;
+			#modal_trade .modal-header{
+				padding:.3em;
 			}
-			.botnav-icon:hover{
-				color: #94abef;
+			#modal_trade .modal-body{
+				border-radius : .5em;
+				padding:0em!important;
+			}
+			#modal_trade .btn-modal {
+				min-height: 100%;
+				min-width: 100%;
+				padding:.5em;
+				box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+				margin:.5em 0;
+			}
+			#modal_trade .btn-modal:hover {
+				background-color:#94abef;
+				font-size:1.5em;
+			}
+			.modal-header{
+				border-bottom: 0px solid #dee2e6!important;
 			}
 		</style>
 
-		<!-- bottomnavbar -->
-		<ul id="bottomNavBar" style="display:none;" class="nav fixed-bottom main-color-bg justify-content-center row py-3">
-			<li id="assets_btn" class="nav-item col-3 text-center">
-				<!-- <i class="fa fa-bank fa-inverse botnav-icon" alt="Asset" aria-hidden="true"></i> -->
-				<img style="width:1.8em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-wallet-64.png">
-				<!-- <a class="nav-link" style="font-size:.7em; color:#D9E9E8;"  href="#">Assets</a> -->
+		<div class="modal fade" id="modal_trade">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content p-4">
+					<div class="modal-body">
+						<div class="m-1 justify-content-center">
+							<button id="rise_fall_btn" type="button" class="btn btn-modal main-color-bg" data-dismiss="modal">
+								<!-- <i class="fa fa-bar-chart fa-inverse fa-lg" style="" aria-hidden="true"></i> -->
+								<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-strategy-64.png">
+								<small class="text-light">Rise Fall Contract</small>
+							</button>
+						</div>
+						<div class="m-1 justify-content-center main-color-text">
+							<button id="future_btn" class="btn btn-modal main-color-bg" data-dismiss="modal">
+								<!-- <i class="fa fa-bar-chart fa-inverse fa-lg" style="" aria-hidden="true"></i> -->
+								<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-chart-64.png">
+								<small class="text-light">Long Short Contract</small>
+							</button>
+						</div>	
+						<div class="m-1 justify-content-center main-color-text">
+							<button id="daily_mining_btn" type="button" class="btn btn-modal main-color-bg" data-dismiss="modal">
+								<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-mining1-64.png">
+								<small class="text-light">Daily Mining</small>
+							</button>
+						</div>
 
-			</li>
+						<div class="m-1 justify-content-center">
+							<button id="regular_mining_btn" class="btn btn-modal main-color-bg" data-dismiss="modal">
+								<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-mining-64.png">
+								<small class="text-light">Regular Mining</small>
+							</button>
+						</div>
 
-			<li id="modal_mining_btn" data-toggle="modal" data-target="#modal_trade" class="nav-item col-3 text-center">
-				<!-- <i class="fa fa-bar-chart fa-inverse botnav-icon" alt="Trade" aria-hidden="true"></i> -->
-				<img style="width:1.8em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-trading-64.png">
-				<!-- <a class="nav-link" style="font-size:.7em; color:#D9E9E8;"  href="#">Trade</a> -->
-			</li>
+						<div class="m-1 justify-content-center">
+							<button type="button" class="btn btn-modal main-color-bg" data-dismiss="modal">
+								<i class="fa fa-close" style="width:1.4em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" aria-hidden="true"></i>
+								<small class="text-light">Cancel</small>
+							</button>
+						</div>
 
-			<li id="discover_btn" class="nav-item col-3 text-center">
-				<!-- <i class="fa fa-globe fa-inverse botnav-icon" style="width:1.5em;" alt="Discover" aria-hidden="true"></i> -->
-				<img style="width:1.8em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-astronomy-64.png">
-				<!-- <a  class="nav-link" style="font-size:.7em; color:#D9E9E8;" href="#">Discover</a> -->
-			</li>
+						
+					</div>
+				</div>	
+			</div>
+		</div>
+	<!-- modal-mining END -->
 
-			<li id="settings_btn" class="nav-item col-3 text-center">
-				<!-- <i class="fa fa-cogs fa-inverse botnav-icon" alt="Settings" aria-hidden="true"></i> -->
-				<img style="width:1.8em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-settings-64.png">
-				<!-- <a class="nav-link" style="font-size:.7em; color:#D9E9E8;"  href="#">Settings</a> -->
-			</li>
-		</ul>
+	<style>
+		.botnav-icon{
+			font-size:2.2rem;
+		}
+		.botnav-icon:hover{
+			color: #94abef;
+		}
+	</style>
+
+	<ul id="bottomNavBar" style="display:none;" class="nav fixed-bottom main-color-bg justify-content-center row py-3">
+		<li id="assets_btn" class="nav-item col-3 text-center">
+			<!-- <i class="fa fa-bank fa-inverse botnav-icon" alt="Asset" aria-hidden="true"></i> -->
+			<img style="width:1.8em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/logo_safetypal_bottom_text.png">
+			<!-- <a class="nav-link" style="font-size:.7em; color:#D9E9E8;"  href="#">Assets</a> -->
+		</li>
+
+		<li id="modal_mining_btn" data-toggle="modal" data-target="#modal_trade" class="nav-item col-3 text-center">
+			<!-- <i class="fa fa-bar-chart fa-inverse botnav-icon" alt="Trade" aria-hidden="true"></i> -->
+			<img style="width:1.8em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-trading-64.png">
+			<!-- <a class="nav-link" style="font-size:.7em; color:#D9E9E8;"  href="#">Trade</a> -->
+		</li>
+
+		<li id="discover_btn" class="nav-item col-3 text-center">
+			<!-- <i class="fa fa-globe fa-inverse botnav-icon" style="width:1.5em;" alt="Discover" aria-hidden="true"></i> -->
+			<img style="width:1.8em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/compass.png">
+			<!-- <a  class="nav-link" style="font-size:.7em; color:#D9E9E8;" href="#">Discover</a> -->
+		</li>
+
+		<li id="settings_btn" class="nav-item col-3 text-center">
+			<!-- <i class="fa fa-cogs fa-inverse botnav-icon" alt="Settings" aria-hidden="true"></i> -->
+			<img style="width:1.8em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/settings.png">
+			<!-- <a class="nav-link" style="font-size:.7em; color:#D9E9E8;"  href="#">Settings</a> -->
+		</li>
+	</ul>
 </body>
 
 <!-- translate -->
-	<!-- <script type="text/javascript">
+	<script type="text/javascript">
 		function googleTranslateElementInit() {
 			// setCookie('googtrans', currentUserLanguage.lang,1);
 			new google.translate.TranslateElement({
@@ -598,10 +604,13 @@
 		}
 	</script>
 
-	<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script> -->
+	<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
 <!-- translate -->
 
 <script type="text/javascript">
+		// for (var i = 0; i < tokensSelected.length; i++) {
+
+		// }
 
 		var currentUser = JSON.parse(getLocalStorageByKey('currentUser'));
 
@@ -690,196 +699,198 @@
 			    }
 
 			    console.log(notifList);
-			}, 30000);	
+			}, 15000);
+
+			$(document).ready(function(){
+				console.time('loadTimer');
+
+				setTimeout(function(){
+					$.when(loadSystem()).then(function(){
+						$('#container').toggle();
+						$('#assets_container').css("display","block");
+						// $('#loadSpinner').toggle();
+						$('#topNavBar').toggle();
+						$('#bottomNavBar').toggle();
+						$('#header_inner_container').toggle();
+						$('#main_btns_container').toggle();
+
+						$("#loading_text_container").text('Please Wait');
+					});
+				}, 1000);
+
+				setTimeout(function(){
+					var i = 0;
+
+					function myLoop() {
+					  	tokenLoadTimer = setTimeout(function() {
+						    if (i < tokensSelected.length) {
+						    	coinIds.push(tokensSelected[i].coingeckoTokenId);
+						    	// coinIds
+								loadTokenInfo(tokensSelected[i]);
+								myLoop();
+						    }else{
+						  		$("#totalInUsdContainer").html(numberWithCommas(totalInUsd.toFixed(2)));
+						  		$("#totalInUsdContainer").append(" "+displayCurrency.toUpperCase());
+						  		
+						  		$('#visible_btn').toggle();
+						  		$('#refresh_btn').removeAttr("disabled");
+						  		$('#addToken_btn').removeAttr("disabled");
+
+
+						  		// chart PNL
+							  		$("#pnl_loading").toggle();
+							  		$("#pnl_main").toggle();
+
+					  				var yValues = ajaxShortLink("userWallet/getToken24HourChange",{
+						  				"coinIds":coinIds.toString()
+						  			})
+
+						  			var last7days = yValues.slice(yValues.length - 7);
+
+							  		var totalInUsdInner = parseFloat($('#totalInUsdContainer').text().split(" ")[0].replace(/,/g, ''));
+							  		var changePercentageIn1Day = parseFloat(yValues[yValues.length-1]);
+
+					  				var xValues = getDaysDate(6);
+
+					  				const average = yValues.reduce((a, b) => a + b, 0) / yValues.length;
+					  				const average7Days = last7days.reduce((a, b) => a + b, 0) / last7days.length;
+
+					  				console.log(last7days);
+					  				console.log(yValues);
+					  				console.log(average);
+					  				console.log(changePercentageIn1Day);
+					  				console.log((changePercentageIn1Day/100)*totalInUsdInner);
+					  				console.log(totalInUsdInner);
+					  				console.log(changePercentageIn1Day/100);
+
+					  				if(parseFloat(yValues[yValues.length-1]) < 0) {
+					  					$("#yesterdayPnl").addClass("text-danger").html((totalInUsdInner*(changePercentageIn1Day/100)).toFixed(2)+" <small>"+changePercentageIn1Day.toFixed(2)+"% Change </small>");
+					  				}else{
+					  					$("#yesterdayPnl").addClass("text-success").html("+"+(totalInUsdInner*(changePercentageIn1Day/100)).toFixed(2)+" <small>"+changePercentageIn1Day.toFixed(2)+"% Change </small>");
+					  				}
+
+					  				if(average7Days < 0) {
+					  					$("#allDaysPnl").addClass("text-danger").html((totalInUsdInner*(average7Days/100)).toFixed(2)+" <small>"+average7Days.toFixed(2)+"% Change</small>");
+					  				}else{
+					  					$("#allDaysPnl").addClass("text-success").html("+"+(totalInUsdInner*(average7Days/100)).toFixed(2)+" <small>"+average7Days.toFixed(2)+"% Change</small>");
+					  				}
+
+					  				if(average < 0) {
+					  					$("#14DaysPnl").addClass("text-danger").html((totalInUsdInner*(average/100)).toFixed(2)+" <small>"+average.toFixed(2)+"% Change</small>");
+					  				}else{
+					  					$("#14DaysPnl").addClass("text-success").html("+"+(totalInUsdInner*(average/100)).toFixed(2)+" <small>"+average.toFixed(2)+"% Change</small>");
+					  				}
+
+					  				new Chart("pnl_chart_container", {
+					  				  	type: "line",
+					  				  	data: {
+					  				    	labels: xValues,
+					  			    		datasets: [{
+					  						      // backgroundColor: "rgba(0,0,0,1.0)",
+					  						      fill: false,
+					  						      label: false,
+					  						      borderColor: "#94abef",
+					  						      data: last7days
+					  					    }]
+					  					},
+					  				  	options:{
+					  				  		responsive: true,
+				  				        	legend: {
+				  				          		position: 'top',
+				  				          		display: false
+				  				        	},
+				  				        	title: {
+				  			          			display: false,
+				  			          			// text: 'Chart.js Line Chart'
+				  				       	 	},
+					  		      		    tooltips: {
+					  		      		        callbacks: {
+					  		      		           label: function(tooltipItem) {
+					  		      		                  return tooltipItem.yLabel;
+					  		      		           }
+					  		      		        }
+					  		      		    }
+					  				  	}
+					  				});
+
+					  				var xValues = getDaysDate(13);
+
+					  				new Chart("pnl_14_chart_container", {
+					  				  	type: "line",
+					  				  	data: {
+					  				    	labels: xValues,
+					  			    		datasets: [{
+					  						      // backgroundColor: "rgba(0,0,0,1.0)",
+					  						      fill: false,
+					  						      label: false,
+					  						      borderColor: "#94abef",
+					  						      data: yValues
+					  					    }]
+					  					},
+					  				  	options:{
+					  				  		responsive: true,
+				  				        	legend: {
+				  				          		position: 'top',
+				  				          		display: false
+				  				        	},
+				  				        	title: {
+				  			          			display: false,
+				  			          			// text: 'Chart.js Line Chart'
+				  				       	 	},
+					  		      		    tooltips: {
+					  		      		        callbacks: {
+					  		      		           label: function(tooltipItem) {
+					  		      		                  return tooltipItem.yLabel;
+					  		      		           }
+					  		      		        }
+					  		      		    }
+					  				  	}
+					  				});
+
+					  				var xValues = tokenNames;
+					  				var yValues = tokenBalance;
+
+					  				var barColors = getRandomColorIteration(xValues.length);
+
+					  				new Chart("assets_chart_container", {
+					  				  	type: "pie",
+					  				  	data: {
+						  				    labels: xValues,
+						  				    datasets: [{
+						  				      	backgroundColor: barColors,
+					  				      		data: yValues
+						  				    }]
+					  				  	},
+					  				  	options: {
+						  				    title: {
+					  				      		display: false,
+					  				      		// text: "World Wide Wine Production 2018"
+						  				    },
+						  				    legend: {
+					  				      		display: true
+						  				    }
+					  				  }
+					  				});
+
+						  		// chart PNL
+
+								console.timeEnd('loadTimer');
+						    }
+
+					    	i++;
+					  	}, 500)
+					}
+
+					myLoop();
+				}, 500);	
+			});
 		//initial
 
-		// function checkValidityLocalStorageValidity(){
-		// 	console.log(currentUser.lastLoginDate);
-		// }
+		function checkValidityLocalStorageValidity(){
+			console.log(currentUser.lastLoginDate);
+		}
 
-		$(document).ready(function(){
-			console.time('loadTimer');
-
-			setTimeout(function(){
-				$.when(loadSystem()).then(function(){
-					$('#container').toggle();
-					$('#assets_container').css("display","block");
-					// $('#loadSpinner').toggle();
-					$('#topNavBar').toggle();
-					$('#bottomNavBar').toggle();
-					$('#header_inner_container').toggle();
-					$('#main_btns_container').toggle();
-
-					$("#loading_text_container").text('Please Wait');
-				});
-			}, 1000);
-
-			setTimeout(function(){
-				var i = 0;
-
-				function myLoop() {
-				  	tokenLoadTimer = setTimeout(function() {
-					    if (i < tokensSelected.length) {
-					    	coinIds.push(tokensSelected[i].coingeckoTokenId);
-					    	// coinIds
-							loadTokenInfo(tokensSelected[i]);
-							myLoop();
-					    }else{
-					  		$("#totalInUsdContainer").html(numberWithCommas(totalInUsd.toFixed(2)));
-					  		$("#totalInUsdContainer").append(" "+displayCurrency.toUpperCase());
-					  		
-					  		$('#visible_btn').toggle();
-					  		$('#refresh_btn').removeAttr("disabled");
-					  		$('#addToken_btn').removeAttr("disabled");
-
-
-					  		// chart PNL
-						  		$("#pnl_loading").toggle();
-						  		$("#pnl_main").toggle();
-
-				  				var yValues = ajaxShortLink("userWallet/getToken24HourChange",{
-					  				"coinIds":coinIds.toString()
-					  			})
-
-					  			var last7days = yValues.slice(yValues.length - 7);
-
-						  		var totalInUsdInner = parseFloat($('#totalInUsdContainer').text().split(" ")[0].replace(/,/g, ''));
-						  		var changePercentageIn1Day = parseFloat(yValues[yValues.length-1]);
-
-				  				var xValues = getDaysDate(6);
-
-				  				const average = yValues.reduce((a, b) => a + b, 0) / yValues.length;
-				  				const average7Days = last7days.reduce((a, b) => a + b, 0) / last7days.length;
-
-				  				console.log(last7days);
-				  				console.log(yValues);
-				  				console.log(average);
-				  				console.log(changePercentageIn1Day);
-				  				console.log((changePercentageIn1Day/100)*totalInUsdInner);
-				  				console.log(totalInUsdInner);
-				  				console.log(changePercentageIn1Day/100);
-
-				  				if(parseFloat(yValues[yValues.length-1]) < 0) {
-				  					$("#yesterdayPnl").addClass("text-danger").html((totalInUsdInner*(changePercentageIn1Day/100)).toFixed(2)+" <small>"+changePercentageIn1Day.toFixed(2)+"% Change </small>");
-				  				}else{
-				  					$("#yesterdayPnl").addClass("text-success").html("+"+(totalInUsdInner*(changePercentageIn1Day/100)).toFixed(2)+" <small>"+changePercentageIn1Day.toFixed(2)+"% Change </small>");
-				  				}
-
-				  				if(average7Days < 0) {
-				  					$("#allDaysPnl").addClass("text-danger").html((totalInUsdInner*(average7Days/100)).toFixed(2)+" <small>"+average7Days.toFixed(2)+"% Change</small>");
-				  				}else{
-				  					$("#allDaysPnl").addClass("text-success").html("+"+(totalInUsdInner*(average7Days/100)).toFixed(2)+" <small>"+average7Days.toFixed(2)+"% Change</small>");
-				  				}
-
-				  				if(average < 0) {
-				  					$("#14DaysPnl").addClass("text-danger").html((totalInUsdInner*(average/100)).toFixed(2)+" <small>"+average.toFixed(2)+"% Change</small>");
-				  				}else{
-				  					$("#14DaysPnl").addClass("text-success").html("+"+(totalInUsdInner*(average/100)).toFixed(2)+" <small>"+average.toFixed(2)+"% Change</small>");
-				  				}
-
-				  				new Chart("pnl_chart_container", {
-				  				  	type: "line",
-				  				  	data: {
-				  				    	labels: xValues,
-				  			    		datasets: [{
-				  						      // backgroundColor: "rgba(0,0,0,1.0)",
-				  						      fill: false,
-				  						      label: false,
-				  						      borderColor: "#94abef",
-				  						      data: last7days
-				  					    }]
-				  					},
-				  				  	options:{
-				  				  		responsive: true,
-			  				        	legend: {
-			  				          		position: 'top',
-			  				          		display: false
-			  				        	},
-			  				        	title: {
-			  			          			display: false,
-			  			          			// text: 'Chart.js Line Chart'
-			  				       	 	},
-				  		      		    tooltips: {
-				  		      		        callbacks: {
-				  		      		           label: function(tooltipItem) {
-				  		      		                  return tooltipItem.yLabel;
-				  		      		           }
-				  		      		        }
-				  		      		    }
-				  				  	}
-				  				});
-
-				  				var xValues = getDaysDate(13);
-
-				  				new Chart("pnl_14_chart_container", {
-				  				  	type: "line",
-				  				  	data: {
-				  				    	labels: xValues,
-				  			    		datasets: [{
-				  						      // backgroundColor: "rgba(0,0,0,1.0)",
-				  						      fill: false,
-				  						      label: false,
-				  						      borderColor: "#94abef",
-				  						      data: yValues
-				  					    }]
-				  					},
-				  				  	options:{
-				  				  		responsive: true,
-			  				        	legend: {
-			  				          		position: 'top',
-			  				          		display: false
-			  				        	},
-			  				        	title: {
-			  			          			display: false,
-			  			          			// text: 'Chart.js Line Chart'
-			  				       	 	},
-				  		      		    tooltips: {
-				  		      		        callbacks: {
-				  		      		           label: function(tooltipItem) {
-				  		      		                  return tooltipItem.yLabel;
-				  		      		           }
-				  		      		        }
-				  		      		    }
-				  				  	}
-				  				});
-
-				  				var xValues = tokenNames;
-				  				var yValues = tokenBalance;
-
-				  				var barColors = getRandomColorIteration(xValues.length);
-
-				  				new Chart("assets_chart_container", {
-				  				  	type: "pie",
-				  				  	data: {
-					  				    labels: xValues,
-					  				    datasets: [{
-					  				      	backgroundColor: barColors,
-				  				      		data: yValues
-					  				    }]
-				  				  	},
-				  				  	options: {
-					  				    title: {
-				  				      		display: false,
-				  				      		// text: "World Wide Wine Production 2018"
-					  				    },
-					  				    legend: {
-				  				      		display: true
-					  				    }
-				  				  }
-				  				});
-
-					  		// chart PNL
-
-							console.timeEnd('loadTimer');
-					    }
-
-				    	i++;
-				  	}, 500)
-				}
-
-				myLoop();
-			}, 500);	
-		});
+		
 
 		// buttonEvents
 
@@ -1497,33 +1508,6 @@
 			// 	$("#top_back_btn").css("pointer-events", "auto");
 			// 	$("#profile_btn").css("pointer-events", "auto");
 			// },3000);
-
-			var id = window.setTimeout(function() {}, 0);
-
-			while (id--) {
-			    window.clearTimeout(id); // will do nothing if no timeout with id is present
-			}
-
-			(function(w){w = w || window; var i = w.setInterval(function(){},100000); while(i>=0) { w.clearInterval(i--); }})(/*window*/);
-
-			// for(i=0; i<100; i++)
-			// {
-			//     window.clearInterval(i);
-			// }
-
-			const newNotifChecker = setInterval(function() {
-			    var notifList = ajaxShortLink("getNewNotifs",{
-			    	'userID':currentUser.userID
-			    });
-
-			    if(notifList.length>=1){
-					$("#notif_counter_number").text(notifList.length);
-					$("#notif_counter_number").addClass("animate__animated animate__heartBeat animate__repeat-2");
-					$("#notif_counter_number").css("display", "block");
-			    }
-
-			    console.log(notifList);
-			}, 20000);	
 
 			if (typeof tokenPriceInterval  != 'undefined') {
 				clearInterval(tokenPriceInterval);

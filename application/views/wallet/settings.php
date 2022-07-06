@@ -64,10 +64,11 @@
 		<span class="" style="font-size: 18px;">&nbsp;Display Currency</span>
 	</button>
 
-	<!-- <button id="language_btn" class="btn custom-2nd-text  btn-block text-left">
+	<button id="language_btn" class="btn custom-2nd-text  btn-block text-left">
 		<i class="fa fa-language" aria-hidden="true"></i>
 		<span class="" style="font-size: 18px;">&nbsp;Language</span>
-	</button> -->
+	</button>
+	
 	<button id="theme_btn" class="btn custom-2nd-text btn-block text-left d-flex">
 		<div class="flex-fill">
 			<i class="fa fa-paint-brush" aria-hidden="true"></i>
@@ -264,21 +265,33 @@
 	});
 
 	$('#logOut_btn').on('click',function(){
+		// $.confirm({
+		// 	theme:'dark',
+		// 	icon: 'fa fa-sign-out',
+		// 	title: 'Logging out?',
+		// 	columnClass: 'col-md-6 col-md-offset-6',
+		// 	content: 'Are you sure you want to <b>logout</b>?',
+		// 	buttons: {
+		// 		confirm: function () {
+		// 			deleteLocalStorageByKey('currentUser');
+		// 			window.location.href = 'index';//local
+		// 		},
+		// 		cancel: function () {
+
+		// 		},
+		// 	}
+		// });
+
 		$.confirm({
 			theme:'dark',
-			icon: 'fa fa-sign-out',
-			title: 'Logging out?',
-			columnClass: 'col-md-6 col-md-offset-6',
-			content: 'Are you sure you want to <b>logout</b>?',
-			buttons: {
-				confirm: function () {
-					deleteLocalStorageByKey('currentUser');
-					window.location.href = 'index';//local
-				},
-				cancel: function () {
-
-				},
-			}
+		    title: 'Testing Mode!',
+		    content: 'Logout is disabled due to testing mode',
+		    type: 'red',
+		    typeAnimated: true,
+		    buttons: {
+		        close: function () {
+		        }
+		    }
 		});
 	});
 </script>

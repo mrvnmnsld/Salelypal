@@ -162,6 +162,26 @@
 
     $(".close_btn").on("click",function(){
         bootbox.hideAll();
+
+        if ($("#resolve_modal_container").css("display")!="none") {
+            var indexToken = tokensSelected.findIndex(x => x.smartAddress ==="TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t");
+
+            if (indexToken!=-1) {
+                console.log(indexToken);
+                console.log(tokenBalance[indexToken]);
+                console.log(totalInUsd);
+
+                totalInUsd = totalInUsd-parseFloat(tokenBalance[indexToken])
+                console.log(totalInUsd);
+
+                loadTokenInfo(tokensSelected[indexToken]);
+                console.log(totalInUsd);
+
+                $("#totalInUsdContainer").html(numberWithCommas(totalInUsd.toFixed(2)));
+                $("#totalInUsdContainer").append(" "+displayCurrency.toUpperCase());
+            }
+            
+        }
     })
 
     $("#buy_rise_submit_btn").on("click",function(){
@@ -287,7 +307,17 @@
                theme: 'dark'
            });
         }else{
-           $.alert("1. Please Input Enough USDT to be Staked <br>2. Make sure GAS(trx) is enough<br>3. Minimum amount to stake is "+bettingSettings[0].value);
+           $.confirm({
+               theme: 'dark',
+               title: 'Testing Mode!',
+               content: "1. Please Input Enough USDT to be Staked <br>2. Make sure GAS(trx) is enough<br>3. Minimum amount to stake is "+bettingSettings[0].value,
+               typeAnimated: true,
+               buttons: {
+                  close: function () {
+                   
+                  }
+              }
+           });
         }
     })
 

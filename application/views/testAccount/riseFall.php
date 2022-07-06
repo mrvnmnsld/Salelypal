@@ -248,6 +248,8 @@
                 "locale": "en",
                 "toolbar_bg": "#f1f3f6",
                 "enable_publishing": false,
+                "hide_top_toolbar": true,
+                "hide_legend": true,
                 "save_image": false,
                 "container_id": "tradingview",
                 "loading_screen": {

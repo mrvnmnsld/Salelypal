@@ -52,9 +52,6 @@
 
 			var endDate = new Date(dateCreated[0], dateCreated[1]-1, dateCreated[2], dateCreated[3], dateCreated[4], dateCreated[5]);;
 
-			console.log();
-			
-
 			$("#new_notification_container").append(
 
 				'<div class="card main-card-ui mb-3">'+
@@ -83,7 +80,6 @@
 				  '</div>'+
 				'</div>'
 			);
-		//pancho 05-24-2022	
 		}
 	}else{
 		$("#notification_counter_string_container").text("You have No New Notifications");

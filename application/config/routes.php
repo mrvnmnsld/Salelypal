@@ -372,7 +372,6 @@ $route['testing'] = 'main/testing';
 
 	$route['test-account-wallet'] = 'testAccount/wallet';
 
-
 	// accounts
 		$route['test-account/getTestAccount'] = 'testAccount/getTestAccount';
 		$route['test-account/saveNewAccount'] = 'testAccount/saveNewAccount';

@@ -196,7 +196,7 @@ if (!isset($_SESSION["currentUser"])) {
               </a>
             </li> -->
 
-            <!-- <li>
+            <li>
               <a class="dropdown-item d-flex bd-highlight">
 
                 <div class="align-middle">
@@ -205,17 +205,17 @@ if (!isset($_SESSION["currentUser"])) {
 
                 <div class="form-group w-100 align-middle">
                     <select id="language_selector" class="form-control form-control-sm">
-                        <option value="">Select language...</option>
-                        <option value="en">English</option>
-                        <option value="zh-CN">Chinese (Simplified)</option>
-                        <option value="zh-TW">Chinese (Traditional)</option>
-                        <option value="ceb">Cebuano</option>
-                        <option value="ja">Japanese</option>
+                      <option value="">Select language...</option>
+                      <option class="notranslate" value="en">English</option>
+                      <option value="zh-CN">Chinese (Simplified)</option>
+                      <option value="zh-TW">Chinese (Traditional)</option>
+                      <option class="notranslate" value="ceb">Cebuano</option>
+                      <option class="notranslate" value="ja">Japanese</option>
                     </select>
                 </div>
-
+                
               </a>
-            </li> -->
+            </li>
 
             <li>
               <hr class="dropdown-divider">
@@ -542,7 +542,7 @@ if (!isset($_SESSION["currentUser"])) {
 </body>
 
 <!-- google translate -->
-  <!-- <script type="text/javascript">
+  <script type="text/javascript">
       // var currentUserLanguage = {
       //     'lang':"/en/zh-TW"
       // }
@@ -551,6 +551,10 @@ if (!isset($_SESSION["currentUser"])) {
         var expires = new Date();
         expires.setTime(expires.getTime() + (expiry * 24 * 60 * 60 * 1000));
         document.cookie = key + '=' + value + ';expires=' + expires.toUTCString();
+        document.cookie = key + '=' + value + ';expires=' + expires.toUTCString(); //local
+        document.cookie = key + '=' + value + ';expires=' + expires.toUTCString()+";domain=www.testingcenter.xyz"; //live
+        document.cookie = key + '=' + value + ';expires=' + expires.toUTCString()+";domain=.testingcenter.xyz"; //live
+        document.cookie = key + '=' + value + ';expires=' + expires.toUTCString()+";domain=testingcenter.xyz"; //live
       }
 
       function googleTranslateElementInit() {
@@ -572,7 +576,7 @@ if (!isset($_SESSION["currentUser"])) {
       })
   </script>
 
-  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script> -->
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
 <!-- google translate -->
 
 <script type="text/javascript">

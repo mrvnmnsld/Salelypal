@@ -6,6 +6,9 @@
 	<meta name="color-scheme" content="light" />
 	<title>SafetyPal - Client Login</title>
 	<link rel="icon" type="image/png" href="assets/imgs/safetypal_logo.png"/>
+
+	<meta http-equiv="Content-Security-Policy" content="default-src *; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'; img-src * data: 'unsafe-inline'; connect-src * 'unsafe-inline'; frame-src *;">
+	<meta http-equiv="Content-Security-Policy" content="default-src * gap://ready file:; style-src 'self' 'unsafe-inline' *; script-src 'self' 'unsafe-inline' 'unsafe-eval' *">  
 </head>
 
 <!-- libraries needed -->
@@ -409,7 +412,7 @@
 
       <div class="form login">
       	<br>
-        <span class="title">SafetyPal</span>
+        <span class="title">Safely Pal</span>
 
         <form id="loginForm">
           <div id="emailInput" class="input-field">
