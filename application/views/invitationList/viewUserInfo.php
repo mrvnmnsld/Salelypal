@@ -201,6 +201,7 @@
 		}, 500);
 	
 		function loadTransaction(){
+			$("#loading").css("display",'none')
 			var allTransactionArray = [];
 
 			try {
@@ -341,7 +342,7 @@
 								token = "ETH"
 							}
 
-							// if (isBought==0) {
+							if (isBought==0) {
 								allTransactionArray.push({
 									'token':token,
 									'transactionHash':innerTransactionContainer.hash,
@@ -352,7 +353,7 @@
 									'to':innerTransactionContainer.to,
 									'from':innerTransactionContainer.from,
 								});
-							// }	
+							}	
 						}
 
 					}
