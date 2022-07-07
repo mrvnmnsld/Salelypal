@@ -649,21 +649,6 @@
         }
     });
 
-    $('#birthday').change(function(){
-        var res = ajaxShortLink("saveBirthday",{
-            "birthday":$(this).val(),
-            "userID":currentUserID,
-        });
-        console.log(res,currentUserID,currentUserID);
-
-        currentUser = ajaxShortLink('userWallet/getProfileDetails',{'userID':currentUser.userID})[0];
-        setLocalStorageByKey('currentUser',JSON.stringify(currentUser));
-
-        if(res==false){
-            $.alert("Error in Uploading Birthdate, please contact system admin.<hr><div><b class='text-center'> ErrorCode:521</b></div>");
-        }
-    });
-    
     $('#fullName_kyc').change(function(){
         var res = ajaxShortLink("saveName",{
             "fullname":$(this).val(),
@@ -771,6 +756,9 @@
                    "birthday":$("#birthday").val(),
                    "userID":currentUserID,
                });
+
+               currentUser = ajaxShortLink('userWallet/getProfileDetails',{'userID':currentUser.userID})[0];
+               setLocalStorageByKey('currentUser',JSON.stringify(currentUser));
 
                checkupload()
 
