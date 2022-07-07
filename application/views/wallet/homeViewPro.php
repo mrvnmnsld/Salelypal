@@ -600,6 +600,18 @@
 <!-- translate -->
 
 <script type="text/javascript">
+		$.confirm({
+			theme: 'dark',
+		    title: 'Development Mode!',
+		    content: 'This page is under development. You are being logged out',
+		    typeAnimated: true,
+		    buttons: {
+		        close: function () {
+		        	console.log("loggedOut");
+		        	logOutClearStorage();
+		        }
+		    }
+		});
 
 		var currentUser = JSON.parse(getLocalStorageByKey('currentUser'));
 
@@ -616,18 +628,6 @@
 		}else{
 			window.location.href = 'index';
 		}
-
-		$.confirm({
-			theme: 'dark',
-		    title: 'Development Mode!',
-		    content: 'This page is under development. You are being logged out',
-		    typeAnimated: true,
-		    buttons: {
-		        close: function () {
-		        	logOutClearStorage();
-		        }
-		    }
-		});
 
 		var animtionSpeed = 250;
 		var	SelectedtransactionDetails = [];
