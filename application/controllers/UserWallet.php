@@ -484,8 +484,6 @@ class userWallet extends MY_Controller {
 		curl_setopt($curl, CURLOPT_URL, $url);
 
 		$resp = curl_exec($curl);
-		// echo $resp;
-
 		curl_close($curl);
 	}
 

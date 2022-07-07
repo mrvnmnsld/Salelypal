@@ -92,14 +92,14 @@
 
 			</div>
 
-			<div class="col h2">Indirect Invites</div>
+			<div class="col h2">Downline Invites</div>
 
 			<div class="row">
 
 				<div class="col-md-3">
 					<div class="card info-card sales-card">
 					<div class="card-body">
-						<h5 class="card-title">Total Indirect Paid in USD <span>| Over All</span></h5>
+						<h5 class="card-title">Total Downline Paid in USD <span>| Over All</span></h5>
 						<div class="d-flex align-items-center">
 						  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
 						    <i class="fa fa-usd"></i>
@@ -116,7 +116,7 @@
 				<div class="col-md-3">
 					<div class="card info-card revenue-card">
 						<div class="card-body">
-							<h5 class="card-title">Total Indirect Invites <span>| Over All</span></h5>
+							<h5 class="card-title">Total Downline Invites <span>| Over All</span></h5>
 							<div class="d-flex align-items-center">
 							  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
 							    <i class="fa fa-user-o"></i>
@@ -140,6 +140,7 @@
     	<thead>
           <tr>
             <th>ID #</th>
+            <th>Invitation Type</th>
             <th>Fullname</th>
             <th>Email</th>
             <th>Total USD Paid</th>
@@ -209,9 +210,10 @@
 		console.log(callDataViaURLVal);
 
 		$('#tableContainer').DataTable({
-			data: callDataViaURLVal[0],
+			data: callDataViaURLVal[6],
 			columns: [
 				{ data:'userID'},
+				{ data:'degree'},
 				{ data:'fullname'},
 				{ data:'email'},
 				{ data:'totalPaidInUSD'},

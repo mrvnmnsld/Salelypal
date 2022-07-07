@@ -192,7 +192,6 @@
     var totalAmountPending = 0;
     var pendingPositionChecker;
     var tokenPriceInterval;
-   
 
     $('#token_pair_select').val(tokenPairArray.tokenPairDescription);
 
