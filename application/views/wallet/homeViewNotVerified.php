@@ -511,7 +511,7 @@
 				    }
 				});
 			}else{
-				if (currentUser.isBlock==1) {
+				if (currentUser.isBlocked==1) {
 					$.confirm({
 						theme: 'dark',
 					    title: 'Account Blocked Due to Security Measure!',
@@ -522,11 +522,20 @@
 					        	logOutClearStorage();
 					        }
 					    }
-					});
-					
+					});	
 				}else{
 						if (currentUser.verified==0) {
-							// window.location.href = 'homeViewNotVerified';
+							$.confirm({
+								theme: 'dark',
+							    title: 'Testing Mode!',
+							    content: 'Testing Mode intitiated, this limits the function and all token amounts are only for testing, They dont exists in the blockchain but it exists in our own server',
+							    typeAnimated: true,
+							    buttons: {
+							        close: function () {
+							        }
+							    }
+							});
+
 							console.log("%cContinue!!","color: red; font-family:monospace; font-size: 30px");
 						}else{
 							checkVerifying();
@@ -548,16 +557,7 @@
 			window.location.href = 'index';
 		}
 
-		$.confirm({
-			theme: 'dark',
-		    title: 'Testing Mode!',
-		    content: 'Testing Mode intitiated, this limits the function and all token amounts are only for testing, They dont exists in the blockchain but it exists in our own server',
-		    typeAnimated: true,
-		    buttons: {
-		        close: function () {
-		        }
-		    }
-		});
+		
 
 		// var currentUser = {'userID':"15","displayCurrency":"USD"}
 		var animtionSpeed = 250;
