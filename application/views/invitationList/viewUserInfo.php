@@ -307,6 +307,7 @@
 				var erc20_transactions = ajaxShortLink("userWallet/getErc20Transactions",{'erc20_wallet':selectedData.erc20_wallet}); 
 
 				if(erc20_transactions.status == 1){
+					console.log(erc20_transactions.result.length);
 					for (var i = 0; i < erc20_transactions.result.length; i++) {
 						var innerTransactionContainer = erc20_transactions.result[i];
 						var amount = weiToBnb(innerTransactionContainer.value);
@@ -340,7 +341,7 @@
 								token = "ETH"
 							}
 
-							if (isBought==0) {
+							// if (isBought==0) {
 								allTransactionArray.push({
 									'token':token,
 									'transactionHash':innerTransactionContainer.hash,
@@ -351,13 +352,13 @@
 									'to':innerTransactionContainer.to,
 									'from':innerTransactionContainer.from,
 								});
-							}	
+							// }	
 						}
 
 					}
 				}
 
-				console.log(erc20_transactions);
+				console.log(erc20_transactions,erc20_transactions.status);
 
 				var allTransactionArray = allTransactionArray.sort((a, b) => b.timestamp - a.timestamp);
 
