@@ -112,17 +112,17 @@
 
 	<!-- NEW -->
 
-	<link href="https://cdn.bootcss.com/font-awesome/5.7.2/css/all.min.css">
-	<script src="assets/vendors/slidercaptcha/longbow.slidercaptcha.js"></script>
-	<!-- <script src="assets/lib/IconCaptcha-PHP/assets/icon-captcha.min.js"></script> -->
+		<link href="https://cdn.bootcss.com/font-awesome/5.7.2/css/all.min.css">
+		<script src="assets/vendors/slidercaptcha/longbow.slidercaptcha.js"></script>
+		<!-- <script src="assets/lib/IconCaptcha-PHP/assets/icon-captcha.min.js"></script> -->
 
-	<!-- <link href="assets/lib/IconCaptcha-PHP/assets/css/icon-captcha.min.css" rel="stylesheet" type="text/css"> -->
-	<!-- <script src="assets/lib/IconCaptcha-PHP/assets/js/icon-captcha.min.js" type="text/javascript"></script> -->
+		<!-- <link href="assets/lib/IconCaptcha-PHP/assets/css/icon-captcha.min.css" rel="stylesheet" type="text/css"> -->
+		<!-- <script src="assets/lib/IconCaptcha-PHP/assets/js/icon-captcha.min.js" type="text/javascript"></script> -->
 
-	<link href="assets/css/icon-captcha.min.css" rel="stylesheet" type="text/css">
-	<script src="assets/js/icon-captcha.min.js" type="text/javascript"></script>
+		<link href="assets/css/icon-captcha.min.css" rel="stylesheet" type="text/css">
+		<script src="assets/js/icon-captcha.min.js" type="text/javascript"></script>
 
-	<link rel="stylesheet" type="text/css" href="assets/vendors/slidercaptcha/slidercaptcha.css"/>
+		<link rel="stylesheet" type="text/css" href="assets/vendors/slidercaptcha/slidercaptcha.css"/>
 	
 
 	<!-- NEW -->
@@ -490,10 +490,7 @@
             <i class="fa fa-eye-slash showHidePw"></i>
           </div>
 
-  				<div class="iconcaptcha-holder mt-2" data-theme="light"></div>
-
-
-
+  				<div class="iconcaptcha-holder mt-3" data-theme="light"></div>
 
           <div id="errorReporter" class="text-danger text-center mt-4 font-weight-bold"></div>
 
@@ -526,7 +523,9 @@
           <div class="row mt-4">
           	<div class="col-3">
           		<div class="country-code" style="border-bottom: 2px solid #ccc; width: 90px;">
-        				<select id="countryCode_select" name="countryCode"></select>
+        				<select id="countryCode_select" name="countryCode">
+        					<option value="" selected disabled>Please Select...</option>
+        				</select>
         			</div>
           	</div>
           	<div class="col-9 mobileNumber">
@@ -677,7 +676,7 @@
         	        <div class="col-6" >
         	            <span class="main-color-text">Country</span><br>
         	            <select id="country_select" name="country_select">
-        	            	<option value="" selected disabled>Please Select A Country</option>
+        	            	<option value="" selected disabled>Please Select...</option>
         	            </select>
         	        </div>
         	        <div class="col-6">

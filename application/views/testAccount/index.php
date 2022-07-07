@@ -1,3 +1,55 @@
+<?php
+    // Start a session.
+    session_start();
+
+    // Include the IconCaptcha classes.
+    require('assets/src/captcha-session.class.php');
+    require('assets/src/captcha.class.php');
+
+    use IconCaptcha\IconCaptcha;
+
+    // Set the IconCaptcha options.
+    IconCaptcha::options([
+        'iconPath' => '../../assets/icons/', // required, change path according to your installation.
+        'token' => false,
+        'messages' => [
+            'wrong_icon' => 'You\'ve selected the wrong image.',
+            'no_selection' => 'No image has been selected.',
+            'empty_form' => 'You\'ve not submitted any form.',
+            'invalid_id' => 'The captcha ID was invalid.',
+            'form_token' => 'The form token was invalid.'
+        ],
+        'image' => [
+            'amount' => [ // min & max can be 5 - 8
+                'min' => 5,
+                'max' => 5
+            ],
+            'rotate' => false,
+            'flip' => [
+                'horizontally' => false,
+                'vertically' => false,
+            ],
+            'border' => false
+        ],
+        'attempts' => [
+            'amount' => 5,
+            'timeout' => 60 // seconds.
+        ],
+    ]);
+    
+    // If the form has been submitted, validate the captcha.
+    if(!empty($_POST)) {
+        if(IconCaptcha::validateSubmission($_POST)) {
+            echo "test";
+        } else {
+            echo "test";
+        }
+    }
+
+    // echo dirname(__FILE__) . '../../assets/icons/';
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -67,7 +119,9 @@
 	<link href="https://cdn.bootcss.com/font-awesome/5.7.2/css/all.min.css">
 	<script src="assets/vendors/slidercaptcha/longbow.slidercaptcha.js"></script>
 	<link rel="stylesheet" type="text/css" href="assets/vendors/slidercaptcha/slidercaptcha.css"/>
-
+	
+	<link href="assets/css/icon-captcha.min.css" rel="stylesheet" type="text/css">
+	<script src="assets/js/icon-captcha.min.js" type="text/javascript"></script>
 	<!-- NEW -->
 
 <!-- libraries needed -->
@@ -426,6 +480,8 @@
             <i class="fa fa-eye-slash showHidePw"></i>
           </div>
 
+          <div class="iconcaptcha-holder mt-3" data-theme="light"></div>
+
           <div id="errorReporter" class="text-danger text-center mt-4"></div>
 
           <div class="input-field button">
@@ -457,6 +513,20 @@
 
 
 	<script type="text/javascript">
+		$('.iconcaptcha-holder').iconCaptcha({
+    	general: {
+          validationPath: 'assets/src/captcha-request.php', // required, change path according to your installation.
+          // fontFamily: 'Poppins',
+          credits: 'hide',
+      },
+      messages: {
+        initialization: {
+            verify: 'Click to Verify',
+            loading: 'Loading captcha...'
+        }
+      }
+    })
+
 		var otpType = '';
 		var generatedOtp = generateOTP();
 		var currentUser = JSON.parse(getLocalStorageByKey('currentUser'));
@@ -633,17 +703,23 @@
 		});
 			
 		$("#submit_login_btn").on("click",function(){
-			if ($("#loginForm").valid()) {
+			if ($('.iconcaptcha-holder').text().includes("Verification complete")) {
 				$('#errorReporter').text("");
-				$('#sliderCaptchaModal').modal('toggle');
 
-				captcha.reset();
-				console.log("valid");
+				if ($("#loginForm").valid()) {
+					$('#errorReporter').text("");
+					$("#loginForm").submit();
+
+					console.log("valid");
+				}else{
+					$('#errorReporter').text("Please Fill The Form");
+
+					console.log("invalid");
+				}
 			}else{
-				$('#errorReporter').text("Please Fill The Form");
-
-				console.log("invalid");
+				$('#errorReporter').text("Complete Verification First");
 			}
+			
 		});
 
 	</script>
