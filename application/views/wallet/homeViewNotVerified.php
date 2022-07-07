@@ -498,22 +498,52 @@
 			
 			currentUser = ajaxShortLink('userWallet/getProfileDetails',{'userID':currentUser.userID})[0];
 
-			if (currentUser.verified==0) {
-				// window.location.href = 'homeViewNotVerified';
-				console.log("%cContinue!!","color: red; font-family:monospace; font-size: 30px");
+			if (currentUser.isBlock) {
+				$.confirm({
+					theme: 'dark',
+				    title: 'Account Blocked Due to Security Measure!',
+				    content: 'We have noticed something wrong with your wallet. Please wait while we check your account. Thank you!',
+				    typeAnimated: true,
+				    buttons: {
+				        close: function () {
+				        	window.location.href = 'index';
+				        }
+				    }
+				});
 			}else{
-				checkVerifying();
+				if (currentUser==undefined) {
+					$.confirm({
+						theme: 'dark',
+					    title: 'Account Deleted Due to Security Measure!',
+					    content: 'We have noticed something wrong with your wallet. Please wait while we check your account. Thank you!',
+					    typeAnimated: true,
+					    buttons: {
+					        close: function () {
+					        	window.location.href = 'index';
+					        }
+					    }
+					});
+					
+				}else{
+						if (currentUser.verified==0) {
+							// window.location.href = 'homeViewNotVerified';
+							console.log("%cContinue!!","color: red; font-family:monospace; font-size: 30px");
+						}else{
+							checkVerifying();
+						}
+
+					    var notifList = ajaxShortLink("getNewNotifs",{
+					    	'userID':currentUser.userID
+					    });
+
+					    if(notifList.length>=1){
+							$("#notif_counter_number").text(notifList.length);
+							$("#notif_counter_number").addClass("animate__animated animate__heartBeat animate__repeat-2");
+							$("#notif_counter_number").css("display", "block");
+					    }
+				}
 			}
 
-		    var notifList = ajaxShortLink("getNewNotifs",{
-		    	'userID':currentUser.userID
-		    });
-
-		    if(notifList.length>=1){
-				$("#notif_counter_number").text(notifList.length);
-				$("#notif_counter_number").addClass("animate__animated animate__heartBeat animate__repeat-2");
-				$("#notif_counter_number").css("display", "block");
-		    }
 		}else{
 			window.location.href = 'index';
 		}
