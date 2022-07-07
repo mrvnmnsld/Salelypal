@@ -506,7 +506,7 @@
 				    typeAnimated: true,
 				    buttons: {
 				        close: function () {
-				        	window.location.href = 'index';
+				        	logOutClearStorage();
 				        }
 				    }
 				});
@@ -519,7 +519,7 @@
 					    typeAnimated: true,
 					    buttons: {
 					        close: function () {
-					        	window.location.href = 'index';
+					        	logOutClearStorage();
 					        }
 					    }
 					});
