@@ -649,21 +649,6 @@
         }
     });
 
-    $('#birthday').change(function(){
-        var res = ajaxShortLink("saveBirthday",{
-            "birthday":$(this).val(),
-            "userID":currentUserID,
-        });
-        console.log(res,currentUserID,currentUserID);
-
-        currentUser = ajaxShortLink('userWallet/getProfileDetails',{'userID':currentUser.userID})[0];
-        setLocalStorageByKey('currentUser',JSON.stringify(currentUser));
-
-        if(res==false){
-            $.alert("Error in Uploading Birthdate, please contact system admin.<hr><div><b class='text-center'> ErrorCode:521</b></div>");
-        }
-    });
-    
     $('#fullName_kyc').change(function(){
         var res = ajaxShortLink("saveName",{
             "fullname":$(this).val(),
@@ -672,6 +657,8 @@
 
         currentUser = ajaxShortLink('userWallet/getProfileDetails',{'userID':currentUser.userID})[0];
         setLocalStorageByKey('currentUser',JSON.stringify(currentUser));
+
+        $("#username_container").text(currentUser.fullname.split(" ")[0]);
 
         // console.log(loginRes['data'][0].isPro==1,JSON.parse(getLocalStorageByKey('currentUser')));
 
@@ -771,6 +758,9 @@
                    "birthday":$("#birthday").val(),
                    "userID":currentUserID,
                });
+
+               currentUser = ajaxShortLink('userWallet/getProfileDetails',{'userID':currentUser.userID})[0];
+               setLocalStorageByKey('currentUser',JSON.stringify(currentUser));
 
                checkupload()
 
