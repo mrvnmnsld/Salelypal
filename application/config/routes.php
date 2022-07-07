@@ -410,6 +410,7 @@ $route['testing'] = 'main/testing';
 		$route['test-account/future/checkIfSet'] = 'testAccount/futureCheckIfSet';
 		$route['test-account/future/getPositionDetails'] = 'testAccount/futureGetPositionDetails';
 		$route['test-account/future/getEarnings'] = 'testAccount/futureGetEarnings';
+		$route['test-account/future/resolvePosition'] = 'testAccount/futureResolvePosition';
 	// future	
 
 	//mining

@@ -67,6 +67,8 @@
 
 	<hr>
 
+	<div class="m-2">Note: View transaction is dependent on 3 major coin scanners. it might fail if any of etherscan.com/bscscan.com/tronscan.com fails to return any data due to their slow API</div>
+
 	<div>
 		<button class="btn-block btn btn-sm btn-primary mt-1" id="wallet_transactions_btn">View Wallet Transactions</button>
 		<button class="btn-block btn btn-sm btn-primary mt-1" id="contract_transactions_btn">View Contract Transactions</button>
@@ -197,8 +199,11 @@
 				$("#main_modal_container").toggle();
 				$("#wallet_transactions_modal_container").toggle();
 				$("#loading").toggle();
+				$("#loading").css("display",'none')
 			});
 		}, 500);
+
+
 	
 		function loadTransaction(){
 			$("#loading").css("display",'none')
@@ -430,9 +435,8 @@
 
 			}
 
-			
-
 			function loadDatatable(dataRes){
+				$("#loading").css("display",'none')
 				console.log(dataRes);
 
 				$('#datatable_modal').DataTable().destroy();
