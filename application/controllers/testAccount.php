@@ -1580,11 +1580,15 @@ class testAccount extends MY_Controller {
 		$sumTodayRiseFall = 0;
 
 		foreach ($riseFall as $key => $value) {
+
 			if ($value->status=="WIN") {
+				$percentage = floatval($value->income)/100;
+
 				if (strpos($value->timeStamp,$_GET['date'])!== false) {
-					$sumTodayRiseFall = $sumTodayRiseFall+floatval($value->income);
+					$sumTodayRiseFall = $sumTodayRiseFall+$percentage*floatVal($value->amount);
 				}
-				$sumRiseFall = $sumRiseFall+floatval($value->income);
+				
+				$sumRiseFall = $sumRiseFall+$percentage*floatVal($value->amount);
 			}else{
 				if (strpos($value->timeStamp,$_GET['date'])!== false) {
 					$sumTodayRiseFall = $sumTodayRiseFall-floatval($value->amount);
