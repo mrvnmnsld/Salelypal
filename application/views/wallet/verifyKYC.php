@@ -658,6 +658,8 @@
         currentUser = ajaxShortLink('userWallet/getProfileDetails',{'userID':currentUser.userID})[0];
         setLocalStorageByKey('currentUser',JSON.stringify(currentUser));
 
+        $("#username_container").text(currentUser.fullname.split(" ")[0]);
+
         // console.log(loginRes['data'][0].isPro==1,JSON.parse(getLocalStorageByKey('currentUser')));
 
         checkupload()
