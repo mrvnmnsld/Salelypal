@@ -576,7 +576,7 @@
 					</div>
 
 					<div id="otp_verifier" style="display:none">
-						<div class="h4 text-success">
+						<div class="h4 text-success font-weight-bold">
 							We have sent the OTP!
 						</div>
 
@@ -676,7 +676,9 @@
         	    <div class="row">
         	        <div class="col-6" >
         	            <span class="main-color-text">Country</span><br>
-        	            <select id="country_select" name="country_select"></select>
+        	            <select id="country_select" name="country_select">
+        	            	<option value="" selected disabled>Please Select A Country</option>
+        	            </select>
         	        </div>
         	        <div class="col-6">
         	            <span class="main-color-text">Birthday</span>
