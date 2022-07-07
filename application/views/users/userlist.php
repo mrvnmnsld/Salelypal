@@ -90,7 +90,7 @@
 					$(row).find("td:eq(3)").addClass('text-warning').text("No data");
 					$(row).find("td:eq(4)").addClass('text-warning').text("No data");
 				}
-				console.log(['verified']);
+				console.log(data['verified']);
 
 				if (data['verified'] == 0) {
 					if(data.IDImagePath!=null && data.FaceImagePath!=null && data.fullname!=null && data.birthday!=null &&data.country!=null) {

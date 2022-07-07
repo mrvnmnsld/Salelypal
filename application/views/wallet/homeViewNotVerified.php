@@ -1226,7 +1226,11 @@
 		}
 
 		function addBreadCrumbs(page){
-			breadCrumbs.push(page);
+			console.log(breadCrumbs[breadCrumbs.length-1],page,breadCrumbs[breadCrumbs.length-1]!=page);
+
+			if (breadCrumbs[breadCrumbs.length-1]!=page) {
+				breadCrumbs.push(page);
+			}
 		}
 
 		$("#top_back_btn").on("click",function(){
@@ -1238,6 +1242,14 @@
 			if (typeof tokenPriceInterval  != 'undefined') {
 				clearInterval(tokenPriceInterval);
 			}
+
+			// console.log();
+
+			// for (var i = 0; i < breadCrumbs.length; i++) {
+			// 	if (breadCrumbs[breadCrumbs.length-1]==breadCrumbs[breadCrumbs.length-2]) {
+			// 		breadCrumbs.pop()
+			// 	}
+			// }
 
 			if (breadCrumbs[breadCrumbs.length-1]=="assets"||breadCrumbs[breadCrumbs.length-1]=="assets_container") {
 				$("#assets_btn").click();
