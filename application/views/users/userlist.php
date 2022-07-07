@@ -87,10 +87,10 @@
 				}
 
 				if (data['lastLoginDate'] == null) {
-					$(row).find("td:eq(3)").addClass('text-warning').text("No data available");
-					$(row).find("td:eq(4)").addClass('text-warning').text("No data available");
+					$(row).find("td:eq(3)").addClass('text-warning').text("No data");
+					$(row).find("td:eq(4)").addClass('text-warning').text("No data");
 				}
-
+				console.log(['verified']);
 
 				if (data['verified'] == 0) {
 					if(data.IDImagePath!=null && data.FaceImagePath!=null && data.fullname!=null && data.birthday!=null &&data.country!=null) {
@@ -98,9 +98,10 @@
 					}else if(data.IDImagePath!=null || data.FaceImagePath!=null || data.fullname!=null ||  data.birthday!=null || data.country!=null){
 						$(row).find("td:eq(5)").addClass('text-danger').text("Incomplete");
 					}
+				}else if(data['verified'] == 2){
+					$(row).find("td:eq(5)").addClass('text-warning').text("Rejected");
 				}else{
 					$(row).find("td:eq(5)").addClass('text-success').text("Yes");
-
 				}
       },
 			"autoWidth": false,
