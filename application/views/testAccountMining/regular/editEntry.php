@@ -55,8 +55,8 @@
 		<hr>
 
 		<div class="d-flex flex-row-reverse">
-			<button class="btn btn-danger ml-2" id="closeBtn">Close</button>
-			<button class="btn btn-success" id="save_edit_btn">Save Changes</button>
+			<button type="button" class="btn btn-danger ml-2" id="closeBtn">Close</button>
+			<button type="button" class="btn btn-success" id="save_edit_btn">Save Changes</button>
 		</div>
 
 	</form>
@@ -98,8 +98,8 @@
 	$("#mainForm").validate({
 	  	errorClass: 'is-invalid text-danger',
 	  	rules: {
-				balance_container: "required",
-				setClaim_radio: "required",
+			balance_container: "required",
+			setClaim_radio: "required",
 	  	},
 	  	submitHandler: function(form){
 		    var data = $('#mainForm').serializeArray();

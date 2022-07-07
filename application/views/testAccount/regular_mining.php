@@ -53,10 +53,10 @@
     .dataTables_paginate {
         float: ;
     }
-    .dataTables_filter {
+    /*.dataTables_filter {
         float: left;
         display: none;
-    }
+    }*/
     .dataTables_length {
         float:left;
     }
@@ -71,9 +71,10 @@
 	        <h4>Mining History</h4>
 	    </div>
 
-	    <table id="tableContainer" class="" style="width: 98%!important;">  
+	    <table id="tableContainer" class="" style="width: 100%!important;">  
 	        <thead>
 	            <tr>
+	                <th>ID</th>
 	                <th>Token</th>
 	                <th>Balance</th>
 	                <th>Period</th>
@@ -502,21 +503,54 @@
 	function loadDatatable(url,data){
 	    $('#tableContainer').DataTable().destroy();
 
+	    // $('#tableContainer').DataTable({
+	    //     data: data,
+	    //     "ordering": false,
+	    //     "bLengthChange": false,
+     //        "bFilter": true,
+	    //     columns: [
+	    //         { data:'id'},
+	    //         { data:'tokenName'},
+	    //         { data:'balance'},
+	    //         { data:'lock_period'},
+	    //         { data:'status'},
+	    //     ],
+	    //     "autoWidth": true,
+	    //     "order": [[ 0, "desc" ]],
+	    //     "language": {
+	    //         "lengthMenu": "Display _MENU_ records per page",
+	    //         "zeroRecords": "No Data Found",
+	    //         "info": "",
+	    //         "infoEmpty": "No records available",
+	    //         "infoFiltered": ""
+	    //     },
+	    //     // "sDom": '<"row view-filter"<"col-sm-12"<"pull-left"l><"pull-right"f><"clearfix">>>t<"row view-pager"<"col-sm-12"<"text-center"ip>>>'
+	    // }).column( 0 ).visible(false);
+
 	    $('#tableContainer').DataTable({
 	        data: data,
-	        // "ordering": false,
+	        "ordering": false,
+	        "searching": true,
 	        "bLengthChange": false,
             "bFilter": true,
 	        columns: [
+	            { data:'id'},
 	            { data:'tokenName'},
 	            { data:'balance'},
 	            { data:'lock_period'},
 	            { data:'status'},
 	        ],
 	        "autoWidth": true,
-	        // "order": [[ 2, "desc" ]],
-	        "sDom": '<"row view-filter"<"col-sm-12"<"pull-left"l><"pull-right"f><"clearfix">>>t<"row view-pager"<"col-sm-12"<"text-center"ip>>>'
-	    });
+	        "order": [[ 0, "desc" ]],
+	        "language": {
+                "lengthMenu": "Display _MENU_ records per page",
+                "zeroRecords": "No Data Found",
+                "info": "",
+                "infoEmpty": "No records available",
+                "infoFiltered": ""
+            }
+	        // "sDom": '<"row view-filter"<"col-sm-12"<"pull-left"l><"pull-right"f><"clearfix">>>t<"row view-pager"<"col-sm-12"<"text-center"ip>>>'
+	    }).column( 0 ).visible(false);
 	}
 
 </script>
