@@ -336,15 +336,15 @@
 
             if (parseFloat(earnings[0])>=1) {
                 console.log("HERE");
-                $("#todaysEarningLongShort").addClass("text-success").text("+"+earnings[0]+" USD");
+                $("#todaysEarningLongShort").addClass("text-success").removeClass("text-danger").text("+"+earnings[0]+" USD");
             }else{
-                $("#todaysEarningLongShort").addClass("text-danger").text(earnings[0]+" USD");
+                $("#todaysEarningLongShort").addClass("text-danger").removeClass("text-success").text(earnings[0]+" USD");
             }
 
             if (parseFloat(earnings[1])>=1) {
-                $("#allTimeEarningsLongShort").addClass("text-success").text("+"+earnings[1]+" USD");
+                $("#allTimeEarningsLongShort").addClass("text-success").removeClass("text-danger").text("+"+earnings[1]+" USD");
             }else{
-                $("#allTimeEarningsLongShort").addClass("text-danger").text(earnings[1]+" USD");
+                $("#allTimeEarningsLongShort").addClass("text-danger").removeClass("text-success").text(earnings[1]+" USD");
             }
         // closed
     }
