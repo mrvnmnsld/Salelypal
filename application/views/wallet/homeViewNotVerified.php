@@ -495,12 +495,25 @@
 		var currentUser = JSON.parse(getLocalStorageByKey('currentUser'));
 
 		if (getLocalStorageByKey('currentUser')!=null) {
+			
+			currentUser = ajaxShortLink('userWallet/getProfileDetails',{'userID':currentUser.userID})[0];
+
 			if (currentUser.verified==0) {
 				// window.location.href = 'homeViewNotVerified';
 				console.log("%cContinue!!","color: red; font-family:monospace; font-size: 30px");
 			}else{
 				checkVerifying();
 			}
+
+		    var notifList = ajaxShortLink("getNewNotifs",{
+		    	'userID':currentUser.userID
+		    });
+
+		    if(notifList.length>=1){
+				$("#notif_counter_number").text(notifList.length);
+				$("#notif_counter_number").addClass("animate__animated animate__heartBeat animate__repeat-2");
+				$("#notif_counter_number").css("display", "block");
+		    }
 		}else{
 			window.location.href = 'index';
 		}
@@ -1277,9 +1290,15 @@
 		    console.log(checkIfKYCPhotoExists.country==null)
 
 			if(checkIfKYCPhotoExists==false||checkIfKYCPhotoExists.IDImagePath==null||checkIfKYCPhotoExists.FaceImagePath==null||checkIfKYCPhotoExists.birthday==null||checkIfKYCPhotoExists.fullname==null||checkIfKYCPhotoExists.country==null){
-				$('#verifyTitle').text('Unverified');
-				$('#verifySubTitle').text('Verify to unlock all features!');
-				$('#verifyButton').text('Verify Account Now');
+				if (checkIfKYCPhotoExists.verified == 2){
+					$('#verifyTitle').text('Rejected...');
+					$('#verifySubTitle').text('Please reupload your KYC images');
+					$('#verifyButton').text('Edit Uploads');
+				}else{
+					$('#verifyTitle').text('Unverified');
+					$('#verifySubTitle').text('Verify to unlock all features!');
+					$('#verifyButton').text('Verify Account Now');
+				}
 			}else{
 				$('#verifyTitle').text('Verifying...');
 				$('#verifySubTitle').text('Please wait as we check');
@@ -1301,8 +1320,7 @@
 					}else{
 						window.location.href = 'homeView';
 					}
-				}
-				
+				}				
 			}
 		}
 

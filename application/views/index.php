@@ -433,7 +433,7 @@
           <div id="errorReporter" class="text-danger text-center mt-4"></div>
 
           <div class="input-field button">
-            <button id="submit_login_btn" class="login-signup-btn" data-toggle="modal" data-target="#sliderCaptchaModal" type="button">LOGIN</button>
+            <button id="submit_login_btn" class="login-signup-btn" type="button">LOGIN</button>
           </div>
         </form>
 
@@ -497,8 +497,8 @@
 				</form>
 
 				<div class="text-center" style="display:none;" id="otp_container">
-					<div id="otp_selector" class="text-center">
-						<span class="">Please select where to send OTP</span>
+					<div id="otp_selector" class="text-center" style="display:">
+						<span class="h3">Please select where to send your OTP</span>
 						<br>
 						<br>
 						<div class="row">
@@ -511,6 +511,10 @@
 					</div>
 
 					<div id="otp_verifier" style="display:none">
+						<div class="h4 text-success">
+							We have sent the OTP!
+						</div>
+
 						<div class="prompt">
 							Enter the code generated on your mobile/email below to proceed with signup!
 						</div>
@@ -875,6 +879,8 @@
 				data.push({"name":'ip','value':ipAddress});
 				var loginRes = ajaxShortLink('checkLoginCredentials',data);
 
+				console.log(loginRes);
+
 				if (loginRes['wrongFlag'] == 2 || loginRes['wrongFlag'] == 1) {
 					$('#errorReporter').text("Wrong Credentials.");
 				}else if(loginRes['wrongFlag'] == 3){
@@ -917,7 +923,17 @@
 		});
 			
 		$("#submit_login_btn").on("click",function(){
-			captcha.reset();
+			if ($("#loginForm").valid()) {
+				$('#errorReporter').text("");
+				$('#sliderCaptchaModal').modal('toggle');
+
+				captcha.reset();
+				console.log("valid");
+			}else{
+				$('#errorReporter').text("Please Fill The Form");
+
+				console.log("invalid");
+			}
 		});
 
 		$("#signup_btn").on("click",function(){
@@ -1441,11 +1457,6 @@
 							},2000)
 	        	}
 
-			        	
-
-								
-
-								
 			        },cancel: function () {
 			        	
 			        },
@@ -1453,13 +1464,13 @@
 			});
 		});
 
-		    if($('#fullName_kyc').val()!=null){
-		    	$('#name_checkedi').addClass('checked_upload');
-          $('#name_checkedt').addClass('checked_upload');
-		    }else{
-		    	$('#name_checkedi').removeClass('checked_upload');
-          $('#name_checkedt').removeClass('checked_upload');
-		    }
+    if($('#fullName_kyc').val()!=null){
+    	$('#name_checkedi').addClass('checked_upload');
+      $('#name_checkedt').addClass('checked_upload');
+    }else{
+    	$('#name_checkedi').removeClass('checked_upload');
+      $('#name_checkedt').removeClass('checked_upload');
+    }
 
 		$('input[name="birthday"]').change(function(){
 		    var res = ajaxShortLink("saveBirthday",{

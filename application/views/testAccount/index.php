@@ -429,7 +429,7 @@
           <div id="errorReporter" class="text-danger text-center mt-4"></div>
 
           <div class="input-field button">
-            <button id="submit_login_btn" class="login-signup-btn" data-toggle="modal" data-target="#sliderCaptchaModal" type="button">LOGIN</button>
+            <button id="submit_login_btn" class="login-signup-btn" type="button">LOGIN</button>
           </div>
         </form>
 
@@ -547,9 +547,12 @@
 				$("#loginForm").submit();
 			},
 			onFail: function () {
+				console.log("failed");
 				// captcha.reset();
 			},
 			onRefresh: function () {
+				console.log("refresh");
+
 				// captcha.reset();
 			}
 		});
@@ -566,7 +569,7 @@
 				$('#emailInput').toggle();
 				$('#mobileInput').toggle();
 				
-				emailAddress
+				// emailAddress
 
 				if(data == 'emailSwitch'){
 					console.log('email chosen');
@@ -611,6 +614,7 @@
 					$('#errorReporter').text("Wrong Credentials.");
 
 				}else if(loginRes['wrongFlag'] == 0){
+					$('#errorReporter').text("");
 
 					$('#errorReporter').text("");
 					$("#submit_login_btn").empty().append(
@@ -629,7 +633,17 @@
 		});
 			
 		$("#submit_login_btn").on("click",function(){
-			captcha.reset();
+			if ($("#loginForm").valid()) {
+				$('#errorReporter').text("");
+				$('#sliderCaptchaModal').modal('toggle');
+
+				captcha.reset();
+				console.log("valid");
+			}else{
+				$('#errorReporter').text("Please Fill The Form");
+
+				console.log("invalid");
+			}
 		});
 
 	</script>

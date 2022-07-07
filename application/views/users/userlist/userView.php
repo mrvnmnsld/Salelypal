@@ -119,6 +119,7 @@
 		<!-- <button class="btn-block btn btn-sm btn-primary mt-1" id="blockBtn">Block User</button> -->
 		<!-- <button class="btn-block btn btn-sm btn-primary mt-1" id="unblockBtn">Unblock User</button> -->
 		<button class="btn-block btn btn-sm btn-success mt-1" id="resetBtn">Reset Password</button>
+		<button class="btn-block btn btn-sm btn-warning mt-1" id="deleteBtn">Delete User</button>
 		<button class="btn-block btn btn-sm btn-danger mt-1" id="closeBtn">Close</button>
 	</div>
 </div>
@@ -157,6 +158,8 @@
 		</div>
 	</div>
 
+	<div class="">NOTE: Please hard refresh the page to see the new uploaded if the image still contains the old one</div>
+
 	<div id="errorReporter" class="text-center">
 		
 	</div>
@@ -165,6 +168,7 @@
 
 	<div>
 		<button class="btn-block btn btn-sm btn-success mt-1" id="verify_user_btn">Verify KYC</button>
+		<button class="btn-block btn btn-sm btn-warning mt-1" id="reject_user_btn">Reject KYC</button>
 		<button class="btn-block btn-danger" id="kyc_back_btn">Go back</button>
 	</div>
 </div>
@@ -225,8 +229,6 @@
 	}else{
 		$("#isProContainerNo").attr('checked', 'checked');
 	}
-
-	
 
 	if (selectedData["verified"] == 1) {
 		$("#verifyBtn").text("View Verification")
@@ -366,6 +368,34 @@
 			}
 		});
 
+		$("#deleteBtn").on('click', function(){
+			$.confirm({
+				icon: 'fa fa-trash',
+			    title: 'Deleting?',
+			    columnClass: 'col-md-6 col-md-offset-6',
+			    content: "Are you sure you want to <b>Delete</b> this user",
+			    buttons: {
+			        confirm: function () {
+			        	ajaxShortLink('admin/userlist/deleteUser',{'userID':selectedData['userID']});
+			        	loadDatatable('admin/getAllUsers');
+			        	bootbox.hideAll();
+
+			        	$.toast({
+	    			        heading: '<h6>Success!</h6>',
+	    			        text: 'Successful deleted the user!',
+	    			        showHideTransition: 'slide',
+	    			        icon: 'success',
+	    			        position: 'bottom-left'
+	    			        // position: 'bottom-center'
+	    			    })
+			        },
+			        cancel: function () {
+
+			        },
+			    }
+			});
+		});
+
 		$('input[type=radio][name=isProContainer]').change(function() {
 		    console.log(this.value);
 		    var status;
@@ -399,7 +429,6 @@
 				ajaxShortLink('admin/userlist/blockuser',{'userID':selectedData['userID']});
 			}
 		});
-
 	// initial Modal
 
 	// kyc Modal
@@ -457,6 +486,43 @@
 			    }
 			});
 		});
+
+		$("#reject_user_btn").on('click', function(){
+			$.confirm({
+				icon: 'bi bi-check',
+			    title: 'Rejecting?',
+			    columnClass: 'col-md-6 col-md-offset-6',
+			    content: 'Are you sure you want to <b>Reject</b> this users KYC this will delete their current uploaded photos?',
+			    buttons: {
+			        confirm: function () {
+			        	ajaxShortLink('admin/userlist/rejectedKyc',{
+			        		'userID':selectedData['userID'],
+			        		'faceFileName':selectedData['FaceImagePath'],
+			        		'IdFileName':selectedData['IDImagePath'],
+			        	});
+			        	pushNewNotif("Rejected KYC!","Account KYC Rejected. Please Upload a new photo that follows the instructions!",selectedData['userID'])
+
+			        	loadDatatable('admin/getAllUsers');
+			        	bootbox.hideAll();
+
+			        	$.toast({
+	    			        heading: '<h6>Success!</h6>',
+	    			        text: 'Successfully rejected the user!',
+	    			        showHideTransition: 'slide',
+	    			        icon: 'success',
+	    			        position: 'bottom-left'
+	    			        // position: 'bottom-center'
+	    			    })
+			        },
+			        cancel: function () {
+
+			        },
+			    }
+			});
+		});
+
+
+		
 
 
 		

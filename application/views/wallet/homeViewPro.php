@@ -619,11 +619,12 @@
 
 		$.confirm({
 			theme: 'dark',
-		    title: 'Testing Mode!',
-		    content: 'Testing Mode intitiated, this limits the function and all token amounts are only for testing, They dont exists in the blockchain but it exists in our own server',
+		    title: 'Development Mode!',
+		    content: 'This page is under development. You are being logged out',
 		    typeAnimated: true,
 		    buttons: {
 		        close: function () {
+		        	logOutClearStorage();
 		        }
 		    }
 		});

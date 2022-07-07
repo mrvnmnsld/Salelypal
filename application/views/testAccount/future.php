@@ -108,27 +108,39 @@
 
     <div class="tab-content">
         <div id="future_history_tab_btn" class="tab-pane active text-muted">
-          <table style="font-size: 13px;width: 100%;" cellpadding="5">
-            <thead>
-              <tr>
-                <th scope="col">Risk Taken</th>
-                <th scope="col">Amount</th>
-                <th scope="col">Resolved Price</th>
-                <th scope="col">Difference</th>
-                <!-- <th scope="col">Status</th> -->
-              </tr>
-            </thead>
-            <tbody id="positions_closed_container">
-              <tr class="text-center text-muted" id="no_history_position_flag_container">
-                  <td colspan="5"><b>No positions opened</b></td>
-              </tr>
-            </tbody>
-          </table>
+            <div class="card main-card-ui p-2 rounded shadow-lg">
+                <div class="d-flex">
+                    <div class="text-center p-2 mt-2">
+                        <div class="flex-fill p-2">
+                            <h5>Today's Earnings:</h5>
+                            <span id="todaysEarningLongShort">
+                                0 USD
+                            </span>
+                        </div>
+                    </div>
 
-          <div class="text-center">
-              Showing 5 latest history<br>
-              <!-- <button class="btn btn-link" id="viewMore_history_btn">View More</button> -->
-          </div>
+                    <div class="text-center p-2 mt-2">
+                        <div class="flex-fill p-2">
+                            <h5>All Time Earnings:</h5>
+                            <span id="allTimeEarningsLongShort">
+                                0 USD
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <table id="tableContainer" class="" style="font-size: 11px;width: 100%;" cellpadding="0"> 
+                    <thead>
+                        <tr>
+                            <th scope="col">Risk Taken</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Risk Price</th>
+                            <th scope="col">Resolved Price</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+
         </div>
 
         <div id="future_instructions_tab_btn" class="tab-pane fade p-2 main-color-text">
@@ -306,29 +318,61 @@
                 }
             );
 
-            positionsClosed = positionsClosed.slice(0,5)
+            loadDatatable('',positionsClosed);
 
-            if (positionsClosed.length>=1) {
-                $("#positions_closed_container").empty();
+            var date = new Date();
 
-                for (var i = 0; i < positionsClosed.length; i++) {
-                    if(positionsClosed[i].status=="WIN"){
-                        statusClass = 'text-success';
-                    }else{
-                        statusClass = 'text-danger';
-                    }
+            var year = date.getFullYear();
+            var month = String(date.getMonth() + 1);
+            var day = String(date.getDate());
+            var joined = [month,day,year,].join('/');
 
-                    $("#positions_closed_container").append(
-                        '<tr class="'+statusClass+'">'+
-                            '<td class="">'+positionsClosed[i].riskPrice+'</td>'+
-                            '<td class="">'+positionsClosed[i].amount+'</td>'+
-                            '<td class="">'+parseFloat(positionsClosed[i].resolvedPrice).toFixed(2)+'</td>'+
-                            '<td class="">'+(positionsClosed[i].resolvedPrice-positionsClosed[i].riskPrice).toFixed(2)+'</td>'+
-                            // '<td class="">'+positionsClosed[i].status+' </td>'+
-                        '</tr>'
-                    );  
-                }        
-            }   
+            var earnings = ajaxShortLink("test-account/future/getEarnings",{
+                'userID':currentUser.userID,
+                'date':joined
+            });
+
+            console.log(earnings[0],parseFloat(earnings[0])>=1);
+
+            if (parseFloat(earnings[0])>=1) {
+                console.log("HERE");
+                $("#todaysEarningLongShort").addClass("text-success").text("+"+earnings[0]+" USD");
+            }else{
+                $("#todaysEarningLongShort").addClass("text-danger").text(earnings[0]+" USD");
+            }
+
+            if (parseFloat(earnings[1])>=1) {
+                $("#allTimeEarningsLongShort").addClass("text-success").text("+"+earnings[1]+" USD");
+            }else{
+                $("#allTimeEarningsLongShort").addClass("text-danger").text(earnings[1]+" USD");
+            }
         // closed
+    }
+
+    function loadDatatable(url,data){
+        $('#tableContainer').DataTable().destroy();
+
+        $('#tableContainer').DataTable({
+            data: data,
+            // "ordering": false,
+            "bLengthChange": false,
+            "bFilter": true,
+            columns: [
+                { data:'riskPrice'},
+                { data:'amount',},
+                { data:'riskPrice'},
+                { data:'resolvedPrice'},
+            ],
+            "columnDefs": [
+                // { "width": "50%", "targets": 0 },
+                // { "width": "5%", "targets": 2 },
+                // { "width": "5%", "targets": 3 },
+                // { "width": "5%", "targets": 1 },
+                // {"className": "text-center", "targets": 2}
+            ],
+            "autoWidth": true,
+            "order": [[ 0, "desc" ]],
+            // "sDom": '<"row view-filter"<"col-sm-12"<"pull-left"l><"pull-right"f><"clearfix">>>t<"row view-pager"<"col-sm-12"<"text-center"ip>>>'
+        });
     }
 </script>

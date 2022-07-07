@@ -64,10 +64,10 @@
 		<span class="" style="font-size: 18px;">&nbsp;Display Currency</span>
 	</button>
 
-	<!-- <button id="language_btn" class="btn custom-2nd-text  btn-block text-left">
+	<button id="language_btn" class="btn custom-2nd-text  btn-block text-left">
 		<i class="fa fa-language" aria-hidden="true"></i>
 		<span class="" style="font-size: 18px;">&nbsp;Language</span>
-	</button> -->
+	</button>
 	
 	<button id="theme_btn" class="btn custom-2nd-text btn-block text-left d-flex">
 		<div class="flex-fill">
@@ -274,24 +274,12 @@
 			buttons: {
 				confirm: function () {
 					deleteLocalStorageByKey('currentUser');
-					window.location.href = 'index';//local
+					window.location.href = 'test-account';//local
 				},
 				cancel: function () {
 
 				},
 			}
 		});
-
-		// $.confirm({
-		// 	theme:'dark',
-		//     title: 'Testing Mode!',
-		//     content: 'Logout is disabled due to testing mode',
-		//     type: 'red',
-		//     typeAnimated: true,
-		//     buttons: {
-		//         close: function () {
-		//         }
-		//     }
-		// });
 	});
 </script>
