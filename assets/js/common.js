@@ -675,7 +675,7 @@ isTimeAfter = function(start, end){
 
 getCurrentDateV3 = function(){
 	// this is for input type=date
-	const date = new Date('March 5, 2025 05:24:00');
+	const date = new Date();
 
 	const year = date.getFullYear();
 	const month = String(date.getMonth() + 1).padStart(2, '0');

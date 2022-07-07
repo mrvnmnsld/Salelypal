@@ -557,6 +557,22 @@ class admin extends MY_Controller {
    		echo json_encode($deleteQuery);
 	}
 
+	public function deleteUser(){
+   		$deleteQuery = $this->_deleteRecords(
+   			$tableName = "user_tbl",
+   		 	$fieldName = array("userID"),
+   		  	$where = array($_GET['userID'])
+   		);
+
+   		if ($deleteQuery) {
+   			echo true;
+   		}else{
+   			echo false;
+   		}
+	}
+
+	
+
 	public function getAllTaskCompleted(){
    		$test = $this->_getRecordsData(
    			$selectfields = array("task_completed.*,CONCAT('USER#',user_tbl.userID,' - ',user_tbl.fullname,' | ',user_tbl.email) AS userInfo,task_reference.details AS taskDetails"), 
@@ -915,6 +931,42 @@ class admin extends MY_Controller {
 
 		echo json_encode($updateRecordsRes);
 	}
+
+	public function rejectedKyc(){
+		$tableName="user_tbl";
+		$fieldName='userID';
+		$where=$_GET['userID'];
+
+		$insertRecord = array(
+			'verified' => 2
+		);
+
+		$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
+
+		$tableName="kyc_image_tbl";
+		$fieldName='userID';
+		$where=$_GET['userID'];
+
+		$insertRecord = array(
+			'FaceImagePath' => null,
+			'IDImagePath' => null
+		);
+
+		$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
+
+
+		if (file_exists('assets/imgs/kyc-imgs/face-imgs/'.$_GET['faceFileName'])) {
+		    unlink('assets/imgs/kyc-imgs/face-imgs/'.$_GET['faceFileName']);
+		}
+
+		if (file_exists('assets/imgs/kyc-imgs/id-imgs/'.$_GET['IdFileName'])) {
+		    unlink('assets/imgs/kyc-imgs/id-imgs/'.$_GET['IdFileName']);
+		}
+
+		echo json_encode($updateRecordsRes);
+	}
+
+	
 
 	public function getKYCImages(){
    		$getKYCImages = $this->_getRecordsData(

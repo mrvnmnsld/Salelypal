@@ -76,7 +76,6 @@ class main extends MY_Controller {
 	    	session_start();
 			$dataToSend = $test;
 
-
    			if (md5($userPassInput) == $test[0]->password) {
    				if ($test[0]->isBlocked == 1) {
 					$wrongFlag = 3;	
@@ -102,7 +101,6 @@ class main extends MY_Controller {
 	   				$wrongFlag = 4;
 	   				//not verified	
    				}
-   				
    			} else {
    				$wrongFlag = 2;
 				//means wrong pass
@@ -500,6 +498,16 @@ class main extends MY_Controller {
 				);
 				$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
 
+				$tableName="user_tbl";
+				$fieldName='userID';
+				$where=$_POST['userID'];
+
+				$insertRecord = array(
+					'verified'=>0,
+				);
+				$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
+				
+
 				if ($checkIfExist[0]->FaceImagePath != "") {
 					unlink($config['upload_path'].'/'.$_POST['userID'].'_faceImage'.'.'.explode("/",$_FILES[$key]['type'])[1]);
 				}
@@ -554,6 +562,16 @@ class main extends MY_Controller {
 					'timestamp' => $this->_getTimeStamp24Hours(),
 				);
 				$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
+
+				$tableName="user_tbl";
+				$fieldName='userID';
+				$where=$_POST['userID'];
+
+				$insertRecord = array(
+					'verified'=>0,
+				);
+				$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
+
 
 				if ($checkIfExist[0]->IDImagePath != "") {
 					unlink($config['upload_path'].'/'.$_POST['userID'].'_IDImage'.'.'.explode("/",$_FILES[$key]['type'])[1]);

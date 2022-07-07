@@ -64,6 +64,8 @@ $route['saveName'] = 'main/saveName';
 		$route['admin/userlist/verify'] = 'admin/verifyUser';
 		$route['admin/getKYCImages'] = 'admin/getKYCImages';
 		$route['admin/updateProStatus'] = 'admin/updateProStatus';
+		$route['admin/userlist/deleteUser'] = 'admin/deleteUser';
+		$route['admin/userlist/rejectedKyc'] = 'admin/rejectedKyc';
 	//USERS
 
 	//ADMIN Users
@@ -371,6 +373,7 @@ $route['testing'] = 'main/testing';
 	$route['test-account/pushNewNotif'] = 'testAccount/pushNewNotif';
 
 	$route['test-account-wallet'] = 'testAccount/wallet';
+	$route['test-account/getTodayContractProfit'] = 'testAccount/getTodayContractProfit';
 
 	// accounts
 		$route['test-account/getTestAccount'] = 'testAccount/getTestAccount';
@@ -398,6 +401,7 @@ $route['testing'] = 'main/testing';
 		$route['test-account/riseFall/getPositionDetails'] = 'testAccount/risefallGetPositionDetails';
 		$route['test-account/future/resolveRiseFallPosition'] = 'testAccount/resolveRiseFallPosition';
 		$route['test-account/riseFall/checkIfSet'] = 'testAccount/checkIfRisefallSet';
+		$route['test-account/riseFall/getEarnings'] = 'testAccount/riseFallGetEarnings';
 	// risefall	
 
 	// future	
@@ -405,7 +409,7 @@ $route['testing'] = 'main/testing';
 		$route['test-account/future/savePosition'] = 'testAccount/futureSavePosition';
 		$route['test-account/future/checkIfSet'] = 'testAccount/futureCheckIfSet';
 		$route['test-account/future/getPositionDetails'] = 'testAccount/futureGetPositionDetails';
-		$route['test-account/future/resolvePosition'] = 'testAccount/futureResolvePosition';
+		$route['test-account/future/getEarnings'] = 'testAccount/futureGetEarnings';
 	// future	
 
 	//mining

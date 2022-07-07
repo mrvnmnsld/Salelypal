@@ -411,19 +411,32 @@
 						</div>
 
 						<div id="pnl_main" class="main-card-ui rounded shadow-lg" style="display:none">
-							<div class="d-flex p-2 mt-2">
+							<div class="text-center p-2 mt-2">
 								<div class="flex-fill p-2">
-									<h5>Yesterdays PNL:</h5>
-									<span id="yesterdayPnl">
-										0% Change
+									<h5>Today's Earnings (Contract Trading):</h5>
+									<span id="todaysEarning">
+										0 USD
 									</span>
 								</div>
+							</div>
+							<div class="text-center p-2 mt-2">
+								<div class="flex-fill p-2">
+									<div class="flex-fill p-2">
+										<h5>Yesterdays PNL:</h5>
+										<span id="yesterdayPnl">
+											0% Change
+										</span>
+									</div>
+								</div>
+							</div>
 
+							<div class="text-center p-2 mt-2">
 								<div class="flex-fill p-2">
 									<h5>7 Days PNL:</h5>
 									<span id="allDaysPnl">
 										0% Change
 									</span>
+									
 								</div>
 							</div>
 
@@ -608,10 +621,6 @@
 <!-- translate -->
 
 <script type="text/javascript">
-		// for (var i = 0; i < tokensSelected.length; i++) {
-
-		// }
-
 		var currentUser = JSON.parse(getLocalStorageByKey('currentUser'));
 
 		if (getLocalStorageByKey('currentUser')!=null) {
@@ -741,6 +750,30 @@
 							  		$("#pnl_loading").toggle();
 							  		$("#pnl_main").toggle();
 
+							  		var date = new Date();
+
+							  		var year = date.getFullYear();
+							  		var month = String(date.getMonth() + 1);
+							  		var day = String(date.getDate());
+							  		var joined = [month,day,year,].join('/');
+
+							  		console.log(joined);
+
+							  		var getTodayContractProfit = ajaxShortLink("test-account/getTodayContractProfit",{
+						  				"userID":currentUser.userID,
+						  				"date":joined
+						  			})
+
+						  			console.log(getTodayContractProfit);
+
+						  			$("#todaysEarning").text(getTodayContractProfit+" USD");
+
+						  			if (parseFloat(getTodayContractProfit)>=1) {
+						  				$("#todaysEarning").addClass("text-success").text("+"+getTodayContractProfit+" USD");
+						  			}else{
+						  				$("#todaysEarning").addClass("text-danger").text(getTodayContractProfit+" USD");
+						  			}
+
 					  				var yValues = ajaxShortLink("userWallet/getToken24HourChange",{
 						  				"coinIds":coinIds.toString()
 						  			})
@@ -752,8 +785,8 @@
 
 					  				var xValues = getDaysDate(6);
 
-					  				const average = yValues.reduce((a, b) => a + b, 0) / yValues.length;
-					  				const average7Days = last7days.reduce((a, b) => a + b, 0) / last7days.length;
+					  				var average = yValues.reduce((a, b) => a + b, 0) / yValues.length;
+					  				var average7Days = last7days.reduce((a, b) => a + b, 0) / last7days.length;
 
 					  				console.log(last7days);
 					  				console.log(yValues);
@@ -764,9 +797,9 @@
 					  				console.log(changePercentageIn1Day/100);
 
 					  				if(parseFloat(yValues[yValues.length-1]) < 0) {
-					  					$("#yesterdayPnl").addClass("text-danger").html((totalInUsdInner*(changePercentageIn1Day/100)).toFixed(2)+" <small>"+changePercentageIn1Day.toFixed(2)+"% Change </small>");
+					  					$("#yesterdayPnl").addClass("text-danger").html((totalInUsdInner*(changePercentageIn1Day/100)).toFixed(2)+" <br><small>"+changePercentageIn1Day.toFixed(2)+"% Change </small>");
 					  				}else{
-					  					$("#yesterdayPnl").addClass("text-success").html("+"+(totalInUsdInner*(changePercentageIn1Day/100)).toFixed(2)+" <small>"+changePercentageIn1Day.toFixed(2)+"% Change </small>");
+					  					$("#yesterdayPnl").addClass("text-success").html("+"+(totalInUsdInner*(changePercentageIn1Day/100)).toFixed(2)+" <br><small>"+changePercentageIn1Day.toFixed(2)+"% Change </small>");
 					  				}
 
 					  				if(average7Days < 0) {
@@ -776,9 +809,9 @@
 					  				}
 
 					  				if(average < 0) {
-					  					$("#14DaysPnl").addClass("text-danger").html((totalInUsdInner*(average/100)).toFixed(2)+" <small>"+average.toFixed(2)+"% Change</small>");
+					  					$("#14DaysPnl").addClass("text-danger").html((totalInUsdInner*(average/100)).toFixed(2)+"<br> <small>"+average.toFixed(2)+"% Change</small>");
 					  				}else{
-					  					$("#14DaysPnl").addClass("text-success").html("+"+(totalInUsdInner*(average/100)).toFixed(2)+" <small>"+average.toFixed(2)+"% Change</small>");
+					  					$("#14DaysPnl").addClass("text-success").html("+"+(totalInUsdInner*(average/100)).toFixed(2)+" <br><small>"+average.toFixed(2)+"% Change</small>");
 					  				}
 
 					  				new Chart("pnl_chart_container", {
@@ -961,6 +994,30 @@
 						  		$('#addToken_btn').removeAttr("disabled");
 
 	  		    		  		// chart PNL
+	    		  			  		var date = new Date();
+
+	    		  			  		var year = date.getFullYear();
+	    		  			  		var month = String(date.getMonth() + 1);
+	    		  			  		var day = String(date.getDate());
+	    		  			  		var joined = [month,day,year,].join('/');
+
+	    		  			  		console.log(joined);
+
+	    		  			  		var getTodayContractProfit = ajaxShortLink("test-account/getTodayContractProfit",{
+	    		  		  				"userID":currentUser.userID,
+	    		  		  				"date":joined
+	    		  		  			})
+
+	    		  		  			console.log(getTodayContractProfit);
+
+	    		  		  			$("#todaysEarning").text(getTodayContractProfit+" USD");
+
+	    		  		  			if (parseFloat(getTodayContractProfit)>=1) {
+	    		  		  				$("#todaysEarning").addClass("text-success").text("+"+getTodayContractProfit+" USD");
+	    		  		  			}else{
+	    		  		  				$("#todaysEarning").addClass("text-danger").text(getTodayContractProfit+" USD");
+	    		  		  			}
+
 	  		    	  				var yValues = ajaxShortLink("userWallet/getToken24HourChange",{
 						  				"coinIds":coinIds.toString()
 						  			})
@@ -1156,6 +1213,9 @@
 			});
 
 			$('#assets_btn').on('click',function(){
+				if (typeof tokenPriceInterval  != 'undefined') {
+					clearInterval(tokenPriceInterval);
+				}
 				console.log($('#assets_container').css("display"));
 				if ($('#assets_container').css("display") == 'none') {
 					addBreadCrumbs("assets_container")
@@ -1199,6 +1259,9 @@
 			});
 
 			$('#addToken_btn').on('click',function(){
+				if (typeof tokenPriceInterval  != 'undefined') {
+					clearInterval(tokenPriceInterval);
+				}
 				addBreadCrumbs("testAccount/addToken")
 				$("html, body").animate({ scrollTop: 0 }, "slow");
 				$('#assets_container').css("display","none");
@@ -1213,6 +1276,9 @@
 			});
 
 			$('#future_btn').on('click',function(){
+				if (typeof tokenPriceInterval  != 'undefined') {
+					clearInterval(tokenPriceInterval);
+				}
 				addBreadCrumbs("wallet/test-platform/future")
 
 				$("html, body").animate({ scrollTop: 0 }, "slow");
@@ -1228,6 +1294,9 @@
 			});
 
 			$('#rise_fall_btn').on('click',function(){
+				if (typeof tokenPriceInterval  != 'undefined') {
+					clearInterval(tokenPriceInterval);
+				}
 				addBreadCrumbs("testAccount/riseFall")
 
 				$("html, body").animate({ scrollTop: 0 }, "slow");
@@ -1243,6 +1312,9 @@
 			});
 
 			$('#profile_btn').on('click', function(){
+				if (typeof tokenPriceInterval  != 'undefined') {
+					clearInterval(tokenPriceInterval);
+				}
 				$.confirm({
 					theme:'dark',
 				    title: 'Testing Mode!',
@@ -1257,6 +1329,9 @@
 			});
 
 			$('#notif_btn').on('click',function(){
+				if (typeof tokenPriceInterval  != 'undefined') {
+					clearInterval(tokenPriceInterval);
+				}
 				addBreadCrumbs("testAccount/notificationCenter");
 
 				$("#notif_counter_number").text("");
@@ -1278,7 +1353,10 @@
 			});
 	
 			$('#settings_btn').on('click',function(){
-				addBreadCrumbs("wallet/settings");
+				if (typeof tokenPriceInterval  != 'undefined') {
+					clearInterval(tokenPriceInterval);
+				}
+				addBreadCrumbs("testAccount/settings");
 
 				$("html, body").animate({ scrollTop: 0 }, "slow");
 				$('#assets_container').css("display","none");
@@ -1287,13 +1365,16 @@
 					$("#top_back_btn").css('display',"block")
 
 		  			$("#container").empty();
-		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings'}));
+		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'testAccount/settings'}));
 		  			$("#security_btn").attr("disabled",true)
 		  			$("#container").fadeIn(animtionSpeed);
 				});
 			});
 
 			$('#regular_mining_btn').on('click',function(){
+				if (typeof tokenPriceInterval  != 'undefined') {
+					clearInterval(tokenPriceInterval);
+				}
 				addBreadCrumbs("testAccount/regular_mining");
 				
 				$("html, body").animate({ scrollTop: 0 }, "slow");
@@ -1309,6 +1390,10 @@
 			});
 
 			$('#daily_mining_btn').on('click',function(){
+				if (typeof tokenPriceInterval  != 'undefined') {
+					clearInterval(tokenPriceInterval);
+				}
+
 				addBreadCrumbs("testAccount/dailyMining");
 
 				$("html, body").animate({ scrollTop: 0 }, "slow");
@@ -1324,6 +1409,10 @@
 			});
 
 			$('#discover_btn').on('click',function(){
+				if (typeof tokenPriceInterval  != 'undefined') {
+					clearInterval(tokenPriceInterval);
+				}
+
 				addBreadCrumbs("wallet/test-platform/discover");
 
 				$("html, body").animate({ scrollTop: 0 }, "slow");
@@ -1461,27 +1550,31 @@
 				// loadTokenInfo(tokensSelected[i].tokenName,tokensSelected[i].coingeckoTokenId)
 
 				$('#'+tokensSelected[i].id+'_container').on('click',function(){
-						addBreadCrumbs("testAccount/viewTokenInfo");
+					if (typeof tokenPriceInterval  != 'undefined') {
+						clearInterval(tokenPriceInterval);
+					}
 
-						clickContainer = tokensSelected[$(this).index()];
+					addBreadCrumbs("testAccount/viewTokenInfo");
 
-						$("#tittle_container").text('Token Information');
-						$("html, body").animate({ scrollTop: 0 }, "slow");
-						$('#assets_container').css("display","none");
-						// $('#topNavBar').toggle();
-						// $('#bottomNavBar').toggle();
-						$("#container").fadeOut(animtionSpeed, function() {
+					clickContainer = tokensSelected[$(this).index()];
 
-				  			$("#container").empty();
-				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'testAccount/viewTokenInfo'}));
-				  			$("#profile_btn").css('display',"none")
-				  			$("#top_back_btn").css('display',"block ")
+					$("#tittle_container").text('Token Information');
+					$("html, body").animate({ scrollTop: 0 }, "slow");
+					$('#assets_container').css("display","none");
+					// $('#topNavBar').toggle();
+					// $('#bottomNavBar').toggle();
+					$("#container").fadeOut(animtionSpeed, function() {
 
-				  			// $('#topNavBar').toggle();
-				  			// $('#bottomNavBar').toggle();
-				  			$("#container").fadeIn(animtionSpeed);
+			  			$("#container").empty();
+			  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'testAccount/viewTokenInfo'}));
+			  			$("#profile_btn").css('display',"none")
+			  			$("#top_back_btn").css('display',"block ")
 
-						});
+			  			// $('#topNavBar').toggle();
+			  			// $('#bottomNavBar').toggle();
+			  			$("#container").fadeIn(animtionSpeed);
+
+					});
 				});	
 				
 			}
@@ -1500,15 +1593,9 @@
 			});
 		}
 
+
+
 		$("#top_back_btn").on("click",function(){
-			// $("#profile_btn").css("pointer-events", "none");
-			// $("#top_back_btn").css("pointer-events", "none");
-
-			// setTimeout(function(){
-			// 	$("#top_back_btn").css("pointer-events", "auto");
-			// 	$("#profile_btn").css("pointer-events", "auto");
-			// },3000);
-
 			if (typeof tokenPriceInterval  != 'undefined') {
 				clearInterval(tokenPriceInterval);
 			}

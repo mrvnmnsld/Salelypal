@@ -100,13 +100,13 @@
     }
 
     #risefall_history_container a{
-					/* color: #94abef; */
-					opacity: .5;
-					-webkit-transition: color 2s, font-size .25s;
-					-moz-transition: color 2s, font-size .25s;
-					-o-transition: color 2s, font-size .25s;
-					transition: color 2s, font-size .25s;
-				}
+		/* color: #94abef; */
+		opacity: .5;
+		-webkit-transition: color 2s, font-size .25s;
+		-moz-transition: color 2s, font-size .25s;
+		-o-transition: color 2s, font-size .25s;
+		transition: color 2s, font-size .25s;
+	}
 </style>
 
 <div id="risefall_history_container" class="mt-2"> 
@@ -121,27 +121,39 @@
 
     <div class="tab-content">
         <div id="history_tab_btn" class=" tab-pane active text-muted">
-            <table style="font-size: 13px;width: 100%;" cellpadding="5">
-                <thead>
-                  <tr>
-                    <th scope="col">Type</th>
-                    <th scope="col">Resolve Time</th>
-                    <th scope="col">Amount</th>
-                    <th scope="col">Price/Resolved</th>
-                    <!-- <th scope="col"></th> -->
-                    <!-- <th scope="col">Status</th> -->
-                  </tr>
-                </thead>
-                <tbody id="positions_closed_container">
-                    <tr class="text-center text-muted" id="no_history_position_flag_container">
-                      <td colspan="5"><b>No positions opened</b></td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="card main-card-ui p-2 rounded shadow-lg">
 
-            <div class="text-center">
-                Showing 5 latest history<br>
-                <!-- <button class="btn btn-link" id="viewMore_history_btn">View More</button> -->
+                <div class="d-flex">
+                    <div class="text-center p-2 mt-2">
+                        <div class="flex-fill p-2">
+                            <h5>Today's Earnings:</h5>
+                            <span id="todaysEarningRiseFall">
+                                0 USD
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="text-center p-2 mt-2">
+                        <div class="flex-fill p-2">
+                            <h5>All Time Earnings:</h5>
+                            <span id="allTimeEarningsRiseFall">
+                                0 USD
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+
+                <table id="tableContainer" class="" style="font-size: 11px;width: 100%;" cellpadding="0"> 
+                    <thead>
+                        <tr>
+                            <th scope="col">Resolve Time</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Price/Resolved</th>
+                        </tr>
+                    </thead>
+                </table>
             </div>
         </div>
 
@@ -180,6 +192,8 @@
     var totalAmountPending = 0;
     var pendingPositionChecker;
     var tokenPriceInterval;
+   
+
     $('#token_pair_select').val(tokenPairArray.tokenPairDescription);
 
     $('#token_pair_select').change(function(){
@@ -371,10 +385,8 @@
 
     function reloadPositions(){
         var timing = '';
+
         // closed
-
-            $("#positions_closed_container").empty();
-
             var closedPositions = ajaxShortLink(
                 "test-account/risefall/getClosedRiseFallPositions",
                 {
@@ -385,50 +397,63 @@
 
             console.log(closedPositions);
 
-            closedPositions = closedPositions.slice(0,5).reverse()
+            loadDatatable('',closedPositions);
 
-            if (closedPositions.length == 0) {
-                $("#no_history_position_flag_container").append(
-                    '<tr class="text-center text-danger" id="no_history_position_flag_container">'+
-                       '<td colspan="5"><b>No positions opened</b></td>'+
-                    '</tr>'
-                ); 
+            var date = new Date();
+
+            var year = date.getFullYear();
+            var month = String(date.getMonth() + 1);
+            var day = String(date.getDate());
+            var joined = [month,day,year,].join('/');
+
+
+            var earnings = ajaxShortLink("test-account/riseFall/getEarnings",{
+                'userID':currentUser.userID,
+                'date':joined
+            });
+
+            console.log(earnings[0],parseFloat(earnings[0])>=1);
+
+            if (parseFloat(earnings[0])>=1) {
+                console.log("HERE");
+                $("#todaysEarningRiseFall").addClass("text-success").text("+"+earnings[0]+" USD");
             }else{
-                for (var x = 0; x < closedPositions.length; x++) {
-                    var statusClass;
+                $("#todaysEarningRiseFall").addClass("text-danger").text(earnings[0]+" USD");
+            }
 
-                    if (closedPositions[x].income == 30) {
-                        timing = '30/30'
-                    }else if(closedPositions[x].income == 50){
-                        timing = '60/50'
-                    }else if(closedPositions[x].income == 70){
-                        timing = '120/70'
-                    }else if(closedPositions[x].income == 90){
-                        timing = '180/90'
-                    }
-
-                    if (closedPositions[x].status == "WIN") {
-                        statusClass = 'text-success'
-                    }else{
-                        statusClass = 'text-danger'
-                    }
-
-                    $("#positions_closed_container").prepend(
-                        '<tr class="'+statusClass+'">'+
-                            '<td class="">'+closedPositions[x].buyType.toUpperCase()+'</td>'+
-                            '<td class="">'+closedPositions[x].timeStamp+'</td>'+
-                            '<td class="text-center">'+closedPositions[x].amount+'</td>'+
-                            '<td class="">'+parseFloat(closedPositions[x].currentPrice).toFixed(2)+'/'+parseFloat(closedPositions[x].resolvedPrice).toFixed(2)+'</td>'+
-                            // '<td class="">'+parseFloat(closedPositions[x].resolvedPrice).toFixed(2)+'</td>'+
-                            // '<td class="">'+closedPositions[x].status+' </td>'+
-                        '</tr>'
-                    ); 
-                } 
-            } 
+            if (parseFloat(earnings[1])>=1) {
+                $("#allTimeEarningsRiseFall").addClass("text-success").text("+"+earnings[1]+" USD");
+            }else{
+                $("#allTimeEarningsRiseFall").addClass("text-danger").text(earnings[1]+" USD");
+            }
         // closed
     }
 
-    window.onbeforeunload = function() {
-        return "Dude, are you sure you want to leave? Think of the kittens!";
+    function loadDatatable(url,data){
+        $('#tableContainer').DataTable().destroy();
+
+        $('#tableContainer').DataTable({
+            data: data,
+            // "ordering": false,
+            "bLengthChange": false,
+            "bFilter": true,
+            columns: [
+                { data:'timeStamp'},
+                { data:'buyType',},
+                { data:'amount'},
+                { data:'currentPrice'},
+            ],
+            "columnDefs": [
+                { "width": "50%", "targets": 0 },
+                { "width": "5%", "targets": 2 },
+                { "width": "5%", "targets": 3 },
+                { "width": "5%", "targets": 1 },
+                // {"className": "text-center", "targets": 2}
+            ],
+            "autoWidth": false,
+            "order": [[ 0, "desc" ]],
+            // "sDom": '<"row view-filter"<"col-sm-12"<"pull-left"l><"pull-right"f><"clearfix">>>t<"row view-pager"<"col-sm-12"<"text-center"ip>>>'
+        });
     }
+
 </script>

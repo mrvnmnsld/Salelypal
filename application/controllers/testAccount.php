@@ -1515,6 +1515,126 @@ class testAccount extends MY_Controller {
 		}
 	}
 
+	public function getTodayContractProfit(){
+		$riseFall = $this->_getRecordsData(
+			$selectfields = array("*"), 
+	   		$tables = array('test_account_future_risefall_positions'),
+	   		$fieldName = array('userID'), $where = array($_GET['userID']), 
+	   		$join = null, $joinType = null,
+	   		$sortBy = array('id'), $sortOrder = array('desc'), 
+	   		$limit = null, 
+	   		$fieldNameLike = null, $like = null,
+	   		$whereSpecial = array("timeStamp LIKE '%".$_GET['date']."%'"), 
+	   		$groupBy = null 
+		);
+
+		$sumRiseFall = 0;
+
+		foreach ($riseFall as $key => $value) {
+			if ($value->status=="WIN") {
+				$sumRiseFall = $sumRiseFall+floatval($value->income);
+			}else{
+				$sumRiseFall = $sumRiseFall-floatval($value->income);
+			}
+		}
+
+		$longShort = $this->_getRecordsData(
+			$selectfields = array("*"), 
+	   		$tables = array('test_account_future_positions'),
+	   		$fieldName = array('userID'), $where = array($_GET['userID']), 
+	   		$join = null, $joinType = null,
+	   		$sortBy = array('id'), $sortOrder = array('desc'), 
+	   		$limit = null, 
+	   		$fieldNameLike = null, $like = null,
+	   		$whereSpecial = array("timeStamp LIKE '%".$_GET['date']."%'"), 
+	   		$groupBy = null 
+		);
+
+		$sumLongShort = 0;
+
+		foreach ($longShort as $key => $value) {
+			if ($value->status=="WIN") {
+				$sumLongShort = $sumLongShort+floatval($value->amount);
+			}else{
+				$sumLongShort = $sumLongShort-floatval($value->amount);
+			}
+		}
+
+		echo json_encode($sumRiseFall+$sumLongShort);
+	}
+
+	public function riseFallGetEarnings(){
+		$riseFall = $this->_getRecordsData(
+			$selectfields = array("*"), 
+	   		$tables = array('test_account_future_risefall_positions'),
+	   		$fieldName = array('userID'), $where = array($_GET['userID']), 
+	   		$join = null, $joinType = null,
+	   		$sortBy = array('id'), $sortOrder = array('desc'), 
+	   		$limit = null, 
+	   		$fieldNameLike = null, $like = null,
+	   		$whereSpecial = null, 
+	   		$groupBy = null 
+		);
+
+		$sumRiseFall = 0;
+		$sumTodayRiseFall = 0;
+
+		foreach ($riseFall as $key => $value) {
+			if ($value->status=="WIN") {
+				if (strpos($value->timeStamp,$_GET['date'])!== false) {
+					$sumTodayRiseFall = $sumTodayRiseFall+floatval($value->income);
+				}
+				$sumRiseFall = $sumRiseFall+floatval($value->income);
+			}else{
+				if (strpos($value->timeStamp,$_GET['date'])!== false) {
+					$sumTodayRiseFall = $sumTodayRiseFall-floatval($value->income);
+				}
+
+				$sumRiseFall = $sumRiseFall-floatval($value->income);
+			}
+		}
+
+
+		echo json_encode(array($sumRiseFall,$sumTodayRiseFall));
+	}
+
+	public function futureGetEarnings(){
+		$longShort = $this->_getRecordsData(
+			$selectfields = array("*"), 
+	   		$tables = array('test_account_future_positions'),
+	   		$fieldName = array('userID'), $where = array($_GET['userID']), 
+	   		$join = null, $joinType = null,
+	   		$sortBy = array('id'), $sortOrder = array('desc'), 
+	   		$limit = null, 
+	   		$fieldNameLike = null, $like = null,
+	   		$whereSpecial = null, 
+	   		$groupBy = null 
+		);
+
+		$sumLongShort = 0;
+		$sumTodayLongShort = 0;
+
+		foreach ($longShort as $key => $value) {
+			if ($value->status=="WIN") {
+				if (strpos($value->timeStamp,$_GET['date'])!== false) {
+					$sumTodayLongShort = $sumTodayLongShort+floatval($value->amount);
+				}
+				$sumLongShort = $sumLongShort+floatval($value->amount);
+			}else{
+				if (strpos($value->timeStamp,$_GET['date'])!== false) {
+					$sumTodayLongShort = $sumTodayLongShort-floatval($value->amount);
+				}
+
+				$sumLongShort = $sumLongShort-floatval($value->amount);
+			}
+		}
+
+
+		echo json_encode(array($sumLongShort,$sumTodayLongShort));
+	}
+
+	
+
 
 	
 
