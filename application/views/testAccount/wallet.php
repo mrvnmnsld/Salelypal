@@ -1587,7 +1587,11 @@
 		}
 
 		function addBreadCrumbs(page){
-			breadCrumbs.push(page);
+			console.log(breadCrumbs[breadCrumbs.length-1],page,breadCrumbs[breadCrumbs.length-1]!=page);
+
+			if (breadCrumbs[breadCrumbs.length-1]!=page) {
+				breadCrumbs.push(page);
+			}
 		}
 
 		function pushNewNotifTestAccount(tittle,content,userID){
