@@ -304,7 +304,7 @@
 
 				console.log(transactions);
 
-				var erc20_transactions = ajaxShortLink("userWallet/getErc20Transactions",{'erc20_wallet':selectedData.erc20_wallet})['result']; 
+				var erc20_transactions = ajaxShortLink("userWallet/getErc20Transactions",{'erc20_wallet':selectedData.erc20_wallet}); 
 
 				if(erc20_transactions.status == 1){
 					for (var i = 0; i < erc20_transactions.result.length; i++) {
