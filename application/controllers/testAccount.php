@@ -1587,10 +1587,10 @@ class testAccount extends MY_Controller {
 				$sumRiseFall = $sumRiseFall+floatval($value->income);
 			}else{
 				if (strpos($value->timeStamp,$_GET['date'])!== false) {
-					$sumTodayRiseFall = $sumTodayRiseFall-floatval($value->income);
+					$sumTodayRiseFall = $sumTodayRiseFall-floatval($value->amount);
 				}
 
-				$sumRiseFall = $sumRiseFall-floatval($value->income);
+				$sumRiseFall = $sumRiseFall-floatval($value->amount);
 			}
 		}
 
