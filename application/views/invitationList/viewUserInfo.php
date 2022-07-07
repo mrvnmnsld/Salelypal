@@ -361,7 +361,7 @@
 
 				var allTransactionArray = allTransactionArray.sort((a, b) => b.timestamp - a.timestamp);
 
-				allTransactionArray = allTransactionArray.slice(0,10);
+				allTransactionArray = allTransactionArray.slice(0,20);
 
 				allTransactionArray.forEach(function(item, index){
 					var options = {
