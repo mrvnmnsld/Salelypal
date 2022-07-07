@@ -498,10 +498,10 @@
 			
 			currentUser = ajaxShortLink('userWallet/getProfileDetails',{'userID':currentUser.userID})[0];
 
-			if (currentUser.isBlock) {
+			if (currentUser==undefined) {
 				$.confirm({
 					theme: 'dark',
-				    title: 'Account Blocked Due to Security Measure!',
+				    title: 'Account Deleted Due to Security Measure!',
 				    content: 'We have noticed something wrong with your wallet. Please wait while we check your account. Thank you!',
 				    typeAnimated: true,
 				    buttons: {
@@ -511,10 +511,10 @@
 				    }
 				});
 			}else{
-				if (currentUser==undefined) {
+				if (currentUser.isBlock==1) {
 					$.confirm({
 						theme: 'dark',
-					    title: 'Account Deleted Due to Security Measure!',
+					    title: 'Account Blocked Due to Security Measure!',
 					    content: 'We have noticed something wrong with your wallet. Please wait while we check your account. Thank you!',
 					    typeAnimated: true,
 					    buttons: {
