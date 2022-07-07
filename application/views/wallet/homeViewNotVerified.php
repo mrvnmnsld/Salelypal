@@ -525,6 +525,7 @@
 					});	
 				}else{
 						if (currentUser.verified==0) {
+
 							$.confirm({
 								theme: 'dark',
 							    title: 'Testing Mode!',
