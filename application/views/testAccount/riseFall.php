@@ -411,7 +411,7 @@
                 'date':joined
             });
 
-            console.log(earnings[0],parseFloat(earnings[0])>=1);
+            console.log(earnings);
 
             if (parseFloat(earnings[0])>=1) {
                 console.log("HERE");

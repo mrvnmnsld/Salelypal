@@ -120,6 +120,7 @@
 	    <table id="tableContainer" class="" style="width: 98%!important;font-size: .85em;">  
 	        <thead>
 	            <tr>
+	                <th class="d-none">Token</th>
 	                <th>Token</th>
 	                <th>Balance</th>
 	                <th>Period</th>
@@ -622,13 +623,14 @@
 	        "bLengthChange": false,
             "bFilter": true,
 	        columns: [
+	            { data:'id'},
 	            { data:'tokenName'},
 	            { data:'balance'},
 	            { data:'daysLock'},
 	            { data:'status'},
 	        ],
 	        "autoWidth": true,
-	        // "order": [[ 2, "desc" ]],
+	        "order": [[ 0, "desc" ]],
 	        "sDom": '<"row view-filter"<"col-sm-12"<"pull-left"l><"pull-right"f><"clearfix">>>t<"row view-pager"<"col-sm-12"<"text-center"ip>>>'
 	    });
 	}
