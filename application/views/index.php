@@ -495,7 +495,7 @@
 
 
 
-          <div id="errorReporter" class="text-danger text-center mt-4"></div>
+          <div id="errorReporter" class="text-danger text-center mt-4 font-weight-bold"></div>
 
           <div class="input-field button">
             <button id="submit_login_btn" class="login-signup-btn" type="button">LOGIN</button>
@@ -595,7 +595,7 @@
 
 						<hr class="mt-4">
 
-						<div id="errorReporter_otp" class="text-danger text-center"></div>
+						<div id="errorReporter_otp" class="text-danger text-center font-weight-bold"></div>
 
 						<button id="verify_otp_btn" class='login-signup-btn btn btn-primary btn-block mt-4 mb-4 customBtn'>Verify OTP</button>
 
@@ -1015,7 +1015,7 @@
 
 				if ($("#loginForm").valid()) {
 					$('#errorReporter').text("");
-					$('#sliderCaptchaModal').modal('toggle');
+					// $('#sliderCaptchaModal').modal('toggle');
 
 					captcha.reset();
 					console.log("valid");
