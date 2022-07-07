@@ -208,11 +208,13 @@
 
         if(amountInput!=""&&amountInput<=availableAmount&&isGasEnough==1&&parseFloat(amountInput)>=parseFloat(bettingSettings[0].value)){
            $.confirm({
-               title: 'Buy Rise?',
-               theme: 'dark',
-               content: 'Are you sure you want to proceed with these risks?',
-               buttons: {
-                   confirm: function () {
+                escapeKey: false,
+                backgroundDismiss: false,
+                title: 'Buy Rise?',
+                theme: 'dark',
+                content: 'Are you sure you want to proceed with these risks?',
+                buttons: {
+                    confirm: function () {
                         $("#buy_rise_submit_btn").attr("disabled",true);
                         
                         var res = ajaxShortLink("test-account/future/saveRiseFallPosition",{
@@ -298,7 +300,7 @@
                        // test-platfrom
 
                        // minusToAmountAvailable(amountInput)
-                       reloadPositions();
+                       // reloadPositions();
                    },
                    cancel: function () {
 

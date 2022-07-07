@@ -205,6 +205,8 @@
 
         if(amountInput!=""&&amountInput<=availableAmount&&isGasEnough==1&&parseFloat(amountInput)>=parseFloat(bettingSettings[0].value)){
            $.confirm({
+                escapeKey: false,
+                backgroundDismiss: false,
                title: 'Buy Rise?',
                theme: 'dark',
                content: 'Are you sure you want to proceed with these risks?',
@@ -295,7 +297,7 @@
                        // test-platfrom
 
                        // minusToAmountAvailable(amountInput)
-                       reloadPositions();
+                       // reloadPositions();
                    },
                    cancel: function () {
                     

@@ -192,6 +192,8 @@
 
                 if($("#amount_input_container").val()<=availableAmount&&isGasEnough==1&&parseFloat(amount)>=parseFloat(bettingSettings[1].value)){
                     $.confirm({
+                        escapeKey: false,
+                        backgroundDismiss: false,
                         title: 'Buy Long?',
                         theme: 'dark',
                         content: 'Are you sure you want to proceed with these risks?',
