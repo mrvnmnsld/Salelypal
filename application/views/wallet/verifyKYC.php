@@ -668,7 +668,7 @@
         });
 
         currentUser = ajaxShortLink('userWallet/getProfileDetails',{'userID':currentUser.userID})[0];
-        setLocalStorageByKey('currentUser',JSON.stringify(currentUser);
+        setLocalStorageByKey('currentUser',JSON.stringify(currentUser));
 
         if(res==false){
             $.alert("Error in Uploading Birthdate, please contact system admin.<hr><div><b class='text-center'> ErrorCode:521</b></div>");
@@ -682,7 +682,7 @@
         });
 
         currentUser = ajaxShortLink('userWallet/getProfileDetails',{'userID':currentUser.userID})[0];
-        setLocalStorageByKey('currentUser',JSON.stringify(currentUser);
+        setLocalStorageByKey('currentUser',JSON.stringify(currentUser));
 
         // console.log(loginRes['data'][0].isPro==1,JSON.parse(getLocalStorageByKey('currentUser')));
 
@@ -703,7 +703,7 @@
         checkupload()
 
         currentUser = ajaxShortLink('userWallet/getProfileDetails',{'userID':currentUser.userID})[0];
-        setLocalStorageByKey('currentUser',JSON.stringify(currentUser);
+        setLocalStorageByKey('currentUser',JSON.stringify(currentUser));
 
         if(res==false){
             $.alert("Error in Uploading name, please contact system admin.<hr><div><b class='text-center'> ErrorCode:521</b></div>");
