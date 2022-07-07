@@ -1015,9 +1015,8 @@
 
 				if ($("#loginForm").valid()) {
 					$('#errorReporter').text("");
-					// $('#sliderCaptchaModal').modal('toggle');
+					$("#loginForm").submit();
 
-					captcha.reset();
 					console.log("valid");
 				}else{
 					$('#errorReporter').text("Please Fill The Form");
