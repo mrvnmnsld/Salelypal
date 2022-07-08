@@ -48,7 +48,6 @@
 				<div class="py-1"id="qrcode"></div>
 			</div>
 
-
 			<div class="form-group">
 				<label class="text-muted">Select which token to deposit</label>
 				<select class="form-control" id="tokenSelection">
