@@ -138,6 +138,12 @@
 <script>
     $(document).ready(function() {
         loadDatatable('wallet/getUserPurchase',{'userID':currentUser['userID']});
+
+        $('#token_select').selectpicker({
+            style: 'border',
+            size: 8,
+            showSubtext :true
+        });
     });
 
     $('#purchaseAppeals_inner_btn').on('click',function(){

@@ -948,16 +948,17 @@
 			});
 
 			$('#buyCrypto_btn, #buy_btn_option').on('click',function(){
-				$.confirm({
-					theme:'dark',
-				    title: 'Testing Mode!',
-				    content: 'Buying is disabled due to testing mode being active',
-				    type: 'red',
-				    typeAnimated: true,
-				    buttons: {
-				        close: function () {
-				        }
-				    }
+				addBreadCrumbs("wallet/buyCrypto");
+
+				$("html, body").animate({ scrollTop: 0 }, "slow");
+				$('#assets_container').css("display","none");
+				$("#container").fadeOut(animtionSpeed, function() {
+					$("#profile_btn").css('display',"none")
+					$("#top_back_btn").css('display',"block")
+
+		  			$("#container").empty();
+		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/buyCrypto'}));
+		  			$("#container").fadeIn(animtionSpeed);
 				});
 			});
 			
@@ -1223,7 +1224,7 @@
 				if (typeof tokenPriceInterval  != 'undefined') {
 					clearInterval(tokenPriceInterval);
 				}
-				
+
 				addBreadCrumbs("wallet/test-platform/discover");
 
 				$("html, body").animate({ scrollTop: 0 }, "slow");
