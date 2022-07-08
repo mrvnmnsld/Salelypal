@@ -561,27 +561,29 @@
 				</form>
 
 				<div class="text-center" style="display:none;" id="otp_container">
-					<div id="otp_selector" class="text-center" style="display:">
+					<div id="otp_selector" class="text-center otp-selector" style="display:">
 						<span class="h3">Please select where to send your OTP</span>
 						<br>
 						<br>
 						<div class="row">
-							<button class="btn col-5 otp_selector_btn login-signup-btn" data-otp-type="email" style="font-size: 16px;">Send via Email</button>
+							<button id="otp_email_btn" class="btn col-5 otp_selector_btn login-signup-btn" data-otp-type="email" style="font-size: 16px;">Send via Email</button>
 							<div class="col-2"></div>
-							<button class="btn col-5 otp_selector_btn login-signup-btn" data-otp-type="mobile" style="font-size: 16px;">
+							<button id="otp_mobile_btn" class="btn col-5 otp_selector_btn login-signup-btn" data-otp-type="mobile" style="font-size: 16px;">
 								Send via Mobile
 							</button>
 						</div>
 					</div>
 
 					<div id="otp_verifier" style="display:none">
-						<div class="h4 text-success font-weight-bold">
+						<div class="h4 text-success font-weight-bold" id="otp_prompt">
 							We have sent the OTP!
 						</div>
 
 						<div class="prompt">
-							Enter the code generated on your mobile/email below to proceed with signup!
+							Enter the code generated sent to <b><span id="otp-chose"></span></b> below to proceed with signup!<br>
 						</div>
+
+
 
 						<form action="" class="mt-5">
 						  <input class="otp" type="number" oninput='digitValidate(this)' onkeyup='tabChange(1)' maxlength=1 >
@@ -596,15 +598,17 @@
 
 						<div id="errorReporter_otp" class="text-danger text-center font-weight-bold"></div>
 
-						<button id="verify_otp_btn" class='login-signup-btn btn btn-primary btn-block mt-4 mb-4 customBtn'>Verify OTP</button>
-
+						<button id="verify_otp_btn" class='login-signup-btn btn btn-primary btn-block mt-4 customBtn'>Verify OTP</button>
+						
 						<div style="font-size: 14px;">
 							Note: Check spam messages.
 						</div>
 
 						<div style="font-size: 14px;">
-							Haven't Received OTP?<a href="#" id="resend_otp_btn"> Click here to resend</a>
+							Haven't Received OTP?<a href="#" id="resend_otp_btn"> Click here to resend</a><br><br>
+							Need to edit your email/mobile number?<a href="#" id="signup_back_btn">Click here to edit!</a>
 						</div>
+
 					</div>
 
 					<script type="text/javascript">
@@ -624,7 +628,7 @@
 					</script>
 				</div>
 
-        <div class="text-center" style="display:none;" id="thankYou">
+        <div class="text-center thank-you" style="display:none;" id="thankYou">
         	<span class="h3">
         		Signing up successfully! 
         	</span>
@@ -718,10 +722,8 @@
         	<div class="d-flex">
         		<button class="flex-fill btn btn-primary" onclick='login.click()'>Back to login</button>
         	</div>
-
-
-
         </div>
+
       </div>
     </div>
   </div>
@@ -740,6 +742,7 @@
 
 
 	<script type="text/javascript">
+
 		$('.iconcaptcha-holder').iconCaptcha({
     	general: {
           validationPath: 'assets/src/captcha-request.php', // required, change path according to your installation.
@@ -1065,16 +1068,32 @@
 						'email':$("#signUpForm input[name='email']").val(),
 						'otp':generatedOtp,
 					});
+					$('#otp-chose').text('Email Address '+$("#signUpForm input[name='email']").val());
 				}else{
 					otpRes = ajaxShortLink('main/sendOTP',{
 						'mobileNumber':$('#countryCode_select').val()+$('#signUpForm input[name="mobileNumber"]').val(),
 						'otp':generatedOtp,
 					});
+					$('#otp-chose').text('Mobile '+$('#countryCode_select').val()+$('#signUpForm input[name="mobileNumber"]').val());
 				}
 
 				$("#otp_selector").toggle()
 				$("#otp_verifier").toggle()
 			},1000)
+		});
+
+		$("#signup_back_btn").on("click",function(){
+			$("#signUpForm").toggle()
+			$("#otp_selector").toggle()
+			$("#otp_container").toggle()
+			$("#otp_verifier").toggle()
+
+			$(".otp_selector_btn").attr("disabled",false);
+			$("#otp_sending_container").remove();
+
+			$("#signup_btn").empty().append(
+			    'SIGN UP'
+			).removeAttr('disabled');
 		});
 
 		$("#verify_otp_btn").on("click",function(){
