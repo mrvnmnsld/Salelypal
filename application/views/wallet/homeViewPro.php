@@ -916,8 +916,56 @@
 					
 				});
 			// visible
+
+			$('#deposit_btn, #deposit_btn_option').on('click',function(){
+				addBreadCrumbs("wallet/deposit");
+
+				$("html, body").animate({ scrollTop: 0 }, "slow");
+				$('#assets_container').css("display","none");
+				$("#container").fadeOut(animtionSpeed, function() {
+					$("#profile_btn").css('display',"none")
+					$("#top_back_btn").css('display',"block")
+
+		  			$("#container").empty();
+		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/deposit'}));
+		  			$("#container").fadeIn(animtionSpeed);
+				});
+			});
+
+			$('#withdraw_btn, #withdraw_btn_option').on('click',function(){
+				addBreadCrumbs("wallet/withdraw");
+
+				$("html, body").animate({ scrollTop: 0 }, "slow");
+				$('#assets_container').css("display","none");
+				$("#container").fadeOut(animtionSpeed, function() {
+					$("#profile_btn").css('display',"none")
+					$("#top_back_btn").css('display',"block")
+
+		  			$("#container").empty();
+		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/withdraw'}));
+		  			$("#container").fadeIn(animtionSpeed);
+				});
+			});
+
+			$('#buyCrypto_btn, #buy_btn_option').on('click',function(){
+				$.confirm({
+					theme:'dark',
+				    title: 'Testing Mode!',
+				    content: 'Buying is disabled due to testing mode being active',
+				    type: 'red',
+				    typeAnimated: true,
+				    buttons: {
+				        close: function () {
+				        }
+				    }
+				});
+			});
 			
 			$('#refresh_btn').on('click',function(){
+				if (typeof tokenPriceInterval  != 'undefined') {
+					clearInterval(tokenPriceInterval);
+				}
+
 				tokenNames = [];
 				tokenBalance = [];
 
@@ -1059,7 +1107,9 @@
 			});
 			
 			$('#assets_btn').on('click',function(){
-				checkVerifying();
+				if (typeof tokenPriceInterval  != 'undefined') {
+					clearInterval(tokenPriceInterval);
+				}
 				console.log($('#assets_container').css("display"));
 				if ($('#assets_container').css("display") == 'none') {
 					addBreadCrumbs("assets_container")
@@ -1089,6 +1139,10 @@
 			});
 
 			$('#addToken_btn').on('click',function(){
+				if (typeof tokenPriceInterval  != 'undefined') {
+					clearInterval(tokenPriceInterval);
+				}
+
 				addBreadCrumbs("wallet/addToken")
 				$("html, body").animate({ scrollTop: 0 }, "slow");
 				$('#assets_container').css("display","none");
@@ -1103,6 +1157,10 @@
 			});
 
 			$('#profile_btn').on('click',function(){
+				if (typeof tokenPriceInterval  != 'undefined') {
+					clearInterval(tokenPriceInterval);
+				}
+
 				addBreadCrumbs("wallet/test-platform/user_profile/profile");
 
 				$("html, body").animate({ scrollTop: 0 }, "slow");
@@ -1118,6 +1176,10 @@
 			});
 
 			$('#notif_btn').on('click',function(){
+				if (typeof tokenPriceInterval  != 'undefined') {
+					clearInterval(tokenPriceInterval);
+				}
+
 				addBreadCrumbs("wallet/notificationCenter");
 
 				$("#notif_counter_number").text("");
@@ -1139,6 +1201,10 @@
 			});
 	
 			$('#settings_btn').on('click',function(){
+				if (typeof tokenPriceInterval  != 'undefined') {
+					clearInterval(tokenPriceInterval);
+				}
+
 				addBreadCrumbs("wallet/settings");
 
 				$("html, body").animate({ scrollTop: 0 }, "slow");
@@ -1154,6 +1220,10 @@
 			});
 
 			$('#discover_btn').on('click',function(){
+				if (typeof tokenPriceInterval  != 'undefined') {
+					clearInterval(tokenPriceInterval);
+				}
+				
 				addBreadCrumbs("wallet/test-platform/discover");
 
 				$("html, body").animate({ scrollTop: 0 }, "slow");
@@ -1164,21 +1234,6 @@
 
 		  			$("#container").empty();
 		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/discover'}));
-		  			$("#container").fadeIn(animtionSpeed);
-				});
-			});
-
-			$('#verify_btn').on('click',function(){
-				addBreadCrumbs("wallet/verifyKYC");
-
-				$("html, body").animate({ scrollTop: 0 }, "slow");
-				$('#assets_container').css("display","none");
-				$("#container").fadeOut(animtionSpeed, function() {
-					$("#profile_btn").css('display',"none")
-					$("#top_back_btn").css('display',"block")
-
-		  			$("#container").empty();
-		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/verifyKYC'}));
 		  			$("#container").fadeIn(animtionSpeed);
 				});
 			});
@@ -1372,7 +1427,6 @@
 			}
 		}
 
-
 		$("#top_back_btn").on("click",function(){
 			if (typeof tokenPriceInterval  != 'undefined') {
 				clearInterval(tokenPriceInterval);
@@ -1415,10 +1469,6 @@
 			}
 
 			// console.log(breadCrumbs[breadCrumbs.length-1]);
-			
-
-			
-			
 		});
 
 
