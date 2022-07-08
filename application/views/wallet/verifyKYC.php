@@ -189,7 +189,12 @@
     .check_upload{
         color:rgba(0, 0, 0, 0.5);
     }
+
     .checked_upload{
+        color:green!important;
+    }
+
+    .main-color-text.checked_upload{
         color:green!important;
     }
     /*kyc*/
