@@ -23,6 +23,10 @@ class main extends MY_Controller {
 		$this->load->view('wallet/homeView');
 	}
 
+	public function homeView(){
+		$this->load->view('wallet/homeView');
+	}
+
 	public function homeViewPro(){
 		$this->load->view('wallet/homeViewPro');
 	}
