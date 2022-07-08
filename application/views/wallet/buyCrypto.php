@@ -1,3 +1,7 @@
+<script 
+    src="https://www.paypal.com/sdk/js?client-id=AbM9J_nb99luadjSViFVccEhWabihbAnHcMmiE-_yiOagyQR1_xeorgKNW1q1XLeURtx3t4KiTbl5f19&disable-funding=credit,paylater,card"
+></script>
+
 <style type="text/css">
     .disabledDiv{
         background-color: rgba(0, 0, 0, 0.75);
@@ -9,15 +13,19 @@
         z-index: 10000;
     }
 
-    .disabledDiv h1{
+    .disabledDiv h3{
         font-weight: bold;
         text-align: center;
-        margin-top: 15%;
+        margin-top: 2px;
         color: white;
     }
 
     #paypal-button-container{
         position: relative;
+    }
+
+    table.dataTable td, table.dataTable th{
+      font-size: 0.8em;
     }
 </style>
 
@@ -58,8 +66,10 @@
 
         <div class="form-group">
             <label>Please select token</label>
-            <select id="token_select" name="token_select" class="form-control">
-                <option value="">Select Token...</option>
+            <select id="token_select" name="token_select" class="js-example-basic-single form-control" data-live-search="true">
+                <optgroup id="erc20_tokens_container" label="Ethereum Mainet"></optgroup>
+                <optgroup id="bsc_tokens_container" label="Binance Smart Chain"></optgroup>
+                <optgroup id="tron_tokens_container" label="Tron Mainet"></optgroup>
             </select>
         </div>
 
@@ -87,52 +97,32 @@
             </div>
         </div>
 
-        <div id="paypal-button-container" class="p-2 pt-4">
+        <div id="paypal-button-container" class="p-1 pt-4">
             <!-- <div class="disabledDiv"><h2>Confirm price again</h2></div> -->
         </div>
     </form>
-</div>
 
+    <div class="p-2 main-color-text">
+        <div class="text-center">
+            <h4>Purchase History</h4>
+        </div>
 
-<style type="text/css">
-    table.dataTable td, table.dataTable th{
-      font-size: 0.8em;
-    }
+        <table id="tableContainer" class="main-color-text table table-borderless table-sm" style="width: 98%!important;">  
+            <thead>
+                <tr>
+                    <th>Token</th>
+                    <!-- <th>Value</th> -->
+                    <th>Amount</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+        </table>
 
-    .dataTables_paginate {
-        float: ;
-    }
-    .dataTables_filter {
-        float: left;
-        display: none;
-    }
-    .dataTables_length {
-        float:left;
-    }
-    .dataTables_info {
-        float:;
-    }
-
-</style>
-
-<div class="p-2 m-2 text-dark">
-    <div class="text-center">
-        <h4>Purchase History</h4>
+        <!-- <button id="purchaseAppeals_inner_btn" class="btn btn-link btn-block mt-2">Purchase Appeals</button> -->
     </div>
-
-    <table id="tableContainer" class="table table-hover table-striped table-borderless table-sm" style="width: 98%!important;">  
-        <thead>
-            <tr>
-                <th>Token</th>
-                <!-- <th>Value</th> -->
-                <th>Amount</th>
-                <th>Date</th>
-            </tr>
-        </thead>
-    </table>
-
-    <button id="purchaseAppeals_inner_btn" class="btn btn-link btn-block mt-2">Purchase Appeals</button>
 </div>
+
+
 
 
 <script>
@@ -186,6 +176,9 @@
         $('#tableContainer').DataTable().destroy();
 
         $('#tableContainer').DataTable({
+            "ordering": false,
+            "bLengthChange": false,
+            "bFilter": true,
             data: callDataViaURLVal,
             columns: [
                 { data:'token'},
@@ -198,8 +191,17 @@
                     }
                 }
             ],
+
             "autoWidth": true,
-            "order": [[ 2, "desc" ]]
+            "order": [[ 2, "desc" ]],
+            "language": {
+                "lengthMenu": "Display _MENU_ records per page",
+                "zeroRecords": "No Data Found",
+                "info": "",
+                "infoEmpty": "No records available",
+                "infoFiltered": ""
+            },
+            // "sDom": '<"row view-filter"<"col-sm-12"<"pull-left"l><"pull-right"f><"clearfix">>>t<"row view-pager"<"col-sm-12"<"text-center"ip>>>'
         });
     }
 
@@ -208,12 +210,31 @@
     var allTokens = ajaxShortLink('userWallet/getAllTokensV2');
 
     for (var i = 0; i < allTokens.length; i++) {
-        $("#token_select").append(
-            '<option value="'+allTokens[i].tokenName+'_'+allTokens[i].networkName+'_'+allTokens[i].smartAddress+'_'+allTokens[i].coingeckoTokenId+'">'+
-                allTokens[i].description+' ('+allTokens[i].networkName.toUpperCase()+')'+
-            '</option>'
-        );
+        if(allTokens[i].networkName=="erc20"){
+            $("#erc20_tokens_container").append(
+                '<option data-subtext="'+allTokens[i].networkName+'" value="'+allTokens[i].tokenName+'_'+allTokens[i].networkName+'_'+allTokens[i].smartAddress+'_'+allTokens[i].coingeckoTokenId+'_'+allTokens[i].id+'">'+
+                    allTokens[i].tokenName+' ('+allTokens[i].description+')'+
+                '</option>'
+            );
+        }
+
+        if(allTokens[i].networkName=="bsc"){
+            $("#bsc_tokens_container").append(
+                '<option data data-subtext="'+allTokens[i].networkName+'" value="'+allTokens[i].tokenName+'_'+allTokens[i].networkName+'_'+allTokens[i].smartAddress+'_'+allTokens[i].coingeckoTokenId+'_'+allTokens[i].id+'">'+
+                    allTokens[i].tokenName+' ('+allTokens[i].description+')'+
+                '</option>'
+            );
+        }
+
+        if(allTokens[i].networkName=="trx"||allTokens[i].networkName=="trc20"){
+            $("#tron_tokens_container").append(
+                '<option data-subtext="'+allTokens[i].networkName+'" value="'+allTokens[i].tokenName+'_'+allTokens[i].networkName+'_'+allTokens[i].smartAddress+'_'+allTokens[i].coingeckoTokenId+'_'+allTokens[i].id+'">'+
+                    allTokens[i].tokenName+' ('+allTokens[i].description+')'+
+                '</option>'
+            );
+        }
     }
+
     console.log(allTokens);
 
     $("#errorReporter_buyCrypto").toggle();
@@ -221,8 +242,37 @@
 
     $("#token_select").on('change', function(){
         var tokenInfoWithdraw = $(this).val().split("_");
+        var found = tokensSelected.find(e => e.id === tokenInfoWithdraw[4]);
 
-        console.log(tokenInfoWithdraw);
+
+        if (found==undefined&&tokenInfoWithdraw!='') {
+            $.confirm({
+                title: 'Something is up!',
+                theme: 'dark',
+                content: 'This token is not currently added to your wallet, do you wish to list this in your managed tokens?',
+                buttons: {
+                    yes: {
+                        text: 'Yes',
+                        btnClass: 'btn-success',
+                        action: function(){
+                            var res = ajaxShortLink("userWallet/updateTokenManagementV2",{
+                                'userID':currentUser.userID,
+                                'tokenID':tokenInfoWithdraw[4]
+                            });
+
+                            console.log(res);
+                        }
+                    },
+                    no: {
+                        text: 'No',
+                        btnClass: 'btn-danger',
+                        action: function(){
+                            $("#token_select").val('');
+                        }
+                    }
+                }
+            });
+        }
 
         if (tokenInfoWithdraw[1] == 'trx'||tokenInfoWithdraw[1] == 'trc20') {
             if (tokenInfoWithdraw[0].toUpperCase() === 'trx'.toUpperCase()) {
@@ -236,11 +286,10 @@
             $("#amount").rules( "remove", "min max" );
 
             $( "#amount" ).rules( "add", {
-              min: 5
+              min: 1
             });
 
         }else if(tokenInfoWithdraw[1] =='bsc'){
-
             if(tokenInfoWithdraw[0].toUpperCase() === 'bnb'.toUpperCase()){
                 availBalance = ajaxShortLink('mainWallet/getBinancecoinBalance')['balance'];
             }else{
@@ -276,10 +325,16 @@
               min: 0.00001
             });
         }
+
+        console.log(availBalance);
+        $("#amount").rules( "remove", "min max" );
+
+        
     });
 
     $("#closeBtn_buyCrypto").on('click',function(){
-        backButton();
+        $("#success_container").toggle();
+        $("#mainForm").toggle();
     });
 
     $("#mainForm").validate({
@@ -329,9 +384,8 @@
                 $("#paypal-button-container").css("display",'block');
                 $("#update_price_container").css("display",'block');
                 
-
                 paypal.Buttons({
-                    env: 'sandbox', // sandbox | production
+                    env: 'production', // sandbox | 
                     // Specify the style of the button
                     style: {
                         label: 'pay',
@@ -385,7 +439,7 @@
                                     'tokenArray':token_select,
                                 });
 
-                                pushNewNotif("Bought Crypto","Tokens successfully bought, post an appeal if tokens haven't been received",currentUser.userID)
+                                pushNewNotif("Bought Crypto","Crypto successfully bought!",currentUser.userID)
 
                                 loadDatatable('wallet/getUserPurchase',{'userID':currentUser['userID']});
 
@@ -398,7 +452,7 @@
 
                         console.log(data, actions)
                         var confirmPriceTimer = setTimeout(function() {
-                            $("#paypal-button-container").append('<div class="disabledDiv"><h1>Confirm price again</h2></div>');
+                            $("#paypal-button-container").append('<div class="disabledDiv"><h3>Confirm price again</h3></div>');
                             $('#confirmBtn').attr('disabled',false);
 
                         }, 5000);
@@ -406,7 +460,7 @@
                 }).render('#paypal-button-container');
 
                 var confirmPriceTimer = setTimeout(function() {
-                    $("#paypal-button-container").append('<div class="disabledDiv"><h1>Confirm price again</h2></div>');
+                    $("#paypal-button-container").append('<div class="disabledDiv"><h3>Confirm price again</h3></div>');
                     $('#confirmBtn').attr('disabled',false);
                 }, 5000);
             }else{
