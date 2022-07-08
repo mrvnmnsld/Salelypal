@@ -152,6 +152,22 @@
 				background-color: #94abef!important;
 			}
 
+			.dark-mode .qr-container::after{
+				background-color : #120731!important;
+			}
+
+			.dark-mode .qr-container::before{
+				background-color : #120731!important;;
+			}
+
+			.light-mode .qr-container::after{
+				background-color : white;
+			}
+
+			.light-mode .qr-container::before{
+				background-color :white;
+			}
+
 			/* dark mode */
 			.dark-mode{
 				background-color : #120731!important;
