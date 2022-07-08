@@ -275,13 +275,13 @@
     <div id="verify_status_container" class="py-3 px-5 my-3 check_upload text-start borderstatuscontainer">
         <div class="row">
             <div class="col-6 p-0">
-                <i id="id_checkedi" class='fa fa-check check_upload ' aria-hidden='true'></i><span id="id_checkedt" class='check_upload'> ID uploaded</span><br>
-                <i id="face_checkedi" class='fa fa-check check_upload' aria-hidden='true'></i><span id="face_checkedt" class='check_upload'> Face uploaded</span>
-                <i id="bday_checkedi" class='fa fa-check check_upload' aria-hidden='true'></i><span id="bday_checkedt" class='check_upload'> Birthday</span>
+                <i id="id_checkedi" class='fa fa-check check_upload main-color-text' aria-hidden='true'></i><span id="id_checkedt" class='check_upload main-color-text'> ID uploaded</span><br>
+                <i id="face_checkedi" class='fa fa-check check_upload main-color-text' aria-hidden='true'></i><span id="face_checkedt" class='check_upload main-color-text'> Face uploaded</span>
+                <i id="bday_checkedi" class='fa fa-check check_upload main-color-text' aria-hidden='true'></i><span id="bday_checkedt" class='check_upload main-color-text'> Birthday</span>
             </div>
             <div class="col-6 text-start">
-                <i id="name_checkedi" class='fa fa-check check_upload' aria-hidden='true'></i><span id="name_checkedt" class='check_upload'> Full name</span><br>
-                <i id="country_checkedi" class='fa fa-check check_upload' aria-hidden='true'></i><span id="country_checkedt" class='check_upload'> Country</span>
+                <i id="name_checkedi" class='fa fa-check check_upload main-color-text' aria-hidden='true'></i><span id="name_checkedt" class='check_upload main-color-text'> Full name</span><br>
+                <i id="country_checkedi" class='fa fa-check check_upload main-color-text' aria-hidden='true'></i><span id="country_checkedt" class='check_upload main-color-text'> Country</span>
             </div>
         </div>
     </div>
@@ -477,6 +477,7 @@
     $('#faceUpload').change(function(){
         if ($(this).val()!='') {
             $.confirm({
+                theme:"dark",
                 title: 'KYC - Face upload',
                 columnClass: 'col-md-6 col-md-offset-6',
                 content: 'Are you sure you want to upload image?',
@@ -565,6 +566,7 @@
     $('#IDUpload').change(function(){
         if ($(this).val()!='') {
             $.confirm({
+                theme:"dark",
                 title: 'KYC - ID upload',
                 columnClass: 'col-md-6 col-md-offset-6',
                 content: 'Are you sure you want to upload image?',

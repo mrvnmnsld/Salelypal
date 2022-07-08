@@ -15,14 +15,19 @@
 
 	.filter-option-inner-inner .mainTokenSelectedLogo{
 		text-align: left!important;
+		
 	}
 
 	.bootbox-close-button{
 		display: none;
 	}
+
+	table td, table th{
+  		font-size: 0.8em;
+	}
 </style>
 
-<div id="innerContainer" class="pl-3 pr-3">
+<div id="innerContainer" class="pl-3 pr-3 main-color-text">
 	<div id="successContainer" class="text-center" style="display: none;">
 		<i style="font-size:150px" class="fa fa-check-circle-o text-success" aria-hidden="true"></i><br>
 		<span style="font-size:30px" class="text-success">Success!</span>
@@ -107,7 +112,7 @@
 		<h4>Transaction History</h4>
 	</div>
 
-	<table class="table table-sm table-borderless text-center">
+	<table class="table table-sm table-borderless text-center main-color-text">
 	  <thead>
 	    <tr>
 	      <th scope="col">Token</th>

@@ -67,9 +67,6 @@
 
 	<script src="assets/vendor/qrCode/qrcode.js"></script>
 
-	<script src="https://www.paypal.com/sdk/js?client-id=Ae1RO9QQfdAmJZrIxgXzcETFNsdWxQj7LBAx8XCbA8JJ4mnwgyWvq9q7A5fVn_5m9NP9kQ3c2XwACrhr&disable-funding=credit,paylater"></script>
-
-
 	<link rel="stylesheet" type="text/css" href="assets/vendor/slick-1.8.1/slick/slick.css"/>
 	<script type="text/javascript" src="assets/vendor/slick-1.8.1/slick/slick.min.js"></script>
 

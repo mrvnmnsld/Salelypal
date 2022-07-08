@@ -336,7 +336,7 @@
 			  				$("#errorReporter").removeClass("text-success");
 
 			  				$("#errorReporter").append("Face in images doesn't match");
-			  				$("#verify_user_btn").attr("disabled",true);
+			  				// $("#verify_user_btn").attr("disabled",true);
 			  			}else{
 			  				$("#errorReporter").removeClass("text-danger");
 			  				$("#errorReporter").addClass("text-success");
