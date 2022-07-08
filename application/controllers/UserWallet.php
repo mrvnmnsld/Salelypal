@@ -605,14 +605,11 @@ class userWallet extends MY_Controller {
 
 	public function getProfileDetails(){
 		$test = $this->_getRecordsData(
-			$selectfields = array("*"), 
-	   		$tables = array('user_tbl'),
-	   		$fieldName = array('userID'), $where = array($_GET['userID']), 
-	   		$join = null, $joinType = null,
-	   		$sortBy = null, $sortOrder = null, 
-	   		$limit = null, 
-	   		$fieldNameLike = null, $like = null,
-	   		$whereSpecial = null, $groupBy = null 
+			$selectfields = array("user_tbl.*,trc20_wallet.address as trc20_wallet,bsc_wallet.address as bsc_wallet,erc20_wallet.address as erc20_wallet"), 
+			$tables = array('user_tbl','trc20_wallet','bsc_wallet','erc20_wallet'), 
+			$fieldName = array('userID'), $where = array($_GET['userID']), 
+			$join = array('user_tbl.userID = trc20_wallet.userOwner','user_tbl.userID = bsc_wallet.userOwner','user_tbl.userID = erc20_wallet.userOwner'), $joinType = array('inner','inner','inner'), $sortBy = null, 
+			$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
 		);
 
 		echo json_encode($test);

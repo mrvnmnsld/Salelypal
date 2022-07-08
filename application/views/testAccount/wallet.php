@@ -929,8 +929,6 @@
 			console.log(currentUser.lastLoginDate);
 		}
 
-		
-
 		// buttonEvents
 
 			// visible
@@ -965,7 +963,6 @@
 				});
 			// visible
 			
-
 			$('#refresh_btn').on('click',function(){
 				tokenNames = [];
 				tokenBalance = [];
