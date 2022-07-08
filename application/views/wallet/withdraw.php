@@ -52,20 +52,20 @@
 	</div>
 
 	<form id="mainForm" style="display:;">
-		<div class="">
-	  		<small class="font-weight-bold text-success">Available Amount on wallet: <span id="availableAmountContainer"></span></small>
+		<div class="mt-5">
+	  		<small class="font-weight-bold main-color-text" style="font-size:1rem;">Available Amount on wallet: <span id="availableAmountContainer"></span></small>
 
 			<div>
-				<b>Network:</b>
-				<span id="network_container">TRON Mainet</span>
+				<span class="">Network:</span>
+				<span id="network_container" class="main-color-text font-weight-bold">TRON Mainet</span>
 			</div>
 
 
-			<div class="form-group">
+			<div class="form-group pt-5">
 
-				<div><b>Select Token to withdraw:</b></div>
+				<div class="main-color-text"><b>Select Token to withdraw:</b></div>
 
-				<select class="form-control" id="tokenContainerSelect" name="tokenContainerSelect">
+				<select class="form-control main-color-text" id="tokenContainerSelect" name="tokenContainerSelect">
 					<option value="">Select Token...</option>
 				</select>	
 		  	</div>
@@ -83,7 +83,7 @@
 				<input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" class="form-control" id="amountInput" name="amountInput" placeholder="Enter amount" />
 
 				<div class="input-group-append">
-					<button class="btn btn-primary" type="button" id="maxBtn" style="border-top-right-radius: 5px 5px;border-bottom-right-radius: 5px 5px;z-index: 0;">Max</button>
+					<button class="btn secondary-color-bg" type="button" id="maxBtn" style="border-top-right-radius: 5px 5px;border-bottom-right-radius: 5px 5px;z-index: 0; color:white;">Max</button>
 				</div>
 	  	  	</div>
 
@@ -99,7 +99,7 @@
 		<hr>
 
 		<div class="row">
-			<button type="submit" class="col-md-12 btn btn-success btn-block m-2" id="confirmBtn">Send Widthrawal</button>
+			<button type="submit" class="col-md-12 btn btn-success light-color btn-block m-2 mx-3" id="confirmBtn">Send Widthrawal</button>
 		</div>
 	</form>
 
