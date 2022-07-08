@@ -309,17 +309,17 @@
                theme: 'dark'
            });
         }else{
-           $.confirm({
-               theme: 'dark',
-               title: 'Testing Mode!',
-               content: "1. Please Input Enough USDT to be Staked <br>2. Make sure GAS(trx) is enough<br>3. Minimum amount to stake is "+bettingSettings[0].value,
-               typeAnimated: true,
-               buttons: {
-                  close: function () {
-                   
-                  }
-              }
-           });
+            $.confirm({
+                theme: 'dark',
+                title: 'Oh no!',
+                content: "1. Please Input Enough USDT to be Staked <br>2. Make sure GAS(trx) is enough<br>3. Minimum amount to stake is "+bettingSettings[0].value,
+                typeAnimated: true,
+                buttons: {
+                    close: function () {
+
+                    }
+                }
+            });
         }
     })
 

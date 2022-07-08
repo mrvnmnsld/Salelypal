@@ -524,43 +524,38 @@
 					    }
 					});	
 				}else{
-						if (currentUser.verified==0) {
+					if (currentUser.verified==0) {
+						$.confirm({
+							theme: 'dark',
+						    title: 'Testing Mode!',
+						    content: 'Testing Mode intitiated, this limits the function and all token amounts are only for testing, They dont exists in the blockchain but it exists in our own server',
+						    typeAnimated: true,
+						    buttons: {
+						        close: function () {
+						        }
+						    }
+						});
 
-							$.confirm({
-								theme: 'dark',
-							    title: 'Testing Mode!',
-							    content: 'Testing Mode intitiated, this limits the function and all token amounts are only for testing, They dont exists in the blockchain but it exists in our own server',
-							    typeAnimated: true,
-							    buttons: {
-							        close: function () {
-							        }
-							    }
-							});
+						console.log("%cContinue!!","color: red; font-family:monospace; font-size: 30px");
+					}else{
+						checkVerifying();
+					}
 
-							console.log("%cContinue!!","color: red; font-family:monospace; font-size: 30px");
-						}else{
-							checkVerifying();
-						}
+				    var notifList = ajaxShortLink("getNewNotifs",{
+				    	'userID':currentUser.userID
+				    });
 
-					    var notifList = ajaxShortLink("getNewNotifs",{
-					    	'userID':currentUser.userID
-					    });
-
-					    if(notifList.length>=1){
-							$("#notif_counter_number").text(notifList.length);
-							$("#notif_counter_number").addClass("animate__animated animate__heartBeat animate__repeat-2");
-							$("#notif_counter_number").css("display", "block");
-					    }
+				    if(notifList.length>=1){
+						$("#notif_counter_number").text(notifList.length);
+						$("#notif_counter_number").addClass("animate__animated animate__heartBeat animate__repeat-2");
+						$("#notif_counter_number").css("display", "block");
+				    }
 				}
 			}
-
 		}else{
 			window.location.href = 'index';
 		}
 
-		
-
-		// var currentUser = {'userID':"15","displayCurrency":"USD"}
 		var animtionSpeed = 250;
 		var	SelectedtransactionDetails = [];
 		var totalInUsd = 0;
@@ -807,7 +802,6 @@
 				});
 			// visible
 			
-
 			$('#refresh_btn').on('click',function(){
 				tokenNames = [];
 				tokenBalance = [];
@@ -1092,7 +1086,6 @@
 
 		function loadTokenInfo(tokenInfo){
 			var differenceResponse = ajaxShortLink('userWallet/getTokenDifference',{'tokenName':tokenInfo.coingeckoTokenId});
-			// console.log(differenceResponse,displayCurrency);
 
 			var valueNow = differenceResponse.market_data.current_price[displayCurrency]
 			var changePercentage = differenceResponse.market_data.price_change_percentage_24h;
@@ -1269,18 +1262,9 @@
 			checkVerifying();
 
 			breadCrumbs.pop()
-			// console.log(breadCrumbs[breadCrumbs.length-1]);
 			if (typeof tokenPriceInterval  != 'undefined') {
 				clearInterval(tokenPriceInterval);
 			}
-
-			// console.log();
-
-			// for (var i = 0; i < breadCrumbs.length; i++) {
-			// 	if (breadCrumbs[breadCrumbs.length-1]==breadCrumbs[breadCrumbs.length-2]) {
-			// 		breadCrumbs.pop()
-			// 	}
-			// }
 
 			if (breadCrumbs[breadCrumbs.length-1]=="assets"||breadCrumbs[breadCrumbs.length-1]=="assets_container") {
 				$("#assets_btn").click();

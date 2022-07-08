@@ -308,7 +308,7 @@
         }else{
             $.confirm({
                 theme: 'dark',
-                title: 'Testing Mode!',
+                title: 'Oh no!',
                 content: "1. Please Input Enough USDT to be Staked <br>2. Make sure GAS(trx) is enough<br>3. Minimum amount to stake is "+bettingSettings[0].value,
                 typeAnimated: true,
                 buttons: {
@@ -365,7 +365,7 @@
                 // test-platform
                     var newBalanceRes = ajaxShortLink("test-account/updateNewBalance",{
                        'userID':currentUser.userID,
-                       'token':null,
+                       'tokenName':null,
                        'smartContract':"TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
                        'balance':parseFloat(balanceUsdtInner)+parseFloat(newIncome)+parseFloat(checkSet[0].amount),
                     })

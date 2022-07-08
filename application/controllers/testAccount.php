@@ -1012,6 +1012,8 @@ class testAccount extends MY_Controller {
 				);
 
 				$saveQueryNotif = $this->_insertRecords($tableName = 'test_account_set_risefall_position', $insertRecord);
+
+				echo $saveQueryNotif;
 			}
 
 			public function getAllContractPositions(){

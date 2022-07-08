@@ -20,7 +20,7 @@ class main extends MY_Controller {
 	}
 
 	public function homeView2(){
-		$this->load->view('wallet/index2');
+		$this->load->view('wallet/homeView');
 	}
 
 	public function homeViewPro(){
@@ -331,20 +331,29 @@ class main extends MY_Controller {
 	}
 
 	public function sendOtp(){
-		require_once(APPPATH . '/vendor/autoload.php');
+		// {"sid": "SM36795022c27b43d8a33b7dc49e2a0d26", "date_created": "Thu, 07 Jul 2022 18:39:41 +0000", "date_updated": "Thu, 07 Jul 2022 18:39:41 +0000", "date_sent": null, "account_sid": "AC51784290c7fcecfe437a217b6d796bbc", "to": "+639613002479", "from": null, "messaging_service_sid": "MG617e80a04a486d9a00e3fc9bf04e1f50", "body": "This is the body...", "status": "accepted", "num_segments": "0", "num_media": "0", "direction": "outbound-api", "api_version": "2010-04-01", "price": null, "price_unit": null, "error_code": null, "error_message": null, "uri": "/2010-04-01/Accounts/AC51784290c7fcecfe437a217b6d796bbc/Messages/SM36795022c27b43d8a33b7dc49e2a0d26.json", "subresource_uris": {"media": "/2010-04-01/Accounts/AC51784290c7fcecfe437a217b6d796bbc/Messages/SM36795022c27b43d8a33b7dc49e2a0d26/Media.json"}}
 
-		\SMSGlobal\Credentials::set('6160b90bef96d3e7cffbc810c81294e6', 'dd9d942a06b4bc599aaf2ec7ac6e2fdc');
+		$payload = [
+		    'To' => $_GET['mobileNumber'],
+		    'MessagingServiceSid' => 'MG617e80a04a486d9a00e3fc9bf04e1f50',
+		    'Body' => 'SafelyPal SignUp OTP: '.$_GET['otp']
+		];
 
-		$sms = new \SMSGlobal\Resource\Sms();
-		$generatedOtp = $_GET['generatedOtp'];
-		$destination = $_GET['destination'];
+		$ch = curl_init();
 
-		try {
-		    $response = $sms->sendToOne($destination, 'This is your OTP for signing up in Application Name /n/n '.$generatedOtp);
-		    echo $response;
-		} catch (\Exception $e) {
-		    echo $e->getMessage();
+		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($payload));
+		curl_setopt($ch, CURLOPT_URL, 'https://api.twilio.com/2010-04-01/Accounts/AC51784290c7fcecfe437a217b6d796bbc/Messages.json');
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_POST, 1);
+		curl_setopt($ch, CURLOPT_USERPWD, 'AC51784290c7fcecfe437a217b6d796bbc' . ':' . 'ea88a2518e7dd83022ac1bd19e9052bf');
+
+		$result = curl_exec($ch);
+		if (curl_errno($ch)) {
+		    echo 'Error:' . curl_error($ch);
 		}
+		curl_close($ch);
+
+		echo $result;
 	}
 
 	public function editProfile(){

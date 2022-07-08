@@ -568,7 +568,7 @@
 						<div class="row">
 							<button class="btn col-5 otp_selector_btn login-signup-btn" data-otp-type="email" style="font-size: 16px;">Send via Email</button>
 							<div class="col-2"></div>
-							<button class="btn col-5 otp_selector_btn login-signup-btn" disabled data-otp-type="mobile" style="font-size: 16px;">
+							<button class="btn col-5 otp_selector_btn login-signup-btn" data-otp-type="mobile" style="font-size: 16px;">
 								Send via Mobile
 							</button>
 						</div>
@@ -1047,10 +1047,12 @@
 			$("#otp_selector").append()
 
 			$("#otp_selector").append(
-				'<span class="spinner-border mt-3 align-bottom" role="status">'+
-				  '<span class="sr-only">Loading...</span>'+
-				'</span>'+
-				"&nbsp Sending OTP Please wait..."
+				'<div id="otp_sending_container">'+
+					'<span class="spinner-border mt-3 align-bottom" role="status">'+
+					  '<span class="sr-only">Loading...</span>'+
+					'</span>'+
+					"&nbsp Sending OTP Please wait..."+
+				'</div>'
 			);
 
 			var otpRes;
@@ -1061,6 +1063,11 @@
 				if (otpType=="email") {
 					otpRes = ajaxShortLink('main/sendOTPViaEmail',{
 						'email':$("#signUpForm input[name='email']").val(),
+						'otp':generatedOtp,
+					});
+				}else{
+					otpRes = ajaxShortLink('main/sendOTP',{
+						'mobileNumber':$('#countryCode_select').val()+$('#signUpForm input[name="mobileNumber"]').val(),
 						'otp':generatedOtp,
 					});
 				}
@@ -1095,31 +1102,10 @@
 		});
 
 		$("#resend_otp_btn").on("click",function(){
-			$("#otp_verifier").append(
-				'<div id="resend_otp_status">'+
-					'<span  class="spinner-border mt-3 align-bottom" role="status">'+
-					  '<span class="sr-only">Loading...</span>'+
-					'</span>'+
-					"&nbsp Sending OTP Please wait..."+
-				'</div>'
-			);
-
-			var otpRes;
-
-			setTimeout(function(){
-				console.log(`generateOTP: ${generatedOtp}`);
-
-				if (otpType=="email") {
-					otpRes = ajaxShortLink('main/sendOTPViaEmail',{
-						'email':$("#signUpForm input[name='email']").val(),
-						'otp':generatedOtp,
-					});
-
-					console.log(otpRes);
-
-					$("#resend_otp_status").remove();
-				}
-			},1000)
+			$(".otp_selector_btn").attr("disabled",false);
+			$("#otp_sending_container").remove();
+			$("#otp_selector").toggle();
+			$("#otp_verifier").toggle();
 		});
 
 		$("#verify_kyc_btn").on("click", function(){

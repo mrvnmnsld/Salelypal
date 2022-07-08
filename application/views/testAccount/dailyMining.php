@@ -52,6 +52,10 @@
 		/* color: white !important;  */
 	}
 
+	.dataTables_filter input {
+	    width: 70%!important; 
+	}
+
 
 </style>
 

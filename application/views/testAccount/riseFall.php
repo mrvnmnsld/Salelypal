@@ -29,6 +29,10 @@
     .make_me_dark{
         background-color: rgba(0, 0, 0, .05);
     }
+
+    .dataTables_filter input {
+        width: 70%!important; 
+    }
 </style>
 
 <!-- <div class="text-danger p-2" id="testNotes">

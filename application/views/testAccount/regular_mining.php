@@ -31,6 +31,10 @@
 	.dark-mode label.btn{
 	    color: white;
 	}
+
+	.dataTables_filter input {
+	    width: 70%!important; 
+	}
 </style>
 
 <div id="title_container" class="text-center" style="display:block">

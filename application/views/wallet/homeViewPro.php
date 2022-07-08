@@ -125,9 +125,14 @@
     	    	display: none !important;
     	    }
         /*google translate*/
-	@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap%27');
+
+		@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap%27');
 
 		/* Mainstyle */
+			html, body {
+			    max-width: 100%;
+			    overflow-x: hidden;
+			}
 			body{
 				font-family: 'Poppins', sans-serif;
 			}
@@ -266,6 +271,7 @@
 			}
 	</style>
 <!-- css -->
+
 <body style="min-height: 130%;" class="light-mode">
 	<div id="topNavBar" class="main-color-bg light-text notranslate" style="display:none; color:white!important;">
 		<span id="profile_btn" style="float: left;" ><i class="fa fa-user-o fa-md" aria-hidden="true"></i><span class="ml-2" id="username_container"></span></span>
@@ -367,7 +373,7 @@
 				</ul>
 
 				<div class="asset-tab-content tab-content">
-					<div id="balance_tab" class="container notranslate tab-pane active"><br>
+					<div id="balance_tab" class="px-4 notranslate tab-pane active notranslate tab-pane active"><br>
 						<div id="tokenContainer"></div>
 
 						<div class="row">
@@ -402,19 +408,32 @@
 						</div>
 
 						<div id="pnl_main" class="main-card-ui rounded shadow-lg" style="display:none">
-							<div class="d-flex p-2 mt-2">
+							<div class="text-center p-2 mt-2">
 								<div class="flex-fill p-2">
-									<h5>Yesterdays PNL:</h5>
-									<span id="yesterdayPnl">
-										0% Change
+									<h5>Today's Earnings (Contract Trading):</h5>
+									<span id="todaysEarning">
+										0 USD
 									</span>
 								</div>
+							</div>
+							<div class="text-center p-2 mt-2">
+								<div class="flex-fill p-2">
+									<div class="flex-fill p-2">
+										<h5>Yesterdays PNL:</h5>
+										<span id="yesterdayPnl">
+											0% Change
+										</span>
+									</div>
+								</div>
+							</div>
 
+							<div class="text-center p-2 mt-2">
 								<div class="flex-fill p-2">
 									<h5>7 Days PNL:</h5>
 									<span id="allDaysPnl">
 										0% Change
 									</span>
+									
 								</div>
 							</div>
 
@@ -466,122 +485,121 @@
 					border-bottom: transparent;
 				}
 			</style>
-		</div>
+	</div>
 
-		<div id="container" class="mb-5" style="display:none;min-height: 120%;"></div>
+	<div id="container" class="mb-5" style="display:none;min-height: 120%;"></div>
 
-		<br>
-		<br>
-		<br>
-		<br>
+	<br>
+	<br>
+	<br>
+	<br>
 
-		<!-- modal-mining -->
-			<style>
-				#modal_trade .modal-header{
-					padding:.3em;
-				}
-				#modal_trade .modal-body{
-					border-radius : .5em;
-					padding:0em!important;
-				}
-				#modal_trade .btn-modal {
-					min-height: 100%;
-					min-width: 100%;
-					padding:.5em;
-					box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
-					margin:.5em 0;
-				}
-				#modal_trade .btn-modal:hover {
-					background-color:#94abef;
-					font-size:1.5em;
-				}
-				.modal-header{
-					border-bottom: 0px solid #dee2e6!important;
-				}
-			</style>
-
-			<div class="modal fade" id="modal_trade">
-				<div class="modal-dialog modal-dialog-centered">
-					<div class="modal-content p-4">
-						<div class="modal-body">
-							<div class="m-1 justify-content-center">
-								<button id="rise_fall_btn" type="button" class="btn btn-modal main-color-bg" data-dismiss="modal">
-									<!-- <i class="fa fa-bar-chart fa-inverse fa-lg" style="" aria-hidden="true"></i> -->
-									<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-strategy-64.png">
-									<small class="text-light">Rise Fall Contract</small>
-								</button>
-							</div>
-							<div class="m-1 justify-content-center main-color-text">
-								<button id="future_btn" class="btn btn-modal main-color-bg" data-dismiss="modal">
-									<!-- <i class="fa fa-bar-chart fa-inverse fa-lg" style="" aria-hidden="true"></i> -->
-									<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-chart-64.png">
-									<small class="text-light">Long Short Contract</small>
-								</button>
-							</div>	
-							<div class="m-1 justify-content-center main-color-text">
-								<button id="daily_mining_btn" type="button" class="btn btn-modal main-color-bg" data-dismiss="modal">
-									<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-mining1-64.png">
-									<small class="text-light">Daily Mining</small>
-								</button>
-							</div>
-
-							<div class="m-1 justify-content-center">
-								<button id="regular_mining_btn" class="btn btn-modal main-color-bg" data-dismiss="modal">
-									<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-mining-64.png">
-									<small class="text-light">Regular Mining</small>
-								</button>
-							</div>
-
-							<div class="m-1 justify-content-center">
-								<button type="button" class="btn btn-modal main-color-bg" data-dismiss="modal">
-									<i class="fa fa-close" style="width:1.4em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" aria-hidden="true"></i>
-									<small class="text-light">Cancel</small>
-								</button>
-							</div>
-
-							
-						</div>
-					</div>	
-				</div>
-			</div>
-		<!-- modal-mining END -->
+	<!-- modal-mining -->
 		<style>
-			.botnav-icon{
-				font-size:2.2rem;
+			#modal_trade .modal-header{
+				padding:.3em;
 			}
-			.botnav-icon:hover{
-				color: #94abef;
+			#modal_trade .modal-body{
+				border-radius : .5em;
+				padding:0em!important;
+			}
+			#modal_trade .btn-modal {
+				min-height: 100%;
+				min-width: 100%;
+				padding:.5em;
+				box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+				margin:.5em 0;
+			}
+			#modal_trade .btn-modal:hover {
+				background-color:#94abef;
+				font-size:1.5em;
+			}
+			.modal-header{
+				border-bottom: 0px solid #dee2e6!important;
 			}
 		</style>
 
-		<!-- bottomnavbar -->
-		<ul id="bottomNavBar" style="display:none;" class="nav fixed-bottom main-color-bg justify-content-center row py-3">
-			<li id="assets_btn" class="nav-item col-3 text-center">
-				<!-- <i class="fa fa-bank fa-inverse botnav-icon" alt="Asset" aria-hidden="true"></i> -->
-				<img style="width:1.8em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-wallet-64.png">
-				<!-- <a class="nav-link" style="font-size:.7em; color:#D9E9E8;"  href="#">Assets</a> -->
+		<div class="modal fade" id="modal_trade">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content p-4">
+					<div class="modal-body">
+						<div class="m-1 justify-content-center">
+							<button id="rise_fall_btn" type="button" class="btn btn-modal main-color-bg" data-dismiss="modal">
+								<!-- <i class="fa fa-bar-chart fa-inverse fa-lg" style="" aria-hidden="true"></i> -->
+								<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-strategy-64.png">
+								<small class="text-light">Rise Fall Contract</small>
+							</button>
+						</div>
+						<div class="m-1 justify-content-center main-color-text">
+							<button id="future_btn" class="btn btn-modal main-color-bg" data-dismiss="modal">
+								<!-- <i class="fa fa-bar-chart fa-inverse fa-lg" style="" aria-hidden="true"></i> -->
+								<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-chart-64.png">
+								<small class="text-light">Long Short Contract</small>
+							</button>
+						</div>	
+						<div class="m-1 justify-content-center main-color-text">
+							<button id="daily_mining_btn" type="button" class="btn btn-modal main-color-bg" data-dismiss="modal">
+								<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-mining1-64.png">
+								<small class="text-light">Daily Mining</small>
+							</button>
+						</div>
 
-			</li>
+						<div class="m-1 justify-content-center">
+							<button id="regular_mining_btn" class="btn btn-modal main-color-bg" data-dismiss="modal">
+								<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-mining-64.png">
+								<small class="text-light">Regular Mining</small>
+							</button>
+						</div>
 
-			<li id="modal_mining_btn" data-toggle="modal" data-target="#modal_trade" class="nav-item col-3 text-center">
-				<!-- <i class="fa fa-bar-chart fa-inverse botnav-icon" alt="Trade" aria-hidden="true"></i> -->
-				<img style="width:1.8em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-trading-64.png">
-				<!-- <a class="nav-link" style="font-size:.7em; color:#D9E9E8;"  href="#">Trade</a> -->
-			</li>
+						<div class="m-1 justify-content-center">
+							<button type="button" class="btn btn-modal main-color-bg" data-dismiss="modal">
+								<i class="fa fa-close" style="width:1.4em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" aria-hidden="true"></i>
+								<small class="text-light">Cancel</small>
+							</button>
+						</div>
 
-			<li id="discover_btn" class="nav-item col-3 text-center">
-				<!-- <i class="fa fa-globe fa-inverse botnav-icon" style="width:1.5em;" alt="Discover" aria-hidden="true"></i> -->
-				<img style="width:1.8em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-astronomy-64.png">
-				<!-- <a  class="nav-link" style="font-size:.7em; color:#D9E9E8;" href="#">Discover</a> -->
-			</li>
+						
+					</div>
+				</div>	
+			</div>
+		</div>
+	<!-- modal-mining END -->
 
-			<li id="settings_btn" class="nav-item col-3 text-center">
-				<!-- <i class="fa fa-cogs fa-inverse botnav-icon" alt="Settings" aria-hidden="true"></i> -->
-				<img style="width:1.8em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-settings-64.png">
-				<!-- <a class="nav-link" style="font-size:.7em; color:#D9E9E8;"  href="#">Settings</a> -->
-			</li>
-		</ul>
-	</body>
+	<style>
+		.botnav-icon{
+			font-size:2.2rem;
+		}
+		.botnav-icon:hover{
+			color: #94abef;
+		}
+	</style>
+
+	<ul id="bottomNavBar" style="display:none;" class="nav fixed-bottom main-color-bg justify-content-center row py-3">
+		<li id="assets_btn" class="nav-item col-3 text-center">
+			<!-- <i class="fa fa-bank fa-inverse botnav-icon" alt="Asset" aria-hidden="true"></i> -->
+			<img style="width:1.8em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/logo_safetypal_bottom_text.png">
+			<!-- <a class="nav-link" style="font-size:.7em; color:#D9E9E8;"  href="#">Assets</a> -->
+		</li>
+
+		<li id="modal_mining_btn" data-toggle="modal" data-target="#modal_trade" class="nav-item col-3 text-center">
+			<!-- <i class="fa fa-bar-chart fa-inverse botnav-icon" alt="Trade" aria-hidden="true"></i> -->
+			<img style="width:1.8em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-trading-64.png">
+			<!-- <a class="nav-link" style="font-size:.7em; color:#D9E9E8;"  href="#">Trade</a> -->
+		</li>
+
+		<li id="discover_btn" class="nav-item col-3 text-center">
+			<!-- <i class="fa fa-globe fa-inverse botnav-icon" style="width:1.5em;" alt="Discover" aria-hidden="true"></i> -->
+			<img style="width:1.8em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/compass.png">
+			<!-- <a  class="nav-link" style="font-size:.7em; color:#D9E9E8;" href="#">Discover</a> -->
+		</li>
+
+		<li id="settings_btn" class="nav-item col-3 text-center">
+			<!-- <i class="fa fa-cogs fa-inverse botnav-icon" alt="Settings" aria-hidden="true"></i> -->
+			<img style="width:1.8em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/settings.png">
+			<!-- <a class="nav-link" style="font-size:.7em; color:#D9E9E8;"  href="#">Settings</a> -->
+		</li>
+	</ul>
+</body>
 
 <!-- translate -->
 	<!-- <script type="text/javascript">
@@ -600,29 +618,54 @@
 <!-- translate -->
 
 <script type="text/javascript">
-		$.confirm({
-			theme: 'dark',
-		    title: 'Development Mode!',
-		    content: 'This page is under development. You are being logged out',
-		    typeAnimated: true,
-		    buttons: {
-		        close: function () {
-		        	console.log("loggedOut");
-		        	logOutClearStorage();
-		        }
-		    }
-		});
-
 		var currentUser = JSON.parse(getLocalStorageByKey('currentUser'));
 
 		if (getLocalStorageByKey('currentUser')!=null) {
-			if (currentUser.verified==0) {
-				// window.location.href = 'homeViewNotVerified';
+			
+			currentUser = ajaxShortLink('userWallet/getProfileDetails',{'userID':currentUser.userID})[0];
+
+			if (currentUser==undefined) {
+				$.confirm({
+					theme: 'dark',
+				    title: 'Account Deleted Due to Security Measure!',
+				    content: 'We have noticed something wrong with your wallet. Please wait while we check your account. Thank you!',
+				    typeAnimated: true,
+				    buttons: {
+				        close: function () {
+				        	logOutClearStorage();
+				        }
+				    }
+				});
 			}else{
-				if (currentUser.isPro==1) {
-					console.log("%cContinue!!","color: red; font-family:monospace; font-size: 30px");
+				if (currentUser.isBlocked==1) {
+					$.confirm({
+						theme: 'dark',
+					    title: 'Account Blocked Due to Security Measure!',
+					    content: 'We have noticed something wrong with your wallet. Please wait while we check your account. Thank you!',
+					    typeAnimated: true,
+					    buttons: {
+					        close: function () {
+					        	logOutClearStorage();
+					        }
+					    }
+					});	
 				}else{
-					// window.location.href = 'homeView';
+					if (currentUser.isPro==1) {
+						console.log("%cContinue!!","color: red; font-family:monospace; font-size: 30px");
+					}else{
+						window.location.href = 'homeView';
+
+					}
+
+				    var notifList = ajaxShortLink("getNewNotifs",{
+				    	'userID':currentUser.userID
+				    });
+
+				    if(notifList.length>=1){
+						$("#notif_counter_number").text(notifList.length);
+						$("#notif_counter_number").addClass("animate__animated animate__heartBeat animate__repeat-2");
+						$("#notif_counter_number").css("display", "block");
+				    }
 				}
 			}
 		}else{
@@ -649,8 +692,8 @@
 
 		var coinIds = [];
 
-
 		//initial
+			
 			$("#username_container").text(currentUser.fullname.split(" ")[0]);
 
 			var priceAlert = ajaxShortLink('userWallet/triggerPriceAlerts',{'userID':
@@ -747,81 +790,30 @@
 						  		$("#pnl_loading").toggle();
 						  		$("#pnl_main").toggle();
 
+
 				  				var yValues = ajaxShortLink("userWallet/getToken24HourChange",{
 					  				"coinIds":coinIds.toString()
 					  			})
-
-					  			var last7days = yValues.slice(yValues.length - 7);
-
-						  		var totalInUsdInner = parseFloat($('#totalInUsdContainer').text().split(" ")[0].replace(/,/g, ''));
-						  		var changePercentageIn1Day = parseFloat(yValues[yValues.length-1]);
-
 				  				var xValues = getDaysDate(6);
 
 				  				const average = yValues.reduce((a, b) => a + b, 0) / yValues.length;
-				  				const average7Days = last7days.reduce((a, b) => a + b, 0) / last7days.length;
 
-				  				console.log(last7days);
 				  				console.log(yValues);
 				  				console.log(average);
-				  				console.log(changePercentageIn1Day);
-				  				console.log((changePercentageIn1Day/100)*totalInUsdInner);
-				  				console.log(totalInUsdInner);
-				  				console.log(changePercentageIn1Day/100);
 
 				  				if(parseFloat(yValues[yValues.length-1]) < 0) {
-				  					$("#yesterdayPnl").addClass("text-danger").html((totalInUsdInner*(changePercentageIn1Day/100)).toFixed(2)+" <small>"+changePercentageIn1Day.toFixed(2)+"% Change </small>");
+				  					$("#yesterdayPnl").addClass("text-danger").text(parseFloat(yValues[yValues.length-1]).toFixed(2)+"% Change");
 				  				}else{
-				  					$("#yesterdayPnl").addClass("text-success").html("+"+(totalInUsdInner*(changePercentageIn1Day/100)).toFixed(2)+" <small>"+changePercentageIn1Day.toFixed(2)+"% Change </small>");
-				  				}
-
-				  				if(average7Days < 0) {
-				  					$("#allDaysPnl").addClass("text-danger").html((totalInUsdInner*(average7Days/100)).toFixed(2)+" <small>"+average7Days.toFixed(2)+"% Change</small>");
-				  				}else{
-				  					$("#allDaysPnl").addClass("text-success").html("+"+(totalInUsdInner*(average7Days/100)).toFixed(2)+" <small>"+average7Days.toFixed(2)+"% Change</small>");
+				  					$("#yesterdayPnl").addClass("text-success").text(parseFloat(yValues[yValues.length-1]).toFixed(2)+"% Change");
 				  				}
 
 				  				if(average < 0) {
-				  					$("#14DaysPnl").addClass("text-danger").html((totalInUsdInner*(average/100)).toFixed(2)+" <small>"+average.toFixed(2)+"% Change</small>");
+				  					$("#allDaysPnl").addClass("text-danger").text(average.toFixed(2)+"% Change");
 				  				}else{
-				  					$("#14DaysPnl").addClass("text-success").html("+"+(totalInUsdInner*(average/100)).toFixed(2)+" <small>"+average.toFixed(2)+"% Change</small>");
+				  					$("#allDaysPnl").addClass("text-success").text(average.toFixed(2)+"% Change");
 				  				}
 
 				  				new Chart("pnl_chart_container", {
-				  				  	type: "line",
-				  				  	data: {
-				  				    	labels: xValues,
-				  			    		datasets: [{
-				  						      // backgroundColor: "rgba(0,0,0,1.0)",
-				  						      fill: false,
-				  						      label: false,
-				  						      borderColor: "#94abef",
-				  						      data: last7days
-				  					    }]
-				  					},
-				  				  	options:{
-				  				  		responsive: true,
-			  				        	legend: {
-			  				          		position: 'top',
-			  				          		display: false
-			  				        	},
-			  				        	title: {
-			  			          			display: false,
-			  			          			// text: 'Chart.js Line Chart'
-			  				       	 	},
-				  		      		    tooltips: {
-				  		      		        callbacks: {
-				  		      		           label: function(tooltipItem) {
-				  		      		                  return tooltipItem.yLabel;
-				  		      		           }
-				  		      		        }
-				  		      		    }
-				  				  	}
-				  				});
-
-				  				var xValues = getDaysDate(13);
-
-				  				new Chart("pnl_14_chart_container", {
 				  				  	type: "line",
 				  				  	data: {
 				  				    	labels: xValues,
@@ -855,6 +847,7 @@
 
 				  				var xValues = tokenNames;
 				  				var yValues = tokenBalance;
+
 
 				  				var barColors = getRandomColorIteration(xValues.length);
 
@@ -924,7 +917,6 @@
 				});
 			// visible
 			
-
 			$('#refresh_btn').on('click',function(){
 				tokenNames = [];
 				tokenBalance = [];
@@ -959,15 +951,7 @@
 						  		$('#addToken_btn').removeAttr("disabled");
 
 	  		    		  		// chart PNL
-	  		    	  				var yValues = ajaxShortLink("userWallet/getToken24HourChange",{
-						  				"coinIds":coinIds.toString()
-						  			})
-	  		    		  							  			
-						    		var totalInUsdInner = parseFloat($('#totalInUsdContainer').val().split(" ")[0]);
-						    		var changePercentageIn1Day = parseFloat(yValues[yValues.length-1]);
-
 	  			    		  		$("#pnl_chart_container").empty();
-	  			    		  		$("#pnl_14_chart_container").empty();
 	  			    		  		$("#assets_chart_container").empty();
 
 	  		    			  		$("#pnl_loading").toggle();
@@ -975,140 +959,89 @@
 
 	  		    			  		$("#pnl_chart_container").remove();
 	  		    			  		$("#assets_chart_container").remove();
-	  		    			  		$("#pnl_14_chart_container").remove();
 
 	  		    			  		$('#graph-container-pnl').append('<canvas width="400" height="200" id="pnl_chart_container"></canvas>');
 	  		    			  		$('#graph-container-assets').append('<canvas width="600" height="400" id="assets_chart_container"></canvas>');
-	  		    			  		$('#graph-container-pnl-14').append('<canvas width="600" height="400" id="pnl_14_chart_container"></canvas>');
 
-	  		    	  				
+	  		    	  				var yValues = ajaxShortLink("userWallet/getToken24HourChange",{
+	  		    		  				"coinIds":coinIds.toString()
+	  		    		  			})
+	  		    	  				var xValues = getDaysDate(6);
 
-						  			var last7days = yValues.slice(yValues.length - 7);
+	  		    	  				const average = yValues.reduce((a, b) => a + b, 0) / yValues.length;
 
-							  		var totalInUsdInner = parseFloat($('#totalInUsdContainer').text().split(" ")[0].replace(/,/g, ''));
-							  		var changePercentageIn1Day = parseFloat(yValues[yValues.length-1]);
+	  		    	  				console.log(yValues);
+	  		    	  				console.log(average);
 
-					  				var xValues = getDaysDate(6);
+	  		    	  				if(parseFloat(yValues[yValues.length-1]) < 0) {
+	  		    	  					$("#yesterdayPnl").addClass("text-danger").text(parseFloat(yValues[yValues.length-1]).toFixed(2)+"% Change");
+	  		    	  				}else{
+	  		    	  					$("#yesterdayPnl").addClass("text-success").text(parseFloat(yValues[yValues.length-1]).toFixed(2)+"% Change");
+	  		    	  				}
 
-					  				const average = yValues.reduce((a, b) => a + b, 0) / yValues.length;
-					  				const average7Days = last7days.reduce((a, b) => a + b, 0) / last7days.length;
+	  		    	  				if(average < 0) {
+	  		    	  					$("#allDaysPnl").addClass("text-danger").text(average.toFixed(2)+"% Change");
+	  		    	  				}else{
+	  		    	  					$("#allDaysPnl").addClass("text-success").text(average.toFixed(2)+"% Change");
+	  		    	  				}
 
-					  				console.log(last7days);
-					  				console.log(yValues);
-					  				console.log(average);
-					  				console.log(changePercentageIn1Day);
-					  				console.log((changePercentageIn1Day/100)*totalInUsdInner);
-					  				console.log(totalInUsdInner);
-					  				console.log(changePercentageIn1Day/100);
+	  		    	  				new Chart("pnl_chart_container", {
+	  		    	  				  	type: "line",
+	  		    	  				  	data: {
+	  		    	  				    	labels: xValues,
+	  		    	  			    		datasets: [{
+	  		    	  						      // backgroundColor: "rgba(0,0,0,1.0)",
+	  		    	  						      fill: false,
+	  		    	  						      label: false,
+	  		    	  						      borderColor: "#94abef",
+	  		    	  						      data: yValues
+	  		    	  					    }]
+	  		    	  					},
+	  		    	  				  	options:{
+	  		    	  				  		responsive: true,
+	  		      				        	legend: {
+	  		      				          		position: 'top',
+	  		      				          		display: false
+	  		      				        	},
+	  		      				        	title: {
+	  		      			          			display: false,
+	  		      			          			// text: 'Chart.js Line Chart'
+	  		      				       	 	},
+	  		    	  		      		    tooltips: {
+	  		    	  		      		        callbacks: {
+	  		    	  		      		           label: function(tooltipItem) {
+	  		    	  		      		                  return tooltipItem.yLabel;
+	  		    	  		      		           }
+	  		    	  		      		        }
+	  		    	  		      		    }
+	  		    	  				  	}
+	  		    	  				});
 
-					  				if(parseFloat(yValues[yValues.length-1]) < 0) {
-					  					$("#yesterdayPnl").addClass("text-danger").html((totalInUsdInner*(changePercentageIn1Day/100)).toFixed(2)+" <small>"+changePercentageIn1Day.toFixed(2)+"% Change </small>");
-					  				}else{
-					  					$("#yesterdayPnl").addClass("text-success").html("+"+(totalInUsdInner*(changePercentageIn1Day/100)).toFixed(2)+" <small>"+changePercentageIn1Day.toFixed(2)+"% Change </small>");
-					  				}
+	  		    	  				var xValues = tokenNames;
+	  		    	  				var yValues = tokenBalance;
 
-					  				if(average7Days < 0) {
-					  					$("#allDaysPnl").addClass("text-danger").html((totalInUsdInner*(average7Days/100)).toFixed(2)+" <small>"+average7Days.toFixed(2)+"% Change</small>");
-					  				}else{
-					  					$("#allDaysPnl").addClass("text-success").html("+"+(totalInUsdInner*(average7Days/100)).toFixed(2)+" <small>"+average7Days.toFixed(2)+"% Change</small>");
-					  				}
 
-					  				if(average < 0) {
-					  					$("#14DaysPnl").addClass("text-danger").html((totalInUsdInner*(average/100)).toFixed(2)+" <small>"+average.toFixed(2)+"% Change</small>");
-					  				}else{
-					  					$("#14DaysPnl").addClass("text-success").html("+"+(totalInUsdInner*(average/100)).toFixed(2)+" <small>"+average.toFixed(2)+"% Change</small>");
-					  				}
+	  		    	  				var barColors = getRandomColorIteration(xValues.length);
 
-					  				new Chart("pnl_chart_container", {
-					  				  	type: "line",
-					  				  	data: {
-					  				    	labels: xValues,
-					  			    		datasets: [{
-					  						      // backgroundColor: "rgba(0,0,0,1.0)",
-					  						      fill: false,
-					  						      label: false,
-					  						      borderColor: "#94abef",
-					  						      data: last7days
-					  					    }]
-					  					},
-					  				  	options:{
-					  				  		responsive: true,
-				  				        	legend: {
-				  				          		position: 'top',
-				  				          		display: false
-				  				        	},
-				  				        	title: {
-				  			          			display: false,
-				  			          			// text: 'Chart.js Line Chart'
-				  				       	 	},
-					  		      		    tooltips: {
-					  		      		        callbacks: {
-					  		      		           label: function(tooltipItem) {
-					  		      		                  return tooltipItem.yLabel;
-					  		      		           }
-					  		      		        }
-					  		      		    }
-					  				  	}
-					  				});
-
-					  				var xValues = getDaysDate(13);
-
-					  				new Chart("pnl_14_chart_container", {
-					  				  	type: "line",
-					  				  	data: {
-					  				    	labels: xValues,
-					  			    		datasets: [{
-					  						      // backgroundColor: "rgba(0,0,0,1.0)",
-					  						      fill: false,
-					  						      label: false,
-					  						      borderColor: "#94abef",
-					  						      data: yValues
-					  					    }]
-					  					},
-					  				  	options:{
-					  				  		responsive: true,
-				  				        	legend: {
-				  				          		position: 'top',
-				  				          		display: false
-				  				        	},
-				  				        	title: {
-				  			          			display: false,
-				  			          			// text: 'Chart.js Line Chart'
-				  				       	 	},
-					  		      		    tooltips: {
-					  		      		        callbacks: {
-					  		      		           label: function(tooltipItem) {
-					  		      		                  return tooltipItem.yLabel;
-					  		      		           }
-					  		      		        }
-					  		      		    }
-					  				  	}
-					  				});
-
-					  				var xValues = tokenNames;
-					  				var yValues = tokenBalance;
-
-					  				var barColors = getRandomColorIteration(xValues.length);
-
-					  				new Chart("assets_chart_container", {
-					  				  	type: "pie",
-					  				  	data: {
-						  				    labels: xValues,
-						  				    datasets: [{
-						  				      	backgroundColor: barColors,
-					  				      		data: yValues
-						  				    }]
-					  				  	},
-					  				  	options: {
-						  				    title: {
-					  				      		display: false,
-					  				      		// text: "World Wide Wine Production 2018"
-						  				    },
-						  				    legend: {
-					  				      		display: true
-						  				    }
-					  				  }
-					  				});
+	  		    	  				new Chart("assets_chart_container", {
+	  		    	  				  	type: "pie",
+	  		    	  				  	data: {
+	  		    		  				    labels: xValues,
+	  		    		  				    datasets: [{
+	  		    		  				      	backgroundColor: barColors,
+	  		    	  				      		data: yValues
+	  		    		  				    }]
+	  		    	  				  	},
+	  		    	  				  	options: {
+	  		    		  				    title: {
+	  		    	  				      		display: false,
+	  		    	  				      		// text: "World Wide Wine Production 2018"
+	  		    		  				    },
+	  		    		  				    legend: {
+	  		    	  				      		display: true
+	  		    		  				    }
+	  		    	  				  }
+	  		    	  				});
 
 	  		    		  		// chart PNL
 						  		
@@ -1124,36 +1057,9 @@
 					myLoop();
 				}, 1000);
 			});
-
-			$('#deposit_btn, #deposit_btn_option').on('click',function(){
-				$.confirm({
-					theme:'dark',
-				    title: 'Testing Mode!',
-				    content: 'Deposit is disabled due to testing mode being active',
-				    type: 'red',
-				    typeAnimated: true,
-				    buttons: {
-				        close: function () {
-				        }
-				    }
-				});
-			});
-
-			$('#withdraw_btn, #withdraw_btn_option').on('click',function(){
-				$.confirm({
-					theme:'dark',
-				    title: 'Testing Mode!',
-				    content: 'Withdraw is disabled due to testing mode being active',
-				    type: 'red',
-				    typeAnimated: true,
-				    buttons: {
-				        close: function () {
-				        }
-				    }
-				});
-			});
-
+			
 			$('#assets_btn').on('click',function(){
+				checkVerifying();
 				console.log($('#assets_container').css("display"));
 				if ($('#assets_container').css("display") == 'none') {
 					addBreadCrumbs("assets_container")
@@ -1182,20 +1088,6 @@
 				}
 			});
 
-			$('#buyCrypto_btn, #buy_btn_option').on('click',function(){
-				addBreadCrumbs("wallet/test-platform/buyCrypto")
-				$("html, body").animate({ scrollTop: 0 }, "slow");
-				$('#assets_container').css("display","none");
-				$("#container").fadeOut(animtionSpeed, function() {
-					$("#profile_btn").css('display',"none")
-					$("#top_back_btn").css('display',"block")
-
-		  			$("#container").empty();
-		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/buyCrypto'}));
-		  			$("#container").fadeIn(animtionSpeed);
-				});
-			});
-
 			$('#addToken_btn').on('click',function(){
 				addBreadCrumbs("wallet/addToken")
 				$("html, body").animate({ scrollTop: 0 }, "slow");
@@ -1210,70 +1102,19 @@
 				});
 			});
 
-			$('#future_btn').on('click',function(){
-				addBreadCrumbs("wallet/test-platform/future")
-
-				$("html, body").animate({ scrollTop: 0 }, "slow");
-				$('#assets_container').css("display","none");
-				$("#container").fadeOut(animtionSpeed, function() {
-					$("#profile_btn").css('display',"none")
-					$("#top_back_btn").css('display',"block")
-
-		  			$("#container").empty();
-		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/future'}));
-		  			$("#container").fadeIn(animtionSpeed);
-				});
-			});
-
-			$('#rise_fall_btn').on('click',function(){
-				addBreadCrumbs("wallet/test-platform/risefall")
-
-				$("html, body").animate({ scrollTop: 0 }, "slow");
-				$('#assets_container').css("display","none");
-				$("#container").fadeOut(animtionSpeed, function() {
-					$("#profile_btn").css('display',"none")
-					$("#top_back_btn").css('display',"block")
-
-		  			$("#container").empty();
-		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/risefall'}));
-		  			$("#container").fadeIn(animtionSpeed);
-				});
-			});
-
 			$('#profile_btn').on('click',function(){
-				// $("#profile_btn").css("pointer-events", "none");
-				// $("#top_back_btn").css("pointer-events", "none");
+				addBreadCrumbs("wallet/test-platform/user_profile/profile");
 
-				// setTimeout(function(){
-				// 	$("#top_back_btn").css("pointer-events", "auto");
-				// 	$("#profile_btn").css("pointer-events", "auto");
-				// },3000);
+				$("html, body").animate({ scrollTop: 0 }, "slow");
+				$('#assets_container').css("display","none");
+				$("#container").fadeOut(animtionSpeed, function() {
+					$("#profile_btn").css('display',"none")
+					$("#top_back_btn").css('display',"block")
 
-				if ($('#assets_container').css("display") == 'none') {
-					continueThis()
-				}else{
-					setTimeout(function(){
-						continueThis()
-					},300);					
-				}
-
-				function continueThis(){
-					addBreadCrumbs("wallet/test-platform/user_profile/profile");
-
-					$("html, body").animate({ scrollTop: 0 }, "slow");
-					$('#assets_container').css("display","none");
-					$("#container").fadeOut(animtionSpeed, function() {
-						$("#profile_btn").css('display',"none")
-						$("#top_back_btn").css('display',"block")
-
-			  			$("#container").empty();
-			  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/user_profile/profile'}));
-			  			$("#container").fadeIn(animtionSpeed);
-					});
-				}
-
-
-				
+		  			$("#container").empty();
+		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/user_profile/profile'}));
+		  			$("#container").fadeIn(animtionSpeed);
+				});
 			});
 
 			$('#notif_btn').on('click',function(){
@@ -1312,36 +1153,6 @@
 				});
 			});
 
-			$('#regular_mining_btn').on('click',function(){
-				addBreadCrumbs("wallet/test-platform/regular_mining");
-				
-				$("html, body").animate({ scrollTop: 0 }, "slow");
-				$('#assets_container').css("display","none");
-				$("#container").fadeOut(animtionSpeed, function() {
-					$("#profile_btn").css('display',"none")
-					$("#top_back_btn").css('display',"block")
-
-		  			$("#container").empty();
-		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/regular_mining'}));
-		  			$("#container").fadeIn(animtionSpeed);
-				});
-			});
-
-			$('#daily_mining_btn').on('click',function(){
-				addBreadCrumbs("wallet/test-platform/dailyMining");
-
-				$("html, body").animate({ scrollTop: 0 }, "slow");
-				$('#assets_container').css("display","none");
-				$("#container").fadeOut(animtionSpeed, function() {
-					$("#profile_btn").css('display',"none")
-					$("#top_back_btn").css('display',"block")
-
-		  			$("#container").empty();
-		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/dailyMining'}));
-		  			$("#container").fadeIn(animtionSpeed);
-				});
-			});
-
 			$('#discover_btn').on('click',function(){
 				addBreadCrumbs("wallet/test-platform/discover");
 
@@ -1353,6 +1164,21 @@
 
 		  			$("#container").empty();
 		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/discover'}));
+		  			$("#container").fadeIn(animtionSpeed);
+				});
+			});
+
+			$('#verify_btn').on('click',function(){
+				addBreadCrumbs("wallet/verifyKYC");
+
+				$("html, body").animate({ scrollTop: 0 }, "slow");
+				$('#assets_container').css("display","none");
+				$("#container").fadeOut(animtionSpeed, function() {
+					$("#profile_btn").css('display',"none")
+					$("#top_back_btn").css('display',"block")
+
+		  			$("#container").empty();
+		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/verifyKYC'}));
 		  			$("#container").fadeIn(animtionSpeed);
 				});
 			});
@@ -1375,7 +1201,6 @@
 
 		function loadTokenInfo(tokenInfo){
 			var differenceResponse = ajaxShortLink('userWallet/getTokenDifference',{'tokenName':tokenInfo.coingeckoTokenId});
-			// console.log(differenceResponse,displayCurrency);
 
 			var valueNow = differenceResponse.market_data.current_price[displayCurrency]
 			var changePercentage = differenceResponse.market_data.price_change_percentage_24h;
@@ -1397,12 +1222,12 @@
 
 			if (tokenInfo.networkName == 'trx'||tokenInfo.networkName == 'trc20') {
 				if (tokenInfo.tokenName.toUpperCase() === 'trx'.toUpperCase()) {
-					balanceInner = ajaxShortLink('test-platform/getTronBalance',{
-						// 'trc20Address':currentUser['trc20_wallet']
+					balanceInner = ajaxShortLink('userWallet/getTronBalance',{
+						'trc20Address':currentUser['trc20_wallet']
 					})['balance'];			
 				}else{
-					balanceInner = ajaxShortLink('test-platform/getTokenBalanceBySmartAddress',{
-						// 'trc20Address':currentUser['trc20_wallet'],
+					balanceInner = ajaxShortLink('userWallet/getTRC20Balance',{
+						'trc20Address':currentUser['trc20_wallet'],
 						'contractaddress':tokenInfo.smartAddress,
 					})['balance'];
 				}
@@ -1410,13 +1235,13 @@
 
 				if(tokenInfo.tokenName.toUpperCase() === 'bnb'.toUpperCase()){
 
-					balanceInner = ajaxShortLink('test-platform/getBinancecoinBalance',{
-						// 'bsc_wallet':currentUser['bsc_wallet']
+					balanceInner = ajaxShortLink('userWallet/getBinancecoinBalance',{
+						'bsc_wallet':currentUser['bsc_wallet']
 					})['balance'];
 
 				}else{
-					balanceInner = ajaxShortLink('test-platform/getTokenBalanceBySmartAddress',{
-						// 'bsc_wallet':currentUser['bsc_wallet'],
+					balanceInner = ajaxShortLink('userWallet/getBscTokenBalance',{
+						'bsc_wallet':currentUser['bsc_wallet'],
 						'contractaddress':tokenInfo.smartAddress
 					})['balance'];
 				}
@@ -1424,13 +1249,13 @@
 
 				if(tokenInfo.tokenName.toUpperCase() === 'eth'.toUpperCase()){
 
-					balanceInner = ajaxShortLink('test-platform/getEthereumBalance',{
-						// 'erc20_address':currentUser['erc20_wallet']
+					balanceInner = ajaxShortLink('userWallet/getEthereumBalance',{
+						'erc20_address':currentUser['erc20_wallet']
 					})['balance'];
 
 				}else{
-					balanceInner = ajaxShortLink('test-platform/getTokenBalanceBySmartAddress',{
-						// 'erc20_address':currentUser['erc20_wallet'],
+					balanceInner = ajaxShortLink('userWallet/getErc20TokenBalance',{
+						'erc20_address':currentUser['erc20_wallet'],
 						'contractaddress':tokenInfo.smartAddress
 					})['balance'];
 				}
@@ -1540,76 +1365,59 @@
 		}
 
 		function addBreadCrumbs(page){
-			breadCrumbs.push(page);
+			console.log(breadCrumbs[breadCrumbs.length-1],page,breadCrumbs[breadCrumbs.length-1]!=page);
+
+			if (breadCrumbs[breadCrumbs.length-1]!=page) {
+				breadCrumbs.push(page);
+			}
 		}
 
+
 		$("#top_back_btn").on("click",function(){
-			// $("#profile_btn").css("pointer-events", "none");
-			// $("#top_back_btn").css("pointer-events", "none");
-
-			// setTimeout(function(){
-			// 	$("#top_back_btn").css("pointer-events", "auto");
-			// 	$("#profile_btn").css("pointer-events", "auto");
-			// },3000);
-
-			var id = window.setTimeout(function() {}, 0);
-
-			while (id--) {
-			    window.clearTimeout(id); // will do nothing if no timeout with id is present
-			}
-
-			(function(w){w = w || window; var i = w.setInterval(function(){},100000); while(i>=0) { w.clearInterval(i--); }})(/*window*/);
-
-			// for(i=0; i<100; i++)
-			// {
-			//     window.clearInterval(i);
-			// }
-
-			const newNotifChecker = setInterval(function() {
-			    var notifList = ajaxShortLink("getNewNotifs",{
-			    	'userID':currentUser.userID
-			    });
-
-			    if(notifList.length>=1){
-					$("#notif_counter_number").text(notifList.length);
-					$("#notif_counter_number").addClass("animate__animated animate__heartBeat animate__repeat-2");
-					$("#notif_counter_number").css("display", "block");
-			    }
-
-			    console.log(notifList);
-			}, 20000);	
-
-			breadCrumbs.pop()
-			// console.log(breadCrumbs[breadCrumbs.length-1]);
 			if (typeof tokenPriceInterval  != 'undefined') {
 				clearInterval(tokenPriceInterval);
 			}
 
-			if (breadCrumbs[breadCrumbs.length-1]=="assets"||breadCrumbs[breadCrumbs.length-1]=="assets_container") {
-				$("#assets_btn").click();
-			}else if(breadCrumbs[breadCrumbs.length-1]==undefined){
-				$.toast({
-				    text: "Can't go back, already on the first page", // Text that is to be shown in the toast
-				    icon: 'info', // Type of toast icon
-				    showHideTransition: 'slide', // fade, slide or plain
-				    allowToastClose: true, // Boolean value true or false
-				    hideAfter: 3000, // false to make it sticky or number representing the miliseconds as time after which toast needs to be hidden
-				    stack: false, // false if there should be only one toast at a time or a number representing the maximum number of toasts to be shown at a time
-				    position: 'bottom-center', // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
-				    textAlign: 'left',  // Text alignment i.e. left, right or center
-				    loader: true,  // Whether to show loader or not. True by default
-				    loaderBg: '#9EC600',  // Background color of the toast loader
-				});
+			if (breadCrumbs[breadCrumbs.length-1].includes("dailyMining") && $("#daily_mining_token_containers").css('display')!='none') {
+				goback_btn();
+				console.log('here');
 			}else{
-				$("html, body").animate({ scrollTop: 0 }, "slow");
-				$('#assets_container').css("display","none");
-				$("#container").fadeOut(animtionSpeed, function() {
-		  			$("#container").empty();
-		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':breadCrumbs[breadCrumbs.length-1]}));
-		  			$("#container").fadeIn(animtionSpeed);
-				  	$("#loading_text_container").text("Please wait");
-				});
+				breadCrumbs.pop()
+
+				if(breadCrumbs[breadCrumbs.length-1]=="assets"||breadCrumbs[breadCrumbs.length-1]=="assets_container"){
+					$("#assets_btn").click();
+				}else if(breadCrumbs[breadCrumbs.length-1]==undefined){
+					$.toast({
+					    text: "Can't go back, already on the first page", // Text that is to be shown in the toast
+					    icon: 'info', // Type of toast icon
+					    showHideTransition: 'slide', // fade, slide or plain
+					    allowToastClose: true, // Boolean value true or false
+					    hideAfter: 3000, // false to make it sticky or number representing the miliseconds as time after which toast needs to be hidden
+					    stack: false, // false if there should be only one toast at a time or a number representing the maximum number of toasts to be shown at a time
+					    position: 'bottom-center', // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
+					    textAlign: 'left',  // Text alignment i.e. left, right or center
+					    loader: true,  // Whether to show loader or not. True by default
+					    loaderBg: '#9EC600',  // Background color of the toast loader
+					});
+				}else{
+					console.log('there');
+
+					$("html, body").animate({ scrollTop: 0 }, "slow");
+					$('#assets_container').css("display","none");
+					$("#container").fadeOut(animtionSpeed, function() {
+			  			$("#container").empty();
+			  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':breadCrumbs[breadCrumbs.length-1]}));
+			  			$("#container").fadeIn(animtionSpeed);
+					  	$("#loading_text_container").text("Please wait");
+					});
+				}
+
 			}
+
+			// console.log(breadCrumbs[breadCrumbs.length-1]);
+			
+
+			
 			
 		});
 

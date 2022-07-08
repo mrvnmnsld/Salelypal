@@ -210,7 +210,7 @@
 	    		'status':statusSet
 	    	});
 
-	    	var setRes = ajaxShortLink('userWallet/future/setRiseFallPosition', {
+	    	var setRes = ajaxShortLink('test-account/future/setRiseFallPosition', {
 	    		'id':selectedData.id,
 	    		'userID':selectedData.userID,
 	    	});

@@ -18,6 +18,10 @@
         background: #bf5279 !important;
      }
 
+     .dataTables_filter input {
+         width: 70%!important; 
+     }
+
 </style>
 <!-- 
 <div class="text-danger p-2" id="testNotes">
@@ -336,15 +340,15 @@
 
             if (parseFloat(earnings[0])>=1) {
                 console.log("HERE");
-                $("#todaysEarningLongShort").addClass("text-success").removeClass("text-danger").text("+"+parseFloat(earnings[0]),toFixed(2)+" USD");
+                $("#todaysEarningLongShort").addClass("text-success").removeClass("text-danger").text("+"+parseFloat(earnings[0]).toFixed(2)+" USD");
             }else{
-                $("#todaysEarningLongShort").addClass("text-danger").removeClass("text-success").text(parseFloat(earnings[0]),toFixed(2)+" USD");
+                $("#todaysEarningLongShort").addClass("text-danger").removeClass("text-success").text(parseFloat(earnings[0]).toFixed(2)+" USD");
             }
 
             if (parseFloat(earnings[1])>=1) {
-                $("#allTimeEarningsLongShort").addClass("text-success").removeClass("text-danger").text("+"+parseFloat(earnings[1]),toFixed(2)+" USD");
+                $("#allTimeEarningsLongShort").addClass("text-success").removeClass("text-danger").text("+"+parseFloat(earnings[1]).toFixed(2)+" USD");
             }else{
-                $("#allTimeEarningsLongShort").addClass("text-danger").removeClass("text-success").text(parseFloat(earnings[1]),toFixed(2)+" USD");
+                $("#allTimeEarningsLongShort").addClass("text-danger").removeClass("text-success").text(parseFloat(earnings[1]).toFixed(2)+" USD");
             }
         // closed
     }

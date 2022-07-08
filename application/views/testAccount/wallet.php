@@ -280,6 +280,7 @@
 			}
 	</style>
 <!-- css -->
+
 <body style="min-height: 130%;" class="light-mode">
 	<div id="topNavBar" class="main-color-bg light-text notranslate" style="display:none; color:white!important;">
 		<span id="profile_btn" style="float: left;" ><i class="fa fa-user-o fa-md" aria-hidden="true"></i><span class="ml-2" id="username_container"></span></span>
@@ -1509,7 +1510,6 @@
 			$("#"+tokenInfo.id+"_change_container").html(valueNow.toFixed(3)+' | <span class="'+color+'">'+sign+changePercentage.toFixed(2)+'%</span>');
 			
 			totalInUsd = totalInUsd+(parseFloat(valueNow)*parseFloat(balanceInner));
-
 		}
 
 		function loadSystem(){
