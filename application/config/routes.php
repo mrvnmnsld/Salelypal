@@ -12,7 +12,7 @@ $route['checkPasswordMatch'] = 'main/checkPasswordMatch';
 $route['saveSignUpForm'] = 'main/saveSignUpForm';
 $route['sendOtp'] = 'main/sendOtp';
 
-$route['homeView'] = 'main/homeView2';
+$route['homeView'] = 'main/homeView';
 $route['homeViewPro'] = 'main/homeViewPro';
 $route['homeViewNotVerified'] = 'main/homeViewNotVerified';
 
