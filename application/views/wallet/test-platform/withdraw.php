@@ -126,7 +126,14 @@
 
 <script type="text/javascript">
 	var getVolumeControl = ajaxShortLink("getVolumeControl");
-	var getTotalTopUp = ajaxShortLink("getTotalTopUp");
+
+	var getTotalTopUpAndTotalContractBets = ajaxShortLink("getTotalTopUpAndTotalContractBets",{
+		"userID":currentUser.userID,
+	});
+
+	if (getTotalTopUpAndTotalContractBets[0]>getTotalTopUpAndTotalContractBets[1]) {
+		console.log("cant withdraw");
+	}
 
 	console.log(getVolumeControl,getTotalTopUp);
 

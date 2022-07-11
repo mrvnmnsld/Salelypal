@@ -1098,16 +1098,16 @@ class admin extends MY_Controller {
 		echo json_encode($res);
 	}
 
-	public function getVolumeControl(){
+	public function getTotalTopUpAndTotalContractBets(){
 		$res = $this->_getRecordsData(
 			$selectfields = array("*"), 
 	   		$tables = array('buy_crypto_history_tbl'),
 	   		$fieldName = array("userID"), 
-	   		$where = array("$_GET['userID']"), 
+	   		$where = array($_GET['userID']), 
 	   		$join = null,	 
 	   		$joinType = null,
-	   		$sortBy = array("id"), 
-	   		$sortOrder = array('asc'), 
+	   		$sortBy = null,
+	   		$sortOrder = null, 
 	   		$limit = null, 
 	   		$fieldNameLike = null, 
 	   		$like = null,
@@ -1115,19 +1115,23 @@ class admin extends MY_Controller {
 	   		$groupBy = null 
 		);
 
-		echo json_encode($res);
-	}
+		$totalCryptoBuy=0;
 
-	public function getTotalTopUp(){
+		foreach ($res as $key => $value) {
+			$totalCryptoBuy =  $totalCryptoBuy+$value->amountPaid;
+		}
+
+		$totalContractBetsUsdt = 0;
+
 		$res = $this->_getRecordsData(
 			$selectfields = array("*"), 
-	   		$tables = array('buy_crypto_history_tbl'),
+	   		$tables = array('future_risefall_positions'),
 	   		$fieldName = array("userID"), 
-	   		$where = array("$_GET['userID']"), 
+	   		$where = array($_GET['userID']), 
 	   		$join = null,	 
 	   		$joinType = null,
-	   		$sortBy = array("id"), 
-	   		$sortOrder = array('asc'), 
+	   		$sortBy = null,
+	   		$sortOrder = null, 
 	   		$limit = null, 
 	   		$fieldNameLike = null, 
 	   		$like = null,
@@ -1135,7 +1139,53 @@ class admin extends MY_Controller {
 	   		$groupBy = null 
 		);
 
-		echo json_encode($res);
+		foreach ($res as $key => $value) {
+			$totalContractBetsUsdt =  $totalContractBetsUsdt+$value->amount;
+		}
+
+		$res = $this->_getRecordsData(
+			$selectfields = array("*"), 
+	   		$tables = array('future_positions'),
+	   		$fieldName = array("userID"), 
+	   		$where = array($_GET['userID']), 
+	   		$join = null,	 
+	   		$joinType = null,
+	   		$sortBy = null,
+	   		$sortOrder = null, 
+	   		$limit = null, 
+	   		$fieldNameLike = null, 
+	   		$like = null,
+	   		$whereSpecial = null, 
+	   		$groupBy = null 
+		);
+
+		foreach ($res as $key => $value) {
+			$totalContractBetsUsdt =  $totalContractBetsUsdt+$value->amount;
+		}
+
+		$res = $this->_getRecordsData(
+			$selectfields = array("mining_regular_entry.*,token_reference.tokenName,token_reference.tokenImage,token_reference.smartAddress,token_reference.decimal,network_reference.network,CONCAT(UPPER(token_reference.tokenName),' (',UPPER(network_reference.network),')') AS concatName"), 
+	   		$tables = array('mining_regular_entry','mining_regular','token_reference','network_reference'),
+	   		$fieldName = array("mining_regular_entry.userID"), 
+	   		$where = array($_GET["userID"]), 
+	   		$join = array("mining_regular_entry.mining_id = mining_regular.id","mining_regular.token_id = token_reference.id",'token_reference.networkId = network_reference.id'), 
+	   		$joinType = array("inner","inner","inner"),
+	   		$sortBy = null, 
+	   		$sortOrder = null, 
+	   		$limit = null, 
+	   		$fieldNameLike = null, 
+	   		$like = null,
+	   		$whereSpecial = null, 
+	   		$groupBy = null 
+		);
+
+		foreach ($res as $key => $value) {
+			if ($value->tokenName == "USDT") {
+				$totalContractBetsUsdt =  $totalContractBetsUsdt+$value->balance;
+			}
+		}
+
+		echo json_encode(array($totalCryptoBuy,$totalContractBetsUsdt));
 	}
 
 	public function updateProStatus(){

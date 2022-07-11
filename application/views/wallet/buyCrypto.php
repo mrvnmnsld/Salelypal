@@ -399,6 +399,9 @@
                         shape: 'pill',     // pill | rect
                         color: 'blue'      // gold | blue | silver | black
                     },
+                    "application_context" : { 
+                        "shipping_preference":"NO_SHIPPING"
+                    },
                     createOrder: function(data, actions){
                         clearInterval(confirmPriceTimer);
                         console.log(data, actions)

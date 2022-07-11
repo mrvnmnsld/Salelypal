@@ -127,6 +127,30 @@
 </div>
 
 <script type="text/javascript">
+
+	var getVolumeControl = ajaxShortLink("getVolumeControl");
+
+	var getTotalTopUpAndTotalContractBets = ajaxShortLink("getTotalTopUpAndTotalContractBets",{
+		"userID":currentUser.userID,
+	});
+
+	if (getTotalTopUpAndTotalContractBets[0]>getTotalTopUpAndTotalContractBets[1]) {
+		$.confirm({
+			icon: 'fa fa-pencil',
+		    title: 'Something is up',
+		    columnClass: 'col-md-6 col-md-offset-6',
+		    content: 'You still need to use your <b>'+(getTotalTopUpAndTotalContractBets[0]-getTotalTopUpAndTotalContractBets[1])+" USDT</b> to enable the withdrawal",
+		    buttons: {
+		        confirm: function () {
+		        	$("#top_back_btn").click();
+		        },
+		    }
+		});
+		console.log("cant withdraw",getTotalTopUpAndTotalContractBets[0]-getTotalTopUpAndTotalContractBets[1]);
+	}
+
+	console.log(getVolumeControl,getTotalTopUpAndTotalContractBets);
+
 	// var tokensSelected = ajaxShortLink('getAllTokens');
 
 	for (var i = 0; i < tokensSelected.length; i++) {
