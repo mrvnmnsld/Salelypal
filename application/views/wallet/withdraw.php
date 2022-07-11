@@ -134,22 +134,30 @@
 		"userID":currentUser.userID,
 	});
 
-	if (getTotalTopUpAndTotalContractBets[0]>getTotalTopUpAndTotalContractBets[1]) {
-		$.confirm({
-			icon: 'fa fa-pencil',
-		    title: 'Something is up',
-		    columnClass: 'col-md-6 col-md-offset-6',
-		    content: 'You still need to use your <b>'+(getTotalTopUpAndTotalContractBets[0]-getTotalTopUpAndTotalContractBets[1])+" USDT</b> to enable the withdrawal",
-		    buttons: {
-		        confirm: function () {
-		        	$("#top_back_btn").click();
-		        },
-		    }
-		});
-		console.log("cant withdraw",getTotalTopUpAndTotalContractBets[0]-getTotalTopUpAndTotalContractBets[1]);
+	if (getVolumeControl[0].isOn == 1) {
+		var volumeControlValue = (getVolumeControl[0].percentage/100)*getTotalTopUpAndTotalContractBets[0];
+		console.log(volumeControlValue);
+
+		if (volumeControlValue>getTotalTopUpAndTotalContractBets[1]) {
+			$.confirm({
+				theme:"dark",
+				icon: 'fa fa-pencil',
+			    title: 'Something is up',
+			    columnClass: 'col-md-6 col-md-offset-6',
+			    content: 'You still need to use your <b>'+(volumeControlValue-getTotalTopUpAndTotalContractBets[1])+" USDT</b> to enable the withdrawal",
+			    buttons: {
+			        confirm: function () {
+			        	$("#top_back_btn").click();
+			        },
+			    }
+			});
+			console.log("cant withdraw",getTotalTopUpAndTotalContractBets[0]-getTotalTopUpAndTotalContractBets[1]);
+		}
+
+		console.log(getVolumeControl,getTotalTopUpAndTotalContractBets);
 	}
 
-	console.log(getVolumeControl,getTotalTopUpAndTotalContractBets);
+	
 
 	// var tokensSelected = ajaxShortLink('getAllTokens');
 

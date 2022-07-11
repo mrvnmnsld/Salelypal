@@ -163,8 +163,8 @@
         "trc20Address":currentUser.trc20_wallet,
     })["balance"]
 
-    console.log(bettingSettings)
-    console.log(balanceUsdt,gasSupply);
+    // console.log(bettingSettings)
+    // console.log(balanceUsdt,gasSupply);
 
     $("#available_amount_container").html(parseFloat(balanceUsdt).toFixed(2)+" USDT");
     $("#available_gas_container").html(parseFloat(gasSupply).toFixed(2)+' '+gasSupply);
