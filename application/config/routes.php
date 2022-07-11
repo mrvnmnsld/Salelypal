@@ -104,6 +104,8 @@ $route['saveName'] = 'main/saveName';
 	$route['volumeControl'] = 'admin/volumeControl';
 	$route['admin/updateVolumeControl'] = 'admin/updateVolumeControl';
 	$route['getVolumeControl'] = 'admin/getVolumeControl';
+	$route['getTotalTopUp'] = 'admin/getTotalTopUp';
+	
 	
 	// chatSupport
 		$route['admin/getAllChatSupport'] = 'admin/getAllChatSupport';

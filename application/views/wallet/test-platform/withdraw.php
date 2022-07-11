@@ -125,6 +125,11 @@
 </div>
 
 <script type="text/javascript">
+	var getVolumeControl = ajaxShortLink("getVolumeControl");
+	var getTotalTopUp = ajaxShortLink("getTotalTopUp");
+
+	console.log(getVolumeControl,getTotalTopUp);
+
 	for (var i = 0; i < tokensSelected.length; i++) {
 		$("#tokenContainerSelect").append(
 			'<option '+ 

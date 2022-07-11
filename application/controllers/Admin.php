@@ -1097,6 +1097,28 @@ class admin extends MY_Controller {
 
 		echo json_encode($res);
 	}
+
+	public function getVolumeControl(){
+		$res = $this->_getRecordsData(
+			$selectfields = array("*"), 
+	   		$tables = array('buy_crypto_history_tbl'),
+	   		$fieldName = array("userID"), 
+	   		$where = array("$_GET['userID']"), 
+	   		$join = null,	 
+	   		$joinType = null,
+	   		$sortBy = array("id"), 
+	   		$sortOrder = array('asc'), 
+	   		$limit = null, 
+	   		$fieldNameLike = null, 
+	   		$like = null,
+	   		$whereSpecial = null, 
+	   		$groupBy = null 
+		);
+
+		echo json_encode($res);
+	}
+
+	getTotalTopUp
 	
 
 	public function updateProStatus(){

@@ -65,6 +65,7 @@
 
 <script type="text/javascript">
 	$("#balance_container").val(parseFloat(selectedData.balance.replace(',','')));
+	
 	$('[name="setClaim_radio"]').removeAttr('checked');
 	$("input[name=setClaim_radio][value=" + selectedData.isClaimableAdmin + "]").attr('checked', 'checked');
 
