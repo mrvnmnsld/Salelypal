@@ -112,7 +112,7 @@
 		e.preventDefault()
 	})
 
-	$("#amount_input_container_bootbox").on('keyup change', _.debounce(function() {
+	$("#amount_input_container_bootbox").on('keyup change', function() {
 	  var amount = $(this).val();
 	  var income = ((parseFloat(amount)*(parseFloat(selectedData.apy)/100))/365).toFixed(6)
 
@@ -127,7 +127,7 @@
 	  	// $("#estimated_daily_income").text('Enter Amount...');
 	  	$("#estimated_total_income").text('Enter Amount...');
 	  }
-	}, 250));
+	});
 
 	$("#save_mining_entry_btn").on('click', function(){	
 		var amount = $("#amount_input_container_bootbox").val();
