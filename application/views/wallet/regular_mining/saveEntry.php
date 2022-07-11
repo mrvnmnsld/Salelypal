@@ -91,14 +91,14 @@
 		selectedData = '';
 	});
 
-	$("#amount_input_container_bootbox").on('keyup change', _.debounce(function() {
+	$("#amount_input_container_bootbox").on('keyup change',function() {
 	  var amount = $(this).val();
 	  var apyDecimal = selectedData.apy/100;
 	  var amountApy = amount*apyDecimal;
 	  var maturity = ((amountApy/365)*selectedData.cycleSelected).toFixed(6);
 
 	  $("#maturity_container_bootbox").text(maturity+" "+selectedData.token_name_combo);
-	}, 250));
+	});
 
 	$("#save_mining_entry_btn").on('click', function(){	
 		var amount = $("#amount_input_container_bootbox").val();

@@ -344,14 +344,14 @@
 
             console.log(earnings[0],parseFloat(earnings[0])>=1);
 
-            if (parseFloat(earnings[0])>=1) {
+            if (parseFloat(earnings[0])>0) {
                 console.log("HERE");
                 $("#todaysEarningLongShort").addClass("text-success").removeClass("text-danger").text("+"+parseFloat(earnings[0]).toFixed(2)+" USD");
             }else{
                 $("#todaysEarningLongShort").addClass("text-danger").removeClass("text-success").text(parseFloat(earnings[0]).toFixed(2)+" USD");
             }
 
-            if (parseFloat(earnings[1])>=1) {
+            if (parseFloat(earnings[1])>0) {
                 $("#allTimeEarningsLongShort").addClass("text-success").removeClass("text-danger").text("+"+parseFloat(earnings[1]).toFixed(2)+" USD");
             }else{
                 $("#allTimeEarningsLongShort").addClass("text-danger").removeClass("text-success").text(parseFloat(earnings[1]).toFixed(2)+" USD");
