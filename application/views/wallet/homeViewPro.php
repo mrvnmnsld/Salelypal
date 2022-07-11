@@ -1929,6 +1929,7 @@
 				$('#portfolio_tab_id').removeClass('active');
 			}
 		});
+	
 	</script>
 </body>
 </html>

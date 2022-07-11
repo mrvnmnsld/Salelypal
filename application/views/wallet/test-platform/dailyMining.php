@@ -78,7 +78,7 @@
 <div id="dailymining_tab_container" class="mt-3">
 	<ul id="dailymining_tabs" class="nav nav-tabs nav-justified" role="tablist">
 		<li class="nav-item">
-			<a class="nav-link active main-color-link" data-toggle="tab" href="#mine_tab">MINE</a>
+			<a id="mine_tab_id" class="nav-link active main-color-link" data-toggle="tab" href="#mine_tab">MINE</a>
 		</li>
 
 		<li class="nav-item">

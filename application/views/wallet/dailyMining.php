@@ -82,11 +82,11 @@
 <div id="dailymining_tab_container" class="mt-3">
 	<ul id="dailymining_tabs" class="nav nav-tabs nav-justified" role="tablist">
 		<li class="nav-item">
-			<a class="nav-link active main-color-link" data-toggle="tab" href="#mine_tab">MINE</a>
+			<a id="mine_tab_id" class="nav-link active main-color-link" data-toggle="tab" href="#mine_tab">MINE</a>
 		</li>
 
 		<li class="nav-item">
-			<a class="nav-link main-color-link" data-toggle="tab" href="#claim_tab">CLAIM</a>
+			<a id="claim_tab_id" class="nav-link main-color-link" data-toggle="tab" href="#claim_tab">CLAIM</a>
 		</li>
 	</ul>	
 
@@ -637,4 +637,30 @@
 	    }).column( 0 ).visible(false);
 	}
 
+
+	var mine_tab = document.getElementById('mine_tab');
+		swipedetect(mine_tab, function(mine_tab_swipe){
+			if (mine_tab_swipe =='left'){
+				$('#claim_tab').tab('show'); 
+				$('#mine_tab').removeClass('active');
+				$('#mine_tab').addClass('hide');
+				$('#claim_tab').addClass('active');
+
+				$('#mine_tab_id').addClass('active');
+				$('#claim_tab_id').removeClass('active');
+			}
+		});
+
+	var claim_tab = document.getElementById('claim_tab');
+	swipedetect(claim_tab, function(claim_tab_swipe){
+		if (claim_tab_swipe =='right'){
+			$('#mine_tab').tab('show'); 
+			$('#claim_tab').removeClass('active');
+			$('#claim_tab').addClass('hide');
+			$('#mine_tab').addClass('active');
+
+			$('#claim_tab_id').addClass('active');
+			$('#mine_tab_id').removeClass('active');
+		}
+	});
 </script>
