@@ -386,10 +386,10 @@
 			<div id="asset_tab_container" class="mt-3">
 				<ul id="asset_tabs" class="nav nav-tabs nav-justified" role="tablist">
 					<li class="nav-item">
-						<a class="nav-link active tab-pane fade show main-color-link" data-toggle="tab" href="#balance_tab">BALANCE</a>
+						<a id="balance_tab_id" class="nav-link active tab-pane fade show main-color-link" data-toggle="tab" href="#balance_tab">BALANCE</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link tab-pane fade show main-color-link" data-toggle="tab" href="#portfolio_tab">PORTFOLIO</a>
+						<a id="portfolio_tab_id" class="nav-link tab-pane fade show main-color-link" data-toggle="tab" href="#portfolio_tab">PORTFOLIO</a>
 					</li>
 				</ul>
 
@@ -1857,6 +1857,80 @@
 
 
 
+
+			function swipedetect(el, callback){
+
+			var touchsurface = el,
+			swipedir,
+			startX,
+			startY,
+			distX,
+			distY,
+			threshold = 150, //required min distance traveled to be considered swipe
+			restraint = 100, // maximum distance allowed at the same time in perpendicular direction
+			allowedTime = 300, // maximum time allowed to travel that distance
+			elapsedTime,
+			startTime,
+			handleswipe = callback || function(swipedir){}
+
+			touchsurface.addEventListener('touchstart', function(e){
+			var touchobj = e.changedTouches[0]
+			swipedir = 'none'
+			dist = 0
+			startX = touchobj.pageX
+			startY = touchobj.pageY
+			startTime = new Date().getTime() // record time when finger first makes contact with surface
+			e.preventDefault()
+			}, false)
+
+			touchsurface.addEventListener('touchmove', function(e){
+			e.preventDefault() // prevent scrolling when inside DIV
+			}, false)
+
+			touchsurface.addEventListener('touchend', function(e){
+			var touchobj = e.changedTouches[0]
+			distX = touchobj.pageX - startX // get horizontal dist traveled by finger while in contact with surface
+			distY = touchobj.pageY - startY // get vertical dist traveled by finger while in contact with surface
+			elapsedTime = new Date().getTime() - startTime // get time elapsed
+			if (elapsedTime <= allowedTime){ // first condition for awipe met
+			if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint){ // 2nd condition for horizontal swipe met
+			swipedir = (distX < 0)? 'left' : 'right' // if dist traveled is negative, it indicates left swipe
+			}
+			else if (Math.abs(distY) >= threshold && Math.abs(distX) <= restraint){ // 2nd condition for vertical swipe met
+			swipedir = (distY < 0)? 'up' : 'down' // if dist traveled is negative, it indicates up swipe
+			}
+			}
+			handleswipe(swipedir)
+			e.preventDefault()
+			}, false)
+			}
+
+
+		var el = document.getElementById('balance_tab')
+		swipedetect(el, function(swipedir){
+		if (swipedir =='left'){
+			$('#portfolio_tab').tab('show'); 
+			$('#balance_tab').removeClass('active');
+			$('#balance_tab').addClass('hide');
+			$('#portfolio_tab').addClass('active');
+
+			$('#portfolio_tab_id').addClass('active');
+			$('#balance_tab_id').removeClass('active');
+		} 		
+		});
+
+		var el2 = document.getElementById('portfolio_tab')
+		swipedetect(el2, function(swipedir2){
+		if (swipedir2 =='right'){
+			$('#portfolio_tab').removeClass('active');
+			$('#portfolio_tab').addClass('hide');
+			$('#balance_tab').addClass('active');
+			$('#balance_tab').tab('show'); 
+
+			$('#balance_tab_id').addClass('active');
+			$('#portfolio_tab_id').removeClass('active');
+		} 		
+		});
 	</script>
 </body>
 </html>
