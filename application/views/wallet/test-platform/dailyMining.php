@@ -82,7 +82,7 @@
 		</li>
 
 		<li class="nav-item">
-			<a class="nav-link main-color-link" data-toggle="tab" href="#claim_tab">CLAIM</a>
+			<a id="claim_tab_id" class="nav-link main-color-link" data-toggle="tab" href="#claim_tab">CLAIM</a>
 		</li>
 	</ul>	
 
