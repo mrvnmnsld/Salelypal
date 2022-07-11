@@ -33,6 +33,14 @@
 	<script src="assets/vendor/jquery/jquery.min.js"></script>
 	<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+	<script src="assets/lib/jquery-ui-1.13.1/jquery-ui.min.js"></script>
+	<link href="assets/lib/jquery-ui-1.13.1/jquery-ui.css" rel="stylesheet">
+
+	<link href="assets/lib/jquery_event_swipe-master/index.js" rel="stylesheet">
+
+
+	
+
 	<script src="assets/lib/DataTables/datatables.js"></script>
 	<script src="assets/lib/DataTables/datatables.min.js"></script>
 	<script src="assets/lib/DataTables/dataTables.responsive.min.js"></script>
@@ -421,44 +429,42 @@
 						</div>
 
 						<div id="pnl_main" class="main-card-ui rounded shadow-lg" style="display:none">
-							<div class="text-center p-2 mt-2">
-								<div class="flex-fill p-2">
-									<h5>Today's Earnings (Contract Trading):</h5>
+
+							<div class="row p-3">
+								<div class="col-6">
+									<b>Today's Earnings (Trading):</b><br>
 									<span id="todaysEarning">
 										0 USD
 									</span>
 								</div>
-							</div>
-							<div class="text-center p-2 mt-2">
-								<div class="flex-fill p-2">
-									<div class="flex-fill p-2">
-										<h5>Yesterdays PNL:</h5>
-										<span id="yesterdayPnl">
-											0% Change
-										</span>
-									</div>
+								
+								<div class="col-6">
+									<b>Yesterdays PNL:</b><br>
+									<span id="yesterdayPnl">
+										0% Change
+									</span>
 								</div>
 							</div>
 
-							<div class="text-center p-2 mt-2">
-								<div class="flex-fill p-2">
-									<h5>7 Days PNL:</h5>
+							<div class="row p-3">
+								<div class="col-6">
+									<b>7 Days PNL:</b><br>
 									<span id="allDaysPnl">
 										0% Change
 									</span>
 									
 								</div>
-							</div>
 
-							<div class="text-center p-2 mt-2">
-								<div class="flex-fill p-2">
-									<h5>14 Days PNL:</h5>
+								<div class="col-6">
+									<b>14 Days PNL:</b><br>
 									<span id="14DaysPnl">
 										0% Change
 									</span>
 								</div>
 							</div>
 
+
+								
 							<div class="p-3">
 								7 Days PNL Chart
 
@@ -804,29 +810,105 @@
 						  		$("#pnl_main").toggle();
 
 
-				  				var yValues = ajaxShortLink("userWallet/getToken24HourChange",{
-					  				"coinIds":coinIds.toString()
-					  			})
-				  				var xValues = getDaysDate(6);
+			  			  		var date = new Date();
 
-				  				const average = yValues.reduce((a, b) => a + b, 0) / yValues.length;
+			  			  		var year = date.getFullYear();
+			  			  		var month = String(date.getMonth() + 1);
+			  			  		var day = String(date.getDate());
+			  			  		var joined = [month,day,year,].join('/');
 
-				  				console.log(yValues);
-				  				console.log(average);
+			  			  		console.log(joined);
 
-				  				if(parseFloat(yValues[yValues.length-1]) < 0) {
-				  					$("#yesterdayPnl").addClass("text-danger").text(parseFloat(yValues[yValues.length-1]).toFixed(2)+"% Change");
-				  				}else{
-				  					$("#yesterdayPnl").addClass("text-success").text(parseFloat(yValues[yValues.length-1]).toFixed(2)+"% Change");
-				  				}
+			  			  		var getTodayContractProfit = ajaxShortLink("userWallet/getTodayContractProfit",{
+			  		  				"userID":currentUser.userID,
+			  		  				"date":joined
+			  		  			})
 
-				  				if(average < 0) {
-				  					$("#allDaysPnl").addClass("text-danger").text(average.toFixed(2)+"% Change");
-				  				}else{
-				  					$("#allDaysPnl").addClass("text-success").text(average.toFixed(2)+"% Change");
-				  				}
+			  		  			console.log(getTodayContractProfit);
+
+			  		  			$("#todaysEarning").text(getTodayContractProfit+" USD");
+
+			  		  			if (parseFloat(getTodayContractProfit)>=1) {
+			  		  				$("#todaysEarning").addClass("text-success").text("+"+getTodayContractProfit+" USD");
+			  		  			}else{
+			  		  				$("#todaysEarning").addClass("text-danger").text(getTodayContractProfit+" USD");
+			  		  			}
+
+  				  				var yValues = ajaxShortLink("userWallet/getToken24HourChange",{
+  					  				"coinIds":coinIds.toString()
+  					  			})
+
+  					  			var last7days = yValues.slice(yValues.length - 7);
+
+  						  		var totalInUsdInner = parseFloat($('#totalInUsdContainer').text().split(" ")[0].replace(/,/g, ''));
+  						  		var changePercentageIn1Day = parseFloat(yValues[yValues.length-1]);
+
+  				  				var xValues = getDaysDate(6);
+
+  				  				var average = yValues.reduce((a, b) => a + b, 0) / yValues.length;
+  				  				var average7Days = last7days.reduce((a, b) => a + b, 0) / last7days.length;
+
+  				  				console.log(last7days);
+  				  				console.log(yValues);
+  				  				console.log(average);
+  				  				console.log(changePercentageIn1Day);
+  				  				console.log((changePercentageIn1Day/100)*totalInUsdInner);
+  				  				console.log(totalInUsdInner);
+  				  				console.log(changePercentageIn1Day/100);
+
+  				  				if(parseFloat(yValues[yValues.length-1]) < 0) {
+  				  					$("#yesterdayPnl").addClass("text-danger").html((totalInUsdInner*(changePercentageIn1Day/100)).toFixed(2)+" <br><small>"+changePercentageIn1Day.toFixed(2)+"% Change </small>");
+  				  				}else{
+  				  					$("#yesterdayPnl").addClass("text-success").html("+"+(totalInUsdInner*(changePercentageIn1Day/100)).toFixed(2)+" <br><small>"+changePercentageIn1Day.toFixed(2)+"% Change </small>");
+  				  				}
+
+  				  				if(average7Days < 0) {
+  				  					$("#allDaysPnl").addClass("text-danger").html((totalInUsdInner*(average7Days/100)).toFixed(2)+" <small>"+average7Days.toFixed(2)+"% Change</small>");
+  				  				}else{
+  				  					$("#allDaysPnl").addClass("text-success").html("+"+(totalInUsdInner*(average7Days/100)).toFixed(2)+" <small>"+average7Days.toFixed(2)+"% Change</small>");
+  				  				}
+
+  				  				if(average < 0) {
+  				  					$("#14DaysPnl").addClass("text-danger").html((totalInUsdInner*(average/100)).toFixed(2)+"<br> <small>"+average.toFixed(2)+"% Change</small>");
+  				  				}else{
+  				  					$("#14DaysPnl").addClass("text-success").html("+"+(totalInUsdInner*(average/100)).toFixed(2)+" <br><small>"+average.toFixed(2)+"% Change</small>");
+  				  				}
 
 				  				new Chart("pnl_chart_container", {
+				  				  	type: "line",
+				  				  	data: {
+				  				    	labels: xValues,
+				  			    		datasets: [{
+				  						      // backgroundColor: "rgba(0,0,0,1.0)",
+				  						      fill: false,
+				  						      label: false,
+				  						      borderColor: "#94abef",
+				  						      data: yValues
+				  					    }]
+				  					},
+				  				  	options:{
+				  				  		responsive: true,
+			  				        	legend: {
+			  				          		position: 'top',
+			  				          		display: false
+			  				        	},
+			  				        	title: {
+			  			          			display: false,
+			  			          			// text: 'Chart.js Line Chart'
+			  				       	 	},
+				  		      		    tooltips: {
+				  		      		        callbacks: {
+				  		      		           label: function(tooltipItem) {
+				  		      		                  return tooltipItem.yLabel;
+				  		      		           }
+				  		      		        }
+				  		      		    }
+				  				  	}
+				  				});
+
+				  				var xValues = getDaysDate(13);
+
+				  				new Chart("pnl_14_chart_container", {
 				  				  	type: "line",
 				  				  	data: {
 				  				    	labels: xValues,
@@ -898,6 +980,7 @@
 		});
 
 		// buttonEvents
+
 			// visible
 				var tokenValuesContainer = []; // this is global
 				var visible = 1;
@@ -1013,99 +1096,182 @@
 						  		$('#addToken_btn').removeAttr("disabled");
 
 	  		    		  		// chart PNL
-	  			    		  		$("#pnl_chart_container").empty();
-	  			    		  		$("#assets_chart_container").empty();
+				  			  		var date = new Date();
 
-	  		    			  		$("#pnl_loading").toggle();
-	  		    			  		$("#pnl_main").toggle();
+				  			  		var year = date.getFullYear();
+				  			  		var month = String(date.getMonth() + 1);
+				  			  		var day = String(date.getDate());
+				  			  		var joined = [month,day,year,].join('/');
 
-	  		    			  		$("#pnl_chart_container").remove();
-	  		    			  		$("#assets_chart_container").remove();
+				  			  		console.log(joined);
 
-	  		    			  		$('#graph-container-pnl').append('<canvas width="400" height="200" id="pnl_chart_container"></canvas>');
-	  		    			  		$('#graph-container-assets').append('<canvas width="600" height="400" id="assets_chart_container"></canvas>');
+				  			  		var getTodayContractProfit = ajaxShortLink("userWallet/getTodayContractProfit",{
+				  		  				"userID":currentUser.userID,
+				  		  				"date":joined
+				  		  			})
 
-	  		    	  				var yValues = ajaxShortLink("userWallet/getToken24HourChange",{
-	  		    		  				"coinIds":coinIds.toString()
-	  		    		  			})
-	  		    	  				var xValues = getDaysDate(6);
+				  		  			console.log(getTodayContractProfit);
 
-	  		    	  				const average = yValues.reduce((a, b) => a + b, 0) / yValues.length;
+				  		  			$("#todaysEarning").text(getTodayContractProfit+" USD");
 
-	  		    	  				console.log(yValues);
-	  		    	  				console.log(average);
+				  		  			if (parseFloat(getTodayContractProfit)>=1) {
+				  		  				$("#todaysEarning").addClass("text-success").text("+"+getTodayContractProfit+" USD");
+				  		  			}else{
+				  		  				$("#todaysEarning").addClass("text-danger").text(getTodayContractProfit+" USD");
+				  		  			}
 
-	  		    	  				if(parseFloat(yValues[yValues.length-1]) < 0) {
-	  		    	  					$("#yesterdayPnl").addClass("text-danger").text(parseFloat(yValues[yValues.length-1]).toFixed(2)+"% Change");
-	  		    	  				}else{
-	  		    	  					$("#yesterdayPnl").addClass("text-success").text(parseFloat(yValues[yValues.length-1]).toFixed(2)+"% Change");
-	  		    	  				}
+				    	  				var yValues = ajaxShortLink("userWallet/getToken24HourChange",{
+						  				"coinIds":coinIds.toString()
+						  			})
+				    		  							  			
+						    		var totalInUsdInner = parseFloat($('#totalInUsdContainer').val().split(" ")[0]);
+						    		var changePercentageIn1Day = parseFloat(yValues[yValues.length-1]);
 
-	  		    	  				if(average < 0) {
-	  		    	  					$("#allDaysPnl").addClass("text-danger").text(average.toFixed(2)+"% Change");
-	  		    	  				}else{
-	  		    	  					$("#allDaysPnl").addClass("text-success").text(average.toFixed(2)+"% Change");
-	  		    	  				}
+					    		  		$("#pnl_chart_container").empty();
+					    		  		$("#pnl_14_chart_container").empty();
+					    		  		$("#assets_chart_container").empty();
 
-	  		    	  				new Chart("pnl_chart_container", {
-	  		    	  				  	type: "line",
-	  		    	  				  	data: {
-	  		    	  				    	labels: xValues,
-	  		    	  			    		datasets: [{
-	  		    	  						      // backgroundColor: "rgba(0,0,0,1.0)",
-	  		    	  						      fill: false,
-	  		    	  						      label: false,
-	  		    	  						      borderColor: "#94abef",
-	  		    	  						      data: yValues
-	  		    	  					    }]
-	  		    	  					},
-	  		    	  				  	options:{
-	  		    	  				  		responsive: true,
-	  		      				        	legend: {
-	  		      				          		position: 'top',
-	  		      				          		display: false
-	  		      				        	},
-	  		      				        	title: {
-	  		      			          			display: false,
-	  		      			          			// text: 'Chart.js Line Chart'
-	  		      				       	 	},
-	  		    	  		      		    tooltips: {
-	  		    	  		      		        callbacks: {
-	  		    	  		      		           label: function(tooltipItem) {
-	  		    	  		      		                  return tooltipItem.yLabel;
-	  		    	  		      		           }
-	  		    	  		      		        }
-	  		    	  		      		    }
-	  		    	  				  	}
-	  		    	  				});
+				    			  		$("#pnl_loading").toggle();
+				    			  		$("#pnl_main").toggle();
 
-	  		    	  				var xValues = tokenNames;
-	  		    	  				var yValues = tokenBalance;
+				    			  		$("#pnl_chart_container").remove();
+				    			  		$("#assets_chart_container").remove();
+				    			  		$("#pnl_14_chart_container").remove();
 
+				    			  		$('#graph-container-pnl').append('<canvas width="400" height="200" id="pnl_chart_container"></canvas>');
+				    			  		$('#graph-container-assets').append('<canvas width="600" height="400" id="assets_chart_container"></canvas>');
+				    			  		$('#graph-container-pnl-14').append('<canvas width="600" height="400" id="pnl_14_chart_container"></canvas>');
 
-	  		    	  				var barColors = getRandomColorIteration(xValues.length);
+				    	  				
 
-	  		    	  				new Chart("assets_chart_container", {
-	  		    	  				  	type: "pie",
-	  		    	  				  	data: {
-	  		    		  				    labels: xValues,
-	  		    		  				    datasets: [{
-	  		    		  				      	backgroundColor: barColors,
-	  		    	  				      		data: yValues
-	  		    		  				    }]
-	  		    	  				  	},
-	  		    	  				  	options: {
-	  		    		  				    title: {
-	  		    	  				      		display: false,
-	  		    	  				      		// text: "World Wide Wine Production 2018"
-	  		    		  				    },
-	  		    		  				    legend: {
-	  		    	  				      		display: true
-	  		    		  				    }
-	  		    	  				  }
-	  		    	  				});
+						  			var last7days = yValues.slice(yValues.length - 7);
 
-	  		    		  		// chart PNL
+							  		var totalInUsdInner = parseFloat($('#totalInUsdContainer').text().split(" ")[0].replace(/,/g, ''));
+							  		var changePercentageIn1Day = parseFloat(yValues[yValues.length-1]);
+
+					  				var xValues = getDaysDate(6);
+
+					  				const average = yValues.reduce((a, b) => a + b, 0) / yValues.length;
+					  				const average7Days = last7days.reduce((a, b) => a + b, 0) / last7days.length;
+
+					  				console.log(last7days);
+					  				console.log(yValues);
+					  				console.log(average);
+					  				console.log(changePercentageIn1Day);
+					  				console.log((changePercentageIn1Day/100)*totalInUsdInner);
+					  				console.log(totalInUsdInner);
+					  				console.log(changePercentageIn1Day/100);
+
+					  				if(parseFloat(yValues[yValues.length-1]) < 0) {
+					  					$("#yesterdayPnl").addClass("text-danger").html((totalInUsdInner*(changePercentageIn1Day/100)).toFixed(2)+" <small>"+changePercentageIn1Day.toFixed(2)+"% Change </small>");
+					  				}else{
+					  					$("#yesterdayPnl").addClass("text-success").html("+"+(totalInUsdInner*(changePercentageIn1Day/100)).toFixed(2)+" <small>"+changePercentageIn1Day.toFixed(2)+"% Change </small>");
+					  				}
+
+					  				if(average7Days < 0) {
+					  					$("#allDaysPnl").addClass("text-danger").html((totalInUsdInner*(average7Days/100)).toFixed(2)+" <small>"+average7Days.toFixed(2)+"% Change</small>");
+					  				}else{
+					  					$("#allDaysPnl").addClass("text-success").html("+"+(totalInUsdInner*(average7Days/100)).toFixed(2)+" <small>"+average7Days.toFixed(2)+"% Change</small>");
+					  				}
+
+					  				if(average < 0) {
+					  					$("#14DaysPnl").addClass("text-danger").html((totalInUsdInner*(average/100)).toFixed(2)+" <small>"+average.toFixed(2)+"% Change</small>");
+					  				}else{
+					  					$("#14DaysPnl").addClass("text-success").html("+"+(totalInUsdInner*(average/100)).toFixed(2)+" <small>"+average.toFixed(2)+"% Change</small>");
+					  				}
+
+					  				new Chart("pnl_chart_container", {
+					  				  	type: "line",
+					  				  	data: {
+					  				    	labels: xValues,
+					  			    		datasets: [{
+					  						      // backgroundColor: "rgba(0,0,0,1.0)",
+					  						      fill: false,
+					  						      label: false,
+					  						      borderColor: "#94abef",
+					  						      data: last7days
+					  					    }]
+					  					},
+					  				  	options:{
+					  				  		responsive: true,
+				  				        	legend: {
+				  				          		position: 'top',
+				  				          		display: false
+				  				        	},
+				  				        	title: {
+				  			          			display: false,
+				  			          			// text: 'Chart.js Line Chart'
+				  				       	 	},
+					  		      		    tooltips: {
+					  		      		        callbacks: {
+					  		      		           label: function(tooltipItem) {
+					  		      		                  return tooltipItem.yLabel;
+					  		      		           }
+					  		      		        }
+					  		      		    }
+					  				  	}
+					  				});
+
+					  				var xValues = getDaysDate(13);
+
+					  				new Chart("pnl_14_chart_container", {
+					  				  	type: "line",
+					  				  	data: {
+					  				    	labels: xValues,
+					  			    		datasets: [{
+					  						      // backgroundColor: "rgba(0,0,0,1.0)",
+					  						      fill: false,
+					  						      label: false,
+					  						      borderColor: "#94abef",
+					  						      data: yValues
+					  					    }]
+					  					},
+					  				  	options:{
+					  				  		responsive: true,
+				  				        	legend: {
+				  				          		position: 'top',
+				  				          		display: false
+				  				        	},
+				  				        	title: {
+				  			          			display: false,
+				  			          			// text: 'Chart.js Line Chart'
+				  				       	 	},
+					  		      		    tooltips: {
+					  		      		        callbacks: {
+					  		      		           label: function(tooltipItem) {
+					  		      		                  return tooltipItem.yLabel;
+					  		      		           }
+					  		      		        }
+					  		      		    }
+					  				  	}
+					  				});
+
+					  				var xValues = tokenNames;
+					  				var yValues = tokenBalance;
+
+					  				var barColors = getRandomColorIteration(xValues.length);
+
+					  				new Chart("assets_chart_container", {
+					  				  	type: "pie",
+					  				  	data: {
+						  				    labels: xValues,
+						  				    datasets: [{
+						  				      	backgroundColor: barColors,
+					  				      		data: yValues
+						  				    }]
+					  				  	},
+					  				  	options: {
+						  				    title: {
+					  				      		display: false,
+					  				      		// text: "World Wide Wine Production 2018"
+						  				    },
+						  				    legend: {
+					  				      		display: true
+						  				    }
+					  				  }
+					  				});
+
+			    		  		// chart PNL
 						  		
 								console.timeEnd('loadTimer');
 						    }
@@ -1230,6 +1396,7 @@
 		  			$("#container").empty();
 		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings'}));
 		  			$("#container").fadeIn(animtionSpeed);
+		  			// $("#container").show("slide", { direction: "left" }, animtionSpeed);
 				});
 			});
 
@@ -1251,6 +1418,80 @@
 		  			$("#container").fadeIn(animtionSpeed);
 				});
 			});
+
+			$('#rise_fall_btn').on('click',function(){
+				if (typeof tokenPriceInterval  != 'undefined') {
+					clearInterval(tokenPriceInterval);
+				}
+				addBreadCrumbs("wallet/riseFall")
+
+				$("html, body").animate({ scrollTop: 0 }, "slow");
+				$('#assets_container').css("display","none");
+				$("#container").fadeOut(animtionSpeed, function() {
+					$("#profile_btn").css('display',"none")
+					$("#top_back_btn").css('display',"block")
+
+		  			$("#container").empty();
+		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/riseFall'}));
+		  			$("#container").fadeIn(animtionSpeed);
+				});
+			});
+
+			$('#future_btn').on('click',function(){
+				if (typeof tokenPriceInterval  != 'undefined') {
+					clearInterval(tokenPriceInterval);
+				}
+				addBreadCrumbs("wallet/future")
+
+				$("html, body").animate({ scrollTop: 0 }, "slow");
+				$('#assets_container').css("display","none");
+				$("#container").fadeOut(animtionSpeed, function() {
+					$("#profile_btn").css('display',"none")
+					$("#top_back_btn").css('display',"block")
+
+		  			$("#container").empty();
+		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/future'}));
+		  			$("#container").fadeIn(animtionSpeed);
+				});
+			});
+
+			$('#regular_mining_btn').on('click',function(){
+				if (typeof tokenPriceInterval  != 'undefined') {
+					clearInterval(tokenPriceInterval);
+				}
+				addBreadCrumbs("wallet/regular_mining");
+				
+				$("html, body").animate({ scrollTop: 0 }, "slow");
+				$('#assets_container').css("display","none");
+				$("#container").fadeOut(animtionSpeed, function() {
+					$("#profile_btn").css('display',"none")
+					$("#top_back_btn").css('display',"block")
+
+		  			$("#container").empty();
+		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/regular_mining'}));
+		  			$("#container").fadeIn(animtionSpeed);
+				});
+			});
+
+			$('#daily_mining_btn').on('click',function(){
+				if (typeof tokenPriceInterval  != 'undefined') {
+					clearInterval(tokenPriceInterval);
+				}
+
+				addBreadCrumbs("wallet/dailyMining");
+
+				$("html, body").animate({ scrollTop: 0 }, "slow");
+				$('#assets_container').css("display","none");
+				$("#container").fadeOut(animtionSpeed, function() {
+					$("#profile_btn").css('display',"none")
+					$("#top_back_btn").css('display',"block")
+
+		  			$("#container").empty();
+		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/dailyMining'}));
+		  			$("#container").fadeIn(animtionSpeed);
+				});
+			});
+
 		// buttonEvents	
 
 		function openNav(){
@@ -1265,7 +1506,7 @@
 		}
 
 		function backButton(){
-			window.location.href = 'test-platform-pro';//local
+			window.location.href = 'index';//local
 		}
 
 		function loadTokenInfo(tokenInfo){
@@ -1396,7 +1637,7 @@
 				// loadTokenInfo(tokensSelected[i].tokenName,tokensSelected[i].coingeckoTokenId)
 
 				$('#'+tokensSelected[i].id+'_container').on('click',function(){
-						addBreadCrumbs("wallet/test-platform/viewTokenInfo");
+						addBreadCrumbs("wallet/viewTokenInfo");
 
 						$("#loading_text_container").text("Please wait while we load your recent activities");
 
@@ -1412,7 +1653,7 @@
 								$("#loadSpinner").fadeIn(animtionSpeed,function(){
 									setTimeout(function(){
 							  			$("#container").empty();
-							  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/viewTokenInfo'}));
+							  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/viewTokenInfo'}));
 							  			$("#profile_btn").css('display',"none")
 							  			$("#top_back_btn").css('display',"block ")
 
@@ -1446,10 +1687,53 @@
 				clearInterval(tokenPriceInterval);
 			}
 
+			if (typeof chatDetailsChecker  != 'undefined') {
+				clearInterval(chatDetailsChecker);
+			}
+
+			if (typeof updateChatHistoryInterval  != 'undefined') {
+				clearInterval(updateChatHistoryInterval);
+			}
+
 			if (breadCrumbs[breadCrumbs.length-1].includes("dailyMining") && $("#daily_mining_token_containers").css('display')!='none') {
+				$("#bottomNavBar").css("display","flex");
+
 				goback_btn();
 				console.log('here');
+			}else if(breadCrumbs[breadCrumbs.length-1].includes('wallet/settings/chat')){
+				$.confirm({
+					theme:'dark',
+					icon: 'fa fa-sign-out',
+					title: 'Disconnecting?',
+					columnClass: 'col-md-6 col-md-offset-6',
+					content: 'Are you sure you want to <b>close this ticket</b>? This will disconnect you with the current representative and put you back on queue',
+					buttons: {
+						confirm: function () {
+							var updateChatTicket = ajaxShortLink('admin/updateChatTicket',{
+								'id':createNewTicket,
+								'status':"CLOSED"
+							});
+							
+							$("#bottomNavBar").css("display","flex");
+							breadCrumbs.pop()
+
+							$("html, body").animate({ scrollTop: 0 }, "slow");
+							$('#assets_container').css("display","none");
+							$("#container").fadeOut(animtionSpeed, function() {
+					  			$("#container").empty();
+					  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':breadCrumbs[breadCrumbs.length-1]}));
+					  			$("#container").show("slide", { direction: "left" }, animtionSpeed);
+							  	$("#loading_text_container").text("Please wait");
+							});
+						},
+						cancel: function () {
+
+						},
+					}
+				});
 			}else{
+				$("#bottomNavBar").css("display","flex");
+
 				breadCrumbs.pop()
 
 				if(breadCrumbs[breadCrumbs.length-1]=="assets"||breadCrumbs[breadCrumbs.length-1]=="assets_container"){
@@ -1475,7 +1759,7 @@
 					$("#container").fadeOut(animtionSpeed, function() {
 			  			$("#container").empty();
 			  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':breadCrumbs[breadCrumbs.length-1]}));
-			  			$("#container").fadeIn(animtionSpeed);
+			  			$("#container").show("slide", { direction: "left" }, animtionSpeed);
 					  	$("#loading_text_container").text("Please wait");
 					});
 				}

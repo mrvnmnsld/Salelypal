@@ -901,8 +901,6 @@ class admin extends MY_Controller {
    		);
    		$risefall_minimumRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
 
-   		// _____________________________________________
-
    		$where=2;
    		$insertRecord = array(
    			// 'risefall_minimum' => $_GET["risefall_minimum"]
@@ -965,8 +963,6 @@ class admin extends MY_Controller {
 
 		echo json_encode($updateRecordsRes);
 	}
-
-	
 
 	public function getKYCImages(){
    		$getKYCImages = $this->_getRecordsData(
@@ -1058,6 +1054,51 @@ class admin extends MY_Controller {
 		$this->load->view('volumeControl/index');
 	}
 
+	public function updateVolumeControl(){
+		$insertRecord = array();
+
+		if (isset($_GET['isOn'])) {
+			$insertRecord['isOn'] = $_GET['isOn'];
+		}
+
+		if (isset($_GET['percentage'])) {
+			$insertRecord['percentage'] = $_GET['percentage'];
+		}
+
+		$tableName="volume_control_tbl";
+		$fieldName='id';
+		$where= 1;
+
+		$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
+
+		if($updateRecordsRes){
+			echo json_encode(true);
+		}else{
+			echo json_encode(false);
+		}
+	}
+
+	public function getVolumeControl(){
+		$res = $this->_getRecordsData(
+			$selectfields = array("*"), 
+	   		$tables = array('volume_control_tbl'),
+	   		$fieldName = null, 
+	   		$where = null, 
+	   		$join = null,	 
+	   		$joinType = null,
+	   		$sortBy = array("id"), 
+	   		$sortOrder = array('asc'), 
+	   		$limit = null, 
+	   		$fieldNameLike = null, 
+	   		$like = null,
+	   		$whereSpecial = null, 
+	   		$groupBy = null 
+		);
+
+		echo json_encode($res);
+	}
+	
+
 	public function updateProStatus(){
 		$insertRecord = array(
 			'isPro' => $_GET['isPro'],
@@ -1076,6 +1117,130 @@ class admin extends MY_Controller {
 		}
 		// echo json_encode($insertRecord);
 	}
+
+	public function getAllChatSupport(){
+   		$getAllChatSupport = $this->_getRecordsData(
+   			$selectfields = array("chat_support_tbl.*,user_tbl.fullname,user_tbl.email,admin_users_tbl.username"), 
+	   		$tables = array('chat_support_tbl',"user_tbl",'admin_users_tbl'), 
+	   		$fieldName = null, $where = null, 
+	   		$join = array('chat_support_tbl.userID = user_tbl.userID','chat_support_tbl.adminID = admin_users_tbl.id'), $joinType = array("inner",'left'), $sortBy = array("chat_support_tbl.id"), 
+	   		$sortOrder = array('desc'), $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+   		);
+
+   		echo json_encode($getAllChatSupport);
+	}
+
+	public function getChatDetails(){
+   		$getAllChatSupport = $this->_getRecordsData(
+   			$selectfields = array("chat_support_tbl.*,user_tbl.fullname,user_tbl.email,admin_users_tbl.username"), 
+	   		$tables = array('chat_support_tbl',"user_tbl",'admin_users_tbl'), 
+	   		$fieldName = array('chat_support_tbl.id'), $where = array($_GET['id']), 
+	   		$join = array('chat_support_tbl.userID = user_tbl.userID','chat_support_tbl.adminID = admin_users_tbl.id'), $joinType = array("inner",'left'), $sortBy = array("chat_support_tbl.id"), 
+	   		$sortOrder = array('desc'), $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+   		);
+
+   		echo json_encode($getAllChatSupport);
+	}
+
+	public function updateChatTicket(){
+		$insertRecord = array();
+
+		if (isset($_GET['status'])) {
+			$insertRecord['status'] = $_GET['status'];
+		}
+
+		if (isset($_GET['adminID'])) {
+			$insertRecord['adminID'] = $_GET['adminID'];
+		}
+
+		$tableName="chat_support_tbl";
+		$fieldName='id';
+		$where= $_GET['id'];
+
+		$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
+
+		if($updateRecordsRes){
+			echo json_encode(true);
+		}else{
+			echo json_encode(false);
+		}
+	}
+
+	public function chatSupportSendMsg(){
+		$data = $_GET;
+
+		$insertRecord = array(
+			'msg' => $data['msg'],	
+			'msgBy' => $data['msgBy'],		
+			'chatTicketID' => $data['chatTicketID'],		
+			'dateCreated' => $this->_getTimeStamp()
+		);
+
+		$saveQueryNotif = $this->_insertRecords($tableName = 'chat_support_msgs_tbl', $insertRecord);
+
+		echo json_encode($saveQueryNotif);
+	}
+
+	public function getChatTicketMsgs(){
+   		$getChatTicketMsgs = $this->_getRecordsData(
+   			$selectfields = array("chat_support_msgs_tbl.*"), 
+	   		$tables = array('chat_support_msgs_tbl'), 
+	   		$fieldName = array('chatTicketID'), $where = array($_GET['chatTicketID']), 
+	   		$join = null, $joinType = null, $sortBy = array("chat_support_msgs_tbl.id"), 
+	   		$sortOrder = array('asc'), $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+   		);
+
+   		echo json_encode($getChatTicketMsgs);
+	}
+
+	public function createNewTicket(){
+		$data = $_GET;
+
+		$insertRecord = array(
+			'userID' => $data['userID'],
+			'dateCreated' => $this->_getTimeStamp(),
+		);
+
+		$saveQueryNotif = $this->_insertRecords($tableName = 'chat_support_tbl', $insertRecord);
+
+		if ($saveQueryNotif) {
+			echo json_encode($saveQueryNotif);
+		}else{
+			echo json_encode(false);
+		} 
+	}
+
+	public function deleteChatSupportHistory(){
+		$data = $_GET;
+
+		$deleteQuery = $this->_deleteRecords(
+			$tableName = "chat_support_tbl",
+		 	$fieldName = array("id"),
+		  	$where = array($data['id'])
+		);
+
+		$deleteQuery = $this->_deleteRecords(
+			$tableName = "chat_support_msgs_tbl",
+		 	$fieldName = array("chatTicketID"),
+		  	$where = array($data['id'])
+		);
+
+		echo true;
+	}
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+
+	
 
 
 }

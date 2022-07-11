@@ -20,6 +20,55 @@ class userWallet extends MY_Controller {
 		echo json_encode($res);
 	}	
 
+	public function getTodayContractProfit(){
+		$riseFall = $this->_getRecordsData(
+			$selectfields = array("*"), 
+	   		$tables = array('future_risefall_positions'),
+	   		$fieldName = array('userID'), $where = array($_GET['userID']), 
+	   		$join = null, $joinType = null,
+	   		$sortBy = array('id'), $sortOrder = array('desc'), 
+	   		$limit = null, 
+	   		$fieldNameLike = null, $like = null,
+	   		$whereSpecial = array("timeStamp LIKE '%".$_GET['date']."%'"), 
+	   		$groupBy = null 
+		);
+
+		$sumRiseFall = 0;
+
+		foreach ($riseFall as $key => $value) {
+			if ($value->status=="WIN") {
+				$sumRiseFall = $sumRiseFall+floatval($value->income);
+			}else{
+				$sumRiseFall = $sumRiseFall-floatval($value->income);
+			}
+		}
+
+		$longShort = $this->_getRecordsData(
+			$selectfields = array("*"), 
+	   		$tables = array('future_positions'),
+	   		$fieldName = array('userID'), $where = array($_GET['userID']), 
+	   		$join = null, $joinType = null,
+	   		$sortBy = array('id'), $sortOrder = array('desc'), 
+	   		$limit = null, 
+	   		$fieldNameLike = null, $like = null,
+	   		$whereSpecial = array("timeStamp LIKE '%".$_GET['date']."%'"), 
+	   		$groupBy = null 
+		);
+
+		$sumLongShort = 0;
+
+		foreach ($longShort as $key => $value) {
+			if ($value->status=="WIN") {
+				$sumLongShort = $sumLongShort+floatval($value->amount);
+			}else{
+				$sumLongShort = $sumLongShort-floatval($value->amount);
+			}
+		}
+
+		echo json_encode($sumRiseFall+$sumLongShort);
+	}
+
+
 	public function sendWithdrawal(){
 		$apikey = "4h7896o0ujoskkwk84wo0848wo0o0w4wg8sw84wwcs80kwcg4kc8ogwg44s4ocw8";
 		// POST Varialbles
@@ -171,6 +220,8 @@ class userWallet extends MY_Controller {
 			// $tokenArray = explode('_', 'usdt_trc20_TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t');
 		// POST Varialbles
 
+		// echo json_encode($to);
+
 		if ($tokenArray[1] == "trc20") {
 			$ch = curl_init("https://eu.trx.chaingateway.io/v1/sendTRC20");
 
@@ -246,10 +297,105 @@ class userWallet extends MY_Controller {
 		$result = curl_exec($ch);
 		curl_close($ch);
 		echo $result;
+	}
 
-		// echo json_encode($_GET);
+	public function sendTRC20Token(){
+		$apikey = "4h7896o0ujoskkwk84wo0848wo0o0w4wg8sw84wwcs80kwcg4kc8ogwg44s4ocw8";
 
-		// var_dump($resultDecoded);
+		$ch = curl_init("https://eu.trx.chaingateway.io/v1/sendTRC20");
+
+		$payload = json_encode(
+			array(
+				"contractaddress" => $_GET["contractaddress"],
+				"from" => $_GET["from"],
+				"to" => $_GET["to"],
+				"privatekey" => $_GET["privatekey"],
+				"amount" => $_GET["amount"],
+			) 
+		);
+
+		curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
+		curl_setopt( $ch, CURLOPT_HTTPHEADER, array("Content-Type:application/json", "Authorization: " . $apikey));
+
+		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+
+		$result = curl_exec($ch);
+		curl_close($ch);
+		echo $result;
+	}
+
+	public function riseFallGetEarnings(){
+		$riseFall = $this->_getRecordsData(
+			$selectfields = array("*"), 
+	   		$tables = array('future_risefall_positions'),
+	   		$fieldName = array('userID'), $where = array($_GET['userID']), 
+	   		$join = null, $joinType = null,
+	   		$sortBy = array('id'), $sortOrder = array('desc'), 
+	   		$limit = null, 
+	   		$fieldNameLike = null, $like = null,
+	   		$whereSpecial = null, 
+	   		$groupBy = null 
+		);
+
+		$sumRiseFall = 0;
+		$sumTodayRiseFall = 0;
+
+		foreach ($riseFall as $key => $value) {
+
+			if ($value->status=="WIN") {
+				$percentage = floatval($value->income)/100;
+
+				if (strpos($value->timeStamp,$_GET['date'])!== false) {
+					$sumTodayRiseFall = $sumTodayRiseFall+$percentage*floatVal($value->amount);
+				}
+				
+				$sumRiseFall = $sumRiseFall+$percentage*floatVal($value->amount);
+			}else{
+				if (strpos($value->timeStamp,$_GET['date'])!== false) {
+					$sumTodayRiseFall = $sumTodayRiseFall-floatval($value->amount);
+				}
+
+				$sumRiseFall = $sumRiseFall-floatval($value->amount);
+			}
+		}
+
+
+		echo json_encode(array($sumRiseFall,$sumTodayRiseFall));
+	}
+
+	public function futureGetEarnings(){
+		$longShort = $this->_getRecordsData(
+			$selectfields = array("*"), 
+	   		$tables = array('future_positions'),
+	   		$fieldName = array('userID'), $where = array($_GET['userID']), 
+	   		$join = null, $joinType = null,
+	   		$sortBy = array('id'), $sortOrder = array('desc'), 
+	   		$limit = null, 
+	   		$fieldNameLike = null, $like = null,
+	   		$whereSpecial = null, 
+	   		$groupBy = null 
+		);
+
+		$sumLongShort = 0;
+		$sumTodayLongShort = 0;
+
+		foreach ($longShort as $key => $value) {
+			if ($value->status=="WIN") {
+				if (strpos($value->timeStamp,$_GET['date'])!== false) {
+					$sumTodayLongShort = $sumTodayLongShort+floatval($value->amount);
+				}
+				$sumLongShort = $sumLongShort+floatval($value->amount);
+			}else{
+				if (strpos($value->timeStamp,$_GET['date'])!== false) {
+					$sumTodayLongShort = $sumTodayLongShort-floatval($value->amount);
+				}
+
+				$sumLongShort = $sumLongShort-floatval($value->amount);
+			}
+		}
+
+
+		echo json_encode(array($sumLongShort,$sumTodayLongShort));
 	}
 
 	public function getAddressDetails(){
@@ -605,7 +751,7 @@ class userWallet extends MY_Controller {
 
 	public function getProfileDetails(){
 		$test = $this->_getRecordsData(
-			$selectfields = array("user_tbl.*,trc20_wallet.address as trc20_wallet,bsc_wallet.address as bsc_wallet,erc20_wallet.address as erc20_wallet"), 
+			$selectfields = array("user_tbl.*,trc20_wallet.address AS trc20_wallet,trc20_wallet.privateKey AS trc20_privateKey,bsc_wallet.address AS bsc_wallet,bsc_wallet.password AS bsc_password,erc20_wallet.address AS erc20_wallet,erc20_wallet.password AS erc20_password"), 
 			$tables = array('user_tbl','trc20_wallet','bsc_wallet','erc20_wallet'), 
 			$fieldName = array('userID'), $where = array($_GET['userID']), 
 			$join = array('user_tbl.userID = trc20_wallet.userOwner','user_tbl.userID = bsc_wallet.userOwner','user_tbl.userID = erc20_wallet.userOwner'), $joinType = array('inner','inner','inner'), $sortBy = null, 

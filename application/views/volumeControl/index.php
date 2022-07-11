@@ -72,8 +72,8 @@
 <div id="innerContainer" style="display:none" class="card">
 	<div class="p-4">
 		<div class="pagetitle">
-	      	<h1>On / Off Toggle</h1>
-			<sub class="fw-bold">Click the toggle button if you want to enable the percentage selector</sub>
+	      	<h1>Volume Control</h1>
+			<sub class="fw-bold">Set User withdrawal limit by their top up total</sub>
 	    </div>
 
 	    <input type="checkbox" id="switch" onclick="toggle_btn()" /><label for="switch">Toggle</label>
@@ -81,38 +81,57 @@
 	    <br>
 
 		<section class="section-dashboard">
-
-			<div class="col-md-4">
-					<div class="card info-card sales-card">
-						<div class="card-body">
-							<h5 class="card-title">Select Percentage <span>| Percent</span></h5>
-							<div class="d-flex align-items-center">
-							  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-							    
-							  </div>
-								<div>
-									<span id="rangeValue">0</span>
-									<input class="range" type="range" value="0" min="0" max="100" onChange="rangeSlide(this.value)" onmousemove="rangeSlide(this.value)">
-								</div>
-								<i class="fa fa-percent"></i>
+			<div class="">
+				<div class="">
+					<div class="card-body">
+						<h5>Select Percentage <span>| Percent</span></h5>
+						<div class="d-flex align-items-center">
+						  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+						    
+						  </div>
+							<div>
+								<span id="rangeValue">0</span>
+								<input class="range" type="range" value="0" min="0" max="100" onChange="rangeSlide(this.value)">
 							</div>
+							<i class="fa fa-percent"></i>
 						</div>
 					</div>
 				</div>
-
+			</div>
 		</section>
-
-		
 
 	</div>
 </div>
 
 <script>
+	var getVolumeControl = ajaxShortLink("getVolumeControl");
+
+	if (getVolumeControl[0].isOn == "1") {
+		console.log("here");
+		$("#switch").prop( "checked", true );
+
+		document.getElementById('rangeValue').innerHTML = getVolumeControl[0].percentage;
+		$(".range").val(getVolumeControl[0].percentage);
+
+		setTimeout(function(){
+			$(".section-dashboard").css("display","block");
+		},10)
+	}
+
 	function toggle_btn(){
+		console.log("there");
 		if ($('#switch').is(":checked")==true) {
-			$(".section-dashboard").show();
+			$(".section-dashboard").css("display","block");
+
+			var updateVolumeControl = ajaxShortLink('admin/updateVolumeControl',{
+				"isOn":1
+			});
 		}else{
-			$(".section-dashboard").toggle();
+			$(".section-dashboard").css("display","none");
+
+			var updateVolumeControl = ajaxShortLink('admin/updateVolumeControl',{
+				"isOn":0
+			});
 		}
 	}
 
@@ -125,6 +144,10 @@
 
 	function rangeSlide(value) {
         document.getElementById('rangeValue').innerHTML = value;
+
+        var updateVolumeControl = ajaxShortLink('admin/updateVolumeControl',{
+        	"percentage":value
+        });
     }
 
 

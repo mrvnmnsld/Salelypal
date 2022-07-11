@@ -1,0 +1,184 @@
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width">
+		<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+		<link rel="stylesheet" href="demo/css/style.css">
+	</head>
+	<body>
+		<section class="container">
+			<div class="row header">
+				<div class="col-12 col-sm-6">
+					<a href="index.html">DOCUMENTATION</a>
+				</div>
+				<div class="col-12 col-sm-6">
+					<a href="demo/test_basic.html">DEMO</a>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<h2 id="jqueryeventswipe">jQuery Event Swipe</h2>
+					<p>
+						Visit the <a href="https://github.com/tschallacka/npm_jquery_event_swipe">github page</a>.<Br/>
+						Install with <code>npm install swipe_event_jquery</code>
+					</p>
+					<p>
+						A simple jQuery event swipe library. When a swipe happens an event will be triggered.<BR/>
+						I needed a simple method to figure out if a swipe had happened or not and none of the libraries currently available gave 
+						me a an easy to manage drop in method. So I made my own.
+					</p>
+					<p>
+						This library is focussed on pure node project integration that will be compiled with something into a single JS file that's served to the browser, 
+						and will not run as a stand alone, in a non node enviroment, unless you modify the source a bit.<BR/>
+						The events will attach themselves to whichever jQuery instance is returned by <code>require('jquery');</code> 
+					</p>
+					<i>Yes, this page looks awful. But honestly I just churned this out so there's something to fiddle with on the demo page.
+					I might revisit this to "beautify" or leave it as is. Depends how popular the library gets. Make an issue
+					or submit a pull request if you really can't stand it.</i>
+					</p>
+				</div>
+				<div class="col-12">
+					<p>There are four events.</p>
+
+					<pre><code class="javascript language-javascript">	$(element).on("swipe.up", (e) =&gt; {});
+	$(element).on("swipe.down", (e) =&gt; {});
+	$(element).on("swipe.left", (e) =&gt; {});
+	$(element).on("swipe.down", (e) =&gt; {});
+	$(element).on("swipe.all", (e) =&gt; {}); // Triggers on all swipe directions</code></pre>
+
+				<div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<h1 id="theeventobject">
+						The event object
+					</h1>
+					<p>
+					The event will be triggered on the element that was swiped. The directional event is triggered first, 
+					then the <code>"swipe.all"</code> event will run.<code>preventDefault</code> has no effect on these events.</p>
+		
+					
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<p>The event object will have the following relevant properties:</p>
+				
+					<p><strong>event.direction</strong> <br />
+					Can be <code>"up"</code>, <code>"down"</code>, <code>"left"</code> and <code>"down"</code></p>
+
+					<p><strong>event.distance</strong> <br />
+					The distance covered in the recorded swipe in pixels. This is the distance along the measured axis, 
+					not accounting for extra distance traveled along the perpendicular axis.</p>
+
+					<p><strong>event.duration</strong> <br />
+					How long it took for the swipe to complete. <br />
+					To calculate the speed you can divide <code>distance / duration</code>.</p>
+
+					<p><strong>event.deviation</strong>
+					The deviation perpendicular to the swipe direction. Can be negative or positive.</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<h1 id="gotcha">Gotcha</h1>
+					<p>
+					When looking for an up or down swipe, please note that that the document will continue to scroll/flinged to position.<BR/>
+					There are several tricks you can apply, but they vary by use case.<BR/>
+					One trick you might consider using is setting the overflow-y property on the document when the touchstart happens within a wrapping element.
+					</p>
+					<pre><code>let $swipefield = $('.swipefield);
+   $body = $('body');
+
+$swipefield.on('touchstart', (e) => {
+	$body.css({
+		'overflow-y': 'hidden'
+	});
+});
+$swipefield.on('touchend', (e) => {
+	$body.css({
+		'overflow-y':''
+	});
+});</code></pre>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<h1 id="managingthesettings">Managing the settings.</h1>
+
+					<p>There are three settings that can be managed for the swiper.</p>
+
+					<p><strong>threshold</strong> <br />
+					How many pixels need to be travelled at a minimum to count as a swipe and not a tap. <br />
+					<strong>default</strong> <code>50</code></p>
+
+					<p><strong>restraint</strong> <br />
+					Maximum numbers of pixels that can be travelled at an a perpendicular direction that it can still be counted as a swipe and not a scroll. <br />
+					So if you are swiping left you allow the swipe this many pixels to deviate to the top and bottom.
+					<strong>default</strong>  <code>200</code></p>
+
+					<p>For example, these are swipes with the orange path marking the movement of the swipe. The black line is the starting point
+					of the swipe, the gray lines showing how many pixels up and down it moves. The orange line shows the path of the swipe.</p>
+
+					<p>Valid swipes at restraint 200: <br />
+					<img src="demo/img/swipe1.jpg" alt="deviation to the top, valid" /> <br />
+					<img src="demo/img/swipe2.jpg" alt="deviation to the bottom, valid" /> <br />
+					<img src="demo/img/swipe3.jpg" alt="deviation relatively straight, valid" /></p>
+
+					<p>Invalid swipes because they deviate too much:</p>
+
+					<p><img src="demo/img/notswipe1.jpg" alt="deviation to the top, invalid" /> <br />
+					<img src="demo/img/notswipe2.jpg" alt="deviation to the bottom, vinalid" />    </p>
+
+					<p><strong>allowedTime</strong> <br />
+					Maximum time in milliseconds for a swipe to complete. Otherwise it may be a slow scroll. <br />
+					<strong>default</strong>  <code>300</code></p>
+
+					<p>You can set these settings by using the function returned by npm's require.</p>
+
+					<pre><code class="javascript language-javascript">	let swipeSettingsManager = require('jquery_event_swipe');
+	swipeSettingsManager({
+		threshold: 50,
+		restraint: 200,
+		allowedTime: 300
+	});</code></pre>
+
+		<p>You don't need to set them all at once, only the ones you need changed. Do keep in mind that the changes are global.</p>
+
+		<pre><code class="javascript language-javascript">	let swipeSettingsManager = require('jquery_event_swipe');
+	swipeSettingsManager({
+		allowedTime: 100
+	});	</code></pre>
+				</div>
+			</div>
+			<footer class=" site-footer profile">
+				<div class="profile row">
+					<div class="col-3">
+						<a class="circle-image-link" href="https://www.tschallacka.de" title="Tschallacka's website">
+						  <img src="demo/img/tschallacka.png">
+						</a>
+					</div>
+					<div class="info col-9">
+					  <h2 class="title">jQuery swipe events by Tschallacka</h2>
+					  <a href="https://twitter.com/tschallacka" class="twitter-follow-button" data-show-count="false" data-size="large" data-show-screen-name="false" data-dnt="true">Follow @tschallacka</a>
+					  <p>
+						I needed a reliable way to detect swipe events on elements so they could hide when swiped.
+						No library currently provided me the easy drop in method I needed, so here it is.
+					  </p>
+					  <p>
+						I'm a coder for fun, who happened to have found a job within his hobby. 
+						I don't claim to be good, but I do claim not to be trash at coding. However, if you find trash within my code, 
+						which can happen because stuff goes out of date and gets replaced with newer knowledge, gimme a ping, and i'll
+						do my best to resolve it.
+					  </p>
+					  <a href="https://www.tschallacka.de">website</a> | <a href="https://www.github.com/tschallacka">github</a> | <a href="https://www.twitter.com/tschallacka">twitter</a> | <a href="https://stackoverflow.com/users/1356107/tschallacka">stackoverflow</a> | <a href="https://www.reddit.com/user/tschallacka">reddit</a> 
+					</div>
+				  </div>
+			</footer>
+		</section>
+	</body>
+	<script
+  src="https://code.jquery.com/jquery-3.5.0.min.js"
+  integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
+  crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>
+</html>

@@ -1,0 +1,90 @@
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width">
+		<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">		
+		<link rel="stylesheet" href="css/style.css">		
+	</head>
+	<body>
+		<section class="container">
+			<div class="row header">
+				<div class="col-12 col-sm-6">
+					<a href="../index.html">DOCUMENTATION</a>
+				</div>
+				<div class="col-12 col-sm-6">
+					<a href="test_basic.html">DEMO</a>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col ">
+					<h2>Demo of swipe events</h2>
+					<p>
+						Swipe the blocks in the directions marked on them to test out the event handling.<Br/>
+						If you're on a desktop with a non touch screen put your browser into mobile emulation mode.<BR/>
+						View the <a href="https://github.com/tschallacka/npm_jquery_event_swipe/blob/master/demo/js/demo_basic.js">demo_basic.js</a> for the code that runs below. 
+						If you are experimenting, run <code>gulp browserify</code> to compile the demo file.
+					</p>
+					<section class="swipefield">
+						<div id="moveup">
+						UP
+						</div>
+						<div id="moveleft">
+						LEFT
+						</div>
+						<div id="moveright">
+						RIGHT
+						</div>
+						<div id="movedown">
+						DOWN
+						</div>
+					</section>
+					<section class="statusfield">
+						<div>
+							<label>last swiped element:</label> <span id="element">none</span>
+						</div>
+						<div>
+							<label>last swiped direction:</label> <span id="direction">none</span>
+						</div>
+						<div>
+							<label>last swiped duration:</label> <span id="duration">0</span>ms
+						</div>
+						<div>
+							<label>last swiped distance:</label> <span id="distance">0</span>px
+						</div>
+						<div>
+							<label>last swiped deviation:</label> <span id="deviation">0</span>px
+						</div>
+						<div>
+							<label>last swiped speed:</label> <span id="speed">0</span>px / ms
+						</div>
+					</section>
+				</div>
+			</div>
+			<footer class=" site-footer profile">
+				<div class="profile row">
+					<div class="col-3">
+						<a class="circle-image-link" href="https://www.tschallacka.de" title="Tschallacka's website">
+						  <img src="img/tschallacka.png">
+						</a>
+					</div>
+					<div class="info col-9">
+					  <h2 class="title">jQuery swipe events by Tschallacka</h2>
+					  <a href="https://twitter.com/tschallacka" class="twitter-follow-button" data-show-count="false" data-size="large" data-show-screen-name="false" data-dnt="true">Follow @tschallacka</a>
+					  <p>
+						I needed a reliable way to detect swipe events on elements so they could hide when swiped.
+						No library currently provided me the easy drop in method I needed, so here it is.
+					  </p>
+					  <p>
+						I'm a coder for fun, who happened to have found a job within his hobby. 
+						I don't claim to be good, but I do claim not to be trash at coding. However, if you find trash within my code, 
+						which can happen because stuff goes out of date and gets replaced with newer knowledge, gimme a ping, and i'll
+						do my best to resolve it.
+					  </p>
+					  <a href="https://www.tschallacka.de">website</a> | <a href="https://github.com/tschallacka/npm_jquery_event_swipe">github</a> | <a href="https://www.twitter.com/tschallacka">twitter</a> | <a href="https://stackoverflow.com/users/1356107/tschallacka">stackoverflow</a> | <a href="https://www.reddit.com/user/tschallacka">reddit</a> 
+					</div>
+				  </div>
+			</footer>
+		</section>
+		<script type="text/javascript" src="js/test_basic.demo.min.js"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>
+	</body>
+</html>

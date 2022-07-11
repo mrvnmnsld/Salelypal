@@ -328,13 +328,19 @@
 
         console.log(availBalance);
         $("#amount").rules( "remove", "min max" );
-
-        
     });
 
     $("#closeBtn_buyCrypto").on('click',function(){
-        $("#success_container").toggle();
-        $("#mainForm").toggle();
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+        $('#assets_container').css("display","none");
+        $("#container").fadeOut(animtionSpeed, function() {
+            $("#profile_btn").css('display',"none")
+            $("#top_back_btn").css('display',"block")
+
+            $("#container").empty();
+            $("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/buyCrypto'}));
+            $("#container").fadeIn(animtionSpeed);
+        });
     });
 
     $("#mainForm").validate({

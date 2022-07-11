@@ -3,8 +3,33 @@
     table{
         overflow-x:auto;
     }
+
+    .btn-group-vertical>.btn.active, .btn-group-vertical>.btn:active, .btn-group-vertical>.btn:focus, .btn-group>.btn.active, .btn-group>.btn:active, .btn-group>.btn:focus {
+        z-index: 0;
+    }
+
+    /*.bootstrap-select.btn-group .dropdown-menu li a:hover {
+         color: whitesmoke !important;
+         background: #bf5279 !important;
+     }*/
+
+     .btn .dropdown-toggle .btn-light{
+        color: whitesmoke !important;
+        background: #bf5279 !important;
+     }
+
+     .dataTables_filter input {
+         width: 70%!important; 
+     }
+
+     .dark-mode .page-link {
+         color: #007bff!important;
+     }
+
+
 </style>
 
+<!-- 
 <div class="text-danger p-2" id="testNotes">
     <b>Testing Mode:</b>
     <br>
@@ -12,163 +37,128 @@
     To reset available amount, go to home and redirect to this page again.
     <br><br>
     Other USDT Token Pair will be added once testing mode is completed
-</div>
+</div> -->
 
-<div id="innerContainer" class="p-2">
-    <div id="token_pair_select" class="text-muted h4">
-        <i class="fa fa-list" aria-hidden="true"></i> <span id="token_pair_name_container">ETH/USDT</span>
-    </div>
+<div id="innerContainer">
+    <div class="main-color-text p-1" style="">
 
-    <div id="changeContainer">
-        <span class="h5" id="token_pair_value_container"></span>
+        <div class="p-2 main-color-text">
+            <label>Select Token Pair: </label>
+            <select id="token_pair_select" style=";" class="p-2 form-control main-card-ui main-color-text">
+                <option>BTC/USDT</option>
+                <option>ETH/USDT</option>
+                <option>XRP/USDT</option>
+                <option>BNB/USDT</option>
+                <option>DOGE/USDT</option>
+                <option>TRX/USDT</option>
+            </select>
 
-        <small id="token_pair_value_percentage_container"></small>
-    </div>
-    
-    <small >24 Hour change</small>
+            <div id="changeContainer">
+                <span class="h5" id="token_pair_value_container"></span>
 
-    <div class="tradingview-widget-container">
-      <div id="tradingview" style="height: 300px;"></div>
-    </div>
-
-    <div class="btn-group btn-group-toggle d-flex justify-content-center mt-2" data-toggle="buttons">
-      <label class="btn btn-secondary active">
-        <input type="radio" name="risk_option_radio" value="1Min" id="1Min" autocomplete="off"> 1 Minute <br>
-        <small style="font-size: 12px;">5% Change</small>
-      </label>
-
-      <label class="btn btn-secondary">
-        <input type="radio" name="risk_option_radio" value="3Min" id="3Min" autocomplete="off"> 3 Minutes <br>
-        <small style="font-size: 12px;">10% Change</small>
-      </label>
-
-      <label class="btn btn-secondary">
-        <input type="radio" name="risk_option_radio" value="5Min" id="5Min" autocomplete="off"> 5 Minutes <br>
-        <small style="font-size: 12px;">15% Change</small>
-      </label>
-
-      <label class="btn btn-primary" id="customRisk_btn">
-        <input type="radio" name="risk_option_radio" value="customRisk" id="customRisk" autocomplete="off"> Custom Risk <br> 
-        <span><small>Click to Input</small></span>
-      </label>
-    </div>
-
-    <div class="mt-3 headers">
-        <div class="h4 text-dark text-center">Risks Options</div>
-    </div class="text-success">
-
-    <div class="mt-2">
-        <!-- <div class="h5 text-dark">Risks Taken</div> -->
-
-        <div>
-            <span>Value Predicted(LONG):</span>
-            <span id="risk_value_predicted_long">Please select risk option</span>
+                <small id="token_pair_value_percentage_container"></small>
+                <small>24 Hour change</small>
+            </div>
         </div>
 
-        <div>
-            <span>Value Predicted(SHORT):</span>
-            <span id="risk_value_predicted_short">Please select risk option</span>
+        <div class="tradingview-widget-container">
+          <div id="tradingview" style="height: 400px;"></div>
         </div>
 
-        <div>
-            <span>Timestamp Trigger:</span>
-            <span id="risk_timestamp_predicted">Please select risk option</span>
+        <div class="d-flex justify-content-center pt-1 mb-2 mt-2">
+            <button class="btn btn-success col-md" id="buy_long_btn">
+                <img style="width:25px;" src="assets/imgs/icons/growth-graph.png">
+                Buy Long
+            </button>
+
+            <button class="btn btn-danger col-md ml-1" id="buy_short_btn">
+                <img style="width:25px;" src="assets/imgs/icons/graph.png">
+                Buy Short
+            </button>
         </div>
-    </div>
-
-    <div class="d-flex mt-1 flex-basis: fit-content;">
-        <div>
-            <label class="mt-1">Amount:</label>
-        </div>
-
-        <div style="flex-basis: 100%;">
-            <input type="number" class="ml-1 form-control form-control-sm" id="amount_input_container">
-        </div>      
-    </div>
-
-    <small >
-        <div class="text-center text-success">
-            <span>Availble Amount:</span>
-            <span id="available_amount_container">20 USDT</span>
-        </div>
-    </small>
-
-    <div class="d-flex justify-content-center mt-2">
-        <button class="btn btn-success col-md" id="buy_long_btn">
-            <img style="width:25px;" src="assets/imgs/icons/growth-graph.png">
-            Buy Long
-        </button>
-
-        <button class="btn btn-danger col-md ml-1" id="buy_short_btn">
-            <img style="width:25px;" src="assets/imgs/icons/graph.png">
-            Buy Short
-        </button>
     </div>
 </div>
 
-<div class="mt-3 headers">
-    <div class="h4 text-dark text-center">Positions</div>
-</div class="text-success">
+<style>
+    .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+        font-size:1.5em;
+        opacity: 1 !important;
+        -webkit-transition: color 1s, font-size .25s;
+        -moz-transition: color 1s, font-size .25s;
+        -o-transition: color 1s, font-size .25s;
+        transition: color 1s, font-size .25s;
 
-<div>
+        border-color: transparent;
+        background-color:transparent;
+        /* LIGHTMODE_ */
+        /* color: #3a189f!important;  */
+        /* DARKMODE_ */
+        /* color: white !important;  */
+    }
+
+    #future_history_container a{
+        /* color: #94abef; */
+        opacity: .5;
+        -webkit-transition: color 2s, font-size .25s;
+        -moz-transition: color 2s, font-size .25s;
+        -o-transition: color 2s, font-size .25s;
+        transition: color 2s, font-size .25s;
+    }
+</style>
+
+<div id="future_history_container">
     <ul class="nav nav-tabs nav-fill">
       <li class="nav-item">
-        <a class="nav-link text-dark active font-weight-bold" aria-current="page" data-toggle="tab" href="#pending_tab_btn">Pending</a>
+        <a class="nav-link active main-color-link" aria-current="page" data-toggle="tab" href="#future_history_tab_btn">History</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-dark font-weight-bold" data-toggle="tab" href="#history_tab_btn">History</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link text-dark font-weight-bold" data-toggle="tab" href="#instructions_tab_btn">Instructions</a>
+        <a class="nav-link main-color-link" data-toggle="tab" href="#future_instructions_tab_btn">Instructions</a>
       </li>
     </ul>
 
     <div class="tab-content">
-        <div id="pending_tab_btn" class="tab-pane active">
-          <table class="table" style="font-size: 15px;">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Risk & Closing</th>
-                <th scope="col">Amount</th>
-                <th scope="col">Type</th>
-                <th scope="col"></th>
-              </tr>
-            </thead>
-            <tbody id="positions_container">
-              <tr class="text-center text-danger" id="no_position_flag_container">
-                  <td colspan="5"><b>No positions opened</b></td>
-              </tr>
-            </tbody>
-          </table>
+        <div id="future_history_tab_btn" class="tab-pane active text-muted">
+            <div class="card main-card-ui p-2 rounded shadow-lg">
+                <div class="d-flex">
+                    <div class="text-center p-2 mt-2">
+                        <div class="flex-fill p-2">
+                            <h5>Today's Earnings:</h5>
+                            <span id="todaysEarningLongShort">
+                                0 USD
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="text-center p-2 mt-2">
+                        <div class="flex-fill p-2">
+                            <h5>All Time Earnings:</h5>
+                            <span id="allTimeEarningsLongShort">
+                                0 USD
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <table id="tableContainer" class="" style="font-size: 11px;width: 100%;" cellpadding="0"> 
+                    <thead>
+                        <tr>
+                            <th scope="col">Risk Taken</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Risk Price</th>
+                            <th scope="col">Resolved Price</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+
         </div>
 
-        <div id="history_tab_btn" class="tab-pane fade">
-          <table class="table" style="font-size: 15px;">
-            <thead>
-              <tr>
-                <th scope="col">Risk Taken</th>
-                <th scope="col">Amount</th>
-                <th scope="col">Resolved Price</th>
-                <th scope="col">Difference Percentage</th>
-                <th scope="col">Status</th>
-              </tr>
-            </thead>
-            <tbody id="positions_closed_container">
-              <tr class="text-center text-danger" id="no_position_flag_container">
-                  <td colspan="5"><b>No positions opened</b></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div id="instructions_tab_btn" class="tab-pane fade p-2">
+        <div id="future_instructions_tab_btn" class="tab-pane fade p-2 main-color-text">
           <span>
               1. Select token value prediction.<br>
               2. Select Time limit of prediction.<br>
               3. Input amount to be staked.<br>
-              4. Wait for time prediction.<br>
-              5. Check history if won or lost.<br>
+              4. Wait for time to be resolved.<br>
               <br>
 
               <!-- *Additional<br>
@@ -190,474 +180,218 @@
           </span>
         </div>
       </div>
-
 </div>
 
 <!-- TradingView Widget BEGIN -->
 <script type="text/javascript">
 
+    var pendingPositionChecker;
+    var tokenPriceInterval;
+    var tokenPriceBinanceLastPrice;
+
+    var totalAmountPending = 0;
+    $('#token_pair_select').val(tokenPairArray.tokenPairDescription);
+
     //setChart
         setTimeout(function() {
-            new TradingView.widget({
-                "autosize": true,
-                // "symbol": "BINANCE:ETHUSDT",
-                "symbol": "BINANCE:ETHUSDT",
-                "interval": "1",
-                "timezone": Intl.DateTimeFormat().resolvedOptions().timeZone,
-                "theme": "dark",
-                "style": "1",
-                "locale": "en",
-                "toolbar_bg": "#f1f3f6",
-                "enable_publishing": false,
-                "save_image": false,
-                "container_id": "tradingview"
-            });
-        }, 1500);
+            if($("#tradingview").length == 1){
+                new TradingView.widget({
+                    "autosize": true,
+                    // "symbol": "BINANCE:ETHUSDT",
+                    "symbol": tokenPairArray.tokenPairID,
+                    "interval": "1",
+                    "timezone": Intl.DateTimeFormat().resolvedOptions().timeZone,
+                    "theme": chartTheme,
+                    "style": "1",
+                    "locale": "en",
+                    "toolbar_bg": "#f1f3f6",
+                    "enable_publishing": false,
+                    "save_image": false,
+                    "container_id": "tradingview"
+                });
+            }
+
+            // continuous
+                tokenPriceInterval = setInterval(function() {
+                    tokenPriceBinanceLastPrice = parseFloat(ajaxShortLinkNoParse("https://api.binance.com/api/v3/ticker/24hr?symbol="+tokenPairArray.tokenPairID).lastPrice).toFixed(2);
+                    var ethPriceBinancePriceChangePercent = parseFloat(ajaxShortLinkNoParse("https://api.binance.com/api/v3/ticker/24hr?symbol="+tokenPairArray.tokenPairID).priceChangePercent).toFixed(2);
+                    var signContainer;
+
+                    if(ethPriceBinancePriceChangePercent.includes("-")){
+                        $("#changeContainer").removeClass('text-success');
+                        $("#changeContainer").addClass('text-danger');
+                        signContainer = "";
+
+                    }else{
+                        $("#changeContainer").addClass('text-success');
+                        $("#changeContainer").removeClass('text-danger');
+                        signContainer = "+";
+                    }
+
+                    $("#token_pair_value_container").html(tokenPriceBinanceLastPrice);
+                    $("#token_pair_value_percentage_container").html(signContainer+ethPriceBinancePriceChangePercent);
+                }, 1000);
+            // continuous
+
+        }, 2000);
     //setChart
 
-
     var customRiskArray = [];
-    var ethPriceBinanceLastPrice;
-    var totalAmountPending = 0;
 
     //callBackEnd
-        var balanceUsdt = ajaxShortLink('userWallet/getTRC20Balance',{
-            'trc20Address':currentUser['trc20_wallet'],
-            'contractaddress':'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t',
-        })['balance'];
+        reloadPositions()
+    //callBackEnd
 
-        $("#available_amount_container").html(parseFloat(balanceUsdt).toFixed(2)+" USDT");
+    // buy
+        $("#buy_long_btn").on("click", function(){
+            bootbox.alert({
+                message: ajaxLoadPage('quickLoadPage',{'pagename':'wallet/future/buy_long'}),
+                size: 'large',
+                centerVertical: true,
+                closeButton: false
+            });
+        });
 
+        $("#buy_short_btn").on("click", function(){
+            bootbox.alert({
+                message: ajaxLoadPage('quickLoadPage',{'pagename':'wallet/future/buy_short'}),
+                size: 'large',
+                centerVertical: true,
+                closeButton: false
+            });
+        });
+    // buy
 
-        var positionsOpened = ajaxShortLink(
-            "userWallet/future/getPendingPositions",
-            {
-                'userID':currentUser.userID
+    $('#token_pair_select').change(function(){
+        var selectedPair = $(this).val();
+        var location;
+
+        if(selectedPair=='BTC/USDT'){
+            tokenPairArray = {
+                'tokenPairID':'BTCUSDT',
+                'tokenPairDescription':'BTC/USDT'
             }
-        );
+        }
 
-        var positionsClosed = ajaxShortLink(
-            "userWallet/future/getClosedPositions",
-            {
-                'userID':currentUser.userID
+        if(selectedPair=='ETH/USDT'){
+
+            tokenPairArray = {
+                'tokenPairID':'ETHUSDT',
+                'tokenPairDescription':'ETH/USDT'
             }
-        );
+        }
 
-        if (positionsOpened.length>=1) {
-            $("#positions_container").empty();
-
-            for (var i = 0; i < positionsOpened.length; i++) {
-                $("#positions_container").append(
-                    '<tr>'+
-                        '<td class="font-weight-bold">'+(i+1)+'. </td>'+
-                        '<td>'+positionsOpened[i].riskPrice+' @'+positionsOpened[i].timeStamp+'</td>'+
-                        '<td>'+positionsOpened[i].amount+'</td>'+
-                        '<td>'+positionsOpened[i].positionType+'</td>'+
-                        '<td><button onclick="cancelPosition('+positionsOpened[i].id+',this,'+positionsOpened[i].amount+')" class="btn btn-danger btn-sm">X</button></td>'+
-                    '</tr>'
-                );  
-
-                totalAmountPending = totalAmountPending+parseFloat(positionsOpened[i].amount);
+        if(selectedPair=='XRP/USDT'){
+            tokenPairArray = {
+                'tokenPairID':'XRPUSDT',
+                'tokenPairDescription':'XRP/USDT'
             }
+        }
 
-            minusToAmountAvailable(totalAmountPending)
-        }   
+        if(selectedPair=='BNB/USDT'){
+            tokenPairArray = {
+                'tokenPairID':'BNBUSDT',
+                'tokenPairDescription':'BNB/USDT'
+            }
+        }
 
-        if (positionsClosed.length>=1) {
+        if(selectedPair=='DOGE/USDT'){
+            tokenPairArray = {
+                'tokenPairID':'DOGEUSDT',
+                'tokenPairDescription':'DOGE/USDT'
+            }
+        }
+
+        if(selectedPair=='TRX/USDT'){
+            tokenPairArray = {
+                'tokenPairID':'TRXUSDT',
+                'tokenPairDescription':'TRX/USDT'
+            }
+        }
+
+        clearInterval(tokenPriceInterval);
+
+        $("#container").empty();
+        $("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/future'}));
+    });
+
+    function reloadPositions(){
+        // closed
+
             $("#positions_closed_container").empty();
 
-            for (var i = 0; i < positionsClosed.length; i++) {
-                if(positionsClosed[i].status=="WIN"){
-                    statusClass = 'text-success';
-                }else{
-                    statusClass = 'text-danger';
-                }
-
-                $("#positions_closed_container").append(
-                    '<tr class="'+statusClass+'">'+
-                        '<td class="">'+positionsClosed[i].riskPrice+'</td>'+
-                        '<td class="">'+positionsClosed[i].amount+'</td>'+
-                        '<td class="">'+parseFloat(positionsClosed[i].resolvedPrice).toFixed(2)+'</td>'+
-                        '<td class="">'+(positionsClosed[i].resolvedPrice-positionsClosed[i].riskPrice).toFixed(2)+'</td>'+
-                        '<td class="">'+positionsClosed[i].status+' </td>'+
-                    '</tr>'
-                );  
-            }        
-        }   
-    //callBackEnd
-    
-    // continuous
-        const ethPriceInterval = setInterval(function() {
-            ethPriceBinanceLastPrice = parseFloat(ajaxShortLinkNoParse("https://api.binance.com/api/v3/ticker/24hr?symbol=ETHUSDT").lastPrice).toFixed(2);
-            var ethPriceBinancePriceChangePercent = parseFloat(ajaxShortLinkNoParse("https://api.binance.com/api/v3/ticker/24hr?symbol=ETHUSDT").priceChangePercent).toFixed(2);
-            var signContainer;
-
-            if(ethPriceBinancePriceChangePercent.includes("-")){
-                $("#changeContainer").removeClass('text-success');
-                $("#changeContainer").addClass('text-danger');
-                signContainer = "";
-
-            }else{
-                $("#changeContainer").addClass('text-success');
-                $("#changeContainer").removeClass('text-danger');
-                signContainer = "+";
-            }
-
-            $("#token_pair_value_container").html(ethPriceBinanceLastPrice);
-            $("#token_pair_value_percentage_container").html(signContainer+ethPriceBinancePriceChangePercent);
-        }, 1000);
-
-        const pendingPositionChecker = setInterval(function() {
-            positionsOpened = ajaxShortLink(
-                "userWallet/future/getPendingPositions",
+            var positionsClosed = ajaxShortLink(
+                "userWallet/future/getClosedPositions",
                 {
-                    'userID':currentUser.userID
+                    'userID':currentUser.userID,
+                    'tradePair':tokenPairArray.tokenPairDescription
                 }
             );
 
-            for (var i = 0; i < positionsOpened.length; i++) {
-                var timeNow = Date.parse(getTimeDateNonFormated());
-                var positionOpenedTimeStamp = Date.parse(positionsOpened[i].timeStamp);
-                var riskPrice = positionsOpened[i].riskPrice;
-                var statusClass = "";
+            loadDatatable('',positionsClosed);
 
-                // console.log(positionOpenedTimeStamp,timeNow);
+            var date = new Date();
 
-                if(timeNow>=positionOpenedTimeStamp){
-                    var ohlcTimeStamp = ajaxShortLinkNoParse("https://api.binance.com/api/v3/klines?symbol=ETHUSDT&interval=1m&limit=1&startTime="+(positionOpenedTimeStamp-60000)+"&endTime="+Date.parse(getTimeDateNonFormated()));
-                    var closeTokenValue = ohlcTimeStamp[0][4];
-                    var status = '';
+            var year = date.getFullYear();
+            var month = String(date.getMonth() + 1);
+            var day = String(date.getDate());
+            var joined = [month,day,year,].join('/');
 
-                    if(riskPrice==closeTokenValue){
-                        status = "WIN";
-                        statusClass = 'text-success';
-                        $.toast({
-                            heading: '<h6>WON!</h6>',
-                            text: 'You have won '+positionsOpened[i].amount+' USDT',
-                            showHideTransition: 'slide',
-                            icon: 'success',
-                            position: 'bottom-center'
-                        })
-                    }else{
-                        status = "LOSE";
-                        statusClass = 'text-danger';
-                        $.toast({
-                            heading: '<h6>LOST!</h6>',
-                            text: 'You have lost '+positionsOpened[i].amount+' USDT',
-                            showHideTransition: 'slide',
-                            icon: 'error',
-                            position: 'bottom-center'
-                        })
-                    }
+            var earnings = ajaxShortLink("userWallet/future/getEarnings",{
+                'userID':currentUser.userID,
+                'date':joined
+            });
 
-                    console.log("Remove Index #"+i,positionsOpened[i]);
+            console.log(earnings[0],parseFloat(earnings[0])>=1);
 
-                    ajaxShortLink("userWallet/future/resolvePosition",{
-                        'id':positionsOpened[i].id,
-                        'resolvedPrice':closeTokenValue,
-                        'status':status,
-                    });
-
-                    positionsOpened = ajaxShortLink(
-                        "userWallet/future/getPendingPositions",
-                        {
-                            'userID':currentUser.userID
-                        }
-                    );
-
-                    $("#positions_container").empty();
-                    if(positionsOpened.length-1==0){
-                        if ($("#positions_container tr").length == 0) {
-                            $("#positions_container").append(
-                                '<tr class="text-center text-danger" id="no_position_flag_container">'+
-                                   '<td colspan="5"><b>No positions opened</b></td>'+
-                                '</tr>'
-                            ); 
-                        }
-                    }else{
-                        for (var i = 0; i < positionsOpened.length; i++) {
-                            $("#positions_container").append(
-                                '<tr>'+
-                                    '<td class="font-weight-bold">'+(i+1)+'. </td>'+
-                                    '<td>'+positionsOpened[i].riskPrice+' @'+positionsOpened[i].timeStamp+'</td>'+
-                                    '<td>'+positionsOpened[i].amount+'</td>'+
-                                    '<td>'+positionsOpened[i].positionType+'</td>'+
-                                    '<td><button onclick="cancelPosition('+positionsOpened[i].id+',this,'+positionsOpened[i].amount+')" class="btn btn-danger btn-sm">X</button></td>'+
-                                '</tr>'
-                            );  
-                        }  
-                    }
-                
-                    $("#positions_closed_container").append(
-                        '<tr class="'+statusClass+'">'+
-                            '<td class="">'+positionsClosed[i].riskPrice+'</td>'+
-                            '<td class="">'+positionsClosed[i].amount+'</td>'+
-                            '<td class="">'+closeTokenValue+'</td>'+
-                            '<td class="">'+(closeTokenValue-positionsClosed[i].riskPrice).toFixed(2)+'</td>'+
-                            '<td class="">'+status+' </td>'+
-                        '</tr>'
-                    );  
-
-                }
-            }
-
-            console.log("No logs")
-        }, 5000);
-    // continuous
-
-    // buy
-        $("#buy_short_btn").on("click", function(){
-            var amount = $("#amount_input_container").val();
-            var riskPrice = $("#risk_value_predicted_long").text();
-            var timeStamp = $("#risk_timestamp_predicted").text();
-            var availableAmount = float2DecimalPoints($("#available_amount_container").text().split(' ')[0])
-
-            if($("#risk_value_predicted_short").text()=="Please select risk option"||$("#amount_input_container").val()==""){
-                $.alert("Please Select Amount and Risks first");
+            if (parseFloat(earnings[0])>=1) {
+                console.log("HERE");
+                $("#todaysEarningLongShort").addClass("text-success").removeClass("text-danger").text("+"+parseFloat(earnings[0]).toFixed(2)+" USD");
             }else{
-                if(Date.parse(timeStamp)<=Date.parse(getTimeDateNonFormated())){
-                    $.alert("Please Change your predicted time.");
-                }else{
-                    if($("#amount_input_container").val()<=availableAmount){
-                        $.confirm({
-                            title: 'Buy Short?',
-                            content: 'Are you sure you want to proceed with these risks?',
-                            buttons: {
-                                confirm: function () {
-                                    var amount = $("#amount_input_container").val();
-                                    var riskPrice = $("#risk_value_predicted_long").text();
-                                    var timeStamp = $("#risk_timestamp_predicted").text();
-
-                                    var res = ajaxShortLink("userWallet/future/savePosition",{
-                                        'currentPrice':ethPriceBinanceLastPrice,
-                                        'positionType':'short',
-                                        'riskPrice':riskPrice,
-                                        'timeStamp':timeStamp,
-                                        'amount':amount,
-                                        'userID':currentUser.userID,
-                                        'status':'PENDING',
-                                        'tradePair':$("#token_pair_name_container").text(),
-                                    });
-
-                                    if($("#no_position_flag_container").length){
-                                        $("#positions_container").empty();
-
-                                        $("#positions_container").append(
-                                            '<tr>'+
-                                                '<td class="font-weight-bold">'+($('#positions_container tr').length+1)+'. </td>'+
-                                                '<td>'+riskPrice+' @'+timeStamp+'</td>'+
-                                                '<td>'+amount+'</td>'+
-                                                '<td>short</td>'+
-                                                '<td><button onclick="cancelPosition('+res+',this,'+amount+')" class="btn btn-danger btn-sm">X</button></td>'+
-                                            '</tr>'
-                                        );  
-                                    }else{
-                                        $("#positions_container").append(
-                                            '<tr>'+
-                                                '<td class="font-weight-bold">'+($('#positions_container tr').length+1)+'. </td>'+
-                                                '<td>'+riskPrice+' @'+timeStamp+'</td>'+
-                                                '<td>'+amount+'</td>'+
-                                                '<td>short</td>'+
-                                                '<td><button onclick="cancelPosition('+res+',this,'+amount+')" class="btn btn-danger btn-sm">X</button></td>'+
-                                            '</tr>'
-                                        );
-                                    }
-
-                                    minusToAmountAvailable(amount)
-
-                                    $.toast({
-                                        heading: '<h6>Success</h6>',
-                                        text: 'Position Opened',
-                                        showHideTransition: 'slide',
-                                        icon: 'success',
-                                        position: 'bottom-center'
-                                    })
-                                    
-                                    console.log(res);
-                                },
-                                cancel: function () {
-
-                                },
-                            }
-                        });
-                    }else{
-                        $.alert("USDT Balance is not enough");
-                    }
-                }
-               
+                $("#todaysEarningLongShort").addClass("text-danger").removeClass("text-success").text(parseFloat(earnings[0]).toFixed(2)+" USD");
             }
-        });
 
-        $("#buy_long_btn").on("click", function(){
-            var amount = $("#amount_input_container").val();
-            var riskPrice = $("#risk_value_predicted_long").text();
-            var timeStamp = $("#risk_timestamp_predicted").text();
-            var availableAmount = float2DecimalPoints($("#available_amount_container").text().split(' ')[0])
-
-            if($("#risk_value_predicted_short").text()=="Please select risk option"||$("#amount_input_container").val()==""){
-                $.alert("Please Select Amount and Risks first");
+            if (parseFloat(earnings[1])>=1) {
+                $("#allTimeEarningsLongShort").addClass("text-success").removeClass("text-danger").text("+"+parseFloat(earnings[1]).toFixed(2)+" USD");
             }else{
-                if(Date.parse(timeStamp)<=Date.parse(getTimeDateNonFormated())){
-                    $.alert("Please Change your predicted time.");
-                }else{
-                    if($("#amount_input_container").val()<=availableAmount){
-                        $.confirm({
-                            title: 'Buy Long?',
-                            content: 'Are you sure you want to proceed with these risks?',
-                            buttons: {
-                                confirm: function () {
-                                    var res = ajaxShortLink("userWallet/future/savePosition",{
-                                        'currentPrice':ethPriceBinanceLastPrice,
-                                        'positionType':'long',
-                                        'riskPrice':riskPrice,
-                                        'timeStamp':timeStamp,
-                                        'amount':amount,
-                                        'userID':currentUser.userID,
-                                        'status':'PENDING',
-                                        'tradePair':$("#token_pair_name_container").text(),
-                                    });
-
-                                    if($("#no_position_flag_container").length){
-                                        $("#positions_container").empty();
-
-                                        $("#positions_container").append(
-                                            '<tr>'+
-                                                '<td class="font-weight-bold">'+($('#positions_container tr').length+1)+'. </td>'+
-                                                '<td>'+riskPrice+' @'+timeStamp+'</td>'+
-                                                '<td>'+amount+'</td>'+
-                                                '<td>long</td>'+
-                                                '<td><button onclick="cancelPosition('+res+',this,'+amount+')" class="btn btn-danger btn-sm">X</button></td>'+
-                                            '</tr>'
-                                        );  
-                                    }else{
-                                        $("#positions_container").append(
-                                            '<tr>'+
-                                                '<td class="font-weight-bold">'+($('#positions_container tr').length+1)+'. </td>'+
-                                                '<td>'+riskPrice+' @'+timeStamp+'</td>'+
-                                                '<td>'+amount+'</td>'+
-                                                '<td>long</td>'+
-                                                '<td><button onclick="cancelPosition('+res+',this,'+amount+')" class="btn btn-danger btn-sm">X</button></td>'+
-                                            '</tr>'
-                                        );  
-                                    }
-
-                                    minusToAmountAvailable(amount)
-
-                                    $.toast({
-                                        heading: '<h6>Success</h6>',
-                                        text: 'Position Opened',
-                                        showHideTransition: 'slide',
-                                        icon: 'success',
-                                        position: 'bottom-center'
-                                    })
-
-                                    console.log(res);
-                                },
-                                cancel: function () {
-
-                                },
-                            }
-                        });
-                    }else{
-                        $.alert("USDT Balance is not enough");
-                    }
-                }  
+                $("#allTimeEarningsLongShort").addClass("text-danger").removeClass("text-success").text(parseFloat(earnings[1]).toFixed(2)+" USD");
             }
-        });
-    // buy
-
-    $("#customRisk_btn").on("click", function(){
-        bootbox.alert({
-            message: ajaxLoadPage('quickLoadPage',{'pagename':'wallet/future/customRisk'}),
-            size: 'large',
-            centerVertical: true,
-            closeButton: false
-        });
-    });
-
-    $('input[name="risk_option_radio"]').change(function(){
-        var riskTaken = $(this).val();
-
-        if(riskTaken=="1Min"){
-            var ethPriceBinance = parseFloat(ethPriceBinanceLastPrice);
-            var risk_timestamp_predicted = addMinutes(getTimeDateNonFormated(), 1);
-
-            $("#risk_value_predicted_long").text(parseFloat(ethPriceBinance+(ethPriceBinance*0.05)).toFixed(2));
-            $("#risk_value_predicted_short").text(parseFloat(ethPriceBinance-(ethPriceBinance*0.05)).toFixed(2));
-            $("#risk_timestamp_predicted").text(formatDateObject(risk_timestamp_predicted).replace(/,/g, ''));
-        }else if(riskTaken=="3Min"){
-            var ethPriceBinance = parseFloat(ethPriceBinanceLastPrice);
-            var risk_timestamp_predicted = addMinutes(getTimeDateNonFormated(), 3);
-
-            $("#risk_value_predicted_long").text(parseFloat(ethPriceBinance+(ethPriceBinance*0.10)).toFixed(2));
-            $("#risk_value_predicted_short").text(parseFloat(ethPriceBinance-(ethPriceBinance*0.10)).toFixed(2));
-            $("#risk_timestamp_predicted").text(formatDateObject(risk_timestamp_predicted).replace(/,/g, ''));
-        }else if(riskTaken=="5Min"){
-            var ethPriceBinance = parseFloat(ethPriceBinanceLastPrice);
-            var risk_timestamp_predicted = addMinutes(getTimeDateNonFormated(), 5);
-
-            $("#risk_value_predicted_long").text(parseFloat(ethPriceBinance+(ethPriceBinance*0.15)).toFixed(2));
-            $("#risk_value_predicted_short").text(parseFloat(ethPriceBinance-(ethPriceBinance*0.15)).toFixed(2));
-            $("#risk_timestamp_predicted").text(formatDateObject(risk_timestamp_predicted).replace(/,/g, ''));
-        }
-    });
-
-    function cancelPosition(id,element,amount){
-        var res = ajaxPostLink('userWallet/future/cancelPosition',{
-            'id':id
-        });
-
-        addToAmountAvailable(amount)
-
-        $(element).parent('td').parent('tr').remove();
-
-        if ($("#positions_container tr").length == 0) {
-            $("#positions_container").append(
-                '<tr class="text-center text-danger" id="no_position_flag_container">'+
-                   '<td colspan="5"><b>No positions opened</b></td>'+
-                '</tr>'
-            ); 
-        }
-
-        $.toast({
-            heading: '<h6>Success</h6>',
-            text: 'Canceled Position',
-            showHideTransition: 'slide',
-            icon: 'success',
-            position: 'bottom-center'
-        })
+        // closed
     }
 
-    function minusToAmountAvailable(amountToMinus){
-        balanceUsdtInner = float2DecimalPoints($("#available_amount_container").text().split(' ')[0])
-        amountToMinus = float2DecimalPoints(amountToMinus)
-        console.log(typeof balanceUsdtInner, balanceUsdtInner);
-        console.log(typeof amountToMinus, amountToMinus);
+    function loadDatatable(url,data){
+        $('#tableContainer').DataTable().destroy();
 
-        var newAmountAvail = balanceUsdtInner-amountToMinus;
-
-        console.log(typeof newAmountAvail, newAmountAvail);
-
-        $("#available_amount_container").html(newAmountAvail+" USDT");
+        $('#tableContainer').DataTable({
+            data: data,
+            // "ordering": false,
+            "bLengthChange": false,
+            "bFilter": true,
+            columns: [
+                { data:'riskPrice'},
+                { data:'amount',},
+                { data:'riskPrice'},
+                { data:'resolvedPrice'},
+            ],
+            "columnDefs": [
+                // { "width": "50%", "targets": 0 },
+                // { "width": "5%", "targets": 2 },
+                // { "width": "5%", "targets": 3 },
+                // { "width": "5%", "targets": 1 },
+                // {"className": "text-center", "targets": 2}
+            ],
+            "autoWidth": true,
+            "order": [[ 0, "desc" ]],
+            "createdRow": function( row, data, dataIndex){
+                if (data['status'] == "WIN") {
+                    $(row)
+                    .addClass('bg-success');
+                }else if (data['status'] == "LOSE"){
+                    $(row).
+                    addClass('bg-danger');
+                }
+            },
+            // "sDom": '<"row view-filter"<"col-sm-12"<"pull-left"l><"pull-right"f><"clearfix">>>t<"row view-pager"<"col-sm-12"<"text-center"ip>>>'
+        });
     }
-
-    function addToAmountAvailable(amountToAdd){
-        balanceUsdtInner = float2DecimalPoints($("#available_amount_container").text().split(' ')[0])
-        amountToAdd = float2DecimalPoints(amountToAdd)
-        console.log(typeof balanceUsdtInner, balanceUsdtInner);
-        // console.log(typeof amountToMinus, amountToMinus);
-
-        var newAmountAvail = balanceUsdtInner+amountToAdd;
-
-        // console.log(typeof newAmountAvail, newAmountAvail);
-
-        $("#available_amount_container").html(newAmountAvail+" USDT");
-    }
-
-    
-    
-
-    
-
-    
 </script>

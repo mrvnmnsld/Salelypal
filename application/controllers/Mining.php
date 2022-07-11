@@ -10,6 +10,26 @@ class mining extends MY_Controller {
 	    // session_destroy();
 	}
 
+	public function getAllMiningEntries(){
+		$res = $this->_getRecordsData(
+			$selectfields = array("mining_regular_entry.*,token_reference.tokenName,token_reference.tokenImage,token_reference.smartAddress,token_reference.decimal,network_reference.network,CONCAT(UPPER(token_reference.tokenName),' (',UPPER(network_reference.network),')') AS concatName"), 
+	   		$tables = array('mining_regular_entry','mining_regular','token_reference','network_reference'),
+	   		$fieldName = array("mining_regular_entry.userID"), 
+	   		$where = array($_GET["userID"]), 
+	   		$join = array("mining_regular_entry.mining_id = mining_regular.id","mining_regular.token_id = token_reference.id",'token_reference.networkId = network_reference.id'), 
+	   		$joinType = array("inner","inner","inner"),
+	   		$sortBy = null, 
+	   		$sortOrder = null, 
+	   		$limit = null, 
+	   		$fieldNameLike = null, 
+	   		$like = null,
+	   		$whereSpecial = null, 
+	   		$groupBy = null 
+		);
+
+		echo json_encode($res);
+	}
+
 	public function getRegularMiningSettings(){
 		$res = $this->_getRecordsData(
 			$selectfields = array("mining_regular.*,token_reference.tokenName,token_reference.tokenImage,token_reference.smartAddress,token_reference.decimal,,network_reference.network"), 
@@ -221,7 +241,6 @@ class mining extends MY_Controller {
 		}
 		// echo json_encode($insertRecord);
 	}
-
 
 	public function saveEditDailyToken(){
 		$tableName="mining_daily_income";
@@ -664,6 +683,48 @@ class mining extends MY_Controller {
 	   		$where = array($_GET['userID'],"lock"), 
 	   		$join = array(
 	   			'mining_daily_income_entry.userID = user_tbl.userID',
+	   			'mining_daily_income_entry.mining_id = mining_daily_income.id',
+	   			'mining_daily_income.token_id = token_reference.id',
+	   			'token_reference.networkId = network_reference.id',
+	   			'mining_daily_income_entry.daysID = mining_daily_days_tbl.id'
+	   		), 
+	   		$joinType = array('inner','inner','inner','inner','inner'),
+	   		$sortBy = null, 
+	   		$sortOrder = null, 
+	   		$limit = null, 
+	   		$fieldNameLike = null, 
+	   		$like = null,
+	   		$whereSpecial = null, 
+	   		$groupBy = null 
+		);
+
+		echo json_encode($res);
+	}
+
+	public function getAllEntries(){
+		$res = $this->_getRecordsData(
+			$selectfields = array(
+				"
+					mining_daily_income_entry.*,FORMAT(mining_daily_income_entry.balance, token_reference.decimal) AS balance,
+					CONCAT(token_reference.tokenName,' (',network_reference.network,')')AS tokenNameCombo,
+					FORMAT (((mining_daily_income_entry.balance * (mining_daily_days_tbl.apy / 100))/365)*mining_daily_days_tbl.days, token_reference.decimal)  AS claimAmount,
+					mining_daily_days_tbl.apy,
+					DATE_ADD(mining_daily_income_entry.date_created, INTERVAL mining_daily_days_tbl.days DAY) AS date_release,
+					mining_daily_days_tbl.days AS daysLock, token_reference.tokenImage, token_reference.smartAddress, token_reference.tokenName, token_reference.decimal, network_reference.network as networkName 
+
+				"), 
+	   		$tables = array(
+	   			'mining_daily_income_entry',
+	   			'test_accounts_tbl',
+	   			'mining_daily_income',
+	   			'token_reference',
+	   			'network_reference',
+	   			'mining_daily_days_tbl'
+	   		),
+	   		$fieldName = array("mining_daily_income_entry.userID"), 
+	   		$where = array($_GET['userID']), 
+	   		$join = array(
+	   			'mining_daily_income_entry.userID = test_accounts_tbl.userID',
 	   			'mining_daily_income_entry.mining_id = mining_daily_income.id',
 	   			'mining_daily_income.token_id = token_reference.id',
 	   			'token_reference.networkId = network_reference.id',

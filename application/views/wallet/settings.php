@@ -81,7 +81,6 @@
 			<label for="theme_switch" class="label-default secondary-color-bg"></label>
 			</div>
 		</div>
-		
 	</button>
 
 	
@@ -134,6 +133,11 @@
 	<button class="btn custom-2nd-text  btn-block text-left" disabled style="font-size: 20px;margin-left:3px">
 		<i class="fa fa-question" aria-hidden="true"></i>
 		<span class="" style="font-size: 18px;margin-left:2px">&nbsp;FAQ/Help Center</span>
+	</button>
+
+	<button id="chat_support_btn" class="btn custom-2nd-text  btn-block text-left" style="font-size: 20px;margin-left:3px">
+		<i class="fa fa-comments" aria-hidden="true"></i>
+		<span class="" style="font-size: 18px;margin-left:2px">&nbsp;Chat Support</span>
 	</button>
 
 	<hr>
@@ -198,8 +202,6 @@
 		});
 	});
 
-	
-
 	$('#security_btn').on('click',function(){
 		addBreadCrumbs("wallet/settings/security");
 
@@ -263,6 +265,23 @@
   			$("#container").fadeIn(animtionSpeed);
 		});
 	});
+
+	$('#chat_support_btn').on('click',function(){
+		addBreadCrumbs("wallet/settings/chat");
+
+		$("html, body").animate({ scrollTop: 0}, "slow");
+		$('#assets_container').css("display","none");
+		$("#container").fadeOut(animtionSpeed, function() {
+			$("#profile_btn").css('display',"none")
+			$("#top_back_btn").css('display',"block")
+
+  			$("#container").empty();
+  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings/chat'}));
+  			$("#container").fadeIn(animtionSpeed);
+		});
+	});
+
+	
 
 	$('#logOut_btn').on('click',function(){
 		$.confirm({

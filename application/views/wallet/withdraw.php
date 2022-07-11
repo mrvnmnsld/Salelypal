@@ -56,8 +56,8 @@
 	  		<small class="font-weight-bold main-color-text" style="font-size:1rem;">Available Amount on wallet: <span id="availableAmountContainer"></span></small>
 
 			<div>
-				<span class="">Network:</span>
-				<span id="network_container" class="main-color-text font-weight-bold">TRON Mainet</span>
+				<span class="font-weight-bold">Network:</span>
+				<span id="network_container" class="main-color-text"></span>
 			</div>
 
 
@@ -190,7 +190,9 @@
 	// $("#availableAmountContainer").text(balance[$("#tokenContainerSelect").val().split("_")[0]]);
 
 	$("#closeBtn_transaction").on('click',function(){
-		backButton();
+		// backButton();
+		$("#successContainer").toggle();
+		$("#mainForm").toggle();
 	});
 
 	$("#tokenContainerSelect").on('change', function(){

@@ -197,6 +197,7 @@
     .main-color-text.checked_upload{
         color:green!important;
     }
+    
     /*kyc*/
 
     /*otp*/

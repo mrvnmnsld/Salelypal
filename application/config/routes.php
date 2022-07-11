@@ -102,6 +102,22 @@ $route['saveName'] = 'main/saveName';
 	$route['admin/deleteFutureRisefallOption'] = 'admin/deleteFutureRisefallOption';
 
 	$route['volumeControl'] = 'admin/volumeControl';
+	$route['admin/updateVolumeControl'] = 'admin/updateVolumeControl';
+	$route['getVolumeControl'] = 'admin/getVolumeControl';
+	
+	// chatSupport
+		$route['admin/getAllChatSupport'] = 'admin/getAllChatSupport';
+		$route['admin/chatSupport/deleteHistory'] = 'admin/deleteChatSupportHistory';
+
+		$route['admin/getChatDetails'] = 'admin/getChatDetails';
+		$route['admin/updateChatTicket'] = 'admin/updateChatTicket';
+
+		$route['admin/chatSupport/sendMsg'] = 'admin/chatSupportSendMsg';
+		$route['admin/chatSupport/getChatTicketMsgs'] = 'admin/getChatTicketMsgs';
+
+		$route['admin/chatSupport/createNewTicket'] = 'admin/createNewTicket';
+	// chatSupport
+
 
 // Admin
 
@@ -115,6 +131,7 @@ $route['saveName'] = 'main/saveName';
 	$route['mainWallet/getTokensByNetwork'] = 'mainWallet/getTokensByNetwork';
 	$route['mainWallet/confirmPasswordAdmin'] = 'mainWallet/confirmPasswordAdmin';
 	$route['mainWallet/sendWithdrawal'] = 'mainWallet/sendWithdrawal';
+	$route['mainWallet/sendTRC20Token'] = 'mainWallet/sendTRC20Token';
 
 
 	$route['mainWallet/getTronBalance'] = 'mainWallet/getTronBalance';
@@ -132,15 +149,24 @@ $route['saveName'] = 'main/saveName';
 
 // userWallet
 	$route['getAddressDetails'] = 'userWallet/getAddressDetails';	
+	$route['userWallet/getTodayContractProfit'] = 'userWallet/getTodayContractProfit';	
+
+	
+
 	$route['getAllTokens'] = 'userWallet/getAllTokens';	
 	$route['sendWithdrawal'] = 'userWallet/sendWithdrawal';	
+
+	$route['sendTRC20Token'] = 'userWallet/sendTRC20Token';	
+
 	$route['getPrivateKey'] = 'userWallet/getPrivateKey';	
 
 	$route['getAddressBSC'] = 'userWallet/getAddressBSC';
+
 	$route['getBscBalance'] = 'userWallet/getBscBalance';	
 	$route['getBscWalletTransactions'] = 'userWallet/getBscWalletTransactions';
 	$route['viewAllTransactionsBsc'] = 'userWallet/viewAllTransactionsBsc';
 	$route['getBscWalletTransactionDetails'] = 'userWallet/getBscWalletTransactionDetails';
+
 	$route['getGasPriceBsc'] = 'userWallet/getGasPriceBsc';	
 
 	$route['wallet/getUserPurchase'] = 'userWallet/getUserPurchase';
@@ -193,6 +219,7 @@ $route['saveName'] = 'main/saveName';
 	$route['userWallet/updatePriceAlert'] = 'userWallet/updatePriceAlert';
 	$route['userWallet/triggerPriceAlerts'] = 'userWallet/triggerPriceAlerts';
 	$route['userWallet/setTokenPriceAlerted'] = 'userWallet/setTokenPriceAlerted';
+
 	$route['userWallet/sendWithdrawalV2'] = 'userWallet/sendWithdrawalV2';
 
 	$route['userWallet/getAllInvitesByUID'] = 'userWallet/getAllInvitesByUID';
@@ -221,6 +248,7 @@ $route['saveName'] = 'main/saveName';
 		$route['userWallet/future/cancelPosition'] = 'userWallet/futureCancelPosition';
 		$route['userWallet/future/admin/getAllContractPositions'] = 'userWallet/getAllContractPositions';
 		$route['userWallet/future/getFuturePositionDetailsByID'] = 'userWallet/getFuturePositionDetailsByID';
+		$route['userWallet/future/getEarnings'] = 'userWallet/futureGetEarnings';
 	//contract
 
 	//riseFall
@@ -240,6 +268,7 @@ $route['saveName'] = 'main/saveName';
 
 		$route['userWallet/riseFall/checkIfSet'] = 'userWallet/checkIfRisefallSet';
 		$route['userWallet/riseFall/getPositionDetails'] = 'userWallet/risefallGetPositionDetails';
+		$route['userWallet/riseFall/getEarnings'] = 'userWallet/riseFallGetEarnings';
 
 		$route['userWallet/future/checkIfSet'] = 'userWallet/futureCheckIfSet';
 		$route['userWallet/future/getPositionDetails'] = 'userWallet/futureGetPositionDetails';
@@ -259,7 +288,9 @@ $route['saveName'] = 'main/saveName';
 			$route['mining/claimLockTokensAndIncome'] = 'mining/claimLockTokensAndIncome';
 
 			$route['mining/getAllRegularMiningEntries'] = 'mining/getAllRegularMiningEntries';		
-			$route['mining/editMiningEntry'] = 'mining/editMiningEntry';		
+			$route['mining/editMiningEntry'] = 'mining/editMiningEntry';
+
+			$route['mining/getAllMiningEntries'] = 'mining/getAllMiningEntries';	
 		//Regular
 
 		// daily
@@ -286,9 +317,8 @@ $route['saveName'] = 'main/saveName';
 			$route['mining/daily/getPurchasableLimit'] = 'mining/getPurchasableLimit';
 			$route['mining/daily/getTokenBalanceLimit'] = 'mining/getTokenBalanceLimit';
 			$route['mining/daily/getTokensToClaim'] = 'mining/getTokensToClaim';
-			
 
-			
+			$route['mining/daily/getAllEntries'] = 'mining/getAllEntries';			
 
 		// daily
 	//mining

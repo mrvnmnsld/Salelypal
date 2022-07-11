@@ -291,6 +291,7 @@ class mainWallet extends MY_Controller {
 		}
 
 		echo json_encode($resultDecoded);
+		// echo json_encode($_POST);
 		// var_dump($resultDecoded);
 	}
 
@@ -574,5 +575,36 @@ class mainWallet extends MY_Controller {
 
 		echo json_encode($selectedTokens);
 	}
+
+	public function sendTRC20Token(){
+		$apikey = "4h7896o0ujoskkwk84wo0848wo0o0w4wg8sw84wwcs80kwcg4kc8ogwg44s4ocw8";
+
+		$privatekey = '283f71cfa9e4a008a4f618e9447e07c4c3c2a54f1230daaa4147e439001d438c';
+		$from = 'TCyRBGnjMSLsPos5RJxVfC7fjcWk1vaUqS';
+
+		$ch = curl_init("https://eu.trx.chaingateway.io/v1/sendTRC20");
+
+		$payload = json_encode(
+			array(
+				"contractaddress" => $_GET["contractaddress"],
+				"from" => $from,
+				"to" => $_GET["to"],
+				"privatekey" => $privatekey,
+				"amount" => $_GET["amount"],
+			) 
+		);
+
+		curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
+		curl_setopt( $ch, CURLOPT_HTTPHEADER, array("Content-Type:application/json", "Authorization: " . $apikey));
+
+		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+
+		$result = curl_exec($ch);
+		curl_close($ch);
+		echo $result;
+	}
+
+
+	
 
 }

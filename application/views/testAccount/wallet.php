@@ -139,7 +139,8 @@
     	    	display: none !important;
     	    }
         /*google translate*/
-	@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap%27');
+
+		@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap%27');
 
 		/* Mainstyle */
 			body{
@@ -1282,7 +1283,7 @@
 				if (typeof tokenPriceInterval  != 'undefined') {
 					clearInterval(tokenPriceInterval);
 				}
-				addBreadCrumbs("wallet/test-platform/future")
+				addBreadCrumbs("wallet/future")
 
 				$("html, body").animate({ scrollTop: 0 }, "slow");
 				$('#assets_container').css("display","none");
