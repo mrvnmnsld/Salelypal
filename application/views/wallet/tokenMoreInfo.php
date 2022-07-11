@@ -1,10 +1,3 @@
-
-
-<button class="btn text-primary" onclick="backPage()">
-	<i class="fa fa-chevron-circle-left" aria-hidden="true"></i>
-	Back
-</button>
-
 <div class="p-2">
 	<div id="widget_container"></div>
 </div>

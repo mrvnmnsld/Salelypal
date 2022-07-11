@@ -16,40 +16,39 @@
 				<span class="h5">
 					<img src="" id="token_image_container">
 				</span> <br>
-				<span class="h5" id="token_name_container">TOKENNAME</span> <br>
-				<span id="token_amount_container">Loading...</span>
+				<span class="h5 text-muted" id="token_name_container">TOKENNAME</span> <br>
+				<span id="token_amount_container" class="font-weight-normal main-color-text">Loading...</span>
 			</div>	
 		</div>
 	</div>
 
 	<div id="btn_option_container" class="d-flex justify-content-center mt-1">
 		<button id="deposit_btn_option_token_info" class="btn" style="background-color:transparent">
-			<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(0, 0, 0, 50%);padding: 5px;">
-				<i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
+			<div class="btn main-color-icon btn-md" style="font-size:2em;padding:1px;">
+				<i class="fa fa-arrow-circle-down fa-lg main-color-text" aria-hidden="true"></i>
 			</div>
-			<div style="font-size:.8em">Deposit</div>
+			<div style="font-size:.8em" ><b class="main-color-text">Deposit</b></div>
 		</button>
 
 		<button id="withdraw_btn_option_token_info" class="btn" style="background-color:transparent">
-			<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(0, 0, 0, 50%);padding: 5px;">
-				<i class="fa fa-arrow-circle-o-up" aria-hidden="true"></i>
+			<div class="btn main-color-icon btn-md" style="font-size:2em;padding:1px;">
+				<i class="fa fa-arrow-circle-up fa-lg main-color-text" aria-hidden="true"></i>
 			</div>
-			<div style="font-size:.8em">Withdraw</div>
+			<div style="font-size:.8em" ><b class="main-color-text">Withdraw</b></div>
 		</button>
 
-
 		<button id="buy_btn_option_token_info" class="btn" style="background-color:transparent">
-			<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(0, 0, 0, 50%);padding: 5px;">
-				<i class="fa fa-usd" aria-hidden="true"></i>
+			<div class="btn main-color-icon btn-md" style="font-size:2em;padding:1px;">
+				<i class="fa fa-credit-card-alt fa-md main-color-text" aria-hidden="true"></i>
 			</div>
-			<div style="font-size:.8em">Purchase</div>
+			<div style="font-size:.8em;" ><b class="main-color-text">Buy</b></div>
 		</button>
 
 		<button id="info_btn_option_token_info" class="btn" style="background-color:transparent">
-			<div class="btn btn-secondary btn-circle btn-md" style="font-size:1.5em;background-color: rgb(0, 0, 0, 50%);padding: 5px;">
-				<i class="fa fa-info" aria-hidden="true"></i>
+			<div class="btn main-color-icon btn-md" style="font-size:2em;padding:1px;">
+				<i class="fa fa-info-circle fa-lg main-color-text" aria-hidden="true"></i>
 			</div>
-			<div style="font-size:.8em">More Info</div>
+			<div style="font-size:.8em;" ><b class="main-color-text">Information</b></div>
 		</button>
 	</div>
 </div>
@@ -71,7 +70,7 @@
 
 
 	<div id="table_container" style="display:none">
-		<table class="table table-sm table-borderless text-center" >
+		<table class="table table-sm table-borderless main-color-text text-center" >
 		  <thead>
 		    <tr>
 		      <th scope="col">Token</th>
@@ -91,9 +90,6 @@
 	</div>
 	
 </div>
-
-
-
 
 <script type="text/javascript">
 
@@ -149,7 +145,7 @@
 
 	// transaction load
 
-		setTimeout(function(){
+		var loadTransactionTimeOut = setTimeout(function(){
 			var allTransactionArray = [];
 			var bscTransactions = ajaxPostLink('getBscWalletTransactions',{
 				'userAddress':currentUser['bsc_wallet']
@@ -342,123 +338,92 @@
 	// transaction load
 
 	$("#buy_btn_option_token_info").on('click',function(){
-		// $("#tittle_container").text('Buy Crypto');
-		console.log("test");
-		$.when(closeNav()).then(function() {
-			$('#topNavBar').toggle();
-	  		$("#container").fadeOut(animtionSpeed, function() {
-			  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
-		  			$("#container").empty();
-		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/buyCrypto'}));
+		clearTimeout(loadTransactionTimeOut);
+		addBreadCrumbs("wallet/buyCrypto");
 
-			  		$("#loadSpinner").fadeOut(animtionSpeed,function(){
-			  			$('#topNavBar').toggle();
-			  			$("#container").fadeIn(animtionSpeed);
-			  			$("#token_select").val(clickContainer.tokenName+"_"+clickContainer.networkName+"_"+clickContainer.smartAddress+"_"+clickContainer.coingeckoTokenId).change();
-			  		});
-		    	});
-		  	});
+		$("html, body").animate({ scrollTop: 0 }, "slow");
+		$('#assets_container').css("display","none");
+		$("#container").fadeOut(animtionSpeed, function() {
+			$("#profile_btn").css('display',"none")
+			$("#top_back_btn").css('display',"block")
+
+  			$("#container").empty();
+  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/buyCrypto'}));
+  			$("#container").fadeIn(animtionSpeed);
+  			// $("#token_select").val(clickContainer.tokenName+"_"+clickContainer.networkName+"_"+clickContainer.smartAddress+"_"+clickContainer.coingeckoTokenId).change();
 		});
 	});
 
 	$("#withdraw_btn_option_token_info").on('click',function(){
+		clearTimeout(loadTransactionTimeOut);
+
 		var res = ajaxPostLink(
 			"userWallet/getCurrentUserStrictStatus",{
 			'userID':currentUser.userID
 		});
 
 		if(res==1){
-			// $.alert({
-			//     icon: 'fa fa-warning',
-			//     title: 'Strict Mode',
-			//     // content: "We've flagged your wallet to strict mode. Please wait while our admins review your wallet history for your assets safety",
-			//     content: "We've flagged your wallet to strict mode. <br><br> All your withdrawals will be pending until all our admin approve your transactions",
-			//     type: 'red',
-			// });
+ 			addBreadCrumbs("wallet/withdrawStrict");
 
-			clearTimeout(tokenLoadTimer);
-			$("#tittle_container").text('Withdraw');
+ 			$("html, body").animate({ scrollTop: 0 }, "slow");
+ 			$('#assets_container').css("display","none");
+ 			$("#container").fadeOut(animtionSpeed, function() {
+ 				$("#profile_btn").css('display',"none")
+ 				$("#top_back_btn").css('display',"block")
 
-	     	$.when(closeNav()).then(function() {
-	     		$('#topNavBar').toggle();
-	       		$("#container").fadeOut(animtionSpeed, function() {
-	     		  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
-	     	  			$("#container").empty();
-	     	  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/withdrawStrict'}));
-
-	     		  		$("#loadSpinner").fadeOut(animtionSpeed,function(){
-	     		  			$('#topNavBar').toggle();
-	     		  			$("#container").fadeIn(animtionSpeed);
-	     		  		});
-	     	    	});
-	     	  	});
-	     	});
+ 	  			$("#container").empty();
+ 	  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/withdrawStrict'}));
+ 	  			$("#container").fadeIn(animtionSpeed);
+ 			});
 		}else{
-			clearTimeout(tokenLoadTimer);
-			$("#tittle_container").text('Withdraw');
+			addBreadCrumbs("wallet/withdraw");
 
-	     	$.when(closeNav()).then(function() {
-	     		$('#topNavBar').toggle();
-	       		$("#container").fadeOut(animtionSpeed, function() {
-	     		  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
-	     	  			$("#container").empty();
-	     	  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/withdraw'}));
+			$("html, body").animate({ scrollTop: 0 }, "slow");
+			$('#assets_container').css("display","none");
+			$("#container").fadeOut(animtionSpeed, function() {
+				$("#profile_btn").css('display',"none")
+				$("#top_back_btn").css('display',"block")
 
-	     		  		$("#loadSpinner").fadeOut(animtionSpeed,function(){
-	     		  			$('#topNavBar').toggle();
-	     		  			$("#container").fadeIn(animtionSpeed);
-							$("#tokenContainerSelect").val(clickContainer.tokenName+"_"+clickContainer.networkName+"_"+clickContainer.smartAddress).change();
-
-	     		  		});
-	     	    	});
-	     	  	});
-	     	});
+	  			$("#container").empty();
+	  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/withdraw'}));
+	  			$("#container").fadeIn(animtionSpeed);
+	  			// $("#tokenContainerSelect").val(clickContainer.tokenName+"_"+clickContainer.networkName+"_"+clickContainer.smartAddress).change();
+			});
 		}
 	});
 
 	$("#deposit_btn_option_token_info").on('click',function(){
-		clearTimeout(tokenLoadTimer);
-		//trackPages();
-		$("#tittle_container").text('Deposit');
+		clearTimeout(loadTransactionTimeOut);
 
-    	$.when(closeNav()).then(function() {
-    		$('#topNavBar').toggle();
-      		$("#container").fadeOut(animtionSpeed, function() {
-    		  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
-    	  			$("#container").empty();
-    	  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/deposit'}));
+		addBreadCrumbs("wallet/deposit");
 
-    		  		$("#loadSpinner").fadeOut(animtionSpeed,function(){
-    		  			$('#topNavBar').toggle();
-    		  			$("#container").fadeIn(animtionSpeed);
-    		  			$("#tokenSelection").val(clickContainer.networkName).change();
-    		  		});
-    	    	});
-    	  	});
-    	});
+		$("html, body").animate({ scrollTop: 0 }, "slow");
+		$('#assets_container').css("display","none");
+		$("#container").fadeOut(animtionSpeed, function() {
+			$("#profile_btn").css('display',"none")
+			$("#top_back_btn").css('display',"block")
+
+  			$("#container").empty();
+  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/deposit'}));
+  			$("#container").fadeIn(animtionSpeed);
+		});
 	});
 
 	$("#info_btn_option_token_info").on('click',function(){
-		clearTimeout(tokenLoadTimer);
+		clearTimeout(loadTransactionTimeOut);
+		
+		addBreadCrumbs("wallet/tokenMoreInfo");
 
-    	$.when(closeNav()).then(function() {
-    		$('#topNavBar').toggle();
-      		$("#container").fadeOut(animtionSpeed, function() {
-    		  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
-    	  			$("#container").empty();
-    	  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/tokenMoreInfo'}));
+		$("html, body").animate({ scrollTop: 0 }, "slow");
+		$('#assets_container').css("display","none");
+		$("#container").fadeOut(animtionSpeed, function() {
+			$("#profile_btn").css('display',"none")
+			$("#top_back_btn").css('display',"block")
 
-    	  			setTimeout(function(){
-    	  				$("#loadSpinner").fadeOut(animtionSpeed,function(){
-    	  					$('#topNavBar').toggle();
-    	  					$("#container").fadeIn(animtionSpeed);
-    	  				});
-    	  			},1000);
-
-    		  		
-    	    	});
-    	  	});
-    	});
+  			$("#container").empty();
+  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/tokenMoreInfo'}));
+  			$("#container").fadeIn(animtionSpeed);
+		});
 	});
 
 	// deposit_btn_option_token_info

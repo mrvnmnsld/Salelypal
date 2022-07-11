@@ -36,7 +36,7 @@
 			<input type="number" name="balance_container" id="balance_container" class="col-md form-control form-control-sm" placeholder=""></input>
 		</div>
 
-		<!-- <div class="row m-1">
+		<div class="row m-1">
 			<div class="col-md-3 pl-3"><b>Set Claimable:</b></div>	
 			<div class="col-md mt-1">
 				<div class="form-check-inline">
@@ -50,7 +50,7 @@
 				  </label>
 				</div>
 			</div>
-		</div> -->
+		</div>
 		<hr>
 
 		<div class="d-flex flex-row-reverse">

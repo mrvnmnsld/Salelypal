@@ -486,7 +486,7 @@ class mining extends MY_Controller {
 
 		$insertRecord = array(
 			'balance' => $_GET["balance_container"],
-			// 'isClaimableAdmin' => $_GET["setClaim_radio"],
+			'isClaimableAdmin' => $_GET["setClaim_radio"],
 		);
 
 		$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);

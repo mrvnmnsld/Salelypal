@@ -65,9 +65,18 @@
 
 	for (var i = 0; i < allPermissions.length; i++) {
 		if (allGrantedPermissions.includes(allPermissions[i].privilegesID)) {
-			$("#permissionContainer").append('<option selected value="'+allPermissions[i]['privilegesID']+'">'+allPermissions[i]['type']+' | '+allPermissions[i]['desc']+' | '+allPermissions[i]['descCode']+' | '+allPermissions[i]['typeParent']+'</option>');
+			if (allPermissions[i].type=="SYS") {
+				$("#permissionContainer").append('<option selected style="font-weight:bold" value="'+allPermissions[i]['privilegesID']+'">'+allPermissions[i]['desc']+'</option>');
+			}else{
+				$("#permissionContainer").append('<option selected style="padding-left:30px" value="'+allPermissions[i]['privilegesID']+'">'+allPermissions[i]['desc']+'</option>');
+			}
 		}else{
-			$("#permissionContainer").append('<option value="'+allPermissions[i]['privilegesID']+'">'+allPermissions[i]['type']+' | '+allPermissions[i]['desc']+'</option>');
+			if (allPermissions[i].type=="SYS") {
+				$("#permissionContainer").append('<option style="font-weight:bold" value="'+allPermissions[i]['privilegesID']+'">'+allPermissions[i]['desc']+'</option>');
+			}else{
+				$("#permissionContainer").append('<option style="padding-left:30px" value="'+allPermissions[i]['privilegesID']+'">'+allPermissions[i]['desc']+'</option>');
+			}
+
 		}
 	}
 

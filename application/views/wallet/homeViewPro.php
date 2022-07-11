@@ -1014,6 +1014,14 @@
 			// visible
 
 			$('#deposit_btn, #deposit_btn_option').on('click',function(){
+				if (typeof tokenPriceInterval  != 'undefined') {
+					clearInterval(tokenPriceInterval);
+				}
+
+				if (typeof loadTransactionTimeOut  != 'undefined') {
+					clearInterval(loadTransactionTimeOut);
+				}
+
 				addBreadCrumbs("wallet/deposit");
 
 				$("html, body").animate({ scrollTop: 0 }, "slow");
@@ -1029,6 +1037,14 @@
 			});
 
 			$('#withdraw_btn, #withdraw_btn_option').on('click',function(){
+				if (typeof tokenPriceInterval  != 'undefined') {
+					clearInterval(tokenPriceInterval);
+				}
+
+				if (typeof loadTransactionTimeOut  != 'undefined') {
+					clearInterval(loadTransactionTimeOut);
+				}
+
 				addBreadCrumbs("wallet/withdraw");
 
 				$("html, body").animate({ scrollTop: 0 }, "slow");
@@ -1044,6 +1060,15 @@
 			});
 
 			$('#buyCrypto_btn, #buy_btn_option').on('click',function(){
+				if (typeof tokenPriceInterval  != 'undefined') {
+					clearInterval(tokenPriceInterval);
+				}
+
+				if (typeof loadTransactionTimeOut  != 'undefined') {
+					clearInterval(loadTransactionTimeOut);
+				}
+
+
 				addBreadCrumbs("wallet/buyCrypto");
 
 				$("html, body").animate({ scrollTop: 0 }, "slow");
@@ -1062,6 +1087,11 @@
 				if (typeof tokenPriceInterval  != 'undefined') {
 					clearInterval(tokenPriceInterval);
 				}
+
+				if (typeof loadTransactionTimeOut  != 'undefined') {
+					clearInterval(loadTransactionTimeOut);
+				}
+
 
 				tokenNames = [];
 				tokenBalance = [];
@@ -1290,6 +1320,11 @@
 				if (typeof tokenPriceInterval  != 'undefined') {
 					clearInterval(tokenPriceInterval);
 				}
+
+				if (typeof loadTransactionTimeOut  != 'undefined') {
+					clearInterval(loadTransactionTimeOut);
+				}
+
 				console.log($('#assets_container').css("display"));
 				if ($('#assets_container').css("display") == 'none') {
 					addBreadCrumbs("assets_container")
@@ -1323,6 +1358,10 @@
 					clearInterval(tokenPriceInterval);
 				}
 
+				if (typeof loadTransactionTimeOut  != 'undefined') {
+					clearInterval(loadTransactionTimeOut);
+				}
+
 				addBreadCrumbs("wallet/addToken")
 				$("html, body").animate({ scrollTop: 0 }, "slow");
 				$('#assets_container').css("display","none");
@@ -1339,6 +1378,10 @@
 			$('#profile_btn').on('click',function(){
 				if (typeof tokenPriceInterval  != 'undefined') {
 					clearInterval(tokenPriceInterval);
+				}
+
+				if (typeof loadTransactionTimeOut  != 'undefined') {
+					clearInterval(loadTransactionTimeOut);
 				}
 
 				addBreadCrumbs("wallet/test-platform/user_profile/profile");
@@ -1358,6 +1401,10 @@
 			$('#notif_btn').on('click',function(){
 				if (typeof tokenPriceInterval  != 'undefined') {
 					clearInterval(tokenPriceInterval);
+				}
+
+				if (typeof loadTransactionTimeOut  != 'undefined') {
+					clearInterval(loadTransactionTimeOut);
 				}
 
 				addBreadCrumbs("wallet/notificationCenter");
@@ -1385,6 +1432,10 @@
 					clearInterval(tokenPriceInterval);
 				}
 
+				if (typeof loadTransactionTimeOut  != 'undefined') {
+					clearInterval(loadTransactionTimeOut);
+				}
+
 				addBreadCrumbs("wallet/settings");
 
 				$("html, body").animate({ scrollTop: 0 }, "slow");
@@ -1405,6 +1456,10 @@
 					clearInterval(tokenPriceInterval);
 				}
 
+				if (typeof loadTransactionTimeOut  != 'undefined') {
+					clearInterval(loadTransactionTimeOut);
+				}
+
 				addBreadCrumbs("wallet/test-platform/discover");
 
 				$("html, body").animate({ scrollTop: 0 }, "slow");
@@ -1423,6 +1478,11 @@
 				if (typeof tokenPriceInterval  != 'undefined') {
 					clearInterval(tokenPriceInterval);
 				}
+
+				if (typeof loadTransactionTimeOut  != 'undefined') {
+					clearInterval(loadTransactionTimeOut);
+				}
+
 				addBreadCrumbs("wallet/riseFall")
 
 				$("html, body").animate({ scrollTop: 0 }, "slow");
@@ -1441,6 +1501,11 @@
 				if (typeof tokenPriceInterval  != 'undefined') {
 					clearInterval(tokenPriceInterval);
 				}
+
+				if (typeof loadTransactionTimeOut  != 'undefined') {
+					clearInterval(loadTransactionTimeOut);
+				}
+
 				addBreadCrumbs("wallet/future")
 
 				$("html, body").animate({ scrollTop: 0 }, "slow");
@@ -1459,6 +1524,11 @@
 				if (typeof tokenPriceInterval  != 'undefined') {
 					clearInterval(tokenPriceInterval);
 				}
+
+				if (typeof loadTransactionTimeOut  != 'undefined') {
+					clearInterval(loadTransactionTimeOut);
+				}
+
 				addBreadCrumbs("wallet/regular_mining");
 				
 				$("html, body").animate({ scrollTop: 0 }, "slow");
@@ -1476,6 +1546,10 @@
 			$('#daily_mining_btn').on('click',function(){
 				if (typeof tokenPriceInterval  != 'undefined') {
 					clearInterval(tokenPriceInterval);
+				}
+
+				if (typeof loadTransactionTimeOut  != 'undefined') {
+					clearInterval(loadTransactionTimeOut);
 				}
 
 				addBreadCrumbs("wallet/dailyMining");
@@ -1637,6 +1711,14 @@
 				// loadTokenInfo(tokensSelected[i].tokenName,tokensSelected[i].coingeckoTokenId)
 
 				$('#'+tokensSelected[i].id+'_container').on('click',function(){
+						if (typeof tokenPriceInterval  != 'undefined') {
+							clearInterval(tokenPriceInterval);
+						}
+
+						if (typeof loadTransactionTimeOut  != 'undefined') {
+							clearInterval(loadTransactionTimeOut);
+						}
+
 						addBreadCrumbs("wallet/viewTokenInfo");
 
 						$("#loading_text_container").text("Please wait while we load your recent activities");
@@ -1693,6 +1775,10 @@
 
 			if (typeof updateChatHistoryInterval  != 'undefined') {
 				clearInterval(updateChatHistoryInterval);
+			}
+
+			if (typeof loadTransactionTimeOut  != 'undefined') {
+				clearInterval(loadTransactionTimeOut);
 			}
 
 			if (breadCrumbs[breadCrumbs.length-1].includes("dailyMining") && $("#daily_mining_token_containers").css('display')!='none') {
