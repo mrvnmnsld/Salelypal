@@ -40,6 +40,12 @@
         #emailDiv:hover #tooltipemail {
             visibility: visible;
         }
+        .not-verified{
+            color:red!important;
+        }
+        .verified{
+            color:#23923d!important;
+        }
 </style>
 
 <link href="https://fonts.googleapis.com/css?family=Oswald" rel=“stylesheet”>
@@ -58,6 +64,7 @@
     <div id="profile_details_container" class="text-center my-3">
         <div id="name_email_div">
             <h1 id="fullname" class="display-4">Wallet Holder</h1>
+            <h6 id="isVerified" class="text-muted isVerified">test</h6>
         </div>
         <div class="p-4">
             <h6>Information</h6>
@@ -100,10 +107,26 @@
     var mobileNumber = profiledetails[0].mobileNumber;
     var birthday = profiledetails[0].birthday;
     var profilePic = profiledetails[0].profile_pic;
+    var verifiedBoolean = profiledetails[0].verified;
+    var verified;
 
     if (profilePic != null) {
 		$('#profilePic').attr('src','assets/imgs/profile_pic/'+profilePic);
 	}
+
+    if(verifiedBoolean==2){
+        verified = 'rejected, please re-submit KYC'
+        $('#isVerified').addClass('not-verified')
+        $('#isVerified').removeClass('verified')
+    }else if(verifiedBoolean==0){
+        verified = 'unverified user'
+        $('#isVerified').removeClass('not-verified')
+        $('#isVerified').removeClass('verified')
+    }else{
+        verified = 'verified user'
+        $('#isVerified').removeClass('not-verified')
+        $('#isVerified').addClass('verified')
+    }
 
     $('#fullname').text(fullName);
     $('#userID').text(userID);
@@ -111,6 +134,8 @@
     $('#mobileNumber').text(mobileNumber);
     $('#birthday').text(birthday);
     $('#tooltipemail').text(email);
+    $('#isVerified').text(verified);
+    
 
     $("#edit_profile_btn").on('click',function(){
 

@@ -281,6 +281,18 @@
 			.dropdown-menu[x-placement^=top]{
 				max-width: 20rem!important;
 			}
+
+			:root{
+				--main-color-light:#5426de!important;
+				--main-color-dark:white!important;
+			}
+
+			.light-mode .nav-link.tab-pane.fade.show.active:before {
+				border-bottom: .2rem solid #5426de;
+			}
+			.dark-mode .nav-link.tab-pane.fade.show.active:before {
+				border-bottom: .2rem solid var(--main-color-dark);
+			}
 	</style>
 <!-- css -->
 <body style="min-height: 130%;" class="light-mode">
@@ -365,10 +377,18 @@
 
 					border-color: transparent;
 					background-color:transparent;
-					/* LIGHTMODE_ */
-					/* color: #3a189f!important;  */
-					/* DARKMODE_ */
-					/* color: white !important;  */
+
+					padding-bottom: 5px;
+ 					position: relative;
+				}
+
+				.nav-link.tab-pane.fade.show.active:before{
+					content: "";
+					position: absolute;
+					width: 50%;
+					height: 1px;
+					bottom: 0;
+					left: 25%;
 				}
 
 			</style>
@@ -502,21 +522,21 @@
 		</style>
 
 		<!-- bottomnavbar -->
-		<ul id="bottomNavBar" style="display:none;" class="nav fixed-bottom main-color-bg justify-content-center row py-3">
-			<li id="assets_btn" class="nav-item col-3 text-center">
+		<ul id="bottomNavBar" style="display:none;" class="nav fixed-bottom main-color-bg justify-content-center row">
+			<li id="assets_btn" class="nav-item col-3 text-center bottom-nav-item-active">
 				<!-- <i class="fa fa-bank fa-inverse botnav-icon" alt="Asset" aria-hidden="true"></i> -->
 				<img style="width:1.8em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/logo_safetypal_bottom_text.png">
 				<!-- <a class="nav-link" style="font-size:.7em; color:#D9E9E8;"  href="#">Assets</a> -->
 
 			</li>
 
-			<li id="discover_btn" class="nav-item col-3 text-center">
+			<li id="discover_btn" class="nav-item col-3 text-center bottom-nav-item">
 				<!-- <i class="fa fa-globe fa-inverse botnav-icon" style="width:1.5em;" alt="Discover" aria-hidden="true"></i> -->
 				<img style="width:1.8em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/compass.png">
 				<!-- <a  class="nav-link" style="font-size:.7em; color:#D9E9E8;" href="#">Discover</a> -->
 			</li>
 
-			<li id="settings_btn" class="nav-item col-3 text-center">
+			<li id="settings_btn" class="nav-item col-3 text-center bottom-nav-item">
 				<!-- <i class="fa fa-cogs fa-inverse botnav-icon" alt="Settings" aria-hidden="true"></i> -->
 				<img style="width:1.8em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/settings.png">
 				<!-- <a class="nav-link" style="font-size:.7em; color:#D9E9E8;"  href="#">Settings</a> -->
