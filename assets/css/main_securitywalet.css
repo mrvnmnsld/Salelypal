@@ -143,7 +143,12 @@
 		padding-top:1rem;
 		padding-bottom:1rem;
 	  }
-	  .bottom-nav-item-active{
+	  .light-mode .bottom-nav-item-active{
+		border-top:#94abef 2px solid;
+		/* border-top:#28a745 2px solid; */
+	  }
+
+	  .dark-mode .bottom-nav-item-active{
 		border-top:white 2px solid;
 		/* border-top:#28a745 2px solid; */
 	  }
