@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap%27');
 
-
+	:root{
+		--main-color:#5426de;
+	}
 	
 	.h4{
 		font-weight: bold;
@@ -135,4 +137,16 @@
 		box-shadow: #3c4fe0 0 3px 7px inset;
 		transform: translateY(2px);
 	  }
-	  
+
+	  .bottom-nav-item{
+		/* border:yellow solid 2px; */
+		padding-top:1rem;
+		padding-bottom:1rem;
+	  }
+	  .light-mode .bottom-nav-item-active{
+		border-bottom:white .2rem solid;
+	  }
+
+	  .dark-mode .bottom-nav-item-active{
+		border-bottom:white .2rem solid;
+	  }

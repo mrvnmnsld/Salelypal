@@ -46,6 +46,9 @@
 
 		border-color: transparent;
 		background-color:transparent;
+
+		text-decoration: underline;
+		text-decoration-thickness: 0.4rem;
 		/* LIGHTMODE_ */
 		/* color: #3a189f!important;  */
 		/* DARKMODE_ */

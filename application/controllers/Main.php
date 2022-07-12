@@ -1202,6 +1202,24 @@ class main extends MY_Controller {
 
 	}
 
+	public function saveLastAllTokenValue(){
+		$tableName="user_tbl";
+		$fieldName='userID';
+		$where=$_GET['userID'];
+		
+		$insertRecord = array(
+			'lastAllTokenValue'=>$_GET['value'],
+			'lastTokenCurrency'=>$_GET['currency'],
+			'lastUpdatedTokenValue'=>$this->_getTimeStamp()
+		);
+
+		$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
+
+		echo json_encode($updateRecordsRes);
+	}
+
+	
+
 
 	public function checkIfReferalCodeIsValid(){
    		$referalCode = $_GET['referalCode'];

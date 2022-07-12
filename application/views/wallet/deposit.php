@@ -12,13 +12,14 @@
 
 	.qr-container {
 		width:100%;
-		outline:thin solid black;
-		border-color:var(--dark-color)!important;
+		/* outline:thin solid black; */
+		/* border-color:var(--dark-color)!important; */
 		position:relative;
 		background:white;
-		border-radius:2px;
+		/* border-radius:2px; */
 		padding-bottom:20px;
-		border:0!important;
+		border : none !important;
+		outline: 0px solid transparent;
 	}
 	.qr-container::after, .qr-container::before {
 		height:100%;
@@ -26,15 +27,16 @@
 		position: absolute;
 		top: 0;
 		width: 10%;
-		border:2px solid var(--dark-color);
+		
+		/* border:2px solid var(--dark-color); */
 	}
 	.qr-container::after {
 		right: 0;
-		background-color: var(--dark-color);
+		/* background-color: var(--dark-color); */
 	}
 	.qr-container::before {
 		left: 0;
-		background-color: var(--dark-color);
+		/* background-color: var(--dark-color); */
 	}
 
 </style>
@@ -42,6 +44,7 @@
 <div id="innerContainer" class="p-3 mb-3">
 	<form id="mainForm">
 		<div>		
+			<div class="text-center mb-3 main-color-text display-4">DEPOSIT</div>
 			<div class="text-center text-muted">Scan this qr code to deposit to your wallet</div>
 
 			<div class="qr-container mt-3 mb-5 py-2">
@@ -125,7 +128,5 @@
     	    position: 'bottom-center'
     	})
 	});
-
-	
 
 </script>

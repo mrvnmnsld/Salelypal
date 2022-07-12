@@ -40,6 +40,15 @@
         #emailDiv:hover #tooltipemail {
             visibility: visible;
         }
+        .not-verified{
+            color:orange!important;
+        }
+        .rejected{
+            color:red!important;
+        }
+        .verified{
+            color:#23923d!important;
+        }
 </style>
 
 <link href="https://fonts.googleapis.com/css?family=Oswald" rel=“stylesheet”>
@@ -58,6 +67,7 @@
     <div id="profile_details_container" class="text-center my-3">
         <div id="name_email_div">
             <h1 id="fullname" class="display-4">Wallet Holder</h1>
+            <h6 id="isVerified" class="text-muted isVerified">test</h6>
         </div>
         <div class="p-4">
             <h6>Information</h6>
@@ -100,10 +110,29 @@
     var mobileNumber = profiledetails[0].mobileNumber;
     var birthday = profiledetails[0].birthday;
     var profilePic = profiledetails[0].profile_pic;
+    var verifiedBoolean = profiledetails[0].verified;
+    var verified;
 
     if (profilePic != null) {
 		$('#profilePic').attr('src','assets/imgs/profile_pic/'+profilePic);
 	}
+
+    if(verifiedBoolean==2){
+        verified = 'Rejected, please re-submit KYC'
+        $('#isVerified').removeClass('not-verified')
+        $('#isVerified').removeClass('verified')
+        $('#isVerified').addClass('rejected')
+    }else if(verifiedBoolean==0){
+        verified = 'Unverified User'
+        $('#isVerified').addClass('not-verified')
+        $('#isVerified').removeClass('verified')
+        $('#isVerified').removeClass('rejected')
+    }else{
+        verified = 'Verified User'
+        $('#isVerified').removeClass('not-verified')
+        $('#isVerified').removeClass('rejected')
+        $('#isVerified').addClass('verified')
+    }
 
     $('#fullname').text(fullName);
     $('#userID').text(userID);
@@ -111,6 +140,8 @@
     $('#mobileNumber').text(mobileNumber);
     $('#birthday').text(birthday);
     $('#tooltipemail').text(email);
+    $('#isVerified').text(verified);
+    
 
     $("#edit_profile_btn").on('click',function(){
 

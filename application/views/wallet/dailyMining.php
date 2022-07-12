@@ -46,10 +46,19 @@
 
 		border-color: transparent;
 		background-color:transparent;
-		/* LIGHTMODE_ */
-		/* color: #3a189f!important;  */
-		/* DARKMODE_ */
-		/* color: white !important;  */
+
+		padding-bottom: 5px;
+		position: relative;
+	}
+
+	.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active:before{
+		content: "";
+		position: absolute;
+		width: 50%;
+		height: 1px;
+		bottom: 0;
+		left: 25%;
+		border-bottom: .2rem solid var(--minetab-color);
 	}
 
 	.dataTables_filter input {
@@ -82,11 +91,11 @@
 <div id="dailymining_tab_container" class="mt-3">
 	<ul id="dailymining_tabs" class="nav nav-tabs nav-justified" role="tablist">
 		<li class="nav-item">
-			<a id="mine_tab_id" class="nav-link active main-color-link" data-toggle="tab" href="#mine_tab">MINE</a>
+			<a id="mine_tab_id" class="nav-link active main-color-link " data-toggle="tab" href="#mine_tab">MINE</a>
 		</li>
 
 		<li class="nav-item">
-			<a id="claim_tab_id" class="nav-link main-color-link" data-toggle="tab" href="#claim_tab">CLAIM</a>
+			<a id="claim_tab_id" class="nav-link main-color-link " data-toggle="tab" href="#claim_tab">CLAIM</a>
 		</li>
 	</ul>	
 
