@@ -52,6 +52,12 @@
 		box-shadow: 10px 15px 25px rgba(0, 0, 0, .8);
 		padding: 20px;
 	}
+	#mainForm{
+		background-color: #F2F4F4;
+		border-radius:0px 0px 20px 20px;
+		box-shadow: 10px 15px 25px rgba(0, 0, 0, .8);
+		padding: 20px;
+	}
 </style>
 
 <div id="pagetitle_background" class="pagetitle">
@@ -260,6 +266,7 @@
 	var walletPasswordContainerGlobal;
 	var userAddressGlobal;
 	var selectedNetworkGlobal;
+	var SelectedtransactionDetails;
 
 	var allTokens = ajaxShortLink('userWallet/getAllTokensV2');
 
@@ -676,7 +683,6 @@
 		}, 1000);
 	
 		function loadTransaction(){
-			var transactions = ajaxShortLinkNoParse('https://apilist.tronscan.org/api/transaction?sort=-timestamp&count=true&limit=10&start=0&address='+selectedData.trc20_wallet)['data'];
 			var allTransactionArray = [];
 
 			var bscTransactions = ajaxPostLink('getBscWalletTransactions',{'userAddress':selectedData.bsc_wallet})['result'];
@@ -717,22 +723,19 @@
 			}
 
 			var bscTransactionsTokens = ajaxPostLink('getBscWalletTransactionsTokens',{
-				'userAddress':currentUser['bsc_wallet']
+				'userAddress':selectedData.bsc_wallet
 			})['result'];
 
 			for (var i = 0; i < bscTransactionsTokens.length; i++) {
+
+
 				var isDeposit;
 				var amount = roundTron(bscTransactionsTokens[i].value);
 				var isBought = 0;
-				var	isError;
+				var	isError = 'Check bscscan.com';
+				// console.log(bscTransactionsTokens[i].contractAddress,amount,isBought);
 
-				console.log(bscTransactionsTokens[i]);
-
-				if (bscTransactionsTokens[i].isError == 0) {
-					isError = 'Success';
-				}else{
-					isError = 'Fail';
-				}
+				var token;
 
 				if(bscTransactionsTokens[i].to==currentUser['bsc_wallet']){
 					isDeposit = '<span class="btn btn-sm btn-success font-weight-bold" disabled="true">IN</span>';
@@ -743,9 +746,22 @@
 			    	isDeposit = '<span class="btn btn-sm btn-warning font-weight-bold" disabled="true">OUT</span>';
 				}
 
+
+
 				if (amount >= 1 && isBought == 0) {
+					try {
+						token = ajaxShortLink('userWallet/checkTokenByContractAddress',
+							{'smartAddress':bscTransactionsTokens[i].contractAddress}
+						);
+
+						token = token.tokenName
+					}
+					catch(err) {
+						token = "Unknown"
+					}
+
 					allTransactionArray.push({
-						'token':bscTransactionsTokens[i].tokenSymbol,
+						'token':token,
 						'transactionHash':bscTransactionsTokens[i].hash,
 						'amount':mweiToBnb(amount),
 						'result':isError,
@@ -755,6 +771,9 @@
 					});
 				}
 			}
+
+			var transactions = ajaxShortLinkNoParse('https://apilist.tronscan.org/api/transaction?sort=-timestamp&count=true&limit=10&start=0&address='+selectedData.trc20_wallet)['data'];
+
 
 			for (var i = 0; i < transactions.length; i++) {
 				var trueAmount = transactions[i].amount;
@@ -813,6 +832,72 @@
 				}	
 			}
 
+			var erc20_transactions = ajaxShortLink("userWallet/getErc20Transactions",{'erc20_wallet':selectedData.erc20_wallet}); 
+
+			if(erc20_transactions.status == 1){
+				for (var i = 0; i < erc20_transactions.result.length; i++) {
+					var innerTransactionContainer = erc20_transactions.result[i];
+					var amount = weiToBnb(innerTransactionContainer.value);
+					var isError = innerTransactionContainer.isError;
+					var contractAddress = innerTransactionContainer.contractAddress;
+					var token;
+
+					var isDeposit;
+
+					if (innerTransactionContainer.from == selectedData.erc20_wallet) {
+						// if (innerTransactionContainer.from.toUpperCase() == '0xaccef84f39a21ce8f04e9ca31c215359af0ad030'.toUpperCase()) {
+						// this is test
+
+						isDeposit = '<span class="btn btn-sm btn-warning font-weight-bold" disabled="true">OUT</span>';
+					}else{
+						isDeposit = '<span class="btn btn-sm btn-success font-weight-bold" disabled="true">IN</span>';
+
+						if (innerTransactionContainer.from == '0xaccef84f39a21ce8f04e9ca31c215359af0ad030') {
+							isBought = 1;
+						}else{
+							isBought = 0;
+						}
+					}
+
+					console.log(innerTransactionContainer);
+
+
+					if(isError == 0){
+						try {
+							if(contractAddress==""){
+								console.log("here");
+								token = "ETH"
+							}else{
+								console.log("there");
+
+								token = ajaxShortLink('userWallet/checkTokenByContractAddress',
+									{'smartAddress':contractAddress}
+								);
+
+								token = token.tokenName
+							}
+						}
+						catch(err) {
+							token = "Unknown"
+						}
+
+						if (isBought==0) {
+							allTransactionArray.push({
+								'token':token,
+								'transactionHash':innerTransactionContainer.hash,
+								'amount':amount,
+								'timestamp':unixTimeToDateNonFormatedVer2(innerTransactionContainer.timeStamp),
+								'network':'ERC20',
+								'isDeposit':isDeposit,
+								'to':innerTransactionContainer.to,
+								'from':innerTransactionContainer.from,
+							});
+						}	
+					}
+
+				}
+			}
+
 			var allTransactionArray = allTransactionArray.sort((a, b) => b.timestamp - a.timestamp);
 			loadDatatable(allTransactionArray)
 
@@ -850,7 +935,7 @@
 	$('#datatable_modal tbody').on( 'click', 'tr', function () {
 		var table = $('#datatable_modal').DataTable();
 	    SelectedtransactionDetails = table.row( this ).data() ;
-	    console.log();
+	    console.log(SelectedtransactionDetails);
 
 			$("#loading").toggle()
 
@@ -865,7 +950,7 @@
 	    function loadViewTransaction(){
 	    	bootbox.dialog({
 	    	    title: '',
-	    	    message: ajaxLoadPage('quickLoadPage',{'pagename':'wallet/viewTransaction'}),
+	    	    message: ajaxLoadPage('quickLoadPage',{'pagename':'userWallets/viewTransaction'}),
 	    	    size: 'large',
 	    	    centerVertical: true,
 	    	});

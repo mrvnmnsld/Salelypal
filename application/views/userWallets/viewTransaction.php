@@ -19,12 +19,7 @@
 		box-shadow: 10px 15px 25px rgba(0, 0, 0, .8);
 		text-align: center;
 	}
-	#mainForm{
-		background-color: #F2F4F4;
-		border-radius:0px 0px 20px 20px;
-		box-shadow: 10px 15px 25px rgba(0, 0, 0, .8);
-		padding: 20px;
-	}
+	
 </style>
 
 <div id="pagetitle_background" class="pagetitle">
@@ -86,9 +81,12 @@
 </form>
 
 <script type="text/javascript">
+	console.log(SelectedtransactionDetails);
 	if (SelectedtransactionDetails.network == 'trx') {
-		SelectedtransactionDetails = ajaxShortLinkNoParse('https://apilist.tronscan.org/api/transaction-info?hash='+SelectedtransactionDetails.txid);
+		SelectedtransactionDetails = ajaxShortLinkNoParse('https://apilist.tronscan.org/api/transaction-info?hash='+SelectedtransactionDetails.transactionHash);
+		
 		console.log(SelectedtransactionDetails);
+
 
 		var fromAddress;
 		var toAddress;
@@ -101,7 +99,7 @@
 			fromAddress = SelectedtransactionDetails['trc20TransferInfo'][0].from_address;
 			toAddress = SelectedtransactionDetails['trc20TransferInfo'][0].to_address;
 
-			if (SelectedtransactionDetails['trc20TransferInfo'][0].from_address ==currentUser['address']) {
+			if (SelectedtransactionDetails['trc20TransferInfo'][0].from_address == selectedData['trc20_wallet']) {
 				transactionType = 'Withrawal/Sending';
 			}else{
 				transactionType = 'Deposit/Receiving';
@@ -113,7 +111,7 @@
 			fromAddress = SelectedtransactionDetails['contractData'].owner_address;
 			toAddress = SelectedtransactionDetails['contractData'].to_address;
 
-			if (SelectedtransactionDetails['contractData'].owner_address==currentUser['address']) {
+			if (SelectedtransactionDetails['contractData'].owner_address == selectedData['trc20_wallet']) {
 				transactionType = 'Withrawal/Sending';
 			}else{
 				transactionType = 'Deposit/Receiving';
@@ -128,40 +126,67 @@
 		$("#viewInTronScan").attr('href','https://tronscan.org/#/transaction/'+SelectedtransactionDetails['hash']);
 		$("#timestampContainer").text(unixTimeToDate13Char(SelectedtransactionDetails['timestamp']));
 		$("#statusContainer").text(SelectedtransactionDetails['contractRet']);
-
 	}else if(SelectedtransactionDetails.network == 'bsc'){
 		var bscAddress = [];
 
-		new QRCode(document.getElementById("qrcode"),'https://bscscan.com/tx/'+SelectedtransactionDetails.txid);
-		$("#viewInTronScan").attr('href','https://bscscan.com/tx/'+SelectedtransactionDetails.txid);
+		bscAddress[0] = {'address':selectedData.bsc_wallet};
+
+		new QRCode(document.getElementById("qrcode"),'https://bscscan.com/tx/'+SelectedtransactionDetails.transactionHash);
+		$("#viewInTronScan").attr('href','https://bscscan.com/tx/'+SelectedtransactionDetails.transactionHash);
 
 		$("#timestampContainer").text(unixTimeToDate13Char(SelectedtransactionDetails.timestamp));
+		$("#statusContainer").text(SelectedtransactionDetails.result);
 		$("#amountContainer").text(SelectedtransactionDetails.amount);
 		$("#tokenNameContainer").parent('div.row').toggle();
 
 		SelectedtransactionDetails = ajaxPostLink('getBscWalletTransactionDetails',{
-			'transactionHash':SelectedtransactionDetails.txid
+			'transactionHash':SelectedtransactionDetails.transactionHash
 		});
 
-		if(SelectedtransactionDetails.ok == true){
-			$("#statusContainer").text("Success");
-		}else{
-			$("#statusContainer").text("Fail");
-		}
-
-
-
 		$("#viewInTronScan").text('View in bscscan.com');
+
 		$("#fromContainer").text(SelectedtransactionDetails.from);
 		$("#toContainer").text(SelectedtransactionDetails.to);
-		$('#typeContainer').text("Withrawal/Sending");
-	
+
+		if (SelectedtransactionDetails.to==bscAddress[0].address) {
+			$('#typeContainer').text("Deposit/Receiving");
+		}else{
+			$('#typeContainer').text("Withrawal/Sending");
+		}
+
 		console.log(SelectedtransactionDetails);
+	}else if(SelectedtransactionDetails.network == 'ERC20'){
+		var transactionType;
+		new QRCode(document.getElementById("qrcode"),'https://etherscan.io/tx/'+SelectedtransactionDetails['hash']);
+
+		var result = SelectedtransactionDetails['isDeposit'].includes("IN");
+
+		if (result) {
+			transactionType = 'Deposit/Receiving';
+		}else{
+			transactionType = 'Withrawal/Sending';
+		}
+
+		console.log(result);
+		console.log(SelectedtransactionDetails);
+
+		$("#viewInTronScan").attr('href','https://etherscan.io/tx/'+SelectedtransactionDetails.transactionHash);
+
+		$("#viewInTronScan").text('View in Etherscan.io');
+
+
+		$("#fromContainer").text(SelectedtransactionDetails.from);
+		$("#toContainer").text(SelectedtransactionDetails.to);
+		$("#timestampContainer").text(unixTimeToDate13Char(SelectedtransactionDetails['timestamp']));
+		$('#typeContainer').text(transactionType);
+		$("#statusContainer").toggle(); 
+		$("#amountContainer").text(SelectedtransactionDetails.amount);
+		$("#tokenNameContainer").text(SelectedtransactionDetails.token);
 	}
 
 
 	$("#closeBtn").on('click',function(){
-    	$('.bootbox.modal').modal('hide');
+    	$($('.bootbox.modal')[1]).modal('hide')
 	});
 
 </script>

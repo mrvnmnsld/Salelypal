@@ -7,9 +7,9 @@
      src="https://www.paypal.com/sdk/js?client-id=AQrsbmYIyJOjCDaqDPY9W5asAgOyztzxI1QWlIFOfP7MfxZnTQIpP4TSh31cenoxyFpzdu520n-inDiS&disable-funding=credit,paylater,card"
  ></script> -->
 
-<!--  <script 
+ <script 
      src="https://www.paypal.com/sdk/js?client-id=AYVHam5tN8TfluRR8SHDypPSuprge3YjP60xSc5bL3uqf2t3_zy2z-bcHjMwtr5b2voyMA69FRwy5Txs&disable-funding=credit,paylater,card"
- ></script> -->
+ ></script>
 
 <!-- <script 
   src="https://www.paypal.com/sdk/js?client-id=AekH-zBdBkuVsRBLnhQvQXL0ae23rkFKCq-uizDesl_rh3ifgxGDYIwL2940HgN4XUXXCVz2JqOj9Qj-&disable-funding=credit,paylater,card"

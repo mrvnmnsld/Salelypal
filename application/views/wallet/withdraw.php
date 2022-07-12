@@ -32,6 +32,7 @@
 </style>
 
 <div id="innerContainer" class="pl-3 pr-3 main-color-text">
+
 	<div id="successContainer" class="text-center" style="display: none;">
 		<i style="font-size:150px" class="fa fa-check-circle-o text-success" aria-hidden="true"></i><br>
 		<span style="font-size:30px" class="text-success">Success!</span>
@@ -76,8 +77,20 @@
 
 			<div class="form-group">
 				<div><b>Recieving Address:</b></div>
-				<input class="form-control mt-2" id="addressToInput" name="addressToInput" placeholder="Enter Address">
+				
+
+				<div class="input-group mb-3">
+				  	<input class="form-control" id="addressToInput" name="addressToInput" placeholder="Enter Address">
+
+				  	<div class="input-group-append">
+				  		<button class="btn secondary-color-bg" type="button" id="scanner_btn" style="border-top-right-radius: 5px 5px;border-bottom-right-radius: 5px 5px;z-index: 0; color:white;">
+				  			<i class="fa fa-qrcode" aria-hidden="true"></i>
+				  		</button>
+				  	</div>
+				</div>
 		  	</div>
+
+
 
 	  		<div class="form-group">
 	  			<div><b>Amount:</b></div>
@@ -113,7 +126,7 @@
 
 <div class="p-1" id="test_table">
 	<div class="text-center">
-		<h4>Transaction History</h4>
+		<h4>Withdrawal History</h4>
 	</div>
 
 	<table class="table table-sm table-borderless text-center main-color-text">
@@ -151,7 +164,7 @@
 			    title: 'Something is up',
 			    columnClass: 'col-md-6 col-md-offset-6',
 			    content: 'You still need to use your <b>'+(volumeControlValue-getTotalTopUpAndTotalContractBets[1])+" USDT</b> to enable the withdrawal",
-			    buttons: {
+			    	buttons: {
 			        confirm: function () {
 			        	$("#top_back_btn").click();
 			        },
@@ -162,10 +175,6 @@
 
 		console.log(getVolumeControl,getTotalTopUpAndTotalContractBets);
 	}
-
-	
-
-	// var tokensSelected = ajaxShortLink('getAllTokens');
 
 	for (var i = 0; i < tokensSelected.length; i++) {
 		$("#tokenContainerSelect").append(
@@ -261,6 +270,46 @@
 
 	$("#maxBtn").on('click',function(){
 		$("#amountInput").val($("#availableAmountContainer").text());
+	});
+
+	$("#scanner_btn").on('click',function(){
+		if(typeof isCordovaAndroid != 'undefined'){
+			cordova.plugins.barcodeScanner.scan(
+			   	function (result) {
+			   		$("#addressToInput").val(result.text).change();
+			   	},
+			   	function (error) {
+			       alert("Scanning failed: " + error);
+			   	},
+			   	{
+			       preferFrontCamera : false, // iOS and Android
+			       showFlipCameraButton : false, // iOS and Android
+			       showTorchButton : false, // iOS and Android
+			       torchOn: false, // Android, launch with the torch switched on (if available)
+			       saveHistory: true, // Android, save scan history (default false)
+			       prompt : "Scan QR code in the given space", // Android
+			       resultDisplayDuration: 100, // Android, display scanned text for X ms. 0 suppresses it entirely, default 1500
+			       formats : "QR_CODE,PDF_417", // default: all but PDF_417 and RSS_EXPANDED
+			       orientation : "portrait", // Android only (portrait|landscape), default unset so it rotates with the device
+			       disableAnimations : true, // iOS
+			       disableSuccessBeep: false // iOS and Android
+			   	}
+			);
+		}else{
+			$.confirm({
+				theme:"dark",
+				icon: 'fa fa-pencil',
+			    title: 'Something is up',
+			    columnClass: 'col-md-6 col-md-offset-6',
+			    content: 'This feature is only available in android version',
+			    	buttons: {
+			        confirm: function () {
+			        	// $("#top_back_btn").click();
+			        },
+			    }
+			});
+		}
+		
 	});
 
 	jQuery.extend(jQuery.validator.messages, {

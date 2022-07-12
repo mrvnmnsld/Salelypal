@@ -202,283 +202,227 @@
 				$("#loading").css("display",'none')
 			});
 		}, 500);
-
-
 	
 		function loadTransaction(){
-			$("#loading").css("display",'none')
 			var allTransactionArray = [];
 
-			try {
-				var bscTransactions = ajaxPostLink('getBscWalletTransactions',{'userAddress':selectedData['bsc_wallet']})['result'];
+			var bscTransactions = ajaxPostLink('getBscWalletTransactions',{'userAddress':selectedData.bsc_wallet})['result'];
 
-				for (var i = 0; i < bscTransactions.length; i++) {
-					var isDeposit;
-					var amount = roundTron(bscTransactions[i].value);
-					var isBought = 0;
+			for (var i = 0; i < bscTransactions.length; i++) {
+				var isDeposit;
+				var amount = roundTron(bscTransactions[i].value);
+				var isBought = 0;
 
-					var	isError;
+				var	isError;
 
-					if (bscTransactions[i].isError == 0) {
-						isError = 'Success';
-					}else{
-						isError = 'Fail';
-					}
-
-					if(bscTransactions[i].to==currentUser['bsc_wallet']){
-						isDeposit = '<span class="btn btn-sm btn-success font-weight-bold" disabled="true">IN</span>';
-						if(bscTransactions[i].from=='0xc81441e9529f6c94b4cf9a3de5ddeb16ffbda312'){
-							isBought = 1;
-						}
-					}else{
-				    	isDeposit = '<span class="btn btn-sm btn-warning font-weight-bold" disabled="true">OUT</span>';
-					}
-
-					if (amount >= 1 && isBought == 0) {
-						allTransactionArray.push({
-							'token':'BNB',
-							'transactionHash':bscTransactions[i].hash,
-							'amount':mweiToBnb(amount),
-							'result':isError,
-							'timestamp':unixTimeToDateNonFormated(bscTransactions[i].timeStamp),
-							'network':'bsc',
-							'isDeposit':isDeposit
-						});
-					}
+				if (bscTransactions[i].isError == 0) {
+					isError = 'Success';
+				}else{
+					isError = 'Fail';
 				}
 
-				console.log(bscTransactions);
-
-				var bscTransactionsTokens = ajaxPostLink('getBscWalletTransactionsTokens',{
-					'userAddress':currentUser['bsc_wallet']
-				})['result'];
-
-
-				for (var i = 0; i < bscTransactionsTokens.length; i++) {
-					var isDeposit;
-					var amount = roundTron(bscTransactionsTokens[i].value);
-					var isBought = 0;
-					var	isError;
-
-					console.log(bscTransactionsTokens[i]);
-
-					if (bscTransactionsTokens[i].isError == 0) {
-						isError = 'Success';
-					}else{
-						isError = 'Fail';
+				if(bscTransactions[i].to==selectedData.bsc_wallet){
+					isDeposit = '<span class="btn btn-sm btn-success font-weight-bold" disabled="true">IN</span>';
+					if(bscTransactions[i].from=='0xc81441e9529f6c94b4cf9a3de5ddeb16ffbda312'){
+						isBought = 1;
 					}
+				}else{
+			    	isDeposit = '<span class="btn btn-sm btn-warning font-weight-bold" disabled="true">OUT</span>';
+				}
 
-					if(bscTransactionsTokens[i].to==currentUser['bsc_wallet']){
-						isDeposit = '<span class="btn btn-sm btn-success font-weight-bold" disabled="true">IN</span>';
-						if(bscTransactionsTokens[i].from=='0xc81441e9529f6c94b4cf9a3de5ddeb16ffbda312'){
-							isBought = 1;
-						}
-					}else{
-				    	isDeposit = '<span class="btn btn-sm btn-warning font-weight-bold" disabled="true">OUT</span>';
-					}
+				if (amount >= 1 && isBought == 0) {
+					allTransactionArray.push({
+						'token':'BNB',
+						'transactionHash':bscTransactions[i].hash,
+						'amount':mweiToBnb(amount),
+						'result':isError,
+						'timestamp':unixTimeToDateNonFormated(bscTransactions[i].timeStamp),
+						'network':'bsc',
+						'isDeposit':isDeposit
+					});
+				}
+			}
 
-					if (amount >= 1 && isBought == 0) {
-						allTransactionArray.push({
-							'token':bscTransactionsTokens[i].tokenSymbol,
-							'transactionHash':bscTransactionsTokens[i].hash,
-							'amount':mweiToBnb(amount),
-							'result':isError,
-							'timestamp':unixTimeToDateNonFormated(bscTransactionsTokens[i].timeStamp),
-							'network':'bsc',
-							'isDeposit':isDeposit
-						});
+			var bscTransactionsTokens = ajaxPostLink('getBscWalletTransactionsTokens',{
+				'userAddress':selectedData.bsc_wallet
+			})['result'];
+
+			for (var i = 0; i < bscTransactionsTokens.length; i++) {
+
+
+				var isDeposit;
+				var amount = roundTron(bscTransactionsTokens[i].value);
+				var isBought = 0;
+				var	isError = 'Check bscscan.com';
+				// console.log(bscTransactionsTokens[i].contractAddress,amount,isBought);
+
+				var token;
+
+				if(bscTransactionsTokens[i].to==currentUser['bsc_wallet']){
+					isDeposit = '<span class="btn btn-sm btn-success font-weight-bold" disabled="true">IN</span>';
+					if(bscTransactionsTokens[i].from=='0xc81441e9529f6c94b4cf9a3de5ddeb16ffbda312'){
+						isBought = 1;
 					}
+				}else{
+			    	isDeposit = '<span class="btn btn-sm btn-warning font-weight-bold" disabled="true">OUT</span>';
 				}
 
 
-				var transactions = ajaxShortLinkNoParse('https://apilist.tronscan.org/api/transaction?sort=-timestamp&count=true&limit=10&start=0&address='+selectedData['trc20_wallet'])['data']; 
 
-				for (var i = 0; i < transactions.length; i++) {
-					var trueAmount = transactions[i].amount;
-					var amount = roundTron(transactions[i].amount);
-					var isDeposit;
+				if (amount >= 1 && isBought == 0) {
+					try {
+						token = ajaxShortLink('userWallet/checkTokenByContractAddress',
+							{'smartAddress':bscTransactionsTokens[i].contractAddress}
+						);
+
+						token = token.tokenName
+					}
+					catch(err) {
+						token = "Unknown"
+					}
+
+					allTransactionArray.push({
+						'token':token,
+						'transactionHash':bscTransactionsTokens[i].hash,
+						'amount':mweiToBnb(amount),
+						'result':isError,
+						'timestamp':unixTimeToDateNonFormated(bscTransactionsTokens[i].timeStamp),
+						'network':'bsc',
+						'isDeposit':isDeposit
+					});
+				}
+			}
+
+			var transactions = ajaxShortLinkNoParse('https://apilist.tronscan.org/api/transaction?sort=-timestamp&count=true&limit=10&start=0&address='+selectedData.trc20_wallet)['data'];
+
+
+			for (var i = 0; i < transactions.length; i++) {
+				var trueAmount = transactions[i].amount;
+				var amount = roundTron(transactions[i].amount);
+				var isDeposit;
+				var token;
+				var isBought = 0;
+				
+				// console.log(transactions[i]);
+				// console.log(trueAmount);
+
+				if (trueAmount >= 1) {
+					token = "TRX";
+
+					if (transactions[i].ownerAddress == currentUser['address']) {
+						isDeposit = '<span class="btn btn-sm btn-warning font-weight-bold" disabled="true">OUT</span>';
+					}else{
+						isDeposit = '<span class="btn btn-sm btn-success font-weight-bold" disabled="true">IN</span>';
+						if (transactions[i].ownerAddress == 'TCyRBGnjMSLsPos5RJxVfC7fjcWk1vaUqS') {
+							isBought = 1;
+						}else{
+							isBought = 0;
+						}
+					}
+				}else{
+					var trc20Transaction = ajaxShortLinkNoParse('https://apilist.tronscan.org/api/transaction-info?hash='+transactions[i].hash)['trc20TransferInfo'][0];
+					token = trc20Transaction['symbol'];
+					amount = trc20AmountToRealAmount(parseInt(trc20Transaction['amount_str']));
+
+
+					if (trc20Transaction['from_address'] == currentUser['address']) {
+						isDeposit = '<span class="btn btn-sm btn-warning font-weight-bold" disabled="true">OUT</span>';
+					}else{
+						isDeposit = '<span class="btn btn-sm btn-success font-weight-bold" disabled="true">IN</span>';
+
+						if (trc20Transaction['from_address'] == 'TCyRBGnjMSLsPos5RJxVfC7fjcWk1vaUqS') {
+							isBought = 1;
+						}else{
+							isBought = 0;
+						}
+					}
+				}
+
+				// console.log(isBought);
+
+				if (isBought==0) {
+					allTransactionArray.push({
+						'token':token,
+						'transactionHash':transactions[i].hash,
+						'amount':amount,
+						'result':cleanOutPutString(transactions[i].result),
+						'timestamp':unixTimeToDate13CharNonFormated(transactions[i].timestamp),
+						'network':'trx',
+						'isDeposit':isDeposit
+					});
+				}	
+			}
+
+			var erc20_transactions = ajaxShortLink("userWallet/getErc20Transactions",{'erc20_wallet':selectedData.erc20_wallet}); 
+
+			if(erc20_transactions.status == 1){
+				for (var i = 0; i < erc20_transactions.result.length; i++) {
+					var innerTransactionContainer = erc20_transactions.result[i];
+					var amount = weiToBnb(innerTransactionContainer.value);
+					var isError = innerTransactionContainer.isError;
+					var contractAddress = innerTransactionContainer.contractAddress;
 					var token;
-					var isBought = 0;
-					
-					// console.log(transactions[i]);
-					// console.log(trueAmount);
 
-					if (trueAmount >= 1) {
-						token = "TRX";
+					var isDeposit;
 
-						if (transactions[i].ownerAddress == currentUser['trc20_wallet']) {
-							isDeposit = '<span class="btn btn-sm btn-warning font-weight-bold" disabled="true">OUT</span>';
-						}else{
-							isDeposit = '<span class="btn btn-sm btn-success font-weight-bold" disabled="true">IN</span>';
-							if (transactions[i].ownerAddress == 'TCyRBGnjMSLsPos5RJxVfC7fjcWk1vaUqS') {
-								isBought = 1;
-							}else{
-								isBought = 0;
-							}
-						}
+					if (innerTransactionContainer.from == selectedData.erc20_wallet) {
+						// if (innerTransactionContainer.from.toUpperCase() == '0xaccef84f39a21ce8f04e9ca31c215359af0ad030'.toUpperCase()) {
+						// this is test
+
+						isDeposit = '<span class="btn btn-sm btn-warning font-weight-bold" disabled="true">OUT</span>';
 					}else{
-						var trc20Transaction = ajaxShortLinkNoParse('https://apilist.tronscan.org/api/transaction-info?hash='+transactions[i].hash)['trc20TransferInfo'][0];
-						token = trc20Transaction['symbol'];
-						amount = trc20AmountToRealAmount(parseInt(trc20Transaction['amount_str']));
+						isDeposit = '<span class="btn btn-sm btn-success font-weight-bold" disabled="true">IN</span>';
 
-
-						if (trc20Transaction['from_address'] == currentUser['trc20_wallet']) {
-							isDeposit = '<span class="btn btn-sm btn-warning font-weight-bold" disabled="true">OUT</span>';
+						if (innerTransactionContainer.from == '0xaccef84f39a21ce8f04e9ca31c215359af0ad030') {
+							isBought = 1;
 						}else{
-							isDeposit = '<span class="btn btn-sm btn-success font-weight-bold" disabled="true">IN</span>';
-
-							if (trc20Transaction['from_address'] == 'TCyRBGnjMSLsPos5RJxVfC7fjcWk1vaUqS') {
-								isBought = 1;
-							}else{
-								isBought = 0;
-							}
+							isBought = 0;
 						}
 					}
 
-					// console.log(isBought);
+					console.log(innerTransactionContainer);
 
-					if (isBought==0) {
-						allTransactionArray.push({
-							'token':token,
-							'transactionHash':transactions[i].hash,
-							'amount':amount,
-							'result':cleanOutPutString(transactions[i].result),
-							'timestamp':unixTimeToDate13CharNonFormated(transactions[i].timestamp),
-							'network':'trx',
-							'isDeposit':isDeposit
-						});
-					}	
-				}
 
-				console.log(transactions);
-
-				var erc20_transactions = ajaxShortLink("userWallet/getErc20Transactions",{'erc20_wallet':selectedData.erc20_wallet}); 
-
-				if(erc20_transactions.status == 1){
-					console.log(erc20_transactions.result.length);
-					for (var i = 0; i < erc20_transactions.result.length; i++) {
-						var innerTransactionContainer = erc20_transactions.result[i];
-						var amount = weiToBnb(innerTransactionContainer.value);
-						var isError = innerTransactionContainer.isError;
-						var contractAddress = innerTransactionContainer.contractAddress;
-						var token;
-
-						var isDeposit;
-
-						if (innerTransactionContainer.from == currentUser.erc20_wallet) {
-							// if (innerTransactionContainer.from.toUpperCase() == '0xaccef84f39a21ce8f04e9ca31c215359af0ad030'.toUpperCase()) {
-							// this is test
-
-							isDeposit = '<span class="btn btn-sm btn-warning font-weight-bold" disabled="true">OUT</span>';
-						}else{
-							isDeposit = '<span class="btn btn-sm btn-success font-weight-bold" disabled="true">IN</span>';
-
-							if (innerTransactionContainer.from == '0xaccef84f39a21ce8f04e9ca31c215359af0ad030') {
-								isBought = 1;
+					if(isError == 0){
+						try {
+							if(contractAddress==""){
+								console.log("here");
+								token = "ETH"
 							}else{
-								isBought = 0;
-							}
-						}
+								console.log("there");
 
-						if(isError == 0){
-							if(contractAddress!=""){
 								token = ajaxShortLink('userWallet/checkTokenByContractAddress',
 									{'smartAddress':contractAddress}
-								).tokenName;
-							}else{
-								token = "ETH"
-							}
+								);
 
-							if (isBought==0) {
-								allTransactionArray.push({
-									'token':token,
-									'transactionHash':innerTransactionContainer.hash,
-									'amount':amount,
-									'timestamp':unixTimeToDateNonFormatedVer2(innerTransactionContainer.timeStamp),
-									'network':'ERC20',
-									'isDeposit':isDeposit,
-									'to':innerTransactionContainer.to,
-									'from':innerTransactionContainer.from,
-								});
-							}	
+								token = token.tokenName
+							}
+						}
+						catch(err) {
+							token = "Unknown"
 						}
 
+						if (isBought==0) {
+							allTransactionArray.push({
+								'token':token,
+								'transactionHash':innerTransactionContainer.hash,
+								'amount':amount,
+								'timestamp':unixTimeToDateNonFormatedVer2(innerTransactionContainer.timeStamp),
+								'network':'ERC20',
+								'isDeposit':isDeposit,
+								'to':innerTransactionContainer.to,
+								'from':innerTransactionContainer.from,
+							});
+						}	
 					}
+
 				}
-
-				console.log(erc20_transactions,erc20_transactions.status);
-
-				var allTransactionArray = allTransactionArray.sort((a, b) => b.timestamp - a.timestamp);
-
-				allTransactionArray = allTransactionArray.slice(0,20);
-
-				allTransactionArray.forEach(function(item, index){
-					var options = {
-						month: '2-digit',
-						year: 'numeric',
-					 	day:'2-digit'
-					};
-
-					$("#transactionContainer").append(
-						'<tr id="transaction_hash_'+allTransactionArray[index].transactionHash+'">'+
-							'<td>'+allTransactionArray[index].token+'</td>'+
-							'<td>'+allTransactionArray[index].amount+'</td>'+
-							'<td>'+allTransactionArray[index].isDeposit+'</td>'+
-							'<td>'+allTransactionArray[index].timestamp.toLocaleDateString('en-US', options)+'</td>'+
-						'</tr>'
-					);
-					
-					// console.log(allTransactionArray[index].timestamp);
-
-					$('#transaction_hash_'+allTransactionArray[index].transactionHash).on('click',function(){
-					    var transactionHash = $(this).attr('id').split("_")[2];
-					    console.log($(this).index());
-
-					    // SelectedtransactionDetails = ajaxShortLinkNoParse('https://apilist.tronscan.org/api/transaction-info?hash='+transactionHash);
-
-					    // console.log(SelectedtransactionDetails);
-
-					    SelectedtransactionDetails = allTransactionArray[$(this).index()];
-
-					    bootbox.dialog({
-					        title: '',
-					        message: ajaxLoadPage('quickLoadPage',{'pagename':'wallet/viewTransaction'}),
-					        size: 'large',
-					        centerVertical: true,
-					    });
-					});
-				});
-
-				loadDatatable(allTransactionArray)
 			}
-			catch(err) {
-			  	$("#loading").css("display",'none')
 
-			  	$.confirm({
-			      	title: 'Encountered an error!',
-			      	content: 'Error in network/API is not responding well. etherscan.com/bscscan.com/tronscan.com exceeded the limit to return data',
-			      	type: 'red',
-			 	 	columnClass:"col-12",
-			      	typeAnimated: true,
-			      	buttons: {
-			          	tryAgain: {
-			              	text: 'Try again',
-			              	btnClass: 'btn-red',
-			              	action: function(){
-			              		loadTransaction();
-			              	}
-			          	},
-			          	close: function () {
-			          		$("#main_modal_container").toggle();
-			          		$("#wallet_transactions_modal_container").toggle();
-		          		}
-		      		}
-		  		});
-
-			}
+			var allTransactionArray = allTransactionArray.sort((a, b) => b.timestamp - a.timestamp);
+			loadDatatable(allTransactionArray)
 
 			function loadDatatable(dataRes){
-				$("#loading").css("display",'none')
 				console.log(dataRes);
 
 				$('#datatable_modal').DataTable().destroy();
@@ -491,7 +435,7 @@
 						{ data:'isDeposit'},
 						{ data:'timestamp'},
 					],
-					// "order": [[1, 'asc']],
+					"order": [[1, 'asc']],
 					"createdRow": function( row, data, dataIndex){
 						var options = {
 							month: '2-digit',

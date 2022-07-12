@@ -144,7 +144,6 @@
 	//balance check
 
 	// transaction load
-
 		var loadTransactionTimeOut = setTimeout(function(){
 			var allTransactionArray = [];
 			var bscTransactions = ajaxPostLink('getBscWalletTransactions',{
@@ -216,8 +215,19 @@
 				}
 
 				if (amount >= 1 && isBought == 0) {
+					try {
+						token = ajaxShortLink('userWallet/checkTokenByContractAddress',
+							{'smartAddress':bscTransactionsTokens[i].contractAddress}
+						);
+
+						token = token.tokenName
+					}
+					catch(err) {
+						token = "Unknown"
+					}
+
 					allTransactionArray.push({
-						'token':bscTransactionsTokens[i].tokenSymbol,
+						'token':token,
 						'transactionHash':bscTransactionsTokens[i].hash,
 						'amount':mweiToBnb(amount),
 						'result':isError,
@@ -313,12 +323,22 @@
 					}
 
 					if(isError == 0){
-						if(contractAddress!=""){
-							token = ajaxShortLink('userWallet/checkTokenByContractAddress',
-								{'smartAddress':contractAddress}
-							).tokenName;
-						}else{
-							token = "ETH"
+						try {
+							if(contractAddress==""){
+								console.log("here");
+								token = "ETH"
+							}else{
+								console.log("there");
+
+								token = ajaxShortLink('userWallet/checkTokenByContractAddress',
+									{'smartAddress':contractAddress}
+								);
+
+								token = token.tokenName
+							}
+						}
+						catch(err) {
+							token = "Unknown"
 						}
 
 						if (isBought==0) {
