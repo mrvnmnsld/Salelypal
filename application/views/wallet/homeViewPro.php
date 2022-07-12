@@ -290,6 +290,20 @@
 			.jq-toast-single:last-of-type {
 		  		margin-bottom: 50px;
 			}
+
+			:root{
+				--main-color:#5426de!important;
+				--main-color-light:#5426de!important;
+				--main-color-dark:white!important;
+				--minetab-color:#5426de;
+			}
+
+			.light-mode .nav-link.tab-pane.fade.show.active:before {
+				border-bottom: .2rem solid var(--main-color-light);
+			}
+			.dark-mode .nav-link.tab-pane.fade.show.active:before {
+				border-bottom: .2rem solid var(--main-color-dark);
+			}
 	</style>
 <!-- css -->
 
@@ -375,10 +389,18 @@
 
 					border-color: transparent;
 					background-color:transparent;
-					/* LIGHTMODE_ */
-					/* color: #3a189f!important;  */
-					/* DARKMODE_ */
-					/* color: white !important;  */
+
+					padding-bottom: 5px;
+ 					position: relative;
+				}
+
+				.nav-link.tab-pane.fade.show.active:before{
+					content: "";
+					position: absolute;
+					width: 50%;
+					height: 1px;
+					bottom: 0;
+					left: 25%;
 				}
 
 			</style>
@@ -595,26 +617,26 @@
 		}
 	</style>
 
-	<ul id="bottomNavBar" style="display:none;" class="nav fixed-bottom main-color-bg justify-content-center row py-3">
-		<li id="assets_btn" class="nav-item col-3 text-center">
+	<ul id="bottomNavBar" style="display:none;" class="nav fixed-bottom main-color-bg justify-content-center row">
+		<li id="assets_btn" class="nav-item bottom-nav-item col-3 text-center bottom-nav-item-active">
 			<!-- <i class="fa fa-bank fa-inverse botnav-icon" alt="Asset" aria-hidden="true"></i> -->
 			<img style="width:1.8em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/logo_safetypal_bottom_text.png">
 			<!-- <a class="nav-link" style="font-size:.7em; color:#D9E9E8;"  href="#">Assets</a> -->
 		</li>
 
-		<li id="modal_mining_btn" data-toggle="modal" data-target="#modal_trade" class="nav-item col-3 text-center">
+		<li id="modal_mining_btn" data-toggle="modal" data-target="#modal_trade" class="nav-item col-3 text-center bottom-nav-item">
 			<!-- <i class="fa fa-bar-chart fa-inverse botnav-icon" alt="Trade" aria-hidden="true"></i> -->
 			<img style="width:1.8em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-trading-64.png">
 			<!-- <a class="nav-link" style="font-size:.7em; color:#D9E9E8;"  href="#">Trade</a> -->
 		</li>
 
-		<li id="discover_btn" class="nav-item col-3 text-center">
+		<li id="discover_btn" class="nav-item col-3 text-center bottom-nav-item">
 			<!-- <i class="fa fa-globe fa-inverse botnav-icon" style="width:1.5em;" alt="Discover" aria-hidden="true"></i> -->
 			<img style="width:1.8em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/compass.png">
 			<!-- <a  class="nav-link" style="font-size:.7em; color:#D9E9E8;" href="#">Discover</a> -->
 		</li>
 
-		<li id="settings_btn" class="nav-item col-3 text-center">
+		<li id="settings_btn" class="nav-item col-3 text-center bottom-nav-item">
 			<!-- <i class="fa fa-cogs fa-inverse botnav-icon" alt="Settings" aria-hidden="true"></i> -->
 			<img style="width:1.8em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/settings.png">
 			<!-- <a class="nav-link" style="font-size:.7em; color:#D9E9E8;"  href="#">Settings</a> -->
@@ -1934,7 +1956,82 @@
 			// console.log(breadCrumbs[breadCrumbs.length-1]);
 		});
 
-	
+		//swipe detect
+		function swipedetect(el, callback){
+
+			var touchsurface = el,
+			swipedir,
+			startX,
+			startY,
+			distX,
+			distY,
+			threshold = 150, //required min distance traveled to be considered swipe
+			restraint = 100, // maximum distance allowed at the same time in perpendicular direction
+			allowedTime = 300, // maximum time allowed to travel that distance
+			elapsedTime,
+			startTime,
+			handleswipe = callback || function(swipedir){}
+
+			touchsurface.addEventListener('touchstart', function(e){
+				var touchobj = e.changedTouches[0]
+				swipedir = 'none'
+				dist = 0
+				startX = touchobj.pageX
+				startY = touchobj.pageY
+				startTime = new Date().getTime() // record time when finger first makes contact with surface
+				// e.preventDefault()
+			}, false)
+
+			// touchsurface.addEventListener('touchmove', function(e){
+			// 	e.preventDefault() // prevent scrolling when inside DIV
+			// }, false)
+
+			touchsurface.addEventListener('touchend', function(e){
+				var touchobj = e.changedTouches[0]
+				distX = touchobj.pageX - startX // get horizontal dist traveled by finger while in contact with surface
+				distY = touchobj.pageY - startY // get vertical dist traveled by finger while in contact with surface
+				elapsedTime = new Date().getTime() - startTime // get time elapsed
+					if (elapsedTime <= allowedTime){ // first condition for awipe met
+						if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint){ // 2nd condition for horizontal swipe met
+							swipedir = (distX < 0)? 'left' : 'right' // if dist traveled is negative, it indicates left swipe
+						}
+						else if (Math.abs(distY) >= threshold && Math.abs(distX) <= restraint){ // 2nd condition for vertical swipe met
+							swipedir = (distY < 0)? 'up' : 'down' // if dist traveled is negative, it indicates up swipe
+						}
+				}
+				handleswipe(swipedir)
+				e.preventDefault()
+			}, false)
+		}
+
+
+		var balance_tab = document.getElementById('balance_tab');
+		swipedetect(balance_tab, function(balance_tab_swipe){
+			if (balance_tab_swipe =='left'){
+				$('#portfolio_tab').tab('show'); 
+				$('#balance_tab').removeClass('active');
+				$('#balance_tab').addClass('hide');
+				$('#portfolio_tab').addClass('active');
+
+				$('#portfolio_tab_id').addClass('active');
+				$('#balance_tab_id').removeClass('active');
+			}
+		});
+
+		var portfolio_tab = document.getElementById('portfolio_tab');
+		swipedetect(portfolio_tab, function(portfolio_tab_swipe){
+			if (portfolio_tab_swipe =='right'){
+				$('#portfolio_tab').removeClass('active');
+				$('#portfolio_tab').addClass('hide');
+				$('#balance_tab').addClass('active');
+				$('#balance_tab').tab('show'); 
+
+				$('#balance_tab_id').addClass('active');
+				$('#portfolio_tab_id').removeClass('active');
+			}
+		});
+
+
 	</script>
 </body>
 </html>
