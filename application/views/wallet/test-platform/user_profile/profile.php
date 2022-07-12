@@ -41,6 +41,9 @@
             visibility: visible;
         }
         .not-verified{
+            color:orange!important;
+        }
+        .rejected{
             color:red!important;
         }
         .verified{
@@ -115,16 +118,19 @@
 	}
 
     if(verifiedBoolean==2){
-        verified = 'rejected, please re-submit KYC'
+        verified = 'Rejected, please re-submit KYC'
+        $('#isVerified').removeClass('not-verified')
+        $('#isVerified').removeClass('verified')
+        $('#isVerified').addClass('rejected')
+    }else if(verifiedBoolean==0){
+        verified = 'Unverified User'
         $('#isVerified').addClass('not-verified')
         $('#isVerified').removeClass('verified')
-    }else if(verifiedBoolean==0){
-        verified = 'unverified user'
-        $('#isVerified').removeClass('not-verified')
-        $('#isVerified').removeClass('verified')
+        $('#isVerified').removeClass('rejected')
     }else{
-        verified = 'verified user'
+        verified = 'Verified User'
         $('#isVerified').removeClass('not-verified')
+        $('#isVerified').removeClass('rejected')
         $('#isVerified').addClass('verified')
     }
 

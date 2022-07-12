@@ -40,6 +40,8 @@ $route['checkIfReferalLinkIsValid'] = 'main/checkIfReferalLinkIsValid';
 
 $route['main/sendSMS'] = 'main/sendSMS';
 $route['main/getUserInvites'] = 'main/getUserInvites';
+$route['saveLastAllTokenValue'] = 'main/saveLastAllTokenValue';
+
 
 $route['saveBirthday'] = 'main/saveBirthday';
 $route['saveCountry'] = 'main/saveCountry';

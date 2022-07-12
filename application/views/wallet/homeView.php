@@ -523,7 +523,7 @@
 
 		<!-- bottomnavbar -->
 		<ul id="bottomNavBar" style="display:none;" class="nav fixed-bottom main-color-bg justify-content-center row">
-			<li id="assets_btn" class="nav-item col-3 text-center bottom-nav-item-active">
+			<li id="assets_btn" class="nav-item col-3 text-center bottom-nav-item bottom-nav-item-active">
 				<!-- <i class="fa fa-bank fa-inverse botnav-icon" alt="Asset" aria-hidden="true"></i> -->
 				<img style="width:1.8em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/logo_safetypal_bottom_text.png">
 				<!-- <a class="nav-link" style="font-size:.7em; color:#D9E9E8;"  href="#">Assets</a> -->
@@ -594,16 +594,16 @@
 				}else{
 						if (currentUser.isPro==0) {
 
-							$.confirm({
-								theme: 'dark',
-							    title: 'Testing Mode!',
-							    content: 'Testing Mode intitiated, this limits the function and all token amounts are only for testing, They dont exists in the blockchain but it exists in our own server',
-							    typeAnimated: true,
-							    buttons: {
-							        close: function () {
-							        }
-							    }
-							});
+							// $.confirm({
+							// 	theme: 'dark',
+							//     title: 'Testing Mode!',
+							//     content: 'Testing Mode intitiated, this limits the function and all token amounts are only for testing, They dont exists in the blockchain but it exists in our own server',
+							//     typeAnimated: true,
+							//     buttons: {
+							//         close: function () {
+							//         }
+							//     }
+							// });
 
 							console.log("%cContinue!!","color: red; font-family:monospace; font-size: 30px");
 						}
@@ -698,6 +698,14 @@
 			    }
 
 			    console.log(notifList);
+
+				if($("#totalInUsdContainer").text().split(" ")[0].includes("Loading")==false){
+					ajaxShortLink("saveLastAllTokenValue",{
+						'userID': currentUser.userID,
+						'value': $("#totalInUsdContainer").text().split(" ")[0],
+						'currency': displayCurrency,
+					});
+				}
 			}, 30000);	
 		//initial
 
@@ -826,6 +834,12 @@
 					  				    }
 				  				  }
 				  				});
+
+								ajaxShortLink("saveLastAllTokenValue",{
+									'userID': currentUser.userID,
+									'value': $("#totalInUsdContainer").text().split(" ")[0],
+									'currency': displayCurrency,
+								});
 
 					  		// chart PNL
 
@@ -1323,7 +1337,22 @@
 		}
 
 		function addBreadCrumbs(page){
-			console.log(breadCrumbs[breadCrumbs.length-1],page,breadCrumbs[breadCrumbs.length-1]!=page);
+			// console.log(page.includes("discover"));
+			$(".bottom-nav-item").removeClass("bottom-nav-item-active");
+
+			if(page.includes("assets")){
+				$("#assets_btn").addClass("bottom-nav-item-active");
+			}
+
+			if(page.includes("discover")){
+				console.log("here");
+				$("#discover_btn").addClass("bottom-nav-item-active");
+			}
+
+			if(page.includes("settings")){
+				console.log("there");
+				$("#settings_btn").addClass("bottom-nav-item-active");
+			}
 
 			if (breadCrumbs[breadCrumbs.length-1]!=page) {
 				breadCrumbs.push(page);
@@ -1338,6 +1367,22 @@
 			// console.log(breadCrumbs[breadCrumbs.length-1]);
 			if (typeof tokenPriceInterval  != 'undefined') {
 				clearInterval(tokenPriceInterval);
+			}
+
+			$(".bottom-nav-item").removeClass("bottom-nav-item-active");
+
+			if(breadCrumbs[breadCrumbs.length-1].includes("assets")){
+				$("#assets_btn").addClass("bottom-nav-item-active");
+			}
+
+			if(breadCrumbs[breadCrumbs.length-1].includes("discover")){
+				console.log("here");
+				$("#discover_btn").addClass("bottom-nav-item-active");
+			}
+
+			if(breadCrumbs[breadCrumbs.length-1].includes("settings")){
+				console.log("there");
+				$("#settings_btn").addClass("bottom-nav-item-active");
 			}
 
 			// console.log();

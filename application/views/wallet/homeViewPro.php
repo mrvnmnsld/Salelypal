@@ -704,6 +704,8 @@
 				    	'userID':currentUser.userID
 				    });
 
+					
+
 				    if(notifList.length>=1){
 						$("#notif_counter_number").text(notifList.length);
 						$("#notif_counter_number").addClass("animate__animated animate__heartBeat animate__repeat-2");
@@ -786,6 +788,14 @@
 			    }
 
 			    console.log(notifList);
+
+				if($("#totalInUsdContainer").text().split(" ")[0].includes("Loading")==false){
+					ajaxShortLink("saveLastAllTokenValue",{
+			    		'userID': currentUser.userID,
+			    		'value': $("#totalInUsdContainer").text().split(" ")[0],
+			    		'currency': displayCurrency,
+			    	});
+				}
 			}, 30000);	
 
 			
@@ -1065,6 +1075,12 @@
 					  				    }
 				  				  }
 				  				});
+
+								ajaxShortLink("saveLastAllTokenValue",{
+									'userID': currentUser.userID,
+									'value': $("#totalInUsdContainer").text().split(" ")[0],
+									'currency': displayCurrency,
+								});
 
 					  		// chart PNL
 
@@ -1859,6 +1875,26 @@
 		function addBreadCrumbs(page){
 			// console.log(breadCrumbs[breadCrumbs.length-1],page,breadCrumbs[breadCrumbs.length-1]!=page);
 			console.log(page.includes("riseFall"));
+			$(".bottom-nav-item").removeClass("bottom-nav-item-active");
+
+			if(page.includes("assets")){
+				$("#assets_btn").addClass("bottom-nav-item-active");
+			}
+
+			if(page.includes("discover")){
+				console.log("here");
+				$("#discover_btn").addClass("bottom-nav-item-active");
+			}
+
+			if(page.includes("settings")){
+				console.log("there");
+				$("#settings_btn").addClass("bottom-nav-item-active");
+			}
+
+			if(page.includes("riseFall") || page.includes("future") || page.includes("regular_mining") || page.includes("dailyMining")){
+				console.log("there");
+				$("#modal_mining_btn").addClass("bottom-nav-item-active");
+			}
 
 			if (breadCrumbs[breadCrumbs.length-1]!=page) {
 				breadCrumbs.push(page);
@@ -1866,6 +1902,28 @@
 		}
 
 		$("#top_back_btn").on("click",function(){
+
+			$(".bottom-nav-item").removeClass("bottom-nav-item-active");
+			
+			if(breadCrumbs[breadCrumbs.length-2].includes("assets")){
+				$("#assets_btn").addClass("bottom-nav-item-active");
+			}
+
+			if(breadCrumbs[breadCrumbs.length-2].includes("discover")){
+				console.log("here");
+				$("#discover_btn").addClass("bottom-nav-item-active");
+			}
+
+			if(breadCrumbs[breadCrumbs.length-2].includes("settings")){
+				console.log("there");
+				$("#settings_btn").addClass("bottom-nav-item-active");
+			}
+
+			if(breadCrumbs[breadCrumbs.length-2].includes("riseFall") || breadCrumbs[breadCrumbs.length-2].includes("future") || breadCrumbs[breadCrumbs.length-2].includes("regular_mining") || breadCrumbs[breadCrumbs.length-2].includes("dailyMining")){
+				console.log("there");
+				$("#modal_mining_btn").addClass("bottom-nav-item-active");
+			}
+			
 			if (typeof tokenPriceInterval  != 'undefined') {
 				clearInterval(tokenPriceInterval);
 			}
