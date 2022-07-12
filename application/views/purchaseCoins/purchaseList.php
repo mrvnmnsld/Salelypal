@@ -1,22 +1,56 @@
+<style type="text/css">
+	.Legend-colorBox {
+	    width: 1rem;
+	    height: 1rem;
+	    display: inline-block;
+	    border:1px solid black;
+	}
+	li{
+		list-style: none;
+	}
+	ul{
+		padding-left: 0!important;
+	}
+</style>
 <div id="innerContainer" style="display:none" class="card"><br>
   <div class="card-body">
     <div class="pagetitle">
-      <h1>Puchase List</h1>
+      <h1>Purchase List</h1>
       <sub class="fw-bold">List of all purchased made in our platform powered by paypal</sub>
+    </div>
+
+    <div class="pt-4">
+    	<span class="text-start fw-bold">Legends:</span>
+			<ul class="Legend ">
+			  <li class="Legend-item">
+			    <span class="Legend-colorBox" style="background-color: green;">
+			    </span>
+			    <span class="Legend-label">
+			      Released
+			    </span>
+			  </li>
+			    <li class="Legend-item">
+			    <span class="Legend-colorBox" style="background-color: transparent;">
+			    </span>
+			    <span class="Legend-label">
+			      For releasing
+			    </span>
+			  </li>
+			</ul>
     </div>
 
     <hr>
 
-    <table id="tableContainer" class="table table-hover table-striped" style="width:100%">
+    <table id="tableContainer" class="table" style="width:100%">
     	<thead>
             <tr>
                 <th>ID</th>
+                <th>Full Name</th>
                 <th>Token</th>
                 <th>Value</th>
                 <th>Amount</th>
                 <th>Paid(USD)</th>
                 <th>Email</th>
-                <th>Full Name</th>
                 <th>Date</th>
             </tr>
         </thead>
@@ -30,11 +64,17 @@
 		$("#loading").toggle();
 		$("#footer").toggle();
 		$("#innerContainer").toggle();
+	});
 
-		$(".dt-button").each(function( index ) {
-		  $(this).removeClass();
-		  $(this).addClass('btn btn-primary');
-		});
+	$('#tableContainer').on('click', 'tbody tr', function () {
+	  selectedData = $('#tableContainer').DataTable().row($(this)).data();
+
+	  bootbox.alert({
+	      message: ajaxLoadPage('quickLoadPage',{'pagename':'purchaseCoins/viewPurchase'}),
+	      size: 'large',
+	      centerVertical: true,
+	      closeButton: false
+	  });
 	});
 
 	function loadDatatable(url,data){
@@ -61,18 +101,23 @@
 			data: callDataViaURLVal,
 			columns: [
 				{ data:'id'},
+				{ data:'fullname'},
 				{ data:'token'},
 				{ data:'tokenValue'},
 				{ data:'amountBought'},
 				{ data:'amountPaid'},
 				{ data:'email'},
-				{ data:'fullname'},
 				{ data:'dateCreated'},
-	      	],"createdRow": function( row, data, dataIndex){
-				if (data['isBlocked'] == 1) {
-					console.log($(row).addClass('bg-danger text-light'));
-				}
-      		},autoWidth: false
+  		],"createdRow": function( row, data, dataIndex){
+					if (data['isReleased'] == 1) {
+						$(row).addClass('bg-success text-light');
+					}
+    		},autoWidth: false,
+    	order:[["0",'desc']]
+		});
+		$(".dt-button").each(function( index ) {
+		  $(this).removeClass();
+		  $(this).addClass('btn btn-primary');
 		});
 	}
 </script>

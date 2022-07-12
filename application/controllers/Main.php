@@ -1203,15 +1203,43 @@ class main extends MY_Controller {
 	}
 
 
-	
+	public function checkIfReferalCodeIsValid(){
+   		$referalCode = $_GET['referalCode'];
 
-	
+   		if (strpos($referalCode,"@")) {
+	   		$test = $this->_getRecordsData(
+	   			$selectfields = array("*"), 
+		   		$tables = array('user_tbl'), 
+		   		$fieldName = array('email'), $where = array($referalCode), 
+		   		$join = null, $joinType = null, $sortBy = null, 
+		   		$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+	   		);
+
+	   		if (count($test)==1) {
+	   			echo true;
+	   		}else{
+	   			echo false;
+	   		}
+   		}else{
+	   		$test = $this->_getRecordsData(
+	   			$selectfields = array("*"), 
+		   		$tables = array('agent_profile_tbl'), 
+		   		$fieldName = array('username'), $where = array($referalCode), 
+		   		$join = null, $joinType = null, $sortBy = null, 
+		   		$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+	   		);
+
+	   		if (count($test)==1) {
+	   			echo true;
+	   		}else{
+	   			echo false;
+	   		}
+   		}
 
 
-	
+   		
 
-	
-
-
+   		
+	}
 
 }

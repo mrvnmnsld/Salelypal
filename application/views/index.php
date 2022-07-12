@@ -760,7 +760,7 @@
 		var otpType = '';
 		var generatedOtp = generateOTP();
 		var currentUser = JSON.parse(getLocalStorageByKey('currentUser'));
-		var referalCode = getUrlParameter('idNum')
+		var referalCode = getUrlParameter('referBy')
 		var referType = getUrlParameter('referType')
 		var face_upload=0;
 		var id_upload=0;
@@ -789,7 +789,7 @@
 	  		if (referalCode != false) {
 	  			setTimeout(function(){
 
-	  				$("input[name='referalLink']").val(window.location.href);
+	  				$("input[name='referalLink']").val(referalCode);
 	  				signUp.click();
 
   					$.toast({
@@ -1178,13 +1178,24 @@
 			
 		}, "Referal Link is Invalid");
 
+		jQuery.validator.addMethod("checkIfReferalCodeIsValid", function(value, element) {
+			if(value.includes("@")){
+				referType = 'user'
+			}else{
+				referType = 'agent'
+			}
+
+			return (ajaxShortLinkNoParse("checkIfReferalCodeIsValid",{'referalCode':value}))
+		}, "Referral Code is Invalid");
+
 		$("#signUpForm").validate({
 		  	errorClass: 'is-invalid text-danger',
 		  	rules: {
 					fullName: "required",
 					birthdate: "required",
 					referalLink: {
-						checkIfReferalLinkIsValid:true,
+						// checkIfReferalLinkIsValid:true,
+						checkIfReferalCodeIsValid:true,
 						required:true,
 					},
 					mobileNumber: {
@@ -1210,13 +1221,6 @@
 		  	},
 		  	submitHandler: function(form){
 			    var data = $('#signUpForm').serializeArray();
-
-			    var referalLink = data[6].value;
-			    var referalLink = referalLink.split("?");
-			    var referalLink = referalLink[1].split("&");
-
-			    referalCode=referalLink[1].split('=')[1]
-			    referType=referalLink[0].split('=')[1]
 
 	  			data.push({
 	  				'name':'referalCode',
