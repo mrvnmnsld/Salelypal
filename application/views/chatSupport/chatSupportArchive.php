@@ -44,7 +44,7 @@
 			if (selectedData!=undefined) {
 				bootbox.dialog({
 					onEscape: false,
-				    message: ajaxLoadPage('quickLoadPage',{'pagename':'chatSupport/openChatSupport'}),
+				    message: ajaxLoadPage('quickLoadPage',{'pagename':'chatSupport/openChatSupportAdmin'}),
 				    size: 'large',
 				    centerVertical: true,
 				    closeButton: false,

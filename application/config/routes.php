@@ -165,7 +165,10 @@ $route['saveName'] = 'main/saveName';
 	$route['getAddressBSC'] = 'userWallet/getAddressBSC';
 
 	$route['getBscBalance'] = 'userWallet/getBscBalance';	
+	
 	$route['getBscWalletTransactions'] = 'userWallet/getBscWalletTransactions';
+	$route['getBscWalletTransactionsTokens'] = 'userWallet/getBscWalletTransactionsTokens';
+
 	$route['viewAllTransactionsBsc'] = 'userWallet/viewAllTransactionsBsc';
 	$route['getBscWalletTransactionDetails'] = 'userWallet/getBscWalletTransactionDetails';
 
@@ -513,4 +516,5 @@ $route['testing'] = 'main/testing';
 
 
 $route[(':any')] = 'main/error';
+
 

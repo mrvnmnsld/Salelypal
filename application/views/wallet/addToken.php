@@ -67,13 +67,13 @@
 
 <script type="text/javascript">
 	var tokens = ajaxShortLink('getAllTokens');
-	var tokensSelected = ajaxShortLink('userWallet/getAllSelectedTokens',{'userID':currentUser['userID']});
-	tokensSelected = tokensSelected[0].tokenIDSelected.split(",");
+	var tokensSelectedInner = ajaxShortLink('userWallet/getAllSelectedTokens',{'userID':currentUser['userID']});
+	tokensSelectedInner = tokensSelectedInner[0].tokenIDSelected.split(",");
 
 	for (var i = 0; i < tokens.length; i++) {
 		var isSelected = '';
 
-		if (tokensSelected.includes(String(tokens[i].id))) {
+		if (tokensSelectedInner.includes(String(tokens[i].id))) {
 			isSelected = 'checked';
 		}
 

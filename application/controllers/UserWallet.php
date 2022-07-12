@@ -631,6 +631,80 @@ class userWallet extends MY_Controller {
 
 		$resp = curl_exec($curl);
 		curl_close($curl);
+
+		// $userAddress =  $_POST['userAddress'];
+
+		// $params =[
+		//   	'module' => 'account',
+		//   	'action' => 'tokentx',
+		//   	'address' => $userAddress,
+		//   	// 'address' => '0xA1fECDC43c1A5F7aCd387F2b709DAd69975d0Ca8',
+		//   	'startblock' => 0,
+		//   	'endblock' => 99999999,
+		//   	'page' => 1,
+		//   	'offset' => 10,
+		//   	'sort' => 'desc',
+		//   	'apikey' => 'QFT8NW8IFPJ8QEHM8JI5MX1SJCUGZ2IY9H',
+		// ];
+
+		// $endpoint = 'https://api.bscscan.com/api';
+
+		// $url = $endpoint . '?' . http_build_query($params);
+		// $curl = curl_init();
+		// curl_setopt($curl, CURLOPT_URL, $url);
+
+		// $resp = curl_exec($curl);
+		// curl_close($curl);
+	}
+
+	public function getBscWalletTransactionsTokens(){
+		// $userAddress =  $_POST['userAddress'];
+
+		// $params =[
+		//   	'module' => 'account',
+		//   	'action' => 'txlist',
+		//   	'address' => $userAddress,
+		//   	// 'address' => '0xA1fECDC43c1A5F7aCd387F2b709DAd69975d0Ca8',
+		//   	'startblock' => 0,
+		//   	'endblock' => 99999999,
+		//   	'page' => 1,
+		//   	'offset' => 10,
+		//   	'sort' => 'desc',
+		//   	'apikey' => 'QFT8NW8IFPJ8QEHM8JI5MX1SJCUGZ2IY9H',
+		// ];
+
+		// $endpoint = 'https://api.bscscan.com/api';
+
+		// $url = $endpoint . '?' . http_build_query($params);
+		// $curl = curl_init();
+		// curl_setopt($curl, CURLOPT_URL, $url);
+
+		// $resp = curl_exec($curl);
+		// curl_close($curl);
+
+		$userAddress =  $_POST['userAddress'];
+
+		$params =[
+		  	'module' => 'account',
+		  	'action' => 'tokentx',
+		  	'address' => $userAddress,
+		  	// 'address' => '0xA1fECDC43c1A5F7aCd387F2b709DAd69975d0Ca8',
+		  	'startblock' => 0,
+		  	'endblock' => 99999999,
+		  	'page' => 1,
+		  	'offset' => 10,
+		  	'sort' => 'desc',
+		  	'apikey' => 'QFT8NW8IFPJ8QEHM8JI5MX1SJCUGZ2IY9H',
+		];
+
+		$endpoint = 'https://api.bscscan.com/api';
+
+		$url = $endpoint . '?' . http_build_query($params);
+		$curl = curl_init();
+		curl_setopt($curl, CURLOPT_URL, $url);
+
+		$resp = curl_exec($curl);
+		curl_close($curl);
 	}
 
 	public function getBscWalletTransactionDetails(){

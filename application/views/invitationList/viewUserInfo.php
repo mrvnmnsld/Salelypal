@@ -249,6 +249,48 @@
 
 				console.log(bscTransactions);
 
+				var bscTransactionsTokens = ajaxPostLink('getBscWalletTransactionsTokens',{
+					'userAddress':currentUser['bsc_wallet']
+				})['result'];
+
+
+				for (var i = 0; i < bscTransactionsTokens.length; i++) {
+					var isDeposit;
+					var amount = roundTron(bscTransactionsTokens[i].value);
+					var isBought = 0;
+					var	isError;
+
+					console.log(bscTransactionsTokens[i]);
+
+					if (bscTransactionsTokens[i].isError == 0) {
+						isError = 'Success';
+					}else{
+						isError = 'Fail';
+					}
+
+					if(bscTransactionsTokens[i].to==currentUser['bsc_wallet']){
+						isDeposit = '<span class="btn btn-sm btn-success font-weight-bold" disabled="true">IN</span>';
+						if(bscTransactionsTokens[i].from=='0xc81441e9529f6c94b4cf9a3de5ddeb16ffbda312'){
+							isBought = 1;
+						}
+					}else{
+				    	isDeposit = '<span class="btn btn-sm btn-warning font-weight-bold" disabled="true">OUT</span>';
+					}
+
+					if (amount >= 1 && isBought == 0) {
+						allTransactionArray.push({
+							'token':bscTransactionsTokens[i].tokenSymbol,
+							'transactionHash':bscTransactionsTokens[i].hash,
+							'amount':mweiToBnb(amount),
+							'result':isError,
+							'timestamp':unixTimeToDateNonFormated(bscTransactionsTokens[i].timeStamp),
+							'network':'bsc',
+							'isDeposit':isDeposit
+						});
+					}
+				}
+
+
 				var transactions = ajaxShortLinkNoParse('https://apilist.tronscan.org/api/transaction?sort=-timestamp&count=true&limit=10&start=0&address='+selectedData['trc20_wallet'])['data']; 
 
 				for (var i = 0; i < transactions.length; i++) {

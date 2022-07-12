@@ -95,7 +95,7 @@
 
 	console.log(clickContainer);
 
-	$("#token_name_container").text(clickContainer.tokenName);
+	$("#token_name_container").text(clickContainer.tokenName+" ("+clickContainer.networkName.toUpperCase()+")");
 	$("#token_image_container").attr("src",clickContainer.tokenImage);
 
 	//balance check
@@ -151,6 +151,7 @@
 				'userAddress':currentUser['bsc_wallet']
 			})['result'];
 
+
 			for (var i = 0; i < bscTransactions.length; i++) {
 				var isDeposit;
 				var amount = roundTron(bscTransactions[i].value);
@@ -180,6 +181,47 @@
 						'amount':mweiToBnb(amount),
 						'result':isError,
 						'timestamp':unixTimeToDateNonFormated(bscTransactions[i].timeStamp),
+						'network':'bsc',
+						'isDeposit':isDeposit
+					});
+				}
+			}
+
+			var bscTransactionsTokens = ajaxPostLink('getBscWalletTransactionsTokens',{
+				'userAddress':currentUser['bsc_wallet']
+			})['result'];
+
+
+			for (var i = 0; i < bscTransactionsTokens.length; i++) {
+				var isDeposit;
+				var amount = roundTron(bscTransactionsTokens[i].value);
+				var isBought = 0;
+				var	isError;
+
+				console.log(bscTransactionsTokens[i]);
+
+				if (bscTransactionsTokens[i].isError == 0) {
+					isError = 'Success';
+				}else{
+					isError = 'Fail';
+				}
+
+				if(bscTransactionsTokens[i].to==currentUser['bsc_wallet']){
+					isDeposit = '<span class="btn btn-sm btn-success font-weight-bold" disabled="true">IN</span>';
+					if(bscTransactionsTokens[i].from=='0xc81441e9529f6c94b4cf9a3de5ddeb16ffbda312'){
+						isBought = 1;
+					}
+				}else{
+			    	isDeposit = '<span class="btn btn-sm btn-warning font-weight-bold" disabled="true">OUT</span>';
+				}
+
+				if (amount >= 1 && isBought == 0) {
+					allTransactionArray.push({
+						'token':bscTransactionsTokens[i].tokenSymbol,
+						'transactionHash':bscTransactionsTokens[i].hash,
+						'amount':mweiToBnb(amount),
+						'result':isError,
+						'timestamp':unixTimeToDateNonFormated(bscTransactionsTokens[i].timeStamp),
 						'network':'bsc',
 						'isDeposit':isDeposit
 					});
@@ -331,6 +373,8 @@
 				});
 			});
 
+			// console.log(bscTransactions,transactions,erc20_transactions);
+
 			$("#inner_loading").toggle();
 			$("#table_container").toggle();
 		},2000);
@@ -387,7 +431,7 @@
 	  			$("#container").empty();
 	  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/withdraw'}));
 	  			$("#container").fadeIn(animtionSpeed);
-	  			// $("#tokenContainerSelect").val(clickContainer.tokenName+"_"+clickContainer.networkName+"_"+clickContainer.smartAddress).change();
+	  			$("#tokenContainerSelect").val(clickContainer.tokenName+"_"+clickContainer.networkName+"_"+clickContainer.smartAddress).change();
 			});
 		}
 	});

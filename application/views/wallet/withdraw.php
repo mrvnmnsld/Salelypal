@@ -25,6 +25,10 @@
 	table td, table th{
   		font-size: 0.8em;
 	}
+
+	.dropdown-menu{
+		z-index: 9999999999;
+	}
 </style>
 
 <div id="innerContainer" class="pl-3 pr-3 main-color-text">
@@ -127,6 +131,8 @@
 </div>
 
 <script type="text/javascript">
+	var gasTokenName, transactionFee, gasSupply;
+	var balanceInner;
 
 	var getVolumeControl = ajaxShortLink("getVolumeControl");
 
@@ -168,7 +174,7 @@
 				'data-content="'+
 					'<div class=&apos;mainTokenSelectedLogo&apos;>'+
 						'<img style=&apos;width:30px;&apos; src=&apos;'+tokensSelected[i].tokenImage+'&apos;>'+
-						'<span class=&apos;ml-3 text-dark&apos;>'+tokensSelected[i].description+' ('+tokensSelected[i].tokenName.toUpperCase()+')'+'</span>'+
+						'<span class=&apos;ml-3 text-dark&apos;>'+tokensSelected[i].tokenName.toUpperCase()+" - "+tokensSelected[i].description+' ('+tokensSelected[i].networkName+')</span>'+
 					'</div>'+
 				'"'+
 			'</option>'
@@ -228,55 +234,10 @@
 	});
 
 	$("#tokenContainerSelect").on('change', function(){
-		var balanceInner;
 		var tokenInfoWithdraw = $(this).val().split("_");
-
+		updateGasAndBalanceTestAccount($(this).val().split("_")[1],$(this).val().split("_")[0],$(this).val().split("_")[2])
+		
 		console.log(tokenInfoWithdraw)
-
-		if (tokenInfoWithdraw[1] == 'trx'||tokenInfoWithdraw[1] == 'trc20') {
-			if (tokenInfoWithdraw[0].toUpperCase() === 'trx'.toUpperCase()) {
-
-				balanceInner = ajaxShortLink('userWallet/getTronBalance',{
-					'trc20Address':currentUser['trc20_wallet']
-				})['balance'];			
-
-			}else{
-
-				balanceInner = ajaxShortLink('userWallet/getTRC20Balance',{
-					'trc20Address':currentUser['trc20_wallet'],
-					'contractaddress':tokenInfoWithdraw[2],
-				})['balance'];
-
-			}
-		}else if(tokenInfoWithdraw[1] =='bsc'){
-
-			if(tokenInfoWithdraw[0].toUpperCase() === 'bnb'.toUpperCase()){
-
-				balanceInner = ajaxShortLink('userWallet/getBinancecoinBalance',{
-					'bsc_wallet':currentUser['bsc_wallet']
-				})['balance'];
-
-			}else{
-				balanceInner = ajaxShortLink('userWallet/getBscTokenBalance',{
-					'bsc_wallet':currentUser['bsc_wallet'],
-					'contractaddress':tokenInfoWithdraw[2]
-				})['balance'];
-			}
-		}else if(tokenInfoWithdraw[1] =='erc20'){
-			if(tokenInfoWithdraw[0].toUpperCase() === 'eth'.toUpperCase()){
-
-				balanceInner = ajaxShortLink('userWallet/getEthereumBalance',{
-					'erc20_address':currentUser['erc20_wallet']
-				})['balance'];
-
-			}else{
-				balanceInner = ajaxShortLink('userWallet/getErc20TokenBalance',{
-					'erc20_address':currentUser['erc20_wallet'],
-					'contractaddress':tokenInfoWithdraw[2]
-				})['balance'];
-			}
-		}
-
 		console.log(balanceInner,tokenInfoWithdraw);
 
 		$("#availableAmountContainer").text(parseFloat(balanceInner).toFixed(4));
@@ -322,57 +283,46 @@
 	jQuery.validator.addMethod("isAmountEnough", function(value, element) {
 		var tokenNetworkSelected = $("#tokenContainerSelect").val().split("_")[1];
 		var tokenSelected = $("#tokenContainerSelect").val().split("_")[0];
-		var availableAmount = parseFloat($("#availableAmountContainer").text());
 
 		if (tokenNetworkSelected=='trc20'||tokenNetworkSelected=='trx') {
-	    	return (value<=availableAmount)
+	    	return (gasSupply<=5)
 		}else if(tokenNetworkSelected=='bsc'){
 			if(tokenSelected.toUpperCase() === 'bnb'.toUpperCase()){
-				var transactionFee = parseFloat($("#transactionFee").text());
-				var valueWithFee = parseFloat(value)+transactionFee;
+				var transactionFee = estimateGasBsc(21000,ajaxShortLink("userWallet/getBscGasPrice").gasprice).toFixed(6);
+				var valueWithFee = parseFloat(value)+parseFloat(transactionFee);
 
 				$("#totalFee").remove();
 				$("#warningReported").append("<div id='totalFee'><b>Total Fee: </b><span class='text-warning'>"+valueWithFee+"</span><div>");
-				$("#warningReported").html("<b>Estimated Transaction Fee: </b><span class='text-warning' id='transactionFee'>"+estimateGasBsc(21000,ajaxShortLink("userWallet/getBscGasPrice").gasprice).toFixed(6)+" BNB</span>");
+				$("#warningReported").html("<b>Estimated Transaction Fee: </b><span class='text-warning' id='transactionFee'>"+transactionFee+" BNB</span>");
 
-
-				return (valueWithFee<=availableAmount)
+				return (valueWithFee<=balanceInner)
 			}else{
-				var transactionFee = parseFloat($("#transactionFee").text());
+				var transactionFee = estimateGasBsc(21000,ajaxShortLink("userWallet/getBscGasPrice").gasprice).toFixed(6);
 				
 				$("#totalFee").remove();
-				$("#warningReported").html("<b>Estimated Transaction Fee: </b><span class='text-warning' id='transactionFee'>"+estimateGasBsc(21000,ajaxShortLink("userWallet/getBscGasPrice").gasprice).toFixed(6)+" BNB</span>");
+				$("#warningReported").html("<b>Estimated Transaction Fee: </b><span class='text-warning' id='transactionFee'>"+transactionFee+" BNB</span>");
 
-				// $("#warningReported").append("<div id='totalFee'><b>Total Fee: </b><span class='text-warning'>"+valueWithFee+"</span><div>");
-
-				return (valueWithFee<=availableAmount)
-
+				return (transactionFee<=gasSupply)
 			}
 			
 		}else if(tokenNetworkSelected=='erc20'){
-			var transactionFee = parseFloat($("#transactionFee").text());
-			var valueWithFee = parseFloat(value)+transactionFee;
-
-			console.log(transactionFee,valueWithFee);
-
 			if(tokenSelected.toUpperCase() === 'eth'.toUpperCase()){
-				var valueWithFee = parseFloat(value)+transactionFee;
+				var transactionFee = estimateGasBsc(21000,ajaxShortLink("userWallet/getEthGasPrice").gasprice).toFixed(6);
+				var valueWithFee = parseFloat(value)+parseFloat(transactionFee);
 
 				$("#totalFee").remove();
 				$("#warningReported").append("<div id='totalFee'><b>Total Fee: </b><span class='text-warning'>"+valueWithFee+"</span><div>");
-				$("#warningReported").html("<b>Estimated Transaction Fee: </b><span class='text-warning' id='transactionFee'>"+estimateGasEth(21000,ajaxShortLink("userWallet/getEthGasPrice").gasprice).toFixed(6)+" ETH</span>");
+				$("#warningReported").html("<b>Estimated Transaction Fee: </b><span class='text-warning' id='transactionFee'>"+transactionFee+" BNB</span>");
 
-
-				return (valueWithFee<=availableAmount)
+				return (valueWithFee<=balanceInner)
 			}else{
 				
-				$("#totalFee").remove();
-				$("#warningReported").html("<b>Estimated Transaction Fee: </b><span class='text-warning' id='transactionFee'>"+estimateGasBsc(21000,ajaxShortLink("userWallet/getBscGasPrice").gasprice).toFixed(6)+" BNB</span>");
+				var transactionFee = estimateGasBsc(21000,ajaxShortLink("userWallet/getEthGasPrice").gasprice).toFixed(6);
 				
-				// $("#warningReported").append("<div id='totalFee'><b>Total Fee: </b><span class='text-warning'>"+valueWithFee+"</span><div>");
+				$("#totalFee").remove();
+				$("#warningReported").html("<b>Estimated Transaction Fee: </b><span class='text-warning' id='transactionFee'>"+transactionFee+" BNB</span>");
 
-				return (valueWithFee<=availableAmount)
-
+				return (transactionFee<=gasSupply)
 			}
 
 		}
@@ -493,5 +443,69 @@
 	  		}
 		}
 	});
+
+	function updateGasAndBalanceTestAccount(networkName,tokenName,smartAddress){
+		if (networkName == 'bsc') {
+			gasTokenName="BNB";
+			transactionFee=parseFloat(estimateGasBsc(21000,ajaxShortLink("userWallet/getBscGasPrice").gasprice).toFixed(6))
+
+			gasSupply = ajaxShortLink('userWallet/getBinancecoinBalance',{
+				"bsc_wallet":currentUser.bsc_wallet,
+			})["balance"]
+
+			if (smartAddress!='null') {
+				balanceInner = ajaxShortLink('userWallet/getBscTokenBalance',{
+					"contractaddress":smartAddress,
+					"bsc_wallet":currentUser.bsc_wallet
+				})["balance"]
+			}else{
+				balanceInner = ajaxShortLink('userWallet/getBinancecoinBalance',{
+					"bsc_wallet":currentUser.bsc_wallet
+				})["balance"]
+			}
+		}else if (networkName == 'erc20') {
+			gasTokenName="ETH";
+			transactionFee=parseFloat(estimateGasBsc(21000,ajaxShortLink("userWallet/getEthGasPrice").gasprice).toFixed(6))
+
+			gasSupply = ajaxShortLink('userWallet/getEthereumBalance',{
+				"erc20_address":currentUser.erc20_wallet,
+			})["balance"]
+
+			if (smartAddress!='null') {
+				balanceInner = ajaxShortLink('userWallet/getErc20TokenBalance',{
+					"contractaddress":smartAddress,
+					"erc20_address":currentUser.erc20_wallet,
+				})["balance"]
+			}else{
+				balanceInner = ajaxShortLink('userWallet/getEthereumBalance',{
+					"erc20_address":currentUser.erc20_wallet,
+				})["balance"]
+			}
+
+		}else{
+			gasTokenName="TRX";
+			transactionFee=5;
+
+			gasSupply = ajaxShortLink('userWallet/getTronBalance',{
+				"trc20Address":currentUser.trc20_wallet,
+			})["balance"]
+
+			if (smartAddress!='null') {
+
+				balanceInner = ajaxShortLink('userWallet/getTRC20Balance',{
+					"contractaddress":smartAddress,
+					"trc20Address":currentUser.trc20_wallet,
+				})["balance"]
+
+			}else{
+
+				balanceInner = ajaxShortLink('userWallet/getTronBalance',{
+					"trc20Address":currentUser.trc20_wallet,
+				})["balance"]
+			}
+
+		}
+
+	}
 
 </script>

@@ -154,7 +154,7 @@
     var resolvedPriceCountdown;
     var bettingSettings = ajaxShortLink("admin/getBettingSettings");
 
-    var balanceOpen = ajaxShortLink('userWallet/getTRC20Balance',{
+    var balanceUsdt = ajaxShortLink('userWallet/getTRC20Balance',{
         'trc20Address':currentUser.trc20_wallet,
         'contractaddress':'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t',
     })['balance'];
@@ -186,10 +186,32 @@
         var isGasEnough = 0;
 
         if($("input[type=radio]:checked").length==0||$("#amount_input_container").val()==""){
-            $.alert("Please Select Amount and Risks first");
+
+            $.confirm({
+                theme: 'dark',
+                title: 'Oh no!',
+                content: "Please Select Amount and Risks first.",
+                typeAnimated: true,
+                buttons: {
+                   close: function () {
+
+                   }
+               }
+            });
+
         }else{
             if(Date.parse(timeStamp)<=Date.parse(getTimeDateNonFormated())){
-                $.alert("Please Change your predicted time.");
+                $.confirm({
+                    theme: 'dark',
+                    title: 'Oh no!',
+                    content: "Please Change your predicted time.",
+                    typeAnimated: true,
+                    buttons: {
+                       close: function () {
+
+                       }
+                   }
+                });
             }else{
                 // test-platform
                     if(parseFloat(gasSupply) >= parseFloat(gasSupply-5)){
