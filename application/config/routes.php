@@ -508,6 +508,15 @@ $route['testing'] = 'main/testing';
 	$route['blogSite'] = 'main/blogSite';
 //blogsite
 
+//purchase coins	
+	$route['userWallet/deletePurchased'] = 'userWallet/deletePurchased';
+	$route['userWallet/releasePurchase'] = 'userWallet/releasePurchase';
+//purchase coins	
+
+	$route['checkIfReferalCodeIsValid'] = 'main/checkIfReferalCodeIsValid';
+
+
+
 		$route["privacyPolicy"] = 'main/privacyPolicy';
 		$route["termsAndConditions"] = 'main/termsAndConditions';
 

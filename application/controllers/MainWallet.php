@@ -306,94 +306,15 @@ class mainWallet extends MY_Controller {
 			'tokenValue' => $postValues['tokenValue'],
 			'userID' => $postValues['userID'],
 			'amountBought' => $postValues['amountBought'],
+			'network' => $postValues['network'],
+			'contractAddress' => $postValues['contractAddress'],
 			'dateCreated' => $this->_getTimeStamp(),
 		);
 
 		$saveQueryNotif = $this->_insertRecords($tableName = 'buy_crypto_history_tbl', $insertRecord);
 
-		// echo json_encode('will send token now');
 		if ($saveQueryNotif) {
-			$apikey = "4h7896o0ujoskkwk84wo0848wo0o0w4wg8sw84wwcs80kwcg4kc8ogwg44s4ocw8";
-
-			$to = $postValues['userWalletAddress'];
-			$privatekey = "283f71cfa9e4a008a4f618e9447e07c4c3c2a54f1230daaa4147e439001d438c";
-			$amount = $postValues['amountBought'];
-
-			if ($tokenArray[1] == "trc20") {
-				$ch = curl_init("https://eu.trx.chaingateway.io/v1/sendTRC20");
-
-				$payload = json_encode(
-					array(
-						"contractaddress" => $tokenArray[2],
-						"from" => 'TCyRBGnjMSLsPos5RJxVfC7fjcWk1vaUqS',
-						"to" => $to,
-						"privatekey" => '283f71cfa9e4a008a4f618e9447e07c4c3c2a54f1230daaa4147e439001d438c',
-						"amount" => $amount,
-					) 
-				);
-			}elseif ($tokenArray[1] == "trx") {				
-				$ch = curl_init("https://eu.trx.chaingateway.io/v1/sendTron");
-
-				$payload = json_encode(
-					array(
-						"to" => $to,
-						"privatekey" => '283f71cfa9e4a008a4f618e9447e07c4c3c2a54f1230daaa4147e439001d438c',
-						"amount" => $amount,
-					) 
-				);
-			}elseif ($tokenArray[1] == "bsc"){
-				if ($tokenArray[0]=="bnb") {
-					$ch = curl_init("https://eu.bsc.chaingateway.io/v1/sendBinancecoin");
-
-					$payload = json_encode(array(
-						"from" => "0xc81441e9529f6c94b4cf9a3de5ddeb16ffbda312",
-						"to" => $to,
-						"password" => 'kurusaki13',
-						"amount" => $amount
-					));
-				}else{
-					$ch = curl_init("https://eu.bsc.chaingateway.io/v1/sendToken");
-
-					$payload = json_encode(array(
-						"from" => "0xc81441e9529f6c94b4cf9a3de5ddeb16ffbda312",
-						"to" => $to,
-						"password" => 'kurusaki13',
-						"contractaddress" => $tokenArray[2],
-						"amount" => $amount
-					));
-				}
-			}elseif ($tokenArray[1] == "erc20"){
-				if ($tokenArray[0]=="ETH") {
-					$ch = curl_init("https://eu.eth.chaingateway.io/v1/sendEthereum");
-
-					$payload = json_encode(array(
-						"from" => "0xaccef84f39a21ce8f04e9ca31c215359af0ad030",
-						"to" => $to,
-						"password" => 'ceb6c970658f31504a901b89dcd3e461',
-						"amount" => $amount
-					));
-				}else{
-					$ch = curl_init("https://eu.eth.chaingateway.io/v1/sendToken");
-
-					$payload = json_encode(array(
-						"from" => '0xaccef84f39a21ce8f04e9ca31c215359af0ad030',
-						"to" => $to,
-						"password" => 'ceb6c970658f31504a901b89dcd3e461',
-						"contractaddress" => $smartAddress,
-						"amount" => $amount
-					));
-				}
-			}
-
-			curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
-			curl_setopt( $ch, CURLOPT_HTTPHEADER, array("Content-Type:application/json", "Authorization: " . $apikey));
-
-			curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
-
-			$result = curl_exec($ch);
-			curl_close($ch);
-
-			echo json_encode($result);
+			echo json_encode(true);
 		}else{
 			echo json_encode(false);
 		} 

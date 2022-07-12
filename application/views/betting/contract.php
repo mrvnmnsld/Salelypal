@@ -64,11 +64,6 @@
 		$("#loading").toggle();
 		$("#footer").toggle();
 		$("#innerContainer").toggle();
-
-		$(".dt-button").each(function( index ) {
-		  $(this).removeClass();
-		  $(this).addClass('btn btn-primary');
-		});
 	});
 
 
@@ -131,6 +126,11 @@
 
 				}
       		},autoWidth: false
+		});
+
+		$(".dt-button").each(function( index ) {
+		  $(this).removeClass();
+		  $(this).addClass('btn btn-primary');
 		});
 	}
 

@@ -11,7 +11,6 @@
 			<div class="row">
 			
 				<div class="col-md-6">
-
 					<div class="card info-card sales-card">
 						<div class="card-body">
 							<h5 class="card-title fw-bold">Link this url to post and get rewards for every users invited</h5>
@@ -22,6 +21,23 @@
 							    <div class="input-group w-145 ml-2">
 								  <input type="text" id="copyLink" class="form-control" placeholder="Link" aria-label="Link" aria-describedby="button-addon2" readonly>
 								  <button class="btn btn-outline-secondary" type="button" id="copyLink_btn">Copy Link</button>		  
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-6">
+					<div class="card info-card sales-card">
+						<div class="card-body">
+							<h5 class="card-title fw-bold">Link this agent code to post and get rewards for every users invited</h5>
+							<div class="d-flex align-items-center">
+							  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+							    <i class="fa fa-files-o"></i>
+							  </div>
+							    <div class="input-group w-145 ml-2">
+								  <input type="text" id="copyCode" class="form-control" placeholder="Code" aria-label="Link" aria-describedby="button-addon2" readonly>
+								  <button class="btn btn-outline-secondary" type="button" id="copyCode_btn">Copy Code</button>		  
 								</div>
 							</div>
 						</div>
@@ -48,7 +64,13 @@
 		var baseUrl = getUrl.protocol + "//" + getUrl.host;
 		var urlLink = baseUrl+"/referalLink?referType=agent&idNum="+currentUser.id+"&referBy="+currentUser.username;
 
+		var agentCode = currentUser.username
+
+		// console.log(agentCode);
+
 		$("#copyLink").val(urlLink)
+
+		$("#copyCode").val(agentCode)
 	});
 
 
@@ -60,6 +82,20 @@
 		$.toast({
 		    heading: '<h6>Copied your Address</h6>',
 		    text: 'You can now paste your address',
+		    showHideTransition: 'slide',
+		    icon: 'success',
+		    position: 'bottom-center'
+		})
+	});
+
+	$("#copyCode_btn").on("click",function(){
+		$("#copyCode").select();
+		document.execCommand("copy");
+		document.getSelection().removeAllRanges();
+
+		$.toast({
+		    heading: '<h6>Copied your Code</h6>',
+		    text: 'You can now paste your code',
 		    showHideTransition: 'slide',
 		    icon: 'success',
 		    position: 'bottom-center'

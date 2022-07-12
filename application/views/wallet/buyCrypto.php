@@ -7,9 +7,9 @@
      src="https://www.paypal.com/sdk/js?client-id=AQrsbmYIyJOjCDaqDPY9W5asAgOyztzxI1QWlIFOfP7MfxZnTQIpP4TSh31cenoxyFpzdu520n-inDiS&disable-funding=credit,paylater,card"
  ></script> -->
 
-<!--  <script 
-     src="https://www.paypal.com/sdk/js?client-id=AYVHam5tN8TfluRR8SHDypPSuprge3YjP60xSc5bL3uqf2t3_zy2z-bcHjMwtr5b2voyMA69FRwy5Txs&disable-funding=credit,paylater,card"
- ></script> -->
+ <script 
+     src="https://www.paypal.com/sdk/js?client-id=AS2N6eoJ0p2unLZiSwHXcbpS6cuTzKbOLEs-Pl5B570zvjV2y8lNTJwVC95RI1PDaD5FD1HaP8L5kzMt&disable-funding=credit,paylater,card"
+ ></script>
 
 <!-- <script 
   src="https://www.paypal.com/sdk/js?client-id=AekH-zBdBkuVsRBLnhQvQXL0ae23rkFKCq-uizDesl_rh3ifgxGDYIwL2940HgN4XUXXCVz2JqOj9Qj-&disable-funding=credit,paylater,card"
@@ -82,9 +82,8 @@
         <div class="form-group">
             <label>Please select token</label>
             <select id="token_select" name="token_select" class="js-example-basic-single form-control" data-live-search="true">
-                <optgroup id="erc20_tokens_container" label="Ethereum Mainet"></optgroup>
-                <optgroup id="bsc_tokens_container" label="Binance Smart Chain"></optgroup>
-                <optgroup id="tron_tokens_container" label="Tron Mainet"></optgroup>
+                <option data-subtext="TRC20" value="USDT_trc20_TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t_tether_1">USDT</option>
+                <option data-subtext="TRON" value="TRX_trx_null_tron_4">TRX</option>
             </select>
         </div>
 
@@ -222,35 +221,35 @@
 
     var availBalance;
     var minAmount = 0.02;
-    var allTokens = ajaxShortLink('userWallet/getAllTokensV2');
+    // var allTokens = ajaxShortLink('userWallet/getAllTokensV2');
 
-    for (var i = 0; i < allTokens.length; i++) {
-        if(allTokens[i].networkName=="erc20"){
-            $("#erc20_tokens_container").append(
-                '<option data-subtext="'+allTokens[i].networkName+'" value="'+allTokens[i].tokenName+'_'+allTokens[i].networkName+'_'+allTokens[i].smartAddress+'_'+allTokens[i].coingeckoTokenId+'_'+allTokens[i].id+'">'+
-                    allTokens[i].tokenName+' ('+allTokens[i].description+')'+
-                '</option>'
-            );
-        }
+    // for (var i = 0; i < allTokens.length; i++) {
+    //     if(allTokens[i].networkName=="erc20"){
+    //         $("#erc20_tokens_container").append(
+    //             '<option data-subtext="'+allTokens[i].networkName+'" value="'+allTokens[i].tokenName+'_'+allTokens[i].networkName+'_'+allTokens[i].smartAddress+'_'+allTokens[i].coingeckoTokenId+'_'+allTokens[i].id+'">'+
+    //                 allTokens[i].tokenName+' ('+allTokens[i].description+')'+
+    //             '</option>'
+    //         );
+    //     }
 
-        if(allTokens[i].networkName=="bsc"){
-            $("#bsc_tokens_container").append(
-                '<option data data-subtext="'+allTokens[i].networkName+'" value="'+allTokens[i].tokenName+'_'+allTokens[i].networkName+'_'+allTokens[i].smartAddress+'_'+allTokens[i].coingeckoTokenId+'_'+allTokens[i].id+'">'+
-                    allTokens[i].tokenName+' ('+allTokens[i].description+')'+
-                '</option>'
-            );
-        }
+    //     if(allTokens[i].networkName=="bsc"){
+    //         $("#bsc_tokens_container").append(
+    //             '<option data data-subtext="'+allTokens[i].networkName+'" value="'+allTokens[i].tokenName+'_'+allTokens[i].networkName+'_'+allTokens[i].smartAddress+'_'+allTokens[i].coingeckoTokenId+'_'+allTokens[i].id+'">'+
+    //                 allTokens[i].tokenName+' ('+allTokens[i].description+')'+
+    //             '</option>'
+    //         );
+    //     }
 
-        if(allTokens[i].networkName=="trx"||allTokens[i].networkName=="trc20"){
-            $("#tron_tokens_container").append(
-                '<option data-subtext="'+allTokens[i].networkName+'" value="'+allTokens[i].tokenName+'_'+allTokens[i].networkName+'_'+allTokens[i].smartAddress+'_'+allTokens[i].coingeckoTokenId+'_'+allTokens[i].id+'">'+
-                    allTokens[i].tokenName+' ('+allTokens[i].description+')'+
-                '</option>'
-            );
-        }
-    }
+    //     if(allTokens[i].networkName=="trx"||allTokens[i].networkName=="trc20"){
+    //         $("#tron_tokens_container").append(
+    //             '<option data-subtext="'+allTokens[i].networkName+'" value="'+allTokens[i].tokenName+'_'+allTokens[i].networkName+'_'+allTokens[i].smartAddress+'_'+allTokens[i].coingeckoTokenId+'_'+allTokens[i].id+'">'+
+    //                 allTokens[i].tokenName+' ('+allTokens[i].description+')'+
+    //             '</option>'
+    //         );
+    //     }
+    // }
 
-    console.log(allTokens);
+    // console.log(allTokens);
 
     $("#errorReporter_buyCrypto").toggle();
     $("#paypal-button-container").toggle();
@@ -258,7 +257,6 @@
     $("#token_select").on('change', function(){
         var tokenInfoWithdraw = $(this).val().split("_");
         var found = tokensSelected.find(e => e.id === tokenInfoWithdraw[4]);
-
 
         if (found==undefined&&tokenInfoWithdraw!='') {
             $.confirm({
@@ -289,59 +287,7 @@
             });
         }
 
-        if (tokenInfoWithdraw[1] == 'trx'||tokenInfoWithdraw[1] == 'trc20') {
-            if (tokenInfoWithdraw[0].toUpperCase() === 'trx'.toUpperCase()) {
-                availBalance = ajaxShortLink('mainWallet/getTronBalance')['balance'];          
-            }else{
-                availBalance = ajaxShortLink('mainWallet/getTRC20Balance',{
-                    'contractaddress':tokenInfoWithdraw[2]
-                })['balance'];
-            }
-
-            $("#amount").rules( "remove", "min max" );
-
-            $( "#amount" ).rules( "add", {
-              min: 1
-            });
-
-        }else if(tokenInfoWithdraw[1] =='bsc'){
-            if(tokenInfoWithdraw[0].toUpperCase() === 'bnb'.toUpperCase()){
-                availBalance = ajaxShortLink('mainWallet/getBinancecoinBalance')['balance'];
-            }else{
-                availBalance = ajaxShortLink('mainWallet/getBscTokenBalance',{
-                    'contractaddress':tokenInfoWithdraw[2]
-                })['balance'];
-
-                $("#amount").rules( "remove", "min max" );
-
-                $( "#amount" ).rules( "add", {
-                  min: 0.01
-                });
-            }
-        }else if(tokenInfoWithdraw[1] =='erc20'){
-
-            if(tokenInfoWithdraw[0].toUpperCase() === 'eth'.toUpperCase()){
-                availBalance = ajaxShortLink('mainWallet/getEthereumBalance')['balance'];
-            }else{
-                availBalance = ajaxShortLink('mainWallet/getBscTokenBalance',{
-                    'contractaddress':tokenInfoWithdraw[2]
-                })['balance'];
-
-                $("#amount").rules( "remove", "min max" );
-
-                $( "#amount" ).rules( "add", {
-                  min: 0.01
-                });
-            }
-
-            $("#amount").rules( "remove", "min max" );
-
-            $( "#amount" ).rules( "add", {
-              min: 0.00001
-            });
-        }
-
-        console.log(availBalance);
+        // console.log(availBalance);
         $("#amount").rules( "remove", "min max" );
     });
 
@@ -368,18 +314,18 @@
             }
         },
         submitHandler: function(form){
-            var token_select = $("#token_select").val().split("_");;
+            var token_select = $("#token_select").val().split("_");
             var tokenMarketInfo = ajaxShortLink('userWallet/getTokenDifference',{'tokenName':token_select[3]});
             var tokenValue = tokenMarketInfo.market_data.current_price.usd;
-
             var amountTotal = parseFloat($("#amount").val());
+            var amountTotalToBePaid = parseFloat((tokenValue*amountTotal).toFixed(2));
 
-            var isAmountEnough = false;
+            var isAmountEnough = true;
             var userWalletAddress ;
 
-            if(availBalance > amountTotal){
-                isAmountEnough = true;
-            }
+            // if(availBalance > amountTotal){
+            //     isAmountEnough = true;
+            // }
 
             if (token_select[1] === 'trc20' || token_select[1] === 'trx') {
                 userWalletAddress = currentUser["trc20_wallet"];
@@ -389,9 +335,22 @@
                 userWalletAddress = currentUser["erc20_wallet"];        
             }
 
-            console.log(tokenValue,availBalance,amountTotal,tokenValue,userWalletAddress);
 
-            var amountTotalToBePaid = parseFloat((tokenValue*amountTotal).toFixed(2));
+            // console.log({
+            //     'userID':currentUser["userID"],
+            //     // 'referenceID':details['id'],
+            //     'amountPaid':amountTotalToBePaid,
+            //     'token':token_select[0],
+            //     'tokenValue':tokenValue,
+            //     'userWalletAddress':userWalletAddress,
+            //     'amountBought':amountTotal,
+            //     'tokenArray':token_select,
+            //     'contractAddress':token_select[2],
+            //     'network':token_select[1]
+            // });
+
+            
+            // console.log(tokenValue,availBalance,amountTotal,tokenValue,userWalletAddress);
 
             $("#tokenPrice_container").text(tokenValue);
             $("#totalAmount_container").text(amountTotalToBePaid);
@@ -461,9 +420,11 @@
                                     'userWalletAddress':userWalletAddress,
                                     'amountBought':amountTotal,
                                     'tokenArray':token_select,
+                                    'network':token_select[1],
+                                    'contractAddress':token_select[2]
                                 });
 
-                                pushNewNotif("Bought Crypto","Crypto successfully bought!",currentUser.userID)
+                                pushNewNotif("Bought Crypto","Crypto successfully bought please wait while we transfer the assets you bought!",currentUser.userID)
 
                                 loadDatatable('wallet/getUserPurchase',{'userID':currentUser['userID']});
 

@@ -59,11 +59,6 @@
 		$("#loading").toggle();
 		$("#footer").toggle();
 		$("#innerContainer").toggle();
-
-		$(".dt-button").each(function( index ) {
-		  $(this).removeClass();
-		  $(this).addClass('btn btn-primary');
-		});
 	});
 
 	function loadDatatable(url,data){
@@ -107,6 +102,11 @@
 				}
       },autoWidth: false
 			// "autoWidth": true,
+		});
+
+		$(".dt-button").each(function( index ) {
+		  $(this).removeClass();
+		  $(this).addClass('btn btn-primary');
 		});
 	}
 

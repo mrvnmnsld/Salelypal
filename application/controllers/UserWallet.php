@@ -908,10 +908,10 @@ class userWallet extends MY_Controller {
 
 	public function getAllPurchase(){
 		$res = $this->_getRecordsData(
-			$selectfields = array("buy_crypto_history_tbl.*,user_tbl.email,user_tbl.fullname"), 
-	   		$tables = array('buy_crypto_history_tbl','user_tbl'),
+			$selectfields = array("buy_crypto_history_tbl.*,user_tbl.email,user_tbl.fullname,trc20_wallet.address as trc20_wallet,bsc_wallet.address as bsc_wallet,erc20_wallet.address as erc20_wallet"), 
+	   		$tables = array('buy_crypto_history_tbl','user_tbl','trc20_wallet','bsc_wallet','erc20_wallet'),
 	   		$fieldName = null, $where = null, 
-	   		$join = array('buy_crypto_history_tbl.userID = user_tbl.userID'), $joinType = array('inner'),
+	   		$join = array('buy_crypto_history_tbl.userID = user_tbl.userID','user_tbl.userID = trc20_wallet.userOwner','user_tbl.userID = bsc_wallet.userOwner','user_tbl.userID = erc20_wallet.userOwner'), $joinType = array('inner','inner','inner','inner'),
 	   		$sortBy = array('buy_crypto_history_tbl.id'), $sortOrder = array('desc'), 
 	   		$limit = null, 
 	   		$fieldNameLike = null, $like = null,
@@ -2255,8 +2255,30 @@ class userWallet extends MY_Controller {
 		echo json_encode($res);
 	}
 
-	
+	public function deletePurchased(){
+		$deleteQuery = $this->_deleteRecords(
+			$tableName = "buy_crypto_history_tbl",
+		 	$fieldName = array("id"),
+		  	$where = array($_GET['id'])
+		);
+		echo json_encode($deleteQuery);
+	}
 
+	public function releasePurchase(){
+		$tableName="buy_crypto_history_tbl";
+		$fieldName='id';
+		$where=$_GET["id"];
+
+		$insertRecord = array(
+			'isReleased'=>1,
+		);
+
+		$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
+
+		echo json_encode($updateRecordsRes);
+	}
+
+	
 
 
 }

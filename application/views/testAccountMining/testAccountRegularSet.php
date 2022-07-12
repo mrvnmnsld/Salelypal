@@ -35,11 +35,6 @@
 		$("#loading").toggle();
 		$("#footer").toggle();
 		$("#innerContainer").toggle();
-
-		$(".dt-button").each(function( index ) {
-		  $(this).removeClass();
-		  $(this).addClass('btn btn-primary');
-		});
 	});
 
 	$('#addToken_btn').on('click', function () {
@@ -98,6 +93,11 @@
     		},
     		order: [[0, 'desc']],
     		autoWidth: false,
+		});
+
+		$(".dt-button").each(function( index ) {
+		  $(this).removeClass();
+		  $(this).addClass('btn btn-primary');
 		});
 	}
 </script>
