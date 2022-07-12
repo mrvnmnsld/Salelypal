@@ -1218,6 +1218,20 @@ class main extends MY_Controller {
 		echo json_encode($updateRecordsRes);
 	}
 
+	public function getLastAllTokenValue(){
+		$getLastAllTokenValue = $this->_getRecordsData(
+			$selectfields = array("user_tbl.*"), 
+			$tables = array('user_tbl'), 
+			$fieldName = array('user_tbl.userID'), $where = array($_GET['userID']), 
+			$join = null, $joinType = null, $sortBy = null, 
+			$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+		);
+
+		echo json_encode($getLastAllTokenValue[0]);
+	}
+
+	
+
 	
 
 
@@ -1253,10 +1267,6 @@ class main extends MY_Controller {
 	   			echo false;
 	   		}
    		}
-
-
-   		
-
    		
 	}
 

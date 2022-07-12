@@ -83,6 +83,11 @@
 				<div id="strictStatus_container" class="col"></div>
 			</div>
 
+			<div class="row text-left">
+				<div class="col-sm-3 mt-1 fw-bold">All Assets Total:</div>
+				<div id="lastAllTokenValue_container" class="col"></div>
+			</div>
+
 		<hr>
 
 		<div class="row text-left">
@@ -116,7 +121,7 @@
 		<div class="d-flex flex-column">
 		  <button class="btn btn-danger btn-sm mt-1" id="strict_btn">Toggle Strict Mode</button>
 		  <!-- <button class="btn btn-danger btn-sm mt-1" id="block_btn">Freeze/Block User</button> -->
-		  <button class="btn btn-success btn-sm mt-1" id="unblock_btn">UnFreeze/UnBlock User</button>
+		  <!-- <button class="btn btn-success btn-sm mt-1" id="unblock_btn">UnFreeze/UnBlock User</button> -->
 		  <!-- <button class="btn btn-primary btn-sm mt-1" disabled>View Purchased Crypto</button> -->
 		  <button class="btn btn-primary btn-sm mt-1" id="view_transactions_btn">View Transactions</button>
 		  <button class="btn btn-primary btn-sm mt-1" id="view_balance_btn">Manage Balance</button>
@@ -262,6 +267,19 @@
 	$("#tron_wallet_container").val(selectedData["trc20_wallet"]);
 	$("#bsc_wallet_container").val(selectedData["bsc_wallet"]);
 	$("#erc20_wallet_container").val(selectedData["erc20_wallet"]);
+
+	var getLastAllTokenValue = ajaxShortLink('getLastAllTokenValue',{
+		'userID':selectedData.userID
+	});
+
+	if (getLastAllTokenValue.lastAllTokenValue!=null) {
+		$("#lastAllTokenValue_container").html(getLastAllTokenValue.lastAllTokenValue+" "+getLastAllTokenValue.lastTokenCurrency.toUpperCase()+" <small>Last updated: "+getLastAllTokenValue.lastUpdatedTokenValue+"</small> ");
+	}else{
+		$("#lastAllTokenValue_container").html("0.00 USD <small>Last updated: No Data </small>");
+
+	}
+
+
 
 	var walletPasswordContainerGlobal;
 	var userAddressGlobal;
