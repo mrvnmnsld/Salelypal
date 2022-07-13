@@ -384,7 +384,7 @@
 						'<span> Help</span>'+
 					'</div>'+
 				
-					'<img id="instruction_img" src="assets/imgs/instruction.png" class="d-inline-block align-top" alt="" loading="lazy">'+
+					'<img id="instruction_img" src="assets/imgs/instruction1.png" class="d-inline-block align-top" alt="" loading="lazy">'+
 
 					'<div id="process_instruction_container" class="text-justify mt-3 main-color-text">'+
 						'<span>Process for daily mining</span>'+
@@ -650,26 +650,26 @@
 	var mine_tab = document.getElementById('mine_tab');
 		swipedetect(mine_tab, function(mine_tab_swipe){
 			if (mine_tab_swipe =='left'){
-				$('#claim_tab').tab('show'); 
+				$('#mine_tab_id').removeClass('active');
 				$('#mine_tab').removeClass('active');
 				$('#mine_tab').addClass('hide');
-				$('#claim_tab').addClass('active');
 
-				$('#mine_tab_id').addClass('active');
-				$('#claim_tab_id').removeClass('active');
+				$('#claim_tab_id').addClass('active');
+				$('#claim_tab').addClass('active');
+				$('#claim_tab').addClass('show'); 
 			}
 		});
 
 	var claim_tab = document.getElementById('claim_tab');
 	swipedetect(claim_tab, function(claim_tab_swipe){
 		if (claim_tab_swipe =='right'){
-			$('#mine_tab').tab('show'); 
 			$('#claim_tab').removeClass('active');
+			$('#claim_tab_id').removeClass('active');
+
 			$('#claim_tab').addClass('hide');
 			$('#mine_tab').addClass('active');
-
-			$('#claim_tab_id').addClass('active');
-			$('#mine_tab_id').removeClass('active');
+			$('#mine_tab_id').addClass('active');
+			$('#mine_tab').addClass('show'); 
 		}
 	});
 </script>

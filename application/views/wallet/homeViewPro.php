@@ -2020,13 +2020,13 @@
 		var balance_tab = document.getElementById('balance_tab');
 		swipedetect(balance_tab, function(balance_tab_swipe){
 			if (balance_tab_swipe =='left'){
-				$('#portfolio_tab').tab('show'); 
 				$('#balance_tab').removeClass('active');
+				$('#balance_tab_id').removeClass('active');
+
 				$('#balance_tab').addClass('hide');
 				$('#portfolio_tab').addClass('active');
-
 				$('#portfolio_tab_id').addClass('active');
-				$('#balance_tab_id').removeClass('active');
+				$('#portfolio_tab').tab('show'); 
 			}
 		});
 
@@ -2034,12 +2034,12 @@
 		swipedetect(portfolio_tab, function(portfolio_tab_swipe){
 			if (portfolio_tab_swipe =='right'){
 				$('#portfolio_tab').removeClass('active');
+				$('#portfolio_tab_id').removeClass('active');
+
 				$('#portfolio_tab').addClass('hide');
 				$('#balance_tab').addClass('active');
-				$('#balance_tab').tab('show'); 
-
 				$('#balance_tab_id').addClass('active');
-				$('#portfolio_tab_id').removeClass('active');
+				$('#balance_tab').tab('show'); 
 			}
 		});
 

@@ -406,10 +406,12 @@
 		bootbox.dialog({
 			message: 
 				'<div class="text-center">'+
-					'<div class="text-left main-color-text" style="font-size:1em;">'+
+					'<div class="text-left main-color-text mb-3" style="font-size:1em;">'+
 						'<i class="main-color-text fa fa-question-circle fa-inverse" aria-hidden="true"></i>'+
 						'<span> Usage</span>'+
 					'</div>'+
+
+					'<img id="instruction_img" src="assets/imgs/instruction2.png" class="d-inline-block align-top" alt="" loading="lazy">'+
 				
 					'<div id="process_instruction_container" class="text-justify mt-3 main-color-text">'+
 							'Formula for Claiming the mined tokens:<br>'+
