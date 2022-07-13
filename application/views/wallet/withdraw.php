@@ -32,6 +32,7 @@
 </style>
 
 <div id="innerContainer" class="pl-3 pr-3 main-color-text">
+	<div class="text-center mb-3 main-color-text display-4">Withdrawal</div>
 
 	<div id="successContainer" class="text-center" style="display: none;">
 		<i style="font-size:150px" class="fa fa-check-circle-o text-success" aria-hidden="true"></i><br>
@@ -57,7 +58,7 @@
 	</div>
 
 	<form id="mainForm" style="display:;">
-		<div class="mt-5">
+		<div class="mt-2">
 	  		<small class="font-weight-bold main-color-text" style="font-size:1rem;">Available Amount on wallet: <span id="availableAmountContainer"></span></small>
 
 			<div>
@@ -66,7 +67,7 @@
 			</div>
 
 
-			<div class="form-group pt-5">
+			<div class="form-group pt-2">
 
 				<div class="main-color-text"><b>Select Token to withdraw:</b></div>
 

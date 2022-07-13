@@ -288,84 +288,92 @@
 			$("#initial_modal").toggle();
 			$("#kyc_modal").toggle();
 
+			if (selectedData.verified == 0) {
+				Promise.all([
+				  faceapi.nets.faceRecognitionNet.loadFromUri('assets/lib/faceapi/models'),
+				  faceapi.nets.faceLandmark68Net.loadFromUri('assets/lib/faceapi/models'),
+				  faceapi.nets.ssdMobilenetv1.loadFromUri('assets/lib/faceapi/models')
+				]).then(start)
+
+				async function start() {
+					$("#loading_text").text("Comparing face descriptions");
+
+					let image
+					let canvas
+
+			  		idImage = await faceapi.fetchImage("assets/imgs/kyc-imgs/id-imgs/"+selectedData.IDImagePath);
+			  		image2Detections = await faceapi.detectAllFaces(idImage).withFaceLandmarks().withFaceDescriptors()
+
+			  		console.log(idImage,image2Detections,image2Detections.length);
+
+			  		if (image2Detections.length != 0) {
+
+				  		var faceMatcher = new faceapi.FaceMatcher(image2Detections, 0.6)
+				  		console.log(faceMatcher);
+
+						$("#loading_text").text("Loading...");
+				  		$("#loading").toggle();
+
+				  		faceImg = await faceapi.fetchImage("assets/imgs/kyc-imgs/face-imgs/"+selectedData.FaceImagePath)
+				  		canvas = faceapi.createCanvasFromMedia(faceImg)
+
+				  		var displaySize = { width: faceImg.width, height: faceImg.height }
+				  		faceapi.matchDimensions(canvas, displaySize)
+				  		var detections = await faceapi.detectAllFaces(faceImg).withFaceLandmarks().withFaceDescriptors()
+
+				  		if (image2Detections.length != 0) {
+				  			var resizedDetections = faceapi.resizeResults(detections, displaySize)
+				  			var results = resizedDetections.map(d => faceMatcher.findBestMatch(d.descriptor))
+
+				  			console.log(results);
+				  			$("#errorReporter").removeClass("text-danger");
+				  			$("#errorReporter").removeClass("text-success");
+
+				  			if (results[0].distance >= 0.6) {
+				  				$("#errorReporter").addClass("text-danger");
+				  				$("#errorReporter").removeClass("text-success");
+
+				  				$("#errorReporter").append("Face in images doesn't match");
+				  				// $("#verify_user_btn").attr("disabled",true);
+				  			}else{
+				  				$("#errorReporter").removeClass("text-danger");
+				  				$("#errorReporter").addClass("text-success");
+				  				$("#errorReporter").append("Face image is matching with the ID Image");
+				  			}
+				  		}else{
+							$("#errorReporter").addClass("text-danger");
+							$("#errorReporter").removeClass("text-success");
+							$("#errorReporter").text("No Face Found in Face Image");
+			  				$("#verify_user_btn").attr("disabled",true);
+
+				  		}
+			  		}else{
+			  			$("#errorReporter").addClass("text-danger");
+			  			$("#errorReporter").removeClass("text-success");
+						$("#errorReporter").text("No Face Found in ID Image");
+		  				$("#verify_user_btn").attr("disabled",true);
+						
+						$("#loading_text").text("Loading...");
+				  		$("#loading").toggle();
+			  		}
+
+			  		// results.forEach((result, i) => {
+			  		//   var box = resizedDetections[i].detection.box
+			  		//   var drawBox = new faceapi.draw.DrawBox(box, { label: result.toString() })
+			  		//   drawBox.draw(canvas)
+			  		// })
+
+				}
+			}else{
+				$("#loading").toggle();
+				$("#loading_text").text("Loading...");
+		
+			}
+
 			var idImg = document.getElementById('id_img_container')
 			var faceImg = document.getElementById('face_img_container')
 
-			Promise.all([
-			  faceapi.nets.faceRecognitionNet.loadFromUri('assets/lib/faceapi/models'),
-			  faceapi.nets.faceLandmark68Net.loadFromUri('assets/lib/faceapi/models'),
-			  faceapi.nets.ssdMobilenetv1.loadFromUri('assets/lib/faceapi/models')
-			]).then(start)
-
-			async function start() {
-				$("#loading_text").text("Comparing face descriptions");
-
-				let image
-				let canvas
-
-		  		idImage = await faceapi.fetchImage("assets/imgs/kyc-imgs/id-imgs/"+selectedData.IDImagePath);
-		  		image2Detections = await faceapi.detectAllFaces(idImage).withFaceLandmarks().withFaceDescriptors()
-
-		  		console.log(idImage,image2Detections,image2Detections.length);
-
-		  		if (image2Detections.length != 0) {
-
-			  		var faceMatcher = new faceapi.FaceMatcher(image2Detections, 0.6)
-			  		console.log(faceMatcher);
-
-					$("#loading_text").text("Loading...");
-			  		$("#loading").toggle();
-
-			  		faceImg = await faceapi.fetchImage("assets/imgs/kyc-imgs/face-imgs/"+selectedData.FaceImagePath)
-			  		canvas = faceapi.createCanvasFromMedia(faceImg)
-
-			  		var displaySize = { width: faceImg.width, height: faceImg.height }
-			  		faceapi.matchDimensions(canvas, displaySize)
-			  		var detections = await faceapi.detectAllFaces(faceImg).withFaceLandmarks().withFaceDescriptors()
-
-			  		if (image2Detections.length != 0) {
-			  			var resizedDetections = faceapi.resizeResults(detections, displaySize)
-			  			var results = resizedDetections.map(d => faceMatcher.findBestMatch(d.descriptor))
-
-			  			console.log(results);
-			  			$("#errorReporter").removeClass("text-danger");
-			  			$("#errorReporter").removeClass("text-success");
-
-			  			if (results[0].distance >= 0.6) {
-			  				$("#errorReporter").addClass("text-danger");
-			  				$("#errorReporter").removeClass("text-success");
-
-			  				$("#errorReporter").append("Face in images doesn't match");
-			  				// $("#verify_user_btn").attr("disabled",true);
-			  			}else{
-			  				$("#errorReporter").removeClass("text-danger");
-			  				$("#errorReporter").addClass("text-success");
-			  				$("#errorReporter").append("Face image is matching with the ID Image");
-			  			}
-			  		}else{
-						$("#errorReporter").addClass("text-danger");
-						$("#errorReporter").removeClass("text-success");
-						$("#errorReporter").text("No Face Found in Face Image");
-		  				$("#verify_user_btn").attr("disabled",true);
-
-			  		}
-		  		}else{
-		  			$("#errorReporter").addClass("text-danger");
-		  			$("#errorReporter").removeClass("text-success");
-					$("#errorReporter").text("No Face Found in ID Image");
-	  				$("#verify_user_btn").attr("disabled",true);
-					
-					$("#loading_text").text("Loading...");
-			  		$("#loading").toggle();
-		  		}
-
-		  		// results.forEach((result, i) => {
-		  		//   var box = resizedDetections[i].detection.box
-		  		//   var drawBox = new faceapi.draw.DrawBox(box, { label: result.toString() })
-		  		//   drawBox.draw(canvas)
-		  		// })
-
-			}
+			
 		});
 
 		$("#deleteBtn").on('click', function(){

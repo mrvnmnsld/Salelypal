@@ -47,7 +47,7 @@
 			<div class="text-center mb-3 main-color-text display-4">DEPOSIT</div>
 			<div class="text-center text-muted">Scan this qr code to deposit to your wallet</div>
 
-			<div class="qr-container mt-3 mb-5 py-2">
+			<div class="qr-container mt-3 mb-5 py-2 text-center">
 				<div class="py-1"id="qrcode"></div>
 			</div>
 

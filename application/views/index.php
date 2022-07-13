@@ -55,7 +55,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="color-scheme" content="light" />
-	<title>SafetyPal - Client Login</title>
+	<title>SafelyPal - Client Login</title>
 	<link rel="icon" type="image/png" href="assets/imgs/safetypal_logo.png"/>
 </head>
 
@@ -469,7 +469,7 @@
     <div class="forms">
 
       <div class="form login">
-        <span class="title">SafetyPal</span>
+        <span class="title">SafelyPal</span>
 
         <form id="loginForm">
           <div id="emailInput" class="input-field">
@@ -524,7 +524,7 @@
           	<div class="col-3">
           		<div class="country-code" style="border-bottom: 2px solid #ccc; width: 90px;">
         				<select id="countryCode_select" name="countryCode">
-        					<option value="" selected disabled>Please Select...</option>
+        					<option value="" selected disabled>+00</option>
         				</select>
         			</div>
           	</div>
@@ -545,7 +545,7 @@
           </div>
 
           <div class="input-field">
-            <input type="text" name="referalLink" placeholder="Enter referral link">
+            <input type="text" name="referalLink" placeholder="Enter Username or Email of referal">
             <i class="fa fa-handshake-o icon"></i>
           </div>
 
@@ -790,6 +790,8 @@
 	  			setTimeout(function(){
 
 	  				$("input[name='referalLink']").val(referalCode);
+	  				$("input[name='referalLink']").attr("readonly",true);
+
 	  				signUp.click();
 
   					$.toast({
