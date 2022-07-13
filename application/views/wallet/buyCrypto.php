@@ -1,21 +1,6 @@
-<!-- <script 
-    src="https://www.paypal.com/sdk/js?client-id=AbM9J_nb99luadjSViFVccEhWabihbAnHcMmiE-_yiOagyQR1_xeorgKNW1q1XLeURtx3t4KiTbl5f19&disable-funding=credit,paylater,card"
-></script> -->
-
-<!-- 
- <script 
-     src="https://www.paypal.com/sdk/js?client-id=AQrsbmYIyJOjCDaqDPY9W5asAgOyztzxI1QWlIFOfP7MfxZnTQIpP4TSh31cenoxyFpzdu520n-inDiS&disable-funding=credit,paylater,card"
- ></script> -->
-
- <script 
-     src="https://www.paypal.com/sdk/js?client-id=AS2N6eoJ0p2unLZiSwHXcbpS6cuTzKbOLEs-Pl5B570zvjV2y8lNTJwVC95RI1PDaD5FD1HaP8L5kzMt&disable-funding=credit,paylater,card"
- ></script>
-
-<!-- <script 
-  src="https://www.paypal.com/sdk/js?client-id=AekH-zBdBkuVsRBLnhQvQXL0ae23rkFKCq-uizDesl_rh3ifgxGDYIwL2940HgN4XUXXCVz2JqOj9Qj-&disable-funding=credit,paylater,card"
-></script> -->
- 
-<!--  -->
+<script 
+ src="https://www.paypal.com/sdk/js?client-id=AS2N6eoJ0p2unLZiSwHXcbpS6cuTzKbOLEs-Pl5B570zvjV2y8lNTJwVC95RI1PDaD5FD1HaP8L5kzMt&disable-funding=credit,paylater,card"
+></script>
 
 <style type="text/css">
     .disabledDiv{
@@ -45,6 +30,8 @@
 </style>
 
 <div id="innerContainer" class="p-3">
+    <div class="text-center mb-3 main-color-text display-4">Buy Crypto</div>
+
     <div id="success_container" class="text-center" style="display: none;">
         <i style="font-size:150px" class="fa fa-check-circle-o text-success" aria-hidden="true"></i><br>
         <span style="font-size:30px" class="text-success">Success!</span>
