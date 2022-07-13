@@ -22,9 +22,11 @@
         color: #007bff!important;
     }
 
-    .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link {
+    /* .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link {
         background-color: rgba(0, 0, 0, .10);
-    }
+    } */
+
+
 
     .make_me_dark{
         background-color: rgba(0, 0, 0, .05);
@@ -87,21 +89,30 @@
 </div>
 
 <style>
-    .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
-        font-size:1.5em;
-        opacity: 1 !important;
-        -webkit-transition: color 1s, font-size .25s;
-        -moz-transition: color 1s, font-size .25s;
-        -o-transition: color 1s, font-size .25s;
-        transition: color 1s, font-size .25s;
+    .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
+		font-size:2em;
+		opacity: 1 !important;
+		-webkit-transition: color 1s, font-size .25s;
+		-moz-transition: color 1s, font-size .25s;
+		-o-transition: color 1s, font-size .25s;
+		transition: color 1s, font-size .25s;
 
-        border-color: transparent;
-        background-color:transparent;
-        /* LIGHTMODE_ */
-        /* color: #3a189f!important;  */
-        /* DARKMODE_ */
-        /* color: white !important;  */
-    }
+		border-color: transparent;
+		background-color:transparent;
+
+		padding-bottom: 5px;
+		position: relative;
+	}
+
+	.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active:before{
+		content: "";
+		position: absolute;
+		width: 50%;
+		height: 1px;
+		bottom: 0;
+		left: 25%;
+		border-bottom: .2rem solid var(--minetab-color);
+	}
 
     #risefall_history_container a{
         /* color: #94abef; */
@@ -113,18 +124,18 @@
     }
 </style>
 
-<div id="risefall_history_container" class="mt-2"> 
+<div id="risefall_history_container" class="my-2"> 
     <ul class="nav nav-tabs nav-fill">
       <li class="nav-item">
-        <a class="nav-link active main-color-link" aria-current="page" data-toggle="tab" href="#history_tab_btn">History</a>
+        <a id="history_tab_link" class="nav-link active main-color-link" aria-current="page" data-toggle="tab" href="#history_tab_btn">History</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link main-color-link" data-toggle="tab" href="#instructions_tab_btn">Instructions</a>
+        <a id="instructions_tab_link" class="nav-link main-color-link" data-toggle="tab" href="#instructions_tab_btn">Instructions</a>
       </li>
     </ul>
 
     <div class="tab-content">
-        <div id="history_tab_btn" class=" tab-pane active text-muted">
+        <div id="history_tab_btn" class=" tab-pane active text-muted my-3">
             <div class="card main-card-ui p-2 rounded shadow-lg">
 
                 <div class="d-flex">
@@ -467,5 +478,31 @@
             // "sDom": '<"row view-filter"<"col-sm-12"<"pull-left"l><"pull-right"f><"clearfix">>>t<"row view-pager"<"col-sm-12"<"text-center"ip>>>'
         });
     }
+
+var history_tab_btn = document.getElementById('history_tab_btn');
+swipedetect(history_tab_btn, function(history_tab_btn_swipe){
+    if (history_tab_btn_swipe =='left'){
+        $('#history_tab_link').removeClass('active');
+        $('#history_tab_btn').removeClass('active');
+        $('#history_tab_btn').addClass('hide');
+
+        $('#instructions_tab_link').addClass('active');
+        $('#instructions_tab_btn').addClass('active');
+        $('#instructions_tab_btn').addClass('show'); 
+    }
+});
+
+var instructions_tab_btn = document.getElementById('instructions_tab_btn');
+swipedetect(instructions_tab_btn, function(instruction_tab_btn_swipe){
+if (instruction_tab_btn_swipe =='right'){
+    $('#instructions_tab_link').removeClass('active');
+    $('#instructions_tab_btn').removeClass('active');
+    $('#instructions_tab_btn').addClass('hide');
+
+    $('#history_tab_btn').addClass('active');
+    $('#history_tab_link').addClass('active');
+    $('#history_tab_btn').addClass('show'); 
+}
+});
 
 </script>

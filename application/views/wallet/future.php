@@ -80,21 +80,30 @@
 </div>
 
 <style>
-    .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
-        font-size:1.5em;
-        opacity: 1 !important;
-        -webkit-transition: color 1s, font-size .25s;
-        -moz-transition: color 1s, font-size .25s;
-        -o-transition: color 1s, font-size .25s;
-        transition: color 1s, font-size .25s;
+    .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
+		font-size:2em;
+		opacity: 1 !important;
+		-webkit-transition: color 1s, font-size .25s;
+		-moz-transition: color 1s, font-size .25s;
+		-o-transition: color 1s, font-size .25s;
+		transition: color 1s, font-size .25s;
 
-        border-color: transparent;
-        background-color:transparent;
-        /* LIGHTMODE_ */
-        /* color: #3a189f!important;  */
-        /* DARKMODE_ */
-        /* color: white !important;  */
-    }
+		border-color: transparent;
+		background-color:transparent;
+
+		padding-bottom: 5px;
+		position: relative;
+	}
+
+	.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active:before{
+		content: "";
+		position: absolute;
+		width: 50%;
+		height: 1px;
+		bottom: 0;
+		left: 25%;
+		border-bottom: .2rem solid var(--minetab-color);
+	}
 
     #future_history_container a{
         /* color: #94abef; */
@@ -109,14 +118,14 @@
 <div id="future_history_container">
     <ul class="nav nav-tabs nav-fill">
       <li class="nav-item">
-        <a class="nav-link active main-color-link" aria-current="page" data-toggle="tab" href="#future_history_tab_btn">History</a>
+        <a id="future_history_tab_link" class="nav-link active main-color-link" aria-current="page" data-toggle="tab" href="#future_history_tab_btn">History</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link main-color-link" data-toggle="tab" href="#future_instructions_tab_btn">Instructions</a>
+        <a id="future_instructions_tab_link" class="nav-link main-color-link" data-toggle="tab" href="#future_instructions_tab_btn">Instructions</a>
       </li>
     </ul>
 
-    <div class="tab-content">
+    <div class="tab-content mt-3">
         <div id="future_history_tab_btn" class="tab-pane active text-muted">
             <div class="card main-card-ui p-2 rounded shadow-lg">
                 <div class="d-flex">
@@ -394,4 +403,31 @@
             // "sDom": '<"row view-filter"<"col-sm-12"<"pull-left"l><"pull-right"f><"clearfix">>>t<"row view-pager"<"col-sm-12"<"text-center"ip>>>'
         });
     }
+
+
+    var future_history_tab_btn = document.getElementById('future_history_tab_btn');
+    swipedetect(future_history_tab_btn, function(future_history_tab_btn_swipe){
+        if (future_history_tab_btn_swipe =='left'){
+            $('#future_history_tab_link').removeClass('active');
+            $('#future_history_tab_btn').removeClass('active');
+            $('#future_history_tab_btn').addClass('hide');
+
+            $('#future_instructions_tab_link').addClass('active');
+            $('#future_instructions_tab_btn').addClass('active');
+            $('#future_instructions_tab_btn').addClass('show'); 
+        }
+    });
+
+    var future_instructions_tab_btn = document.getElementById('future_instructions_tab_btn');
+    swipedetect(future_instructions_tab_btn, function(future_instructions_tab_btn_swipe){
+    if (future_instructions_tab_btn_swipe =='right'){
+        $('#future_instructions_tab_link').removeClass('active');
+        $('#future_instructions_tab_btn').removeClass('active');
+        $('#future_instructions_tab_btn').addClass('hide');
+
+        $('#future_history_tab_link').addClass('active');
+        $('#future_history_tab_btn').addClass('active');
+        $('#future_history_tab_btn').addClass('show'); 
+    }
+    });
 </script>
