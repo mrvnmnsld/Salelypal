@@ -1080,7 +1080,7 @@ class admin extends MY_Controller {
 
 							'<div style="height: 250px; width: 500px; background-color: rgb(255, 255, 255); border-radius: 0px 0px 20px 20px; margin:auto; padding: 20px">'.
 								'<div style="text-align: center;">'.
-									'<img src="http://testingcenter.xyz/assets/imgs/rejected.png" style="height:100px; width: 100px;>'.
+									'<img src="http://testingcenter.xyz/assets/imgs/rejected.png" style="height:50px; width: 50px;>'.
 									'<h1 style="color: #aea9b3; font-family: Poppins, sans-serif;">'.
 									    'Account KYC Rejected'.
 									'</h1>'.
