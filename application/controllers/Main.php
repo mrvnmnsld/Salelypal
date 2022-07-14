@@ -194,7 +194,7 @@ class main extends MY_Controller {
 			'timestamp' => $this->_getTimeStamp24Hours(),
 			// 'birthday' => $data['birthdate'],
 			'verified' => 0,
-			'isPro' => 1,//change
+			'isPro' => 0,//change
 		);
 
 		if (isset($data['referalCode'])) {

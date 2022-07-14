@@ -77,28 +77,37 @@ class admin extends MY_Controller {
    		foreach ($users as $key => $value) {
    			if ($value->referType!=null&&$value->referType!=null) {
 	   			if ($value->referType == "agent") {
-			   		$res = $this->_getRecordsData(
+			   		$refered = $this->_getRecordsData(
 			   			$selectfields = array("agent_profile_tbl.*"), 
 				   		$tables = array('agent_profile_tbl'), 
 				   		$fieldName = array("id"), $where = array($value->referred_user_id), 
 				   		$join = null, $joinType = null, $sortBy = null, 
 				   		$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
 			   		);
+
+   		   			if (count($refered)>=1) {
+   		   				$users[$key]->referedConcat = ucfirst($value->referType).": ".$refered[0]->username;
+   		   			}else{
+   						$users[$key]->referedConcat = "No User/Agent ";
+
+   		   			}
 	   			}else{
-	   				$res = $this->_getRecordsData(
+	   				$refered = $this->_getRecordsData(
 			   			$selectfields = array("user_tbl.*"), 
 				   		$tables = array('user_tbl'), 
 				   		$fieldName = array("userID"), $where = array($value->referred_user_id), 
 				   		$join = null, $joinType = null, $sortBy = null, 
 				   		$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
 			   		);
-	   			}
-	   			if (count($res)>=1) {
-	   				$users[$key]->referedConcat = ucfirst($value->referType).": ".$res[0]->email;
-	   			}else{
-					$users[$key]->referedConcat = "No User/Agent ";
 
+   		   			if (count($refered)>=1) {
+   		   				$users[$key]->referedConcat = ucfirst($value->referType).": ".$refered[0]->email;
+   		   			}else{
+   						$users[$key]->referedConcat = "No User/Agent ";
+
+   		   			}
 	   			}
+	   			
    				// echo json_encode($res);
    			}else{
 				$users[$key]->referedConcat = "No referral";
@@ -1080,7 +1089,7 @@ class admin extends MY_Controller {
 
 							'<div style="height: 250px; width: 500px; background-color: rgb(255, 255, 255); border-radius: 0px 0px 20px 20px; margin:auto; padding: 20px">'.
 								'<div style="text-align: center;">'.
-									'<img src="http://testingcenter.xyz/assets/imgs/rejected.png" style="height:50px; width: 50px;>'.
+									'<img src="http://testingcenter.xyz/assets/imgs/rejected.png" style="height:50px!important; width: 50px!important;>'.
 									'<h1 style="color: #aea9b3; font-family: Poppins, sans-serif;">'.
 									    'Account KYC Rejected'.
 									'</h1>'.
