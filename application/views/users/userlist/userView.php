@@ -511,7 +511,9 @@
 			        		'userID':selectedData['userID'],
 			        		'faceFileName':selectedData['FaceImagePath'],
 			        		'IdFileName':selectedData['IDImagePath'],
+			        		'email':selectedData['email'],
 			        	});
+
 			        	pushNewNotif("Rejected KYC!","Account KYC Rejected. Please Upload a new photo that follows the instructions!",selectedData['userID'])
 
 			        	loadDatatable('admin/getAllUsers');

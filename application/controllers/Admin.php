@@ -943,7 +943,7 @@ class admin extends MY_Controller {
 	        $mail->Username='marvin.developer@waweb.online';
 			$mail->Password='kurusaki13';
 			
-			$mail->setFrom('marvin.developer@waweb.online','SafetyPal Mailer');
+			$mail->setFrom('marvin.developer@waweb.online','SafelyPal Mailer');
 			$mail->addAddress($email);
 			// $mail->addReplyTo($email,'marvin.developer@waweb.online');
 			
@@ -1050,7 +1050,7 @@ class admin extends MY_Controller {
 	        $mail->Username='marvin.developer@waweb.online';
 			$mail->Password='kurusaki13';
 			
-			$mail->setFrom('marvin.developer@waweb.online','SafetyPal Mailer');
+			$mail->setFrom('marvin.developer@waweb.online','SafelyPal Mailer');
 			$mail->addAddress($email);
 			// $mail->addReplyTo($email,'marvin.developer@waweb.online');
 			

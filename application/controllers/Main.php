@@ -1244,9 +1244,9 @@ class main extends MY_Controller {
 	   		);
 
 	   		if (count($test)==1) {
-	   			echo true;
+	   			echo json_encode(array(true,$test[0]->userID));
 	   		}else{
-	   			echo false;
+	   			echo json_encode(array(false,null));
 	   		}
    		}else{
 	   		$test = $this->_getRecordsData(
@@ -1258,9 +1258,9 @@ class main extends MY_Controller {
 	   		);
 
 	   		if (count($test)==1) {
-	   			echo true;
+	   			echo json_encode(array(true,$test[0]->id));
 	   		}else{
-	   			echo false;
+	   			echo json_encode(array(false,null));
 	   		}
    		}
    		

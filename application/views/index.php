@@ -766,6 +766,7 @@
 		var id_upload=0;
 		var currentUserID;
 		var isOnline = navigator.onLine;
+		var idNum;
 		const container = document.querySelector(".container"),
 		  pwShowHide = document.querySelectorAll(".showHidePw"),
 		  pwFields = document.querySelectorAll(".password"),
@@ -1187,7 +1188,17 @@
 				referType = 'agent'
 			}
 
-			return (ajaxShortLinkNoParse("checkIfReferalCodeIsValid",{'referalCode':value}))
+			var result = ajaxShortLink("checkIfReferalCodeIsValid",{'referalCode':value});
+			console.log(result);
+
+			idNum = result[1]
+
+			if (result[0]==true) {
+				return true;
+			}else{
+				return false;
+			}
+
 		}, "Referral Code is Invalid");
 
 		$("#signUpForm").validate({
@@ -1226,7 +1237,7 @@
 
 	  			data.push({
 	  				'name':'referalCode',
-	  				'value':referalCode
+	  				'value':idNum
 	  			})
 
 	  			data.push({
@@ -1239,6 +1250,7 @@
 			    $("#fullName_kyc").val($("input[name='fullName']").val());
 
 			    var res = ajaxShortLink("saveSignUpForm",data);
+
 					currentUserID = res;
 			    console.log(res);
 
