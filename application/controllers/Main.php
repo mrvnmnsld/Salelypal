@@ -1006,7 +1006,7 @@ class main extends MY_Controller {
         );
         
         $mail->isHTML(true);
-		$mail->Subject='SafetyPal - Mailer';
+		$mail->Subject='SafelyPal - Mailer';
     
 		$mail->Body=
 		'<html>'.
