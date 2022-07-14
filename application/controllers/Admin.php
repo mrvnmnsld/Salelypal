@@ -966,21 +966,20 @@ class admin extends MY_Controller {
 					'<div>'.
 						'<div style="background-color: #aea9b3; padding: 10px">'.
 
-							'<div style="width: 500px; border-radius:20px 20px 0px 0px ; background-color: #9327f8; margin:auto; padding: 20px">'.
+							'<div style="width: 510px; border-radius:20px 20px 0px 0px ; background-color: #9327f8; margin:auto; padding: 20px">'.
 								'<div style="color: #fff; text-align: center;">'.
 									'<div style="font-weight: bold; font-size: 2em;">WELCOME TO SAFELYPAL</div>'.
 								'</div>'.
 							'</div>'.
 
-							'<div style="height: 300px; width: 500px; background-color: #fff; border-radius: 0px 0px 20px 20px; margin:auto; padding: 20px">'.
+							'<div style="height: 250px; width: 510px; background-color: #fff; border-radius: 0px 0px 20px 20px; margin:auto; padding: 20px">'.
 								'<div style="text-align: center;">'.
-									'<img src="http://testingcenter.xyz/assets/imgs/Email_OTP.png" style="height:100px; width: 100px;">'.
-									'<h1 style="color: #9327f8; font-family: Poppins, sans-serif;">'.
-									    'Verify your Account'.
+									'<img src="http://testingcenter.xyz/assets/imgs/verified.png" style="height:100px; width: 100px;">'.
+									'<h1 style="color: #aea9b3; font-family: Poppins, sans-serif;">'.
+									    'Your KYC is Verified'.
 									'</h1>'.
-									'<h3 style="color: #aea9b3;">Here is your One Time Password '.
-					                'to validate your account</h3>'.
-									'<p style="font-size: 2em; letter-spacing: 5px; font-weight: bold; border: 1px solid #9327f8; width: 50%; margin:auto; border-radius: 20px;">'.$_GET["otp"].'</p>'.
+									'<h3 style="color: #9327f8;">You can now start using SafelyPal '.
+					                'and Earn Crypto hassle-free!</h3>'.
 								'</div>'.
 							'</div>'.
 
@@ -1082,10 +1081,11 @@ class admin extends MY_Controller {
 							'<div style="height: 250px; width: 500px; background-color: rgb(255, 255, 255); border-radius: 0px 0px 20px 20px; margin:auto; padding: 20px">'.
 								'<div style="text-align: center;">'.
 									'<img src="http://testingcenter.xyz/assets/imgs/rejected.png" style="height:100px; width: 100px;>'.
-									'<h1 style="color: #9327f8; font-family: Poppins, sans-serif;">'.
+									'<h1 style="color: #aea9b3; font-family: Poppins, sans-serif;">'.
 									    'Account KYC Rejected'.
 									'</h1>'.
-									'<h3 style="color: #aea9b3;">Please Upload a new photo that follows the instructions!</h3>'.
+									'<h3 style="color: #9327f8;">Please Upload a new photo that '.
+					                'follows the instructions!</h3>'.
 								'</div>'.
 							'</div>'.
 
