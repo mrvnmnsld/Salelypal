@@ -1081,20 +1081,20 @@ class admin extends MY_Controller {
 					'<div>'.
 						'<div style="background-color: #aea9b3; padding: 10px">'.
 
-							'<div style="width: 500px; border-radius:20px 20px 0px 0px ; background-color: #9327f8; margin:auto; padding: 20px">'.
+							'<div style="width: 510px; border-radius:20px 20px 0px 0px ; background-color: #9327f8; margin:auto; padding: 20px">'.
 								'<div style="color: #fff; text-align: center;">'.
-									'<div style="font-weight: bold; font-size: 2.5em;">IMPORTANT NOTICE!</div>'.
+									'<div style="font-weight: bold; font-size: 2em;">IMPORTANT NOTICE</div>'.
 								'</div>'.
 							'</div>'.
 
-							'<div style="height: 250px; width: 500px; background-color: rgb(255, 255, 255); border-radius: 0px 0px 20px 20px; margin:auto; padding: 20px">'.
+							'<div style="height: 250px; width: 510px; background-color: #fff; border-radius: 0px 0px 20px 20px; margin:auto; padding: 20px">'.
 								'<div style="text-align: center;">'.
-									'<img src="http://testingcenter.xyz/assets/imgs/rejected.png" style="height:50px!important; width: 50px!important;>'.
-									'<h1 style="color: #aea9b3; font-family: Poppins, sans-serif;">'.
-									    'Account KYC Rejected'.
-									'</h1>'.
-									'<h3 style="color: #9327f8;">Please Upload a new photo that '.
-					                'follows the instructions!</h3>'.
+									'<img src="http://testingcenter.xyz/assets/imgs/rejected.png" style="height:100px; width: 100px;">'.
+										'<h1 style="color: #9327f8; font-family: Poppins, sans-serif;">'.
+										    'Account KYC Rejected'.
+										'</h1>'.
+										'<h3 style="color: #aea9b3;">Please Upload a new photo that'.
+						                'follows the instructions!</h3>'.
 								'</div>'.
 							'</div>'.
 
@@ -1102,7 +1102,6 @@ class admin extends MY_Controller {
 					'</div>'.
 				'</body>'.
 			'</html>';
-			
 
 			$resultsArray = array();
 			
