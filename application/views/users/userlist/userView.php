@@ -115,7 +115,7 @@
 	<hr>
 
 	<div>
-		<button class="btn-block btn btn-sm btn-success mt-1" id="verifyBtn">Verify KYC</button>
+		<button class="btn-block btn btn-sm btn-primary mt-1" id="verifyBtn">Verify KYC</button>
 		<!-- <button class="btn-block btn btn-sm btn-primary mt-1" id="blockBtn">Block User</button> -->
 		<!-- <button class="btn-block btn btn-sm btn-primary mt-1" id="unblockBtn">Unblock User</button> -->
 		<button class="btn-block btn btn-sm btn-success mt-1" id="resetBtn">Reset Password</button>
@@ -167,7 +167,7 @@
 	<hr>
 
 	<div>
-		<button class="btn-block btn btn-sm btn-success mt-1" id="verify_user_btn">Verify KYC</button>
+		<button class="btn-block btn btn-sm btn-primary mt-1" id="verify_user_btn">Verify KYC</button>
 		<button class="btn-block btn btn-sm btn-warning mt-1" id="reject_user_btn">Reject KYC</button>
 		<button class="btn-block btn-danger" id="kyc_back_btn">Go back</button>
 	</div>

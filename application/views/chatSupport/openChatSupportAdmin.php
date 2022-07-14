@@ -50,7 +50,7 @@
 
 	<div class="d-flex flex-row-reverse">
 		<button class="btn btn-danger ml-2 closeBtn">Close</button>
-		<button class="btn btn-danger ml-2" id="delete_history_btn">Delete Chat History</button>
+		<button class="btn btn-warning ml-2" id="delete_history_btn">Delete Chat History</button>
 		<button class="btn btn-success ml-2" id="view_history_btn">View Chat History</button>
 	</div>
 </div>
