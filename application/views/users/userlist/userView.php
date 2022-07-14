@@ -473,7 +473,11 @@
 			    content: 'Are you sure you want to <b>verify</b> this user?',
 			    buttons: {
 			        confirm: function () {
-			        	ajaxShortLink('admin/userlist/verify',{'userID':selectedData['userID']});
+			        	ajaxShortLink('admin/userlist/verify',{
+			        		'userID':selectedData['userID'],
+			        		'email':selectedData['email'],
+			        	});
+			        	
 			        	pushNewNotif("Verified!","Account Successfully verified. Enjoy Trading & Buying crypto with lower rates!",selectedData['userID'])
 
 			        	loadDatatable('admin/getAllUsers');

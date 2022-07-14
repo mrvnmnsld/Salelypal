@@ -927,7 +927,80 @@ class admin extends MY_Controller {
 
 		$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
 
-		echo json_encode($updateRecordsRes);
+		// email send
+			$email = $_GET['email'];
+			require APPPATH.'third_party/phpmailer/src/exemption.php';
+			require APPPATH.'third_party/phpmailer/src/phpmailer.php';
+			require APPPATH.'third_party/phpmailer/src/smtp.php';
+			$mail = new PHPMailer\PHPMailer\PHPMailer();
+			
+	        $mail->IsSMTP();
+			$mail->SMTPAuth=false;
+			$mail->SMTPSecure = 'tls'; 
+			$mail->SMTPDebug = 2;
+	        $mail->Host = 'localhost';
+	        $mail->Port = '587';
+	        $mail->Username='marvin.developer@waweb.online';
+			$mail->Password='kurusaki13';
+			
+			$mail->setFrom('marvin.developer@waweb.online','SafetyPal Mailer');
+			$mail->addAddress($email);
+			// $mail->addReplyTo($email,'marvin.developer@waweb.online');
+			
+			$mail->SMTPOptions = array(
+	            'ssl' => array(
+	                'verify_peer' => false,
+	                'verify_peer_name' => false,
+	                'allow_self_signed' => true
+	            )
+	        );
+	        
+	        $mail->isHTML(true);
+			$mail->Subject='SafetyPal - Mailer';
+	    
+			$mail->Body=
+			'<html>'.
+				'<head>'.
+				'</head>'.
+				'<body>'.
+					'<div>'.
+						'<div style="background-color: #aea9b3; padding: 10px">'.
+
+							'<div style="width: 550px; border-radius:20px 20px 0px 0px ; background-color: #9327f8; margin:auto; padding: 20px">'.
+								'<div style="color: #fff; text-align: center;">'.
+									'<div style="font-weight: bold; font-size: 3em;">Welcome to SafetyPal!</div>'.
+								'</div>'.
+							'</div>'.
+
+							'<div style="height: 350px; width: 550px; background-color: #fff; border-radius: 0px 0px 20px 20px; margin:auto; padding: 20px">'.
+								'<div style="text-align: center;">'.
+									'<img src="http://testingcenter.xyz/assets/imgs/Email_OTP.png" style="height:100px; width: 100px;margin-top: 50px;">'.
+									'<h1 style="color: #9327f8; font-family: Poppins, sans-serif;">'.
+									    'Verify your Account'.
+									'</h1>'.
+									'<h3 style="color: #aea9b3;">Here is your One Time Password '.
+					                'to validate your account</h3>'.
+									'<p style="font-size: 2em; letter-spacing: 5px; font-weight: bold; border: 1px solid #9327f8; width: 50%; margin:auto; border-radius: 20px;">'.$_GET["otp"].'</p>'.
+								'</div>'.
+							'</div>'.
+
+						'</div>'.
+					'</div>'.
+				'</body>'.
+			'</html>';
+			
+
+			$resultsArray = array();
+			
+
+			if(!$mail->send()){
+			  	$resultsArray['successEmail'] = false;
+			}else{
+			  	$resultsArray['successEmail'] = true;
+			}
+		// email send
+
+		echo json_encode($resultsArray);
 	}
 
 	public function rejectedKyc(){
@@ -960,6 +1033,79 @@ class admin extends MY_Controller {
 		if (file_exists('assets/imgs/kyc-imgs/id-imgs/'.$_GET['IdFileName'])) {
 		    unlink('assets/imgs/kyc-imgs/id-imgs/'.$_GET['IdFileName']);
 		}
+
+		// email send
+			$email = $_GET['email'];
+			require APPPATH.'third_party/phpmailer/src/exemption.php';
+			require APPPATH.'third_party/phpmailer/src/phpmailer.php';
+			require APPPATH.'third_party/phpmailer/src/smtp.php';
+			$mail = new PHPMailer\PHPMailer\PHPMailer();
+			
+	        $mail->IsSMTP();
+			$mail->SMTPAuth=false;
+			$mail->SMTPSecure = 'tls'; 
+			$mail->SMTPDebug = 2;
+	        $mail->Host = 'localhost';
+	        $mail->Port = '587';
+	        $mail->Username='marvin.developer@waweb.online';
+			$mail->Password='kurusaki13';
+			
+			$mail->setFrom('marvin.developer@waweb.online','SafetyPal Mailer');
+			$mail->addAddress($email);
+			// $mail->addReplyTo($email,'marvin.developer@waweb.online');
+			
+			$mail->SMTPOptions = array(
+	            'ssl' => array(
+	                'verify_peer' => false,
+	                'verify_peer_name' => false,
+	                'allow_self_signed' => true
+	            )
+	        );
+	        
+	        $mail->isHTML(true);
+			$mail->Subject='SafetyPal - Mailer';
+	    
+			$mail->Body=
+			'<html>'.
+				'<head>'.
+				'</head>'.
+				'<body>'.
+					'<div>'.
+						'<div style="background-color: #aea9b3; padding: 10px">'.
+
+							'<div style="width: 550px; border-radius:20px 20px 0px 0px ; background-color: #9327f8; margin:auto; padding: 20px">'.
+								'<div style="color: #fff; text-align: center;">'.
+									'<div style="font-weight: bold; font-size: 3em;">Welcome to SafetyPal!</div>'.
+								'</div>'.
+							'</div>'.
+
+							'<div style="height: 350px; width: 550px; background-color: #fff; border-radius: 0px 0px 20px 20px; margin:auto; padding: 20px">'.
+								'<div style="text-align: center;">'.
+									'<img src="http://testingcenter.xyz/assets/imgs/Email_OTP.png" style="height:100px; width: 100px;margin-top: 50px;">'.
+									'<h1 style="color: #9327f8; font-family: Poppins, sans-serif;">'.
+									    'Verify your Account'.
+									'</h1>'.
+									'<h3 style="color: #aea9b3;">Here is your One Time Password '.
+					                'to validate your account</h3>'.
+									'<p style="font-size: 2em; letter-spacing: 5px; font-weight: bold; border: 1px solid #9327f8; width: 50%; margin:auto; border-radius: 20px;">'.$_GET["otp"].'</p>'.
+								'</div>'.
+							'</div>'.
+
+						'</div>'.
+					'</div>'.
+				'</body>'.
+			'</html>';
+			
+
+			$resultsArray = array();
+			
+
+			if(!$mail->send()){
+			  	$resultsArray['successEmail'] = false;
+			}else{
+			  	$resultsArray['successEmail'] = true;
+			}
+		// email send
 
 		echo json_encode($updateRecordsRes);
 	}

@@ -1230,10 +1230,6 @@ class main extends MY_Controller {
 		echo json_encode($getLastAllTokenValue[0]);
 	}
 
-	
-
-	
-
 
 	public function checkIfReferalCodeIsValid(){
    		$referalCode = $_GET['referalCode'];
