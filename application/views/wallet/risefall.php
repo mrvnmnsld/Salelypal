@@ -260,7 +260,7 @@
         clearInterval(tokenPriceInterval);
 
         $("#container").empty();
-        $("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'userWallet/riseFall'}));
+        $("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/riseFall'}));
     });
 
     setTimeout(function() {
@@ -285,6 +285,7 @@
                 },
             });
         }
+        
         //continous
             tokenPriceInterval = setInterval(function() {
                 tokenPriceBinanceLastPrice = parseFloat(ajaxShortLinkNoParse("https://api.binance.com/api/v3/ticker/24hr?symbol="+tokenPairArray.tokenPairID).lastPrice).toFixed(4);

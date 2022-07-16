@@ -203,11 +203,11 @@
 
     //setChart
         setTimeout(function() {
-            if($("#tradingview").length == 1){
+            if($("#tradingview").length==1){
                 new TradingView.widget({
                     "autosize": true,
-                    // "symbol": "BINANCE:ETHUSDT",
-                    "symbol": tokenPairArray.tokenPairID,
+                    "symbol": "BINANCE:"+tokenPairArray.tokenPairID,
+                    // "symbol": "BINANCE:BTCUSDT",
                     "interval": "1",
                     "timezone": Intl.DateTimeFormat().resolvedOptions().timeZone,
                     "theme": chartTheme,
@@ -215,8 +215,13 @@
                     "locale": "en",
                     "toolbar_bg": "#f1f3f6",
                     "enable_publishing": false,
+                    "hide_top_toolbar": true,
+                    "hide_legend": true,
                     "save_image": false,
-                    "container_id": "tradingview"
+                    "container_id": "tradingview",
+                    "loading_screen": {
+                        "backgroundColor": "#f1f3f6",
+                    },
                 });
             }
 

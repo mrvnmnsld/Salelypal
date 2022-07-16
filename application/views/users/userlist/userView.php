@@ -344,14 +344,14 @@
 							$("#errorReporter").addClass("text-danger");
 							$("#errorReporter").removeClass("text-success");
 							$("#errorReporter").text("No Face Found in Face Image");
-			  				$("#verify_user_btn").attr("disabled",true);
+			  				// $("#verify_user_btn").attr("disabled",true);
 
 				  		}
 			  		}else{
 			  			$("#errorReporter").addClass("text-danger");
 			  			$("#errorReporter").removeClass("text-success");
 						$("#errorReporter").text("No Face Found in ID Image");
-		  				$("#verify_user_btn").attr("disabled",true);
+		  				// $("#verify_user_btn").attr("disabled",true);
 						
 						$("#loading_text").text("Loading...");
 				  		$("#loading").toggle();

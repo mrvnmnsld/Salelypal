@@ -396,10 +396,10 @@
 			<div id="asset_tab_container" class="mt-3">
 				<ul id="asset_tabs" class="nav nav-tabs nav-justified" role="tablist">
 					<li class="nav-item">
-						<a class="nav-link active tab-pane fade show main-color-link" data-toggle="tab" href="#balance_tab">BALANCE</a>
+						<a id="balance_tab_id" class="nav-link active tab-pane fade show main-color-link" data-toggle="tab" href="#balance_tab">BALANCE</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link tab-pane fade show main-color-link" data-toggle="tab" href="#portfolio_tab">PORTFOLIO</a>
+						<a id="portfolio_tab_id" class="nav-link tab-pane fade show main-color-link" data-toggle="tab" href="#portfolio_tab">PORTFOLIO</a>
 					</li>
 				</ul>
 
@@ -1271,12 +1271,12 @@
 
 			if (tokenInfo.networkName == 'trx'||tokenInfo.networkName == 'trc20') {
 				if (tokenInfo.tokenName.toUpperCase() === 'trx'.toUpperCase()) {
-					balanceInner = ajaxShortLink('test-platform/getTronBalance',{
-						// 'trc20Address':currentUser['trc20_wallet']
+					balanceInner = ajaxShortLink('userWallet/getTronBalance',{
+						'trc20Address':currentUser['trc20_wallet']
 					})['balance'];			
 				}else{
-					balanceInner = ajaxShortLink('test-platform/getTokenBalanceBySmartAddress',{
-						// 'trc20Address':currentUser['trc20_wallet'],
+					balanceInner = ajaxShortLink('userWallet/getTRC20Balance',{
+						'trc20Address':currentUser['trc20_wallet'],
 						'contractaddress':tokenInfo.smartAddress,
 					})['balance'];
 				}
@@ -1284,13 +1284,13 @@
 
 				if(tokenInfo.tokenName.toUpperCase() === 'bnb'.toUpperCase()){
 
-					balanceInner = ajaxShortLink('test-platform/getBinancecoinBalance',{
-						// 'bsc_wallet':currentUser['bsc_wallet']
+					balanceInner = ajaxShortLink('userWallet/getBinancecoinBalance',{
+						'bsc_wallet':currentUser['bsc_wallet']
 					})['balance'];
 
 				}else{
-					balanceInner = ajaxShortLink('test-platform/getTokenBalanceBySmartAddress',{
-						// 'bsc_wallet':currentUser['bsc_wallet'],
+					balanceInner = ajaxShortLink('userWallet/getBscTokenBalance',{
+						'bsc_wallet':currentUser['bsc_wallet'],
 						'contractaddress':tokenInfo.smartAddress
 					})['balance'];
 				}
@@ -1298,13 +1298,13 @@
 
 				if(tokenInfo.tokenName.toUpperCase() === 'eth'.toUpperCase()){
 
-					balanceInner = ajaxShortLink('test-platform/getEthereumBalance',{
-						// 'erc20_address':currentUser['erc20_wallet']
+					balanceInner = ajaxShortLink('userWallet/getEthereumBalance',{
+						'erc20_address':currentUser['erc20_wallet']
 					})['balance'];
 
 				}else{
-					balanceInner = ajaxShortLink('test-platform/getTokenBalanceBySmartAddress',{
-						// 'erc20_address':currentUser['erc20_wallet'],
+					balanceInner = ajaxShortLink('userWallet/getErc20TokenBalance',{
+						'erc20_address':currentUser['erc20_wallet'],
 						'contractaddress':tokenInfo.smartAddress
 					})['balance'];
 				}

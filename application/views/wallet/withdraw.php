@@ -252,8 +252,8 @@
 
 		$("#availableAmountContainer").text(parseFloat(balanceInner).toFixed(4));
 
-		if ($(this).val().split("_")[1] == 'trc20') {
-			$("#warningReported").html("<b>Important Note:</b><br>TRC20 token transfer may consume energy, if energy is insufficient, TRX will be burned. Please ensure you have more than enough TRX to avoid transfer failure.<br><br> You may check TRC20 TRX Fee at <a href='https://tronstation.io/calculator' target='_blank'>Tronstation.io</a>");
+		if ($(this).val().split("_")[1] == 'trc20'||$(this).val().split("_")[1] == 'trx') {
+			$("#warningReported").html("<b>Important Note:</b><br>TRC20 token transfer may consume energy, if energy is insufficient, TRX will be burned. Please ensure you have more than enough TRX (gas is estimated from 5-9 TRX per transaction) to avoid transfer failure.<br><br> You may check TRC20 TRX Fee at <a href='https://tronstation.io/calculator' target='_blank'>Tronstation.io</a>");
 			$("#network_container").text("TRON Mainet");
 		}else if($(this).val().split("_")[1] == 'bsc'){
 			$("#warningReported").html("<b>Important Note:</b><br>BSC token transfer will consume transaction fee, if BNB is insufficient the transaction will fail Please ensure you have more than enough BNB to avoid transfer failure.<br><br> <b>Estimated Transaction Fee: </b><span class='text-warning' id='transactionFee'>"+estimateGasBsc(21000,ajaxShortLink("userWallet/getBscGasPrice").gasprice).toFixed(6)+" BNB</span>");
@@ -335,7 +335,12 @@
 		var tokenSelected = $("#tokenContainerSelect").val().split("_")[0];
 
 		if (tokenNetworkSelected=='trc20'||tokenNetworkSelected=='trx') {
-	    	return (gasSupply<=5)
+	    	if (tokenNetworkSelected=='trx') {
+	    		return (((parseFloat(gasSupply)+5)-value)>=5)
+	    	}else{
+	    		return (parseFloat(gasSupply)>=5&&balanceInner>=value)
+
+	    	}
 		}else if(tokenNetworkSelected=='bsc'){
 			if(tokenSelected.toUpperCase() === 'bnb'.toUpperCase()){
 				var transactionFee = estimateGasBsc(21000,ajaxShortLink("userWallet/getBscGasPrice").gasprice).toFixed(6);
@@ -345,14 +350,14 @@
 				$("#warningReported").append("<div id='totalFee'><b>Total Fee: </b><span class='text-warning'>"+valueWithFee+"</span><div>");
 				$("#warningReported").html("<b>Estimated Transaction Fee: </b><span class='text-warning' id='transactionFee'>"+transactionFee+" BNB</span>");
 
-				return (valueWithFee<=balanceInner)
+				return (parseFloat(valueWithFee)<=parseFloat(balanceInner))
 			}else{
 				var transactionFee = estimateGasBsc(21000,ajaxShortLink("userWallet/getBscGasPrice").gasprice).toFixed(6);
 				
 				$("#totalFee").remove();
 				$("#warningReported").html("<b>Estimated Transaction Fee: </b><span class='text-warning' id='transactionFee'>"+transactionFee+" BNB</span>");
 
-				return (transactionFee<=gasSupply)
+				return (parseFloat(transactionFee)<=parseFloat(gasSupply)&&balanceInner>=value)
 			}
 			
 		}else if(tokenNetworkSelected=='erc20'){
@@ -364,7 +369,7 @@
 				$("#warningReported").append("<div id='totalFee'><b>Total Fee: </b><span class='text-warning'>"+valueWithFee+"</span><div>");
 				$("#warningReported").html("<b>Estimated Transaction Fee: </b><span class='text-warning' id='transactionFee'>"+transactionFee+" BNB</span>");
 
-				return (valueWithFee<=balanceInner)
+				return (parseFloat(valueWithFee)<=parseFloat(balanceInner))
 			}else{
 				
 				var transactionFee = estimateGasBsc(21000,ajaxShortLink("userWallet/getEthGasPrice").gasprice).toFixed(6);
@@ -372,12 +377,11 @@
 				$("#totalFee").remove();
 				$("#warningReported").html("<b>Estimated Transaction Fee: </b><span class='text-warning' id='transactionFee'>"+transactionFee+" BNB</span>");
 
-				return (transactionFee<=gasSupply)
+				return (parseFloat(transactionFee)<=parseFloat(gasSupply)&&balanceInner>=value)
 			}
-
 		}
 
-	}, "Your balance is not enough");
+	}, "Your balance is not enough or gas is not enough");
 
 	jQuery.validator.addMethod("checkPassword", function(value, element) {
 	    // return (value<=parseInt($("#availableAmountContainer").text()))
@@ -435,6 +439,7 @@
 	  		console.log(res);
 
 	  		if (res['ok'] == true) {
+	  			$("form")[0].reset();
 	  			var tokenNetworkSelected = $("#tokenContainerSelect").val().split("_")[1];
 	  			var tokenSelected = $("#tokenContainerSelect").val().split("_")[0];
 
