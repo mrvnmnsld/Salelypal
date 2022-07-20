@@ -20,10 +20,13 @@
 	.bootbox-close-button{
 		display: none;
 	}
+
+	div.dataTables_paginate {text-align: center}
 </style>
 
 <div id="innerContainer" class="p-3">
-	<div class="h3 text-danger text-center animate__flash animate__animated animate__infinite">Strict Mode Active</div>
+	<!-- <div class="h3 text-danger text-center animate__flash animate__animated animate__infinite">Strict Mode Active</div> -->
+
 	<div id="successContainer" class="text-center" style="display: none;">
 		<i style="font-size:150px" class="fa fa-check-circle-o text-success" aria-hidden="true"></i><br>
 		<span style="font-size:30px" class="text-success">Success!</span>
@@ -33,7 +36,7 @@
 
 		<br>
 
-		<span>Please wait while our admins review your withdrawal transactions for your asset's safety</span>
+		<span>Please wait while we review your withdrawal transactions for your asset's safety</span>
 		
 		<br>
 		<hr>
@@ -87,36 +90,94 @@
 		<div id="errorReporter" class="text-center text-danger"></div>
 		<div id="warningReported" class="text-center"></div>
 
-		<hr>
-
 		<div class="row">
-			<button type="submit" class="col-md-12 btn btn-success btn-block m-2" id="confirmBtn">Send Widthrawal</button>
+			<button type="submit" class="col-md-12 btn btn-success btn-block mx-4" id="confirmBtn">Send Widthrawal</button>
 			<!-- <button type="button" class="col-md-12 btn btn-primary btn-block" id="view_pending_btn">View Pending Withdrawals</button> -->
 		</div>
 	</form>
 </div>
 
-<div class="p-1" id="test_table">
-	<div class="text-center">
-		<h4>Transaction History</h4>
-	</div>
+<div class="px-4">
+	<div class="card main-card-ui p-2 rounded shadow-lg">
+	    <div class="text-center">
+	        <h4>Pending Withdrawals</h4>
+	        <small>Click row to view details</small>
+	    </div>
+	    <br>
 
-	<table class="table table-sm table-borderless text-center" cellpadding="5" style="font-size:12px">
-	  <thead>
-	    <tr>
-	      <th scope="col">Token</th>
-	      <th scope="col">Amount</th>
-	      <!-- <th scope="col">Type</th> -->
-	      <th scope="col">Date</th>
-	    </tr>
-	  </thead>
-	  <tbody id="transactionContainer">
-	  </tbody>
-	</table>
+	    <table id="tableContainer_pending" class="" style="width: 100%!important;">  
+	        <thead>
+	            <tr>
+	                <th scope="col">ID</th>
+	                <th scope="col">Token</th>
+	                <th scope="col">Amount</th>
+	                <!-- <th scope="col">Type</th> -->
+	                <th scope="col">Date</th>
+	            </tr>
+	        </thead>
+	    </table>
+	</div>
+</div>
+
+<br>
+
+
+<div class="px-4">
+	<div class="card main-card-ui p-2 rounded shadow-lg">
+	    <div class="text-center">
+	        <h4>Withdrawal History</h4>
+	        <small>Click row to view details</small>
+	    </div>
+	    <br>
+
+	    <table id="tableContainer" class="" style="width: 100%!important;">  
+	        <thead>
+	            <tr>
+	                <th scope="col">TX</th>
+	                <th scope="col">Token</th>
+	                <th scope="col">Amount</th>
+	                <!-- <th scope="col">Type</th> -->
+	                <th scope="col">Date</th>
+	            </tr>
+	        </thead>
+	    </table>
+	</div>
 </div>
 
 <script type="text/javascript">
 	// var tokensSelected = ajaxShortLink('getAllTokens');
+	var SelectedtransactionDetails;
+	loadDatatable();
+	loadDatatablePending();
+
+	var getVolumeControl = ajaxShortLink("getVolumeControl");
+
+	var getTotalTopUpAndTotalContractBets = ajaxShortLink("getTotalTopUpAndTotalContractBets",{
+		"userID":currentUser.userID,
+	});
+
+	if (getVolumeControl[0].isOn == 1) {
+		var volumeControlValue = (getVolumeControl[0].percentage/100)*getTotalTopUpAndTotalContractBets[0];
+		console.log(volumeControlValue);
+
+		if (volumeControlValue>getTotalTopUpAndTotalContractBets[1]) {
+			$.confirm({
+				theme:"dark",
+				icon: 'fa fa-pencil',
+			    title: 'Something is up',
+			    columnClass: 'col-md-6 col-md-offset-6',
+			    content: 'You still need to use your <b>'+(volumeControlValue-getTotalTopUpAndTotalContractBets[1])+" USDT</b> to enable the withdrawal",
+			    	buttons: {
+			        confirm: function () {
+			        	$("#top_back_btn").click();
+			        },
+			    }
+			});
+			console.log("cant withdraw",getTotalTopUpAndTotalContractBets[0]-getTotalTopUpAndTotalContractBets[1]);
+		}
+
+		console.log(getVolumeControl,getTotalTopUpAndTotalContractBets);
+	}
 
 	for (var i = 0; i < tokensSelected.length; i++) {
 		$("#tokenContainerSelect").append(
@@ -134,108 +195,21 @@
 
 	$("#tokenContainerSelect").selectpicker();
 
-	var resWithdrawals = ajaxShortLink('userWallet/loadUserWithdrawal',{
-		'userID':currentUser.userID
-	});
-
-	// console.log(resWithdrawals);
-
-	resWithdrawals.forEach(function(item, index){
-		// console.log(resWithdrawals[index].txid);
-		$("#transactionContainer").append(
-			'<tr id="transaction_hash_'+resWithdrawals[index].txid+'">'+
-				'<td>'+resWithdrawals[index].token.toUpperCase()+'</td>'+
-				'<td>'+resWithdrawals[index].amount+'</td>'+
-				// '<td>'+allTransactionArray[index].isDeposit+'</td>'+
-				'<td>'+resWithdrawals[index].timestamp+'</td>'+
-			'</tr>'
-		);
-		
-		$('#transaction_hash_'+resWithdrawals[index].txid).on('click',function(){
-		    var transactionHash = $(this).attr('id').split("_")[2];
-		    console.log($(this).index());
-
-		    SelectedtransactionDetails = resWithdrawals[$(this).index()];
-
-		    if(SelectedtransactionDetails.network=="trx"||SelectedtransactionDetails.network=="trc20"){
-		    	SelectedtransactionDetails.network = 'trx';
-		    }
-
-	    	SelectedtransactionDetails['transactionHash'] = transactionHash;
-
-		    console.log(SelectedtransactionDetails);
-
-		    bootbox.dialog({
-		        title: '',
-		        message: ajaxLoadPage('quickLoadPage',{'pagename':'wallet/viewTransaction'}),
-		        size: 'large',
-		        centerVertical: true,
-		    });
-		});
-	});
-
-	// $("#availableAmountContainer").text(balance[$("#tokenContainerSelect").val().split("_")[0]]);
-
 	$("#closeBtn_transaction").on('click',function(){
-		backButton();
+		// backButton();
 	});
 
 	$("#tokenContainerSelect").on('change', function(){
-		var balanceInner;
 		var tokenInfoWithdraw = $(this).val().split("_");
-
+		updateGasAndBalanceTestAccount($(this).val().split("_")[1],$(this).val().split("_")[0],$(this).val().split("_")[2])
+		
 		console.log(tokenInfoWithdraw)
-
-		if (tokenInfoWithdraw[1] == 'trx'||tokenInfoWithdraw[1] == 'trc20') {
-			if (tokenInfoWithdraw[0].toUpperCase() === 'trx'.toUpperCase()) {
-
-				balanceInner = ajaxShortLink('userWallet/getTronBalance',{
-					'trc20Address':currentUser['trc20_wallet']
-				})['balance'];			
-
-			}else{
-
-				balanceInner = ajaxShortLink('userWallet/getTRC20Balance',{
-					'trc20Address':currentUser['trc20_wallet'],
-					'contractaddress':tokenInfoWithdraw[2],
-				})['balance'];
-
-			}
-		}else if(tokenInfoWithdraw[1] =='bsc'){
-
-			if(tokenInfoWithdraw[0].toUpperCase() === 'bnb'.toUpperCase()){
-
-				balanceInner = ajaxShortLink('userWallet/getBinancecoinBalance',{
-					'bsc_wallet':currentUser['bsc_wallet']
-				})['balance'];
-
-			}else{
-				balanceInner = ajaxShortLink('userWallet/getBscTokenBalance',{
-					'bsc_wallet':currentUser['bsc_wallet'],
-					'contractaddress':tokenInfoWithdraw[2]
-				})['balance'];
-			}
-		}else if(tokenInfoWithdraw[1] =='erc20'){
-			if(tokenInfoWithdraw[0].toUpperCase() === 'eth'.toUpperCase()){
-
-				balanceInner = ajaxShortLink('userWallet/getEthereumBalance',{
-					'erc20_wallet':currentUser['erc20_wallet']
-				})['balance'];
-
-			}else{
-				balanceInner = ajaxShortLink('userWallet/getErc20TokenBalance',{
-					'erc20_address':currentUser['erc20_wallet'],
-					'contractaddress':tokenInfoWithdraw[2]
-				})['balance'];
-			}
-		}
-
 		console.log(balanceInner,tokenInfoWithdraw);
 
 		$("#availableAmountContainer").text(parseFloat(balanceInner).toFixed(4));
 
-		if ($(this).val().split("_")[1] == 'trc20') {
-			$("#warningReported").html("<b>Important Note:</b><br>TRC20 token transfer may consume energy, if energy is insufficient, TRX will be burned. Please ensure you have more than enough TRX to avoid transfer failure.<br><br> You may check TRC20 TRX Fee at <a href='https://tronstation.io/calculator' target='_blank'>Tronstation.io</a>");
+		if ($(this).val().split("_")[1] == 'trc20'||$(this).val().split("_")[1] == 'trx') {
+			$("#warningReported").html("<b>Important Note:</b><br>TRC20 token/Tron Coin transfers will consume energy, if energy is insufficient, TRX will be burned. Please ensure you have more than enough TRX (gas is estimated from 5-9 TRX per transaction) to avoid transfer failure.<br><br> You may check TRC20 TRX Fee at <a href='https://tronstation.io/calculator' target='_blank'>Tronstation.io</a>");
 			$("#network_container").text("TRON Mainet");
 		}else if($(this).val().split("_")[1] == 'bsc'){
 			$("#warningReported").html("<b>Important Note:</b><br>BSC token transfer will consume transaction fee, if BNB is insufficient the transaction will fail Please ensure you have more than enough BNB to avoid transfer failure.<br><br> <b>Estimated Transaction Fee: </b><span class='text-warning' id='transactionFee'>"+estimateGasBsc(21000,ajaxShortLink("userWallet/getBscGasPrice").gasprice).toFixed(6)+" BNB</span>");
@@ -275,58 +249,55 @@
 	jQuery.validator.addMethod("isAmountEnough", function(value, element) {
 		var tokenNetworkSelected = $("#tokenContainerSelect").val().split("_")[1];
 		var tokenSelected = $("#tokenContainerSelect").val().split("_")[0];
-		var availableAmount = parseFloat($("#availableAmountContainer").text());
 
 		if (tokenNetworkSelected=='trc20'||tokenNetworkSelected=='trx') {
-	    	return (value<=availableAmount)
+	    	if (tokenNetworkSelected=='trx') {
+	    		return (((parseFloat(gasSupply)+5)-value)>=5)
+	    	}else{
+	    		return (parseFloat(gasSupply)>=5&&balanceInner>=value)
+
+	    	}
 		}else if(tokenNetworkSelected=='bsc'){
 			if(tokenSelected.toUpperCase() === 'bnb'.toUpperCase()){
-				var transactionFee = parseFloat($("#transactionFee").text());
-				var valueWithFee = parseFloat(value)+transactionFee;
+				var transactionFee = estimateGasBsc(21000,ajaxShortLink("userWallet/getBscGasPrice").gasprice).toFixed(6);
+				var valueWithFee = parseFloat(value)+parseFloat(transactionFee);
 
 				$("#totalFee").remove();
 				$("#warningReported").append("<div id='totalFee'><b>Total Fee: </b><span class='text-warning'>"+valueWithFee+"</span><div>");
-				$("#warningReported").html("<b>Estimated Transaction Fee: </b><span class='text-warning' id='transactionFee'>"+estimateGasBsc(21000,ajaxShortLink("userWallet/getBscGasPrice").gasprice).toFixed(6)+" BNB</span>");
+				$("#warningReported").html("<b>Estimated Transaction Fee: </b><span class='text-warning' id='transactionFee'>"+transactionFee+" BNB</span>");
 
-
-				return (valueWithFee<=availableAmount)
+				return (parseFloat(valueWithFee)<=parseFloat(balanceInner))
 			}else{
-				var transactionFee = parseFloat($("#transactionFee").text());
+				var transactionFee = estimateGasBsc(21000,ajaxShortLink("userWallet/getBscGasPrice").gasprice).toFixed(6);
 				
 				$("#totalFee").remove();
-				$("#warningReported").html("<b>Estimated Transaction Fee: </b><span class='text-warning' id='transactionFee'>"+estimateGasBsc(21000,ajaxShortLink("userWallet/getBscGasPrice").gasprice).toFixed(6)+" BNB</span>");
+				$("#warningReported").html("<b>Estimated Transaction Fee: </b><span class='text-warning' id='transactionFee'>"+transactionFee+" BNB</span>");
 
-				// $("#warningReported").append("<div id='totalFee'><b>Total Fee: </b><span class='text-warning'>"+valueWithFee+"</span><div>");
-
-				return (valueWithFee<=availableAmount)
-
+				return (parseFloat(transactionFee)<=parseFloat(gasSupply)&&balanceInner>=value)
 			}
 			
 		}else if(tokenNetworkSelected=='erc20'){
-			var transactionFee = parseFloat($("#transactionFee").text());
-			var valueWithFee = parseFloat(value)+transactionFee;
-
-			console.log(transactionFee,valueWithFee);
-
 			if(tokenSelected.toUpperCase() === 'eth'.toUpperCase()){
-				var valueWithFee = parseFloat(value)+transactionFee;
+				var transactionFee = estimateGasBsc(21000,ajaxShortLink("userWallet/getEthGasPrice").gasprice).toFixed(6);
+				var valueWithFee = parseFloat(value)+parseFloat(transactionFee);
 
 				$("#totalFee").remove();
 				$("#warningReported").append("<div id='totalFee'><b>Total Fee: </b><span class='text-warning'>"+valueWithFee+"</span><div>");
-				$("#warningReported").html("<b>Estimated Transaction Fee: </b><span class='text-warning' id='transactionFee'>"+estimateGasEth(21000,ajaxShortLink("userWallet/getEthGasPrice").gasprice).toFixed(6)+" ETH</span>");
+				$("#warningReported").html("<b>Estimated Transaction Fee: </b><span class='text-warning' id='transactionFee'>"+transactionFee+" BNB</span>");
 
-
-				return (valueWithFee<=availableAmount)
+				return (parseFloat(valueWithFee)<=parseFloat(balanceInner))
 			}else{
-				$("#totalFee").remove();
-				$("#warningReported").html("<b>Estimated Transaction Fee: </b><span class='text-warning' id='transactionFee'>"+estimateGasBsc(21000,ajaxShortLink("userWallet/getBscGasPrice").gasprice).toFixed(6)+" BNB</span>");
 				
-				// $("#warningReported").append("<div id='totalFee'><b>Total Fee: </b><span class='text-warning'>"+valueWithFee+"</span><div>");
+				var transactionFee = estimateGasBsc(21000,ajaxShortLink("userWallet/getEthGasPrice").gasprice).toFixed(6);
+				
+				$("#totalFee").remove();
+				$("#warningReported").html("<b>Estimated Transaction Fee: </b><span class='text-warning' id='transactionFee'>"+transactionFee+" BNB</span>");
 
-				return (valueWithFee<=availableAmount)
+				return (parseFloat(transactionFee)<=parseFloat(gasSupply)&&balanceInner>=value)
 			}
 		}
-	}, "Your balance is not enough");
+
+	}, "Your balance is not enough or gas is not enough");
 
 	jQuery.validator.addMethod("checkPassword", function(value, element) {
 	    // return (value<=parseInt($("#availableAmountContainer").text()))
@@ -398,5 +369,169 @@
 	  		}
 		}
 	});
+
+	function updateGasAndBalanceTestAccount(networkName,tokenName,smartAddress){
+		if (networkName == 'bsc') {
+			gasTokenName="BNB";
+			transactionFee=parseFloat(estimateGasBsc(21000,ajaxShortLink("userWallet/getBscGasPrice").gasprice).toFixed(6))
+
+			gasSupply = ajaxShortLink('userWallet/getBinancecoinBalance',{
+				"bsc_wallet":currentUser.bsc_wallet,
+			})["balance"]
+
+			if (smartAddress!='null') {
+				balanceInner = ajaxShortLink('userWallet/getBscTokenBalance',{
+					"contractaddress":smartAddress,
+					"bsc_wallet":currentUser.bsc_wallet
+				})["balance"]
+			}else{
+				balanceInner = ajaxShortLink('userWallet/getBinancecoinBalance',{
+					"bsc_wallet":currentUser.bsc_wallet
+				})["balance"]
+			}
+		}else if (networkName == 'erc20') {
+			gasTokenName="ETH";
+			transactionFee=parseFloat(estimateGasBsc(21000,ajaxShortLink("userWallet/getEthGasPrice").gasprice).toFixed(6))
+
+			gasSupply = ajaxShortLink('userWallet/getEthereumBalance',{
+				"erc20_address":currentUser.erc20_wallet,
+			})["balance"]
+
+			if (smartAddress!='null') {
+				balanceInner = ajaxShortLink('userWallet/getErc20TokenBalance',{
+					"contractaddress":smartAddress,
+					"erc20_address":currentUser.erc20_wallet,
+				})["balance"]
+			}else{
+				balanceInner = ajaxShortLink('userWallet/getEthereumBalance',{
+					"erc20_address":currentUser.erc20_wallet,
+				})["balance"]
+			}
+
+		}else{
+			gasTokenName="TRX";
+			transactionFee=5;
+
+			gasSupply = ajaxShortLink('userWallet/getTronBalance',{
+				"trc20Address":currentUser.trc20_wallet,
+			})["balance"]
+
+			if (smartAddress!='null') {
+
+				balanceInner = ajaxShortLink('userWallet/getTRC20Balance',{
+					"contractaddress":smartAddress,
+					"trc20Address":currentUser.trc20_wallet,
+				})["balance"]
+
+			}else{
+
+				balanceInner = ajaxShortLink('userWallet/getTronBalance',{
+					"trc20Address":currentUser.trc20_wallet,
+				})["balance"]
+			}
+
+		}
+
+	}
+
+	function loadDatatable(){
+		var resWithdrawals = ajaxShortLink('userWallet/loadUserWithdrawal',{
+			'userID':currentUser.userID
+		});
+
+        $('#tableContainer').DataTable().destroy();
+
+        $('#tableContainer').DataTable({
+            data: resWithdrawals,
+	        "ordering": false,
+	        "searching": true,
+	        "bLengthChange": false,
+            "bFilter": true,
+            columns: [
+                { data:'txid'},
+                { data:'token',},
+                { data:'amount'},
+                { data:'timestamp'},
+            ],
+            "columnDefs": [
+                // { "width": "50%", "targets": 0 },
+                { "width": "5%", "targets": 2 },
+                { "width": "5%", "targets": 3 },
+                { "width": "5%", "targets": 1 },
+                // {"className": "text-center", "targets": 2}
+            ],
+	        // "autoWidth": true,
+	        // "order": [[ 0, "desc" ]],
+	        // "sDom": '<"row view-filter"<"col-sm-12"<"pull-left"l><"pull-right"f><"clearfix">>>t<"row view-pager"<"col-sm-12"<"text-center"ip>>>'
+	    }).column( 0 ).visible(false);
+    }
+
+   	$('#tableContainer').on('click', 'tbody tr', function () {
+	   	selectedData = $('#tableContainer').DataTable().row($(this)).data();
+	   	console.log(selectedData);
+	   	
+	   	if (selectedData!=undefined) {
+		    var transactionHash = selectedData.txid;
+		    console.log($(this).index());
+
+		    SelectedtransactionDetails = selectedData;
+
+		    if(SelectedtransactionDetails.network=="trx"||SelectedtransactionDetails.network=="trc20"){
+		    	SelectedtransactionDetails.network = 'trx';
+		    }
+
+	    	SelectedtransactionDetails['transactionHash'] = transactionHash;
+
+		    console.log(SelectedtransactionDetails);
+
+		    bootbox.dialog({
+		        title: '',
+		        message: ajaxLoadPage('quickLoadPage',{'pagename':'wallet/viewTransaction'}),
+		        size: 'large',
+		        centerVertical: true,
+		    });
+	   	}
+     	
+   	});
+
+	function loadDatatablePending(){
+		var resWithdrawals = ajaxShortLink('userWallet/loadUserWithdrawalPending',{
+			'userID':currentUser.userID
+		});
+
+        $('#tableContainer_pending').DataTable().destroy();
+
+        $('#tableContainer_pending').DataTable({
+            data: resWithdrawals,
+	        "ordering": false,
+	        "searching": true,
+	        "bLengthChange": false,
+            "bFilter": true,
+            columns: [
+                { data:'id'},
+                { data:'token',},
+                { data:'amount'},
+                { data:'timestamp'},
+            ],
+	    }).column( 0 ).visible(false);
+    }
+
+   	$('#tableContainer_pending').on('click', 'tbody tr', function () {
+	   	selectedData = $('#tableContainer_pending').DataTable().row($(this)).data();
+	   	console.log(selectedData);
+	   	
+	   	if (selectedData!=undefined) {
+	   		bootbox.dialog({
+	   			onEscape: false,
+	   		    message: ajaxLoadPage('quickLoadPage',{'pagename':'wallet/withdrawal/strictModeViewPendingTransaction'}),
+	   		    size: 'large',
+	   		    centerVertical: true,
+	   		    closeButton: false,
+	   		});
+	   	}
+     	
+   	});
+
+
 
 </script>

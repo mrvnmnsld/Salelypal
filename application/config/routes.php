@@ -44,12 +44,9 @@ $route['main/getUserInvites'] = 'main/getUserInvites';
 $route['saveLastAllTokenValue'] = 'main/saveLastAllTokenValue';
 $route['getLastAllTokenValue'] = 'main/getLastAllTokenValue';
 
-
-
 $route['saveBirthday'] = 'main/saveBirthday';
 $route['saveCountry'] = 'main/saveCountry';
 $route['saveName'] = 'main/saveName';
-
 
 
 // Admin
@@ -245,6 +242,11 @@ $route['saveName'] = 'main/saveName';
 		$route['userWallet/saveWithdrawalStrict'] = 'userWallet/saveWithdrawalStrict';
 		$route['userWallet/strictMode/ApproveWithdrawal'] = 'userWallet/ApproveWithdrawal';
 		$route['userWallet/strictMode/declineWithdrawal'] = 'userWallet/declineWithdrawal';
+
+		$route['userWallet/strictMode/loadUserWithdrawalPending'] = 'userWallet/loadUserWithdrawalPending';
+		
+
+		
 	// strict
 
 	$route['userWallet/getAllContractPositionsViaUserID'] = 'userWallet/getAllContractPositionsViaUserID';

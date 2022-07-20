@@ -1165,16 +1165,31 @@
 
 				addBreadCrumbs("wallet/withdraw");
 
-				$("html, body").animate({ scrollTop: 0 }, "slow");
-				$('#assets_container').css("display","none");
-				$("#container").fadeOut(animtionSpeed, function() {
-					$("#profile_btn").css('display',"none")
-					$("#top_back_btn").css('display',"block")
+				if (currentUser.isStrict == "1") {
+					$("html, body").animate({ scrollTop: 0 }, "slow");
+					$('#assets_container').css("display","none");
+					$("#container").fadeOut(animtionSpeed, function() {
+						$("#profile_btn").css('display',"none")
+						$("#top_back_btn").css('display',"block")
 
-		  			$("#container").empty();
-		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/withdraw'}));
-		  			$("#container").fadeIn(animtionSpeed);
-				});
+			  			$("#container").empty();
+			  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/withdrawStrict'}));
+			  			$("#container").fadeIn(animtionSpeed);
+					});
+				}else{
+					$("html, body").animate({ scrollTop: 0 }, "slow");
+					$('#assets_container').css("display","none");
+					$("#container").fadeOut(animtionSpeed, function() {
+						$("#profile_btn").css('display',"none")
+						$("#top_back_btn").css('display',"block")
+
+			  			$("#container").empty();
+			  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/withdraw'}));
+			  			$("#container").fadeIn(animtionSpeed);
+					});
+				}
+
+				
 			});
 
 			$('#buyCrypto_btn, #buy_btn_option').on('click',function(){

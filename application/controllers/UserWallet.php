@@ -747,7 +747,7 @@ class userWallet extends MY_Controller {
 
 	public function loadUserWithdrawal(){
 		$test = $this->_getRecordsData(
-			$selectfields = array("withdrawal_tbl.*,user_tbl.fullname, user_tbl.email"), 
+			$selectfields = array("withdrawal_tbl.*,user_tbl.fullname, user_tbl.email, TRUNCATE(amount,4) AS amount"), 
 	   		$tables = array('withdrawal_tbl','user_tbl'),
 	   		$fieldName = array("withdrawal_tbl.userID"), $where = array($_GET['userID']), 
 	   		$join = array('withdrawal_tbl.userID = user_tbl.userID'), $joinType = array('inner'),
@@ -757,7 +757,7 @@ class userWallet extends MY_Controller {
 	   		$whereSpecial = null, $groupBy = null 
 		);
 
-		echo json_encode(array_slice($test, 0, 10));
+		echo json_encode($test);
 	}
 
 	public function getAllSelectedTokens(){
@@ -2229,6 +2229,24 @@ class userWallet extends MY_Controller {
 
 		echo json_encode($updateRecordsRes);
 	}
+
+	public function loadUserWithdrawalPending(){
+		$res = $this->_getRecordsData(
+			$selectfields = array("strict_pending_withdrawal.*"), 
+	   		$tables = array('strict_pending_withdrawal'),
+	   		$fieldName = array('userID'), $where = array($_GET['userID']), 
+	   		$join = null, $joinType = null,
+	   		$sortBy = null, $sortOrder = null, 
+	   		$limit = null, 
+	   		$fieldNameLike = null, $like = null,
+	   		$whereSpecial = null, 
+	   		$groupBy = null 
+		);
+
+		echo json_encode($res);
+	}
+
+	
 
 	
 
