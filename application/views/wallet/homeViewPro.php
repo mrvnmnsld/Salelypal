@@ -9,9 +9,9 @@
 	<meta name="color-scheme" content="light
 	" />
 
-	<title>[Testing Platform] Security Wallet</title>
+	<title>Wallet - SafelyPal - Pro</title>
 
-	<link rel="icon" type="image/png" href="assets/imgs/logo_main_no_text.png"/>
+	<link rel="icon" type="image/png" href="assets/imgs/logo_safetypal_bottom_text.png"/>
 </head>
 
 <!-- libraries needed -->
@@ -331,196 +331,208 @@
 		<div id="header_inner_container" class="main-color-bg py-2" style="display:none;">
 			<div class="font-weight-bold text-center">
 				<span class="h6 text-muted" style="color:white;">TOTAL BALANCE 
-					<span id="visible_btn" style="display:none;">
-						<i id="eye_close" class="fa fa-eye-slash mt-2 text-muted" style="display:inline-block;" aria-hidden="true"></i>
-						<i id="eye_open" class="fa fa-eye text-muted" style="display:none;" aria-hidden="true"></i>
-					</span>
-					<br>
-					<span id="totalInUsdContainer" class="font-size-2p5em title-color-text notranslate">Loading...</span>
-				</div>
-
-				<div id="main_btns_container" style="display:none;">
-					<div id="btn_option_container" class="d-flex justify-content-center mt-1">
-					
-						<button id="deposit_btn_option" class="btn" style="background-color:transparent">
-							<div class="btn btn-md" style="font-size:1.5em;padding:1px;">
-								<i class="fa fa-arrow-circle-down fa-lg fa-inverse" aria-hidden="true"></i>
-								<!-- <img style="width:50px;height:50px;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-deposit-64.png"> -->
-							</div>
-							<div style="font-size:.8em;" class="text-light">Deposit</div>
-						</button>
-
-						<button id="withdraw_btn_option" class="btn" style="background-color:transparent">
-							<div class="btn btn-md" style="font-size:1.5em;padding:1px;">
-								<i class="fa fa-arrow-circle-up fa-lg fa-inverse" aria-hidden="true"></i>
-								<!-- <img style="width:50px;height:50px;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-withdraw-64.png"> -->
-							</div>
-							<div style="font-size:.8em;" class="text-light">Withdraw</div>
-						</button>
-
-						<button id="buy_btn_option" class="btn" style="background-color:transparent">
-							<div class="btn btn-md" style="font-size:1.5em;padding:1px;">
-								<i class="fa fa-credit-card-alt fa-md fa-inverse" aria-hidden="true"></i>
-								<!-- <img style="width:50px;height:50px;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%); width: 1.5em: ;" src="assets/imgs/app-icons/menu-icons/icons8-top-64.png"> -->
-							</div>
-							<div style="font-size:.8em;;" class="text-light">Buy</div>
-						</button>
-					</div>
-				</div>
+				<span id="visible_btn" style="display:none;">
+					<i id="eye_close" class="fa fa-eye-slash mt-2 text-muted" style="display:inline-block;" aria-hidden="true"></i>
+					<i id="eye_open" class="fa fa-eye text-muted" style="display:none;" aria-hidden="true"></i>
+				</span>
+				<br>
+				<span id="totalInUsdContainer" class="font-size-2p5em title-color-text notranslate">Loading...</span>
 			</div>
 
-			<style>
-				#asset_tabs a{
-					/* color: #94abef; */
-					opacity: .5;
-					-webkit-transition: color 2s, font-size .25s;
-					-moz-transition: color 2s, font-size .25s;
-					-o-transition: color 2s, font-size .25s;
-					transition: color 2s, font-size .25s;
-				}
-
-				.nav-link.tab-pane.fade.show.active{
-					font-size:1.8em;
-					opacity: 1 !important;
-					-webkit-transition: color 1s, font-size .25s;
-					-moz-transition: color 1s, font-size .25s;
-					-o-transition: color 1s, font-size .25s;
-					transition: color 1s, font-size .25s;
-
-					border-color: transparent;
-					background-color:transparent;
-
-					padding-bottom: 5px;
- 					position: relative;
-				}
-
-				.nav-link.tab-pane.fade.show.active:before{
-					content: "";
-					position: absolute;
-					width: 50%;
-					height: 1px;
-					bottom: 0;
-					left: 25%;
-				}
-
-			</style>
-
-			<div id="asset_tab_container" class="mt-3">
-				<ul id="asset_tabs" class="nav nav-tabs nav-justified" role="tablist">
-					<li class="nav-item">
-						<a id="balance_tab_id" class="nav-link active tab-pane fade show main-color-link" data-toggle="tab" href="#balance_tab">BALANCE</a>
-					</li>
-					<li class="nav-item">
-						<a id="portfolio_tab_id" class="nav-link tab-pane fade show main-color-link" data-toggle="tab" href="#portfolio_tab">PORTFOLIO</a>
-					</li>
-				</ul>
-
-				<div class="asset-tab-content tab-content">
-					<div id="balance_tab" class="px-4 notranslate tab-pane active notranslate tab-pane active"><br>
-						<div id="tokenContainer"></div>
-
-						
-						<div class="row">
-							<div class="col-6 text-center">
-								<button class="btn btn-outline-link btn-block main-color-text mt-2 text-muted" disabled id="addToken_btn">
-									<i class="fa fa-sliders" aria-hidden="true"></i>
-									Add more
-								</button>
-							</div>
-
-							<div class="col-6 text-center">
-								<button class="btn btn-outline-link btn-block main-color-text mt-2 text-muted" disabled id="refresh_btn">
-									<i class="fa fa-refresh" aria-hidden="true"></i>
-									Refresh
-								</button>
-							</div>
+			<div id="main_btns_container" style="display:none;">
+				<div id="btn_option_container" class="d-flex justify-content-center mt-1">
+				
+					<button id="deposit_btn_option" class="btn" style="background-color:transparent">
+						<div class="btn btn-md" style="font-size:1.5em;padding:1px;">
+							<i class="fa fa-arrow-circle-down fa-lg fa-inverse" aria-hidden="true"></i>
+							<!-- <img style="width:50px;height:50px;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-deposit-64.png"> -->
 						</div>
-						
+						<div style="font-size:.8em;" class="text-light">Deposit</div>
+					</button>
+
+					<button id="withdraw_btn_option" class="btn" style="background-color:transparent">
+						<div class="btn btn-md" style="font-size:1.5em;padding:1px;">
+							<i class="fa fa-arrow-circle-up fa-lg fa-inverse" aria-hidden="true"></i>
+							<!-- <img style="width:50px;height:50px;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-withdraw-64.png"> -->
+						</div>
+						<div style="font-size:.8em;" class="text-light">Withdraw</div>
+					</button>
+
+					<button id="buy_btn_option" class="btn" style="background-color:transparent">
+						<div class="btn btn-md" style="font-size:1.5em;padding:1px;">
+							<i class="fa fa-credit-card-alt fa-md fa-inverse" aria-hidden="true"></i>
+							<!-- <img style="width:50px;height:50px;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%); width: 1.5em: ;" src="assets/imgs/app-icons/menu-icons/icons8-top-64.png"> -->
+						</div>
+						<div style="font-size:.8em;;" class="text-light">Buy</div>
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- <div class="text-center m-2 mb-3" id="updating_assets_container" style="opacity: .3;">
+			<span class="spinner-border" role="status">
+			  <span class="sr-only">Loading...</span>
+			</span>
+
+			<span class="mb-2">Updating Assets...</span>
+		</div> -->
+		
+
+		<style>
+			#asset_tabs a{
+				/* color: #94abef; */
+				opacity: .5;
+				-webkit-transition: color 2s, font-size .25s;
+				-moz-transition: color 2s, font-size .25s;
+				-o-transition: color 2s, font-size .25s;
+				transition: color 2s, font-size .25s;
+			}
+
+			.nav-link.tab-pane.fade.show.active{
+				font-size:1.8em;
+				opacity: 1 !important;
+				-webkit-transition: color 1s, font-size .25s;
+				-moz-transition: color 1s, font-size .25s;
+				-o-transition: color 1s, font-size .25s;
+				transition: color 1s, font-size .25s;
+
+				border-color: transparent;
+				background-color:transparent;
+
+				padding-bottom: 5px;
+					position: relative;
+			}
+
+			.nav-link.tab-pane.fade.show.active:before{
+				content: "";
+				position: absolute;
+				width: 50%;
+				height: 1px;
+				bottom: 0;
+				left: 25%;
+			}
+
+		</style>
+
+		
+
+		<div id="asset_tab_container" class="mt-3">
+			<ul id="asset_tabs" class="nav nav-tabs nav-justified" role="tablist">
+				<li class="nav-item">
+					<a id="balance_tab_id" class="nav-link active tab-pane fade show main-color-link" data-toggle="tab" href="#balance_tab">BALANCE</a>
+				</li>
+				<li class="nav-item">
+					<a id="portfolio_tab_id" class="nav-link tab-pane fade show main-color-link" data-toggle="tab" href="#portfolio_tab">PORTFOLIO</a>
+				</li>
+			</ul>
+
+			<div class="asset-tab-content tab-content">
+				<div id="balance_tab" class="px-4 notranslate tab-pane active notranslate tab-pane active"><br>
+					<div id="tokenContainer"></div>
+					
+					<div class="row">
+						<div class="col-6 text-center">
+							<button class="btn btn-outline-link btn-block main-color-text mt-2 text-muted" disabled id="addToken_btn">
+								<i class="fa fa-sliders" aria-hidden="true"></i>
+								Add more
+							</button>
+						</div>
+
+						<div class="col-6 text-center">
+							<button class="btn btn-outline-link btn-block main-color-text mt-2 text-muted" disabled id="refresh_btn">
+								<i class="fa fa-refresh" aria-hidden="true"></i>
+								Refresh
+							</button>
+						</div>
 					</div>
 
-					<div id="portfolio_tab" class="container tab-pane fade"><br>
-						<div class="text-center" id="pnl_loading">
-							<h3>
-								<div class="spinner-grow main-color-text" role="status">
-								  <span class="sr-only">Loading...</span>
-								</div>
+					
+				</div>
 
-								Loading...
-
-							</h3>
-						</div>
-
-						<div id="pnl_main" class="main-card-ui rounded shadow-lg" style="display:none">
-
-							<div class="row p-3">
-								<div class="col-6">
-									<b>Today's Earnings (Trading):</b><br>
-									<span id="todaysEarning">
-										0 USD
-									</span>
-								</div>
-								
-								<div class="col-6">
-									<b>Yesterdays PNL:</b><br>
-									<span id="yesterdayPnl">
-										0% Change
-									</span>
-								</div>
+				<div id="portfolio_tab" class="container tab-pane fade"><br>
+					<div class="text-center" id="pnl_loading">
+						<h3>
+							<div class="spinner-grow main-color-text" role="status">
+							  <span class="sr-only">Loading...</span>
 							</div>
 
-							<div class="row p-3">
-								<div class="col-6">
-									<b>7 Days PNL:</b><br>
-									<span id="allDaysPnl">
-										0% Change
-									</span>
-									
-								</div>
+							Loading...
 
-								<div class="col-6">
-									<b>14 Days PNL:</b><br>
-									<span id="14DaysPnl">
-										0% Change
-									</span>
-								</div>
-							</div>
-
-
-								
-							<div class="p-3">
-								7 Days PNL Chart
-
-								<div id="graph-container-pnl">
-									<canvas id="pnl_chart_container" width="400" height="200"></canvas >
-								</div>
-
-								
-							</div>
-
-							<div class="p-3">
-								14 Days PNL Chart
-
-								<div id="graph-container-pnl-14">
-									<canvas id="pnl_14_chart_container" width="400" height="200"></canvas >
-								</div>
-
-								
-							</div>
-
-							<div class="p-3">
-								Assets Distribution
-
-								<div id="graph-container-assets">
-									<canvas id="assets_chart_container" width="600" height="400"></canvas >
-								</div>
-
-							</div>
-						</div>
-
+						</h3>
 					</div>
 
+					<div id="pnl_main" class="main-card-ui rounded shadow-lg" style="display:none">
+
+						<div class="row p-3">
+							<div class="col-6">
+								<b>Today's Earnings (Trading):</b><br>
+								<span id="todaysEarning">
+									0 USD
+								</span>
+							</div>
+							
+							<div class="col-6">
+								<b>Yesterdays PNL:</b><br>
+								<span id="yesterdayPnl">
+									0% Change
+								</span>
+							</div>
+						</div>
+
+						<div class="row p-3">
+							<div class="col-6">
+								<b>7 Days PNL:</b><br>
+								<span id="allDaysPnl">
+									0% Change
+								</span>
+								
+							</div>
+
+							<div class="col-6">
+								<b>14 Days PNL:</b><br>
+								<span id="14DaysPnl">
+									0% Change
+								</span>
+							</div>
+						</div>
+
+
+							
+						<div class="p-3">
+							7 Days PNL Chart
+
+							<div id="graph-container-pnl">
+								<canvas id="pnl_chart_container" width="400" height="200"></canvas >
+							</div>
+
+							
+						</div>
+
+						<div class="p-3">
+							14 Days PNL Chart
+
+							<div id="graph-container-pnl-14">
+								<canvas id="pnl_14_chart_container" width="400" height="200"></canvas >
+							</div>
+
+							
+						</div>
+
+						<div class="p-3">
+							Assets Distribution
+
+							<div id="graph-container-assets">
+								<canvas id="assets_chart_container" width="600" height="400"></canvas >
+							</div>
+
+						</div>
+					</div>
 
 				</div>
+
+
+			</div>
+
 			</div><!-- asset_tab_container -->
 			
 			<style>
@@ -662,6 +674,8 @@
 
 <script type="text/javascript">
 		var currentUser = JSON.parse(getLocalStorageByKey('currentUser'));
+		var localStorageTokenValuesContainer = JSON.parse(getLocalStorageByKey('tokenValuesContainer'));
+		var localStorageTotalInUsd = getLocalStorageByKey("localStorageTotalInUsd")
 
 		if (getLocalStorageByKey('currentUser')!=null) {
 			
@@ -895,11 +909,13 @@
 					$('#main_btns_container').toggle();
 
 					$("#loading_text_container").text('Please Wait');
+					console.log("all done");
 				});
 			}, 500);
 
 			setTimeout(function(){
 				var i = 0;
+
 
 				function myLoop() {
 				  	tokenLoadTimer = setTimeout(function() {
@@ -913,6 +929,8 @@
 					  		$("#totalInUsdContainer").append(" "+displayCurrency.toUpperCase());
 					  		
 					  		$('#visible_btn').toggle();
+					  		$('#updating_assets_container').toggle();
+
 					  		$('#refresh_btn').removeAttr("disabled");
 					  		$('#addToken_btn').removeAttr("disabled");
 
@@ -929,14 +947,14 @@
 			  			  		var day = String(date.getDate());
 			  			  		var joined = [month,day,year,].join('/');
 
-			  			  		console.log(joined);
+			  			  		// console.log(joined);
 
 			  			  		var getTodayContractProfit = ajaxShortLink("userWallet/getTodayContractProfit",{
 			  		  				"userID":currentUser.userID,
 			  		  				"date":joined
 			  		  			})
 
-			  		  			console.log(getTodayContractProfit);
+			  		  			// console.log(getTodayContractProfit);
 
 			  		  			$("#todaysEarning").text(getTodayContractProfit+" USD");
 
@@ -960,13 +978,13 @@
   				  				var average = yValues.reduce((a, b) => a + b, 0) / yValues.length;
   				  				var average7Days = last7days.reduce((a, b) => a + b, 0) / last7days.length;
 
-  				  				console.log(last7days);
-  				  				console.log(yValues);
-  				  				console.log(average);
-  				  				console.log(changePercentageIn1Day);
-  				  				console.log((changePercentageIn1Day/100)*totalInUsdInner);
-  				  				console.log(totalInUsdInner);
-  				  				console.log(changePercentageIn1Day/100);
+  				  				// console.log(last7days);
+  				  				// console.log(yValues);
+  				  				// console.log(average);
+  				  				// console.log(changePercentageIn1Day);
+  				  				// console.log((changePercentageIn1Day/100)*totalInUsdInner);
+  				  				// console.log(totalInUsdInner);
+  				  				// console.log(changePercentageIn1Day/100);
 
   				  				if(parseFloat(yValues[yValues.length-1]) < 0) {
   				  					$("#yesterdayPnl").addClass("text-danger").html((totalInUsdInner*(changePercentageIn1Day/100)).toFixed(2)+" <br><small>"+changePercentageIn1Day.toFixed(2)+"% Change </small>");
@@ -1083,6 +1101,9 @@
 									'value': $("#totalInUsdContainer").text().split(" ")[0],
 									'currency': displayCurrency,
 								});
+
+								setLocalStorageByKey('tokenValuesContainer',JSON.stringify(tokenValuesContainer))
+
 
 					  		// chart PNL
 
@@ -1228,6 +1249,8 @@
 
 				tokenNames = [];
 				tokenBalance = [];
+				tokenValuesContainer = [];
+
 
 				$('#refresh_btn').attr("disabled");
 				$('#visible_btn').toggle();
@@ -1437,6 +1460,14 @@
 			    		  		// chart PNL
 						  		
 								console.timeEnd('loadTimer');
+
+								ajaxShortLink("saveLastAllTokenValue",{
+									'userID': currentUser.userID,
+									'value': $("#totalInUsdContainer").text().split(" ")[0],
+									'currency': displayCurrency,
+								});
+
+								setLocalStorageByKey('tokenValuesContainer',JSON.stringify(tokenValuesContainer))
 						    }
 
 		    		  		
@@ -1796,6 +1827,13 @@
 				}
 			}
 
+			tokenValuesContainer.push({
+				'changePercentage': $("#"+tokenInfo.id+"_change_container").parent("span").parent("div").html(),
+				'balanceInner': $("#"+tokenInfo.id+"_amount_container").parent("div").html(),
+			});
+
+			setLocalStorageByKey("localStorageTotalInUsd",totalInUsd)
+
 			// console.timeEnd('loadTokenInfo');
 
 			// console.log("---------------------");
@@ -1886,7 +1924,26 @@
 				});	
 				
 			}
-			// $('#totalInUsdContainer').text(totalInUsd.toFixed(2));
+
+
+			if (localStorageTokenValuesContainer!=null) {
+				if (tokensSelected.length==localStorageTokenValuesContainer.length) {
+					$("#tokenContainer > div").find("div:nth-child(3)").each(function(index){
+						// console.log($(this),index,localStorageTokenValuesContainer[index].balanceInner);
+						$(this).html(localStorageTokenValuesContainer[index].balanceInner)
+					})
+
+					$("#tokenContainer > div").find("div:nth-child(2)").each(function(index){
+						// console.log($(this),index,localStorageTokenValuesContainer[index].changePercentage);
+						$(this).html(localStorageTokenValuesContainer[index].changePercentage)
+					})
+				}
+			}
+
+			if (localStorageTotalInUsd!=null) {
+				$('#totalInUsdContainer').html(numberWithCommas(parseFloat(localStorageTotalInUsd).toFixed(2)));
+				$("#totalInUsdContainer").append(" "+displayCurrency.toUpperCase());
+			}
 		}
 
 		function addBreadCrumbs(page){
@@ -2031,6 +2088,6 @@
 			// console.log(breadCrumbs[breadCrumbs.length-1]);
 		});
 
-	</script>
+</script>
 </body>
 </html>

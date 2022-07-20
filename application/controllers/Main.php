@@ -195,6 +195,7 @@ class main extends MY_Controller {
 			// 'birthday' => $data['birthdate'],
 			'verified' => 0,
 			'isPro' => 0,//change
+			'isStrict' => 1,//change
 		);
 
 		if (isset($data['referalCode'])) {

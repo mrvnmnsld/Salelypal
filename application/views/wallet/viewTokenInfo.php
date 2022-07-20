@@ -55,45 +55,47 @@
 
 <hr>
 
-<div class="p-1">
-	<div class="text-center">
-		<h4>Transaction History</h4>
+
+<div class="px-3">
+	<div class="">
+	    <div class="text-center">
+	        <h4>Transaction History</h4>
+	        <small>Click row to view details</small>
+	    </div>
+
+	    <br>
+
+	    <table id="tableContainer" class="" style="width: 100%!important;">  
+	        <thead>
+	            <tr>
+	                <th scope="col">TX</th>
+	                <th scope="col">Token</th>
+	                <th scope="col">Amount</th>
+	                <th scope="col">Deposit</th>
+	                <th scope="col">Date</th>
+	            </tr>
+	        </thead>
+	    </table>
+
+	    <div id="inner_loading" class="text-center mt-5">
+	    	<div class="spinner-border" role="status">
+	    	  <span class="sr-only">Loading...</span>
+	    	</div>
+
+	    	<div class="mt-2">Updating Transactions...</div>
+	    </div>
 	</div>
-
-	<div id="inner_loading" class="text-center mt-5">
-		<div class="spinner-border" role="status">
-		  <span class="sr-only">Loading...</span>
-		</div>
-
-		<div class="mt-2">Loading Transactions...</div>
-	</div>
-
-
-	<div id="table_container" style="display:none">
-		<table class="table table-sm table-borderless main-color-text text-center" >
-		  <thead>
-		    <tr>
-		      <th scope="col">Token</th>
-		      <th scope="col">Amount</th>
-		      <th scope="col">Type</th>
-		      <th scope="col">Date</th>
-		    </tr>
-		  </thead>
-		  <tbody id="transactionContainer">
-		  </tbody>
-		</table>
-
-		<div class="text-center" style="margin-top:-5px">
-			<small class="">Displaying 10 latest transactions</small><br>
-		</div>
-		
-	</div>
-	
 </div>
 
 <script type="text/javascript">
+	var localTransactionsHistory = JSON.parse(getLocalStorageByKey("transactionsHistory"));
 
-	console.log(clickContainer);
+	if (localTransactionsHistory!=null) {
+		$("#table_container").toggle();
+		loadDatatable(localTransactionsHistory);
+	}
+
+	console.log(localTransactionsHistory);
 
 	$("#token_name_container").text(clickContainer.tokenName+" ("+clickContainer.networkName.toUpperCase()+")");
 	$("#token_image_container").attr("src",clickContainer.tokenImage);
@@ -144,261 +146,326 @@
 	//balance check
 
 	// transaction load
-		var loadTransactionTimeOut = setTimeout(function(){
-			var allTransactionArray = [];
-			var bscTransactions = ajaxPostLink('getBscWalletTransactions',{
-				'userAddress':currentUser['bsc_wallet']
-			})['result'];
+		try{
+			var loadTransactionTimeOut = setTimeout(function(){
+				var allTransactionArray = [];
+				var bscTransactions = ajaxPostLink('getBscWalletTransactions',{
+					'userAddress':currentUser['bsc_wallet']
+				})['result'];
 
 
-			for (var i = 0; i < bscTransactions.length; i++) {
-				var isDeposit;
-				var amount = roundTron(bscTransactions[i].value);
-				var isBought = 0;
-
-				var	isError;
-
-				if (bscTransactions[i].isError == 0) {
-					isError = 'Success';
-				}else{
-					isError = 'Fail';
-				}
-
-				if(bscTransactions[i].to==currentUser['bsc_wallet']){
-					isDeposit = '<span class="btn btn-sm btn-success font-weight-bold" disabled="true">IN</span>';
-					if(bscTransactions[i].from=='0xc81441e9529f6c94b4cf9a3de5ddeb16ffbda312'){
-						isBought = 1;
-					}
-				}else{
-			    	isDeposit = '<span class="btn btn-sm btn-warning font-weight-bold" disabled="true">OUT</span>';
-				}
-
-				if (amount >= 1 && isBought == 0) {
-					allTransactionArray.push({
-						'token':'BNB',
-						'transactionHash':bscTransactions[i].hash,
-						'amount':mweiToBnb(amount),
-						'result':isError,
-						'timestamp':unixTimeToDateNonFormated(bscTransactions[i].timeStamp),
-						'network':'bsc',
-						'isDeposit':isDeposit
-					});
-				}
-			}
-
-			var bscTransactionsTokens = ajaxPostLink('getBscWalletTransactionsTokens',{
-				'userAddress':currentUser['bsc_wallet']
-			})['result'];
-
-
-			for (var i = 0; i < bscTransactionsTokens.length; i++) {
-				var isDeposit;
-				var amount = roundTron(bscTransactionsTokens[i].value);
-				var isBought = 0;
-				var	isError;
-
-				console.log(bscTransactionsTokens[i]);
-
-				if (bscTransactionsTokens[i].isError == 0) {
-					isError = 'Success';
-				}else{
-					isError = 'Fail';
-				}
-
-				if(bscTransactionsTokens[i].to==currentUser['bsc_wallet']){
-					isDeposit = '<span class="btn btn-sm btn-success font-weight-bold" disabled="true">IN</span>';
-					if(bscTransactionsTokens[i].from=='0xc81441e9529f6c94b4cf9a3de5ddeb16ffbda312'){
-						isBought = 1;
-					}
-				}else{
-			    	isDeposit = '<span class="btn btn-sm btn-warning font-weight-bold" disabled="true">OUT</span>';
-				}
-
-				if (amount >= 1 && isBought == 0) {
-					try {
-						token = ajaxShortLink('userWallet/checkTokenByContractAddress',
-							{'smartAddress':bscTransactionsTokens[i].contractAddress}
-						);
-
-						token = token.tokenName
-					}
-					catch(err) {
-						token = "Unknown"
-					}
-
-					allTransactionArray.push({
-						'token':token,
-						'transactionHash':bscTransactionsTokens[i].hash,
-						'amount':mweiToBnb(amount),
-						'result':isError,
-						'timestamp':unixTimeToDateNonFormated(bscTransactionsTokens[i].timeStamp),
-						'network':'bsc',
-						'isDeposit':isDeposit
-					});
-				}
-			}
-
-			var transactions = ajaxShortLinkNoParse('https://apilist.tronscan.org/api/transaction?sort=-timestamp&count=true&limit=10&start=0&address='+currentUser['trc20_wallet'])['data']; 
-
-			for (var i = 0; i < transactions.length; i++) {
-				var trueAmount = transactions[i].amount;
-				var amount = roundTron(transactions[i].amount);
-				var isDeposit;
-				var token;
-				var isBought = 0;
-				
-				// console.log(transactions[i]);
-				// console.log(trueAmount);
-
-				if (trueAmount >= 1) {
-					token = "TRX";
-
-					if (transactions[i].ownerAddress == currentUser['trc20_wallet']) {
-						isDeposit = '<span class="btn btn-sm btn-warning font-weight-bold" disabled="true">OUT</span>';
-					}else{
-						isDeposit = '<span class="btn btn-sm btn-success font-weight-bold" disabled="true">IN</span>';
-						if (transactions[i].ownerAddress == 'TCyRBGnjMSLsPos5RJxVfC7fjcWk1vaUqS') {
-							isBought = 1;
-						}else{
-							isBought = 0;
-						}
-					}
-				}else{
-					var trc20Transaction = ajaxShortLinkNoParse('https://apilist.tronscan.org/api/transaction-info?hash='+transactions[i].hash)['trc20TransferInfo'][0];
-					token = trc20Transaction['symbol'];
-					amount = trc20AmountToRealAmount(parseInt(trc20Transaction['amount_str']));
-
-
-					if (trc20Transaction['from_address'] == currentUser['trc20_wallet']) {
-						isDeposit = '<span class="btn btn-sm btn-warning font-weight-bold" disabled="true">OUT</span>';
-					}else{
-						isDeposit = '<span class="btn btn-sm btn-success font-weight-bold" disabled="true">IN</span>';
-
-						if (trc20Transaction['from_address'] == 'TCyRBGnjMSLsPos5RJxVfC7fjcWk1vaUqS') {
-							isBought = 1;
-						}else{
-							isBought = 0;
-						}
-					}
-				}
-
-				if (isBought==0) {
-					allTransactionArray.push({
-						'token':token,
-						'transactionHash':transactions[i].hash,
-						'amount':amount,
-						'result':cleanOutPutString(transactions[i].result),
-						'timestamp':unixTimeToDate13CharNonFormated(transactions[i].timestamp),
-						'network':'trx',
-						'isDeposit':isDeposit
-					});
-				}	
-			}
-
-			var erc20_transactions = ajaxShortLink("userWallet/getErc20Transactions",{'erc20_wallet':currentUser.erc20_wallet}); 
-
-			if(erc20_transactions.status == 1){
-				for (var i = 0; i < erc20_transactions.result.length; i++) {
-					var innerTransactionContainer = erc20_transactions.result[i];
-					var amount = weiToBnb(innerTransactionContainer.value);
-					var isError = innerTransactionContainer.isError;
-					var contractAddress = innerTransactionContainer.contractAddress;
-					var token;
-
+				for (var i = 0; i < bscTransactions.length; i++) {
 					var isDeposit;
+					var amount = roundTron(bscTransactions[i].value);
+					var isBought = 0;
 
-					if (innerTransactionContainer.from == currentUser.erc20_wallet) {
-						// if (innerTransactionContainer.from.toUpperCase() == '0xaccef84f39a21ce8f04e9ca31c215359af0ad030'.toUpperCase()) {
-						// this is test
+					var	isError;
 
-						isDeposit = '<span class="btn btn-sm btn-warning font-weight-bold" disabled="true">OUT</span>';
+					if (bscTransactions[i].isError == 0) {
+						isError = 'Success';
 					}else{
-						isDeposit = '<span class="btn btn-sm btn-success font-weight-bold" disabled="true">IN</span>';
-
-						if (innerTransactionContainer.from == '0xaccef84f39a21ce8f04e9ca31c215359af0ad030') {
-							isBought = 1;
-						}else{
-							isBought = 0;
-						}
+						isError = 'Fail';
 					}
 
-					if(isError == 0){
+					if(bscTransactions[i].to==currentUser['bsc_wallet']){
+						isDeposit = '<span class="btn btn-sm btn-success font-weight-bold" disabled="true">IN</span>';
+						if(bscTransactions[i].from=='0xc81441e9529f6c94b4cf9a3de5ddeb16ffbda312'){
+							isBought = 1;
+						}
+					}else{
+				    	isDeposit = '<span class="btn btn-sm btn-warning font-weight-bold" disabled="true">OUT</span>';
+					}
+
+					if (amount >= 1 && isBought == 0) {
+						allTransactionArray.push({
+							'token':'BNB',
+							'transactionHash':bscTransactions[i].hash,
+							'amount':mweiToBnb(amount),
+							'result':isError,
+							'timestamp':unixTimeToDateNonFormated(bscTransactions[i].timeStamp),
+							'network':'bsc',
+							'isDeposit':isDeposit
+						});
+					}
+				}
+
+				var bscTransactionsTokens = ajaxPostLink('getBscWalletTransactionsTokens',{
+					'userAddress':currentUser['bsc_wallet']
+				})['result'];
+
+
+				for (var i = 0; i < bscTransactionsTokens.length; i++) {
+					var isDeposit;
+					var amount = roundTron(bscTransactionsTokens[i].value);
+					var isBought = 0;
+					var	isError;
+
+					console.log(bscTransactionsTokens[i]);
+
+					if (bscTransactionsTokens[i].isError == 0) {
+						isError = 'Success';
+					}else{
+						isError = 'Fail';
+					}
+
+					if(bscTransactionsTokens[i].to==currentUser['bsc_wallet']){
+						isDeposit = '<span class="btn btn-sm btn-success font-weight-bold" disabled="true">IN</span>';
+						if(bscTransactionsTokens[i].from=='0xc81441e9529f6c94b4cf9a3de5ddeb16ffbda312'){
+							isBought = 1;
+						}
+					}else{
+				    	isDeposit = '<span class="btn btn-sm btn-warning font-weight-bold" disabled="true">OUT</span>';
+					}
+
+					if (amount >= 1 && isBought == 0) {
 						try {
-							if(contractAddress==""){
-								console.log("here");
-								token = "ETH"
-							}else{
-								console.log("there");
+							token = ajaxShortLink('userWallet/checkTokenByContractAddress',
+								{'smartAddress':bscTransactionsTokens[i].contractAddress}
+							);
 
-								token = ajaxShortLink('userWallet/checkTokenByContractAddress',
-									{'smartAddress':contractAddress}
-								);
-
-								token = token.tokenName
-							}
+							token = token.tokenName
 						}
 						catch(err) {
 							token = "Unknown"
 						}
 
-						if (isBought==0) {
-							allTransactionArray.push({
-								'token':token,
-								'transactionHash':innerTransactionContainer.hash,
-								'amount':amount,
-								'timestamp':unixTimeToDateNonFormatedVer2(innerTransactionContainer.timeStamp),
-								'network':'ERC20',
-								'isDeposit':isDeposit,
-								'to':innerTransactionContainer.to,
-								'from':innerTransactionContainer.from,
-							});
-						}	
+						allTransactionArray.push({
+							'token':token,
+							'transactionHash':bscTransactionsTokens[i].hash,
+							'amount':mweiToBnb(amount),
+							'result':isError,
+							'timestamp':unixTimeToDateNonFormated(bscTransactionsTokens[i].timeStamp),
+							'network':'bsc',
+							'isDeposit':isDeposit
+						});
+					}
+				}
+
+				var transactions = ajaxShortLinkNoParse('https://apilist.tronscan.org/api/transaction?sort=-timestamp&count=true&limit=10&start=0&address='+currentUser['trc20_wallet'])['data']; 
+
+				for (var i = 0; i < transactions.length; i++) {
+					var trueAmount = transactions[i].amount;
+					var amount = roundTron(transactions[i].amount);
+					var isDeposit;
+					var token;
+					var isBought = 0;
+					
+					// console.log(transactions[i]);
+					// console.log(trueAmount);
+
+					if (trueAmount >= 1) {
+						token = "TRX";
+
+						if (transactions[i].ownerAddress == currentUser['trc20_wallet']) {
+							isDeposit = '<span class="btn btn-sm btn-warning font-weight-bold" disabled="true">OUT</span>';
+						}else{
+							isDeposit = '<span class="btn btn-sm btn-success font-weight-bold" disabled="true">IN</span>';
+							if (transactions[i].ownerAddress == 'TCyRBGnjMSLsPos5RJxVfC7fjcWk1vaUqS') {
+								isBought = 1;
+							}else{
+								isBought = 0;
+							}
+						}
+					}else{
+						var trc20Transaction = ajaxShortLinkNoParse('https://apilist.tronscan.org/api/transaction-info?hash='+transactions[i].hash)['trc20TransferInfo'][0];
+						token = trc20Transaction['symbol'];
+						amount = trc20AmountToRealAmount(parseInt(trc20Transaction['amount_str']));
+
+
+						if (trc20Transaction['from_address'] == currentUser['trc20_wallet']) {
+							isDeposit = '<span class="btn btn-sm btn-warning font-weight-bold" disabled="true">OUT</span>';
+						}else{
+							isDeposit = '<span class="btn btn-sm btn-success font-weight-bold" disabled="true">IN</span>';
+
+							if (trc20Transaction['from_address'] == 'TCyRBGnjMSLsPos5RJxVfC7fjcWk1vaUqS') {
+								isBought = 1;
+							}else{
+								isBought = 0;
+							}
+						}
 					}
 
+					if (isBought==0) {
+						allTransactionArray.push({
+							'token':token,
+							'transactionHash':transactions[i].hash,
+							'amount':amount,
+							'result':cleanOutPutString(transactions[i].result),
+							'timestamp':unixTimeToDate13CharNonFormated(transactions[i].timestamp),
+							'network':'trx',
+							'isDeposit':isDeposit
+						});
+					}	
 				}
-			}
 
-			var allTransactionArray = allTransactionArray.sort((a, b) => b.timestamp - a.timestamp);
+				var erc20_transactions = ajaxShortLink("userWallet/getErc20Transactions",{'erc20_wallet':currentUser.erc20_wallet}); 
 
-			allTransactionArray = allTransactionArray.slice(0,10);
+				if(erc20_transactions.status == 1){
+					for (var i = 0; i < erc20_transactions.result.length; i++) {
+						var innerTransactionContainer = erc20_transactions.result[i];
+						var amount = weiToBnb(innerTransactionContainer.value);
+						var isError = innerTransactionContainer.isError;
+						var contractAddress = innerTransactionContainer.contractAddress;
+						var token;
 
-			allTransactionArray.forEach(function(item, index){
-				var options = {
-					month: '2-digit',
-					year: 'numeric',
-				 	day:'2-digit'
-				};
+						var isDeposit;
 
-				$("#transactionContainer").append(
-					'<tr id="transaction_hash_'+allTransactionArray[index].transactionHash+'">'+
-						'<td>'+allTransactionArray[index].token+'</td>'+
-						'<td>'+allTransactionArray[index].amount+'</td>'+
-						'<td>'+allTransactionArray[index].isDeposit+'</td>'+
-						'<td>'+allTransactionArray[index].timestamp.toLocaleDateString('en-US', options)+'</td>'+
-					'</tr>'
-				);
-				
-				$('#transaction_hash_'+allTransactionArray[index].transactionHash).on('click',function(){
-				    var transactionHash = $(this).attr('id').split("_")[2];
-				    console.log($(this).index());
+						if (innerTransactionContainer.from == currentUser.erc20_wallet) {
+							// if (innerTransactionContainer.from.toUpperCase() == '0xaccef84f39a21ce8f04e9ca31c215359af0ad030'.toUpperCase()) {
+							// this is test
 
-				    SelectedtransactionDetails = allTransactionArray[$(this).index()];
+							isDeposit = '<span class="btn btn-sm btn-warning font-weight-bold" disabled="true">OUT</span>';
+						}else{
+							isDeposit = '<span class="btn btn-sm btn-success font-weight-bold" disabled="true">IN</span>';
 
-				    bootbox.dialog({
-				        title: '',
-				        message: ajaxLoadPage('quickLoadPage',{'pagename':'wallet/viewTransaction'}),
-				        size: 'large',
-				        centerVertical: true,
-				    });
+							if (innerTransactionContainer.from == '0xaccef84f39a21ce8f04e9ca31c215359af0ad030') {
+								isBought = 1;
+							}else{
+								isBought = 0;
+							}
+						}
+
+						if(isError == 0){
+							try {
+								if(contractAddress==""){
+									console.log("here");
+									token = "ETH"
+								}else{
+									console.log("there");
+
+									token = ajaxShortLink('userWallet/checkTokenByContractAddress',
+										{'smartAddress':contractAddress}
+									);
+
+									token = token.tokenName
+								}
+							}
+							catch(err) {
+								token = "Unknown"
+							}
+
+							if (isBought==0) {
+								allTransactionArray.push({
+									'token':token,
+									'transactionHash':innerTransactionContainer.hash,
+									'amount':amount,
+									'timestamp':unixTimeToDateNonFormatedVer2(innerTransactionContainer.timeStamp),
+									'network':'ERC20',
+									'isDeposit':isDeposit,
+									'to':innerTransactionContainer.to,
+									'from':innerTransactionContainer.from,
+								});
+							}	
+						}
+
+					}
+				}
+
+				var allTransactionArray = allTransactionArray.sort((a, b) => b.timestamp - a.timestamp);
+
+				// allTransactionArray = allTransactionArray.slice(0,10);
+
+				allTransactionArray.forEach(function(item, index){
+					var options = {
+						month: '2-digit',
+						year: 'numeric',
+					 	day:'2-digit',
+					 	hour:   '2-digit',
+				 	    minute: '2-digit',
+				 	    second: '2-digit',
+					};
+
+					allTransactionArray[index].timestamp = allTransactionArray[index].timestamp.toLocaleDateString('en-US', options);
 				});
-			});
 
-			// console.log(bscTransactions,transactions,erc20_transactions);
+				console.log(bscTransactions,transactions,erc20_transactions);
+				setLocalStorageByKey("transactionsHistory",JSON.stringify(allTransactionArray));
 
-			$("#inner_loading").toggle();
-			$("#table_container").toggle();
-		},2000);
-		
+				$("#inner_loading").toggle();
+
+				$("#table_container").css("display",'block');
+				loadDatatable(allTransactionArray)
+			},2000);
+			
+		}catch(error){
+			alert("There seems to be a problem. Try loading the transaction later");
+		}
+			
+		function loadDatatable(dataInner){
+	        $('#tableContainer').DataTable().destroy();
+
+	        $('#tableContainer').DataTable({
+	            data: dataInner,
+		        "ordering": false,
+		        "searching": true,
+		        "bLengthChange": false,
+	            "bFilter": true,
+	            columns: [
+	                { data:'transactionHash'},
+	                { data:'token'},
+	                { data:'amount',},
+	                { data:'isDeposit'},
+	                { data:'timestamp'},
+	            ],
+	            "columnDefs": [
+	                // { "width": "50%", "targets": 0 },
+	                // { "width": "5%", "targets": 2 },
+	                // { "width": "5%", "targets": 3 },
+	                // { "width": "5%", "targets": 1 },
+	                // {"className": "text-center", "targets": 2}
+	            ],"createdRow": function( row, data, dataIndex){
+	                if (data['status'] == "WIN") {
+	                    $(row).find('td:nth-child(3)').addClass('bg-success');
+	                }
+	            },
+		        // "autoWidth": true,
+		        // "order": [[ 0, "desc" ]],
+		        // "sDom": '<"row view-filter"<"col-sm-12"<"pull-left"l><"pull-right"f><"clearfix">>>t<"row view-pager"<"col-sm-12"<"text-center"ip>>>'
+
+		        // var options = {
+				// 		month: '2-digit',
+				// 		year: 'numeric',
+				// 	 	day:'2-digit'
+				// 	};
+
+				// 	$("#transactionContainer").append(
+				// 		'<tr id="transaction_hash_'+allTransactionArray[index].transactionHash+'">'+
+				// 			'<td>'+allTransactionArray[index].token+'</td>'+
+				// 			'<td>'+allTransactionArray[index].amount+'</td>'+
+				// 			'<td>'+allTransactionArray[index].isDeposit+'</td>'+
+				// 			'<td>'+allTransactionArray[index].timestamp.toLocaleDateString('en-US', options)+'</td>'+
+				// 		'</tr>'
+				// 	);
+		    }).column( 0 ).visible(false);
+	    }
+
+       	$('#tableContainer').on('click', 'tbody tr', function () {
+    	   	selectedData = $('#tableContainer').DataTable().row($(this)).data();
+    	   	console.log(selectedData);
+    	   	
+    	   	if (selectedData!=undefined) {
+    		    var transactionHash = selectedData.transactionHash;
+    		    console.log($(this).index());
+
+    		    SelectedtransactionDetails = selectedData;
+
+    		    if(SelectedtransactionDetails.network=="trx"||SelectedtransactionDetails.network=="trc20"){
+    		    	SelectedtransactionDetails.network = 'trx';
+    		    }
+
+    	    	SelectedtransactionDetails['transactionHash'] = transactionHash;
+
+    		    console.log(SelectedtransactionDetails);
+
+    		    bootbox.dialog({
+    		        title: '',
+    		        message: ajaxLoadPage('quickLoadPage',{'pagename':'wallet/viewTransaction'}),
+    		        size: 'large',
+    		        centerVertical: true,
+    		    });
+    	   	}
+         	
+       	});
 	// transaction load
 
 	$("#buy_btn_option_token_info").on('click',function(){
