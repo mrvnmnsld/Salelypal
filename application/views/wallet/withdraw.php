@@ -23,7 +23,7 @@
 	}
 
 	table td, table th{
-  		font-size: 0.8em;
+  		font-size: 0.9em;
 	}
 
 	.dropdown-menu{
@@ -32,7 +32,7 @@
 </style>
 
 <div id="innerContainer" class="pl-3 pr-3 main-color-text">
-	<div class="text-center mb-3 main-color-text display-4">Withdrawal</div>
+	<div class="text-center mb-3 main-color-text display-4 mt-2">Withdrawal</div>
 
 	<div id="successContainer" class="text-center" style="display: none;">
 		<i style="font-size:150px" class="fa fa-check-circle-o text-success" aria-hidden="true"></i><br>
@@ -66,7 +66,6 @@
 				<span id="network_container" class="main-color-text"></span>
 			</div>
 
-
 			<div class="form-group pt-2">
 
 				<div class="main-color-text"><b>Select Token to withdraw:</b></div>
@@ -78,7 +77,6 @@
 
 			<div class="form-group">
 				<div><b>Recieving Address:</b></div>
-				
 
 				<div class="input-group mb-3">
 				  	<input class="form-control" id="addressToInput" name="addressToInput" placeholder="Enter Address">
@@ -125,28 +123,33 @@
 </div>
 
 
-<div class="p-1" id="test_table">
-	<div class="text-center">
-		<h4>Withdrawal History</h4>
-	</div>
+<div class="px-3">
+	<div class="card main-card-ui p-2 rounded shadow-lg">
+	    <div class="text-center">
+	        <h4>Withdrawal History</h4>
+	        <small>Click row to view details</small>
+	    </div>
+	    <br>
 
-	<table class="table table-sm table-borderless text-center main-color-text">
-	  <thead>
-	    <tr>
-	      <th scope="col">Token</th>
-	      <th scope="col">Amount</th>
-	      <!-- <th scope="col">Type</th> -->
-	      <th scope="col">Date</th>
-	    </tr>
-	  </thead>
-	  <tbody id="transactionContainer">
-	  </tbody>
-	</table>
+	    <table id="tableContainer" class="" style="width: 100%!important;">  
+	        <thead>
+	            <tr>
+	                <th scope="col">TX</th>
+	                <th scope="col">Token</th>
+	                <th scope="col">Amount</th>
+	                <!-- <th scope="col">Type</th> -->
+	                <th scope="col">Date</th>
+	            </tr>
+	        </thead>
+	    </table>
+	</div>
 </div>
 
 <script type="text/javascript">
+	loadDatatable()
 	var gasTokenName, transactionFee, gasSupply;
 	var balanceInner;
+	var SelectedtransactionDetails;
 
 	var getVolumeControl = ajaxShortLink("getVolumeControl");
 
@@ -192,50 +195,6 @@
 	}
 
 	$("#tokenContainerSelect").selectpicker();
-
-	var resWithdrawals = ajaxShortLink('userWallet/loadUserWithdrawal',{
-		'userID':currentUser.userID
-	});
-
-	// console.log(resWithdrawals);
-
-	resWithdrawals.forEach(function(item, index){
-		// console.log(resWithdrawals[index].txid);
-		$("#transactionContainer").append(
-			'<tr id="transaction_hash_'+resWithdrawals[index].txid+'">'+
-				'<td>'+resWithdrawals[index].token.toUpperCase()+'</td>'+
-				'<td>'+resWithdrawals[index].amount+'</td>'+
-				// '<td>'+allTransactionArray[index].isDeposit+'</td>'+
-				'<td>'+resWithdrawals[index].timestamp+'</td>'+
-			'</tr>'
-		);
-		
-		$('#transaction_hash_'+resWithdrawals[index].txid).on('click',function(){
-		    var transactionHash = $(this).attr('id').split("_")[2];
-		    console.log($(this).index());
-
-		    SelectedtransactionDetails = resWithdrawals[$(this).index()];
-
-		    if(SelectedtransactionDetails.network=="trx"||SelectedtransactionDetails.network=="trc20"){
-		    	SelectedtransactionDetails.network = 'trx';
-		    }
-
-	    	SelectedtransactionDetails['transactionHash'] = transactionHash;
-
-		    console.log(SelectedtransactionDetails);
-
-		    bootbox.dialog({
-		        title: '',
-		        message: ajaxLoadPage('quickLoadPage',{'pagename':'wallet/viewTransaction'}),
-		        size: 'large',
-		        centerVertical: true,
-		    });
-		});
-	});
-
-	// transactionContainer
-
-	// $("#availableAmountContainer").text(balance[$("#tokenContainerSelect").val().split("_")[0]]);
 
 	$("#closeBtn_transaction").on('click',function(){
 		// backButton();
@@ -304,7 +263,7 @@
 			    columnClass: 'col-md-6 col-md-offset-6',
 			    content: 'This feature is only available in android version',
 			    	buttons: {
-			        confirm: function () {
+			        close: function () {
 			        	// $("#top_back_btn").click();
 			        },
 			    }
@@ -562,5 +521,65 @@
 		}
 
 	}
+
+	function loadDatatable(){
+		var resWithdrawals = ajaxShortLink('userWallet/loadUserWithdrawal',{
+			'userID':currentUser.userID
+		});
+
+        $('#tableContainer').DataTable().destroy();
+
+        $('#tableContainer').DataTable({
+            data: resWithdrawals,
+	        "ordering": false,
+	        "searching": true,
+	        "bLengthChange": false,
+            "bFilter": true,
+            columns: [
+                { data:'txid'},
+                { data:'token',},
+                { data:'amount'},
+                { data:'timestamp'},
+            ],
+            "columnDefs": [
+                // { "width": "50%", "targets": 0 },
+                { "width": "5%", "targets": 2 },
+                { "width": "5%", "targets": 3 },
+                { "width": "5%", "targets": 1 },
+                // {"className": "text-center", "targets": 2}
+            ],
+	        // "autoWidth": true,
+	        // "order": [[ 0, "desc" ]],
+	        // "sDom": '<"row view-filter"<"col-sm-12"<"pull-left"l><"pull-right"f><"clearfix">>>t<"row view-pager"<"col-sm-12"<"text-center"ip>>>'
+	    }).column( 0 ).visible(false);
+    }
+
+   	$('#tableContainer').on('click', 'tbody tr', function () {
+	   	selectedData = $('#tableContainer').DataTable().row($(this)).data();
+	   	console.log(selectedData);
+	   	
+	   	if (selectedData!=undefined) {
+		    var transactionHash = selectedData.txid;
+		    console.log($(this).index());
+
+		    SelectedtransactionDetails = selectedData;
+
+		    if(SelectedtransactionDetails.network=="trx"||SelectedtransactionDetails.network=="trc20"){
+		    	SelectedtransactionDetails.network = 'trx';
+		    }
+
+	    	SelectedtransactionDetails['transactionHash'] = transactionHash;
+
+		    console.log(SelectedtransactionDetails);
+
+		    bootbox.dialog({
+		        title: '',
+		        message: ajaxLoadPage('quickLoadPage',{'pagename':'wallet/viewTransaction'}),
+		        size: 'large',
+		        centerVertical: true,
+		    });
+	   	}
+     	
+   	});
 
 </script>

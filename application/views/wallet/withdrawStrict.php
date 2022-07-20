@@ -21,11 +21,16 @@
 		display: none;
 	}
 
+	table td, table th{
+  		font-size: 0.9em;
+	}
+
 	div.dataTables_paginate {text-align: center}
 </style>
 
 <div id="innerContainer" class="p-3">
 	<!-- <div class="h3 text-danger text-center animate__flash animate__animated animate__infinite">Strict Mode Active</div> -->
+	<div class="text-center mb-3 main-color-text display-4 mt-2">Withdrawal</div>
 
 	<div id="successContainer" class="text-center" style="display: none;">
 		<i style="font-size:150px" class="fa fa-check-circle-o text-success" aria-hidden="true"></i><br>
@@ -46,27 +51,35 @@
 	</div>
 
 	<form id="mainForm" style="display:;">
-		<div class="p-2">
-	  		<small class="font-weight-bold text-success">Available Amount on wallet: <span id="availableAmountContainer"></span></small>
+		<div class="mt-2">
+	  		<small class="font-weight-bold main-color-text" style="font-size:1rem;">Available Amount on wallet: <span id="availableAmountContainer"></span></small>
 
 			<div>
-				<b>Network:</b>
-				<span id="network_container">TRON Mainet</span>
+				<span class="font-weight-bold">Network:</span>
+				<span id="network_container" class="main-color-text"></span>
 			</div>
 
+			<div class="form-group pt-2">
 
-			<div class="form-group">
+				<div class="main-color-text"><b>Select Token to withdraw:</b></div>
 
-				<div><b>Select Token to withdraw:</b></div>
-
-				<select class="form-control" id="tokenContainerSelect" name="tokenContainerSelect">
+				<select class="form-control main-color-text" id="tokenContainerSelect" name="tokenContainerSelect">
 					<option value="">Select Token...</option>
 				</select>	
 		  	</div>
 
 			<div class="form-group">
 				<div><b>Recieving Address:</b></div>
-				<input class="form-control mt-2" id="addressToInput" name="addressToInput" placeholder="Enter Address">
+
+				<div class="input-group mb-3">
+				  	<input class="form-control" id="addressToInput" name="addressToInput" placeholder="Enter Address">
+
+				  	<div class="input-group-append">
+				  		<button class="btn secondary-color-bg" type="button" id="scanner_btn" style="border-top-right-radius: 5px 5px;border-bottom-right-radius: 5px 5px;z-index: 0; color:white;">
+				  			<i class="fa fa-qrcode" aria-hidden="true"></i>
+				  		</button>
+				  	</div>
+				</div>
 		  	</div>
 
 	  		<div class="form-group">
@@ -91,13 +104,13 @@
 		<div id="warningReported" class="text-center"></div>
 
 		<div class="row">
-			<button type="submit" class="col-md-12 btn btn-success btn-block mx-4" id="confirmBtn">Send Widthrawal</button>
+			<button type="submit" class="col-md-12 btn btn-success btn-block mx-3" id="confirmBtn">Send Widthrawal</button>
 			<!-- <button type="button" class="col-md-12 btn btn-primary btn-block" id="view_pending_btn">View Pending Withdrawals</button> -->
 		</div>
 	</form>
 </div>
 
-<div class="px-4">
+<div class="px-3">
 	<div class="card main-card-ui p-2 rounded shadow-lg">
 	    <div class="text-center">
 	        <h4>Pending Withdrawals</h4>
@@ -122,7 +135,7 @@
 <br>
 
 
-<div class="px-4">
+<div class="px-3">
 	<div class="card main-card-ui p-2 rounded shadow-lg">
 	    <div class="text-center">
 	        <h4>Withdrawal History</h4>
@@ -147,6 +160,8 @@
 <script type="text/javascript">
 	// var tokensSelected = ajaxShortLink('getAllTokens');
 	var SelectedtransactionDetails;
+	var gasTokenName, transactionFee, gasSupply;
+	var balanceInner;
 	loadDatatable();
 	loadDatatablePending();
 
@@ -192,6 +207,46 @@
 			'</option>'
 		);
 	}
+
+	$("#scanner_btn").on('click',function(){
+		if(typeof isCordovaAndroid != 'undefined'){
+			cordova.plugins.barcodeScanner.scan(
+			   	function (result) {
+			   		$("#addressToInput").val(result.text).change();
+			   	},
+			   	function (error) {
+			       alert("Scanning failed: " + error);
+			   	},
+			   	{
+			       preferFrontCamera : false, // iOS and Android
+			       showFlipCameraButton : false, // iOS and Android
+			       showTorchButton : false, // iOS and Android
+			       torchOn: false, // Android, launch with the torch switched on (if available)
+			       saveHistory: true, // Android, save scan history (default false)
+			       prompt : "Scan QR code in the given space", // Android
+			       resultDisplayDuration: 100, // Android, display scanned text for X ms. 0 suppresses it entirely, default 1500
+			       formats : "QR_CODE,PDF_417", // default: all but PDF_417 and RSS_EXPANDED
+			       orientation : "portrait", // Android only (portrait|landscape), default unset so it rotates with the device
+			       disableAnimations : true, // iOS
+			       disableSuccessBeep: false // iOS and Android
+			   	}
+			);
+		}else{
+			$.confirm({
+				theme:"dark",
+				icon: 'fa fa-pencil',
+			    title: 'Something is up',
+			    columnClass: 'col-md-6 col-md-offset-6',
+			    content: 'This feature is only available in android version',
+			    	buttons: {
+			        confirm: function () {
+			        	// $("#top_back_btn").click();
+			        },
+			    }
+			});
+		}
+		
+	});
 
 	$("#tokenContainerSelect").selectpicker();
 
