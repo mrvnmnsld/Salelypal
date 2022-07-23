@@ -64,7 +64,7 @@
 				{ data:'toAddress'},
 				{ data:'timestamp'}
 			],
-			"order": [[1, 'asc']],
+			"order": [[0, 'desc']],
 		    autoWidth: false
 		});
 	}
@@ -72,6 +72,9 @@
 	function viewThis(element){
 		var table = $('#tableContainer').DataTable();
 		SelectedtransactionDetails = table.row($(element).closest('tr')).data();
+		SelectedtransactionDetails["transactionHash"] = SelectedtransactionDetails.txid
+
+		console.log(SelectedtransactionDetails);
 
 		bootbox.alert({
 		    message: ajaxLoadPage('quickLoadPage',{'pagename':'userWallets/viewTransaction'}),

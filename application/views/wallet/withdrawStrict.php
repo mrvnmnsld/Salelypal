@@ -46,7 +46,7 @@
 		<br>
 		<hr>
 
-		<button type="button" class="btn btn-block btn-danger" id="closeBtn_transaction">Close</button>
+		<button type="button" class="btn btn-block btn-success m-1" id="closeBtn_transaction">Send Another</button>
 
 	</div>
 
@@ -201,7 +201,7 @@
 				'data-content="'+
 					'<div class=&apos;mainTokenSelectedLogo&apos;>'+
 						'<img style=&apos;width:30px;&apos; src=&apos;'+tokensSelected[i].tokenImage+'&apos;>'+
-						'<span class=&apos;ml-3 text-dark&apos;>'+tokensSelected[i].description+' ('+tokensSelected[i].tokenName.toUpperCase()+')'+'</span>'+
+						'<span class=&apos;ml-3 text-dark&apos;>'+tokensSelected[i].tokenName.toUpperCase()+" - "+tokensSelected[i].description+' ('+tokensSelected[i].networkName.toUpperCase()+')</span>'+
 					'</div>'+
 				'"'+
 			'</option>'
@@ -251,6 +251,8 @@
 	$("#tokenContainerSelect").selectpicker();
 
 	$("#closeBtn_transaction").on('click',function(){
+		$("#successContainer").toggle();
+		$("#mainForm").toggle();
 		// backButton();
 	});
 
@@ -388,40 +390,59 @@
 		    mygroup: "tokenContainerSelect addressToInput amountInput accountPassword"
 		},
 	  	submitHandler: function(form){
-	  		var data = $('#mainForm').serializeArray();
-	  		data.push({
-	  			'name':'fromBscNetwork',
-	  			'value':currentUser.bsc_wallet
+
+	  		$.confirm({
+	  			theme:"dark",
+	  			icon: 'fa fa-pencil',
+	  		    title: 'Withdrawal?',
+	  		    columnClass: 'col-md-6 col-md-offset-6',
+	  		    content: "Are you sure you want to withdraw this?",
+	  		    	buttons: {
+	  		        Yes: function () {
+	  		        	var data = $('#mainForm').serializeArray();
+	  		        	data.push({
+	  		        		'name':'fromBscNetwork',
+	  		        		'value':currentUser.bsc_wallet
+	  		        	});
+
+	  		        	data.push({
+	  		        		'name':'erc20_address',
+	  		        		'value':currentUser.erc20_wallet
+	  		        	});
+
+	  		        	data.push({
+	  		        		'name':'currentUserID',
+	  		        		'value':currentUser.userID
+	  		        	});
+
+	  		        	console.log(data);
+
+	  		        	var res = ajaxPostLink('userWallet/saveWithdrawalStrict',data);
+
+	  		        	console.log(res);
+
+	  		        	if (res) {
+	  		        		var tokenNetworkSelected = $("#tokenContainerSelect").val().split("_")[1];
+
+	  		        		$('#successContainer').toggle();
+	  		        		$('#mainForm').toggle();
+	  		        		$('#mainForm').trigger("reset");
+	  		        		loadDatatablePending();
+
+	  		        		// $('#amountSendContainer').text(res['amount']);
+	  		        		// $('#addressSendContainer').text(res['to']);
+	  		        		// $('#txidSendContainer').val(res['txid']);
+	  		        	}else{
+	  		        		$.alert("Error in Withdrawal contact admin | Error#: 33122")
+	  		        	}
+	  		        },No: function () {
+
+  		        	}
+
+	  		    }
 	  		});
 
-	  		data.push({
-	  			'name':'erc20_address',
-	  			'value':currentUser.erc20_wallet
-	  		});
-
-	  		data.push({
-	  			'name':'currentUserID',
-	  			'value':currentUser.userID
-	  		});
-
-	  		console.log(data);
-
-	  		var res = ajaxPostLink('userWallet/saveWithdrawalStrict',data);
-
-	  		console.log(res);
-
-	  		if (res) {
-	  			var tokenNetworkSelected = $("#tokenContainerSelect").val().split("_")[1];
-
-	  			$('#successContainer').toggle();
-	  			$('#mainForm').toggle();
-
-	  			// $('#amountSendContainer').text(res['amount']);
-	  			// $('#addressSendContainer').text(res['to']);
-	  			// $('#txidSendContainer').val(res['txid']);
-	  		}else{
-	  			$.alert("Error in Withdrawal contact admin | Error#: 33122")
-	  		}
+	  		
 		}
 	});
 

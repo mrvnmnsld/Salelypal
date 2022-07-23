@@ -292,7 +292,8 @@
 			content: 'Are you sure you want to <b>logout</b>?',
 			buttons: {
 				confirm: function () {
-					deleteLocalStorageByKey('currentUser');
+					// deleteLocalStorageByKey('currentUser');
+					localStorage.clear();
 					window.location.href = 'index';//local
 				},
 				cancel: function () {

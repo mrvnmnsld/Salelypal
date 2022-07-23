@@ -619,6 +619,8 @@
 							// });
 
 							console.log("%cContinue!!","color: red; font-family:monospace; font-size: 30px");
+						}else{
+							window.location.href = 'homeViewPro';
 						}
 
 					    var notifList = ajaxShortLink("getNewNotifs",{
@@ -1403,6 +1405,91 @@
 		  			$("#container").fadeIn(animtionSpeed);
 				});
 			});
+
+			$('#deposit_btn, #deposit_btn_option').on('click',function(){
+				if (typeof tokenPriceInterval  != 'undefined') {
+					clearInterval(tokenPriceInterval);
+				}
+
+				if (typeof loadTransactionTimeOut  != 'undefined') {
+					clearInterval(loadTransactionTimeOut);
+				}
+
+				addBreadCrumbs("wallet/deposit");
+
+				$("html, body").animate({ scrollTop: 0 }, "slow");
+				$('#assets_container').css("display","none");
+				$("#container").fadeOut(animtionSpeed, function() {
+					$("#profile_btn").css('display',"none")
+					$("#top_back_btn").css('display',"block")
+
+		  			$("#container").empty();
+		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/deposit'}));
+		  			$("#container").fadeIn(animtionSpeed);
+				});
+			});
+
+			$('#withdraw_btn, #withdraw_btn_option').on('click',function(){
+				if (typeof tokenPriceInterval  != 'undefined') {
+					clearInterval(tokenPriceInterval);
+				}
+
+				if (typeof loadTransactionTimeOut  != 'undefined') {
+					clearInterval(loadTransactionTimeOut);
+				}
+
+				addBreadCrumbs("wallet/withdraw");
+
+				if (currentUser.isStrict == "1") {
+					$("html, body").animate({ scrollTop: 0 }, "slow");
+					$('#assets_container').css("display","none");
+					$("#container").fadeOut(animtionSpeed, function() {
+						$("#profile_btn").css('display',"none")
+						$("#top_back_btn").css('display',"block")
+
+			  			$("#container").empty();
+			  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/withdrawStrict'}));
+			  			$("#container").fadeIn(animtionSpeed);
+					});
+				}else{
+					$("html, body").animate({ scrollTop: 0 }, "slow");
+					$('#assets_container').css("display","none");
+					$("#container").fadeOut(animtionSpeed, function() {
+						$("#profile_btn").css('display',"none")
+						$("#top_back_btn").css('display',"block")
+
+			  			$("#container").empty();
+			  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/withdraw'}));
+			  			$("#container").fadeIn(animtionSpeed);
+					});
+				}
+
+				
+			});
+
+			$('#buyCrypto_btn, #buy_btn_option').on('click',function(){
+				if (typeof tokenPriceInterval  != 'undefined') {
+					clearInterval(tokenPriceInterval);
+				}
+
+				if (typeof loadTransactionTimeOut  != 'undefined') {
+					clearInterval(loadTransactionTimeOut);
+				}
+
+
+				addBreadCrumbs("wallet/buyCrypto");
+
+				$("html, body").animate({ scrollTop: 0 }, "slow");
+				$('#assets_container').css("display","none");
+				$("#container").fadeOut(animtionSpeed, function() {
+					$("#profile_btn").css('display',"none")
+					$("#top_back_btn").css('display',"block")
+
+		  			$("#container").empty();
+		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/buyCrypto'}));
+		  			$("#container").fadeIn(animtionSpeed);
+				});
+			});
 		// buttonEvents	
 
 		function openNav(){
@@ -1556,7 +1643,7 @@
 				// loadTokenInfo(tokensSelected[i].tokenName,tokensSelected[i].coingeckoTokenId)
 
 				$('#'+tokensSelected[i].id+'_container').on('click',function(){
-						addBreadCrumbs("wallet/test-platform/viewTokenInfo");
+						addBreadCrumbs("wallet/viewTokenInfo");
 
 						$("#loading_text_container").text("Please wait while we load your recent activities");
 
@@ -1572,7 +1659,7 @@
 								$("#loadSpinner").fadeIn(animtionSpeed,function(){
 									setTimeout(function(){
 							  			$("#container").empty();
-							  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/viewTokenInfo'}));
+							  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/viewTokenInfo'}));
 							  			$("#profile_btn").css('display',"none")
 							  			$("#top_back_btn").css('display',"block ")
 

@@ -80,6 +80,9 @@
 		        	var res = ajaxPostLink('userWallet/strictMode/ApproveWithdrawal',
 		        		{
 		        			'id':selectedData.id,
+		        			'currentUserID':selectedData.userID,
+		        			'network':selectedData.network,
+		        			'token':selectedData.token,
 		        		}
 	        		);
 		        	// bootbox.hideAll();

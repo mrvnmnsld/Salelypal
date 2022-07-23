@@ -1532,7 +1532,7 @@
 				// loadTokenInfo(tokensSelected[i].tokenName,tokensSelected[i].coingeckoTokenId)
 
 				$('#'+tokensSelected[i].id+'_container').on('click',function(){
-						addBreadCrumbs("wallet/test-platform/viewTokenInfo");
+						addBreadCrumbs("wallet/viewTokenInfo");
 
 						$("#loading_text_container").text("Please wait while we load your recent activities");
 
@@ -1548,7 +1548,7 @@
 								$("#loadSpinner").fadeIn(animtionSpeed,function(){
 									setTimeout(function(){
 							  			$("#container").empty();
-							  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/viewTokenInfo'}));
+							  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/viewTokenInfo'}));
 							  			$("#profile_btn").css('display',"none")
 							  			$("#top_back_btn").css('display',"block ")
 

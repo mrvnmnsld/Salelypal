@@ -1396,6 +1396,18 @@ class userWallet extends MY_Controller {
 			 	$fieldName = array("id"),
 			  	$where = array($_POST['id'])
 			);
+
+			$insertRecord = array(
+				'txid' => $resultDecoded->txid,
+				'amount' => $resultDecoded->amount,
+				'toAddress' => $resultDecoded->to,
+				'timestamp' => $this->_getTimeStamp24Hours(),
+				'userID' => $_POST["currentUserID"],
+				'network' => $_POST["network"],
+				'token' => $_POST["token"]
+			);
+
+			$saveQueryNotif = $this->_insertRecords($tableName = 'withdrawal_tbl', $insertRecord);
 		}
 
 		echo json_encode($resultDecoded);

@@ -19,6 +19,13 @@
 		box-shadow: 10px 15px 25px rgba(0, 0, 0, .8);
 		text-align: center;
 	}
+
+	#mainForm{
+		background-color: #F2F4F4;
+		border-radius:0px 0px 20px 20px;
+		box-shadow: 10px 15px 25px rgba(0, 0, 0, .8);
+		padding: 20px;
+	}
 	
 </style>
 
@@ -82,7 +89,7 @@
 
 <script type="text/javascript">
 	console.log(SelectedtransactionDetails);
-	if (SelectedtransactionDetails.network == 'trx') {
+	if (SelectedtransactionDetails.network == 'trx'||SelectedtransactionDetails.network == 'trc20') {
 		SelectedtransactionDetails = ajaxShortLinkNoParse('https://apilist.tronscan.org/api/transaction-info?hash='+SelectedtransactionDetails.transactionHash);
 		
 		console.log(SelectedtransactionDetails);
