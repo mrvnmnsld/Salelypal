@@ -2483,7 +2483,9 @@
 				$("#container_main").toggle();
 				$("#container").toggle();
 			}else{
+				breadCrumbs.pop()
 				console.log('there');
+				console.log(breadCrumbs[breadCrumbs.length-1]);
 
 				$("#container_main").empty();
 				$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':breadCrumbs[breadCrumbs.length-1]}));
