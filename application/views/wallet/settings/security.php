@@ -76,7 +76,6 @@
 
 		            	if(res==1){
 		            		pushNewNotif("Security changes","Login credentials recently changed, if this is not you please contact our admins",currentUser.userID)
-		            		$.alert("You are being logged out for security purposes");
 		            		$(".jconfirm-buttons").remove()
 
 		            		setTimeout(function(){
@@ -96,26 +95,6 @@
 	  	}
 	});
 
-	function backPage(){
-		$("#tittle_container").text('Settings');
-
-    	$.when(closeNav()).then(function() {
-    		$('#topNavBar').toggle();
-      		$("#container").fadeOut(animtionSpeed, function() {
-    		  	$("#loadSpinner").fadeIn(animtionSpeed,function(){
-    	  			$("#container").empty();
-    	  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings'}));
-
-    		  		$("#loadSpinner").fadeOut(animtionSpeed,function(){
-    		  			$('#topNavBar').toggle();
-    		  			$("#container").fadeIn(animtionSpeed);
-    		  		});
-    	    	});
-    	  	});
-    	});
-	}
-
-	
 
 
 </script>
