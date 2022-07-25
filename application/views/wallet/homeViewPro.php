@@ -2477,6 +2477,7 @@
 			breadCrumbs.pop()
 
 			if(breadCrumbs[breadCrumbs.length-1]=="assets"||breadCrumbs[breadCrumbs.length-1]=="assets_container"){
+				breadCrumbs = ['assets'];
 				$("#profile_btn").css('display',"block");
 				$("#top_back_btn").css('display',"none");
 
