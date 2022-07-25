@@ -19,7 +19,6 @@
 
 	<div class="mt-3">
 		<button class="btn btn-success btn-block" id="save_btn">Save Changes</button>
-		<button class="btn btn-danger red-btn btn-block" id="close_btn">Back</button>
 	</div>
 </div>
 
@@ -50,9 +49,5 @@
 				},
 			}
 		});
-	})
-
-	$("#close_btn").on('click',function(){
-		$("#top_back_btn").click();
 	})
 </script>
