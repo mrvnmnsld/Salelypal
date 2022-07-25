@@ -2,10 +2,10 @@
 	button:focus { outline-style: none; }
 </style>
 
-<button class="btn text-dark font-weight-bold" onclick="backPage()">
+<!-- <button class="btn text-dark font-weight-bold" onclick="backPage()">
 	<i class="fa fa-chevron-circle-left" aria-hidden="true"></i>
 	Back
-</button>
+</button> -->
 
 <div id="innerContainer" class="p-3">
 	<form>
