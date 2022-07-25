@@ -1617,9 +1617,10 @@
 				clearInterval(loadTransactionTimeOut);
 			}
 
-			addBreadCrumbs("wallet/withdraw");
 
 			if (currentUser.isStrict == "1") {
+				addBreadCrumbs("wallet/withdrawStrict");
+
 				$("html, body").animate({ scrollTop: 0 }, "slow");
 
 				$("#container").toggle();
@@ -1631,6 +1632,8 @@
 				$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/withdrawStrict'}));
 				$("#container_main").toggle();
 			}else{
+				addBreadCrumbs("wallet/withdraw");
+
 				$("html, body").animate({ scrollTop: 0 }, "slow");
 
 				$("#container").toggle();

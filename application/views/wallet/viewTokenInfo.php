@@ -488,38 +488,40 @@
 	$("#withdraw_btn_option_token_info").on('click',function(){
 		clearTimeout(loadTransactionTimeOut);
 
-		var res = ajaxPostLink(
-			"userWallet/getCurrentUserStrictStatus",{
-			'userID':currentUser.userID
-		});
+		if (typeof tokenPriceInterval  != 'undefined') {
+			clearInterval(tokenPriceInterval);
+		}
 
-		if(res==1){
- 			addBreadCrumbs("wallet/withdrawStrict");
+		if (typeof loadTransactionTimeOut  != 'undefined') {
+			clearInterval(loadTransactionTimeOut);
+		}
 
- 			$("html, body").animate({ scrollTop: 0 }, "slow");
- 			$('#assets_container').css("display","none");
- 			$("#container").fadeOut(animtionSpeed, function() {
- 				$("#profile_btn").css('display',"none")
- 				$("#top_back_btn").css('display',"block")
+		if (currentUser.isStrict == "1") {
+			addBreadCrumbs("wallet/withdrawStrict");
 
- 	  			$("#container").empty();
- 	  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/withdrawStrict'}));
- 	  			$("#container").fadeIn(animtionSpeed);
- 			});
+			$("html, body").animate({ scrollTop: 0 }, "slow");
+
+			$("#container").toggle();
+			
+			$("#profile_btn").css('display',"none");
+			$("#top_back_btn").css('display',"block");
+
+			$("#container_main").empty();
+			$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/withdrawStrict'}));
+			$("#container_main").toggle();
 		}else{
 			addBreadCrumbs("wallet/withdraw");
 
 			$("html, body").animate({ scrollTop: 0 }, "slow");
-			$('#assets_container').css("display","none");
-			$("#container").fadeOut(animtionSpeed, function() {
-				$("#profile_btn").css('display',"none")
-				$("#top_back_btn").css('display',"block")
 
-	  			$("#container").empty();
-	  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/withdraw'}));
-	  			$("#container").fadeIn(animtionSpeed);
-	  			$("#tokenContainerSelect").val(clickContainer.tokenName+"_"+clickContainer.networkName+"_"+clickContainer.smartAddress).change();
-			});
+			$("#container").toggle();
+			
+			$("#profile_btn").css('display',"none");
+			$("#top_back_btn").css('display',"block");
+
+			$("#container_main").empty();
+			$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/withdraw'}));
+			$("#container_main").toggle();
 		}
 	});
 
@@ -529,15 +531,15 @@
 		addBreadCrumbs("wallet/deposit");
 
 		$("html, body").animate({ scrollTop: 0 }, "slow");
-		$('#assets_container').css("display","none");
-		$("#container").fadeOut(animtionSpeed, function() {
-			$("#profile_btn").css('display',"none")
-			$("#top_back_btn").css('display',"block")
 
-  			$("#container").empty();
-  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/deposit'}));
-  			$("#container").fadeIn(animtionSpeed);
-		});
+		$("#container").toggle();
+		
+		$("#profile_btn").css('display',"none");
+		$("#top_back_btn").css('display',"block");
+
+		$("#container_main").empty();
+		$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/deposit'}));
+		$("#container_main").toggle();
 	});
 
 	$("#info_btn_option_token_info").on('click',function(){
@@ -545,16 +547,14 @@
 		
 		addBreadCrumbs("wallet/tokenMoreInfo");
 
-		$("html, body").animate({ scrollTop: 0 }, "slow");
-		$('#assets_container').css("display","none");
-		$("#container").fadeOut(animtionSpeed, function() {
-			$("#profile_btn").css('display',"none")
-			$("#top_back_btn").css('display',"block")
+		$("#container").toggle();
+		
+		$("#profile_btn").css('display',"none");
+		$("#top_back_btn").css('display',"block");
 
-  			$("#container").empty();
-  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/tokenMoreInfo'}));
-  			$("#container").fadeIn(animtionSpeed);
-		});
+		$("#container_main").empty();
+		$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/tokenMoreInfo'}));
+		$("#container_main").toggle();
 	});
 
 	// deposit_btn_option_token_info
