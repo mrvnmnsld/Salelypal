@@ -1316,237 +1316,237 @@
 			});
 		}, 500);
 
-		setTimeout(function(){
-			var i = 0;
+		// setTimeout(function(){
+		// 	var i = 0;
 
 
-			function myLoop() {
-			  	tokenLoadTimer = setTimeout(function() {
-				    if (i < tokensSelected.length) {
-				    	coinIds.push(tokensSelected[i].coingeckoTokenId);
-				    	// coinIds
-						loadTokenInfo(tokensSelected[i]);
-						myLoop();
-				    }else{
-				  		$("#totalInUsdContainer").html(numberWithCommas(totalInUsd.toFixed(2)));
-				  		$("#totalInUsdContainer").append(" "+displayCurrency.toUpperCase());
+		// 	function myLoop() {
+		// 	  	tokenLoadTimer = setTimeout(function() {
+		// 		    if (i < tokensSelected.length) {
+		// 		    	coinIds.push(tokensSelected[i].coingeckoTokenId);
+		// 		    	// coinIds
+		// 				loadTokenInfo(tokensSelected[i]);
+		// 				myLoop();
+		// 		    }else{
+		// 		  		$("#totalInUsdContainer").html(numberWithCommas(totalInUsd.toFixed(2)));
+		// 		  		$("#totalInUsdContainer").append(" "+displayCurrency.toUpperCase());
 				  		
-				  		$('#visible_btn').toggle();
-				  		$('#updating_assets_container').toggle();
+		// 		  		$('#visible_btn').toggle();
+		// 		  		$('#updating_assets_container').toggle();
 
-				  		$('#refresh_btn').removeAttr("disabled");
-				  		$('#addToken_btn').removeAttr("disabled");
-
-
-				  		// chart PNL
-					  		$("#pnl_loading").toggle();
-					  		$("#pnl_main").toggle();
-
-		  			  		var date = new Date();
-
-		  			  		var year = date.getFullYear();
-		  			  		var month = String(date.getMonth() + 1);
-		  			  		var day = String(date.getDate());
-		  			  		var joined = [month,day,year,].join('/');
-
-		  			  		// console.log(joined);
-
-		  			  		var getTodayContractProfit = ajaxShortLink("userWallet/getTodayContractProfit",{
-		  		  				"userID":currentUser.userID,
-		  		  				"date":joined
-		  		  			})
-
-		  		  			// console.log(getTodayContractProfit);
-
-		  		  			$("#todaysEarning").text(getTodayContractProfit+" USD");
-
-		  		  			if (parseFloat(getTodayContractProfit)>=1) {
-		  		  				$("#todaysEarning").addClass("text-success").text("+"+getTodayContractProfit+" USD");
-		  		  			}else{
-		  		  				$("#todaysEarning").addClass("text-danger").text(getTodayContractProfit+" USD");
-		  		  			}
-
-				  				var yValues = ajaxShortLink("userWallet/getToken24HourChange",{
-					  				"coinIds":coinIds.toString()
-					  			})
-
-					  			var last7days = yValues.slice(yValues.length - 7);
-
-						  		var totalInUsdInner = parseFloat($('#totalInUsdContainer').text().split(" ")[0].replace(/,/g, ''));
-						  		var changePercentageIn1Day = parseFloat(yValues[yValues.length-1]);
-
-				  				var xValues = getDaysDate(6);
-
-				  				var average = yValues.reduce((a, b) => a + b, 0) / yValues.length;
-				  				var average7Days = last7days.reduce((a, b) => a + b, 0) / last7days.length;
-
-				  				// console.log(last7days);
-				  				// console.log(yValues);
-				  				// console.log(average);
-				  				// console.log(changePercentageIn1Day);
-				  				// console.log((changePercentageIn1Day/100)*totalInUsdInner);
-				  				// console.log(totalInUsdInner);
-				  				// console.log(changePercentageIn1Day/100);
-
-				  				if(parseFloat(yValues[yValues.length-1]) < 0) {
-				  					$("#yesterdayPnl").addClass("text-danger").html((totalInUsdInner*(changePercentageIn1Day/100)).toFixed(2)+" <br><small>"+changePercentageIn1Day.toFixed(2)+"% Change </small>");
-				  				}else{
-				  					$("#yesterdayPnl").addClass("text-success").html("+"+(totalInUsdInner*(changePercentageIn1Day/100)).toFixed(2)+" <br><small>"+changePercentageIn1Day.toFixed(2)+"% Change </small>");
-				  				}
-
-				  				if(average7Days < 0) {
-				  					$("#allDaysPnl").addClass("text-danger").html((totalInUsdInner*(average7Days/100)).toFixed(2)+" <small>"+average7Days.toFixed(2)+"% Change</small>");
-				  				}else{
-				  					$("#allDaysPnl").addClass("text-success").html("+"+(totalInUsdInner*(average7Days/100)).toFixed(2)+" <small>"+average7Days.toFixed(2)+"% Change</small>");
-				  				}
-
-				  				if(average < 0) {
-				  					$("#14DaysPnl").addClass("text-danger").html((totalInUsdInner*(average/100)).toFixed(2)+"<br> <small>"+average.toFixed(2)+"% Change</small>");
-				  				}else{
-				  					$("#14DaysPnl").addClass("text-success").html("+"+(totalInUsdInner*(average/100)).toFixed(2)+" <br><small>"+average.toFixed(2)+"% Change</small>");
-				  				}
-
-					  		$("#pnl_chart_container");
+		// 		  		$('#refresh_btn').removeAttr("disabled");
+		// 		  		$('#addToken_btn').removeAttr("disabled");
 
 
-			  				new Chart("pnl_chart_container", {
-			  				  	type: "line",
-			  				  	data: {
-			  				    	labels: xValues,
-			  			    		datasets: [{
-			  						      // backgroundColor: "rgba(0,0,0,1.0)",
-			  						      fill: false,
-			  						      label: false,
-			  						      borderColor: "#94abef",
-			  						      data: yValues
-			  					    }]
-			  					},
-			  				  	options:{
-			  				  		responsive: true,
-		  				        	legend: {
-		  				          		position: 'top',
-		  				          		display: false
-		  				        	},
-		  				        	title: {
-		  			          			display: false,
-		  			          			// text: 'Chart.js Line Chart'
-		  				       	 	},
-			  		      		    tooltips: {
-			  		      		        callbacks: {
-			  		      		           label: function(tooltipItem) {
-			  		      		                  return tooltipItem.yLabel;
-			  		      		           }
-			  		      		        }
-			  		      		    }
-			  				  	}
-			  				});
+		// 		  		// chart PNL
+		// 			  		$("#pnl_loading").toggle();
+		// 			  		$("#pnl_main").toggle();
 
-			  				var xValues = getDaysDate(13);
+		//   			  		var date = new Date();
 
-			  				new Chart("pnl_14_chart_container", {
-			  				  	type: "line",
-			  				  	data: {
-			  				    	labels: xValues,
-			  			    		datasets: [{
-			  						      // backgroundColor: "rgba(0,0,0,1.0)",
-			  						      fill: false,
-			  						      label: false,
-			  						      borderColor: "#94abef",
-			  						      data: yValues
-			  					    }]
-			  					},
-			  				  	options:{
-			  				  		responsive: true,
-		  				        	legend: {
-		  				          		position: 'top',
-		  				          		display: false
-		  				        	},
-		  				        	title: {
-		  			          			display: false,
-		  			          			// text: 'Chart.js Line Chart'
-		  				       	 	},
-			  		      		    tooltips: {
-			  		      		        callbacks: {
-			  		      		           label: function(tooltipItem) {
-			  		      		                  return tooltipItem.yLabel;
-			  		      		           }
-			  		      		        }
-			  		      		    }
-			  				  	}
-			  				});
+		//   			  		var year = date.getFullYear();
+		//   			  		var month = String(date.getMonth() + 1);
+		//   			  		var day = String(date.getDate());
+		//   			  		var joined = [month,day,year,].join('/');
 
-			  				var xValues = tokenNames;
-			  				var yValues = tokenBalance;
+		//   			  		// console.log(joined);
+
+		//   			  		var getTodayContractProfit = ajaxShortLink("userWallet/getTodayContractProfit",{
+		//   		  				"userID":currentUser.userID,
+		//   		  				"date":joined
+		//   		  			})
+
+		//   		  			// console.log(getTodayContractProfit);
+
+		//   		  			$("#todaysEarning").text(getTodayContractProfit+" USD");
+
+		//   		  			if (parseFloat(getTodayContractProfit)>=1) {
+		//   		  				$("#todaysEarning").addClass("text-success").text("+"+getTodayContractProfit+" USD");
+		//   		  			}else{
+		//   		  				$("#todaysEarning").addClass("text-danger").text(getTodayContractProfit+" USD");
+		//   		  			}
+
+		// 		  				var yValues = ajaxShortLink("userWallet/getToken24HourChange",{
+		// 			  				"coinIds":coinIds.toString()
+		// 			  			})
+
+		// 			  			var last7days = yValues.slice(yValues.length - 7);
+
+		// 				  		var totalInUsdInner = parseFloat($('#totalInUsdContainer').text().split(" ")[0].replace(/,/g, ''));
+		// 				  		var changePercentageIn1Day = parseFloat(yValues[yValues.length-1]);
+
+		// 		  				var xValues = getDaysDate(6);
+
+		// 		  				var average = yValues.reduce((a, b) => a + b, 0) / yValues.length;
+		// 		  				var average7Days = last7days.reduce((a, b) => a + b, 0) / last7days.length;
+
+		// 		  				// console.log(last7days);
+		// 		  				// console.log(yValues);
+		// 		  				// console.log(average);
+		// 		  				// console.log(changePercentageIn1Day);
+		// 		  				// console.log((changePercentageIn1Day/100)*totalInUsdInner);
+		// 		  				// console.log(totalInUsdInner);
+		// 		  				// console.log(changePercentageIn1Day/100);
+
+		// 		  				if(parseFloat(yValues[yValues.length-1]) < 0) {
+		// 		  					$("#yesterdayPnl").addClass("text-danger").html((totalInUsdInner*(changePercentageIn1Day/100)).toFixed(2)+" <br><small>"+changePercentageIn1Day.toFixed(2)+"% Change </small>");
+		// 		  				}else{
+		// 		  					$("#yesterdayPnl").addClass("text-success").html("+"+(totalInUsdInner*(changePercentageIn1Day/100)).toFixed(2)+" <br><small>"+changePercentageIn1Day.toFixed(2)+"% Change </small>");
+		// 		  				}
+
+		// 		  				if(average7Days < 0) {
+		// 		  					$("#allDaysPnl").addClass("text-danger").html((totalInUsdInner*(average7Days/100)).toFixed(2)+" <small>"+average7Days.toFixed(2)+"% Change</small>");
+		// 		  				}else{
+		// 		  					$("#allDaysPnl").addClass("text-success").html("+"+(totalInUsdInner*(average7Days/100)).toFixed(2)+" <small>"+average7Days.toFixed(2)+"% Change</small>");
+		// 		  				}
+
+		// 		  				if(average < 0) {
+		// 		  					$("#14DaysPnl").addClass("text-danger").html((totalInUsdInner*(average/100)).toFixed(2)+"<br> <small>"+average.toFixed(2)+"% Change</small>");
+		// 		  				}else{
+		// 		  					$("#14DaysPnl").addClass("text-success").html("+"+(totalInUsdInner*(average/100)).toFixed(2)+" <br><small>"+average.toFixed(2)+"% Change</small>");
+		// 		  				}
+
+		// 			  		$("#pnl_chart_container");
 
 
-			  				var barColors = getRandomColorIteration(xValues.length);
+		// 	  				new Chart("pnl_chart_container", {
+		// 	  				  	type: "line",
+		// 	  				  	data: {
+		// 	  				    	labels: xValues,
+		// 	  			    		datasets: [{
+		// 	  						      // backgroundColor: "rgba(0,0,0,1.0)",
+		// 	  						      fill: false,
+		// 	  						      label: false,
+		// 	  						      borderColor: "#94abef",
+		// 	  						      data: yValues
+		// 	  					    }]
+		// 	  					},
+		// 	  				  	options:{
+		// 	  				  		responsive: true,
+		//   				        	legend: {
+		//   				          		position: 'top',
+		//   				          		display: false
+		//   				        	},
+		//   				        	title: {
+		//   			          			display: false,
+		//   			          			// text: 'Chart.js Line Chart'
+		//   				       	 	},
+		// 	  		      		    tooltips: {
+		// 	  		      		        callbacks: {
+		// 	  		      		           label: function(tooltipItem) {
+		// 	  		      		                  return tooltipItem.yLabel;
+		// 	  		      		           }
+		// 	  		      		        }
+		// 	  		      		    }
+		// 	  				  	}
+		// 	  				});
 
-			  				new Chart("assets_chart_container", {
-			  				  	type: "pie",
-			  				  	data: {
-				  				    labels: xValues,
-				  				    datasets: [{
-				  				      	backgroundColor: barColors,
-			  				      		data: yValues
-				  				    }]
-			  				  	},
-			  				  	options: {
-				  				    title: {
-			  				      		display: false,
-			  				      		// text: "World Wide Wine Production 2018"
-				  				    },
-				  				    legend: {
-			  				      		display: true
-				  				    }
-			  				  }
-			  				});
+		// 	  				var xValues = getDaysDate(13);
 
-			  				baseUrl = "https://widgets.cryptocompare.com/";
-			  				var scripts = document.getElementsByTagName("script");
-			  				var embedder = $("#news_container")[0];
+		// 	  				new Chart("pnl_14_chart_container", {
+		// 	  				  	type: "line",
+		// 	  				  	data: {
+		// 	  				    	labels: xValues,
+		// 	  			    		datasets: [{
+		// 	  						      // backgroundColor: "rgba(0,0,0,1.0)",
+		// 	  						      fill: false,
+		// 	  						      label: false,
+		// 	  						      borderColor: "#94abef",
+		// 	  						      data: yValues
+		// 	  					    }]
+		// 	  					},
+		// 	  				  	options:{
+		// 	  				  		responsive: true,
+		//   				        	legend: {
+		//   				          		position: 'top',
+		//   				          		display: false
+		//   				        	},
+		//   				        	title: {
+		//   			          			display: false,
+		//   			          			// text: 'Chart.js Line Chart'
+		//   				       	 	},
+		// 	  		      		    tooltips: {
+		// 	  		      		        callbacks: {
+		// 	  		      		           label: function(tooltipItem) {
+		// 	  		      		                  return tooltipItem.yLabel;
+		// 	  		      		           }
+		// 	  		      		        }
+		// 	  		      		    }
+		// 	  				  	}
+		// 	  				});
 
-			  				(function (){
-			  					var appName = encodeURIComponent(window.location.hostname);
-			  					if(appName==""){appName="local";}
-			  					var s = document.createElement("script");
-			  					s.type = "text/javascript";
-			  					s.async = true;
-			  					var theUrl = baseUrl+'serve/v1/coin/feed?fsym=TRX&tsym=USD&feedType=cryptoglobe';
-			  					s.src = theUrl + ( theUrl.indexOf("?") >= 0 ? "&" : "?") + "app=" + appName;
+		// 	  				var xValues = tokenNames;
+		// 	  				var yValues = tokenBalance;
+
+
+		// 	  				var barColors = getRandomColorIteration(xValues.length);
+
+		// 	  				new Chart("assets_chart_container", {
+		// 	  				  	type: "pie",
+		// 	  				  	data: {
+		// 		  				    labels: xValues,
+		// 		  				    datasets: [{
+		// 		  				      	backgroundColor: barColors,
+		// 	  				      		data: yValues
+		// 		  				    }]
+		// 	  				  	},
+		// 	  				  	options: {
+		// 		  				    title: {
+		// 	  				      		display: false,
+		// 	  				      		// text: "World Wide Wine Production 2018"
+		// 		  				    },
+		// 		  				    legend: {
+		// 	  				      		display: true
+		// 		  				    }
+		// 	  				  }
+		// 	  				});
+
+		// 	  				baseUrl = "https://widgets.cryptocompare.com/";
+		// 	  				var scripts = document.getElementsByTagName("script");
+		// 	  				var embedder = $("#news_container")[0];
+
+		// 	  				(function (){
+		// 	  					var appName = encodeURIComponent(window.location.hostname);
+		// 	  					if(appName==""){appName="local";}
+		// 	  					var s = document.createElement("script");
+		// 	  					s.type = "text/javascript";
+		// 	  					s.async = true;
+		// 	  					var theUrl = baseUrl+'serve/v1/coin/feed?fsym=TRX&tsym=USD&feedType=cryptoglobe';
+		// 	  					s.src = theUrl + ( theUrl.indexOf("?") >= 0 ? "&" : "?") + "app=" + appName;
 			  					
-			  					embedder.append(s)
+		// 	  					embedder.append(s)
 			  					
-			  				})();
+		// 	  				})();
 
-			  				setTimeout(function(){
-			  					var containerATag = $("#news_container a")[1];
-			  					$(containerATag).remove();
+		// 	  				setTimeout(function(){
+		// 	  					var containerATag = $("#news_container a")[1];
+		// 	  					$(containerATag).remove();
 
-			  					$("#news_container a").attr("href",'#');
-			  					$("#news_container a").attr("target",'');
-			  					$("#newsLoading").toggle();
-			  				},1000)
+		// 	  					$("#news_container a").attr("href",'#');
+		// 	  					$("#news_container a").attr("target",'');
+		// 	  					$("#newsLoading").toggle();
+		// 	  				},1000)
 
-							ajaxShortLink("saveLastAllTokenValue",{
-								'userID': currentUser.userID,
-								'value': $("#totalInUsdContainer").text().split(" ")[0],
-								'currency': displayCurrency,
-							});
+		// 					ajaxShortLink("saveLastAllTokenValue",{
+		// 						'userID': currentUser.userID,
+		// 						'value': $("#totalInUsdContainer").text().split(" ")[0],
+		// 						'currency': displayCurrency,
+		// 					});
 
-							setLocalStorageByKey('tokenValuesContainer',JSON.stringify(tokenValuesContainer))
+		// 					setLocalStorageByKey('tokenValuesContainer',JSON.stringify(tokenValuesContainer))
 
 
-				  		// chart PNL
+		// 		  		// chart PNL
 
-						console.timeEnd('loadTimer');
-				    }
+		// 				console.timeEnd('loadTimer');
+		// 		    }
 
-			    	i++;
-			  	}, 500)
-			}
+		// 	    	i++;
+		// 	  	}, 500)
+		// 	}
 
-			myLoop();
-		}, 1000);	
+		// 	myLoop();
+		// }, 1000);	
 	});
 
 	// buttonEvents
@@ -1667,27 +1667,76 @@
 			$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/buyCrypto'}));
 			$("#container_main").toggle();
 		});
+		// bottom buttons
+			$('#assets_btn').on('click',function(){
+				if ($("#container_main").css("display")=="none") {
+					$("html, body").animate({ scrollTop: 0 }, "slow");
+					slider1.moveToIdx(0)
+				}else{
+					$("#profile_btn").css('display',"block");
+					$("#top_back_btn").css('display',"none");
 
-		$('#assets_btn').on('click',function(){
-			$("html, body").animate({ scrollTop: 0 }, "slow");
-			slider1.moveToIdx(0)
-		});
+					$("#container_main").toggle();
+					$("#container").toggle();
 
-		$('#modal_mining_btn').on('click',function(){
-			$("html, body").animate({ scrollTop: 0 }, "slow");
-			slider1.moveToIdx(1)
-		});
+					$("html, body").animate({ scrollTop: 0 }, "slow");
+					slider1.moveToIdx(0)
+				}
+				
+			});
 
-		$('#settings_btn').on('click',function(){
-			$("html, body").animate({ scrollTop: 0 }, "slow");
-			slider1.moveToIdx(3)
-		});
+			$('#modal_mining_btn').on('click',function(){
+				if ($("#container_main").css("display")=="none") {
+					$("html, body").animate({ scrollTop: 0 }, "slow");
+					slider1.moveToIdx(1)
+				}else{
+					$("#profile_btn").css('display',"block");
+					$("#top_back_btn").css('display',"none");
 
-		$('#discover_btn').on('click',function(){
-			$("html, body").animate({ scrollTop: 0 }, "slow");
-			slider1.moveToIdx(2)
-		});
+					$("#container_main").toggle();
+					$("#container").toggle();
+
+					$("html, body").animate({ scrollTop: 0 }, "slow");
+					slider1.moveToIdx(1)
+				}
+			});
+
+			$('#discover_btn').on('click',function(){
+				if ($("#container_main").css("display")=="none") {
+					$("html, body").animate({ scrollTop: 0 }, "slow");
+					slider1.moveToIdx(2)
+				}else{
+					$("#profile_btn").css('display',"block");
+					$("#top_back_btn").css('display',"none");
+
+					$("#container_main").toggle();
+					$("#container").toggle();
+
+					$("html, body").animate({ scrollTop: 0 }, "slow");
+					slider1.moveToIdx(2)
+				}
+			});
+
+			$('#settings_btn').on('click',function(){
+				if ($("#container_main").css("display")=="none") {
+					$("html, body").animate({ scrollTop: 0 }, "slow");
+					slider1.moveToIdx(3)
+				}else{
+					$("#profile_btn").css('display',"block");
+					$("#top_back_btn").css('display',"none");
+
+					$("#container_main").toggle();
+					$("#container").toggle();
+
+					$("html, body").animate({ scrollTop: 0 }, "slow");
+					slider1.moveToIdx(3)
+				}
+			});
+		// bottom buttons
+
 		
+
+
 		$('#refresh_btn').on('click',function(){
 			if (typeof tokenPriceInterval  != 'undefined') {
 				clearInterval(tokenPriceInterval);
@@ -1978,6 +2027,7 @@
 		});
 
 		$('#notif_btn').on('click',function(){
+			console.log("test");
 			if (typeof tokenPriceInterval  != 'undefined') {
 				clearInterval(tokenPriceInterval);
 			}
@@ -1996,16 +2046,15 @@
 
 			$("html, body").animate({ scrollTop: 0 }, "slow");
 
-			$("#container").toggle();
+			$("#container").css("display",'none');
 
 			$("#profile_btn").css('display',"none");
 			$("#top_back_btn").css('display',"block");
 
 			$("#container_main").empty();
 			$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/notificationCenter'}));
-			$("#container_main").toggle();
+			$("#container_main").css("display",'block');
 		});
-
 
 		$('#rise_fall_btn').on('click',function(){
 			if (typeof tokenPriceInterval  != 'undefined') {
@@ -2433,14 +2482,9 @@
 			}else{
 				console.log('there');
 
-				$("html, body").animate({ scrollTop: 0 }, "slow");
-				$('#assets_container').css("display","none");
-				$("#container").fadeOut(animtionSpeed, function() {
-		  			$("#container").empty();
-		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':breadCrumbs[breadCrumbs.length-1]}));
-		  			$("#container").show("slide", { direction: "left" }, animtionSpeed);
-				  	$("#loading_text_container").text("Please wait");
-				});
+				$("#container_main").empty();
+				$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':breadCrumbs[breadCrumbs.length-1]}));
+				$("#container_main").css('display',"block");
 			}
 
 		}
