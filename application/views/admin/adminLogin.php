@@ -178,7 +178,7 @@
           <button>LOGIN</button>
           <div class="switch_login">
              <a href="agent-login">Click here for Agent login</a>
-             <p>© SafetyPal 2022</p>
+             <p>© SafelyPal 2022</p>
           </div>
       </form>
   </div>
