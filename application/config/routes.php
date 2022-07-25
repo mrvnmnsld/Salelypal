@@ -244,13 +244,9 @@ $route['saveName'] = 'main/saveName';
 		$route['userWallet/strictMode/declineWithdrawal'] = 'userWallet/declineWithdrawal';
 
 		$route['userWallet/strictMode/loadUserWithdrawalPending'] = 'userWallet/loadUserWithdrawalPending';
-		
-
-		
 	// strict
 
 	$route['userWallet/getAllContractPositionsViaUserID'] = 'userWallet/getAllContractPositionsViaUserID';
-
 
 	//contract
 		$route['userWallet/future/savePosition'] = 'userWallet/futureSavePosition';
