@@ -73,11 +73,12 @@
             <h6>Information</h6>
             
             <hr class="mt-0 mb-4">
+
             <div class="row pt-1">
                 <div id="emailDiv" class="col-6 mb-3">
                     <h6> Email </h6>
                     <p id="email" class="text-truncate text-muted">info@email.com</p>
-                     <span id="tooltipemail"></span>
+                    <span id="tooltipemail"></span>
                 </div>
             <div class="col-6 mb-3">
                 <h6> Phone Number</i></h6>
