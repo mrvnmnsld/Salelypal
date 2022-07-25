@@ -473,16 +473,11 @@
 		addBreadCrumbs("wallet/buyCrypto");
 
 		$("html, body").animate({ scrollTop: 0 }, "slow");
-		$('#assets_container').css("display","none");
-		$("#container").fadeOut(animtionSpeed, function() {
-			$("#profile_btn").css('display',"none")
-			$("#top_back_btn").css('display',"block")
 
-  			$("#container").empty();
-  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/buyCrypto'}));
-  			$("#container").fadeIn(animtionSpeed);
-  			// $("#token_select").val(clickContainer.tokenName+"_"+clickContainer.networkName+"_"+clickContainer.smartAddress+"_"+clickContainer.coingeckoTokenId).change();
-		});
+		addBreadCrumbs("wallet/tokenMoreInfo");
+
+		$("#container_main").empty();
+		$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/buyCrypto'}));
 	});
 
 	$("#withdraw_btn_option_token_info").on('click',function(){
@@ -501,60 +496,40 @@
 
 			$("html, body").animate({ scrollTop: 0 }, "slow");
 
-			$("#container").toggle();
-			
-			$("#profile_btn").css('display',"none");
-			$("#top_back_btn").css('display',"block");
-
 			$("#container_main").empty();
 			$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/withdrawStrict'}));
-			$("#container_main").toggle();
 		}else{
 			addBreadCrumbs("wallet/withdraw");
 
 			$("html, body").animate({ scrollTop: 0 }, "slow");
 
-			$("#container").toggle();
-			
-			$("#profile_btn").css('display',"none");
-			$("#top_back_btn").css('display',"block");
+			addBreadCrumbs("wallet/tokenMoreInfo");
 
 			$("#container_main").empty();
 			$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/withdraw'}));
-			$("#container_main").toggle();
 		}
 	});
 
 	$("#deposit_btn_option_token_info").on('click',function(){
+		$("html, body").animate({ scrollTop: 0 }, "slow");
+
 		clearTimeout(loadTransactionTimeOut);
 
 		addBreadCrumbs("wallet/deposit");
 
-		$("html, body").animate({ scrollTop: 0 }, "slow");
-
-		$("#container").toggle();
-		
-		$("#profile_btn").css('display',"none");
-		$("#top_back_btn").css('display',"block");
-
 		$("#container_main").empty();
 		$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/deposit'}));
-		$("#container_main").toggle();
 	});
 
 	$("#info_btn_option_token_info").on('click',function(){
+		$("html, body").animate({ scrollTop: 0 }, "slow");
+		
 		clearTimeout(loadTransactionTimeOut);
 		
 		addBreadCrumbs("wallet/tokenMoreInfo");
 
-		$("#container").toggle();
-		
-		$("#profile_btn").css('display',"none");
-		$("#top_back_btn").css('display',"block");
-
 		$("#container_main").empty();
 		$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/tokenMoreInfo'}));
-		$("#container_main").toggle();
 	});
 
 	// deposit_btn_option_token_info
