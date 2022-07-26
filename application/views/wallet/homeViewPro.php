@@ -551,36 +551,46 @@
 		</div>
 
 		<div id="1_container_slider" style="display:none;" class="keen-slider__slide text-center">
+			<div style="margin-top: 30%;padding: 20px;">
+				<!-- <h1>Choose Main Function: </h1> -->
 
-			<div class="m-1 justify-content-center">
-				<button id="rise_fall_btn" type="button" class="btn btn-modal btn-block main-color-bg" data-dismiss="modal">
-					<!-- <i class="fa fa-bar-chart fa-inverse fa-lg" style="" aria-hidden="true"></i> -->
-					<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-strategy-64.png">
-					<small class="text-light">Rise Fall Contract</small>
-				</button>
+				<div class="m-1 justify-content-center mb-2" style="">
+					<button id="rise_fall_btn" type="button" class="btn btn-modal btn-block main-color-bg" data-dismiss="modal" style="height: 5.5em;">
+						<!-- <i class="fa fa-bar-chart fa-inverse fa-lg" style="" aria-hidden="true"></i> -->
+						<img style="width:2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-strategy-64.png">
+						<span class="text-light h4">Rise Fall Contract</span><br>
+						<small class="text-light">Profit from both rising and falling markets.</small>
+					</button>
+				</div>
+
+				<div class="m-1 justify-content-center main-color-text mb-2">
+					<button id="future_btn" class="btn btn-modal btn-block main-color-bg" data-dismiss="modal" style="height: 5.5em;">
+						<!-- <i class="fa fa-bar-chart fa-inverse fa-lg" style="" aria-hidden="true"></i> -->
+						<img style="width:2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-chart-64.png">
+						<span class="text-light h4">Long Short Contract</span><br>
+						<small class="text-light">Benefit from changes in market prices.</small>
+					</button>
+				</div>	
+
+				<div class="m-1 justify-content-center main-color-text mb-2">
+					<button id="daily_mining_btn" type="button" class="btn btn-modal btn-block main-color-bg" data-dismiss="modal" style="height: 5.5em;">
+						<img style="width:2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-mining1-64.png">
+						<span class="text-light h4">Daily Mining</span><br>
+						<small class="text-light">Mine with Different Purchase Limit but Higher APY</small>
+					</button>
+				</div>
+
+				<div class="m-1 justify-content-center main-color-text">
+					<button id="regular_mining_btn" class="btn btn-modal btn-block main-color-bg" data-dismiss="modal" style="height: 5.5em;">
+						<img style="width:2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-mining-64.png">
+						<span class="text-light h4">Regular Mining</span><br>
+						<small class="text-light"> Mine with Regular APY</small>
+					</button>
+				</div>
+				
 			</div>
 
-			<div class="m-1 justify-content-center main-color-text">
-				<button id="future_btn" class="btn btn-modal btn-block main-color-bg" data-dismiss="modal">
-					<!-- <i class="fa fa-bar-chart fa-inverse fa-lg" style="" aria-hidden="true"></i> -->
-					<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-chart-64.png">
-					<small class="text-light">Long Short Contract</small>
-				</button>
-			</div>	
-
-			<div class="m-1 justify-content-center main-color-text">
-				<button id="daily_mining_btn" type="button" class="btn btn-modal btn-block main-color-bg" data-dismiss="modal">
-					<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-mining1-64.png">
-					<small class="text-light">Daily Mining</small>
-				</button>
-			</div>
-
-			<div class="m-1 justify-content-center main-color-text">
-				<button id="regular_mining_btn" class="btn btn-modal btn-block main-color-bg" data-dismiss="modal">
-					<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-mining-64.png">
-					<small class="text-light">Regular Mining</small>
-				</button>
-			</div>
+			
 		</div>
 
 		<div id="2_container_slider" style="display:none;" class="keen-slider__slide">
