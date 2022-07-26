@@ -81,6 +81,8 @@
 
 	<!-- NEW -->
 		<script src="assets/lib/jquery.countdown-2.2.0/jquery.countdown.js"></script>
+		<link rel="stylesheet" href="assets/lib/keen/keen-slider.min.css" />
+		<script src="assets/lib/keen/keen-slider.min.js"></script>
 	<!-- NEW -->
 					
 	
@@ -326,11 +328,6 @@
 	  	</div><br>
 		<span class="font-weight-bold mt-2 main-color-text" id="loading_text_container" style="font-size:30px; text-align: center;">Loading...</span>
 	</div>
-
-	
-
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/keen-slider/keen-slider.min.css" />
-	<script src="https://cdn.jsdelivr.net/npm/keen-slider/keen-slider.min.js"></script>
 
 	<div id="container" class="mb-5 keen-slider" style="display:;min-height: 120%;">
 		<div id="assets_container" style="display:none;" class="keen-slider__slide">
@@ -1175,8 +1172,6 @@
 			    	'userID':currentUser.userID
 			    });
 
-				
-
 			    if(notifList.length>=1){
 					$("#notif_counter_number").text(notifList.length);
 					$("#notif_counter_number").addClass("animate__animated animate__heartBeat animate__repeat-2");
@@ -1209,7 +1204,6 @@
 	var coinIds = [];
 
 	//initial
-		
 		$("#username_container").text(currentUser.fullname.split(" ")[0]);
 
 		var priceAlert = ajaxShortLink('userWallet/triggerPriceAlerts',{'userID':
@@ -1670,6 +1664,7 @@
 			$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/buyCrypto'}));
 			$("#container_main").toggle();
 		});
+
 		// bottom buttons
 			$('#assets_btn').on('click',function(){
 				if ($("#container_main").css("display")=="none") {
@@ -1736,9 +1731,6 @@
 				}
 			});
 		// bottom buttons
-
-		
-
 
 		$('#refresh_btn').on('click',function(){
 			if (typeof tokenPriceInterval  != 'undefined') {
@@ -2201,6 +2193,7 @@
 	}
 
 	$("#top_back_btn").on("click",function(){		
+		$("#container_main").empty();
 		var sliderPosition = slider1.track.details.position.toFixed(0)
 
 		if(breadCrumbs[breadCrumbs.length-2].includes("assets")){

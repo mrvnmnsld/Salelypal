@@ -76,6 +76,8 @@
 
 	<!-- NEW -->
 		<script src="assets/lib/jquery.countdown-2.2.0/jquery.countdown.js"></script>
+		<link rel="stylesheet" href="assets/lib/keen/keen-slider.min.css" />
+		<script src="assets/lib/keen/keen-slider.min.js"></script>
 	<!-- NEW -->
 					
 	
@@ -318,236 +320,714 @@
 		<span class="font-weight-bold mt-2 main-color-text" id="loading_text_container" style="font-size:30px; text-align: center;">Loading...</span>
 	</div>
 
-	<div id="assets_container" style="display:none;">
-		<div id="header_inner_container" class="main-color-bg py-2" style="display:none;">
-			<div class="font-weight-bold text-center m-3">
-				<div class="display-4" style="color:white; font-weight:600;">
-					<span id="verifyTitle">Unverified</span>
-				</div>
-					
-				<div class="text-muted mx-2 mb-4 mt-1">
-					<span id="verifySubTitle">Verify to unlock all features!</span>
-				</div>
-				<div>
-					<button id="verify_btn" type="button" class="px-3 py-2" style="font-weight:bolder">
-						<span id="verifyButton">Verify Account Now</span>
-					</button>
+	<div id="container" class="mb-5 keen-slider" style="display:;min-height: 120%;">
+		<div id="assets_container" style="display:none;" class="keen-slider__slide">
+			<div id="header_inner_container" class="main-color-bg py-2" style="display:none;">
+				<div class="font-weight-bold text-center m-3">
+					<div class="display-4" style="color:white; font-weight:600;">
+						<span id="verifyTitle">Unverified</span>
+					</div>
+						
+					<div class="text-muted mx-2 mb-4 mt-1">
+						<span id="verifySubTitle">Verify to unlock all features!</span>
+					</div>
+					<div>
+						<button id="verify_btn" type="button" class="px-3 py-2" style="font-weight:bolder">
+							<span id="verifyButton">Verify Account Now</span>
+						</button>
+					</div>
 				</div>
 			</div>
-		</div>
 
-		<style>
-			#asset_tabs a{
-				/* color: #94abef; */
-				opacity: .5;
-				-webkit-transition: color 2s, font-size .25s;
-				-moz-transition: color 2s, font-size .25s;
-				-o-transition: color 2s, font-size .25s;
-				transition: color 2s, font-size .25s;
-			}
+			<style>
+				#asset_tabs a{
+					/* color: #94abef; */
+					opacity: .5;
+					-webkit-transition: color 2s, font-size .25s;
+					-moz-transition: color 2s, font-size .25s;
+					-o-transition: color 2s, font-size .25s;
+					transition: color 2s, font-size .25s;
+				}
 
-			.nav-link.tab-pane.fade.show.active{
-				font-size:1.8em;
-				opacity: 1 !important;
-				-webkit-transition: color 1s, font-size .25s;
-				-moz-transition: color 1s, font-size .25s;
-				-o-transition: color 1s, font-size .25s;
-				transition: color 1s, font-size .25s;
+				.nav-link.tab-pane.fade.show.active{
+					font-size:1.8em;
+					opacity: 1 !important;
+					-webkit-transition: color 1s, font-size .25s;
+					-moz-transition: color 1s, font-size .25s;
+					-o-transition: color 1s, font-size .25s;
+					transition: color 1s, font-size .25s;
 
-				border-color: transparent;
-				background-color:transparent;
+					border-color: transparent;
+					background-color:transparent;
 
-				padding-bottom: 5px;
-				position: relative;
-			}
+					padding-bottom: 5px;
+					position: relative;
+				}
 
-			.nav-link.tab-pane.fade.show.active:before{
-				content: "";
-				position: absolute;
-				width: 50%;
-				height: 1px;
-				bottom: 0;
-				left: 25%;
-			}
+				.nav-link.tab-pane.fade.show.active:before{
+					content: "";
+					position: absolute;
+					width: 50%;
+					height: 1px;
+					bottom: 0;
+					left: 25%;
+				}
 
-		</style>
+			</style>
 
-		<div id="asset_tab_container" class="mt-3">
-			<ul id="asset_tabs" class="nav nav-tabs nav-justified" role="tablist">
-				<li class="nav-item">
-					<a id="balance_tab_id" class="nav-link active tab-pane fade show main-color-link" data-toggle="tab" href="#balance_tab">BALANCE</a>
-				</li>
-				<li class="nav-item">
-					<a id="portfolio_tab_id" class="nav-link tab-pane fade show main-color-link" data-toggle="tab" href="#portfolio_tab">PORTFOLIO</a>
-				</li>
-			</ul>
+			<div id="asset_tab_container" class="mt-3">
+				<ul id="asset_tabs" class="nav nav-tabs nav-justified" role="tablist">
+					<li class="nav-item">
+						<a id="balance_tab_id" class="nav-link active tab-pane fade show main-color-link" data-toggle="tab" href="#balance_tab">BALANCE</a>
+					</li>
+					<li class="nav-item">
+						<a id="portfolio_tab_id" class="nav-link tab-pane fade show main-color-link" data-toggle="tab" href="#portfolio_tab">PORTFOLIO</a>
+					</li>
+				</ul>
 
-			<div class="asset-tab-content tab-content">
-				<div id="balance_tab" class="container notranslate tab-pane active"><br>
-					<div id="tokenContainer"></div>
+				<div class="asset-tab-content tab-content">
+					<div id="balance_tab" class="container notranslate tab-pane active"><br>
+						<div id="tokenContainer"></div>
 
-					<div class="row">
-						<div class="col-6 text-center">
-							<button class="btn btn-outline-link btn-block main-color-text mt-2 text-muted" disabled id="addToken_btn">
-								<i class="fa fa-sliders" aria-hidden="true"></i>
-								Add more
-							</button>
+						<div class="row">
+							<div class="col-6 text-center">
+								<button class="btn btn-outline-link btn-block main-color-text mt-2 text-muted" disabled id="addToken_btn">
+									<i class="fa fa-sliders" aria-hidden="true"></i>
+									Add more
+								</button>
+							</div>
+
+							<div class="col-6 text-center">
+								<button class="btn btn-outline-link btn-block main-color-text mt-2 text-muted" disabled id="refresh_btn">
+									<i class="fa fa-refresh" aria-hidden="true"></i>
+									Refresh
+								</button>
+							</div>
 						</div>
 
-						<div class="col-6 text-center">
-							<button class="btn btn-outline-link btn-block main-color-text mt-2 text-muted" disabled id="refresh_btn">
-								<i class="fa fa-refresh" aria-hidden="true"></i>
-								Refresh
-							</button>
-						</div>
+						
 					</div>
 
-					
-				</div>
+					<div id="portfolio_tab" class="container tab-pane fade"><br>
+						<div class="text-center" id="pnl_loading">
+							<h3>
+								<div class="spinner-grow main-color-text" role="status">
+								  <span class="sr-only">Loading...</span>
+								</div>
 
-				<div id="portfolio_tab" class="container tab-pane fade"><br>
-					<div class="text-center" id="pnl_loading">
-						<h3>
-							<div class="spinner-grow main-color-text" role="status">
-							  <span class="sr-only">Loading...</span>
-							</div>
+								Loading...
 
-							Loading...
-
-						</h3>
-					</div>
-
-					<div id="pnl_main" class="main-card-ui rounded shadow-lg" style="display:none">
-
-						<div class="row p-3">
-							<div class="col-6">
-								<b>Today's Earnings (Trading):</b><br>
-								<span id="todaysEarning">
-									0 USD
-								</span>
-							</div>
-							
-							<div class="col-6">
-								<b>Yesterdays PNL:</b><br>
-								<span id="yesterdayPnl">
-									0% Change
-								</span>
-							</div>
+							</h3>
 						</div>
 
-						<div class="row p-3">
-							<div class="col-6">
-								<b>7 Days PNL:</b><br>
-								<span id="allDaysPnl">
-									0% Change
-								</span>
+						<div id="pnl_main" class="main-card-ui rounded shadow-lg" style="display:none">
+
+							<div class="row p-3">
+								<div class="col-6">
+									<b>Today's Earnings (Trading):</b><br>
+									<span id="todaysEarning">
+										0 USD
+									</span>
+								</div>
+								
+								<div class="col-6">
+									<b>Yesterdays PNL:</b><br>
+									<span id="yesterdayPnl">
+										0% Change
+									</span>
+								</div>
+							</div>
+
+							<div class="row p-3">
+								<div class="col-6">
+									<b>7 Days PNL:</b><br>
+									<span id="allDaysPnl">
+										0% Change
+									</span>
+									
+								</div>
+
+								<div class="col-6">
+									<b>14 Days PNL:</b><br>
+									<span id="14DaysPnl">
+										0% Change
+									</span>
+								</div>
+							</div>
+
+
+								
+							<div class="p-3">
+								7 Days PNL Chart
+
+								<div id="graph-container-pnl">
+									<canvas id="pnl_chart_container" width="400" height="200"></canvas >
+								</div>
+
 								
 							</div>
 
-							<div class="col-6">
-								<b>14 Days PNL:</b><br>
-								<span id="14DaysPnl">
-									0% Change
-								</span>
+							<div class="p-3">
+								14 Days PNL Chart
+
+								<div id="graph-container-pnl-14">
+									<canvas id="pnl_14_chart_container" width="400" height="200"></canvas >
+								</div>
+
+								
+							</div>
+
+							<div class="p-3">
+								Assets Distribution
+
+								<div id="graph-container-assets">
+									<canvas id="assets_chart_container" width="600" height="400"></canvas >
+								</div>
+
 							</div>
 						</div>
 
+					</div>
+				</div>
+			</div><!-- asset_tab_container -->
+			
+			<style>
+				.nav-tabs {
+					border-bottom: transparent;
+				}
+			</style>
+		</div>
 
-							
-						<div class="p-3">
-							7 Days PNL Chart
+		<div id="2_container_slider" style="display:none;" class="keen-slider__slide">
+			<style type="text/css">
+				.font-sm{
+					font-size: 1rem!important;
+				}
+				.font-xsm{
+					font-size: .9rem!important;
+				}
+				.font-md{
+					font-size: 1.3rem!important;
+				}
+				.font-lg{
+					font-size: 1.4rem!important;
+				}
+				.font-xlg{
+					font-size: 2rem!important;
+				}
+				.text-semibold{
+					font-weight: 400;
+				}
+				.text-bold{
+					font-weight: bold;
+				}
+				.text-bolder{
+					font-weight: bolder;
+				}
+				.cardshad{
+					box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px!important;
+				}
+				.cardshad1{
+					box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+				}
+				#instruction_invites{
+					line-height: 1;
+				}
+		    	.icon_kyc{
+			        font-size:1rem!important;
+			        color:#5426de!important;
+		    	}
+		    	.line1{
+		    		line-height: 1;
+		    	}
+			</style>
 
-							<div id="graph-container-pnl">
-								<canvas id="pnl_chart_container" width="400" height="200"></canvas >
-							</div>
+			<div class="card px-1 py-2 rounded shadow-lg main-card-ui m-2 cardshad">
+				<div class="card px-2 py- pt-4 mt-2 rounded shadow-lg main-card-ui m-2 cardshad1">
+					<span class="main-color-text text-start text-bold font-lg">Invite friends and earn USDT</span>
+					<span class="font-xsm text-muted text-start py-1 text-bold line1 display-4">Copy the link and send it to your friends & wait for the rewards to be sent</span> 
 
-							
-						</div>
+					<div class="input-group mb-1">
+					  <input type="text" class="form-control" id="referal_link_container" readonly>
 
-						<div class="p-3">
-							14 Days PNL Chart
-
-							<div id="graph-container-pnl-14">
-								<canvas id="pnl_14_chart_container" width="400" height="200"></canvas >
-							</div>
-
-							
-						</div>
-
-						<div class="p-3">
-							Assets Distribution
-
-							<div id="graph-container-assets">
-								<canvas id="assets_chart_container" width="600" height="400"></canvas >
-							</div>
-
-						</div>
+					  <div class="input-group-append">
+					    <button class="btn secondary-color-bg" style="color:white;" type="button" id="copyLink_btn">Copy</button>
+					  </div>
 					</div>
 
+					<div id="total_invites" class="main-color-text text-start">
+						<span class="font-sm main-color-text text-bolder display-4">TOTAL INVITES </span> 
+						<span class="main-color-text text-bolder font-md" id="total_invites_container"></span>
+						
+						<button class="btn btn-link" id="view_invites_btn">
+							<spam class="font-sm text-semibold text-muted" style="text-decoration: underline;">
+								view
+							</spam>
+						</button>
+					</div>
+				</div>
+				<div class="card p-2 mb-2 rounded shadow-lg main-card-ui mx-2 cardshad1">
+					<div class="main-color-text text-start">
+						<div id="instruction_invites" class=" pt-4 pb-2 ">
+							<span class=" font-md text-bold">
+								Share the link to earn rewards!
+							</span>
+
+							 <div id="noteslist_invite" class="m-2"> 
+						        <div class="text-start px-3">
+						          <i class="fa fa-caret-right icon_kyc " aria-hidden="true"></i><span class="text-start main-color-text font-sm"> Invite 1 to get 5% reward!</span>
+						        </div>
+						        <div class="text-start px-3">
+						          <i class="fa fa-caret-right icon_kyc " aria-hidden="true"></i><span class="text-start main-color-text font-sm"> Invite 2 to get 6% reward!</span>
+						        </div>
+						        <div class="text-start px-3">
+						          <i class="fa fa-caret-right icon_kyc " aria-hidden="true"></i><span class="text-start main-color-text font-sm"> Invite 5 to get 10% reward!</span>
+						        </div>
+						    </div>
+						</div>
+						
+					</div>
 				</div>
 			</div>
-		</div><!-- asset_tab_container -->
-		
-		<style>
-			.nav-tabs {
-				border-bottom: transparent;
-			}
-		</style>
+
+
+			<div class="card px-2 pt-5 pb-4 mt-2 rounded shadow-lg main-card-ui m-2 cardshad">
+				<h4 class="text-center mb-3 font-xlg text-bold">Top Crypto News</h4>
+
+				<div id="news_container"></div>
+
+				<div id="newsLoading">
+					<h3>
+						<div class="spinner-grow main-color-text" role="status">
+						  <span class="sr-only">Loading Latest News...</span>
+						</div>
+
+						Loading Latest News...
+					</h3>
+				</div>
+
+				<script type="text/javascript">
+					$("#view_invites_btn").click(function(){
+						bootbox.alert({
+						    message: ajaxLoadPage('quickLoadPage',{'pagename':'wallet/invitesList'}),
+						    size: 'large',
+						    centerVertical: true,
+						    closeButton: false
+						});
+					});
+
+					$("#copyLink_btn").on("click",function(){
+						// var copiedLink = $("#referal_link_container").val()
+						// navigator.clipboard.writeText(copiedLink);
+
+						$("#referal_link_container").select();
+						document.execCommand("copy");
+						document.getSelection().removeAllRanges();
+
+						$.toast({
+						    text: 'Successfully Copied the Link',
+					        showHideTransition: 'slide',
+					        allowToastClose: false,
+					        hideAfter: 5000,
+					        stack: 5,
+					        position: 'bottom-center',
+					        textAlign: 'center',
+					        loader: true,
+					        loaderBg: '#9EC600'
+						})
+					});
+				</script>
+			</div>
+		</div>
+
+		<div id="3_container_slider" style="display:none;" class="keen-slider__slide">
+			<style type="text/css">
+				.material-switch > input[type="checkbox"] {
+				    display: none;   
+				}
+
+				.material-switch > label {
+				    cursor: pointer;
+				    height: 0px;
+				    position: relative; 
+				    width: 40px;  
+				}
+
+				.material-switch > label::before {
+				    background: rgb(0, 0, 0);
+				    box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+				    border-radius: 8px;
+				    content: '';
+				    height: 16px;
+				    margin-top: -8px;
+				    position:absolute;
+				    opacity: 0.3;
+				    transition: all 0.4s ease-in-out;
+				    width: 40px;
+				}
+				.material-switch > label::after {
+				    background: rgb(255, 255, 255);
+				    border-radius: 16px;
+				    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+				    content: '';
+				    height: 24px;
+				    left: -4px;
+				    margin-top: -8px;
+				    position: absolute;
+				    top: -4px;
+				    transition: all 0.3s ease-in-out;
+				    width: 24px;
+				}
+				.material-switch > input[type="checkbox"]:checked + label::before {
+				    background: inherit;
+				    opacity: 0.5;
+				}
+				.material-switch > input[type="checkbox"]:checked + label::after {
+				    background: inherit;
+				    left: 20px;
+				}
+
+				input[type="checkbox"]:disabled {
+				  background: white!important;
+				}
+			</style>
+
+			<div class="p-2">
+				<div class="main-color-text mb-2 font-weight-bold h5">Security</div>
+				<button id="security_btn" style="margin-left:3px" class="btn custom-2nd-text btn-block text-left">
+					<i class="fa fa-shield" aria-hidden="true"></i>
+					<span style="font-size: 18px;margin-left:2px">&nbsp;Reset Password</span>
+				</button>
+			</div>	
+
+			<div class="p-2">
+				<div class="main-color-text mb-2 font-weight-bold h5">Preference</div>
+				<button id="display_currency_btn" class="btn custom-2nd-text btn-block text-left">
+					<i class="fa fa-money" aria-hidden="true"></i>
+					<span class="" style="font-size: 18px;">&nbsp;Display Currency</span>
+				</button>
+
+				<!-- <button id="language_btn" class="btn custom-2nd-text  btn-block text-left">
+					<i class="fa fa-language" aria-hidden="true"></i>
+					<span class="" style="font-size: 18px;">&nbsp;Language</span>
+				</button> -->
+				
+				<button id="theme_btn" class="btn custom-2nd-text btn-block text-left d-flex">
+					<div class="flex-fill">
+						<i class="fa fa-paint-brush" aria-hidden="true"></i>
+						<span class="" style="font-size: 18px;">&nbsp;Dark Mode</span>
+					</div>
+
+					<div class="flex-fill">
+						<div class="ml-auto material-switch pull-right">
+						<input id="theme_switch" name="themeSwitchToggle" type="checkbox">
+						<label for="theme_switch" class="label-default secondary-color-bg"></label>
+						</div>
+					</div>
+				</button>
+
+				
+			</div> 
+				
+				<!-- <button id="price_alert_btn" class="btn text-muted  btn-block text-left">
+					<i class="fa fa-bell" aria-hidden="true"></i>
+					<span class="" style="font-size: 15px;">&nbsp;Price Alerts</span>
+				</button>
+
+				<button id="exportWallet_btn" class="btn text-muted  btn-block text-left">
+					<i class="fa fa-exchange" aria-hidden="true"></i>
+					<span class="" style="font-size: 15px;">&nbsp;Export Wallet</span>
+				</button> -->
+
+
+
+			<div class="p-2">
+				<div class="main-color-text mb-2 font-weight-bold h5">Follow Us</div>
+
+				<button class="btn custom-2nd-text  btn-block text-left" disabled style="font-size: 18px;">
+					<i class="fa fa-facebook-square" aria-hidden="true"></i>
+					<span class="">&nbsp;Facebook</span>
+				</button>
+
+				<button class="btn custom-2nd-text  btn-block text-left" disabled style="font-size: 18px;">
+					<i class="fa fa-telegram" aria-hidden="true"></i>
+					<span class="">&nbsp;Telegram</span>
+				</button>
+
+				<button class="btn custom-2nd-text  btn-block text-left" disabled style="font-size: 18px;">
+					<i class="fa fa-twitter-square" aria-hidden="true"></i>
+					<span class="">&nbsp;Twitter</span>
+				</button>
+
+				<button class="btn custom-2nd-text  btn-block text-left" disabled style="font-size: 18px;">
+					<i class="fa fa-youtube-play" aria-hidden="true"></i>
+					<span class="">&nbsp;Youtube</span>
+				</button>
+
+				<button class="btn custom-2nd-text  btn-block text-left" disabled style="font-size: 18px;">
+					<i class="fa fa-reddit" aria-hidden="true"></i>
+					<span class="">&nbsp;Reddit</span>
+				</button>
+			</div>
+
+			<div class="p-2">
+
+				<div class="main-color-text mb-2 font-weight-bold h5">Support</div>
+				<button class="btn custom-2nd-text  btn-block text-left" disabled style="font-size: 20px;margin-left:3px">
+					<i class="fa fa-question" aria-hidden="true"></i>
+					<span class="" style="font-size: 18px;margin-left:2px">&nbsp;FAQ/Help Center</span>
+				</button>
+
+				<button id="chat_support_btn" class="btn custom-2nd-text  btn-block text-left" style="font-size: 20px;margin-left:3px">
+					<i class="fa fa-comments" aria-hidden="true"></i>
+					<span class="" style="font-size: 18px;margin-left:2px">&nbsp;Chat Support</span>
+				</button>
+
+				<hr>
+				
+				<button id="logOut_btn" type="button" class="btn btn-block btn-danger" style="font-size: 20px;">LOGOUT</button>
+				
+			</div>
+
+			<script type="text/javascript">
+				$('#display_currency_btn').on('click',function(){
+					addBreadCrumbs("wallet/settings/currency");
+
+					$("html, body").animate({ scrollTop: 0 }, "slow");
+
+					$("#container").toggle();
+					
+					$("#profile_btn").css('display',"none");
+					$("#top_back_btn").css('display',"block");
+
+					$("#container_main").empty();
+					$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings/currency'}));
+					$("#container_main").toggle();
+				});
+
+				$('#security_btn').on('click',function(){
+					addBreadCrumbs("wallet/settings/security");
+
+					$("html, body").animate({ scrollTop: 0 }, "slow");
+
+					$("#container").toggle();
+					
+					$("#profile_btn").css('display',"none");
+					$("#top_back_btn").css('display',"block");
+
+					$("#container_main").empty();
+					$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings/security'}));
+					$("#container_main").toggle();
+				});
+
+				$('#theme_switch').on('change',function(){
+					var $this = $(this);
+					console.log($this.is(":checked"));
+
+					if($this.is(":checked")){
+						isDarkMode = 1;
+						chartTheme = 'dark';
+						setLocalStorageByKey("isDarkMode",1);
+						$("body").removeClass( "light-mode" ).addClass( "dark-mode" );
+						
+					}else{
+						isDarkMode = 0;
+						chartTheme = 'light';
+						setLocalStorageByKey("isDarkMode",0);
+						$("body").removeClass( "dark-mode" ).addClass( "light-mode" );
+					}
+				});
+
+				$('#price_alert_btn').on('click',function(){
+					addBreadCrumbs("wallet/settings/priceAlert");
+					
+					$("html, body").animate({ scrollTop: 0 }, "slow");
+
+					$("#container").toggle();
+					
+					$("#profile_btn").css('display',"none");
+					$("#top_back_btn").css('display',"block");
+
+					$("#container_main").empty();
+					$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings/priceAlert'}));
+					$("#container_main").toggle();
+				});
+
+				$('#language_btn').on('click',function(){
+					addBreadCrumbs("wallet/settings/language");
+
+					$("html, body").animate({ scrollTop: 0 }, "slow");
+
+					$("#container").toggle();
+					
+					$("#profile_btn").css('display',"none");
+					$("#top_back_btn").css('display',"block");
+
+					$("#container_main").empty();
+					$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings/language'}));
+					$("#container_main").toggle();
+				});
+
+				$('#chat_support_btn').on('click',function(){
+					addBreadCrumbs("wallet/settings/chat");
+
+					$("html, body").animate({ scrollTop: 0 }, "slow");
+
+					$("#container").toggle();
+					
+					$("#profile_btn").css('display',"none");
+					$("#top_back_btn").css('display',"block");
+
+					$("#container_main").empty();
+					$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings/chat'}));
+					$("#container_main").toggle();
+				});
+
+				$('#logOut_btn').on('click',function(){
+					$.confirm({
+						theme:'dark',
+						icon: 'fa fa-sign-out',
+						title: 'Logging out?',
+						columnClass: 'col-md-6 col-md-offset-6',
+						content: 'Are you sure you want to <b>logout</b>?',
+						buttons: {
+							confirm: function () {
+								// deleteLocalStorageByKey('currentUser');
+								localStorage.clear();
+								window.location.href = 'index';//local
+							},
+							cancel: function () {
+
+							},
+						}
+					});
+				});
+			</script>
+		</div>
 	</div>
 
-		<div id="container" class="mb-5" style="display:none;min-height: 120%;"></div>
+	<div id="container_main" style="display:none">
 
-		<br>
-		<br>
-		<br>
-		<br>
+	</div>
 
-		<style>
-			.botnav-icon{
-				font-size:2.2rem;
-			}
-			.botnav-icon:hover{
-				color: #94abef;
-			}
-		</style>
+	<br>
+	<br>
+	<br>
+	<br>
 
-		<!-- bottomnavbar -->
-		<ul id="bottomNavBar" style="display:none;" class="nav fixed-bottom main-color-bg justify-content-center row ">
-			<li id="assets_btn" class="nav-item col-3 text-center bottom-nav-item bottom-nav-item-active">
-				<!-- <i class="fa fa-bank fa-inverse botnav-icon" alt="Asset" aria-hidden="true"></i> -->
-				<img style="width:1.8em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/logo_safetypal_bottom_text.png">
-				<!-- <a class="nav-link" style="font-size:.7em; color:#D9E9E8;"  href="#">Assets</a> -->
+	<script type="text/javascript">
+		var slider1 = new KeenSlider("#container",{
+		    // auto set the slider to the height of the tallest slide
+		    autoHeight: true,
+		    // auto center the current slide
+		    centered: false,
+		    // pass options for different screen size
+		    // e.g.
+		    //   breakpoints: {
+		    //    '(min-width: 720px) and (max-width: 1000px)': {
+		    //       options here
+		    //     },
+		    //   }
+		    breakpoints: null,
+		    // enable mouse drag and touch swipe events
+		    controls: true,
+		    // adjust the speed that is translated to the slider when dragging
+		    dragSpeed: 1,
+		    // friction factor
+		    friction: 0.0025,
+		    // enable infinite loop
+		    loop: false,
+		    // initial slide
+		    initial: 0,
+		    // duration of the animation
+		    duration: 500,
+		    // slide selector
+		    slides: '.keen-slider__slide',
+		    // enable vertical mode
+		    vertical: false,
+		    // reset the slider on window resize
+		    resetSlide: false,
+		    // how many slides per view
+		    slidesPerView: 1,
+		    // space between slides
+		    spacing: 0,
+		    // "snap": auto snap to the next/prev slide
+		    // "free-snap": free mode + auto snap
+		    // "free": free mode
+		    mode: 'snap',
+		    // simulate rubberband if moving or dragging above the slider edge
+		    rubberband: true,
+		    // cancel on leave
+		    cancelOnLeave: true,
+			slideChanged: slider => {
+				$(".bottom-nav-item").removeClass("bottom-nav-item-active");
+				$("html, body").animate({ scrollTop: 0 }, "slow");
 
-			</li>
+				var sliderPosition = slider.track.details.position.toFixed(0)
 
-			<li id="discover_btn" class="nav-item col-3 text-center bottom-nav-item">
-				<!-- <i class="fa fa-globe fa-inverse botnav-icon" style="width:1.5em;" alt="Discover" aria-hidden="true"></i> -->
-				<img style="width:1.8em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/compass.png">
-				<!-- <a  class="nav-link" style="font-size:.7em; color:#D9E9E8;" href="#">Discover</a> -->
-			</li>
+				if(sliderPosition == 0){
+					$("#assets_btn").addClass("bottom-nav-item-active");
+				}
 
-			<li id="settings_btn" class="nav-item col-3 text-center bottom-nav-item">
-				<!-- <i class="fa fa-cogs fa-inverse botnav-icon" alt="Settings" aria-hidden="true"></i> -->
-				<img style="width:1.8em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/settings.png">
-				<!-- <a class="nav-link" style="font-size:.7em; color:#D9E9E8;"  href="#">Settings</a> -->
-			</li>
-		</ul>
-	</body>
-<!-- translate -->
-	<!-- <script type="text/javascript">
-		function googleTranslateElementInit() {
-			// setCookie('googtrans', currentUserLanguage.lang,1);
-			new google.translate.TranslateElement({
-				pageLanguage: 'en',
-				// includedLanguages: 'en,zh-CN,zh-TW',
-				// layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-				autoDisplay: true
-			}, 'google_translate_element');
-		}
+				if(sliderPosition == 1){
+					$("#discover_btn").addClass("bottom-nav-item-active");	
+				}
+
+				if(sliderPosition == 2){
+					$("#settings_btn").addClass("bottom-nav-item-active");		
+				}
+			},
+		});
 	</script>
 
-	<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script> -->
-<!-- translate -->
+	<style>
+		.botnav-icon{
+			font-size:2.2rem;
+		}
+		.botnav-icon:hover{
+			color: #94abef;
+		}
+	</style>
+
+	<ul id="bottomNavBar" style="display:none;" class="nav fixed-bottom main-color-bg justify-content-center row">
+		<li id="assets_btn" class="nav-item bottom-nav-item col-3 text-center bottom-nav-item-active">
+			<!-- <i class="fa fa-bank fa-inverse botnav-icon" alt="Asset" aria-hidden="true"></i> -->
+			<img style="width:1.8em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/logo_safetypal_bottom_text.png">
+			<!-- <a class="nav-link" style="font-size:.7em; color:#D9E9E8;"  href="#">Assets</a> -->
+		</li>
+
+		<li id="discover_btn" class="nav-item col-3 text-center bottom-nav-item">
+			<!-- <i class="fa fa-globe fa-inverse botnav-icon" style="width:1.5em;" alt="Discover" aria-hidden="true"></i> -->
+			<img style="width:1.8em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/compass.png">
+			<!-- <a  class="nav-link" style="font-size:.7em; color:#D9E9E8;" href="#">Discover</a> -->
+		</li>
+
+		<li id="settings_btn" class="nav-item col-3 text-center bottom-nav-item">
+			<!-- <i class="fa fa-cogs fa-inverse botnav-icon" alt="Settings" aria-hidden="true"></i> -->
+			<img style="width:1.8em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/settings.png">
+			<!-- <a class="nav-link" style="font-size:.7em; color:#D9E9E8;"  href="#">Settings</a> -->
+		</li>
+	</ul>
+
+</body>
+
+
+
+	<!-- translate -->
+		<!-- <script type="text/javascript">
+			function googleTranslateElementInit() {
+				// setCookie('googtrans', currentUserLanguage.lang,1);
+				new google.translate.TranslateElement({
+					pageLanguage: 'en',
+					// includedLanguages: 'en,zh-CN,zh-TW',
+					// layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+					autoDisplay: true
+				}, 'google_translate_element');
+			}
+		</script>
+
+		<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script> -->
+	<!-- translate -->
 
 <script type="text/javascript">
 		var currentUser = JSON.parse(getLocalStorageByKey('currentUser'));
@@ -637,7 +1117,6 @@
 		var coinIds = [];
 
 		//initial
-			
 			$("#username_container").text(currentUser.fullname.split(" ")[0]);
 
 			var priceAlert = ajaxShortLink('userWallet/triggerPriceAlerts',{'userID':
@@ -649,15 +1128,20 @@
 				if(priceAlert.tokens!=""){
 					priceAlertTokensId = priceAlert.tokens.split(',')
 				}
-			}	
+			}
 
 			var isDarkMode = getLocalStorageByKey("isDarkMode");
 			var chartTheme;
+
+			console.log(isDarkMode);
+
 			if(isDarkMode==1){
 				$("body").removeClass( "light-mode" ).addClass( "dark-mode" );
+				$("#theme_switch").attr("checked",true)
 				chartTheme = 'dark';
 			}else{
 				$("body").removeClass( "dark-mode" ).addClass( "light-mode" );
+				$("#theme_switch").attr("checked",false)
 				chartTheme = 'light';
 			}
 
@@ -690,89 +1174,27 @@
 
 				if($("#totalInUsdContainer").text().split(" ")[0].includes("Loading")==false){
 					ajaxShortLink("saveLastAllTokenValue",{
-						'userID': currentUser.userID,
-						'value': $("#totalInUsdContainer").text().split(" ")[0],
-						'currency': displayCurrency,
-					});
+			    		'userID': currentUser.userID,
+			    		'value': $("#totalInUsdContainer").text().split(" ")[0],
+			    		'currency': displayCurrency,
+			    	});
 				}
 			}, 30000);	
 
-			//swipe detect
-				function swipedetect(el, callback){
+			// referalPage
+				var getUrl = window.location;
+				var baseUrl = getUrl.protocol + "//" + getUrl.host;
+				var urlLink = baseUrl+"/referalLink?referType=user&idNum="+currentUser.userID+"&referBy="+currentUser.email;
 
-					var touchsurface = el,
-					swipedir,
-					startX,
-					startY,
-					distX,
-					distY,
-					threshold = 150, //required min distance traveled to be considered swipe
-					restraint = 100, // maximum distance allowed at the same time in perpendicular direction
-					allowedTime = 300, // maximum time allowed to travel that distance
-					elapsedTime,
-					startTime,
-					handleswipe = callback || function(swipedir){}
-
-					touchsurface.addEventListener('touchstart', function(e){
-						var touchobj = e.changedTouches[0]
-						swipedir = 'none'
-						dist = 0
-						startX = touchobj.pageX
-						startY = touchobj.pageY
-						startTime = new Date().getTime() // record time when finger first makes contact with surface
-						// e.preventDefault()
-					}, false)
-
-					// touchsurface.addEventListener('touchmove', function(e){
-					// 	e.preventDefault() // prevent scrolling when inside DIV
-					// }, false)
-
-					touchsurface.addEventListener('touchend', function(e){
-						var touchobj = e.changedTouches[0]
-						distX = touchobj.pageX - startX // get horizontal dist traveled by finger while in contact with surface
-						distY = touchobj.pageY - startY // get vertical dist traveled by finger while in contact with surface
-						elapsedTime = new Date().getTime() - startTime // get time elapsed
-							if (elapsedTime <= allowedTime){ // first condition for awipe met
-								if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint){ // 2nd condition for horizontal swipe met
-									swipedir = (distX < 0)? 'left' : 'right' // if dist traveled is negative, it indicates left swipe
-								}
-								else if (Math.abs(distY) >= threshold && Math.abs(distX) <= restraint){ // 2nd condition for vertical swipe met
-									swipedir = (distY < 0)? 'up' : 'down' // if dist traveled is negative, it indicates up swipe
-								}
-						}
-						handleswipe(swipedir)
-						// e.preventDefault()
-					}, false)
-				}
-
-
-				var balance_tab = document.getElementById('balance_tab');
-				swipedetect(balance_tab, function(balance_tab_swipe){
-					if (balance_tab_swipe =='left'){
-						$('#portfolio_tab').tab('show'); 
-						$('#balance_tab').removeClass('active');
-						$('#balance_tab').addClass('hide');
-						$('#portfolio_tab').addClass('active');
-
-						$('#portfolio_tab_id').addClass('active');
-						$('#balance_tab_id').removeClass('active');
-					}
+				var invites = ajaxShortLink("userWallet/getAllInvitesByUID",{
+					'userID':currentUser.userID
 				});
 
-				var portfolio_tab = document.getElementById('portfolio_tab');
-				swipedetect(portfolio_tab, function(portfolio_tab_swipe){
-					if (portfolio_tab_swipe =='right'){
-						$('#portfolio_tab').removeClass('active');
-						$('#portfolio_tab').addClass('hide');
-						$('#balance_tab').addClass('active');
-						$('#balance_tab').tab('show'); 
+				$("#total_invites_container").text(invites.length)
 
-						$('#balance_tab_id').addClass('active');
-						$('#portfolio_tab_id').removeClass('active');
-					}
-				});
+				$("#referal_link_container").val(urlLink);
+			// referalPage
 
-			// swipe detect
 		//initial
 
 		// function checkValidityLocalStorageValidity(){
@@ -780,13 +1202,16 @@
 		// }
 
 		$(document).ready(function(){
-			checkVerifying();
 			console.time('loadTimer');
 
 			setTimeout(function(){
 				$.when(loadSystem()).then(function(){
-					$('#container').toggle();
+					// $('#container').toggle();
 					$('#assets_container').css("display","block");
+					$('#1_container_slider').toggle();
+					$('#2_container_slider').toggle();
+					$('#3_container_slider').toggle();
+
 					// $('#loadSpinner').toggle();
 					$('#topNavBar').toggle();
 					$('#bottomNavBar').toggle();
@@ -794,11 +1219,13 @@
 					$('#main_btns_container').toggle();
 
 					$("#loading_text_container").text('Please Wait');
+					console.log("all done");
 				});
 			}, 500);
 
 			setTimeout(function(){
 				var i = 0;
+
 
 				function myLoop() {
 				  	tokenLoadTimer = setTimeout(function() {
@@ -812,6 +1239,8 @@
 					  		$("#totalInUsdContainer").append(" "+displayCurrency.toUpperCase());
 					  		
 					  		$('#visible_btn').toggle();
+					  		$('#updating_assets_container').toggle();
+
 					  		$('#refresh_btn').removeAttr("disabled");
 					  		$('#addToken_btn').removeAttr("disabled");
 
@@ -819,7 +1248,6 @@
 					  		// chart PNL
 						  		$("#pnl_loading").toggle();
 						  		$("#pnl_main").toggle();
-
 
 			  			  		var date = new Date();
 
@@ -845,45 +1273,48 @@
 			  		  				$("#todaysEarning").addClass("text-danger").text(getTodayContractProfit+" USD");
 			  		  			}
 
-  				  				var yValues = ajaxShortLink("userWallet/getToken24HourChange",{
-  					  				"coinIds":coinIds.toString()
-  					  			})
+					  				var yValues = ajaxShortLink("userWallet/getToken24HourChange",{
+						  				"coinIds":coinIds.toString()
+						  			})
 
-  					  			var last7days = yValues.slice(yValues.length - 7);
+						  			var last7days = yValues.slice(yValues.length - 7);
 
-  						  		var totalInUsdInner = parseFloat($('#totalInUsdContainer').text().split(" ")[0].replace(/,/g, ''));
-  						  		var changePercentageIn1Day = parseFloat(yValues[yValues.length-1]);
+							  		var totalInUsdInner = parseFloat($('#totalInUsdContainer').text().split(" ")[0].replace(/,/g, ''));
+							  		var changePercentageIn1Day = parseFloat(yValues[yValues.length-1]);
 
-  				  				var xValues = getDaysDate(6);
+					  				var xValues = getDaysDate(6);
 
-  				  				var average = yValues.reduce((a, b) => a + b, 0) / yValues.length;
-  				  				var average7Days = last7days.reduce((a, b) => a + b, 0) / last7days.length;
+					  				var average = yValues.reduce((a, b) => a + b, 0) / yValues.length;
+					  				var average7Days = last7days.reduce((a, b) => a + b, 0) / last7days.length;
 
-  				  				// console.log(last7days);
-  				  				// console.log(yValues);
-  				  				// console.log(average);
-  				  				// console.log(changePercentageIn1Day);
-  				  				// console.log((changePercentageIn1Day/100)*totalInUsdInner);
-  				  				// console.log(totalInUsdInner);
-  				  				// console.log(changePercentageIn1Day/100);
+					  				// console.log(last7days);
+					  				// console.log(yValues);
+					  				// console.log(average);
+					  				// console.log(changePercentageIn1Day);
+					  				// console.log((changePercentageIn1Day/100)*totalInUsdInner);
+					  				// console.log(totalInUsdInner);
+					  				// console.log(changePercentageIn1Day/100);
 
-  				  				if(parseFloat(yValues[yValues.length-1]) < 0) {
-  				  					$("#yesterdayPnl").addClass("text-danger").html((totalInUsdInner*(changePercentageIn1Day/100)).toFixed(2)+" <br><small>"+changePercentageIn1Day.toFixed(2)+"% Change </small>");
-  				  				}else{
-  				  					$("#yesterdayPnl").addClass("text-success").html("+"+(totalInUsdInner*(changePercentageIn1Day/100)).toFixed(2)+" <br><small>"+changePercentageIn1Day.toFixed(2)+"% Change </small>");
-  				  				}
+					  				if(parseFloat(yValues[yValues.length-1]) < 0) {
+					  					$("#yesterdayPnl").addClass("text-danger").html((totalInUsdInner*(changePercentageIn1Day/100)).toFixed(2)+" <br><small>"+changePercentageIn1Day.toFixed(2)+"% Change </small>");
+					  				}else{
+					  					$("#yesterdayPnl").addClass("text-success").html("+"+(totalInUsdInner*(changePercentageIn1Day/100)).toFixed(2)+" <br><small>"+changePercentageIn1Day.toFixed(2)+"% Change </small>");
+					  				}
 
-  				  				if(average7Days < 0) {
-  				  					$("#allDaysPnl").addClass("text-danger").html((totalInUsdInner*(average7Days/100)).toFixed(2)+" <small>"+average7Days.toFixed(2)+"% Change</small>");
-  				  				}else{
-  				  					$("#allDaysPnl").addClass("text-success").html("+"+(totalInUsdInner*(average7Days/100)).toFixed(2)+" <small>"+average7Days.toFixed(2)+"% Change</small>");
-  				  				}
+					  				if(average7Days < 0) {
+					  					$("#allDaysPnl").addClass("text-danger").html((totalInUsdInner*(average7Days/100)).toFixed(2)+" <small>"+average7Days.toFixed(2)+"% Change</small>");
+					  				}else{
+					  					$("#allDaysPnl").addClass("text-success").html("+"+(totalInUsdInner*(average7Days/100)).toFixed(2)+" <small>"+average7Days.toFixed(2)+"% Change</small>");
+					  				}
 
-  				  				if(average < 0) {
-  				  					$("#14DaysPnl").addClass("text-danger").html((totalInUsdInner*(average/100)).toFixed(2)+"<br> <small>"+average.toFixed(2)+"% Change</small>");
-  				  				}else{
-  				  					$("#14DaysPnl").addClass("text-success").html("+"+(totalInUsdInner*(average/100)).toFixed(2)+" <br><small>"+average.toFixed(2)+"% Change</small>");
-  				  				}
+					  				if(average < 0) {
+					  					$("#14DaysPnl").addClass("text-danger").html((totalInUsdInner*(average/100)).toFixed(2)+"<br> <small>"+average.toFixed(2)+"% Change</small>");
+					  				}else{
+					  					$("#14DaysPnl").addClass("text-success").html("+"+(totalInUsdInner*(average/100)).toFixed(2)+" <br><small>"+average.toFixed(2)+"% Change</small>");
+					  				}
+
+						  		$("#pnl_chart_container");
+
 
 				  				new Chart("pnl_chart_container", {
 				  				  	type: "line",
@@ -977,6 +1408,32 @@
 				  				  }
 				  				});
 
+				  				baseUrl = "https://widgets.cryptocompare.com/";
+				  				var scripts = document.getElementsByTagName("script");
+				  				var embedder = $("#news_container")[0];
+
+				  				(function (){
+				  					var appName = encodeURIComponent(window.location.hostname);
+				  					if(appName==""){appName="local";}
+				  					var s = document.createElement("script");
+				  					s.type = "text/javascript";
+				  					s.async = true;
+				  					var theUrl = baseUrl+'serve/v1/coin/feed?fsym=TRX&tsym=USD&feedType=cryptoglobe';
+				  					s.src = theUrl + ( theUrl.indexOf("?") >= 0 ? "&" : "?") + "app=" + appName;
+				  					
+				  					embedder.append(s)
+				  					
+				  				})();
+
+				  				setTimeout(function(){
+				  					var containerATag = $("#news_container a")[1];
+				  					$(containerATag).remove();
+
+				  					$("#news_container a").attr("href",'#');
+				  					$("#news_container a").attr("target",'');
+				  					$("#newsLoading").toggle();
+				  				},1000)
+
 								ajaxShortLink("saveLastAllTokenValue",{
 									'userID': currentUser.userID,
 									'value': $("#totalInUsdContainer").text().split(" ")[0],
@@ -1000,6 +1457,7 @@
 		});
 
 		// buttonEvents
+
 			// visible
 				var tokenValuesContainer = []; // this is global
 				var visible = 1;
@@ -1031,17 +1489,163 @@
 					
 				});
 			// visible
+
+			// slider1.moveToIdx(2)
+
+			$('#deposit_btn, #deposit_btn_option').on('click',function(){
+				if (typeof tokenPriceInterval  != 'undefined') {
+					clearInterval(tokenPriceInterval);
+				}
+
+				if (typeof loadTransactionTimeOut  != 'undefined') {
+					clearInterval(loadTransactionTimeOut);
+				}
+
+				addBreadCrumbs("wallet/deposit");
+
+				$("html, body").animate({ scrollTop: 0 }, "slow");
+
+				$("#container").toggle();
+
+				$("#profile_btn").css('display',"none");
+				$("#top_back_btn").css('display',"block");
+
+				$("#container_main").empty();
+				$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/deposit'}));
+				$("#container_main").toggle();
+			});
+
+			$('#withdraw_btn, #withdraw_btn_option').on('click',function(){
+				if (typeof tokenPriceInterval  != 'undefined') {
+					clearInterval(tokenPriceInterval);
+				}
+
+				if (typeof loadTransactionTimeOut  != 'undefined') {
+					clearInterval(loadTransactionTimeOut);
+				}
+
+
+				if (currentUser.isStrict == "1") {
+					addBreadCrumbs("wallet/withdrawStrict");
+
+					$("html, body").animate({ scrollTop: 0 }, "slow");
+
+					$("#container").toggle();
+					
+					$("#profile_btn").css('display',"none");
+					$("#top_back_btn").css('display',"block");
+
+					$("#container_main").empty();
+					$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/withdrawStrict'}));
+					$("#container_main").toggle();
+				}else{
+					addBreadCrumbs("wallet/withdraw");
+
+					$("html, body").animate({ scrollTop: 0 }, "slow");
+
+					$("#container").toggle();
+					
+					$("#profile_btn").css('display',"none");
+					$("#top_back_btn").css('display',"block");
+
+					$("#container_main").empty();
+					$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/withdraw'}));
+					$("#container_main").toggle();
+				}
+
+			});
+
+			$('#buyCrypto_btn, #buy_btn_option').on('click',function(){
+				if (typeof tokenPriceInterval  != 'undefined') {
+					clearInterval(tokenPriceInterval);
+				}
+
+				if (typeof loadTransactionTimeOut  != 'undefined') {
+					clearInterval(loadTransactionTimeOut);
+				}
+
+				addBreadCrumbs("wallet/buyCrypto");
+
+				$("html, body").animate({ scrollTop: 0 }, "slow");
+
+				$("#container").toggle();
+
+				$("#profile_btn").css('display',"none");
+				$("#top_back_btn").css('display',"block");
+
+				$("#container_main").empty();
+				$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/buyCrypto'}));
+				$("#container_main").toggle();
+			});
 			
+			// bottom buttons
+				$('#assets_btn').on('click',function(){
+					if ($("#container_main").css("display")=="none") {
+						$("html, body").animate({ scrollTop: 0 }, "slow");
+						slider1.moveToIdx(0)
+					}else{
+						$("#profile_btn").css('display',"block");
+						$("#top_back_btn").css('display',"none");
+
+						$("#container_main").toggle();
+						$("#container").toggle();
+
+						$("html, body").animate({ scrollTop: 0 }, "slow");
+						slider1.moveToIdx(0)
+					}
+					
+				});
+
+				$('#discover_btn').on('click',function(){
+					if ($("#container_main").css("display")=="none") {
+						$("html, body").animate({ scrollTop: 0 }, "slow");
+						slider1.moveToIdx(1)
+					}else{
+						$("#profile_btn").css('display',"block");
+						$("#top_back_btn").css('display',"none");
+
+						$("#container_main").toggle();
+						$("#container").toggle();
+
+						$("html, body").animate({ scrollTop: 0 }, "slow");
+						slider1.moveToIdx(1)
+					}
+				});
+
+				$('#settings_btn').on('click',function(){
+					if ($("#container_main").css("display")=="none") {
+						$("html, body").animate({ scrollTop: 0 }, "slow");
+						slider1.moveToIdx(2)
+					}else{
+						$("#profile_btn").css('display',"block");
+						$("#top_back_btn").css('display',"none");
+
+						$("#container_main").toggle();
+						$("#container").toggle();
+
+						$("html, body").animate({ scrollTop: 0 }, "slow");
+						slider1.moveToIdx(2)
+					}
+				});
+			// bottom buttons
+
 			$('#refresh_btn').on('click',function(){
+				if (typeof tokenPriceInterval  != 'undefined') {
+					clearInterval(tokenPriceInterval);
+				}
+
+				if (typeof loadTransactionTimeOut  != 'undefined') {
+					clearInterval(loadTransactionTimeOut);
+				}
+
+
 				tokenNames = [];
 				tokenBalance = [];
+				tokenValuesContainer = [];
+
 
 				$('#refresh_btn').attr("disabled");
 				$('#visible_btn').toggle();
-
-		  		$("#pnl_loading").toggle();
-		  		$("#pnl_main").toggle();
-
 
 				$("#tokenContainer > div").find("div:nth-child(3)").find("span").each(function(){
 					$(this).text("Loading...")
@@ -1065,188 +1669,18 @@
 						  		$('#refresh_btn').removeAttr("disabled");
 						  		$('#addToken_btn').removeAttr("disabled");
 
-	  		    		  		// chart PNL
-				  			  		var date = new Date();
-
-				  			  		var year = date.getFullYear();
-				  			  		var month = String(date.getMonth() + 1);
-				  			  		var day = String(date.getDate());
-				  			  		var joined = [month,day,year,].join('/');
-
-				  			  		console.log(joined);
-
-				  			  		var getTodayContractProfit = ajaxShortLink("userWallet/getTodayContractProfit",{
-				  		  				"userID":currentUser.userID,
-				  		  				"date":joined
-				  		  			})
-
-				  		  			console.log(getTodayContractProfit);
-
-				  		  			$("#todaysEarning").text(getTodayContractProfit+" USD");
-
-				  		  			if (parseFloat(getTodayContractProfit)>=1) {
-				  		  				$("#todaysEarning").addClass("text-success").text("+"+getTodayContractProfit+" USD");
-				  		  			}else{
-				  		  				$("#todaysEarning").addClass("text-danger").text(getTodayContractProfit+" USD");
-				  		  			}
-
-				    	  				var yValues = ajaxShortLink("userWallet/getToken24HourChange",{
-						  				"coinIds":coinIds.toString()
-						  			})
-				    		  							  			
-						    		var totalInUsdInner = parseFloat($('#totalInUsdContainer').val().split(" ")[0]);
-						    		var changePercentageIn1Day = parseFloat(yValues[yValues.length-1]);
-
-					    		  		$("#pnl_chart_container").empty();
-					    		  		$("#pnl_14_chart_container").empty();
-					    		  		$("#assets_chart_container").empty();
-
-				    			  		$("#pnl_loading").toggle();
-				    			  		$("#pnl_main").toggle();
-
-				    			  		$("#pnl_chart_container").remove();
-				    			  		$("#assets_chart_container").remove();
-				    			  		$("#pnl_14_chart_container").remove();
-
-				    			  		$('#graph-container-pnl').append('<canvas width="400" height="200" id="pnl_chart_container"></canvas>');
-				    			  		$('#graph-container-assets').append('<canvas width="600" height="400" id="assets_chart_container"></canvas>');
-				    			  		$('#graph-container-pnl-14').append('<canvas width="600" height="400" id="pnl_14_chart_container"></canvas>');
-
-				    	  				
-
-						  			var last7days = yValues.slice(yValues.length - 7);
-
-							  		var totalInUsdInner = parseFloat($('#totalInUsdContainer').text().split(" ")[0].replace(/,/g, ''));
-							  		var changePercentageIn1Day = parseFloat(yValues[yValues.length-1]);
-
-					  				var xValues = getDaysDate(6);
-
-					  				const average = yValues.reduce((a, b) => a + b, 0) / yValues.length;
-					  				const average7Days = last7days.reduce((a, b) => a + b, 0) / last7days.length;
-
-					  				console.log(last7days);
-					  				console.log(yValues);
-					  				console.log(average);
-					  				console.log(changePercentageIn1Day);
-					  				console.log((changePercentageIn1Day/100)*totalInUsdInner);
-					  				console.log(totalInUsdInner);
-					  				console.log(changePercentageIn1Day/100);
-
-					  				if(parseFloat(yValues[yValues.length-1]) < 0) {
-					  					$("#yesterdayPnl").addClass("text-danger").html((totalInUsdInner*(changePercentageIn1Day/100)).toFixed(2)+" <small>"+changePercentageIn1Day.toFixed(2)+"% Change </small>");
-					  				}else{
-					  					$("#yesterdayPnl").addClass("text-success").html("+"+(totalInUsdInner*(changePercentageIn1Day/100)).toFixed(2)+" <small>"+changePercentageIn1Day.toFixed(2)+"% Change </small>");
-					  				}
-
-					  				if(average7Days < 0) {
-					  					$("#allDaysPnl").addClass("text-danger").html((totalInUsdInner*(average7Days/100)).toFixed(2)+" <small>"+average7Days.toFixed(2)+"% Change</small>");
-					  				}else{
-					  					$("#allDaysPnl").addClass("text-success").html("+"+(totalInUsdInner*(average7Days/100)).toFixed(2)+" <small>"+average7Days.toFixed(2)+"% Change</small>");
-					  				}
-
-					  				if(average < 0) {
-					  					$("#14DaysPnl").addClass("text-danger").html((totalInUsdInner*(average/100)).toFixed(2)+" <small>"+average.toFixed(2)+"% Change</small>");
-					  				}else{
-					  					$("#14DaysPnl").addClass("text-success").html("+"+(totalInUsdInner*(average/100)).toFixed(2)+" <small>"+average.toFixed(2)+"% Change</small>");
-					  				}
-
-					  				new Chart("pnl_chart_container", {
-					  				  	type: "line",
-					  				  	data: {
-					  				    	labels: xValues,
-					  			    		datasets: [{
-					  						      // backgroundColor: "rgba(0,0,0,1.0)",
-					  						      fill: false,
-					  						      label: false,
-					  						      borderColor: "#94abef",
-					  						      data: last7days
-					  					    }]
-					  					},
-					  				  	options:{
-					  				  		responsive: true,
-				  				        	legend: {
-				  				          		position: 'top',
-				  				          		display: false
-				  				        	},
-				  				        	title: {
-				  			          			display: false,
-				  			          			// text: 'Chart.js Line Chart'
-				  				       	 	},
-					  		      		    tooltips: {
-					  		      		        callbacks: {
-					  		      		           label: function(tooltipItem) {
-					  		      		                  return tooltipItem.yLabel;
-					  		      		           }
-					  		      		        }
-					  		      		    }
-					  				  	}
-					  				});
-
-					  				var xValues = getDaysDate(13);
-
-					  				new Chart("pnl_14_chart_container", {
-					  				  	type: "line",
-					  				  	data: {
-					  				    	labels: xValues,
-					  			    		datasets: [{
-					  						      // backgroundColor: "rgba(0,0,0,1.0)",
-					  						      fill: false,
-					  						      label: false,
-					  						      borderColor: "#94abef",
-					  						      data: yValues
-					  					    }]
-					  					},
-					  				  	options:{
-					  				  		responsive: true,
-				  				        	legend: {
-				  				          		position: 'top',
-				  				          		display: false
-				  				        	},
-				  				        	title: {
-				  			          			display: false,
-				  			          			// text: 'Chart.js Line Chart'
-				  				       	 	},
-					  		      		    tooltips: {
-					  		      		        callbacks: {
-					  		      		           label: function(tooltipItem) {
-					  		      		                  return tooltipItem.yLabel;
-					  		      		           }
-					  		      		        }
-					  		      		    }
-					  				  	}
-					  				});
-
-					  				var xValues = tokenNames;
-					  				var yValues = tokenBalance;
-
-					  				var barColors = getRandomColorIteration(xValues.length);
-
-					  				new Chart("assets_chart_container", {
-					  				  	type: "pie",
-					  				  	data: {
-						  				    labels: xValues,
-						  				    datasets: [{
-						  				      	backgroundColor: barColors,
-					  				      		data: yValues
-						  				    }]
-					  				  	},
-					  				  	options: {
-						  				    title: {
-					  				      		display: false,
-					  				      		// text: "World Wide Wine Production 2018"
-						  				    },
-						  				    legend: {
-					  				      		display: true
-						  				    }
-					  				  }
-					  				});
-
-			    		  		// chart PNL
-						  		
 								console.timeEnd('loadTimer');
+
+								ajaxShortLink("saveLastAllTokenValue",{
+									'userID': currentUser.userID,
+									'value': $("#totalInUsdContainer").text().split(" ")[0],
+									'currency': displayCurrency,
+								});
+
+								setLocalStorageByKey('tokenValuesContainer',JSON.stringify(tokenValuesContainer))
 						    }
 
-		    		  		
+			   		  		
 
 					    	i++;
 					  	}, 500)
@@ -1256,66 +1690,62 @@
 				}, 1000);
 			});
 			
-			$('#assets_btn').on('click',function(){
-				checkVerifying();
-				console.log($('#assets_container').css("display"));
-				if ($('#assets_container').css("display") == 'none') {
-					addBreadCrumbs("assets_container")
-
-					$("html, body").animate({ scrollTop: 0 }, "slow");
-		  			$("#container").empty();
-
-					$("#profile_btn").css('display',"block")
-					$("#top_back_btn").css('display',"none")
-
-			  		$("#container").fadeOut(animtionSpeed, function() {
-					  	// $("#loadSpinner").fadeIn(animtionSpeed,function(){
-				  			// $("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/buyCrypto'}));
-
-				  			// setTimeout(function(){
-				  				// $("#loadSpinner").fadeOut(animtionSpeed,function(){
-									$('#assets_container').fadeIn(animtionSpeed);
-									// $('#topNavBar').toggle();
-				  					// $('#bottomNavBar').toggle();
-				  					$("#container").fadeIn(animtionSpeed);
-				  				// });
-				  			// }, 1000);
-					  		
-				    	// });
-				  	});
-				}
-			});
-
 			$('#addToken_btn').on('click',function(){
-				addBreadCrumbs("wallet/addToken")
-				$("html, body").animate({ scrollTop: 0 }, "slow");
-				$('#assets_container').css("display","none");
-				$("#container").fadeOut(animtionSpeed, function() {
-					$("#profile_btn").css('display',"none")
-					$("#top_back_btn").css('display',"block")
+				if (typeof tokenPriceInterval  != 'undefined') {
+					clearInterval(tokenPriceInterval);
+				}
 
-		  			$("#container").empty();
-		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/addToken'}));
-		  			$("#container").fadeIn(animtionSpeed);
-				});
+				if (typeof loadTransactionTimeOut  != 'undefined') {
+					clearInterval(loadTransactionTimeOut);
+				}
+
+				addBreadCrumbs("wallet/addToken")
+
+				$("html, body").animate({ scrollTop: 0 }, "slow");
+
+				$("#container").toggle();
+
+				$("#profile_btn").css('display',"none");
+				$("#top_back_btn").css('display',"block");
+
+				$("#container_main").empty();
+				$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/addToken'}));
+				$("#container_main").toggle();
 			});
 
 			$('#profile_btn').on('click',function(){
+				if (typeof tokenPriceInterval  != 'undefined') {
+					clearInterval(tokenPriceInterval);
+				}
+
+				if (typeof loadTransactionTimeOut  != 'undefined') {
+					clearInterval(loadTransactionTimeOut);
+				}
+
 				addBreadCrumbs("wallet/test-platform/user_profile/profile");
 
 				$("html, body").animate({ scrollTop: 0 }, "slow");
-				$('#assets_container').css("display","none");
-				$("#container").fadeOut(animtionSpeed, function() {
-					$("#profile_btn").css('display',"none")
-					$("#top_back_btn").css('display',"block")
 
-		  			$("#container").empty();
-		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/user_profile/profile'}));
-		  			$("#container").fadeIn(animtionSpeed);
-				});
+				$("#container").toggle();
+
+				$("#profile_btn").css('display',"none");
+				$("#top_back_btn").css('display',"block");
+
+				$("#container_main").empty();
+				$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/user_profile/profile'}));
+				$("#container_main").toggle();
 			});
 
 			$('#notif_btn').on('click',function(){
+				console.log("test");
+				if (typeof tokenPriceInterval  != 'undefined') {
+					clearInterval(tokenPriceInterval);
+				}
+
+				if (typeof loadTransactionTimeOut  != 'undefined') {
+					clearInterval(loadTransactionTimeOut);
+				}
+
 				addBreadCrumbs("wallet/notificationCenter");
 
 				$("#notif_counter_number").text("");
@@ -1325,60 +1755,39 @@
 				clearTimeout(newNotifChecker);
 
 				$("html, body").animate({ scrollTop: 0 }, "slow");
-				$('#assets_container').css("display","none");
-				$("#container").fadeOut(animtionSpeed, function() {
-					$("#profile_btn").css('display',"none")
-					$("#top_back_btn").css('display',"block")
 
-		  			$("#container").empty();
-		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/notificationCenter'}));
-		  			$("#container").fadeIn(animtionSpeed);
-				});
-			});
-	
-			$('#settings_btn').on('click',function(){
-				addBreadCrumbs("wallet/settings");
+				$("#container").css("display",'none');
 
-				$("html, body").animate({ scrollTop: 0 }, "slow");
-				$('#assets_container').css("display","none");
-				$("#container").fadeOut(animtionSpeed, function() {
-					$("#profile_btn").css('display',"none")
-					$("#top_back_btn").css('display',"block")
+				$("#profile_btn").css('display',"none");
+				$("#top_back_btn").css('display',"block");
 
-		  			$("#container").empty();
-		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings'}));
-		  			$("#container").fadeIn(animtionSpeed);
-				});
-			});
-
-			$('#discover_btn').on('click',function(){
-				addBreadCrumbs("wallet/test-platform/discover");
-
-				$("html, body").animate({ scrollTop: 0 }, "slow");
-				$('#assets_container').css("display","none");
-				$("#container").fadeOut(animtionSpeed, function() {
-					$("#profile_btn").css('display',"none")
-					$("#top_back_btn").css('display',"block")
-
-		  			$("#container").empty();
-		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/test-platform/discover'}));
-		  			$("#container").fadeIn(animtionSpeed);
-				});
+				$("#container_main").empty();
+				$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/notificationCenter'}));
+				$("#container_main").css("display",'block');
 			});
 
 			$('#verify_btn').on('click',function(){
+				console.log("test");
+				if (typeof tokenPriceInterval  != 'undefined') {
+					clearInterval(tokenPriceInterval);
+				}
+
+				if (typeof loadTransactionTimeOut  != 'undefined') {
+					clearInterval(loadTransactionTimeOut);
+				}
+
 				addBreadCrumbs("wallet/verifyKYC");
 
 				$("html, body").animate({ scrollTop: 0 }, "slow");
-				$('#assets_container').css("display","none");
-				$("#container").fadeOut(animtionSpeed, function() {
-					$("#profile_btn").css('display',"none")
-					$("#top_back_btn").css('display',"block")
 
-		  			$("#container").empty();
-		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/verifyKYC'}));
-		  			$("#container").fadeIn(animtionSpeed);
-				});
+				$("#container").css("display",'none');
+
+				$("#profile_btn").css('display',"none");
+				$("#top_back_btn").css('display',"block");
+
+				$("#container_main").empty();
+				$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/verifyKYC'}));
+				$("#container_main").css("display",'block');
 			});
 		// buttonEvents	
 
@@ -1394,7 +1803,7 @@
 		}
 
 		function backButton(){
-			window.location.href = 'test-platform-pro';//local
+			window.location.href = 'index';//local
 		}
 
 		function loadTokenInfo(tokenInfo){
@@ -1532,6 +1941,14 @@
 				// loadTokenInfo(tokensSelected[i].tokenName,tokensSelected[i].coingeckoTokenId)
 
 				$('#'+tokensSelected[i].id+'_container').on('click',function(){
+						if (typeof tokenPriceInterval  != 'undefined') {
+							clearInterval(tokenPriceInterval);
+						}
+
+						if (typeof loadTransactionTimeOut  != 'undefined') {
+							clearInterval(loadTransactionTimeOut);
+						}
+
 						addBreadCrumbs("wallet/viewTokenInfo");
 
 						$("#loading_text_container").text("Please wait while we load your recent activities");
@@ -1540,32 +1957,19 @@
 
 						$("#tittle_container").text('Token Information');
 						$("html, body").animate({ scrollTop: 0 }, "slow");
-						$.when(closeNav()).then(function() {
-							$('#assets_container').css("display","none");
-							$('#topNavBar').toggle();
-							$('#bottomNavBar').toggle();
-							$("#container").fadeOut(animtionSpeed, function() {
-								$("#loadSpinner").fadeIn(animtionSpeed,function(){
-									setTimeout(function(){
-							  			$("#container").empty();
-							  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/viewTokenInfo'}));
-							  			$("#profile_btn").css('display',"none")
-							  			$("#top_back_btn").css('display',"block ")
 
-								  		$("#loadSpinner").fadeOut(animtionSpeed,function(){
-								  			$('#topNavBar').toggle();
-								  			$('#bottomNavBar').toggle();
-								  			$("#container").fadeIn(animtionSpeed);
-								  		});
-									}, 1000)
-							  	});
+						$("#container").toggle();
 
-							  	$("#loading_text_container").text("Please wait");
-							});
-						});
+						$("#profile_btn").css('display',"none");
+						$("#top_back_btn").css('display',"block");
+
+						$("#container_main").empty();
+						$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/viewTokenInfo'}));
+						$("#container_main").toggle();
 				});	
 				
 			}
+
 
 			if (localStorageTokenValuesContainer!=null) {
 				if (tokensSelected.length==localStorageTokenValuesContainer.length) {
@@ -1585,12 +1989,11 @@
 				$('#totalInUsdContainer').html(numberWithCommas(parseFloat(localStorageTotalInUsd).toFixed(2)));
 				$("#totalInUsdContainer").append(" "+displayCurrency.toUpperCase());
 			}
-			// $('#totalInUsdContainer').text(totalInUsd.toFixed(2));
 		}
 
 		function addBreadCrumbs(page){
-			console.log(breadCrumbs[breadCrumbs.length-1],page,breadCrumbs[breadCrumbs.length-1]!=page);
-
+			// console.log(breadCrumbs[breadCrumbs.length-1],page,breadCrumbs[breadCrumbs.length-1]!=page);
+			console.log(page.includes("riseFall"));
 			$(".bottom-nav-item").removeClass("bottom-nav-item-active");
 
 			if(page.includes("assets")){
@@ -1607,70 +2010,178 @@
 				$("#settings_btn").addClass("bottom-nav-item-active");
 			}
 
+			if(page.includes("riseFall") || page.includes("future") || page.includes("regular_mining") || page.includes("dailyMining")){
+				console.log("there");
+				$("#modal_mining_btn").addClass("bottom-nav-item-active");
+			}
+
 			if (breadCrumbs[breadCrumbs.length-1]!=page) {
 				breadCrumbs.push(page);
 			}
 		}
 
 		$("#top_back_btn").on("click",function(){
-		
-			checkVerifying();
+			$("#container_main").empty();
+			var sliderPosition = slider1.track.details.position.toFixed(0)
 
-			breadCrumbs.pop()
-			if (typeof tokenPriceInterval  != 'undefined') {
-				clearInterval(tokenPriceInterval);
-			}
-
-			$(".bottom-nav-item").removeClass("bottom-nav-item-active");
-
-			if(breadCrumbs[breadCrumbs.length-1].includes("assets")){
+			if(breadCrumbs[breadCrumbs.length-2].includes("assets")){
 				$("#assets_btn").addClass("bottom-nav-item-active");
 			}
 
-			if(breadCrumbs[breadCrumbs.length-1].includes("discover")){
+			if(breadCrumbs[breadCrumbs.length-2].includes("discover")){
 				console.log("here");
 				$("#discover_btn").addClass("bottom-nav-item-active");
 			}
 
-			if(breadCrumbs[breadCrumbs.length-1].includes("settings")){
+			if(breadCrumbs[breadCrumbs.length-2].includes("settings")){
 				console.log("there");
 				$("#settings_btn").addClass("bottom-nav-item-active");
 			}
 
-			if (breadCrumbs[breadCrumbs.length-1]=="assets"||breadCrumbs[breadCrumbs.length-1]=="assets_container") {
-				$("#assets_btn").click();
-			}else if(breadCrumbs[breadCrumbs.length-1]==undefined){
-				$.toast({
-				    text: "Can't go back, already on the first page", // Text that is to be shown in the toast
-				    
-				    icon: 'info', // Type of toast icon
-				    showHideTransition: 'slide', // fade, slide or plain
-				    allowToastClose: true, // Boolean value true or false
-				    hideAfter: 3000, // false to make it sticky or number representing the miliseconds as time after which toast needs to be hidden
-				    stack: false, // false if there should be only one toast at a time or a number representing the maximum number of toasts to be shown at a time
-				    position: 'bottom-center', // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
-				    
-				    
-				    
-				    textAlign: 'left',  // Text alignment i.e. left, right or center
-				    loader: true,  // Whether to show loader or not. True by default
-				    loaderBg: '#9EC600',  // Background color of the toast loader
-				    beforeShow: function () {}, // will be triggered before the toast is shown
-				    afterShown: function () {}, // will be triggered after the toat has been shown
-				    beforeHide: function () {}, // will be triggered before the toast gets hidden
-				    afterHidden: function () {}  // will be triggered after the toast has been hidden
+			if(breadCrumbs[breadCrumbs.length-2].includes("riseFall") || breadCrumbs[breadCrumbs.length-2].includes("future") || breadCrumbs[breadCrumbs.length-2].includes("regular_mining") || breadCrumbs[breadCrumbs.length-2].includes("dailyMining")){
+				console.log("there");
+				$("#modal_mining_btn").addClass("bottom-nav-item-active");
+			}
+
+			$(".bottom-nav-item").removeClass("bottom-nav-item-active");
+
+			if(sliderPosition == 0){
+				$("#assets_btn").addClass("bottom-nav-item-active");
+			}
+
+			if(sliderPosition == 1){
+				$("#modal_mining_btn").addClass("bottom-nav-item-active");
+			}
+
+			if(sliderPosition == 2){
+				$("#discover_btn").addClass("bottom-nav-item-active");			
+			}
+
+			if(sliderPosition == 3){
+				$("#settings_btn").addClass("bottom-nav-item-active");
+			}
+			
+			if (typeof tokenPriceInterval  != 'undefined') {
+				clearInterval(tokenPriceInterval);
+			}
+
+			if (typeof chatDetailsChecker  != 'undefined') {
+				clearInterval(chatDetailsChecker);
+			}
+
+			if (typeof updateChatHistoryInterval  != 'undefined') {
+				clearInterval(updateChatHistoryInterval);
+			}
+
+			if (typeof loadTransactionTimeOut  != 'undefined') {
+				clearInterval(loadTransactionTimeOut);
+			}
+
+			if (breadCrumbs[breadCrumbs.length-1].includes("dailyMining") && $("#daily_mining_token_containers").css('display')!='none') {
+				$("#bottomNavBar").css("display","flex");
+
+				goback_btn();
+				console.log('here');
+			}else if(breadCrumbs[breadCrumbs.length-1].includes('wallet/settings/chat')){
+				$.confirm({
+					theme:'dark',
+					icon: 'fa fa-sign-out',
+					title: 'Disconnecting?',
+					columnClass: 'col-md-6 col-md-offset-6',
+					content: 'Are you sure you want to <b>close this ticket</b>? This will disconnect you with the current representative and put you back on queue',
+					buttons: {
+						confirm: function () {
+							var updateChatTicket = ajaxShortLink('admin/updateChatTicket',{
+								'id':createNewTicket,
+								'status':"CLOSED"
+							});
+							
+							$("#bottomNavBar").css("display","flex");
+							breadCrumbs.pop()
+
+							$("#profile_btn").css('display',"block");
+							$("#top_back_btn").css('display',"none");
+
+							$("#container_main").toggle();
+							$("#container").toggle();
+						},
+						cancel: function () {
+
+						},
+					}
 				});
 			}else{
-				$("html, body").animate({ scrollTop: 0 }, "slow");
-				$('#assets_container').css("display","none");
-				$("#container").fadeOut(animtionSpeed, function() {
-		  			$("#container").empty();
-		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':breadCrumbs[breadCrumbs.length-1]}));
-		  			$("#container").fadeIn(animtionSpeed);
-				  	$("#loading_text_container").text("Please wait");
-				});
+				$("#bottomNavBar").css("display","flex");
+
+				breadCrumbs.pop()
+
+				if(breadCrumbs[breadCrumbs.length-1]=="assets"||breadCrumbs[breadCrumbs.length-1]=="assets_container"){
+					breadCrumbs = ['assets'];
+					$("#profile_btn").css('display',"block");
+					$("#top_back_btn").css('display',"none");
+
+					$("#container_main").toggle();
+					$("#container").toggle();
+				}else{
+					console.log('there');
+					console.log(breadCrumbs[breadCrumbs.length-1]);
+
+					$("#container_main").empty();
+					$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':breadCrumbs[breadCrumbs.length-1]}));
+					$("#container_main").css('display',"block");
+				}
+
 			}
+
+			// console.log(breadCrumbs[breadCrumbs.length-1]);
 		});
+
+		function swipedetect(el, callback){
+
+			var touchsurface = el,
+			swipedir,
+			startX,
+			startY,
+			distX,
+			distY,
+			threshold = 150, //required min distance traveled to be considered swipe
+			restraint = 100, // maximum distance allowed at the same time in perpendicular direction
+			allowedTime = 300, // maximum time allowed to travel that distance
+			elapsedTime,
+			startTime,
+			handleswipe = callback || function(swipedir){}
+
+			touchsurface.addEventListener('touchstart', function(e){
+				var touchobj = e.changedTouches[0]
+				swipedir = 'none'
+				dist = 0
+				startX = touchobj.pageX
+				startY = touchobj.pageY
+				startTime = new Date().getTime() // record time when finger first makes contact with surface
+				// e.preventDefault()
+			}, false)
+
+			// touchsurface.addEventListener('touchmove', function(e){
+			// 	e.preventDefault() // prevent scrolling when inside DIV
+			// }, false)
+
+			touchsurface.addEventListener('touchend', function(e){
+				var touchobj = e.changedTouches[0]
+				distX = touchobj.pageX - startX // get horizontal dist traveled by finger while in contact with surface
+				distY = touchobj.pageY - startY // get vertical dist traveled by finger while in contact with surface
+				elapsedTime = new Date().getTime() - startTime // get time elapsed
+					if (elapsedTime <= allowedTime){ // first condition for awipe met
+						if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint){ // 2nd condition for horizontal swipe met
+							swipedir = (distX < 0)? 'left' : 'right' // if dist traveled is negative, it indicates left swipe
+						}
+						else if (Math.abs(distY) >= threshold && Math.abs(distX) <= restraint){ // 2nd condition for vertical swipe met
+							swipedir = (distY < 0)? 'up' : 'down' // if dist traveled is negative, it indicates up swipe
+						}
+				}
+				handleswipe(swipedir)
+				// e.preventDefault()
+			}, false)
+		}
 
 		function checkVerifying(){
 			console.log('checkVerifying...');
@@ -1722,6 +2233,6 @@
 			}
 		}
 
-	</script>
+</script>
 </body>
 </html>
