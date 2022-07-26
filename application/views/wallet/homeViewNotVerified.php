@@ -95,6 +95,11 @@
 
 <!-- css -->
 	<style>
+		.btn:focus {
+		  outline: none;
+		  box-shadow: none;
+		}
+
       	/*google translate*/
 		  .goog-te-banner-frame.skiptranslate, .goog-te-gadget-icon {
     	       display: none !important;
@@ -836,6 +841,19 @@
 						setLocalStorageByKey("isDarkMode",0);
 						$("body").removeClass( "dark-mode" ).addClass( "light-mode" );
 					}
+				});
+
+				$('#theme_btn').on('click',function(){
+					var $this = $('#theme_switch');
+
+					if($this.is(":checked")){
+						$('#theme_switch').prop("checked", false);
+					}else{
+						$('#theme_switch').prop("checked", true);
+					}
+
+					$('#theme_switch').trigger("change");
+
 				});
 
 				$('#price_alert_btn').on('click',function(){

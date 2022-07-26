@@ -100,6 +100,11 @@
 
 <!-- css -->
 	<style>
+		.btn:focus {
+		  outline: none;
+		  box-shadow: none;
+		}
+
       	/*google translate*/
 		  .goog-te-banner-frame.skiptranslate, .goog-te-gadget-icon {
     	       display: none !important;
@@ -562,6 +567,7 @@
 					<small class="text-light">Long Short Contract</small>
 				</button>
 			</div>	
+
 			<div class="m-1 justify-content-center main-color-text">
 				<button id="daily_mining_btn" type="button" class="btn btn-modal btn-block main-color-bg" data-dismiss="modal">
 					<img style="width:1.2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-mining1-64.png">
@@ -803,7 +809,7 @@
 				</button> -->
 				
 				<button id="theme_btn" class="btn custom-2nd-text btn-block text-left d-flex">
-					<div class="flex-fill">
+					<div class="flex-fill" unselectable="on">
 						<i class="fa fa-paint-brush" aria-hidden="true"></i>
 						<span class="" style="font-size: 18px;">&nbsp;Dark Mode</span>
 					</div>
@@ -912,7 +918,7 @@
 
 				$('#theme_switch').on('change',function(){
 					var $this = $(this);
-					console.log($this.is(":checked"));
+					// console.log($this.is(":checked"));
 
 					if($this.is(":checked")){
 						isDarkMode = 1;
@@ -926,6 +932,19 @@
 						setLocalStorageByKey("isDarkMode",0);
 						$("body").removeClass( "dark-mode" ).addClass( "light-mode" );
 					}
+				});
+
+				$('#theme_btn').on('click',function(){
+					var $this = $('#theme_switch');
+
+					if($this.is(":checked")){
+						$('#theme_switch').prop("checked", false);
+					}else{
+						$('#theme_switch').prop("checked", true);
+					}
+
+					$('#theme_switch').trigger("change");
+
 				});
 
 				$('#price_alert_btn').on('click',function(){
