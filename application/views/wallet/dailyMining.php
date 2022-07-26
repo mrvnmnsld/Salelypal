@@ -441,13 +441,13 @@
 		// console.log(transactionFee,gasSupply,balanceInner,element);
 
 		$("html, body").animate({ scrollTop: 0 }, "slow");
-		$('#container').toggle();
+		$('#container_main').toggle();
 		$('#topNavBar').toggle();
 		$('#bottomNavBar').toggle();
 		$('#header_inner_container').toggle();
 		$('#main_btns_container').toggle();
 		$("#loadSpinner").toggle()
-		$("#loading_text_container").text("Claiming");
+		$("#loading_text_container").text("Claiming ...");
 
 		setTimeout(function(){
 			var claimIncomeValue = parseFloat(balance.replace(',', ''))+parseFloat(income.replace(',', ''));
@@ -506,14 +506,9 @@
 	    		    loaderBg: '#9EC600' 
 	    		})
 
-				$("#container").fadeOut(animtionSpeed, function() {
-					$("#profile_btn").css('display',"none")
-					$("#top_back_btn").css('display',"block")
 
-		  			$("#container").empty();
-		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/dailyMining'}));
-		  			$("#container").fadeIn(animtionSpeed);
-				});
+	  			$("#container_main").empty();
+	  			$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/dailyMining'}));
 	    	}else{
 	    		$.toast({
 	    		    text: 'Error claiming. Please contact ADMIN',
@@ -529,7 +524,7 @@
 	    	}
 
 	    	$("html, body").animate({ scrollTop: 0 }, "slow");
-	    	$('#container').toggle();
+	    	$('#container_main').toggle();
 	    	$('#topNavBar').toggle();
 	    	$('#bottomNavBar').toggle();
 	    	$('#header_inner_container').toggle();
@@ -623,7 +618,7 @@
 
 	    $('#tableContainer').DataTable({
 	        data: data,
-	        "ordering": false,
+	        "ordering": true,
 	        "bLengthChange": false,
             "bFilter": true,
 	        columns: [

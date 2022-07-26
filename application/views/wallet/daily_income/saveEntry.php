@@ -232,11 +232,8 @@
 
 							bootbox.hideAll();
 
-					  		$("#container").fadeOut(animtionSpeed, function() {
-					  			$("#container").empty();
-					  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/dailyMining'}));
-			  					$("#container").fadeIn(animtionSpeed);
-						  	});
+			  			$("#container_main").empty();
+			  			$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/dailyMining'}));
 						}else{
 							$.toast({
 							    text: 'Something went downhill, please contact admin and report this error',

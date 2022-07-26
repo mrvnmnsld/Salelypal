@@ -65,7 +65,7 @@
 
 	    <br>
 
-	    <table id="tableContainer" class="" style="width: 100%!important;">  
+	    <table id="tableContainer" class="text-center" style="width: 100%!important;">  
 	        <thead>
 	            <tr>
 	                <th scope="col">TX</th>

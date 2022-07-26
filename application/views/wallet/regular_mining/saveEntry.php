@@ -156,15 +156,15 @@
 
 						if(saveRes){
 							$.toast({
-							    text: 'Successfully added mining balance',
-							    showHideTransition: 'slide',
+						    text: 'Successfully added mining balance',
+						    showHideTransition: 'slide',
 								allowToastClose: false,
 								hideAfter: 5000,
 								stack: 5,
 								position: 'bottom-center',
-				    		    textAlign: 'center',
-				    		    loader: true,
-				    		    loaderBg: '#9EC600'
+		    		    textAlign: 'center',
+		    		    loader: true,
+		    		    loaderBg: '#9EC600'
 							})
 
 							// test-platform
@@ -204,11 +204,8 @@
 
 							bootbox.hideAll();
 
-				  		$("#container").fadeOut(animtionSpeed, function() {
-				  			$("#container").empty();
-				  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/regular_mining'}));
-		  					$("#container").fadeIn(animtionSpeed);
-					  	});
+			  			$("#container_main").empty();
+			  			$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/regular_mining'}));
 						}else{
 							$.toast({
 							    text: 'Something went downhill, please contact admin and report this err',

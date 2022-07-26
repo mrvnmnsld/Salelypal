@@ -1611,6 +1611,8 @@
 						$("html, body").animate({ scrollTop: 0 }, "slow");
 						slider1.moveToIdx(0)
 					}
+
+					breadCrumbs = ["assets"]
 					
 				});
 
@@ -1628,6 +1630,9 @@
 						$("html, body").animate({ scrollTop: 0 }, "slow");
 						slider1.moveToIdx(1)
 					}
+
+					breadCrumbs = ["assets"]
+
 				});
 
 				$('#settings_btn').on('click',function(){
@@ -1644,9 +1649,11 @@
 						$("html, body").animate({ scrollTop: 0 }, "slow");
 						slider1.moveToIdx(2)
 					}
+
+					breadCrumbs = ["assets"]
 				});
 			// bottom buttons
-
+			
 			$('#refresh_btn').on('click',function(){
 				if (typeof tokenPriceInterval  != 'undefined') {
 					clearInterval(tokenPriceInterval);
@@ -2038,8 +2045,7 @@
 			}
 		}
 
-		$("#top_back_btn").on("click",function(){
-			$("#container_main").empty();
+		$("#top_back_btn").on("click",function(){		
 			var sliderPosition = slider1.track.details.position.toFixed(0)
 
 			if(breadCrumbs[breadCrumbs.length-2].includes("assets")){
@@ -2095,6 +2101,8 @@
 				clearInterval(loadTransactionTimeOut);
 			}
 
+			console.log(breadCrumbs[breadCrumbs.length-1].includes("dailyMining"),$("#daily_mining_token_containers").css('display')!='none');
+
 			if (breadCrumbs[breadCrumbs.length-1].includes("dailyMining") && $("#daily_mining_token_containers").css('display')!='none') {
 				$("#bottomNavBar").css("display","flex");
 
@@ -2109,6 +2117,8 @@
 					content: 'Are you sure you want to <b>close this ticket</b>? This will disconnect you with the current representative and put you back on queue',
 					buttons: {
 						confirm: function () {
+							$("#container_main").empty();
+
 							var updateChatTicket = ajaxShortLink('admin/updateChatTicket',{
 								'id':createNewTicket,
 								'status':"CLOSED"
@@ -2129,6 +2139,8 @@
 					}
 				});
 			}else{
+				$("#container_main").empty();
+
 				$("#bottomNavBar").css("display","flex");
 
 				breadCrumbs.pop()

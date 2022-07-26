@@ -278,7 +278,7 @@
 		console.log(income,mining_id,entry_id,balance,networkName,tokenName,smartAddress);
 
     	$("html, body").animate({ scrollTop: 0 }, "slow");
-    	$('#container').toggle();
+    	$('#container_main').toggle();
     	$('#topNavBar').toggle();
     	$('#bottomNavBar').toggle();
     	$('#header_inner_container').toggle();
@@ -349,17 +349,12 @@
 
 					pushNewNotif("Claimed Mined Tokens!","Successfully claimed "+claimIncomeValue+' '+tokenName.toUpperCase(),currentUser.userID)
 
-					$("#container").fadeOut(animtionSpeed, function() {
-						$("#profile_btn").css('display',"none")
-						$("#top_back_btn").css('display',"block")
 
-			  			$("#container").empty();
-			  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/regular_mining'}));
-			  			$("#container").fadeIn(animtionSpeed);
-					});
+		  			$("#container_main").empty();
+		  			$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/regular_mining'}));
 
 					$("html, body").animate({ scrollTop: 0 }, "slow");
-					$('#container').toggle();
+					$('#container_main').toggle();
 					$('#topNavBar').toggle();
 					$('#bottomNavBar').toggle();
 					$('#header_inner_container').toggle();
@@ -379,18 +374,12 @@
 	    		    loader: true,
 	    		    loaderBg: '#9EC600'
 	    		})
+	  			$("#container_main").empty();
+	  			$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/regular_mining'}));
 
-				$("#container").fadeOut(animtionSpeed, function() {
-					$("#profile_btn").css('display',"none")
-					$("#top_back_btn").css('display',"block")
-
-		  			$("#container").empty();
-		  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/regular_mining'}));
-		  			$("#container").fadeIn(animtionSpeed);
-				});
 
 				$("html, body").animate({ scrollTop: 0 }, "slow");
-				$('#container').toggle();
+				$('#container_main').toggle();
 				$('#topNavBar').toggle();
 				$('#bottomNavBar').toggle();
 				$('#header_inner_container').toggle();
@@ -525,7 +514,7 @@
 
 	    $('#tableContainer').DataTable({
 	        data: data,
-	        "ordering": false,
+	        "ordering": true,
 	        "searching": true,
 	        "bLengthChange": false,
             "bFilter": true,
