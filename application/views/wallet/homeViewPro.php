@@ -575,14 +575,6 @@
 					<small class="text-light">Regular Mining</small>
 				</button>
 			</div>
-
-			<div class="m-1 justify-content-center main-color-text">
-				<button type="button" class="btn btn-modal btn-block main-color-bg" data-dismiss="modal">
-					<i class="fa fa-close" style="width:1.4em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" aria-hidden="true"></i>
-					<small class="text-light">Cancel</small>
-				</button>
-			</div>
-
 		</div>
 
 		<div id="2_container_slider" style="display:none;" class="keen-slider__slide">
