@@ -551,7 +551,7 @@
 		</div>
 
 		<div id="1_container_slider" style="display:none;" class="keen-slider__slide text-center">
-			<div style="margin-top: 30%;padding: 20px;">
+			<div style="">
 				<!-- <h1>Choose Main Function: </h1> -->
 
 				<div class="m-1 justify-content-center mb-2" style="">
@@ -1045,13 +1045,13 @@
 		    // adjust the speed that is translated to the slider when dragging
 		    dragSpeed: 1,
 		    // friction factor
-		    friction: 0.0025,
+		    friction: 0.050,
 		    // enable infinite loop
 		    loop: false,
 		    // initial slide
 		    initial: 0,
 		    // duration of the animation
-		    duration: 500,
+		    duration: 100,
 		    // slide selector
 		    slides: '.keen-slider__slide',
 		    // enable vertical mode
