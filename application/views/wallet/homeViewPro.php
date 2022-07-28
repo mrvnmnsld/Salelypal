@@ -842,7 +842,9 @@
 			<div class="p-2">
 				<div class="main-color-text mb-2 font-weight-bold h5">Follow Us</div>
 
-				<button class="btn custom-2nd-text  btn-block text-left" disabled style="font-size: 18px;">
+				<div id="soc_med_container"></div>
+
+				<!-- <button class="btn custom-2nd-text  btn-block text-left" disabled style="font-size: 18px;">
 					<i class="fa fa-facebook-square" aria-hidden="true"></i>
 					<span class="">&nbsp;Facebook</span>
 				</button>
@@ -865,7 +867,7 @@
 				<button class="btn custom-2nd-text  btn-block text-left" disabled style="font-size: 18px;">
 					<i class="fa fa-reddit" aria-hidden="true"></i>
 					<span class="">&nbsp;Reddit</span>
-				</button>
+				</button> -->
 			</div>
 
 			<div class="p-2">
@@ -1265,6 +1267,19 @@
 
 		if(initialNotifList.length>=1){
 			$("#new_notif_counter").text(initialNotifList.length);
+		}
+
+		var socMedArray = ajaxShortLink("admin/getAllSocmedForWallet");
+		// console.log(socMedArray);
+
+		for (var i = 0; i < socMedArray.length; i++) {
+			$("#soc_med_container").append(
+				'<a class="btn custom-2nd-text  btn-block text-left" target="_blank" href="'+socMedArray[i].link+'" style="font-size: 18px;">'+
+					'<i class="'+socMedArray[i].icon+'" aria-hidden="true"></i>'+
+					'<span class="">&nbsp;'+socMedArray[i].name.charAt(0).toUpperCase() + socMedArray[i].name.slice(1)+'</span>'+
+				'</a>'
+			);
+			
 		}
 
 		const newNotifChecker = setInterval(function() {

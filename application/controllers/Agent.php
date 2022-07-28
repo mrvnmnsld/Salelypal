@@ -190,6 +190,7 @@ class agent extends MY_Controller {
 			'timestamp' => $this->_getTimeStamp24Hours(),
 			'userType' => 'agent',
 			'createdBy' => $_GET["id"],
+			'isShareContract' => '0',
 		);
 
 		$saveQueryNotif = $this->_insertRecords($tableName = 'agent_profile_tbl', $insertRecord);
@@ -199,6 +200,8 @@ class agent extends MY_Controller {
 		}else{
 			echo json_encode(false);
 		}
+
+		// echo json_encode($insertRecord);
 	}
 
 	public function updateAgentInfo(){

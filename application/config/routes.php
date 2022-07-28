@@ -518,6 +518,14 @@ $route['testing'] = 'main/testing';
 
 	$route['checkIfReferalCodeIsValid'] = 'main/checkIfReferalCodeIsValid';
 
+	$route['admin/getAllSocmed'] = 'admin/getAllSocmed';
+	$route['admin/saveNewSocmed'] = 'admin/saveNewSocmed';
+	$route['admin/updateSocmed'] = 'admin/updateSocmed';
+	
+	$route['admin/getAllSocmedForWallet'] = 'admin/getAllSocmedForWallet';
+
+	
+
 
 
 		$route["privacyPolicy"] = 'main/privacyPolicy';

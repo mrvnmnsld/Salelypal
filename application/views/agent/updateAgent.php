@@ -68,7 +68,7 @@
     .toggle:checked + .slider {
     background-color: #5426de;
     }
-    toggle:focus + .slider {
+    .toggle:focus + .slider {
     box-shadow: 0 0 1px #5426de;
     }
     .toggle:checked + .slider:before {
