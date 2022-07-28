@@ -64,18 +64,6 @@
 		});
 	}
 
-	// function viewThis(element){
-	// 	var table = $('#tableContainer').DataTable();
-	// 	selectedData = table.row($(element).closest('tr')).data();
-
-	// 	bootbox.alert({
-	// 	    message: ajaxLoadPage('quickLoadPage',{'pagename':'socialMedia/updateSocmed'}),
-	// 	    size: 'large',
-	// 	    centerVertical: true,
-	// 	    closeButton: false
-	// 	});
-	// }
-
 	$('#tableContainer').on('click', 'tbody tr', function () {
 	  selectedData = $('#tableContainer').DataTable().row($(this)).data();
 
