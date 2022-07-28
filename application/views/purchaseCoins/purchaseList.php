@@ -86,7 +86,7 @@
 	        buttons: [
 	            'copyHtml5',
 	            {
-                    extend: 'excelHtml5',
+                  extend: 'excelHtml5',
 	                title: 'data_export'
 	            },
 	            {

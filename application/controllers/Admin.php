@@ -1469,19 +1469,87 @@ class admin extends MY_Controller {
 		echo true;
 	}
 
+	public function getAllSocmed(){
+		$res = $this->_getRecordsData(
+			$selectfields = array("*"), 
+	   		$tables = array('socmed_tbl'),
+	   		$fieldName = null, 
+	   		$where = null, 
+	   		$join = null,	 
+	   		$joinType = null,
+	   		$sortBy = array("id"), 
+	   		$sortOrder = array('desc'), 
+	   		$limit = null, 
+	   		$fieldNameLike = null, 
+	   		$like = null,
+	   		$whereSpecial = null, 
+	   		$groupBy = null 
+		);
+
+		echo json_encode($res);
+	}
+
+	public function saveNewSocmed(){
+		$insertRecord = array(
+			'name' => $_GET['name'],
+			'link' => $_GET['link'],
+			'isShown' => '0',
+		);
+
+		$saveQueryNotif = $this->_insertRecords($tableName = 'socmed_tbl', $insertRecord);
+
+		if($saveQueryNotif){
+			echo json_encode(true);
+		}else{
+			echo json_encode(false);
+		}
+
+		// echo json_encode($insertRecord);
+	}
+
+	public function updateSocmed(){
+		$insertRecord = array(
+			'name' => $_GET['name_container'],
+			'link' => $_GET['link_container'],
+			'isShown' => $_GET['isShownUpdate'],
+		);
+
+		$tableName="socmed_tbl";
+		$fieldName='id';
+		$where= $_GET['id'];
+
+		$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
+
+		if($updateRecordsRes){
+			echo json_encode(true);
+		}else{
+			echo json_encode(false);
+		}
+		// echo json_encode($insertRecord);
+	}
+
+	public function getAllSocmedForWallet(){
+		$res = $this->_getRecordsData(
+			$selectfields = array("*"), 
+	   		$tables = array('socmed_tbl'),
+	   		$fieldName = array("isShown"), 
+	   		$where = array("1"), 
+	   		$join = null,	 
+	   		$joinType = null,
+	   		$sortBy = null, 
+	   		$sortOrder = null, 
+	   		$limit = null, 
+	   		$fieldNameLike = null, 
+	   		$like = null,
+	   		$whereSpecial = null, 
+	   		$groupBy = null 
+		);
+
+		echo json_encode($res);
+	}
+
 	
 
-
-
 	
-
-	
-
-	
-
-	
-
-	
-
 
 }
