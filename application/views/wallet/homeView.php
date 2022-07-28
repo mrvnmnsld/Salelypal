@@ -789,7 +789,9 @@
 			<div class="p-2">
 				<div class="main-color-text mb-2 font-weight-bold h5">Follow Us</div>
 
-				<button class="btn custom-2nd-text  btn-block text-left" disabled style="font-size: 18px;">
+				<div id="soc_med_container"></div>
+
+				<!-- <button class="btn custom-2nd-text  btn-block text-left" disabled style="font-size: 18px;">
 					<i class="fa fa-facebook-square" aria-hidden="true"></i>
 					<span class="">&nbsp;Facebook</span>
 				</button>
@@ -812,7 +814,7 @@
 				<button class="btn custom-2nd-text  btn-block text-left" disabled style="font-size: 18px;">
 					<i class="fa fa-reddit" aria-hidden="true"></i>
 					<span class="">&nbsp;Reddit</span>
-				</button>
+				</button> -->
 			</div>
 
 			<div class="p-2">
