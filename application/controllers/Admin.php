@@ -1549,7 +1549,47 @@ class admin extends MY_Controller {
 	}
 
 	
+	public function checkAdminUserNameAvailability(){
+   		$username = $_GET['username'];
 
+   		$test = $this->_getRecordsData(
+   			$selectfields = array("*"), 
+	   		$tables = array('admin_users_tbl'), 
+	   		$fieldName = array('username'), $where = array($username), 
+	   		$join = null, $joinType = null, $sortBy = null, 
+	   		$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+   		);
+
+   		if (count($test)==0) {
+   			echo true;
+   		}else{
+   			echo false;
+   		}
+	}
+
+	public function updateLoginInfo(){
+
+		$tableName="admin_users_tbl";
+		$fieldName1='id';
+		$where1= $_GET['id'];
+
+		$insertRecord = array(
+			'username' => $_GET['username'],
+		);
+
+		if ($_GET['newPassword']!="") {
+			$insertRecord['password'] = MD5($_GET['newPassword']);
+		}
+
+		$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName1), array($where1), $insertRecord);
+
+		if($updateRecordsRes){
+			echo json_encode(true);
+		}else{
+			echo json_encode(false);
+		}
+
+	}
 	
-
+	
 }
