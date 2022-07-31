@@ -148,9 +148,6 @@ if (!isset($_SESSION["currentUser"])) {
       #goog-gt-tt{
         display: none !important;
       }
-      .dnone{
-        display: none;
-      }
   </style>
 </head>
 
@@ -221,7 +218,7 @@ if (!isset($_SESSION["currentUser"])) {
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="#" onclick="dnonetoggle('dashboard','settings_dashboard')">
+              <a class="dropdown-item d-flex align-items-center" href="#" onclick="settings_mdl()">
                 <i class="bi bi-gear"></i>
                 <span>Settings</span>
               </a>
@@ -254,41 +251,6 @@ if (!isset($_SESSION["currentUser"])) {
   </aside><!-- End Sidebar-->
 
   <main id="main" class="main">
-
-  <!-- settings -->
-    <div id="settings_dashboard" class="pagetitle dnone card p-3" >
-      <h1 class="mb-2">Settings</h1>
-      <sub class="fw-bold">Edit your Credentials</sub>
-
-      <hr>
-
-      <div class="row mt-1">
-        <div class="col-md-3 pl-3"><b>ID:</b></div> 
-        <div class="col-md" id="idContainer"></div>  
-      </div>
-
-      <div class="row mt-1">
-        <div class="col-md-3 pl-3"><b>Username:</b></div> 
-        <div class="col-md" id="usernameContainer"></div>  
-      </div>
-
-      <div class="row mt-1">
-        <div class="col-md-3 pl-3"><b>User Type:</b></div> 
-        <div class="col-md" id="usertypeContainer"></div>  
-      </div>
-
-      <div class="row mt-1">
-        <div class="col-md-3 pl-3"><b>Date Created:</b></div> 
-        <div class="col-md" id="datecreatedContainer"></div>  
-      </div>
-
-      <div class="d-flex flex-row-reverse">
-        <button type="button" class="btn btn-danger" id="close_btn_settings" onclick="dnonetoggle('settings_dashboard','dashboard')">Close</button>
-        <button type="button" class="btn btn-success mr-1" id="edit_profile_btn">Edit Credentials</button>
-      </div>
-
-    </div>
-  <!-- end settings -->
 
     <div id="dashboard">
 
@@ -634,11 +596,6 @@ if (!isset($_SESSION["currentUser"])) {
   var currentUser = JSON.parse('<?php echo json_encode($_SESSION['currentUser'])?>');
   console.log(currentUser, "hello");
 
-  $("#idContainer").text(currentUser.id);
-  $("#usernameContainer").text(currentUser.username);
-  $("#usertypeContainer").text(currentUser.userType);
-  $("#datecreatedContainer").text(currentUser.dateCreated);
-
   //User Type text UI
   $('#userNameLogged').text(capitalizeFirstLetter(currentUser.username));
   $('#userNameLoggedInner').text(capitalizeFirstLetter(currentUser.username));
@@ -667,15 +624,6 @@ if (!isset($_SESSION["currentUser"])) {
       error: function(error) {
           console.log('Error:', error);
       }
-  });
-
-  $("#edit_profile_btn").on('click',function(){
-    bootbox.alert({
-      message: ajaxLoadPage('quickLoadPage',{'pagename':'admin/updateLogin'}),
-      size: 'large',
-      centerVertical: true,
-      closeButton: false
-    });
   });
 
   function setPriviNavbar(priviArray){
@@ -759,9 +707,18 @@ if (!isset($_SESSION["currentUser"])) {
     });
   }
 
-  async function dnonetoggle(id1,id2){
-    await $('#'+id1).toggleClass('dnone')
-    return $('#'+id2).toggleClass('dnone')
+  // async function dnonetoggle(id1,id2){
+  //   await $('#'+id1).toggleClass('dnone')
+  //   return $('#'+id2).toggleClass('dnone')
+  // }
+
+  function settings_mdl(){
+    bootbox.alert({
+      message: ajaxLoadPage('quickLoadPage',{'pagename':'admin/settings'}),
+      size: 'large',
+      centerVertical: true,
+      closeButton: false
+    });
   }
 
 

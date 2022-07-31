@@ -517,6 +517,7 @@ $route['testing'] = 'main/testing';
 //purchase coins	
 
 	$route['checkIfReferalCodeIsValid'] = 'main/checkIfReferalCodeIsValid';
+	
 // socmed
 	$route['admin/getAllSocmed'] = 'admin/getAllSocmed';
 	$route['admin/saveNewSocmed'] = 'admin/saveNewSocmed';
