@@ -517,12 +517,18 @@ $route['testing'] = 'main/testing';
 //purchase coins	
 
 	$route['checkIfReferalCodeIsValid'] = 'main/checkIfReferalCodeIsValid';
-
+	
+// socmed
 	$route['admin/getAllSocmed'] = 'admin/getAllSocmed';
 	$route['admin/saveNewSocmed'] = 'admin/saveNewSocmed';
 	$route['admin/updateSocmed'] = 'admin/updateSocmed';
-	
 	$route['admin/getAllSocmedForWallet'] = 'admin/getAllSocmedForWallet';
+//socmed
+
+//admin settings
+	$route['admin/checkAdminUserNameAvailability'] = 'admin/checkAdminUserNameAvailability';
+	$route['admin/updateLoginInfo'] = 'admin/updateLoginInfo';
+//admin settings
 
 	
 
