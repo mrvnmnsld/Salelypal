@@ -1014,29 +1014,49 @@ class main extends MY_Controller {
 			'<head>'.
 			'</head>'.
 			'<body>'.
-				'<div>'.
-					'<div style="background-color: #aea9b3; padding: 10px">'.
+				// '<div>'.
+				// 	'<div style="background-color: #aea9b3; padding: 10px">'.
 
-						'<div style="width: 550px; border-radius:20px 20px 0px 0px ; background-color: #9327f8; margin:auto; padding: 20px">'.
-							'<div style="color: #fff; text-align: center;">'.
-								'<div style="font-weight: bold; font-size: 3em;">Welcome to SafetyPal!</div>'.
-							'</div>'.
-						'</div>'.
+				// 		'<div style="width: 550px; border-radius:20px 20px 0px 0px ; background-color: #9327f8; margin:auto; padding: 20px">'.
+				// 			'<div style="color: #fff; text-align: center;">'.
+				// 				'<div style="font-weight: bold; font-size: 3em;">Welcome to SafetyPal!</div>'.
+				// 			'</div>'.
+				// 		'</div>'.
 
-						'<div style="height: 350px; width: 550px; background-color: #fff; border-radius: 0px 0px 20px 20px; margin:auto; padding: 20px">'.
-							'<div style="text-align: center;">'.
-								'<img src="http://testingcenter.xyz/assets/imgs/Email_OTP.png" style="height:100px; width: 100px;margin-top: 50px;">'.
-								'<h1 style="color: #9327f8; font-family: Poppins, sans-serif;">'.
-								    'Verify your Account'.
-								'</h1>'.
-								'<h3 style="color: #aea9b3;">Here is your One Time Password '.
-				                'to validate your account</h3>'.
-								'<p style="font-size: 2em; letter-spacing: 5px; font-weight: bold; border: 1px solid #9327f8; width: 50%; margin:auto; border-radius: 20px;">'.$_GET["otp"].'</p>'.
-							'</div>'.
-						'</div>'.
+				// 		'<div style="height: 350px; width: 550px; background-color: #fff; border-radius: 0px 0px 20px 20px; margin:auto; padding: 20px">'.
+				// 			'<div style="text-align: center;">'.
+				// 				'<img src="http://testingcenter.xyz/assets/imgs/Email_OTP.png" style="height:100px; width: 100px;margin-top: 50px;">'.
+				// 				'<h1 style="color: #9327f8; font-family: Poppins, sans-serif;">'.
+				// 				    'Verify your Account'.
+				// 				'</h1>'.
+				// 				'<h3 style="color: #aea9b3;">Here is your One Time Password '.
+				//                 'to validate your account</h3>'.
+				// 				'<p style="font-size: 2em; letter-spacing: 5px; font-weight: bold; border: 1px solid #9327f8; width: 50%; margin:auto; border-radius: 20px;">'.$_GET["otp"].'</p>'.
+				// 			'</div>'.
+				// 		'</div>'.
 
-					'</div>'.
-				'</div>'.
+				// 	'</div>'.
+				// '</div>'.
+				'<div style="height:90vh">'.
+			        '<div style="background-color: #9327f8; padding: 10px; height: 300px;">'.
+
+			            '<div style="height: 470px; width: 700px; background-color: #fff; margin:auto; margin-top: 100px; padding: 30px; box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;">'.
+			                '<div style="text-align: center;">'.
+			                    '<img src="http://wallet.safelypal.com/assets/imgs/safelypal_logo.png" style="height:100px; width: 350px; margin-bottom: 20px;">'.
+			                    '<div style="font-weight: bold; font-size: 2.5em; color: #aea9b3;">WELCOME TO SAFELYPAL</div>'.
+			                    '<i class="fa fa-envelope-o" aria-hidden="true" style="font-size: 5rem; color: #9327f8; margin-top: 20px;"></i>'.
+			                    '<h1 style="color: #aea9b3;">'.
+			                        'Verify your Account'.
+			                    '</h1>'.
+			                    '<h3 style="color: #5427dd; margin-top: 40px;">HERE IS YOUR ONE TIME PASSWORD TO VALIDATE YOUR ACCOUNT</h3>'.
+			                   ' <p style="font-size: 2em; letter-spacing: 5px; font-weight: bold; border: 1px solid #aea9b3; width: 50%; margin:auto; border-radius: 20px;">'.$_GET["otp"].'</p>'.
+			                '</div>'.
+			            '</div>'.
+			            '<div style="text-align: center; margin-top:20px">'.
+			               ' <p style="font-weight: bold; color: #5427dd; margin-top: 70px;">© 2022 SAFELYPAL. ALL RIGHTS RESERVED.</p>'.
+			            '</div>'.
+			        '</div>'.
+			    '</div>'.
 			'</body>'.
 		'</html>';
 		
