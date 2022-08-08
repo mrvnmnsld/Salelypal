@@ -97,7 +97,7 @@
 
 	  	  	<div class="form-group form-check mt-4 text-center">
 				<input type="checkbox" class="form-check-input" name="termsCondition">
-				<label class="form-check-label d-inline">I have read and accept the <a href="#" onclick='termsCondition()'>Terms and Conditions</a></label>
+				<label class="form-check-label d-inline">I have read and accept the <u><a href="#" onclick='termsCondition()'>Terms and Conditions</a></u></label>
 			</div>
 		</div>
 
