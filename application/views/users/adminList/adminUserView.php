@@ -47,6 +47,14 @@
 		<div class="col-md" id="dateContainer"></div>	
 	</div>
 
+	<div class="row m-1">
+		<div class="col-md pl-3">
+			<b>Authenticator QR:</b><br>
+			<img id="authQRLink" src="https://api.qrserver.com/v1/create-qr-code/?data=otpauth%3A%2F%2Ftotp%2FSafelyPal+Admin%3Fsecret%3DIHEWOT7HL5AXF2GD&size=200x200&ecc=M/"><br>
+			<span>Note: Scan this QR via authenticator (or authy)</span>
+		</div>
+	</div>
+
 	<hr>
 
 	<div class="row">
@@ -62,8 +70,9 @@
 	$("#userNameContainer").append(selectedData["username"]);
 	$("#userTypeContainer").append(selectedData["userType"]);
 	$("#dateContainer").append(selectedData["dateCreated"]);
+	$("#authQRLink").attr("src",selectedData["authQRLink"]);
 
-	console.log(selectedData["isBlocked"]);
+	console.log(selectedData);
 
 	if (selectedData["isBlocked"] == 1) {
 		$('#blockBtn').addClass('disabled');

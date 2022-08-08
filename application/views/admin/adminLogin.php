@@ -209,6 +209,8 @@
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <script>
+    var loginRes;
+    
     $("#loginForm").validate({
         errorClass: 'is-invalid',
         rules: {
@@ -220,7 +222,7 @@
         },
         submitHandler: function(form){
           var data = $('#loginForm').serializeArray();
-          var loginRes = ajaxShortLink('admin/checkLoginCredentials',data);
+          loginRes = ajaxShortLink('admin/checkLoginCredentials',data);
 
           console.log(data);
 
@@ -228,23 +230,21 @@
             $('#errorReporter').css("display","block");
             $('#errorReporter').css("color","red");
 
-
             if (loginRes['wrongFlag'] == 2 || loginRes['wrongFlag'] == 1) {
               $('#errorReporter').text("Wrong Credentials.");
             }else if(loginRes['wrongFlag'] == 3){
               $('#errorReporter').html("Account frozen!");
             }
           }else{
-            $("#loginForm button").empty().append(
-              '<span class="spinner-border" role="status">'+
-                '<span class="sr-only">Loading...</span>'+
-              '</span>'+
-              "&nbsp Success Login"
-            ).attr('disabled',true);
-
             $('#errorReporter').css("display","none");
 
-            window.location.replace("admin-dashboard");
+            bootbox.alert({
+              message: ajaxLoadPage('quickLoadPage',{'pagename':'admin/authenticatorChecker'}),
+              // size: 'large',
+              centerVertical: true,
+              closeButton: false
+            });
+
           }
         
         }

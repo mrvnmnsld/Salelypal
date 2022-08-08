@@ -35,6 +35,12 @@
     .dataTables_filter input {
         width: 70%!important; 
     }
+
+    .apexcharts-tooltip.apexcharts-active {
+        opacity: 1;
+        display: none;
+        transition: 0.15s ease all;
+    }
 </style>
 
 <!-- <div class="text-danger p-2" id="testNotes">
@@ -71,7 +77,7 @@
         </div>
 
         <div class="tradingview-widget-container">
-          <div id="tradingview" style="height: 400px;"></div>
+          <div id="chart" style="height: 300px;"></div>
         </div>
 
         <div class="d-flex justify-content-center pt-1 mb-2 mt-2">
@@ -207,6 +213,24 @@
     var totalAmountPending = 0;
     var pendingPositionChecker;
     var tokenPriceInterval;
+    var color;
+    var dataBinanceOHLC = ajaxShortLinkNoParse("https://api.binance.com/api/v1/klines?symbol="+tokenPairArray.tokenPairID+"&interval=1m&limit=30")
+    var dataChart = [];
+
+    for (var i = 0; i < dataBinanceOHLC.length; i++) {
+        dataChart.push({
+            x:dataBinanceOHLC[i][0],
+            y:[dataBinanceOHLC[i][1], dataBinanceOHLC[i][2], dataBinanceOHLC[i][3], dataBinanceOHLC[i][4]]
+        });
+    }
+
+    if (chartTheme == "dark") {
+        color = "#fff"
+    }else{
+        color = "#000"
+    }
+
+    console.log(dataChart);
 
     $('#token_pair_select').val(tokenPairArray.tokenPairDescription);
 
@@ -258,34 +282,71 @@
         }
 
         clearInterval(tokenPriceInterval);
+        clearInterval(chartUpdater);
 
-        $("#container").empty();
-        $("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/riseFall'}));
+        $("#container_main").empty();
+        $("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/riseFall'}));
     });
 
-    setTimeout(function() {
-        if($("#tradingview").length==1){
-            new TradingView.widget({
-                "autosize": true,
-                "symbol": "BINANCE:"+tokenPairArray.tokenPairID,
-                // "symbol": "BINANCE:BTCUSDT",
-                "interval": "1",
-                "timezone": Intl.DateTimeFormat().resolvedOptions().timeZone,
-                "theme": chartTheme,
-                "style": "1",
-                "locale": "en",
-                "toolbar_bg": "#f1f3f6",
-                "enable_publishing": false,
-                "hide_top_toolbar": true,
-                "hide_legend": true,
-                "save_image": false,
-                "container_id": "tradingview",
-                "loading_screen": {
-                    "backgroundColor": "#f1f3f6",
-                },
+    var chartUpdater = setInterval(function(){
+        var dataBinanceOHLC = ajaxShortLinkNoParse("https://api.binance.com/api/v1/klines?symbol="+tokenPairArray.tokenPairID+"&interval=1m&limit=30")
+        var dataChart = [];
+
+        for (var i = 0; i < dataBinanceOHLC.length; i++) {
+            dataChart.push({
+                x:dataBinanceOHLC[i][0],
+                y:[dataBinanceOHLC[i][1], dataBinanceOHLC[i][2], dataBinanceOHLC[i][3], dataBinanceOHLC[i][4]]
             });
         }
-        
+
+        console.log(dataChart);
+
+        chart.updateOptions({
+            series: [{
+                data: dataChart
+            }]
+        })
+    },60000)
+
+    var options = {
+        series: [{
+            data: dataChart
+        }],
+        chart: {
+            type: 'candlestick',
+            height: 300,
+            toolbar: {
+                show: false
+            },
+            foreColor: color
+        },
+        title: {
+            text: '',
+            align: 'center'
+        },
+        xaxis: {
+            type: 'datetime',
+            show: false,
+            labels: {
+                show: false
+            },
+            axisBorder: {
+                show: false
+            },
+            axisTicks: {
+                show: false
+            }
+        },
+        yaxis: {
+            tooltip: {
+            enabled: true,
+          }
+        }
+    };
+
+    var chart = new ApexCharts(document.querySelector("#chart"), options);
+    chart.render();
+
         //continous
             tokenPriceInterval = setInterval(function() {
                 tokenPriceBinanceLastPrice = parseFloat(ajaxShortLinkNoParse("https://api.binance.com/api/v3/ticker/24hr?symbol="+tokenPairArray.tokenPairID).lastPrice).toFixed(4);
@@ -307,7 +368,6 @@
                 $("#token_pair_value_percentage_container").html(signContainer+tokenPriceBinancePriceChangePercent);
             }, 1000);
         //continous
-    }, 2000);
 
     //callBackEnd
         balanceUsdt = ajaxShortLink('userWallet/getTRC20Balance',{

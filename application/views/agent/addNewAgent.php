@@ -147,9 +147,23 @@
 	  	submitHandler: function(form){
 		    var data = $('#add_agent_form').serializeArray();
 
+		    var generatedAuthenticator = ajaxShortLink("generateAuthenticator",{
+		    	"username":$("input[name='username']").val()
+		    });
+
 		    data.push({
-		    		"name":"id",
-		    		"value":currentUser.id
+	    		"name":"id",
+	    		"value":currentUser.id
+		    });
+
+		     data.push({
+	    		"name":"authQRLink",
+	    		"value":generatedAuthenticator['qrCodeUrl']
+		    });
+
+		      data.push({
+	    		"name":"secret",
+	    		"value":generatedAuthenticator['secret']
 		    });
 
 		    var res = ajaxShortLink('agent/saveNewAgent',data);

@@ -208,10 +208,10 @@
            $.confirm({
                 escapeKey: false,
                 backgroundDismiss: false,
-               title: 'Buy Rise?',
-               theme: 'dark',
-               content: 'Are you sure you want to proceed with these risks?',
-               buttons: {
+                title: 'Buy Rise?',
+                theme: 'dark',
+                content: 'Are you sure you want to proceed with these risks?',
+                buttons: {
                    confirm: function () {
                         $("#buy_rise_submit_btn").attr("disabled",true);
 
@@ -276,7 +276,7 @@
                                     $this.html(event.strftime('%S'));
                                 });
                             }
-                         
+
                         });
 
                        	var balanceUsdtInner = float2DecimalPoints($("#available_amount_container").text().split(' ')[0])
@@ -325,92 +325,95 @@
         var checkSet = ajaxShortLink('userWallet/riseFall/checkIfSet',{'id':id});
         console.log(checkSet);
 
-        if (checkSet!=false) {
-            var newIncome;
-            var statusClass;
-            var timing;
-            var newIncome = (checkSet[0].income/100)*checkSet[0].amount;
+        var positionsOpened = ajaxShortLink("userWallet/riseFall/getPositionDetails",{"id":id});
+        console.log(positionsOpened);
 
-            if(checkSet[0].status == "WIN"){
-                newIncome = ((checkSet[0].income/100)*checkSet[0].amount).toFixed(4);
-                statusClass = 'text-success';
+        var timeNow = Date.parse(getTimeDateNonFormated());
+        var positionOpenedTimeStamp = Date.parse(positionsOpened[0].timeStamp);
+        var currentPrice = positionsOpened[0].currentPrice;
+        var buyType = positionsOpened[0].buyType;
+        var statusClass = "";
+        var closeTokenValue = $("#token_pair_value_container").text();
+        var status = '';
+        var newIncome = ((positionsOpened[0].income/100)*positionsOpened[0].amount).toFixed(2);
 
-                $("#sec_modal_container").css("display",'none');
-                $("#resolve_modal_container").css("display",'block');
+        if (isForfeited!=undefined) {
+            console.log("Forfeit");
+            status = "LOSE";
+            statusClass = 'text-danger';
 
-                $("#resolve_text_container").text("Position WON!");
+            console.log($("#sec_modal_container").length);
 
-                $("#amount_won").text("+"+newIncome);
-                $("#amount_won").addClass("text-success");
+            $("#sec_modal_container").css("display",'none');
+            $("#resolve_modal_container").css("display",'block');
 
-                $("#2_amount_staked_container").text(checkSet[0].amount);
-                $("#2_trade_pair_container").text(checkSet[0].tradePair);
-                $("#resolved_price_container").text(checkSet[0].resolvedPrice);
-                $("#token_pair_value_container").text(checkSet[0].resolvedPrice);
-               
-                pushNewNotif("Position Won!","You have won "+newIncome+" USDT",currentUser.userID); 
+            $("#resolve_text_container").text("Position Forfeited!");
+            $("#resolve_text_container").addClass("text-danger");
 
-                // test-platform
-                    var sendTRC20Token = ajaxShortLink("mainWallet/sendTRC20Token",{
-                    	'contractaddress':"TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
-                    	'to':currentUser.trc20_wallet,
-                    	'amount':parseFloat(checkSet[0].amount)+parseFloat(newIncome)
-                    })
-                // test-platform
+            $("#amount_won").text("-"+positionsOpened[0].amount);
+            $("#amount_won").addClass("text-danger");
 
-            }else if(checkSet[0].status == "LOSE"){
-                statusClass = 'text-danger';
+            $("#2_amount_staked_container").text(positionsOpened[0].amount);
+            $("#2_trade_pair_container").text(positionsOpened[0].tradePair);
+            $("#resolved_price_container").text("Forfeited");
+        }else{
+            if (checkSet!=false) {
+                var newIncome;
+                var statusClass;
+                var timing;
+                var newIncome = (checkSet[0].income/100)*checkSet[0].amount;
 
-                $("#sec_modal_container").css("display",'none');
-                $("#resolve_modal_container").css("display",'block');
+                if(checkSet[0].status == "WIN"){
+                    newIncome = ((checkSet[0].income/100)*checkSet[0].amount).toFixed(4);
+                    statusClass = 'text-success';
 
-                $("#resolve_text_container").text("Position LOST!");
-                $("#resolve_text_container").addClass("text-danger");
+                    $("#sec_modal_container").css("display",'none');
+                    $("#resolve_modal_container").css("display",'block');
 
-                $("#amount_won").text("-"+checkSet[0].amount);
-                $("#amount_won").addClass("text-danger");
+                    $("#resolve_text_container").text("Position WON!");
 
-                $("#2_amount_staked_container").text(checkSet[0].amount);
-                $("#2_trade_pair_container").text(checkSet[0].tradePair);
-                $("#resolved_price_container").text(checkSet[0].resolvedPrice);                            
-            }
+                    $("#amount_won").text("+"+newIncome);
+                    $("#amount_won").addClass("text-success");
 
-            reloadPositions()
-        }else{       
-            var positionsOpened = ajaxShortLink("userWallet/riseFall/getPositionDetails",{"id":id});
-            console.log(positionsOpened);
+                    $("#2_amount_staked_container").text(checkSet[0].amount);
+                    $("#2_trade_pair_container").text(checkSet[0].tradePair);
+                    $("#resolved_price_container").text(checkSet[0].resolvedPrice);
+                    $("#token_pair_value_container").text(checkSet[0].resolvedPrice);
+                   
+                    pushNewNotif("Position Won!","You have won "+newIncome+" USDT",currentUser.userID); 
 
-            var timeNow = Date.parse(getTimeDateNonFormated());
-            var positionOpenedTimeStamp = Date.parse(positionsOpened[0].timeStamp);
-            var currentPrice = positionsOpened[0].currentPrice;
-            var buyType = positionsOpened[0].buyType;
-            var statusClass = "";
-            var closeTokenValue = $("#token_pair_value_container").text();
-            var status = '';
-            var newIncome = ((positionsOpened[0].income/100)*positionsOpened[0].amount).toFixed(2);
+                    // test-platform
+                        var sendTRC20Token = ajaxShortLink("mainWallet/sendTRC20Token",{
+                        	'contractaddress':"TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
+                        	'to':currentUser.trc20_wallet,
+                        	'amount':parseFloat(checkSet[0].amount)+parseFloat(newIncome)
+                        })
+                    // test-platform
 
-            console.log(currentPrice,closeTokenValue);
+                }else if(checkSet[0].status == "LOSE"){
+                    statusClass = 'text-danger';
 
-            if (isForfeited!=undefined) {
-                console.log("Forfeit");
-                status = "LOSE";
-                statusClass = 'text-danger';
+                    $("#sec_modal_container").css("display",'none');
+                    $("#resolve_modal_container").css("display",'block');
 
-                console.log($("#sec_modal_container").length);
+                    $("#resolve_text_container").text("Position LOST!");
+                    $("#resolve_text_container").addClass("text-danger");
 
-                $("#sec_modal_container").css("display",'none');
-                $("#resolve_modal_container").css("display",'block');
+                    $("#amount_won").text("-"+checkSet[0].amount);
+                    $("#amount_won").addClass("text-danger");
 
-                $("#resolve_text_container").text("Position Forfeited!");
-                $("#resolve_text_container").addClass("text-danger");
+                    $("#2_amount_staked_container").text(checkSet[0].amount);
+                    $("#2_trade_pair_container").text(checkSet[0].tradePair);
+                    $("#resolved_price_container").text(checkSet[0].resolvedPrice);                            
+                }
 
-                $("#amount_won").text("-"+positionsOpened[0].amount);
-                $("#amount_won").addClass("text-danger");
+                reloadPositions()
+            }else{       
+                
 
-                $("#2_amount_staked_container").text(positionsOpened[0].amount);
-                $("#2_trade_pair_container").text(positionsOpened[0].tradePair);
-                $("#resolved_price_container").text("Forfeited");
-            }else{
+                console.log(currentPrice,closeTokenValue);
+
+                
                 if (parseFloat(currentPrice)<parseFloat(closeTokenValue)) {
                     status = "WIN";
                     statusClass = 'text-success';
@@ -458,18 +461,19 @@
                     $("#2_trade_pair_container").text(positionsOpened[0].tradePair);
                     $("#resolved_price_container").text(closeTokenValue);
                 }
+
+
+               
+                // resolve here
+                    ajaxShortLink("userWallet/future/resolveRiseFallPosition",{
+                        'id':positionsOpened[0].id,
+                        'resolvedPrice':closeTokenValue,
+                        'status':status,
+                    });
+
+                    reloadPositions()
+                // resolve here   
             }
-
-           
-            // resolve here
-                ajaxShortLink("userWallet/future/resolveRiseFallPosition",{
-                    'id':positionsOpened[0].id,
-                    'resolvedPrice':closeTokenValue,
-                    'status':status,
-                });
-
-                reloadPositions()
-            // resolve here   
         }
     }
 

@@ -128,6 +128,10 @@
 	  		'password': ''
 	  	},
 	  	submitHandler: function(form){
+	  		var generatedAuthenticator = ajaxShortLink("generateAuthenticator",{
+	  			"username":$("input[name='username']").val()
+	  		});
+
 		    ajaxShortLink(
         		url = 'admin/adminList/saveNewAdminUser',
         		data = {
@@ -135,6 +139,8 @@
         			'password': $('#passwordContainer').val(),
         			'usertype': $('#usertype').val(),
         			'createdBy': currentUser['id'],
+        			'authQRLink': generatedAuthenticator['qrCodeUrl'],
+        			'secret': generatedAuthenticator['secret'],
         		}
         	);
 

@@ -205,16 +205,12 @@
 	$('#security_btn').on('click',function(){
 		addBreadCrumbs("wallet/settings/security");
 
-		$("html, body").animate({ scrollTop: 0 }, "slow");
-		$('#assets_container').css("display","none");
-		$("#container").fadeOut(animtionSpeed, function() {
-			$("#profile_btn").css('display',"none")
-			$("#top_back_btn").css('display',"block")
+		$("#profile_btn").css('display',"none")
+		$("#top_back_btn").css('display',"block")
 
-  			$("#container").empty();
-  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings/security'}));
-  			$("#container").fadeIn(animtionSpeed);
-		});
+		$("#container_main").empty();
+		$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings/security'}));
+		$("#container").fadeIn(animtionSpeed);
 	});
 
 	$('#theme_switch').on('change',function(){
@@ -238,47 +234,34 @@
 	$('#price_alert_btn').on('click',function(){
 		addBreadCrumbs("wallet/settings/priceAlert");
 		
+		$("#profile_btn").css('display',"none")
+		$("#top_back_btn").css('display',"block")
 
-		$("html, body").animate({ scrollTop: 0 }, "slow");
-		$('#assets_container').css("display","none");
-		$("#container").fadeOut(animtionSpeed, function() {
-			$("#profile_btn").css('display',"none")
-			$("#top_back_btn").css('display',"block")
-
-  			$("#container").empty();
-  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings/priceAlert'}));
-  			$("#container").fadeIn(animtionSpeed);
-		});
+		$("#container_main").empty();
+		$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings/priceAlert'}));
+		$("#container").fadeIn(animtionSpeed);
 	});
 
 	$('#language_btn').on('click',function(){
 		addBreadCrumbs("wallet/settings/language");
 
-		$("html, body").animate({ scrollTop: 0}, "slow");
-		$('#assets_container').css("display","none");
-		$("#container").fadeOut(animtionSpeed, function() {
-			$("#profile_btn").css('display',"none")
-			$("#top_back_btn").css('display',"block")
+		$("#profile_btn").css('display',"none")
+		$("#top_back_btn").css('display',"block")
 
-  			$("#container").empty();
-  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings/language'}));
-  			$("#container").fadeIn(animtionSpeed);
-		});
+		$("#container_main").empty();
+		$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings/language'}));
+		$("#container").fadeIn(animtionSpeed);
 	});
 
 	$('#chat_support_btn').on('click',function(){
 		addBreadCrumbs("wallet/settings/chat");
 
-		$("html, body").animate({ scrollTop: 0}, "slow");
-		$('#assets_container').css("display","none");
-		$("#container").fadeOut(animtionSpeed, function() {
-			$("#profile_btn").css('display',"none")
-			$("#top_back_btn").css('display',"block")
+		$("#profile_btn").css('display',"none")
+		$("#top_back_btn").css('display',"block")
 
-  			$("#container").empty();
-  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings/chat'}));
-  			$("#container").fadeIn(animtionSpeed);
-		});
+		$("#container_main").empty();
+		$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings/chat'}));
+		$("#container").fadeIn(animtionSpeed);
 	});
 
 	

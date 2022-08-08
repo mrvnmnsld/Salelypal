@@ -38,9 +38,6 @@
 
 	<link href="assets/lib/jquery_event_swipe-master/index.js" rel="stylesheet">
 
-
-	
-
 	<script src="assets/lib/DataTables/datatables.js"></script>
 	<script src="assets/lib/DataTables/datatables.min.js"></script>
 	<script src="assets/lib/DataTables/dataTables.responsive.min.js"></script>
@@ -55,6 +52,7 @@
 	<script src="assets/lib/js-toast-master/toast.min.js"></script>
 	
 	<script src="assets/lib/Chart.js/Chart.bundle.js"></script>
+	<script src="assets/lib/apexcharts-bundle/dist/apexcharts.min.js"></script>
 
 	<script src="assets/vendor/bootbox/bootbox.min.js"></script>
 
@@ -1031,7 +1029,7 @@
 	<script type="text/javascript">
 		var slider1 = new KeenSlider("#container",{
 		    // auto set the slider to the height of the tallest slide
-		    autoHeight: true,
+		    autoHeight: false,
 		    // auto center the current slide
 		    centered: false,
 		    // pass options for different screen size
@@ -1624,6 +1622,18 @@
 				clearInterval(loadTransactionTimeOut);
 			}
 
+			if (typeof chartUpdater  != 'undefined') {
+				clearInterval(chartUpdater);
+			}
+
+			if (typeof chatDetailsChecker  != 'undefined') {
+				clearInterval(chatDetailsChecker);
+			}
+
+			if (typeof updateChatHistoryInterval  != 'undefined') {
+				clearInterval(updateChatHistoryInterval);
+			}
+
 			addBreadCrumbs("wallet/deposit");
 
 			$("html, body").animate({ scrollTop: 0 }, "slow");
@@ -1645,6 +1655,18 @@
 
 			if (typeof loadTransactionTimeOut  != 'undefined') {
 				clearInterval(loadTransactionTimeOut);
+			}
+
+			if (typeof chartUpdater  != 'undefined') {
+				clearInterval(chartUpdater);
+			}
+
+			if (typeof chatDetailsChecker  != 'undefined') {
+				clearInterval(chatDetailsChecker);
+			}
+
+			if (typeof updateChatHistoryInterval  != 'undefined') {
+				clearInterval(updateChatHistoryInterval);
 			}
 
 
@@ -1687,6 +1709,19 @@
 				clearInterval(loadTransactionTimeOut);
 			}
 
+			if (typeof chartUpdater  != 'undefined') {
+				clearInterval(chartUpdater);
+			}
+
+			if (typeof chatDetailsChecker  != 'undefined') {
+				clearInterval(chatDetailsChecker);
+			}
+
+			if (typeof updateChatHistoryInterval  != 'undefined') {
+				clearInterval(updateChatHistoryInterval);
+			}
+
+
 			addBreadCrumbs("wallet/buyCrypto");
 
 			$("html, body").animate({ scrollTop: 0 }, "slow");
@@ -1703,9 +1738,30 @@
 
 		// bottom buttons
 			$('#assets_btn').on('click',function(){
+				$(".bottom-nav-item").removeClass("bottom-nav-item-active");
+
+				if (typeof tokenPriceInterval  != 'undefined') {
+					clearInterval(tokenPriceInterval);
+				}
+
+				if (typeof loadTransactionTimeOut  != 'undefined') {
+					clearInterval(loadTransactionTimeOut);
+				}
+
+				if (typeof chartUpdater  != 'undefined') {
+					clearInterval(chartUpdater);
+				}
+
+				if (typeof chatDetailsChecker  != 'undefined') {
+					clearInterval(chatDetailsChecker);
+				}
+
+				if (typeof updateChatHistoryInterval  != 'undefined') {
+					clearInterval(updateChatHistoryInterval);
+				}
+
 				if ($("#container_main").css("display")=="none") {
 					$("html, body").animate({ scrollTop: 0 }, "slow");
-					slider1.moveToIdx(0)
 				}else{
 					$("#profile_btn").css('display',"block");
 					$("#top_back_btn").css('display',"none");
@@ -1714,17 +1770,41 @@
 					$("#container").toggle();
 
 					$("html, body").animate({ scrollTop: 0 }, "slow");
-					slider1.moveToIdx(0)
 				}
 
 				breadCrumbs = ["assets"]
-				
+				reinitKeen();
+				slider1.moveToIdx(0)
+
+				$("#assets_btn").addClass("bottom-nav-item-active");
 			});
 
 			$('#modal_mining_btn').on('click',function(){
+				$(".bottom-nav-item").removeClass("bottom-nav-item-active");
+
+				if (typeof tokenPriceInterval  != 'undefined') {
+					clearInterval(tokenPriceInterval);
+				}
+
+				if (typeof loadTransactionTimeOut  != 'undefined') {
+					clearInterval(loadTransactionTimeOut);
+				}
+
+				if (typeof chartUpdater  != 'undefined') {
+					clearInterval(chartUpdater);
+				}
+
+				if (typeof chatDetailsChecker  != 'undefined') {
+					clearInterval(chatDetailsChecker);
+				}
+
+				if (typeof updateChatHistoryInterval  != 'undefined') {
+					clearInterval(updateChatHistoryInterval);
+				}
+
+
 				if ($("#container_main").css("display")=="none") {
 					$("html, body").animate({ scrollTop: 0 }, "slow");
-					slider1.moveToIdx(1)
 				}else{
 					$("#profile_btn").css('display',"block");
 					$("#top_back_btn").css('display',"none");
@@ -1733,17 +1813,42 @@
 					$("#container").toggle();
 
 					$("html, body").animate({ scrollTop: 0 }, "slow");
-					slider1.moveToIdx(1)
 				}
 
 				breadCrumbs = ["assets"]
 
+				reinitKeen();
+				slider1.moveToIdx(1)
+
+				$("#modal_mining_btn").addClass("bottom-nav-item-active");
 			});
 
 			$('#discover_btn').on('click',function(){
+				$(".bottom-nav-item").removeClass("bottom-nav-item-active");
+
+				if (typeof tokenPriceInterval  != 'undefined') {
+					clearInterval(tokenPriceInterval);
+				}
+
+				if (typeof loadTransactionTimeOut  != 'undefined') {
+					clearInterval(loadTransactionTimeOut);
+				}
+
+				if (typeof chartUpdater  != 'undefined') {
+					clearInterval(chartUpdater);
+				}
+
+				if (typeof chatDetailsChecker  != 'undefined') {
+					clearInterval(chatDetailsChecker);
+				}
+
+				if (typeof updateChatHistoryInterval  != 'undefined') {
+					clearInterval(updateChatHistoryInterval);
+				}
+
+
 				if ($("#container_main").css("display")=="none") {
 					$("html, body").animate({ scrollTop: 0 }, "slow");
-					slider1.moveToIdx(2)
 				}else{
 					$("#profile_btn").css('display',"block");
 					$("#top_back_btn").css('display',"none");
@@ -1752,17 +1857,42 @@
 					$("#container").toggle();
 
 					$("html, body").animate({ scrollTop: 0 }, "slow");
-					slider1.moveToIdx(2)
 				}
 
 				breadCrumbs = ["assets"]
 
+				reinitKeen();
+				slider1.moveToIdx(2)
+
+				$("#discover_btn").addClass("bottom-nav-item-active");
 			});
 
 			$('#settings_btn').on('click',function(){
+				$(".bottom-nav-item").removeClass("bottom-nav-item-active");
+
+				if (typeof tokenPriceInterval  != 'undefined') {
+					clearInterval(tokenPriceInterval);
+				}
+
+				if (typeof loadTransactionTimeOut  != 'undefined') {
+					clearInterval(loadTransactionTimeOut);
+				}
+
+				if (typeof chartUpdater  != 'undefined') {
+					clearInterval(chartUpdater);
+				}
+
+				if (typeof chatDetailsChecker  != 'undefined') {
+					clearInterval(chatDetailsChecker);
+				}
+
+				if (typeof updateChatHistoryInterval  != 'undefined') {
+					clearInterval(updateChatHistoryInterval);
+				}
+
+
 				if ($("#container_main").css("display")=="none") {
 					$("html, body").animate({ scrollTop: 0 }, "slow");
-					slider1.moveToIdx(3)
 				}else{
 					$("#profile_btn").css('display',"block");
 					$("#top_back_btn").css('display',"none");
@@ -1771,11 +1901,14 @@
 					$("#container").toggle();
 
 					$("html, body").animate({ scrollTop: 0 }, "slow");
-					slider1.moveToIdx(3)
 				}
 
 				breadCrumbs = ["assets"]
 
+				reinitKeen();
+				slider1.moveToIdx(3)
+
+				$("#settings_btn").addClass("bottom-nav-item-active");
 			});
 		// bottom buttons
 
@@ -1786,6 +1919,18 @@
 
 			if (typeof loadTransactionTimeOut  != 'undefined') {
 				clearInterval(loadTransactionTimeOut);
+			}
+
+			if (typeof chartUpdater  != 'undefined') {
+				clearInterval(chartUpdater);
+			}
+
+			if (typeof chatDetailsChecker  != 'undefined') {
+				clearInterval(chatDetailsChecker);
+			}
+
+			if (typeof updateChatHistoryInterval  != 'undefined') {
+				clearInterval(updateChatHistoryInterval);
 			}
 
 
@@ -1849,6 +1994,20 @@
 				clearInterval(loadTransactionTimeOut);
 			}
 
+			if (typeof chartUpdater  != 'undefined') {
+				clearInterval(chartUpdater);
+			}
+
+			if (typeof chatDetailsChecker  != 'undefined') {
+				clearInterval(chatDetailsChecker);
+			}
+
+			if (typeof updateChatHistoryInterval  != 'undefined') {
+				clearInterval(updateChatHistoryInterval);
+			}
+
+
+
 			addBreadCrumbs("wallet/addToken")
 
 			$("html, body").animate({ scrollTop: 0 }, "slow");
@@ -1872,6 +2031,19 @@
 				clearInterval(loadTransactionTimeOut);
 			}
 
+			if (typeof chartUpdater  != 'undefined') {
+				clearInterval(chartUpdater);
+			}
+
+			if (typeof chatDetailsChecker  != 'undefined') {
+				clearInterval(chatDetailsChecker);
+			}
+
+			if (typeof updateChatHistoryInterval  != 'undefined') {
+				clearInterval(updateChatHistoryInterval);
+			}
+
+
 			addBreadCrumbs("wallet/test-platform/user_profile/profile");
 
 			$("html, body").animate({ scrollTop: 0 }, "slow");
@@ -1887,7 +2059,6 @@
 		});
 
 		$('#notif_btn').on('click',function(){
-			console.log("test");
 			if (typeof tokenPriceInterval  != 'undefined') {
 				clearInterval(tokenPriceInterval);
 			}
@@ -1895,6 +2066,19 @@
 			if (typeof loadTransactionTimeOut  != 'undefined') {
 				clearInterval(loadTransactionTimeOut);
 			}
+
+			if (typeof chartUpdater  != 'undefined') {
+				clearInterval(chartUpdater);
+			}
+
+			if (typeof chatDetailsChecker  != 'undefined') {
+				clearInterval(chatDetailsChecker);
+			}
+
+			if (typeof updateChatHistoryInterval  != 'undefined') {
+				clearInterval(updateChatHistoryInterval);
+			}
+
 
 			addBreadCrumbs("wallet/notificationCenter");
 
@@ -1925,6 +2109,20 @@
 				clearInterval(loadTransactionTimeOut);
 			}
 
+			if (typeof chartUpdater  != 'undefined') {
+				clearInterval(chartUpdater);
+			}
+
+			if (typeof chatDetailsChecker  != 'undefined') {
+				clearInterval(chatDetailsChecker);
+			}
+
+			if (typeof updateChatHistoryInterval  != 'undefined') {
+				clearInterval(updateChatHistoryInterval);
+			}
+
+
+
 			addBreadCrumbs("wallet/riseFall")
 
 			$("html, body").animate({ scrollTop: 0 }, "slow");
@@ -1947,6 +2145,20 @@
 			if (typeof loadTransactionTimeOut  != 'undefined') {
 				clearInterval(loadTransactionTimeOut);
 			}
+
+			if (typeof chartUpdater  != 'undefined') {
+				clearInterval(chartUpdater);
+			}
+
+			if (typeof chatDetailsChecker  != 'undefined') {
+				clearInterval(chatDetailsChecker);
+			}
+
+			if (typeof updateChatHistoryInterval  != 'undefined') {
+				clearInterval(updateChatHistoryInterval);
+			}
+
+
 
 			addBreadCrumbs("wallet/future")
 
@@ -1971,6 +2183,20 @@
 				clearInterval(loadTransactionTimeOut);
 			}
 
+			if (typeof chartUpdater  != 'undefined') {
+				clearInterval(chartUpdater);
+			}
+
+			if (typeof chatDetailsChecker  != 'undefined') {
+				clearInterval(chatDetailsChecker);
+			}
+
+			if (typeof updateChatHistoryInterval  != 'undefined') {
+				clearInterval(updateChatHistoryInterval);
+			}
+
+
+
 			addBreadCrumbs("wallet/regular_mining");
 			
 			$("html, body").animate({ scrollTop: 0 }, "slow");
@@ -1993,6 +2219,20 @@
 			if (typeof loadTransactionTimeOut  != 'undefined') {
 				clearInterval(loadTransactionTimeOut);
 			}
+
+			if (typeof chartUpdater  != 'undefined') {
+				clearInterval(chartUpdater);
+			}
+
+			if (typeof chatDetailsChecker  != 'undefined') {
+				clearInterval(chatDetailsChecker);
+			}
+
+			if (typeof updateChatHistoryInterval  != 'undefined') {
+				clearInterval(updateChatHistoryInterval);
+			}
+
+
 
 			addBreadCrumbs("wallet/dailyMining");
 
@@ -2295,6 +2535,10 @@
 			clearInterval(loadTransactionTimeOut);
 		}
 
+		if (typeof chartUpdater != 'undefined') {
+			clearInterval(chartUpdater);
+		}
+
 		console.log(breadCrumbs[breadCrumbs.length-1].includes("dailyMining"),$("#daily_mining_token_containers").css('display')!='none');
 
 		if (breadCrumbs[breadCrumbs.length-1].includes("dailyMining") && $("#daily_mining_token_containers").css('display')!='none') {
@@ -2326,6 +2570,8 @@
 
 						$("#container_main").toggle();
 						$("#container").toggle();
+
+						$("#settings_btn").click();
 					},
 					cancel: function () {
 
@@ -2341,11 +2587,13 @@
 
 			if(breadCrumbs[breadCrumbs.length-1]=="assets"||breadCrumbs[breadCrumbs.length-1]=="assets_container"){
 				breadCrumbs = ['assets'];
+
 				$("#profile_btn").css('display',"block");
 				$("#top_back_btn").css('display',"none");
 
 				$("#container_main").toggle();
 				$("#container").toggle();
+
 			}else{
 				console.log('there');
 				console.log(breadCrumbs[breadCrumbs.length-1]);
@@ -2357,7 +2605,15 @@
 
 		}
 
-		// console.log(breadCrumbs[breadCrumbs.length-1]);
+		reinitKeen()
+
+		if (breadCrumbs[breadCrumbs.length-1]=="assets") {
+			console.log(slider1.track.details.position.toFixed(0));
+			slider1.moveToIdx(slider1.track.details.position.toFixed(0));
+		}
+
+
+
 	});
 
 	function swipedetect(el, callback){
@@ -2406,6 +2662,83 @@
 			// e.preventDefault()
 		}, false)
 	}
+
+	function reinitKeen(){
+		slider1.destroy();
+
+		slider1 = KeenSlider("#container",{
+		    // auto set the slider to the height of the tallest slide
+		    autoHeight: false,
+		    // auto center the current slide
+		    centered: false,
+		    // pass options for different screen size
+		    // e.g.
+		    //   breakpoints: {
+		    //    '(min-width: 720px) and (max-width: 1000px)': {
+		    //       options here
+		    //     },
+		    //   }
+		    breakpoints: null,
+		    // enable mouse drag and touch swipe events
+		    controls: true,
+		    // adjust the speed that is translated to the slider when dragging
+		    dragSpeed: 1,
+		    // friction factor
+		    friction: 0.050,
+		    // enable infinite loop
+		    loop: false,
+		    // initial slide
+		    initial: 0,
+		    // duration of the animation
+		    duration: 100,
+		    // slide selector
+		    slides: '.keen-slider__slide',
+		    // enable vertical mode
+		    vertical: false,
+		    // reset the slider on window resize
+		    resetSlide: false,
+		    // how many slides per view
+		    slidesPerView: 1,
+		    // space between slides
+		    spacing: 0,
+		    // "snap": auto snap to the next/prev slide
+		    // "free-snap": free mode + auto snap
+		    // "free": free mode
+		    mode: 'snap',
+		    // simulate rubberband if moving or dragging above the slider edge
+		    rubberband: true,
+		    // cancel on leave
+		    cancelOnLeave: true,
+			slideChanged: slider => {
+				$(".bottom-nav-item").removeClass("bottom-nav-item-active");
+				$("html, body").animate({ scrollTop: 0 }, "slow");
+
+				var sliderPosition = slider.track.details.position.toFixed(0)
+
+				if(sliderPosition == 0){
+					$("#assets_btn").addClass("bottom-nav-item-active");
+				}
+
+				if(sliderPosition == 1){
+					$("#modal_mining_btn").addClass("bottom-nav-item-active");
+				}
+
+				if(sliderPosition == 2){
+					$("#discover_btn").addClass("bottom-nav-item-active");			
+				}
+
+				if(sliderPosition == 3){
+					$("#settings_btn").addClass("bottom-nav-item-active");
+				}
+			},
+		});
+
+	}
+
+	// $(window).on('resize', function(){
+	// 	console.log("resized");
+	// 	reinitKeen()
+	// });
 
 </script>
 </body>

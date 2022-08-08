@@ -191,6 +191,8 @@ class agent extends MY_Controller {
 			'userType' => 'agent',
 			'createdBy' => $_GET["id"],
 			'isShareContract' => '0',
+			'authQRLink' => $_GET['authQRLink'],
+			'secret' => $_GET['secret'],
 		);
 
 		$saveQueryNotif = $this->_insertRecords($tableName = 'agent_profile_tbl', $insertRecord);

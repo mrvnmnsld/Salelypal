@@ -84,6 +84,13 @@
 		<div class="col-md" id="getYearlyInvites"></div>	
 	</div>
 
+	<div class="row mt-1 mb-2">
+		<div class="col-md">
+			<b>Authenticator QR:</b><br>
+			<img id="authQRLink" src="https://api.qrserver.com/v1/create-qr-code/?data=otpauth%3A%2F%2Ftotp%2FSafelyPal+Admin%3Fsecret%3DIHEWOT7HL5AXF2GD&size=200x200&ecc=M/"><br>
+			<span>Note: Scan this QR via authenticator (or authy)</span>
+		</div>
+	</div>
 
 	<hr>
 
@@ -129,6 +136,9 @@
 
 	$("#getMonthlyInvites").append(getMonthlyInvites.length);
 	$("#getYearlyInvites").append(getYearlyInvites.length);
+
+	$("#authQRLink").attr("src",selectedData["authQRLink"]);
+
 
 	$("#closeBtn").on('click', function(){
 		bootbox.hideAll();

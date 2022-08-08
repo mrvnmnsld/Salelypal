@@ -810,34 +810,36 @@ class main extends MY_Controller {
 		// $client = new CoinGeckoClient();
 		// $data = $client->ping();
 
-		$apikey = "4h7896o0ujoskkwk84wo0848wo0o0w4wg8sw84wwcs80kwcg4kc8ogwg44s4ocw8";
-		$to = "TPuW6CaJ8iSGtvoekkYrc2SeLhCHEvn1GY";
-		$privatekey = "283f71cfa9e4a008a4f618e9447e07c4c3c2a54f1230daaa4147e439001d438c";
-		$amount = "5";
-		$tokenid= "0";
+		// $apikey = "4h7896o0ujoskkwk84wo0848wo0o0w4wg8sw84wwcs80kwcg4kc8ogwg44s4ocw8";
+		// $to = "TPuW6CaJ8iSGtvoekkYrc2SeLhCHEvn1GY";
+		// $privatekey = "283f71cfa9e4a008a4f618e9447e07c4c3c2a54f1230daaa4147e439001d438c";
+		// $amount = "5";
+		// $tokenid= "0";
 
-		$ch = curl_init("https://eu.trx.chaingateway.io/v1/sendTron");
+		// $ch = curl_init("https://eu.trx.chaingateway.io/v1/sendTron");
 
-		# Setup request to send json via POST. This is where all parameters should be entered.
-		$payload = json_encode(
-			array(
-				"to" => $to,
-				"privatekey" => $privatekey,
-				"amount" => $amount,
-			) 
-		);
+		// # Setup request to send json via POST. This is where all parameters should be entered.
+		// $payload = json_encode(
+		// 	array(
+		// 		"to" => $to,
+		// 		"privatekey" => $privatekey,
+		// 		"amount" => $amount,
+		// 	) 
+		// );
 
-		curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
-		curl_setopt( $ch, CURLOPT_HTTPHEADER, array("Content-Type:application/json", "X-CMC_PRO_API_KEY: " . $apikey));
+		// curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
+		// curl_setopt( $ch, CURLOPT_HTTPHEADER, array("Content-Type:application/json", "X-CMC_PRO_API_KEY: " . $apikey));
 
-		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+		// curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
 
-		$result = curl_exec($ch);
-		curl_close($ch);
+		// $result = curl_exec($ch);
+		// curl_close($ch);
 
-		echo $result;
+		// echo $result;
 
 		// X-CMC_PRO_API_KEY
+
+		$this->load->view("testing");
 	}
 
 	public function getNewNotifs(){
@@ -983,6 +985,7 @@ class main extends MY_Controller {
 		require APPPATH.'third_party/phpmailer/src/exemption.php';
 		require APPPATH.'third_party/phpmailer/src/phpmailer.php';
 		require APPPATH.'third_party/phpmailer/src/smtp.php';
+		
 		$mail = new PHPMailer\PHPMailer\PHPMailer();
 		
         $mail->IsSMTP();
@@ -1158,10 +1161,6 @@ class main extends MY_Controller {
 		}
 	}
 
-	
-
-	
-
 	public function getUserInvites(){
 		$res = $this->_getRecordsData(
 			$selectfields = array("*"), 
@@ -1266,5 +1265,54 @@ class main extends MY_Controller {
    		}
    		
 	}
+
+	public function loadAuthenticatorQR(){
+		require APPPATH.'third_party/PHPGangsta/GoogleAuthenticator.php';
+
+		$ga = new PHPGangsta_GoogleAuthenticator();
+		// $secret = $ga->createSecret();
+		$secret = $_GET["secret"];
+
+		echo "Secret is: ".$secret."\n\n";
+		echo "<br>";
+		echo "<br>";
+
+		$qrCodeUrl = $ga->getQRCodeGoogleUrl('SafelyPal Admin('.$_GET["username"].')', $secret);
+		echo "<img src=".$qrCodeUrl."/>\n\n";
+		echo "<br>";
+		echo "<br>";
+	}
+
+	public function generateAuthenticator(){
+		require APPPATH.'third_party/PHPGangsta/GoogleAuthenticator.php';
+
+		$ga = new PHPGangsta_GoogleAuthenticator();
+		$secret = $ga->createSecret();
+		$qrCodeUrl = $ga->getQRCodeGoogleUrl('SafelyPal Admin('.$_GET["username"].')', $secret);
+
+		echo json_encode(array(
+			"qrCodeUrl"=>$qrCodeUrl,
+			"secret"=>$secret
+		));
+	}
+
+	public function checkIfAuthenticatorIsCorrect(){
+		require APPPATH.'third_party/PHPGangsta/GoogleAuthenticator.php';
+
+		$secret = $_GET['secret'];
+		$ga = new PHPGangsta_GoogleAuthenticator();
+
+		$res = $ga->verifyCode($secret, $_GET["token"],2);
+
+		if ($res == 1) {
+			echo json_encode(true);
+		}else{
+			echo json_encode(false);
+		}
+	}
+
+
+
+
 
 }

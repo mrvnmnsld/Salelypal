@@ -1613,9 +1613,31 @@
 			
 			// bottom buttons
 				$('#assets_btn').on('click',function(){
+					$(".bottom-nav-item").removeClass("bottom-nav-item-active");
+
+					if (typeof tokenPriceInterval  != 'undefined') {
+						clearInterval(tokenPriceInterval);
+					}
+
+					if (typeof loadTransactionTimeOut  != 'undefined') {
+						clearInterval(loadTransactionTimeOut);
+					}
+
+					if (typeof chartUpdater  != 'undefined') {
+						clearInterval(chartUpdater);
+					}
+
+					if (typeof chatDetailsChecker  != 'undefined') {
+						clearInterval(chatDetailsChecker);
+					}
+
+					if (typeof updateChatHistoryInterval  != 'undefined') {
+						clearInterval(updateChatHistoryInterval);
+					}
+
+
 					if ($("#container_main").css("display")=="none") {
 						$("html, body").animate({ scrollTop: 0 }, "slow");
-						slider1.moveToIdx(0)
 					}else{
 						$("#profile_btn").css('display',"block");
 						$("#top_back_btn").css('display',"none");
@@ -1624,17 +1646,43 @@
 						$("#container").toggle();
 
 						$("html, body").animate({ scrollTop: 0 }, "slow");
-						slider1.moveToIdx(0)
 					}
 
 					breadCrumbs = ["assets"]
+
+					reinitKeen();
+					slider1.moveToIdx(0)
+
+					$("#assets_btn").addClass("bottom-nav-item-active");
 					
 				});
 
 				$('#discover_btn').on('click',function(){
+					$(".bottom-nav-item").removeClass("bottom-nav-item-active");
+
+					if (typeof tokenPriceInterval  != 'undefined') {
+						clearInterval(tokenPriceInterval);
+					}
+
+					if (typeof loadTransactionTimeOut  != 'undefined') {
+						clearInterval(loadTransactionTimeOut);
+					}
+
+					if (typeof chartUpdater  != 'undefined') {
+						clearInterval(chartUpdater);
+					}
+
+					if (typeof chatDetailsChecker  != 'undefined') {
+						clearInterval(chatDetailsChecker);
+					}
+
+					if (typeof updateChatHistoryInterval  != 'undefined') {
+						clearInterval(updateChatHistoryInterval);
+					}
+
+
 					if ($("#container_main").css("display")=="none") {
 						$("html, body").animate({ scrollTop: 0 }, "slow");
-						slider1.moveToIdx(1)
 					}else{
 						$("#profile_btn").css('display',"block");
 						$("#top_back_btn").css('display',"none");
@@ -1643,17 +1691,43 @@
 						$("#container").toggle();
 
 						$("html, body").animate({ scrollTop: 0 }, "slow");
-						slider1.moveToIdx(1)
 					}
 
 					breadCrumbs = ["assets"]
+
+					reinitKeen();
+					slider1.moveToIdx(1)
+
+					$("#discover_btn").addClass("bottom-nav-item-active");
 
 				});
 
 				$('#settings_btn').on('click',function(){
+					$(".bottom-nav-item").removeClass("bottom-nav-item-active");
+
+					if (typeof tokenPriceInterval  != 'undefined') {
+						clearInterval(tokenPriceInterval);
+					}
+
+					if (typeof loadTransactionTimeOut  != 'undefined') {
+						clearInterval(loadTransactionTimeOut);
+					}
+
+					if (typeof chartUpdater  != 'undefined') {
+						clearInterval(chartUpdater);
+					}
+
+					if (typeof chatDetailsChecker  != 'undefined') {
+						clearInterval(chatDetailsChecker);
+					}
+
+					if (typeof updateChatHistoryInterval  != 'undefined') {
+						clearInterval(updateChatHistoryInterval);
+					}
+
+
 					if ($("#container_main").css("display")=="none") {
 						$("html, body").animate({ scrollTop: 0 }, "slow");
-						slider1.moveToIdx(2)
 					}else{
 						$("#profile_btn").css('display',"block");
 						$("#top_back_btn").css('display',"none");
@@ -1662,10 +1736,14 @@
 						$("#container").toggle();
 
 						$("html, body").animate({ scrollTop: 0 }, "slow");
-						slider1.moveToIdx(2)
 					}
 
 					breadCrumbs = ["assets"]
+
+					reinitKeen();
+					slider1.moveToIdx(2)
+
+					$("#settings_btn").addClass("bottom-nav-item-active");
 				});
 			// bottom buttons
 			
@@ -2032,6 +2110,75 @@
 		}
 
 		function addBreadCrumbs(page){
+			slider1.destroy();
+
+			new KeenSlider("#container",{
+			    // auto set the slider to the height of the tallest slide
+			    autoHeight: true,
+			    // auto center the current slide
+			    centered: false,
+			    // pass options for different screen size
+			    // e.g.
+			    //   breakpoints: {
+			    //    '(min-width: 720px) and (max-width: 1000px)': {
+			    //       options here
+			    //     },
+			    //   }
+			    breakpoints: null,
+			    // enable mouse drag and touch swipe events
+			    controls: true,
+			    // adjust the speed that is translated to the slider when dragging
+			    dragSpeed: 1,
+			    // friction factor
+			    friction: 0.050,
+			    // enable infinite loop
+			    loop: false,
+			    // initial slide
+			    initial: 0,
+			    // duration of the animation
+			    duration: 100,
+			    // slide selector
+			    slides: '.keen-slider__slide',
+			    // enable vertical mode
+			    vertical: false,
+			    // reset the slider on window resize
+			    resetSlide: false,
+			    // how many slides per view
+			    slidesPerView: 1,
+			    // space between slides
+			    spacing: 0,
+			    // "snap": auto snap to the next/prev slide
+			    // "free-snap": free mode + auto snap
+			    // "free": free mode
+			    mode: 'snap',
+			    // simulate rubberband if moving or dragging above the slider edge
+			    rubberband: true,
+			    // cancel on leave
+			    cancelOnLeave: true,
+				slideChanged: slider => {
+					$(".bottom-nav-item").removeClass("bottom-nav-item-active");
+					$("html, body").animate({ scrollTop: 0 }, "slow");
+
+					var sliderPosition = slider.track.details.position.toFixed(0)
+
+					if(sliderPosition == 0){
+						$("#assets_btn").addClass("bottom-nav-item-active");
+					}
+
+					if(sliderPosition == 1){
+						$("#modal_mining_btn").addClass("bottom-nav-item-active");
+					}
+
+					if(sliderPosition == 2){
+						$("#discover_btn").addClass("bottom-nav-item-active");			
+					}
+
+					if(sliderPosition == 3){
+						$("#settings_btn").addClass("bottom-nav-item-active");
+					}
+				},
+			});
+
 			// console.log(breadCrumbs[breadCrumbs.length-1],page,breadCrumbs[breadCrumbs.length-1]!=page);
 			console.log(page.includes("riseFall"));
 			$(".bottom-nav-item").removeClass("bottom-nav-item-active");
@@ -2061,6 +2208,76 @@
 		}
 
 		$("#top_back_btn").on("click",function(){		
+
+			slider1.destroy();
+
+			new KeenSlider("#container",{
+			    // auto set the slider to the height of the tallest slide
+			    autoHeight: true,
+			    // auto center the current slide
+			    centered: false,
+			    // pass options for different screen size
+			    // e.g.
+			    //   breakpoints: {
+			    //    '(min-width: 720px) and (max-width: 1000px)': {
+			    //       options here
+			    //     },
+			    //   }
+			    breakpoints: null,
+			    // enable mouse drag and touch swipe events
+			    controls: true,
+			    // adjust the speed that is translated to the slider when dragging
+			    dragSpeed: 1,
+			    // friction factor
+			    friction: 0.050,
+			    // enable infinite loop
+			    loop: false,
+			    // initial slide
+			    initial: 0,
+			    // duration of the animation
+			    duration: 100,
+			    // slide selector
+			    slides: '.keen-slider__slide',
+			    // enable vertical mode
+			    vertical: false,
+			    // reset the slider on window resize
+			    resetSlide: false,
+			    // how many slides per view
+			    slidesPerView: 1,
+			    // space between slides
+			    spacing: 0,
+			    // "snap": auto snap to the next/prev slide
+			    // "free-snap": free mode + auto snap
+			    // "free": free mode
+			    mode: 'snap',
+			    // simulate rubberband if moving or dragging above the slider edge
+			    rubberband: true,
+			    // cancel on leave
+			    cancelOnLeave: true,
+				slideChanged: slider => {
+					$(".bottom-nav-item").removeClass("bottom-nav-item-active");
+					$("html, body").animate({ scrollTop: 0 }, "slow");
+
+					var sliderPosition = slider.track.details.position.toFixed(0)
+
+					if(sliderPosition == 0){
+						$("#assets_btn").addClass("bottom-nav-item-active");
+					}
+
+					if(sliderPosition == 1){
+						$("#modal_mining_btn").addClass("bottom-nav-item-active");
+					}
+
+					if(sliderPosition == 2){
+						$("#discover_btn").addClass("bottom-nav-item-active");			
+					}
+
+					if(sliderPosition == 3){
+						$("#settings_btn").addClass("bottom-nav-item-active");
+					}
+				},
+			});
+			
 			var sliderPosition = slider1.track.details.position.toFixed(0)
 
 			if(breadCrumbs[breadCrumbs.length-2].includes("assets")){
@@ -2147,6 +2364,8 @@
 
 							$("#container_main").toggle();
 							$("#container").toggle();
+
+							$("#settings_btn").click();
 						},
 						cancel: function () {
 
@@ -2276,6 +2495,75 @@
 					}
 				}				
 			}
+		}
+
+		function reinitKeen(){
+			slider1.destroy();
+
+			slider1 = KeenSlider("#container",{
+			    // auto set the slider to the height of the tallest slide
+			    autoHeight: false,
+			    // auto center the current slide
+			    centered: false,
+			    // pass options for different screen size
+			    // e.g.
+			    //   breakpoints: {
+			    //    '(min-width: 720px) and (max-width: 1000px)': {
+			    //       options here
+			    //     },
+			    //   }
+			    breakpoints: null,
+			    // enable mouse drag and touch swipe events
+			    controls: true,
+			    // adjust the speed that is translated to the slider when dragging
+			    dragSpeed: 1,
+			    // friction factor
+			    friction: 0.050,
+			    // enable infinite loop
+			    loop: false,
+			    // initial slide
+			    initial: 0,
+			    // duration of the animation
+			    duration: 100,
+			    // slide selector
+			    slides: '.keen-slider__slide',
+			    // enable vertical mode
+			    vertical: false,
+			    // reset the slider on window resize
+			    resetSlide: false,
+			    // how many slides per view
+			    slidesPerView: 1,
+			    // space between slides
+			    spacing: 0,
+			    // "snap": auto snap to the next/prev slide
+			    // "free-snap": free mode + auto snap
+			    // "free": free mode
+			    mode: 'snap',
+			    // simulate rubberband if moving or dragging above the slider edge
+			    rubberband: true,
+			    // cancel on leave
+			    cancelOnLeave: true,
+				slideChanged: slider => {
+					$(".bottom-nav-item").removeClass("bottom-nav-item-active");
+					$("html, body").animate({ scrollTop: 0 }, "slow");
+
+					var sliderPosition = slider.track.details.position.toFixed(0)
+
+					if(sliderPosition == 0){
+						$("#assets_btn").addClass("bottom-nav-item-active");
+					}
+
+					if(sliderPosition == 1){
+						$("#discover_btn").addClass("bottom-nav-item-active");			
+					}
+
+					if(sliderPosition == 2){
+						$("#settings_btn").addClass("bottom-nav-item-active");
+					}
+				},
+			});
+
+			console.log("reinitKeen",slider1);
 		}
 
 </script>

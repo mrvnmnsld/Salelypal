@@ -3,6 +3,9 @@
 	<div class="form-group notranslate w-100 align-middle">
 	    <select id="display_currency_selector" class="form-control form-control-sm">
 	        <option value="usd">USD</option>
+	        <option value="aud">AUD</option>
+	        <option value="jpy">JPY</option>
+	        <option value="twd">TWD</option>
 	        <option value="eur">EUR</option>
 	        <option value="gbp">GBP(Pounds)</option>
 	        <option value="aed">AED</option>
@@ -11,6 +14,7 @@
 	        <option value="php">PHP</option>
 	        <!-- <option value="RMB">RMB</option> -->
 	        <option value="inr">INR</option>
+
 	        <!-- <option value="IDR">IDR</option> -->
 	    </select>
 	</div>

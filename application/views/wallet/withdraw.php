@@ -76,7 +76,7 @@
 		  	</div>
 
 			<div class="form-group">
-				<div><b>Recieving Address:</b></div>
+				<div><b>Receiving Address:</b></div>
 
 				<div class="input-group mb-3">
 				  	<input class="form-control" id="addressToInput" name="addressToInput" placeholder="Enter Address">

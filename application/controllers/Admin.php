@@ -221,6 +221,8 @@ class admin extends MY_Controller {
 			'username' => $data['username'],
 			'createdBy' => $data['createdBy'],
 			'userType' => $data['usertype'],
+			'authQRLink' => $data['authQRLink'],
+			'secret' => $data['secret'],
 			'password' => md5($data['password']),
 			'dateCreated' => $this->_getTimeStamp(),
 		);

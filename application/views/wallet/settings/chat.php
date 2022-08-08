@@ -89,21 +89,14 @@
 					}
 					
 					$("html, body").animate({ scrollTop: 0}, "slow");
-					$('#assets_container').css("display","none");
-					$("#container").fadeOut(animtionSpeed, function() {
 
-						var updateChatTicket = ajaxShortLink('admin/updateChatTicket',{
-							'id':createNewTicket,
-							'status':"CLOSED"
-						});
-
-						$("#profile_btn").css('display',"none")
-						$("#top_back_btn").css('display',"block")
-
-			  			$("#container").empty();
-			  			$("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings/chat'}));
-			  			$("#container").fadeIn(animtionSpeed);
+					var updateChatTicket = ajaxShortLink('admin/updateChatTicket',{
+						'id':createNewTicket,
+						'status':"CLOSED"
 					});
+
+		  			$("#container_main").empty();
+		  			$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings/chat'}));
 				},
 				cancel: function () {
 

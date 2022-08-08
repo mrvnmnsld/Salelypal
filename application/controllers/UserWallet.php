@@ -34,12 +34,24 @@ class userWallet extends MY_Controller {
 		);
 
 		$sumRiseFall = 0;
+		$sumTodayRiseFall = 0;
 
 		foreach ($riseFall as $key => $value) {
+
 			if ($value->status=="WIN") {
-				$sumRiseFall = $sumRiseFall+floatval($value->income);
+				$percentage = floatval($value->income)/100;
+
+				if (strpos($value->timeStamp,$_GET['date'])!== false) {
+					$sumTodayRiseFall = $sumTodayRiseFall+$percentage*floatVal($value->amount);
+				}
+				
+				$sumRiseFall = $sumRiseFall+$percentage*floatVal($value->amount);
 			}else{
-				$sumRiseFall = $sumRiseFall-floatval($value->income);
+				if (strpos($value->timeStamp,$_GET['date'])!== false) {
+					$sumTodayRiseFall = $sumTodayRiseFall-floatval($value->amount);
+				}
+
+				$sumRiseFall = $sumRiseFall-floatval($value->amount);
 			}
 		}
 

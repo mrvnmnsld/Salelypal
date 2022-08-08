@@ -9,6 +9,12 @@ $route['checkLoginCredentials'] = 'main/checkLoginCredentials';
 $route['checkEmailAvailability'] = 'main/checkEmailAvailability';
 $route['checkPasswordMatch'] = 'main/checkPasswordMatch';
 
+$route['loadAuthenticatorQR'] = 'main/loadAuthenticatorQR';
+$route['generateAuthenticator'] = 'main/generateAuthenticator';
+$route['checkIfAuthenticatorIsCorrect'] = 'main/checkIfAuthenticatorIsCorrect';
+
+
+
 $route['saveSignUpForm'] = 'main/saveSignUpForm';
 $route['sendOtp'] = 'main/sendOtp';
 
@@ -47,6 +53,8 @@ $route['getLastAllTokenValue'] = 'main/getLastAllTokenValue';
 $route['saveBirthday'] = 'main/saveBirthday';
 $route['saveCountry'] = 'main/saveCountry';
 $route['saveName'] = 'main/saveName';
+
+
 
 
 // Admin
@@ -534,8 +542,8 @@ $route['testing'] = 'main/testing';
 
 
 
-		$route["privacyPolicy"] = 'main/privacyPolicy';
-		$route["termsAndConditions"] = 'main/termsAndConditions';
+$route["privacyPolicy"] = 'main/privacyPolicy';
+$route["termsAndConditions"] = 'main/termsAndConditions';
 
 
 
