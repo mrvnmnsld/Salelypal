@@ -974,28 +974,47 @@ class admin extends MY_Controller {
 				'<head>'.
 				'</head>'.
 				'<body>'.
-					'<div>'.
-						'<div style="background-color: #aea9b3; padding: 10px">'.
+					// '<div>'.
+					// 	'<div style="background-color: #aea9b3; padding: 10px">'.
 
-							'<div style="width: 510px; border-radius:20px 20px 0px 0px ; background-color: #9327f8; margin:auto; padding: 20px">'.
-								'<div style="color: #fff; text-align: center;">'.
-									'<div style="font-weight: bold; font-size: 2em;">WELCOME TO SAFELYPAL</div>'.
-								'</div>'.
-							'</div>'.
+					// 		'<div style="width: 510px; border-radius:20px 20px 0px 0px ; background-color: #9327f8; margin:auto; padding: 20px">'.
+					// 			'<div style="color: #fff; text-align: center;">'.
+					// 				'<div style="font-weight: bold; font-size: 2em;">WELCOME TO SAFELYPAL</div>'.
+					// 			'</div>'.
+					// 		'</div>'.
 
-							'<div style="height: 250px; width: 510px; background-color: #fff; border-radius: 0px 0px 20px 20px; margin:auto; padding: 20px">'.
-								'<div style="text-align: center;">'.
-									'<img src="http://testingcenter.xyz/assets/imgs/verified.png" style="height:100px; width: 100px;">'.
-									'<h1 style="color: #aea9b3; font-family: Poppins, sans-serif;">'.
-									    'Your KYC is Verified'.
-									'</h1>'.
-									'<h3 style="color: #9327f8;">You can now start using SafelyPal '.
-					                'and Earn Crypto hassle-free!</h3>'.
-								'</div>'.
-							'</div>'.
+					// 		'<div style="height: 250px; width: 510px; background-color: #fff; border-radius: 0px 0px 20px 20px; margin:auto; padding: 20px">'.
+					// 			'<div style="text-align: center;">'.
+					// 				'<img src="http://testingcenter.xyz/assets/imgs/verified.png" style="height:100px; width: 100px;">'.
+					// 				'<h1 style="color: #aea9b3; font-family: Poppins, sans-serif;">'.
+					// 				    'Your KYC is Verified'.
+					// 				'</h1>'.
+					// 				'<h3 style="color: #9327f8;">You can now start using SafelyPal '.
+					//                 'and Earn Crypto hassle-free!</h3>'.
+					// 			'</div>'.
+					// 		'</div>'.
 
-						'</div>'.
-					'</div>'.
+					// 	'</div>'.
+					// '</div>'.
+					 '<div style="height:90vh">'.
+				        '<div style="background-color: #9327f8; padding: 10px; height: 300px;">'.
+
+				            '<div style="height: 400px; width: 700px; background-color: #fff; margin:auto; margin-top: 100px; padding: 30px; box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;">'.
+				                '<div style="text-align: center;">'.
+				                    '<img src="http://wallet.safelypal.com/assets/imgs/safelypal_logo.png" style="height:100px; width: 350px; margin-bottom: 20px;">'.
+				                    '<div style="font-weight: bold; font-size: 2.5em; color: #aea9b3;">WELCOME TO SAFELYPAL</div>'.
+				                    '<i class="fa fa-check-circle-o" aria-hidden="true" style="font-size: 5rem; color: green; margin-top: 20px;"></i>'.
+				                    '<h1 style="color: #aea9b3;">'.
+				                        'Your KYC is Verified'.
+				                   ' </h1>'.
+				                    '<h3 style="color: #5427dd; margin-top: 40px;">YOU CAN NOW START USING SAFELYPAL AND EARN CRYPTO HASSLE-FREE!</h3>'.
+				                '</div>'.
+				            '</div>'.
+				            '<div style="text-align: center; margin-top:20px">'.
+				                '<p style="font-weight: bold; color: #5427dd; margin-top: 70px;">© 2022 SAFELYPAL. ALL RIGHTS RESERVED.</p>'.
+				            '</div>'.
+				        '</div>'.
+				    '</div>'.
 				'</body>'.
 			'</html>';
 			
@@ -1080,28 +1099,47 @@ class admin extends MY_Controller {
 				'<head>'.
 				'</head>'.
 				'<body>'.
-					'<div>'.
-						'<div style="background-color: #aea9b3; padding: 10px">'.
+					// '<div>'.
+					// 	'<div style="background-color: #aea9b3; padding: 10px">'.
 
-							'<div style="width: 510px; border-radius:20px 20px 0px 0px ; background-color: #9327f8; margin:auto; padding: 20px">'.
-								'<div style="color: #fff; text-align: center;">'.
-									'<div style="font-weight: bold; font-size: 2em;">IMPORTANT NOTICE</div>'.
-								'</div>'.
-							'</div>'.
+					// 		'<div style="width: 510px; border-radius:20px 20px 0px 0px ; background-color: #9327f8; margin:auto; padding: 20px">'.
+					// 			'<div style="color: #fff; text-align: center;">'.
+					// 				'<div style="font-weight: bold; font-size: 2em;">IMPORTANT NOTICE</div>'.
+					// 			'</div>'.
+					// 		'</div>'.
 
-							'<div style="height: 250px; width: 510px; background-color: #fff; border-radius: 0px 0px 20px 20px; margin:auto; padding: 20px">'.
-								'<div style="text-align: center;">'.
-									'<img src="http://testingcenter.xyz/assets/imgs/rejected.png" style="height:100px; width: 100px;">'.
-										'<h1 style="color: #9327f8; font-family: Poppins, sans-serif;">'.
-										    'Account KYC Rejected'.
-										'</h1>'.
-										'<h3 style="color: #aea9b3;">Please Upload a new photo that'.
-						                'follows the instructions!</h3>'.
-								'</div>'.
-							'</div>'.
+					// 		'<div style="height: 250px; width: 510px; background-color: #fff; border-radius: 0px 0px 20px 20px; margin:auto; padding: 20px">'.
+					// 			'<div style="text-align: center;">'.
+					// 				'<img src="http://testingcenter.xyz/assets/imgs/rejected.png" style="height:100px; width: 100px;">'.
+					// 					'<h1 style="color: #9327f8; font-family: Poppins, sans-serif;">'.
+					// 					    'Account KYC Rejected'.
+					// 					'</h1>'.
+					// 					'<h3 style="color: #aea9b3;">Please Upload a new photo that'.
+					// 	                'follows the instructions!</h3>'.
+					// 			'</div>'.
+					// 		'</div>'.
 
-						'</div>'.
-					'</div>'.
+					// 	'</div>'.
+					// '</div>'.
+					'<div style="height:90vh">'.
+				        '<div style="background-color: #9327f8; padding: 10px; height: 300px;">'.
+
+				            '<div style="height: 420px; width: 700px; background-color: #fff; margin:auto; margin-top: 100px; padding: 30px; box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;">'.
+				                '<div style="text-align: center;">'.
+				                    '<img src="http://wallet.safelypal.com/assets/imgs/safelypal_logo.png" style="height:100px; width: 350px; margin-bottom: 20px;">'.
+				                    '<div style="font-weight: bold; font-size: 2.5em; color: #aea9b3;">IMPORTANT NOTICE</div>'.
+				                    '<i class="fa fa-ban" aria-hidden="true" style="font-size: 5rem; color:  red; margin-top: 20px;"></i>'.
+				                    '<h1 style="color: #aea9b3;">'.
+				                        'Account KYC Rejected'.
+				                    '</h1>'.
+				                    '<h3 style="color: #5427dd; margin-top: 40px;">PLEASE UPLOAD A NEW PHOTO THAT FOLLOWS THE INSTRUCTIONS!</h3>'.
+				                '</div>'.
+				            '</div>'.
+				            '<div style="text-align: center; margin-top:20px">'.
+				                '<p style="font-weight: bold; color: #5427dd; margin-top: 70px;">© 2022 SAFELYPAL. ALL RIGHTS RESERVED.</p>'.
+				            '</div>'.
+				        '</div>'.
+				    '</div>'.
 				'</body>'.
 			'</html>';
 
