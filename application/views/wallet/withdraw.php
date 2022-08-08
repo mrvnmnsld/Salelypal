@@ -1,8 +1,4 @@
 <style type="text/css">
-	.modal-footer{
-		display: none;
-	}
-
 	#qrcode img{
 		/*border: solid 1px;*/
 		outline: 2px solid black;
@@ -107,6 +103,11 @@
 	  			<div><b>Account Password:</b></div>
 	  			<input type="password" class="form-control mt-2" id="accountPassword" name="accountPassword" placeholder="Enter password">
 	  	  	</div>
+
+			<div class="form-group form-check mt-4 text-center">
+				<input type="checkbox" class="form-check-input" name="termsCondition">
+				<label class="form-check-label">I have read and accept the <a href="#" onclick='termsCondition()'>Terms and Conditions</a></label>
+			</div>
 		</div>
 
 		<div id="errorReporter" class="text-center text-danger"></div>
@@ -357,6 +358,7 @@
 	  	errorClass: 'is-invalid text-danger',
 	  	rules: {
 			tokenContainerSelect: "required",
+			termsCondition: "required",
 			addressToInput: {
 				isTrc20:true,
 				required:true
@@ -369,6 +371,9 @@
 				required:true,
 				checkPassword:true
 			}
+	  	},
+	  	messages:{
+	  		termsCondition:"You must accept terms and conditions"
 	  	},
 	  	errorLabelContainer: $('#errorReporter'),
 	  	groups: {
@@ -581,5 +586,14 @@
 	   	}
      	
    	});
+
+   	function termsCondition(){
+		bootbox.alert({
+			title: "Terms and Condition",
+			centerVertical: true,
+		    message: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
+		    size: 'large'
+		});
+	}
 
 </script>

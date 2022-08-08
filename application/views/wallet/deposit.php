@@ -1,8 +1,4 @@
 <style type="text/css">
-	.modal-footer{
-		display: none;
-	}
-
 	#qrcode img{
 		/*border: solid 1px;*/
 		outline: 2px solid black;
@@ -51,6 +47,10 @@
 				<div class="py-1"id="qrcode"></div>
 			</div>
 
+			<div class="form-group mt-4">
+				<small class="form-check-label">By depositing, you agree with the <u><a href="#" onclick='termsCondition()'>Terms and Conditions</a></u></small>
+			</div>
+
 			<div class="form-group">
 				<label class="text-muted">Select which token to deposit</label>
 				<select class="form-control" id="tokenSelection">
@@ -72,13 +72,14 @@
 				</div>
 			</div>
 
+			
+			<hr>
 			<div class="">
-				<div class="h5 text-start mt-5 main-color-text"><b>NOTE :</b></div>
+				<div class="h5 text-start mt-3 main-color-text"><b>NOTE :</b></div>
 				<span class="font-weight-normal main-color-text" id="importantNotes">This wallet supports Tron Mainet and TRC20 Tokens but make sure you added the token contract to your wallet to show the balance</span>
 				<!-- <span class="text-danger">To view other tokens in wallet, export this wallet to a capable wallet link. </span> -->
 			</div>
 		</div>
-		<hr>
 	</form>
 </div>
 
@@ -128,5 +129,15 @@
     	    position: 'bottom-center'
     	})
 	});
+
+
+   	function termsCondition(){
+		bootbox.alert({
+			title: "Terms and Condition",
+			centerVertical: true,
+		    message: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
+		    size: 'large'
+		});
+	}
 
 </script>

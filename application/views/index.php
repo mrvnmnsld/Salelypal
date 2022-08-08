@@ -547,7 +547,12 @@
           <div class="input-field">
             <input type="text" name="referalLink" placeholder="Enter Username or Email of referal">
             <i class="fa fa-handshake-o icon"></i>
-          </div>
+          </div> 
+
+          <div class="form-group form-check mt-4">
+				    <input type="checkbox" class="form-check-input" name="termsCondition">
+				    <label class="form-check-label">I accept the <a href="#" onclick='termsCondition()'>Terms and Conditions</a></label>
+				  </div>
 
           <div class="input-field button">
             <button type="button" class="login-signup-btn" id="signup_btn">SIGN UP</button>
@@ -1201,11 +1206,22 @@
 
 		}, "Referral Code is Invalid");
 
+		function termsCondition(){
+			bootbox.alert({
+				title: "Terms and Condition",
+				centerVertical: true,
+		    message: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+		    size: 'large'
+			});
+		}
+
+
 		$("#signUpForm").validate({
 		  	errorClass: 'is-invalid text-danger',
 		  	rules: {
 					fullName: "required",
 					birthdate: "required",
+					termsCondition: "required",
 					referalLink: {
 						// checkIfReferalLinkIsValid:true,
 						checkIfReferalCodeIsValid:true,
@@ -1228,6 +1244,9 @@
 						checkPasswordConfirm:true,
 						required:true
 					}
+		  	},
+		  	messages:{
+		  		termsCondition:"You must accept terms and conditions"
 		  	},
 		  	errorPlacement: function(error, element) {
 		  	  element.parent("div").after(error);

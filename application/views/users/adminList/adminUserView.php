@@ -27,34 +27,40 @@
 </div>
 
 <div id="mainQuestionModal">
-	<div class="row m-1">
-		<div class="col-md-3 pl-3"><b>Username:</b></div>	
-		<div class="col-md" id="userNameContainer"></div>	
-	</div>
+	<div class="row">
+		<div class="col-6">
+			<div class="row text-center">
+				<div class="col-md">
+					<b>Authenticator QR:</b><br>
+					<img id="authQRLink" src="https://api.qrserver.com/v1/create-qr-code/?data=otpauth%3A%2F%2Ftotp%2FSafelyPal+Admin%3Fsecret%3DIHEWOT7HL5AXF2GD&size=200x200&ecc=M/"><br>
+					<span>Note: Scan this QR via authenticator (or authy)</span>
+				</div>
+			</div>
+		</div>
 
-	<div class="row m-1">
-		<div class="col-md-3 pl-3"><b>User Type:</b></div>	
-		<div class="col-md" id="userTypeContainer"></div>	
-	</div>
+		<div class="col-6">
+			<div class="row">
+				<div class="col-md-5"><b>Username:</b></div>	
+				<div class="col-md-7" id="userNameContainer"></div>	
+			</div>
 
-	<div class="row m-1">
-		<div class="col-md-3 pl-3"><b>Block:</b></div>	
-		<div class="col-md" id="blockContainer"></div>	
-	</div>
+			<div class="row mt-1">
+				<div class="col-md-5"><b>User Type:</b></div>	
+				<div class="col-md-7" id="userTypeContainer"></div>	
+			</div>
 
-	<div class="row m-1">
-		<div class="col-md-3 pl-3"><b>Date Created:</b></div>	
-		<div class="col-md" id="dateContainer"></div>	
-	</div>
+			<div class="row mt-1">
+				<div class="col-md-5"><b>Block:</b></div>	
+				<div class="col-md-7" id="blockContainer"></div>	
+			</div>
 
-	<div class="row m-1">
-		<div class="col-md pl-3">
-			<b>Authenticator QR:</b><br>
-			<img id="authQRLink" src="https://api.qrserver.com/v1/create-qr-code/?data=otpauth%3A%2F%2Ftotp%2FSafelyPal+Admin%3Fsecret%3DIHEWOT7HL5AXF2GD&size=200x200&ecc=M/"><br>
-			<span>Note: Scan this QR via authenticator (or authy)</span>
+			<div class="row mt-1">
+				<div class="col-md-5"><b>Date Created:</b></div>	
+				<div class="col-md-7" id="dateContainer"></div>	
+			</div>
 		</div>
 	</div>
-
+	
 	<hr>
 
 	<div class="row">

@@ -6,7 +6,7 @@
   body{
     margin: 0;
     padding: 0;
-    background: linear-gradient(120deg,#2980b9, #8e44ad) !important;
+    background: linear-gradient(120deg,#5426de, #0f0728) !important;
     overflow: hidden;
   }
   .center{

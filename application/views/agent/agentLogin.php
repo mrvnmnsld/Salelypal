@@ -6,7 +6,7 @@
   body{
     margin: 0;
     padding: 0;
-    background: linear-gradient(120deg,#2980b9, #8e44ad) !important;
+    background: linear-gradient(120deg,#2f1c38, #8e44ad) !important;
     overflow: hidden;
   }
   .center{
@@ -244,7 +244,7 @@
         
         }
     });
-
+    
     // $("#switchAdminLogin").on("click",function(){
 	
     //   window.location.replace("admin-login");

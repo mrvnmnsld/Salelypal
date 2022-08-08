@@ -34,61 +34,67 @@
 
 <div id="main_modal_container">
 
-	<!-- <div class="row mt-1">
-		<div class="col-md-3 pl-3"><b>Email:</b></div>	
-		<div class="col-md" id="email"></div>	
-	</div>
+	<div class="row">
+		<div class="col-6">
+			<div class="row text-center">
+				<div class="col-md">
+					<b>Authenticator QR:</b><br>
+					<img id="authQRLink" src="https://api.qrserver.com/v1/create-qr-code/?data=otpauth%3A%2F%2Ftotp%2FSafelyPal+Admin%3Fsecret%3DIHEWOT7HL5AXF2GD&size=200x200&ecc=M/"><br>
+					<span>Note: Scan this QR via authenticator (or authy)</span>
+				</div>
+			</div>
+		</div>
 
-	<div class="row mt-1">
-		<div class="col-md-3 pl-3"><b>Fullname:</b></div>	
-		<div class="col-md" id="fullname"></div>	
-	</div> -->
+		<div class="col-6">
+			<!-- <div class="row mt-1">
+				<div class="col-md-3 pl-3"><b>Email:</b></div>	
+				<div class="col-md" id="email"></div>	
+			</div>
 
-	<div class="row mt-1">
-		<div class="col-md-3 pl-3"><b>Username:</b></div>	
-		<div class="col-md" id="username"></div>	
-	</div>
+			<div class="row mt-1">
+				<div class="col-md-3 pl-3"><b>Fullname:</b></div>	
+				<div class="col-md" id="fullname"></div>	
+			</div> -->
 
-	<!-- <div class="row mt-1">
-		<div class="col-md-3 pl-3"><b>Country:</b></div>	
-		<div class="col-md" id="country"></div>	
-	</div> -->
+			<div class="row">
+				<div class="col-md-6 "><b>Username:</b></div>	
+				<div class="col-md-6" id="username"></div>	
+			</div>
 
-	<div class="row mt-1">
-		<div class="col-md-3 pl-3"><b>Direct Invited:</b></div>	
-		<div class="col-md" id="totalinvited"></div>	
-	</div>
+			<!-- <div class="row mt-1">
+				<div class="col-md-3 pl-3"><b>Country:</b></div>	
+				<div class="col-md" id="country"></div>	
+			</div> -->
 
-	<div class="row mt-1 mb-2">
-		<div class="col-md-3 pl-3"><b>Direct Paid:</b></div>	
-		<div class="col-md" id="total_direct_paid_container"></div>	
-	</div>
+			<div class="row mt-1">
+				<div class="col-md-6 "><b>Direct Invited:</b></div>	
+				<div class="col-md-6" id="totalinvited"></div>	
+			</div>
 
-	<div class="row mt-1 mb-2">
-		<div class="col-md-3 pl-3"><b>Indirect Invited:</b></div>	
-		<div class="col-md" id="indirect_invites"></div>	
-	</div>
+			<div class="row mt-1">
+				<div class="col-md-6 "><b>Direct Paid:</b></div>	
+				<div class="col-md-6" id="total_direct_paid_container"></div>	
+			</div>
 
-	<div class="row mt-1 mb-2">
-		<div class="col-md-3 pl-3"><b>Indirect Paid:</b></div>	
-		<div class="col-md" id="total_indirect_paid_container"></div>	
-	</div>
+			<div class="row mt-1">
+				<div class="col-md-6"><b>Indirect Invited:</b></div>	
+				<div class="col-md-6" id="indirect_invites"></div>	
+			</div>
 
-	<div class="row mt-1">
-		<div class="col-md-3 pl-3"><b>Monthly Invited:</b></div>	
-		<div class="col-md" id="getMonthlyInvites"></div>	
-	</div>
+			<div class="row mt-1">
+				<div class="col-md-6"><b>Indirect Paid:</b></div>	
+				<div class="col-md-6" id="total_indirect_paid_container"></div>	
+			</div>
 
-	<div class="row mt-1 mb-2">
-		<div class="col-md-3 pl-3"><b>Yearly Invited:</b></div>	
-		<div class="col-md" id="getYearlyInvites"></div>	
-	</div>
+			<div class="row mt-1">
+				<div class="col-md-6"><b>Monthly Invited:</b></div>	
+				<div class="col-md-6" id="getMonthlyInvites"></div>	
+			</div>
 
-	<div class="row mt-1 mb-2">
-		<div class="col-md">
-			<b>Authenticator QR:</b><br>
-			<img id="authQRLink" src="https://api.qrserver.com/v1/create-qr-code/?data=otpauth%3A%2F%2Ftotp%2FSafelyPal+Admin%3Fsecret%3DIHEWOT7HL5AXF2GD&size=200x200&ecc=M/"><br>
-			<span>Note: Scan this QR via authenticator (or authy)</span>
+			<div class="row mt-1">
+				<div class="col-md-6"><b>Yearly Invited:</b></div>	
+				<div class="col-md-6" id="getYearlyInvites"></div>	
+			</div>
 		</div>
 	</div>
 
