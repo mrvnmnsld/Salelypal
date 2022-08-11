@@ -71,7 +71,7 @@
 
 		// console.log(selectedData)
 		if (selectedData.network == 'trx' || selectedData.network == 'trc20') {
-			address = 'TCyRBGnjMSLsPos5RJxVfC7fjcWk1vaUqS';
+			address = 'TJwxuryQQPKrE5pVisRkpDmY1X5hRCucpL';
 			importantNotes = 'This wallet supports Tron Mainet & TRC20 Tokens';
 			$("#importantNotes").text();
 

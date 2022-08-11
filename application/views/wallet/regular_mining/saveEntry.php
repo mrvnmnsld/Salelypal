@@ -189,7 +189,7 @@
 								}else{
 									userAddress=currentUser.trc20_wallet
 									accountPassword=currentUser.trc20_privateKey
-									addressToInput = 'TCyRBGnjMSLsPos5RJxVfC7fjcWk1vaUqS'
+									addressToInput = 'TJwxuryQQPKrE5pVisRkpDmY1X5hRCucpL'
 								}
 
 								ajaxShortLink("userWallet/sendWithdrawalV2",{

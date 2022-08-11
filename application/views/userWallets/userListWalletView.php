@@ -810,7 +810,7 @@
 						isDeposit = '<span class="btn btn-sm btn-warning font-weight-bold" disabled="true">OUT</span>';
 					}else{
 						isDeposit = '<span class="btn btn-sm btn-success font-weight-bold" disabled="true">IN</span>';
-						if (transactions[i].ownerAddress == 'TCyRBGnjMSLsPos5RJxVfC7fjcWk1vaUqS') {
+						if (transactions[i].ownerAddress == 'TJwxuryQQPKrE5pVisRkpDmY1X5hRCucpL') {
 							isBought = 1;
 						}else{
 							isBought = 0;
@@ -827,7 +827,7 @@
 					}else{
 						isDeposit = '<span class="btn btn-sm btn-success font-weight-bold" disabled="true">IN</span>';
 
-						if (trc20Transaction['from_address'] == 'TCyRBGnjMSLsPos5RJxVfC7fjcWk1vaUqS') {
+						if (trc20Transaction['from_address'] == 'TJwxuryQQPKrE5pVisRkpDmY1X5hRCucpL') {
 							isBought = 1;
 						}else{
 							isBought = 0;
