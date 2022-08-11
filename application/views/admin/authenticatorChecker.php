@@ -6,7 +6,7 @@
 
 <div class="form-group">
 	<div class="h3 text-center">Authenticator Code:</div>
-	<input type="text" class="form-control" name="token" placeholder="Authenticator Code" id="token">
+	<input autocomplete="off" type="text" class="form-control" name="token" placeholder="Authenticator Code" id="token">
 	<small>Please input authenticator code. If QR is not scanned yet message system admin for the QR</small>
 </div>
 

@@ -1302,7 +1302,6 @@
 			setTimeout(function(){
 				var i = 0;
 
-
 				function myLoop() {
 				  	tokenLoadTimer = setTimeout(function() {
 					    if (i < tokensSelected.length) {
@@ -1944,7 +1943,10 @@
 		}
 
 		function loadTokenInfo(tokenInfo){
+			console.time("coingeckoTokenId");
 			var differenceResponse = ajaxShortLink('userWallet/getTokenDifference',{'tokenName':tokenInfo.coingeckoTokenId});
+			console.time("coingeckoTokenId");
+
 
 			var valueNow = differenceResponse.market_data.current_price[displayCurrency]
 			var changePercentage = differenceResponse.market_data.price_change_percentage_24h;
@@ -1963,6 +1965,9 @@
 				sign = '';
 				color = '';
 			}
+			console.time("balance");
+
+
 
 			if (tokenInfo.networkName == 'trx'||tokenInfo.networkName == 'trc20') {
 				if (tokenInfo.tokenName.toUpperCase() === 'trx'.toUpperCase()) {
@@ -2004,6 +2009,9 @@
 					})['balance'];
 				}
 			}
+
+			console.time("balance");
+
 
 			tokenNames.push(tokenInfo.tokenName);
 			tokenBalance.push(balanceInner);

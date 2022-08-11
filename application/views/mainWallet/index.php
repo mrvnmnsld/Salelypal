@@ -138,7 +138,7 @@
     if (networkNameContainer == 'trx'||networkNameContainer == 'trc20') {
         if (tokenNameContainer.toUpperCase() === 'trx'.toUpperCase()) {
             availBalance = ajaxShortLink('mainWallet/getTronBalance',{
-            'trc20Address' : 'TCyRBGnjMSLsPos5RJxVfC7fjcWk1vaUqS'
+            'trc20Address' : 'TJwxuryQQPKrE5pVisRkpDmY1X5hRCucpL'
           })['balance'];
 
           balanceDisplay();
@@ -148,7 +148,7 @@
         }else{
             availBalance = ajaxShortLink('mainWallet/getTRC20Balance',{
             'contractaddress':smartAddressContainer,
-            'trc20Address' : 'TCyRBGnjMSLsPos5RJxVfC7fjcWk1vaUqS'
+            'trc20Address' : 'TJwxuryQQPKrE5pVisRkpDmY1X5hRCucpL'
           })['balance'];
 
           balanceDisplay();
