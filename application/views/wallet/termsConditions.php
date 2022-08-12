@@ -1,4 +1,6 @@
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap%27');
+
   .modal-footer{
     display: none;
   }
@@ -26,7 +28,7 @@
   <p>
     These Safelypal Terms of Use is entered into between you (hereinafter referred to as “you” or “your”) and Safelypal operators (as defined below). By accessing, downloading, using or clicking on 
     “I agree” to accept any Safelypal Services (as defined below) provided by Safelypal (as defined below), you agree that you have read, understood and accepted all of the terms and conditions stipulated in 
-    these Terms of Use (hereinafter referred to as “these Terms”) as well as our Privacy Policy at <a href="www.Safelypal.com/privacy">www.Safelypal.com/privacy</a>. In addition, when using some features of 
+    these Terms of Use (hereinafter referred to as “these Terms”) as well as our Privacy Policy. In addition, when using some features of 
     the Services, you may be subject to specific additional terms and conditions applicable to those features.
   </p>
 
@@ -42,11 +44,6 @@
     By accessing, using or attempting to use Safelypal Services in any capacity, you acknowledge that you accept and agree to be bound by these Terms. If you do not agree, do not access Safelypal or utilize 
     Safelypal services.
   </p>
-
-  <p>
-    If you would like to know more about the risks associated with investing in or trading Digital Assets, you can access our General Risk Warning at <a href="www.safelypal.com/risk-warning">www.Safelypal.com/risk-warning</a>.
-  </p>
-
 
   <b>I. Definitions</b><br><br>
   <p>
@@ -175,7 +172,7 @@
   <b>a. Registration</b><br><br>
 
   <p>
-    All Users must apply for a Safelypal Account at <a href="https://accounts.Safelypal.com/register">(https://accounts.Safelypal.com/register)</a> before using Safelypal Services. When you register a Safelypal Account, you must provide the information identified in 
+    All Users must apply for a Safelypal Account at <a href="https://wallet.safelypal.com/">(https://wallet.safelypal.com)</a> before using Safelypal Services. When you register a Safelypal Account, you must provide the information identified in 
     this paragraph 3 or otherwise as requested by Safelypal, and accept these Terms, the Privacy Policy, and other Safelypal Platform Rules. Safelypal may refuse, in its discretion, to open a Safelypal Account for 
     you. You agree to provide complete and accurate information when opening a Safelypal Account, and agree to timely update any information you provide to Safelypal to maintain the integrity and accuracy of the 
     information. Each User (including natural person, business or legal entity) may maintain only one main account at any given time. However, Users can open one or more subaccounts under the main account with the 
