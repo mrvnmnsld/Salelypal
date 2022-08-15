@@ -216,6 +216,9 @@
 	$("#countryContainer").append(selectedData["country"]);
 	$("#fullnameContainer").append(selectedData["fullname"]);
 	$("#birthdayContainer").append(selectedData["birthday"]);
+	$("#volumeControl_rangeValue_slider").val(selectedData["valueVC"]);
+	$("#volumeControl_rangeValue").text(selectedData["valueVC"]);
+	volumeControl_rangeValue
 
 	if (selectedData["fullname"] == null) {
 		$("#fullnameContainer_kyc").html("<span class='text-danger'>No data</span>");
@@ -277,9 +280,6 @@
 
 	// volumeControl_percentage
 	// volumeControl_rangeValue
-
-
-	
 
 	// initial Modal
 		$("#closeBtn").on('click', function(){
