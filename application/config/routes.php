@@ -115,6 +115,9 @@ $route['saveName'] = 'main/saveName';
 	$route['admin/updateVolumeControl'] = 'admin/updateVolumeControl';
 	$route['getVolumeControl'] = 'admin/getVolumeControl';
 	$route['getTotalTopUpAndTotalContractBets'] = 'admin/getTotalTopUpAndTotalContractBets';
+
+	$route['admin/updateVCStatus'] = 'admin/updateVCStatus';
+	$route['admin/updateVCPercent'] = 'admin/updateVCPercent';
 	
 	
 	// chatSupport

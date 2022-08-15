@@ -134,13 +134,13 @@
 		  	<input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm Password">
 		</div>
 
-		<label class="fw-bold">Share Contract Control </label>
+		<!-- <label class="fw-bold">Share Contract Control </label>
 		<div class="input-group row m-1 mb-3">
 			<label class="switch">
 			  <input id="isShareContract" onclick="toggle_btn()" class="toggle" type="checkbox">
 			  <span class="slider round"></span>
 			</label>
-		</div>
+		</div> -->
 
 		<hr>
 
@@ -178,8 +178,8 @@
 	$("#fullname_input").val(selectedData.fullname);
 	$("#country_input").val(selectedData.country);
 	$("#username_input").val(selectedData.username);
+	
 	// $("#password").val(selectedData.password);
-
 	// console.log(selectedData.email)
 
 	$("#save_btn").on("click",function(){

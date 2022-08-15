@@ -44,48 +44,48 @@
 <div id="initial_modal">
 
 	<div class="row mt-1">
-		<div class="col-md-2 pl-3"><b>Email:</b></div>	
+		<div class="col-md-3 pl-3"><b>Email:</b></div>	
 		<div class="col-md" id="emailContainer"></div>	
 	</div>
 
 	<div class="row mt-1">
-		<div class="col-md-2 pl-3"><b>Name:</b></div>	
+		<div class="col-md-3 pl-3"><b>Name:</b></div>	
 		<div class="col-md" id="fullnameContainer"></div>	
 	</div>
 
 	<div class="row mt-1">
-		<div class="col-md-2 pl-3"><b>Date Joined:</b></div>	
+		<div class="col-md-3 pl-3"><b>Date Joined:</b></div>	
 		<div class="col-md" id="dateContainer"></div>	
 	</div>
 
 	<div class="row mt-1">
-		<div class="col-md-2 pl-3"><b>Birthday:</b></div>	
+		<div class="col-md-3 pl-3"><b>Birthday:</b></div>	
 		<div class="col-md" id="birthdayContainer"></div>	
 	</div>
 
 	<div class="row mt-1">
-		<div class="col-md-2 pl-3"><b>Mobile:</b></div>	
+		<div class="col-md-3 pl-3"><b>Mobile:</b></div>	
 		<div class="col-md" id="mobileNumberContainer"></div>	
 	</div>
 
 	<div class="row mt-1">
-		<div class="col-md-2 pl-3"><b>Country:</b></div>	
+		<div class="col-md-3 pl-3"><b>Country:</b></div>	
 		<div class="col-md" id="countryContainer"></div>	
 	</div>
 
 
 	<div class="row mt-1">
-		<div class="col-md-2 pl-3"><b>Referred By:</b></div>	
+		<div class="col-md-3 pl-3"><b>Referred By:</b></div>	
 		<div class="col-md" id="referredByContainer"></div>	
 	</div>
 
 	<div class="row mt-1 mb-2">
-		<div class="col-md-2 pl-3"><b>Last login:</b></div>	
+		<div class="col-md-3 pl-3"><b>Last login:</b></div>	
 		<div class="col-md" id="lastLoginContainer"></div>	
 	</div>
 
 	<div class="row mt-1 mb-2">
-		<div class="col-md-2 pl-3"><b>Pro User:</b></div>	
+		<div class="col-md-3 pl-3"><b>Pro User:</b></div>	
 		<div class="col-md" id="">
 			<div class="form-check form-check-inline">
 			  <input class="form-check-input" type="radio" name="isProContainer" id="isProContainerYes" value="true">
@@ -99,7 +99,7 @@
 	</div>
 
 	<div class="row mt-1 mb-2">
-		<div class="col-md-2 pl-3"><b>Block:</b></div>	
+		<div class="col-md-3 pl-3"><b>Block:</b></div>	
 		<div class="col-md" id="">
 			<div class="form-check form-check-inline">
 			  <input class="form-check-input" type="radio" name="blockContainer" id="blockContainerYes" value="true">
@@ -111,6 +111,35 @@
 			</div>
 		</div>	
 	</div>
+
+	<div class="row mt-1 mb-2">
+		<div class="col-md-3 pl-3"><b>Volume Control:</b></div>	
+		<div class="col-md" id="">
+			<div class="form-check form-check-inline">
+			  <input class="form-check-input" type="radio" name="volumeControl" id="volumeControlYes" value="true">
+			  <label class="form-check-label" for="volumeControlYes">Yes</label>
+			</div>
+			<div class="form-check form-check-inline">
+			  <input class="form-check-input" type="radio" name="volumeControl" id="volumeControlNo" value="false">
+			  <label class="form-check-label" for="volumeControlNo">No</label>
+			</div>
+		</div>	
+	</div>
+
+	<div class="row" id="volumeControl_percentage">
+		<div class="col-md-3 pl-3"><b>Control Percentage:</b></div>	
+		<div class="col-md">
+			<div class="d-flex align-items-center">
+				<div>
+					<span id="volumeControl_rangeValue">0</span>
+					<input id="volumeControl_rangeValue_slider" class="range" type="range" value="0" min="0" max="100">
+				</div>
+				<i class="fa fa-percent"></i>
+			</div>
+		</div>
+		
+	</div>
+
 
 	<hr>
 
@@ -235,6 +264,22 @@
 		$("#verify_user_btn").attr("disabled",true)
 		$("#verify_user_btn").text("Already Verified")
 	}
+
+	if (selectedData["isVC"] == 1) {
+		$("#volumeControlYes").attr('checked', 'checked');
+		$("#volumeControl_percentage").css("display",'flex');
+
+	}else{
+		$("#volumeControlNo").attr('checked', 'checked');
+		$("#volumeControl_percentage").css("display",'none');
+
+	}
+
+	// volumeControl_percentage
+	// volumeControl_rangeValue
+
+
+	
 
 	// initial Modal
 		$("#closeBtn").on('click', function(){
@@ -437,6 +482,56 @@
 				ajaxShortLink('admin/userlist/blockuser',{'userID':selectedData['userID']});
 			}
 		});
+
+		$("input[name='volumeControl']").on("change",function(){
+		    var status;
+
+			if (this.value=='false') {
+				status=0
+				$("#volumeControl_percentage").css("display",'none');
+
+			}else{
+				status=1
+				$("#volumeControl_percentage").css("display",'flex');
+			}
+
+			var res = ajaxShortLink("admin/updateVCStatus",{
+				'isVC':status,
+				'userID':selectedData.userID,
+			});
+
+			if (res==false) {
+	        	$.toast({
+			        heading: '<h6>ERROR!</h6>',
+			        text: 'Please contact system admin!',
+			        showHideTransition: 'slide',
+			        position: 'bottom-left'
+			        // position: 'bottom-center'
+			    })
+			}
+		})
+
+		$("#volumeControl_rangeValue_slider").on("change",function(){
+			console.log(this);
+			document.getElementById('volumeControl_rangeValue').innerHTML = this.value;
+		    var status;
+
+			var res = ajaxShortLink("admin/updateVCPercent",{
+				'valueVC':this.value,
+				'userID':selectedData.userID,
+			});
+
+			if (res==false) {
+	        	$.toast({
+			        heading: '<h6>ERROR!</h6>',
+			        text: 'Please contact system admin!',
+			        showHideTransition: 'slide',
+			        position: 'bottom-left'
+			        // position: 'bottom-center'
+			    })
+			}
+		})
+
 	// initial Modal
 
 	// kyc Modal

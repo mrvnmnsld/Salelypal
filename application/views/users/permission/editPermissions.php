@@ -35,8 +35,8 @@
 			</div>
 
 			<div class="form-group">
-				<div class="col-md"><b>Tasks:</b></div>	
-				<div class="col-md">NOTE: TYPE | DESC | DESC CODE | PARENT - GRP Are dependents to its SYS. if sys parent is not added it will not show to the sidebar</div>
+				<div class="col-md"><b>NOTE:</b></div>	
+				<div class="col-md">TYPE | DESC | DESC CODE | PARENT - GRP Are dependent to its SYS. if sys parent is not added it will not show to the sidebar</div>
 
 				<br>
 				<select class="form-control selectpicker" multiple id="permissionContainer">

@@ -2614,14 +2614,16 @@
 
 		}
 
+		// if (breadCrumbs[breadCrumbs.length-1]=="assets") {
+		// 	console.log(slider1.track.details.position.toFixed(0));
+		// 	slider1.moveToIdx(slider1.track.details.position.toFixed(0));
+		// }
+
 		reinitKeen()
 
-		if (breadCrumbs[breadCrumbs.length-1]=="assets") {
-			console.log(slider1.track.details.position.toFixed(0));
-			slider1.moveToIdx(slider1.track.details.position.toFixed(0));
-		}
-
-
+		setTimeout(function(){
+			slider1.moveToIdx(sliderPosition);
+		},500)
 
 	});
 
@@ -2673,6 +2675,9 @@
 	}
 
 	function reinitKeen(){
+		// var sliderPosition = slider1.track.details.position.toFixed(0);
+		// console.log(sliderPosition);
+
 		slider1.destroy();
 
 		slider1 = KeenSlider("#container",{

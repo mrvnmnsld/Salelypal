@@ -166,7 +166,7 @@
 	loadDatatable();
 	loadDatatablePending();
 
-	var getVolumeControl = ajaxShortLink("getVolumeControl");
+	var getVolumeControl = [{"isOn":currentUser.isVC,"percentage":currentUser.valueVC}];
 
 	var getTotalTopUpAndTotalContractBets = ajaxShortLink("getTotalTopUpAndTotalContractBets",{
 		"userID":currentUser.userID,
