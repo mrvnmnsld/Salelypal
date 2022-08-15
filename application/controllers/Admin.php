@@ -1630,6 +1630,38 @@ class admin extends MY_Controller {
 		}
 
 	}
+
+	public function updateVCStatus(){
+		$tableName="user_tbl";
+		$fieldName='userID';
+		$where=$_GET['userID'];
+
+		$insertRecord = array(
+			'isVC' => $_GET['isVC']
+		);
+
+		$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
+
+		echo json_encode($updateRecordsRes);
+	}
+	
+	public function updateVCPercent(){
+		$tableName="user_tbl";
+		$fieldName='userID';
+		$where=$_GET['userID'];
+
+		$insertRecord = array(
+			'valueVC' => $_GET['valueVC']
+		);
+
+		$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
+
+		echo json_encode($updateRecordsRes);
+	}
+
+
+
+	
 	
 	
 }

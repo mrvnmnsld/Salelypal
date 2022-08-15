@@ -12,6 +12,7 @@
             <tr>
                 <th width="10"></th>
                 <th>User ID</th>
+                <th>Total USD</th>
                 <th>Full Name</th>
                 <th>Email</th>
                 <th>Last Login</th>
@@ -50,14 +51,22 @@
 						 '<button type="button" class="btn btn-success rounded btn-sm" onClick="viewThis(this)">View</button>&nbsp;'
 				},
 				{ data:'userID'},
+				{ data:'lastAllTokenValue'},
 				{ data:'fullname'},
 				{ data:'email'},
 				{ data:'lastLoginDate'},
 			],
 			"order": [[1, 'asc']],
 			"createdRow": function( row, data, dataIndex){
+				console.log(data['lastLoginDate']);
 				if (data['lastLoginDate'] == null) {
-					$(row).find("td:eq(4)").text("No data available");
+					$(row).find("td:eq(5)").text("No data");
+				}
+
+				if (data['lastUpdatedTokenValue'] != null) {
+					$(row).find("td:eq(2)").html(data.lastAllTokenValue+" "+data.lastTokenCurrency.toUpperCase());
+				}else{
+					$(row).find("td:eq(2)").html("Not Updated");
 				}
 
 				if (data['isBlocked'] == 1) {
