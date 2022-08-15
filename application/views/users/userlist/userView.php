@@ -127,17 +127,16 @@
 	</div>
 
 	<div class="row" id="volumeControl_percentage">
-		<div class="col-md-3 pl-3"><b>Control Percentage:</b></div>	
+		<div class="col-md-4 pl-3"><b>Percentage Control:</b></div>	
 		<div class="col-md">
 			<div class="d-flex align-items-center">
-				<div>
-					<span id="volumeControl_rangeValue">0</span>
+				<div class="mt-1 mr-2">
 					<input id="volumeControl_rangeValue_slider" class="range" type="range" value="0" min="0" max="100">
 				</div>
-				<i class="fa fa-percent"></i>
+					<span id="volumeControl_rangeValue">0</span>
+					<i class="fa fa-percent"></i>
 			</div>
 		</div>
-		
 	</div>
 
 
