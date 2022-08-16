@@ -5,61 +5,6 @@
     ></script> --> 
 <!-- Sandbox -->
 
-<!-- Load Stripe.js on your website. -->
-<script src="https://js.stripe.com/v3"></script>
-
-<!-- Create a button that your customers click to complete their purchase. Customize the styling to suit your branding. -->
-<button
-  style="background-color:#6772E5;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1em;cursor:pointer"
-  id="checkout-button-price_1LX2QDBoMRBmxxWJGcL94qJc"
-  role="link"
-  type="button"
->
-  Checkout
-</button>
-
-<div id="error-message"></div>
-
-<script>
-(function() {
-  var stripe = Stripe('pk_test_51KQD5oBoMRBmxxWJ3UIu6ZH3aXayrgooB3NuTyuLgD3mdXUSDIIORnENzq0LYhnryFxojaiPfAT2HIdHynUFfvAO00Eq9mD1Fh');
-
-  console.log(stripe);
-
-  var checkoutButton = document.getElementById('checkout-button-price_1LX2QDBoMRBmxxWJGcL94qJc');
-  checkoutButton.addEventListener('click', function () {
-    /*
-     * When the customer clicks on the button, redirect
-     * them to Checkout.
-     */
-    stripe.redirectToCheckout({
-      lineItems: [{price: 'price_1LX2QDBoMRBmxxWJGcL94qJc', quantity: 1}],
-      mode: 'payment',
-      /*
-       * Do not rely on the redirect to the successUrl for fulfilling
-       * purchases, customers may not always reach the success_url after
-       * a successful payment.
-       * Instead use one of the strategies described in
-       * https://stripe.com/docs/payments/checkout/fulfill-orders
-       */
-      successUrl: 'https://wallet.safelypal.com',
-      cancelUrl: 'https://wallet.safelypal.com',
-    })
-    .then(function (result) {
-      if (result.error) {
-        /*
-         * If `redirectToCheckout` fails due to a browser or network
-         * error, display the localized error message to your customer.
-         */
-        var displayError = document.getElementById('error-message');
-        displayError.textContent = result.error.message;
-      }
-    });
-  });
-})();
-</script>
-
-
 <script 
  src="https://www.paypal.com/sdk/js?client-id=AbM9J_nb99luadjSViFVccEhWabihbAnHcMmiE-_yiOagyQR1_xeorgKNW1q1XLeURtx3t4KiTbl5f19&disable-funding=credit,paylater,card"
 ></script>
@@ -119,7 +64,7 @@
         <br>
         <hr>
 
-        <button type="button" class="btn btn-block btn-danger" id="closeBtn_buyCrypto">Close</button>
+        <button type="button" class="btn btn-block btn-danger" id="closeBtn_buyCrypto">Buy Again</button>
     </div>
 
     <form id="mainForm" style="display: ;">
@@ -201,24 +146,24 @@
         });
     });
 
-    $('#purchaseAppeals_inner_btn').on('click',function(){
-        clearTimeout(tokenLoadTimer);
-        $("#tittle_container").text('Purchase Appeals');
-        $.when(closeNav()).then(function() {
-            $('#topNavBar').toggle();
-            $("#container").fadeOut(animtionSpeed, function() {
-                $("#loadSpinner").fadeIn(animtionSpeed,function(){
-                    $("#container").empty();
-                    $("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/purchaseAppeals'}));
+    // $('#purchaseAppeals_inner_btn').on('click',function(){
+    //     clearTimeout(tokenLoadTimer);
+    //     $("#tittle_container").text('Purchase Appeals');
+    //     $.when(closeNav()).then(function() {
+    //         $('#topNavBar').toggle();
+    //         $("#container").fadeOut(animtionSpeed, function() {
+    //             $("#loadSpinner").fadeIn(animtionSpeed,function(){
+    //                 $("#container").empty();
+    //                 $("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/purchaseAppeals'}));
 
-                    $("#loadSpinner").fadeOut(animtionSpeed,function(){
-                        $('#topNavBar').toggle();
-                        $("#container").fadeIn(animtionSpeed);
-                    });
-                });
-            });
-        });
-    });     
+    //                 $("#loadSpinner").fadeOut(animtionSpeed,function(){
+    //                     $('#topNavBar').toggle();
+    //                     $("#container").fadeIn(animtionSpeed);
+    //                 });
+    //             });
+    //         });
+    //     });
+    // });     
 
     $("#backButton").on("click", function(){
         $("#container").fadeOut(animtionSpeed, function() {
@@ -344,15 +289,16 @@
 
     $("#closeBtn_buyCrypto").on('click',function(){
         $("html, body").animate({ scrollTop: 0 }, "slow");
-        $('#assets_container').css("display","none");
-        $("#container").fadeOut(animtionSpeed, function() {
-            $("#profile_btn").css('display',"none")
-            $("#top_back_btn").css('display',"block")
+        $("#success_container").toggle();
+        $("#mainForm").toggle();
+        $(".bootbox-close-button").toggle()
 
-            $("#container").empty();
-            $("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/buyCrypto'}));
-            $("#container").fadeIn(animtionSpeed);
-        });
+        $("#amount_bought_container").text('');
+        $("#amount_paid_container").text('');
+        $("#token_container").text('');
+        $("#token_amount_container").text('');
+        $("#timestamp_container").text('');
+        $("#reference_id_container").text('');
     });
 
     $("#mainForm").validate({
