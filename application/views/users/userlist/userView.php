@@ -44,48 +44,48 @@
 <div id="initial_modal">
 
 	<div class="row mt-1">
-		<div class="col-md-3 pl-3"><b>Email:</b></div>	
+		<div class="col-md-4 pl-3"><b>Email:</b></div>	
 		<div class="col-md" id="emailContainer"></div>	
 	</div>
 
 	<div class="row mt-1">
-		<div class="col-md-3 pl-3"><b>Name:</b></div>	
+		<div class="col-md-4 pl-3"><b>Name:</b></div>	
 		<div class="col-md" id="fullnameContainer"></div>	
 	</div>
 
 	<div class="row mt-1">
-		<div class="col-md-3 pl-3"><b>Date Joined:</b></div>	
+		<div class="col-md-4 pl-3"><b>Date Joined:</b></div>	
 		<div class="col-md" id="dateContainer"></div>	
 	</div>
 
 	<div class="row mt-1">
-		<div class="col-md-3 pl-3"><b>Birthday:</b></div>	
+		<div class="col-md-4 pl-3"><b>Birthday:</b></div>	
 		<div class="col-md" id="birthdayContainer"></div>	
 	</div>
 
 	<div class="row mt-1">
-		<div class="col-md-3 pl-3"><b>Mobile:</b></div>	
+		<div class="col-md-4 pl-3"><b>Mobile:</b></div>	
 		<div class="col-md" id="mobileNumberContainer"></div>	
 	</div>
 
 	<div class="row mt-1">
-		<div class="col-md-3 pl-3"><b>Country:</b></div>	
+		<div class="col-md-4 pl-3"><b>Country:</b></div>	
 		<div class="col-md" id="countryContainer"></div>	
 	</div>
 
 
 	<div class="row mt-1">
-		<div class="col-md-3 pl-3"><b>Referred By:</b></div>	
+		<div class="col-md-4 pl-3"><b>Referred By:</b></div>	
 		<div class="col-md" id="referredByContainer"></div>	
 	</div>
 
 	<div class="row mt-1 mb-2">
-		<div class="col-md-3 pl-3"><b>Last login:</b></div>	
+		<div class="col-md-4 pl-3"><b>Last login:</b></div>	
 		<div class="col-md" id="lastLoginContainer"></div>	
 	</div>
 
 	<div class="row mt-1 mb-2">
-		<div class="col-md-3 pl-3"><b>Pro User:</b></div>	
+		<div class="col-md-4 pl-3"><b>Pro User:</b></div>	
 		<div class="col-md" id="">
 			<div class="form-check form-check-inline">
 			  <input class="form-check-input" type="radio" name="isProContainer" id="isProContainerYes" value="true">
@@ -99,7 +99,7 @@
 	</div>
 
 	<div class="row mt-1 mb-2">
-		<div class="col-md-3 pl-3"><b>Block:</b></div>	
+		<div class="col-md-4 pl-3"><b>Block:</b></div>	
 		<div class="col-md" id="">
 			<div class="form-check form-check-inline">
 			  <input class="form-check-input" type="radio" name="blockContainer" id="blockContainerYes" value="true">
@@ -113,7 +113,7 @@
 	</div>
 
 	<div class="row mt-1 mb-2">
-		<div class="col-md-3 pl-3"><b>Volume Control:</b></div>	
+		<div class="col-md-4 pl-3"><b>Volume Control:</b></div>	
 		<div class="col-md" id="">
 			<div class="form-check form-check-inline">
 			  <input class="form-check-input" type="radio" name="volumeControl" id="volumeControlYes" value="true">
