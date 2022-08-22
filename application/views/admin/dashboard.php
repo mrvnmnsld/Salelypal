@@ -400,6 +400,7 @@ if (!isset($_SESSION["currentUser"])) {
                     <tr> 
                         <th>Rank</th>
                         <th>Agent Name</th>
+                        <th>Total</th>
                         <th>Direct Invites</th>
                         <th>Downline</th>
                         <th>Date Joined</th>
@@ -439,6 +440,7 @@ if (!isset($_SESSION["currentUser"])) {
 
     function loadRankingTable(url,data){
       var callDataViaURLVal = ajaxShortLink(url,data);
+      console.log(callDataViaURLVal);
       $('#table').DataTable().destroy();
 
       $('#table').DataTable({
@@ -446,6 +448,7 @@ if (!isset($_SESSION["currentUser"])) {
         columns: [
           {},
           { data:'username'},
+          { data:'totalPaidInUSD'},
           { data:'totalDirectPaidInUSD'},
           { data:'totalIndirectPaidInUSD'},
           { data:'dateJoined'},
