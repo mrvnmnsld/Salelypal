@@ -1674,7 +1674,7 @@ class admin extends MY_Controller {
 				$res[0]->total = 0;
 			}
 
-	   		array_push($response, $res[0]->total);
+	   		array_push($response, round($res[0]->total,2));
 
 
 

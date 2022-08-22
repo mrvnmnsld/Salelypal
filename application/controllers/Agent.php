@@ -315,16 +315,6 @@ class agent extends MY_Controller {
 	}
 
 	public function getRanking(){
-		
-
-		// $res = $this->_getRecordsData(
-		// 	$selectfields = array("user_tbl.*,CONCAT(COALESCE(ROUND(SUM(buy_crypto_history_tbl.amountPaid), 2) ,0) ,' USD') AS totalPaidInUSD,COALESCE(ROUND(SUM(buy_crypto_history_tbl.amountPaid), 2) ,0) AS totalPaidInUSDNoFormat"), 
-		// 	$tables = array('user_tbl','buy_crypto_history_tbl'), 
-			
-		// 	$join = array('user_tbl.userID = buy_crypto_history_tbl.userID'), $joinType = array("LEFT"), $sortBy = null, 
-		// 	$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = array("user_tbl.userID")
-		// );
-
 		$agent = $this->_getRecordsData(
 			$selectfields = array("agent_profile_tbl.*"), 
 	   		$tables = array('agent_profile_tbl'),
