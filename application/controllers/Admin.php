@@ -1674,17 +1674,11 @@ class admin extends MY_Controller {
 				$res[0]->total = 0;
 			}
 
-	   		array_push($response, $res[0]->total);
-
-
+	   		array_push($response, round($res[0]->total,2));
 
 		}
 
 		echo json_encode($response);
-
-
-   		
-
 	}
 
 	public function getQuestions(){
@@ -1700,60 +1694,95 @@ class admin extends MY_Controller {
 		);
 
 		echo json_encode($getQuestions);
-}
+	}
 
-public function editQuestion(){
-	$tableName="questions_tbl";
-	$where=$_GET["id"];
+	public function editQuestion(){
+		$tableName="questions_tbl";
+		$where=$_GET["id"];
 
-	$insertRecord = array(
-		'question' => $_GET["question_input"],
-		'answer' => $_GET["answer_textarea"],
-		'createdBy' => $_GET["createdBy"],
-		'dateCreated' => $this->_getTimeStamp(),
-	);
+		$insertRecord = array(
+			'question' => $_GET["question_input"],
+			'answer' => $_GET["answer_textarea"],
+			'createdBy' => $_GET["createdBy"],
+			'dateCreated' => $this->_getTimeStamp(),
+		);
 
-	$updateRecordsRes = $this->_updateRecords($tableName,array('id'), array($where), $insertRecord);
+		$updateRecordsRes = $this->_updateRecords($tableName,array('id'), array($where), $insertRecord);
 
-	echo json_encode($updateRecordsRes);
-	// echo json_encode($insertRecord);
-}
+		echo json_encode($updateRecordsRes);
+		// echo json_encode($insertRecord);
+	}
 
-public function deleteQuestion(){
+	public function deleteQuestion(){
 
-	$deleteQuery = $this->_deleteRecords(
-		$tableName = "questions_tbl",
-		 $fieldName = array("id"),
-			$where = array($_GET['id'])
-	);
+		$deleteQuery = $this->_deleteRecords(
+			$tableName = "questions_tbl",
+			$fieldName = array("id"),
+				$where = array($_GET['id'])
+		);
 
-	echo json_encode(array($deleteQuery));
-}
+		echo json_encode(array($deleteQuery));
+	}
 
-public function addQuestion(){
+	public function addQuestion(){
 
-	$insertRecord = array(
-		'question' => $_GET["question_input"],
-		'answer' => $_GET["answer_textarea"],
-		'createdBy' => $_GET["createdBy"],
-		'dateCreated' => $this->_getTimeStamp(),
-	);
+		$insertRecord = array(
+			'question' => $_GET["question_input"],
+			'answer' => $_GET["answer_textarea"],
+			'createdBy' => $_GET["createdBy"],
+			'dateCreated' => $this->_getTimeStamp(),
+		);
 
-	$saveQueryNotif = $this->_insertRecords($tableName = 'questions_tbl', $insertRecord);
+		$saveQueryNotif = $this->_insertRecords($tableName = 'questions_tbl', $insertRecord);
 
-	if ($saveQueryNotif) {
-		echo json_encode(true);
-	}else{
-		echo json_encode(false);
-	} 
-}
+		if ($saveQueryNotif) {
+			echo json_encode(true);
+		}else{
+			echo json_encode(false);
+		} 
+	}
 
+	public function loadFAQ(){
+   		$res = $this->_getRecordsData(
+   			$selectfields = array("faq_tbl.*,admin_users_tbl.username"), 
+	   		$tables = array('faq_tbl','admin_users_tbl'), 
+	   		$fieldName = null, $where = null, 
+	   		$join = array("faq_tbl.createdBy = admin_users_tbl.id"), $joinType = null, $sortBy = null, 
+	   		$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+   		);
 
+		echo json_encode($res);
+	}
 
+	public function editFaqSave(){
+		$tableName="faq_tbl";
+		$fieldName='id';
+		$where=$_GET['id'];
 
+		$insertRecord = array(
+			'faq' => $_GET["faq"],
+			'answer' => $_GET["answer"]
+		);
 
+		$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
 
-	
-	
-	
+		echo json_encode($updateRecordsRes);
+		
+	}
+
+	public function addFaq(){
+		$data = $_GET;
+
+		$insertRecord = array(
+			'faq' => $data['faq'],
+			'answer' => $data['answer'],
+			'createdBy' => $data['userID'],
+			'dateCreated' => $this->_getTimeStamp(),
+		);
+
+		$saveQueryNotif = $this->_insertRecords($tableName = 'faq_tbl', $insertRecord);
+
+		echo json_encode($saveQueryNotif);
+	}
+
 }
