@@ -1681,11 +1681,58 @@ class admin extends MY_Controller {
 		}
 
 		echo json_encode($response);
-
-
-   		
-
 	}
+
+	public function loadFAQ(){
+   		$res = $this->_getRecordsData(
+   			$selectfields = array("faq_tbl.*,admin_users_tbl.username"), 
+	   		$tables = array('faq_tbl','admin_users_tbl'), 
+	   		$fieldName = null, $where = null, 
+	   		$join = array("faq_tbl.createdBy = admin_users_tbl.id"), $joinType = null, $sortBy = null, 
+	   		$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+   		);
+
+		echo json_encode($res);
+	}
+
+	public function editFaqSave(){
+		$tableName="faq_tbl";
+		$fieldName='id';
+		$where=$_GET['id'];
+
+		$insertRecord = array(
+			'faq' => $_GET["faq"],
+			'answer' => $_GET["answer"]
+		);
+
+		$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
+
+		echo json_encode($updateRecordsRes);
+		
+	}
+
+	public function addFaq(){
+		$data = $_GET;
+
+		$insertRecord = array(
+			'faq' => $data['faq'],
+			'answer' => $data['answer'],
+			'createdBy' => $data['userID'],
+			'dateCreated' => $this->_getTimeStamp(),
+		);
+
+		$saveQueryNotif = $this->_insertRecords($tableName = 'faq_tbl', $insertRecord);
+
+		echo json_encode($saveQueryNotif);
+	}
+
+
+	
+
+
+	
+
+	
 
 
 

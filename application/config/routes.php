@@ -120,7 +120,13 @@ $route['saveName'] = 'main/saveName';
 
 	$route['admin/updateVCStatus'] = 'admin/updateVCStatus';
 	$route['admin/updateVCPercent'] = 'admin/updateVCPercent';
+
+	$route['admin/loadFAQ'] = 'admin/loadFAQ';
+	$route['admin/faq/editFaqSave'] = 'admin/editFaqSave';
+	$route['admin/faq/deleteFaq'] = 'admin/deleteFaq';
+	$route['admin/faq/addFaq'] = 'admin/addFaq';
 	
+
 	
 	// chatSupport
 		$route['admin/getAllChatSupport'] = 'admin/getAllChatSupport';
