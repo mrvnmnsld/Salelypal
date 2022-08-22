@@ -1346,7 +1346,6 @@
 
 		setTimeout(function(){
 			var i = 0;
-			tokenValuesContainer = localStorageTokenValuesContainer;
 
 	    	if (localStorageTokenValuesContainer==null) {
 	    		bootbox.alert({
