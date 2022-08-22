@@ -1282,6 +1282,11 @@
 					    }else{
 					  		$("#totalInUsdContainer").html(numberWithCommas(totalInUsd.toFixed(2)));
 					  		$("#totalInUsdContainer").append(" "+displayCurrency.toUpperCase());
+
+					  		if (localStorageTotalInUsd!=null) {
+					  			$('#totalInUsdContainer').html(numberWithCommas(parseFloat(localStorageTotalInUsd).toFixed(2)));
+					  			$("#totalInUsdContainer").append(" "+displayCurrency.toUpperCase());
+					  		}
 					  		
 					  		$('#visible_btn').toggle();
 					  		$('#updating_assets_container').toggle();
