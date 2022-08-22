@@ -1302,19 +1302,21 @@
 			setTimeout(function(){
 				var i = 0;
 
+				if (localStorageTokenValuesContainer==null) {
+					bootbox.alert({
+					    message: "<div class='text-center'><h4>Initial New Login Loading...</h4> <br> Please wait, Loading time depends on number of token managed</div>",
+					    size: 'small',
+					    centerVertical: true,
+					    closeButton: false
+					});
+				}
+
 				function myLoop() {
 				  	tokenLoadTimer = setTimeout(function() {
 					    if (i < tokensSelected.length) {
 					    	coinIds.push(tokensSelected[i].coingeckoTokenId);
 					    	// coinIds
 					    	if (localStorageTokenValuesContainer==null) {
-					    		bootbox.alert({
-					    		    message: "<div class='text-center'><h4>Initial New Login Loading...</h4> <br> Please wait, Loading time depends on number of token managed</div>",
-					    		    size: 'small',
-					    		    centerVertical: true,
-					    		    closeButton: false
-					    		});
-
 								loadTokenInfo(tokensSelected[i]);
 					    	}
 					    	

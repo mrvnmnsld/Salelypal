@@ -1747,7 +1747,7 @@ class admin extends MY_Controller {
    			$selectfields = array("faq_tbl.*,admin_users_tbl.username"), 
 	   		$tables = array('faq_tbl','admin_users_tbl'), 
 	   		$fieldName = null, $where = null, 
-	   		$join = array("faq_tbl.createdBy = admin_users_tbl.id"), $joinType = null, $sortBy = null, 
+	   		$join = array("faq_tbl.createdBy = admin_users_tbl.id"), $joinType = array("left"), $sortBy = null, 
 	   		$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
    		);
 
