@@ -753,7 +753,7 @@ if (!isset($_SESSION["currentUser"])) {
   
   $('#date_today').text(today)
   $('#total_number_of_clients').text(getAllClients.length)
-  $('#total_amount_paid').text("$"+totalAmountPaid+ " USD")
+  $('#total_amount_paid').text("$"+parseFloat(totalAmountPaid).toFixed(2)+ " USD")
   $('#total_number_of_agents').text(getAllAgents.length)
 
   // console.log(getAllClients,'hello')
