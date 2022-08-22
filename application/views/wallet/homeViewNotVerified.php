@@ -1266,8 +1266,10 @@
 					    centerVertical: true,
 					    closeButton: false
 					});
+				}else{
+					tokenValuesContainer = localStorageTokenValuesContainer;
 				}
-
+				
 				function myLoop() {
 				  	tokenLoadTimer = setTimeout(function() {
 					    if (i < tokensSelected.length) {

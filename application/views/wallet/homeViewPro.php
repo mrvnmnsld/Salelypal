@@ -1346,6 +1346,7 @@
 
 		setTimeout(function(){
 			var i = 0;
+			tokenValuesContainer = localStorageTokenValuesContainer;
 
 	    	if (localStorageTokenValuesContainer==null) {
 	    		bootbox.alert({
@@ -1354,7 +1355,9 @@
 	    		    centerVertical: true,
 	    		    closeButton: false
 	    		});
-	    	}
+	    	}else{
+				tokenValuesContainer = localStorageTokenValuesContainer;
+			}
 
 
 			function myLoop() {
