@@ -1687,6 +1687,68 @@ class admin extends MY_Controller {
 
 	}
 
+	public function getQuestions(){
+		$getQuestions = $this->_getRecordsData(
+			$selectfields = array("
+			*,
+			DATE_FORMAT(dateCreated, '%M %e %Y') AS dateCreated,
+			"), 
+			$tables = array('questions_tbl'), 
+			$fieldName = null, $where = null, 
+			$join = null, $joinType = null, $sortBy = null, 
+			$sortOrder = array('asc'), $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+		);
+
+		echo json_encode($getQuestions);
+}
+
+public function editQuestion(){
+	$tableName="questions_tbl";
+	$where=$_GET["id"];
+
+	$insertRecord = array(
+		'question' => $_GET["question_input"],
+		'answer' => $_GET["answer_textarea"],
+		'createdBy' => $_GET["createdBy"],
+		'dateCreated' => $this->_getTimeStamp(),
+	);
+
+	$updateRecordsRes = $this->_updateRecords($tableName,array('id'), array($where), $insertRecord);
+
+	echo json_encode($updateRecordsRes);
+	// echo json_encode($insertRecord);
+}
+
+public function deleteQuestion(){
+
+	$deleteQuery = $this->_deleteRecords(
+		$tableName = "questions_tbl",
+		 $fieldName = array("id"),
+			$where = array($_GET['id'])
+	);
+
+	echo json_encode(array($deleteQuery));
+}
+
+public function addQuestion(){
+
+	$insertRecord = array(
+		'question' => $_GET["question_input"],
+		'answer' => $_GET["answer_textarea"],
+		'createdBy' => $_GET["createdBy"],
+		'dateCreated' => $this->_getTimeStamp(),
+	);
+
+	$saveQueryNotif = $this->_insertRecords($tableName = 'questions_tbl', $insertRecord);
+
+	if ($saveQueryNotif) {
+		echo json_encode(true);
+	}else{
+		echo json_encode(false);
+	} 
+}
+
+
 
 
 

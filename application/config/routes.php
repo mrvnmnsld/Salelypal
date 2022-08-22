@@ -133,6 +133,11 @@ $route['saveName'] = 'main/saveName';
 		$route['admin/chatSupport/getChatTicketMsgs'] = 'admin/getChatTicketMsgs';
 
 		$route['admin/chatSupport/createNewTicket'] = 'admin/createNewTicket';
+
+		$route['admin/getQuestions'] = 'admin/getQuestions';
+		$route['admin/addQuestion'] = 'admin/addQuestion';
+		$route['admin/deleteQuestion'] = 'admin/deleteQuestion';
+		$route['admin/editQuestion'] = 'admin/editQuestion';
 	// chatSupport
 
 
