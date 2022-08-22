@@ -723,11 +723,6 @@ class admin extends MY_Controller {
     	    		}
     	    	}
 	    	}
-
-			
-
-	  //  		echo json_encode(array(array_reverse($dataArray),array_reverse($labelArray)));
-
 		}
 
 		foreach ($amount1Container as $key => $value) {
@@ -1658,6 +1653,41 @@ class admin extends MY_Controller {
 
 		echo json_encode($updateRecordsRes);
 	}
+
+	public function loadSalesGraphData(){
+		$numberOfDays = json_decode($_GET["numberOfDays"]);
+		// $initialDay = $numberOfDays[0];
+		// $endDay = $numberOfDays[6];
+
+		$response = array();
+
+		foreach ($numberOfDays as $key => $value) {
+	   		$res = $this->_getRecordsData(
+	   			$selectfields = array("SUM(amountPaid) AS total, count(*) AS numberOfSales"), 
+		   		$tables = array('buy_crypto_history_tbl'), 
+		   		$fieldName = null, $where = null, 
+		   		$join = null, $joinType = null, $sortBy = null, 
+		   		$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = array("dateCreated LIKE '%".$value."%' "), $groupBy = null 
+	   		);
+
+			if ($res[0]->total == null) {
+				$res[0]->total = 0;
+			}
+
+	   		array_push($response, $res[0]->total);
+
+
+
+		}
+
+		echo json_encode($response);
+
+
+   		
+
+	}
+
+
 
 
 

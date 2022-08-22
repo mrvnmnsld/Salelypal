@@ -718,6 +718,32 @@ getDaysDate = function(numDays){
 	return dateContainer;
 }
 
+getDaysDateV2 = function(numDays){
+	var dateContainer = [];
+
+	for (var i = numDays; i >= 0; i--) {
+		var innerDate = new Date().getTime()+(-Math.abs(i)*24*60*60*1000)
+
+		innerDate = unixTimeToDate13CharNonFormated(innerDate)
+		// // dateContainer.push(formatDateObjectMonthAndDayOnly(new Date(new Date().getTime()+(-Math.abs(i)*24*60*60*1000))))
+		// dateContainer.push(
+		// 	(innerDate.getMonth()+1)+"-"+innerDate.getDate()
+		// )
+
+		var month = String(innerDate.getMonth() + 1).padStart(2, '0');
+
+		var day = String(innerDate.getDate()).padStart(2, '0');
+
+		var year = innerDate.getFullYear();
+
+		dateContainer.push(
+			year+"-"+month+"-"+day
+		)
+	}
+
+	return dateContainer;
+}
+
 getRandomColorIteration = function(iteration) {
 	var colorContainer = [];
 

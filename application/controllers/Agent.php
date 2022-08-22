@@ -314,6 +314,135 @@ class agent extends MY_Controller {
    		}
 	}
 
+	public function getRanking(){
+		
+
+		// $res = $this->_getRecordsData(
+		// 	$selectfields = array("user_tbl.*,CONCAT(COALESCE(ROUND(SUM(test_platform_buy_crypto_history_tbl.amountPaid), 2) ,0) ,' USD') AS totalPaidInUSD,COALESCE(ROUND(SUM(test_platform_buy_crypto_history_tbl.amountPaid), 2) ,0) AS totalPaidInUSDNoFormat"), 
+		// 	$tables = array('user_tbl','test_platform_buy_crypto_history_tbl'), 
+			
+		// 	$join = array('user_tbl.userID = test_platform_buy_crypto_history_tbl.userID'), $joinType = array("LEFT"), $sortBy = null, 
+		// 	$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = array("user_tbl.userID")
+		// );
+
+		$agent = $this->_getRecordsData(
+			$selectfields = array("agent_profile_tbl.*"), 
+	   		$tables = array('agent_profile_tbl'),
+	   		$fieldName = null, $where = null, 
+	   		$join = null, $joinType = null,
+	   		$sortBy = null, $sortOrder = null, 
+	   		$limit = null, 
+	   		$fieldNameLike = null, $like = null,
+	   		$whereSpecial = null, $groupBy = null
+		);
+
+		$response = [];
+
+		foreach ($agent as $keyFirst => $valueFirst) {
+			$referalCounter = array();
+			$referalCounter2ndDegree = array();
+			$referalCounter3rdDegree = array();
+			$downlineInvites = [];
+
+			$totalCount1st = 0;
+			$totalCount2nd = 0;
+			$totalCount3rd = 0;
+			$totalIndirectPainInUSD = 0;
+			$totalDirectPainInUSD = 0;
+
+			$res = $this->_getRecordsData(
+				$selectfields = array("user_tbl.*,trc20_wallet.address AS trc20_wallet,trc20_wallet.privateKey AS trc20_privateKey,bsc_wallet.address AS bsc_wallet,bsc_wallet.password AS bsc_password,erc20_wallet.address AS erc20_wallet,erc20_wallet.password AS erc20_password,CONCAT(COALESCE(ROUND(SUM(test_platform_buy_crypto_history_tbl.amountPaid), 2) ,0) ,' USD') AS totalPaidInUSD,COALESCE(ROUND(SUM(test_platform_buy_crypto_history_tbl.amountPaid), 2) ,0) AS totalPaidInUSDNoFormat"), 
+		   		$tables = array('user_tbl','trc20_wallet','bsc_wallet','erc20_wallet','test_platform_buy_crypto_history_tbl'),
+		   		$fieldName = array('referType','referred_user_id'), $where = array('agent',$valueFirst->id), 
+		   		$join = array('user_tbl.userID = trc20_wallet.userOwner','user_tbl.userID = bsc_wallet.userOwner','user_tbl.userID = erc20_wallet.userOwner','user_tbl.userID = test_platform_buy_crypto_history_tbl.userID'), $joinType = array('inner','left','left',"LEFT"),
+		   		$sortBy = null, $sortOrder = null, 
+		   		$limit = null, 
+		   		$fieldNameLike = null, $like = null,
+		   		$whereSpecial = null, $groupBy = array("user_tbl.userID")
+			);
+
+			foreach ($res as $key => $value) {
+				$userInvite = $this->_getRecordsData(
+					$selectfields = array("user_tbl.*,COALESCE(ROUND(SUM(test_platform_buy_crypto_history_tbl.amountPaid), 2) ,0) AS totalPaidInUSD,trc20_wallet.address AS trc20_wallet,trc20_wallet.privateKey AS trc20_privateKey,bsc_wallet.address AS bsc_wallet,bsc_wallet.password AS bsc_password,erc20_wallet.address AS erc20_wallet,erc20_wallet.password AS erc20_password"), 
+					$tables = array('user_tbl','test_platform_buy_crypto_history_tbl',"trc20_wallet","bsc_wallet","erc20_wallet"), 
+					$fieldName = array('referType','referred_user_id'), $where = array('user',$value->userID), 
+					$join = array('user_tbl.userID = test_platform_buy_crypto_history_tbl.userID','user_tbl.userID = trc20_wallet.userOwner','user_tbl.userID = bsc_wallet.userOwner','user_tbl.userID = erc20_wallet.userOwner'), $joinType = array("LEFT","LEFT","LEFT","LEFT"), $sortBy = null, 
+					$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = array("user_tbl.userID")
+				);
+
+				$value->degree = "Direct";
+				$downlineInvites[] = $value;
+
+				$totalDirectPainInUSD = $totalDirectPainInUSD+floatval($value->totalPaidInUSDNoFormat);
+
+				$totalCount1st = $totalCount1st+count($userInvite);
+
+				foreach ($userInvite as $userInviteKey => $userInviteValue) {
+					$userInvite2ndDegree = $this->_getRecordsData(
+						$selectfields = array("user_tbl.*,COALESCE(ROUND(SUM(test_platform_buy_crypto_history_tbl.amountPaid), 2) ,0) AS totalPaidInUSD,trc20_wallet.address AS trc20_wallet,trc20_wallet.privateKey AS trc20_privateKey,bsc_wallet.address AS bsc_wallet,bsc_wallet.password AS bsc_password,erc20_wallet.address AS erc20_wallet,erc20_wallet.password AS erc20_password"), 
+						$tables = array('user_tbl','test_platform_buy_crypto_history_tbl',"trc20_wallet","bsc_wallet","erc20_wallet"), 
+						$fieldName = array('referType','referred_user_id'), $where = array('user',$userInviteValue->userID), 
+						$join = array('user_tbl.userID = test_platform_buy_crypto_history_tbl.userID','user_tbl.userID = trc20_wallet.userOwner','user_tbl.userID = bsc_wallet.userOwner','user_tbl.userID = erc20_wallet.userOwner'), $joinType = array("LEFT","LEFT","LEFT","LEFT"), $sortBy = null, 
+						$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = array("user_tbl.userID")
+					);
+					$userInviteValue->degree = "Downline (2nd Degree)";
+
+					$downlineInvites[] = $userInviteValue;
+
+					$totalIndirectPainInUSD = $totalIndirectPainInUSD+floatval($userInviteValue->totalPaidInUSD);
+
+					$totalCount2nd = $totalCount2nd+count($userInvite2ndDegree);
+
+					foreach ($userInvite2ndDegree as $userInvite2ndDegreeKey => $userInvite2ndDegreeValue) {
+						$userInvite3rdDegree = $this->_getRecordsData(
+							$selectfields = array("user_tbl.*,COALESCE(ROUND(SUM(test_platform_buy_crypto_history_tbl.amountPaid), 2) ,0) AS totalPaidInUSD,trc20_wallet.address AS trc20_wallet,trc20_wallet.privateKey AS trc20_privateKey,bsc_wallet.address AS bsc_wallet,bsc_wallet.password AS bsc_password,erc20_wallet.address AS erc20_wallet,erc20_wallet.password AS erc20_password"), 
+							$tables = array('user_tbl','test_platform_buy_crypto_history_tbl',"trc20_wallet","bsc_wallet","erc20_wallet"), 
+							$fieldName = array('referType','referred_user_id'), $where = array('user',$userInvite2ndDegreeValue->userID), 
+							$join = array('user_tbl.userID = test_platform_buy_crypto_history_tbl.userID','user_tbl.userID = trc20_wallet.userOwner','user_tbl.userID = bsc_wallet.userOwner','user_tbl.userID = erc20_wallet.userOwner'), $joinType = array("LEFT","LEFT","LEFT","LEFT"), $sortBy = null, 
+							$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = array("user_tbl.userID")
+						);
+
+						$userInvite2ndDegreeValue->degree = "Downline (3rd Degree)";
+						$downlineInvites[] = $userInvite2ndDegreeValue;
+
+						$totalIndirectPainInUSD = $totalIndirectPainInUSD+floatval($userInvite2ndDegreeValue->totalPaidInUSD);
+
+						foreach ($userInvite3rdDegree as $userInvite3rdDegreeKey => $userInvite3rdDegreeValue) {
+							$totalIndirectPainInUSD = $totalIndirectPainInUSD+floatval($userInvite3rdDegreeValue->totalPaidInUSD);
+							$userInvite3rdDegreeValue->degree = "Downline (4th Degree)";
+							$downlineInvites[] = $userInvite3rdDegreeValue;
+						}
+
+
+						$totalCount3rd = $totalCount3rd+count($userInvite3rdDegree);
+					}
+				}
+			}
+
+			$response[] = array(
+				'username' => $valueFirst->username,
+				'dateJoined' => $valueFirst->timestamp,
+				'totalDirectPaidInUSD' => $totalDirectPainInUSD,
+				'totalIndirectPaidInUSD' => $totalIndirectPainInUSD,
+				'totalPaidInUSD' => floatval($totalIndirectPainInUSD)+floatval($totalDirectPainInUSD)
+			);
+		}
+
+		usort($response, function($a, $b) { //Sort the array using a user defined function
+		    return $a["totalPaidInUSD"] > $b['totalPaidInUSD'] ? -1 : 1; //Compare the scores
+		});   
+
+		echo json_encode($response);
+
+		// pretty print JSON
+            // $jsonData = json_encode(array(
+            //         "test" => $response,
+            //     ), JSON_PRETTY_PRINT
+            // );
+            // echo "<pre>" . $jsonData . "</pre>";
+        // pretty print JSON
+	}
+
 }
 
 ?>

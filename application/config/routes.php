@@ -62,6 +62,8 @@ $route['saveName'] = 'main/saveName';
 	$route['admin/checkLoginCredentials'] = 'admin/checkLoginCredentials';
 	$route['admin-dashboard'] = 'admin/dashboard';
 	$route['adminLogout'] = 'admin/adminLogout';
+	$route['admin/loadSalesGraphData'] = 'admin/loadSalesGraphData';
+	
 
 
 	$route['admin/getTopUpChartData'] = 'admin/getTopUpChartData';
@@ -359,6 +361,11 @@ $route['saveName'] = 'main/saveName';
 	$route['agent/getYearlyInvites'] = 'agent/getYearlyInvites';
 
 	$route['agent/getIndirectReferal1stDegree'] = 'agent/getIndirectReferal1stDegree';
+
+	$route['agent/getRanking'] = 'agent/getRanking';
+	
+
+	
 //agent management
 
 //users management

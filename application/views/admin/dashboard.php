@@ -109,6 +109,8 @@ if (!isset($_SESSION["currentUser"])) {
     <link href="assets/vendor-admin/simple-datatables/style.css" rel="stylesheet">
   <!-- Vendor CSS Files -->
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+
   <!-- Template Main CSS File -->
     <link href="assets/css-admin/style.css" rel="stylesheet">
   <!-- Template Main CSS File -->
@@ -146,6 +148,9 @@ if (!isset($_SESSION["currentUser"])) {
       }
 
       #goog-gt-tt{
+        display: none !important;
+      }
+      .apexcharts-toolbar{
         display: none !important;
       }
   </style>
@@ -258,279 +263,152 @@ if (!isset($_SESSION["currentUser"])) {
         <h1>Dashboard</h1>
       </div><!-- End Page Title -->
 
-      <section class="section dashboard">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="row">
-
-              <!-- Sales Card -->
-              <div class="col-xxl-4 col-md-6">
-                <div class="card info-card sales-card">
-
-                  <div class="filter">
-                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                      <li class="dropdown-header text-start">
-                        <h6>Filter</h6>
-                      </li>
-
-                      <li><a class="dropdown-item" href="#">Today</a></li>
-                      <li><a class="dropdown-item" href="#">This Month</a></li>
-                      <li><a class="dropdown-item" href="#">This Year</a></li>
-                    </ul>
-                  </div>
-
-                  <div class="card-body">
-                    <h5 class="card-title">Sales <span>| Today</span></h5>
-
-                    <div class="d-flex align-items-center">
-                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                        <i class="bi bi-cart"></i>
-                      </div>
-                      <div class="ps-3">
-                        <h6>145</h6>
-                        <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
-
-                      </div>
+      <section class="section dashboard m-2">
+        <div class="col-md-12 p-0">
+            <div class="row ">
+                <div class="col-xl-3 col-lg-6">
+                    <div class="card1 l-bg-blue-dark">
+                        <div class="card-statistic-3 p-4">
+                            <div class="card-icon card-icon-medium"><i class="fas fa-users"></i></div>
+                            <div class="mb-4">
+                                <h5 class="card-title1 mb-0">Number of Clients</h5>
+                            </div>
+                            <div class="row align-items-center mb-2 d-flex">
+                                <div class="col-8">
+                                    <h2 id="total_number_of_clients" class="d-flex align-items-center mb-0">
+                                        0
+                                    </h2>
+                                </div>
+                                <div class="col-4 text-right">
+                                    <span>Person</span>
+                                </div>
+                            </div>
+                            <!-- <div class="progress mt-1 " data-height="8" style="height: 8px;">
+                                <div class="progress-bar l-bg-green" role="progressbar" data-width="25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;"></div>
+                            </div> -->
+                        </div>
                     </div>
-                  </div>
-
                 </div>
-              </div><!-- End Sales Card -->
-
-              <!-- Revenue Card -->
-              <div class="col-xxl-4 col-md-6">
-                <div class="card info-card revenue-card">
-
-                  <div class="filter">
-                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                      <li class="dropdown-header text-start">
-                        <h6>Filter</h6>
-                      </li>
-
-                      <li><a class="dropdown-item" href="#">Today</a></li>
-                      <li><a class="dropdown-item" href="#">This Month</a></li>
-                      <li><a class="dropdown-item" href="#">This Year</a></li>
-                    </ul>
-                  </div>
-
-                  <div class="card-body">
-                    <h5 class="card-title">Revenue <span>| This Month</span></h5>
-
-                    <div class="d-flex align-items-center">
-                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                        <i class="bi bi-currency-dollar"></i>
-                      </div>
-                      <div class="ps-3">
-                        <h6>$3,264</h6>
-                        <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span>
-
-                      </div>
+                <div class="col-xl-3 col-lg-6">
+                    <div class="card1 l-bg-green-dark">
+                        <div class="card-statistic-3 p-4">
+                            <div class="card-icon card-icon-large"><i class="fas fa-dollar-sign"></i></div>
+                            <div class="mb-4">
+                                <h5 class="card-title1 mb-0">Total Sales</h5>
+                            </div>
+                            <div class="row align-items-center mb-2 d-flex">
+                                <div class="col-8">
+                                    <h2 id="total_amount_paid" class="d-flex align-items-center mb-0">
+                                        0
+                                    </h2>
+                                </div>
+                                <div class="col-4 text-right">
+                                    <span>Money</span>
+                                </div>
+                            </div>
+                            <!-- <div class="progress mt-1 " data-height="8" style="height: 8px;">
+                                <div class="progress-bar l-bg-orange" role="progressbar" data-width="25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;"></div>
+                            </div> -->
+                        </div>
                     </div>
-                  </div>
-
                 </div>
-              </div><!-- End Revenue Card -->
-
-              <!-- Customers Card -->
-              <div class="col-xxl-4 col-xl-12">
-
-                <div class="card info-card customers-card">
-
-                  <div class="filter">
-                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                      <li class="dropdown-header text-start">
-                        <h6>Filter</h6>
-                      </li>
-
-                      <li><a class="dropdown-item" href="#">Today</a></li>
-                      <li><a class="dropdown-item" href="#">This Month</a></li>
-                      <li><a class="dropdown-item" href="#">This Year</a></li>
-                    </ul>
-                  </div>
-
-                  <div class="card-body">
-                    <h5 class="card-title">Customers <span>| This Year</span></h5>
-
-                    <div class="d-flex align-items-center">
-                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                        <i class="bi bi-people"></i>
-                      </div>
-                      <div class="ps-3">
-                        <h6>1244</h6>
-                        <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
-
-                      </div>
+                <div class="col-xl-3 col-lg-6">
+                    <div class="card1 l-bg-orange-dark">
+                        <div class="card-statistic-3 p-4">
+                            <div class="card-icon card-icon-large"><i class="fas fa-headset"></i></div>
+                            <div class="mb-4">
+                                <h5 class="card-title1 mb-0">Number of Agents</h5>
+                            </div>
+                            <div class="row align-items-center mb-2 d-flex">
+                                <div class="col-8">
+                                    <h2 id="total_number_of_agents" class="d-flex align-items-center mb-0">
+                                        0
+                                    </h2>
+                                </div>
+                                <div class="col-4 text-right">
+                                    <span>Person</span>
+                                </div>
+                            </div>
+                            <!-- <div class="progress mt-1 " data-height="8" style="height: 8px;">
+                                <div class="progress-bar l-bg-cyan" role="progressbar" data-width="25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;"></div>
+                            </div> -->
+                        </div>
                     </div>
-
-                  </div>
                 </div>
-
-              </div><!-- End Customers Card -->
-
-              <!-- Reports -->
-              <div class="col-12">
-                <div class="card">
-
-                  <div class="filter">
-                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                      <li class="dropdown-header text-start">
-                        <h6>Filter</h6>
-                      </li>
-
-                      <li><a class="dropdown-item" href="#">Today</a></li>
-                      <li><a class="dropdown-item" href="#">This Month</a></li>
-                      <li><a class="dropdown-item" href="#">This Year</a></li>
-                    </ul>
-                  </div>
-
-                  <div class="card-body">
-                    <h5 class="card-title">Reports <span>/Today</span></h5>
-
-                    <!-- Line Chart -->
-                    <div id="reportsChart"></div>
-
-                    <script>
-                      document.addEventListener("DOMContentLoaded", () => {
-                        new ApexCharts(document.querySelector("#reportsChart"), {
-                          series: [{
-                            name: 'Sales',
-                            data: [31, 40, 28, 51, 42, 82, 56],
-                          }, {
-                            name: 'Revenue',
-                            data: [11, 32, 45, 32, 34, 52, 41]
-                          }, {
-                            name: 'Customers',
-                            data: [15, 11, 32, 18, 9, 24, 11]
-                          }],
-                          chart: {
-                            height: 350,
-                            type: 'area',
-                            toolbar: {
-                              show: false
-                            },
-                          },
-                          markers: {
-                            size: 4
-                          },
-                          colors: ['#4154f1', '#2eca6a', '#ff771d'],
-                          fill: {
-                            type: "gradient",
-                            gradient: {
-                              shadeIntensity: 1,
-                              opacityFrom: 0.3,
-                              opacityTo: 0.4,
-                              stops: [0, 90, 100]
-                            }
-                          },
-                          dataLabels: {
-                            enabled: false
-                          },
-                          stroke: {
-                            curve: 'smooth',
-                            width: 2
-                          },
-                          xaxis: {
-                            type: 'datetime',
-                            categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
-                          },
-                          tooltip: {
-                            x: {
-                              format: 'dd/MM/yy HH:mm'
-                            },
-                          }
-                        }).render();
-                      });
-                    </script>
-                    <!-- End Line Chart -->
-
-                  </div>
-
+                <div class="col-xl-3 col-lg-6">
+                    <div class="card1 l-bg-cherry">
+                        <div class="card-statistic-3 p-4">
+                            <div class="card-icon card-icon-large"><i class="fas fa-calendar-day"></i></div>
+                            <div class="mb-4">
+                                <h5 class="card-title1 mb-0">Updated as of</h5>
+                            </div>
+                            <div class="row align-items-center mb-2 d-flex">
+                                <div class="col-8">
+                                    <h2 id="date_today" class="d-flex align-items-center mb-0">
+                                        0
+                                    </h2>
+                                </div>
+                                <div class="col-4 text-right">
+                                    <span>Date</span>
+                                </div>
+                            </div>
+                            <!-- <div class="progress mt-1 " data-height="8" style="height: 8px;">
+                                <div class="progress-bar l-bg-cyan" role="progressbar" data-width="25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;"></div>
+                            </div> -->
+                        </div>
+                    </div>
                 </div>
-              </div><!-- End Reports -->
-
-              <!-- Recent Sales -->
-              <div class="col-12">
-                <div class="card recent-sales overflow-auto">
-
-                  <div class="filter">
-                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                      <li class="dropdown-header text-start">
-                        <h6>Filter</h6>
-                      </li>
-
-                      <li><a class="dropdown-item" href="#">Today</a></li>
-                      <li><a class="dropdown-item" href="#">This Month</a></li>
-                      <li><a class="dropdown-item" href="#">This Year</a></li>
-                    </ul>
-                  </div>
-
-                  <div class="card-body">
-                    <h5 class="card-title">Recent Sales <span>| Today</span></h5>
-
-                    <table class="table table-borderless datatable">
-                      <thead>
-                        <tr>
-                          <th scope="col">#</th>
-                          <th scope="col">Customer</th>
-                          <th scope="col">Product</th>
-                          <th scope="col">Price</th>
-                          <th scope="col">Status</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <th scope="row"><a href="#">#2457</a></th>
-                          <td>Brandon Jacob</td>
-                          <td><a href="#" class="text-primary">At praesentium minu</a></td>
-                          <td>$64</td>
-                          <td><span class="badge bg-success">Approved</span></td>
-                        </tr>
-                        <tr>
-                          <th scope="row"><a href="#">#2147</a></th>
-                          <td>Bridie Kessler</td>
-                          <td><a href="#" class="text-primary">Blanditiis dolor omnis similique</a></td>
-                          <td>$47</td>
-                          <td><span class="badge bg-warning">Pending</span></td>
-                        </tr>
-                        <tr>
-                          <th scope="row"><a href="#">#2049</a></th>
-                          <td>Ashleigh Langosh</td>
-                          <td><a href="#" class="text-primary">At recusandae consectetur</a></td>
-                          <td>$147</td>
-                          <td><span class="badge bg-success">Approved</span></td>
-                        </tr>
-                        <tr>
-                          <th scope="row"><a href="#">#2644</a></th>
-                          <td>Angus Grady</td>
-                          <td><a href="#" class="text-primar">Ut voluptatem id earum et</a></td>
-                          <td>$67</td>
-                          <td><span class="badge bg-danger">Rejected</span></td>
-                        </tr>
-                        <tr>
-                          <th scope="row"><a href="#">#2644</a></th>
-                          <td>Raheem Lehner</td>
-                          <td><a href="#" class="text-primary">Sunt similique distinctio</a></td>
-                          <td>$165</td>
-                          <td><span class="badge bg-success">Approved</span></td>
-                        </tr>
-                      </tbody>
-                    </table>
-
-                  </div>
-
-                </div>
-              </div><!-- End Recent Sales -->
             </div>
-          </div><!-- End Left side columns -->
-
-          </div><!-- End Right side columns -->
-
         </div>
+
+        <!-- Chart -->
+        <div class="col-md-12">
+          <div class="row">
+            <div class="card1 col-12">
+              <div class="text-center m-3">
+                <h2 class="fw-bold" style="color:#012970">BAR GRAPH</h2>
+              </div>
+              <div id="chart" style="max-width: 100%;"></div>
+            </div>
+          </div>
+        </div>  
+        <!-- End Chart -->
+
+        <!-- Widget -->
+        <div class="col-md-12">
+          <div class="row">
+            <div class="card col-12 p-4 align-items-center">
+               <h2 class="fw-bold" style="color:#012970">CRYPTO CURRENCIES</h2>
+               <div id="currency_container"></div>
+            </div>
+          </div>
+        </div>
+        <!-- End Widget -->
+
+        <!-- Ranking -->
+        <div id="innerContainer" class="card"><br>
+          <div class="card-body">
+            <div class="pagetitle">
+              <h1>Agent Ranking Table</h1>
+              <sub class="fw-bold">Agents with the highest invites</sub>
+            </div>
+
+            <hr>
+
+            <table id="table" class="table table-hover" style="width:100%">
+              <thead>
+                    <tr> 
+                        <th>Rank</th>
+                        <th>Agent Name</th>
+                        <th>Direct Invites</th>
+                        <th>Downline</th>
+                        <th>Date Joined</th>
+                    </tr>
+                </thead>
+            </table>
+          </div>
+        </div>
+        <!-- End Ranking -->
       </section>
       
     </div><!-- end_dashboard -->
@@ -554,39 +432,76 @@ if (!isset($_SESSION["currentUser"])) {
 
 <!-- google translate -->
   <script type="text/javascript">
-      
 
-      // var currentUserLanguage = {
-      //     'lang':"/en/zh-TW"
-      // }
+    $(document).ready(function() {
+      loadRankingTable('agent/getRanking');
+    });
 
-      function setCookie(key, value, expiry) {
-        var expires = new Date();
-        expires.setTime(expires.getTime() + (expiry * 24 * 60 * 60 * 1000));
-        document.cookie = key + '=' + value + ';expires=' + expires.toUTCString();
-        document.cookie = key + '=' + value + ';expires=' + expires.toUTCString(); //local
-        document.cookie = key + '=' + value + ';expires=' + expires.toUTCString()+";domain=www.testingcenter.xyz"; //live
-        document.cookie = key + '=' + value + ';expires=' + expires.toUTCString()+";domain=.testingcenter.xyz"; //live
-        document.cookie = key + '=' + value + ';expires=' + expires.toUTCString()+";domain=testingcenter.xyz"; //live
+    function loadRankingTable(url,data){
+      var callDataViaURLVal = ajaxShortLink(url,data);
+      $('#table').DataTable().destroy();
+
+      $('#table').DataTable({
+        data: callDataViaURLVal,
+        columns: [
+          {},
+          { data:'username'},
+          { data:'totalDirectPaidInUSD'},
+          { data:'totalIndirectPaidInUSD'},
+          { data:'dateJoined'},
+        ],
+        "columnDefs": [{
+          "targets": 0,
+          "width": "5%",
+          "data": 'username',
+          "orderable": false,
+          // "sortable": false
+        }],
+        // "order": [[1, 'asc']],
+        "ordering": false,
+        "autoWidth": false,
+      });
+
+      $('#table').DataTable().on('order.dt search.dt', function () {
+        let i = 1;
+
+        $('#table').DataTable().cells(null, 0, { search: 'applied', order: 'applied' }).every(function (cell) {
+        this.data(i++);
+        });
+      }).draw();
+    }
+
+    // var currentUserLanguage = {
+    //     'lang':"/en/zh-TW"
+    // }
+
+    function setCookie(key, value, expiry) {
+      var expires = new Date();
+      expires.setTime(expires.getTime() + (expiry * 24 * 60 * 60 * 1000));
+      document.cookie = key + '=' + value + ';expires=' + expires.toUTCString();
+      document.cookie = key + '=' + value + ';expires=' + expires.toUTCString(); //local
+      document.cookie = key + '=' + value + ';expires=' + expires.toUTCString()+";domain=www.testingcenter.xyz"; //live
+      document.cookie = key + '=' + value + ';expires=' + expires.toUTCString()+";domain=.testingcenter.xyz"; //live
+      document.cookie = key + '=' + value + ';expires=' + expires.toUTCString()+";domain=testingcenter.xyz"; //live
+    }
+
+    function googleTranslateElementInit() {
+        // setCookie('googtrans', currentUserLanguage.lang,1);
+        new google.translate.TranslateElement({
+            pageLanguage: 'en',
+            // includedLanguages: 'en,zh-CN,zh-TW',
+            // layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+            autoDisplay: true
+        }, 'google_translate_element');
+    }
+
+    $("#language_selector").on('change',function(){
+      if ($(this).val()!="") {
+        var lang = "/en/"+$(this).val()
+        setCookie('googtrans',lang ,1);
+        location.reload();
       }
-
-      function googleTranslateElementInit() {
-          // setCookie('googtrans', currentUserLanguage.lang,1);
-          new google.translate.TranslateElement({
-              pageLanguage: 'en',
-              // includedLanguages: 'en,zh-CN,zh-TW',
-              // layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-              autoDisplay: true
-          }, 'google_translate_element');
-      }
-
-      $("#language_selector").on('change',function(){
-        if ($(this).val()!="") {
-          var lang = "/en/"+$(this).val()
-          setCookie('googtrans',lang ,1);
-          location.reload();
-        }
-      })
+    })
   </script>
 
   <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
@@ -721,8 +636,146 @@ if (!isset($_SESSION["currentUser"])) {
     });
   }
 
+  var d = new Date();
+  var year = d.getFullYear();
+  var  months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  var monthName=months[d.getMonth()];
+  var today = (monthName) + " " + d.getDate() + ", " + d.getFullYear();
 
+  var getAllClients = ajaxShortLink("admin/getAllUsers",{
+    'userID' : currentUser.id
+  });
+
+  var getAllAgents = ajaxShortLink("agent/getAgent",{
+    'id' : currentUser.id
+  });
+
+  var getPurchase = ajaxShortLink("userWallet/getAllPurchase",{
+    'userID' : currentUser.id,
+  });
+
+  console.log(year) 
+
+  var totalAmountPaid = 0;
+
+  for (i=0; i < getPurchase.length; i++){  
+    totalAmountPaid = totalAmountPaid+parseFloat(getPurchase[i].amountPaid);
+    // console.log(parseFloat(getPurchase[i].amountPaid))
+  }
+
+  var numberOfDays = getDaysDateV2(6);
+
+  var loadSalesGraphData = ajaxShortLink("admin/loadSalesGraphData",{
+    'numberOfDays':JSON.stringify(numberOfDays)
+  });
+
+  // console.log(loadSalesGraphData);
+
+  // here is chart
+  var options = {
+       series: [{
+       name: 'Sales Per Day',
+       data: loadSalesGraphData
+      }],
+       chart: {
+       height: 350,
+       type: 'bar',
+     },
+     plotOptions: {
+       bar: {
+         borderRadius: 10,
+         dataLabels: {
+           position: 'top', // top, center, bottom
+         },
+       }
+     },
+     dataLabels: {
+       enabled: true,
+       formatter: function (val) {
+         return "$" + val + " USD";
+       },
+       offsetY: -20,
+       style: {
+         fontSize: '12px',
+         colors: ["#012970"]
+       }
+     },
+     
+     xaxis: {
+       categories: numberOfDays,
+       position: 'top',
+       axisBorder: {
+         show: false
+       },
+       axisTicks: {
+         show: false
+       },
+       crosshairs: {
+         fill: {
+           type: 'gradient',
+           gradient: {
+             colorFrom: '#D8E3F0',
+             colorTo: '#BED1E6',
+             stops: [0, 100],
+             opacityFrom: 0.4,
+             opacityTo: 0.5,
+           }
+         }
+       },
+       tooltip: {
+         enabled: true,
+       }
+     },
+     yaxis: {
+       axisBorder: {
+         show: false
+       },
+       axisTicks: {
+         show: false,
+       },
+       labels: {
+         show: false,
+       }
+     },
+     title: {
+       text: 'Total Daily Sales for 7 days, ' + year,
+       floating: true,
+       offsetY: 330,
+       align: 'center',
+       style: {
+         color: '#012970'
+       }
+     }
+   };
+
+   var chart = new ApexCharts(document.querySelector("#chart"), options);
+   chart.render();
+  
+  $('#date_today').text(today)
+  $('#total_number_of_clients').text(getAllClients.length)
+  $('#total_amount_paid').text("$"+totalAmountPaid+ " USD")
+  $('#total_number_of_agents').text(getAllAgents.length)
+
+  // console.log(getAllClients,'hello')
 </script>
+
+<script type="text/javascript">
+  baseUrl = "https://widgets.cryptocompare.com/";
+  var scripts = document.getElementsByTagName("script");
+  var embedder = $("#currency_container")[0];
+
+  (function (){
+    var appName = encodeURIComponent(window.location.hostname);
+    if(appName==""){appName="local";}
+    var s = document.createElement("script");
+    s.type = "text/javascript";
+    s.async = true;
+    var theUrl = baseUrl+'serve/v2/coin/header?fsyms=BTC,ETH,TRX,BNB,DOGE&tsyms=BTC,USD';
+    s.src = theUrl + ( theUrl.indexOf("?") >= 0 ? "&" : "?") + "app=" + appName;
+    embedder.parentNode.appendChild(s);
+  })();
+</script>
+
 </html>
 <?php 
 }
