@@ -800,7 +800,7 @@
 				$('#display_currency_btn').on('click',function(){
 					addBreadCrumbs("wallet/settings/currency");
 
-					$("html, body").animate({ scrollTop: 0 }, "slow");
+					window.scrollTo(0, 0);
 
 					$("#container").toggle();
 					
@@ -815,7 +815,7 @@
 				$('#security_btn').on('click',function(){
 					addBreadCrumbs("wallet/settings/security");
 
-					$("html, body").animate({ scrollTop: 0 }, "slow");
+					window.scrollTo(0, 0);
 
 					$("#container").toggle();
 					
@@ -861,7 +861,7 @@
 				$('#price_alert_btn').on('click',function(){
 					addBreadCrumbs("wallet/settings/priceAlert");
 					
-					$("html, body").animate({ scrollTop: 0 }, "slow");
+					window.scrollTo(0, 0);
 
 					$("#container").toggle();
 					
@@ -876,7 +876,7 @@
 				$('#language_btn').on('click',function(){
 					addBreadCrumbs("wallet/settings/language");
 
-					$("html, body").animate({ scrollTop: 0 }, "slow");
+					window.scrollTo(0, 0);
 
 					$("#container").toggle();
 					
@@ -891,7 +891,7 @@
 				$('#chat_support_btn').on('click',function(){
 					addBreadCrumbs("wallet/settings/chat");
 
-					$("html, body").animate({ scrollTop: 0 }, "slow");
+					window.scrollTo(0, 0);
 
 					$("#container").toggle();
 					
@@ -981,7 +981,7 @@
 		    cancelOnLeave: true,
 			slideChanged: slider => {
 				$(".bottom-nav-item").removeClass("bottom-nav-item-active");
-				$("html, body").animate({ scrollTop: 0 }, "slow");
+				window.scrollTo(0, 0);
 
 				var sliderPosition = slider.track.details.position.toFixed(0)
 
@@ -1555,7 +1555,7 @@
 
 				addBreadCrumbs("wallet/deposit");
 
-				$("html, body").animate({ scrollTop: 0 }, "slow");
+				window.scrollTo(0, 0);
 
 				$("#container").toggle();
 
@@ -1580,7 +1580,7 @@
 				if (currentUser.isStrict == "1") {
 					addBreadCrumbs("wallet/withdrawStrict");
 
-					$("html, body").animate({ scrollTop: 0 }, "slow");
+					window.scrollTo(0, 0);
 
 					$("#container").toggle();
 					
@@ -1593,7 +1593,7 @@
 				}else{
 					addBreadCrumbs("wallet/withdraw");
 
-					$("html, body").animate({ scrollTop: 0 }, "slow");
+					window.scrollTo(0, 0);
 
 					$("#container").toggle();
 					
@@ -1618,7 +1618,7 @@
 
 				addBreadCrumbs("wallet/buyCrypto");
 
-				$("html, body").animate({ scrollTop: 0 }, "slow");
+				window.scrollTo(0, 0);
 
 				$("#container").toggle();
 
@@ -1656,7 +1656,7 @@
 
 
 					if ($("#container_main").css("display")=="none") {
-						$("html, body").animate({ scrollTop: 0 }, "slow");
+						window.scrollTo(0, 0);
 					}else{
 						$("#profile_btn").css('display',"block");
 						$("#top_back_btn").css('display',"none");
@@ -1664,7 +1664,7 @@
 						$("#container_main").toggle();
 						$("#container").toggle();
 
-						$("html, body").animate({ scrollTop: 0 }, "slow");
+						window.scrollTo(0, 0);
 					}
 
 					breadCrumbs = ["assets"]
@@ -1701,7 +1701,7 @@
 
 
 					if ($("#container_main").css("display")=="none") {
-						$("html, body").animate({ scrollTop: 0 }, "slow");
+						window.scrollTo(0, 0);
 					}else{
 						$("#profile_btn").css('display',"block");
 						$("#top_back_btn").css('display',"none");
@@ -1709,7 +1709,7 @@
 						$("#container_main").toggle();
 						$("#container").toggle();
 
-						$("html, body").animate({ scrollTop: 0 }, "slow");
+						window.scrollTo(0, 0);
 					}
 
 					breadCrumbs = ["assets"]
@@ -1746,7 +1746,7 @@
 
 
 					if ($("#container_main").css("display")=="none") {
-						$("html, body").animate({ scrollTop: 0 }, "slow");
+						window.scrollTo(0, 0);
 					}else{
 						$("#profile_btn").css('display',"block");
 						$("#top_back_btn").css('display',"none");
@@ -1754,7 +1754,7 @@
 						$("#container_main").toggle();
 						$("#container").toggle();
 
-						$("html, body").animate({ scrollTop: 0 }, "slow");
+						window.scrollTo(0, 0);
 					}
 
 					breadCrumbs = ["assets"]
@@ -1838,7 +1838,7 @@
 
 				addBreadCrumbs("wallet/addToken")
 
-				$("html, body").animate({ scrollTop: 0 }, "slow");
+				window.scrollTo(0, 0);
 
 				$("#container").toggle();
 
@@ -1861,7 +1861,7 @@
 
 				addBreadCrumbs("wallet/test-platform/user_profile/profile");
 
-				$("html, body").animate({ scrollTop: 0 }, "slow");
+				window.scrollTo(0, 0);
 
 				$("#container").toggle();
 
@@ -1891,7 +1891,7 @@
 				
 				clearTimeout(newNotifChecker);
 
-				$("html, body").animate({ scrollTop: 0 }, "slow");
+				window.scrollTo(0, 0);
 
 				$("#container").css("display",'none');
 
@@ -1915,7 +1915,7 @@
 
 				addBreadCrumbs("wallet/verifyKYC");
 
-				$("html, body").animate({ scrollTop: 0 }, "slow");
+				window.scrollTo(0, 0);
 
 				$("#container").css("display",'none');
 
@@ -2093,7 +2093,7 @@
 						clickContainer = tokensSelected[$(this).index()];
 
 						$("#tittle_container").text('Token Information');
-						$("html, body").animate({ scrollTop: 0 }, "slow");
+						window.scrollTo(0, 0);
 
 						$("#container").toggle();
 
@@ -2176,7 +2176,7 @@
 			    cancelOnLeave: true,
 				slideChanged: slider => {
 					$(".bottom-nav-item").removeClass("bottom-nav-item-active");
-					$("html, body").animate({ scrollTop: 0 }, "slow");
+					window.scrollTo(0, 0);
 
 					var sliderPosition = slider.track.details.position.toFixed(0)
 
@@ -2275,7 +2275,7 @@
 			    cancelOnLeave: true,
 				slideChanged: slider => {
 					$(".bottom-nav-item").removeClass("bottom-nav-item-active");
-					$("html, body").animate({ scrollTop: 0 }, "slow");
+					window.scrollTo(0, 0);
 
 					var sliderPosition = slider.track.details.position.toFixed(0)
 
@@ -2564,7 +2564,7 @@
 			    cancelOnLeave: true,
 				slideChanged: slider => {
 					$(".bottom-nav-item").removeClass("bottom-nav-item-active");
-					$("html, body").animate({ scrollTop: 0 }, "slow");
+					window.scrollTo(0, 0);
 
 					var sliderPosition = slider.track.details.position.toFixed(0)
 

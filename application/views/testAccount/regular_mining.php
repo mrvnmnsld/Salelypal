@@ -263,7 +263,7 @@
 	function claimIncome(income,mining_id,entry_id,balance,networkName,tokenName,smartAddress){
 		console.log(networkName);
 
-    	$("html, body").animate({ scrollTop: 0 }, "slow");
+    	window.scrollTo(0, 0);
     	$('#container').toggle();
     	$('#topNavBar').toggle();
     	$('#bottomNavBar').toggle();
@@ -394,7 +394,7 @@
 			  			$("#container").fadeIn(animtionSpeed);
 					});
 
-					$("html, body").animate({ scrollTop: 0 }, "slow");
+					window.scrollTo(0, 0);
 					$('#container').toggle();
 					$('#topNavBar').toggle();
 					$('#bottomNavBar').toggle();

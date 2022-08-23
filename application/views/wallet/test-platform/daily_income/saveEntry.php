@@ -170,7 +170,7 @@
 						}
 
 						$("#tittle_container").text('Daily Income Mining');
-						$("html, body").animate({ scrollTop: 0 }, "slow");
+						window.scrollTo(0, 0);
 						$.when(closeNav()).then(function() {
 							$('#assets_container').css("display","none");
 							$('#topNavBar').toggle();
@@ -266,7 +266,7 @@
 					}
 
 					$("#tittle_container").text('Daily Income Mining');
-						$("html, body").animate({ scrollTop: 0 }, "slow");
+						window.scrollTo(0, 0);
 						$.when(closeNav()).then(function() {
 							$('#assets_container').css("display","none");
 							$('#topNavBar').toggle();

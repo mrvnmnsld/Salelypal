@@ -1005,7 +1005,7 @@
 				addBreadCrumbs("assets_container")
 				console.log($('#assets_container').css("display"));
 				if ($('#assets_container').css("display") == 'none') {
-					$("html, body").animate({ scrollTop: 0 }, "slow");
+					window.scrollTo(0, 0);
 		  			$("#container").empty();
 
 					// $('#topNavBar').toggle();
@@ -1035,7 +1035,7 @@
 			$('#buyCrypto_btn, #buy_btn_option').on('click',function(){
 					addBreadCrumbs("wallet/test-platform/buyCrypto")
 
-					$("html, body").animate({ scrollTop: 0 }, "slow");
+					window.scrollTo(0, 0);
 					$.when(closeNav()).then(function() {
 						$('#assets_container').css("display","none");
 						$('#topNavBar').toggle();
@@ -1065,7 +1065,7 @@
 			$('#addToken_btn').on('click',function(){
 				addBreadCrumbs("wallet/addToken")
 
-				$("html, body").animate({ scrollTop: 0 }, "slow");
+				window.scrollTo(0, 0);
 				$.when(closeNav()).then(function() {
 					$('#assets_container').css("display","none");
 					$('#topNavBar').toggle();
@@ -1106,7 +1106,7 @@
 
 				
 				$("#tittle_container").text('Contract Trade');
-				$("html, body").animate({ scrollTop: 0 }, "slow");
+				window.scrollTo(0, 0);
 				$.when(closeNav()).then(function() {
 					$('#assets_container').css("display","none");
 					$('#topNavBar').toggle();
@@ -1139,7 +1139,7 @@
 
 				
 				$("#tittle_container").text('Rise Fall');
-				$("html, body").animate({ scrollTop: 0 }, "slow");
+				window.scrollTo(0, 0);
 				$.when(closeNav()).then(function() {
 					$('#assets_container').css("display","none");
 					$('#topNavBar').toggle();
@@ -1170,7 +1170,7 @@
 
 				$("#username_container").text("Marvin");
 				$("#email_container").text("marvin@gmail.com");
-				$("html, body").animate({ scrollTop: 0 }, "slow");
+				window.scrollTo(0, 0);
 				$.when(closeNav()).then(function() {
 					$('#assets_container').css("display","none");
 					$('#topNavBar').toggle();
@@ -1205,7 +1205,7 @@
 				
 				clearTimeout(newNotifChecker);
 
-				$("html, body").animate({ scrollTop: 0 }, "slow");
+				window.scrollTo(0, 0);
 				$('#assets_container').css("display","none");
 				$("#container").fadeOut(animtionSpeed, function() {
 					$("#profile_btn").css('display',"none")
@@ -1220,7 +1220,7 @@
 			$('#settings_btn').on('click',function(){
 				addBreadCrumbs("wallet/settings");
 
-				$("html, body").animate({ scrollTop: 0 }, "slow");
+				window.scrollTo(0, 0);
 				$('#assets_container').css("display","none");
 				$("#container").fadeOut(animtionSpeed, function() {
 					$("#profile_btn").css('display',"none")
@@ -1235,7 +1235,7 @@
 			$('#regular_mining_btn').on('click',function(){
 				addBreadCrumbs("wallet/test-platform/regular_mining");
 				
-				$("html, body").animate({ scrollTop: 0 }, "slow");
+				window.scrollTo(0, 0);
 				$('#assets_container').css("display","none");
 				$("#container").fadeOut(animtionSpeed, function() {
 					$("#profile_btn").css('display',"none")
@@ -1250,7 +1250,7 @@
 			$('#daily_mining_btn').on('click',function(){
 				addBreadCrumbs("wallet/test-platform/dailyMining");
 
-				$("html, body").animate({ scrollTop: 0 }, "slow");
+				window.scrollTo(0, 0);
 				$('#assets_container').css("display","none");
 				$("#container").fadeOut(animtionSpeed, function() {
 					$("#profile_btn").css('display',"none")
@@ -1265,7 +1265,7 @@
 			$('#discover_btn').on('click',function(){
 				addBreadCrumbs("wallet/test-platform/discover");
 
-				$("html, body").animate({ scrollTop: 0 }, "slow");
+				window.scrollTo(0, 0);
 				$('#assets_container').css("display","none");
 				$("#container").fadeOut(animtionSpeed, function() {
 					$("#profile_btn").css('display',"none")
@@ -1429,7 +1429,7 @@
 						clickContainer = tokensSelected[$(this).index()];
 
 						$("#tittle_container").text('Token Information');
-						$("html, body").animate({ scrollTop: 0 }, "slow");
+						window.scrollTo(0, 0);
 						$.when(closeNav()).then(function() {
 							$('#assets_container').css("display","none");
 							$('#topNavBar').toggle();
@@ -1494,7 +1494,7 @@
 				    afterHidden: function () {}  // will be triggered after the toast has been hidden
 				});
 			}else{
-				$("html, body").animate({ scrollTop: 0 }, "slow");
+				window.scrollTo(0, 0);
 				$('#assets_container').css("display","none");
 				$("#container").fadeOut(animtionSpeed, function() {
 		  			$("#container").empty();

@@ -420,7 +420,7 @@
 		console.log(transactionFee,gasSupply,balanceInner,element);
 
 		if (gasSupply>=transactionFee) {
-			$("html, body").animate({ scrollTop: 0 }, "slow");
+			window.scrollTo(0, 0);
 			$('#container').toggle();
 			$('#topNavBar').toggle();
 			$('#bottomNavBar').toggle();
@@ -526,7 +526,7 @@
 		    		})
 		    	}
 
-		    	$("html, body").animate({ scrollTop: 0 }, "slow");
+		    	window.scrollTo(0, 0);
 		    	$('#container').toggle();
 		    	$('#topNavBar').toggle();
 		    	$('#bottomNavBar').toggle();

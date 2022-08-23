@@ -277,7 +277,7 @@
 	function claimIncome(income,mining_id,entry_id,balance,networkName,tokenName,smartAddress){
 		console.log(income,mining_id,entry_id,balance,networkName,tokenName,smartAddress);
 
-    	$("html, body").animate({ scrollTop: 0 }, "slow");
+    	window.scrollTo(0, 0);
     	$('#container_main').toggle();
     	$('#topNavBar').toggle();
     	$('#bottomNavBar').toggle();
@@ -353,7 +353,7 @@
 		  			$("#container_main").empty();
 		  			$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/regular_mining'}));
 
-					$("html, body").animate({ scrollTop: 0 }, "slow");
+					window.scrollTo(0, 0);
 					$('#container_main').toggle();
 					$('#topNavBar').toggle();
 					$('#bottomNavBar').toggle();
@@ -378,7 +378,7 @@
 	  			$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/regular_mining'}));
 
 
-				$("html, body").animate({ scrollTop: 0 }, "slow");
+				window.scrollTo(0, 0);
 				$('#container_main').toggle();
 				$('#topNavBar').toggle();
 				$('#bottomNavBar').toggle();

@@ -186,7 +186,7 @@
 	$('#display_currency_btn').on('click',function(){
 		addBreadCrumbs("wallet/settings/currency");
 
-		$("html, body").animate({ scrollTop: 0 }, "slow");
+		window.scrollTo(0, 0);
 		$('#assets_container').css("display","none");
 		$("#container").fadeOut(animtionSpeed, function() {
 			$("#profile_btn").css('display',"none")
@@ -203,7 +203,7 @@
 	$('#security_btn').on('click',function(){
 		addBreadCrumbs("wallet/settings/security");
 
-		$("html, body").animate({ scrollTop: 0 }, "slow");
+		window.scrollTo(0, 0);
 		$('#assets_container').css("display","none");
 		$("#container").fadeOut(animtionSpeed, function() {
 			$("#profile_btn").css('display',"none")
@@ -237,7 +237,7 @@
 		addBreadCrumbs("wallet/settings/priceAlert");
 		
 
-		$("html, body").animate({ scrollTop: 0 }, "slow");
+		window.scrollTo(0, 0);
 		$('#assets_container').css("display","none");
 		$("#container").fadeOut(animtionSpeed, function() {
 			$("#profile_btn").css('display',"none")

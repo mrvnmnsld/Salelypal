@@ -250,7 +250,7 @@
 
 					bootbox.hideAll();
 
-					$("html, body").animate({ scrollTop: 0 }, "slow");
+					window.scrollTo(0, 0);
 					$('#assets_container').css("display","none");
 					$("#container").fadeOut(animtionSpeed, function() {
 						$("#profile_btn").css('display',"none")

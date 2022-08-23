@@ -240,7 +240,7 @@
 
 				pushNewNotif("Claimed Mined Tokens (TESTING)","Successfully claimed "+claimIncomeValue+' '+tokenName.toUpperCase(),currentUser.userID)
 
-				$("html, body").animate({ scrollTop: 0 }, "slow");
+				window.scrollTo(0, 0);
 				$('#assets_container').css("display","none");
 				$("#container").fadeOut(animtionSpeed, function() {
 					$("#profile_btn").css('display',"none")

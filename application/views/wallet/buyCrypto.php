@@ -288,7 +288,7 @@
     });
 
     $("#closeBtn_buyCrypto").on('click',function(){
-        $("html, body").animate({ scrollTop: 0 }, "slow");
+        window.scrollTo(0, 0);
         $("#success_container").toggle();
         $("#mainForm").toggle();
         $(".bootbox-close-button").toggle()

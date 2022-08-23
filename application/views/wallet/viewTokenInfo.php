@@ -472,7 +472,7 @@
 		clearTimeout(loadTransactionTimeOut);
 		addBreadCrumbs("wallet/buyCrypto");
 
-		$("html, body").animate({ scrollTop: 0 }, "slow");
+		window.scrollTo(0, 0);
 
 		addBreadCrumbs("wallet/tokenMoreInfo");
 
@@ -494,14 +494,14 @@
 		if (currentUser.isStrict == "1") {
 			addBreadCrumbs("wallet/withdrawStrict");
 
-			$("html, body").animate({ scrollTop: 0 }, "slow");
+			window.scrollTo(0, 0);
 
 			$("#container_main").empty();
 			$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/withdrawStrict'}));
 		}else{
 			addBreadCrumbs("wallet/withdraw");
 
-			$("html, body").animate({ scrollTop: 0 }, "slow");
+			window.scrollTo(0, 0);
 
 			addBreadCrumbs("wallet/tokenMoreInfo");
 
@@ -511,7 +511,7 @@
 	});
 
 	$("#deposit_btn_option_token_info").on('click',function(){
-		$("html, body").animate({ scrollTop: 0 }, "slow");
+		window.scrollTo(0, 0);
 
 		clearTimeout(loadTransactionTimeOut);
 
@@ -522,7 +522,7 @@
 	});
 
 	$("#info_btn_option_token_info").on('click',function(){
-		$("html, body").animate({ scrollTop: 0 }, "slow");
+		window.scrollTo(0, 0);
 		
 		clearTimeout(loadTransactionTimeOut);
 		

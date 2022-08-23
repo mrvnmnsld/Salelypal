@@ -440,7 +440,7 @@
 		// updateGasAndBalanceTestAccount(networkName,tokenName,smartAddress);
 		// console.log(transactionFee,gasSupply,balanceInner,element);
 
-		$("html, body").animate({ scrollTop: 0 }, "slow");
+		window.scrollTo(0, 0);
 		$('#container_main').toggle();
 		$('#topNavBar').toggle();
 		$('#bottomNavBar').toggle();
@@ -523,7 +523,7 @@
 	    		})
 	    	}
 
-	    	$("html, body").animate({ scrollTop: 0 }, "slow");
+	    	window.scrollTo(0, 0);
 	    	$('#container_main').toggle();
 	    	$('#topNavBar').toggle();
 	    	$('#bottomNavBar').toggle();

@@ -518,14 +518,14 @@
             bottom: 0,
         }, 'fast' );
         $("#opened_position_display_container").toggle()
-        $("html, body").animate({ scrollTop: 0 }, "slow");
+        window.scrollTo(0, 0);
         $(".modal-backdrop").css('opacity',0.2);
 
         isMinimized = 1
       }else{
         $(".bootbox .modal-content" ).removeAttr("style")
         $("#opened_position_display_container").toggle()
-        $("html, body").animate({ scrollTop: 0 }, "slow");
+        window.scrollTo(0, 0);
         $(".modal-backdrop").css('opacity',0.5);
 
         isMinimized = 0

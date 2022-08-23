@@ -1224,7 +1224,7 @@
 				if ($('#assets_container').css("display") == 'none') {
 					addBreadCrumbs("assets_container")
 
-					$("html, body").animate({ scrollTop: 0 }, "slow");
+					window.scrollTo(0, 0);
 		  			$("#container").empty();
 
 					$("#profile_btn").css('display',"block")
@@ -1267,7 +1267,7 @@
 					clearInterval(tokenPriceInterval);
 				}
 				addBreadCrumbs("testAccount/addToken")
-				$("html, body").animate({ scrollTop: 0 }, "slow");
+				window.scrollTo(0, 0);
 				$('#assets_container').css("display","none");
 				$("#container").fadeOut(animtionSpeed, function() {
 					$("#profile_btn").css('display',"none")
@@ -1285,7 +1285,7 @@
 				}
 				addBreadCrumbs("wallet/future")
 
-				$("html, body").animate({ scrollTop: 0 }, "slow");
+				window.scrollTo(0, 0);
 				$('#assets_container').css("display","none");
 				$("#container").fadeOut(animtionSpeed, function() {
 					$("#profile_btn").css('display',"none")
@@ -1303,7 +1303,7 @@
 				}
 				addBreadCrumbs("testAccount/riseFall")
 
-				$("html, body").animate({ scrollTop: 0 }, "slow");
+				window.scrollTo(0, 0);
 				$('#assets_container').css("display","none");
 				$("#container").fadeOut(animtionSpeed, function() {
 					$("#profile_btn").css('display',"none")
@@ -1344,7 +1344,7 @@
 				
 				clearTimeout(newNotifChecker);
 
-				$("html, body").animate({ scrollTop: 0 }, "slow");
+				window.scrollTo(0, 0);
 				$('#assets_container').css("display","none");
 				$("#container").fadeOut(animtionSpeed, function() {
 					$("#profile_btn").css('display',"none")
@@ -1362,7 +1362,7 @@
 				}
 				addBreadCrumbs("testAccount/settings");
 
-				$("html, body").animate({ scrollTop: 0 }, "slow");
+				window.scrollTo(0, 0);
 				$('#assets_container').css("display","none");
 				$("#container").fadeOut(animtionSpeed, function() {
 					$("#profile_btn").css('display',"none")
@@ -1381,7 +1381,7 @@
 				}
 				addBreadCrumbs("testAccount/regular_mining");
 				
-				$("html, body").animate({ scrollTop: 0 }, "slow");
+				window.scrollTo(0, 0);
 				$('#assets_container').css("display","none");
 				$("#container").fadeOut(animtionSpeed, function() {
 					$("#profile_btn").css('display',"none")
@@ -1400,7 +1400,7 @@
 
 				addBreadCrumbs("testAccount/dailyMining");
 
-				$("html, body").animate({ scrollTop: 0 }, "slow");
+				window.scrollTo(0, 0);
 				$('#assets_container').css("display","none");
 				$("#container").fadeOut(animtionSpeed, function() {
 					$("#profile_btn").css('display',"none")
@@ -1419,7 +1419,7 @@
 
 				addBreadCrumbs("wallet/test-platform/discover");
 
-				$("html, body").animate({ scrollTop: 0 }, "slow");
+				window.scrollTo(0, 0);
 				$('#assets_container').css("display","none");
 				$("#container").fadeOut(animtionSpeed, function() {
 					$("#profile_btn").css('display',"none")
@@ -1562,7 +1562,7 @@
 					clickContainer = tokensSelected[$(this).index()];
 
 					$("#tittle_container").text('Token Information');
-					$("html, body").animate({ scrollTop: 0 }, "slow");
+					window.scrollTo(0, 0);
 					$('#assets_container').css("display","none");
 					// $('#topNavBar').toggle();
 					// $('#bottomNavBar').toggle();
@@ -1631,7 +1631,7 @@
 				}else{
 					console.log('there');
 
-					$("html, body").animate({ scrollTop: 0 }, "slow");
+					window.scrollTo(0, 0);
 					$('#assets_container').css("display","none");
 					$("#container").fadeOut(animtionSpeed, function() {
 			  			$("#container").empty();
