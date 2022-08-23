@@ -329,6 +329,8 @@
 			    icon: 'success',
 			    position: 'bottom-left'
 			})
+
+			window.scrollTo(0, 0);
 		}
 
 		

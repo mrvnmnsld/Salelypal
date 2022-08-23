@@ -57,7 +57,7 @@
 				{ data:'id'},
 				{ data:'faq'},
 				{ data:'dateCreated'},
-				{ data:'createdBy'},
+				{ data:'username'},
 			],
 			"order": [[1, 'asc']],
 		    autoWidth: false
