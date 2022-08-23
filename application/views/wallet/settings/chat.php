@@ -119,7 +119,7 @@
 	var minutes = String(dt.getMinutes()).padStart(2, '0');
 	var seconds = String(dt.getSeconds()).padStart(2, '0');
 	var time = hours + ":" + minutes + ":" + seconds;
-	
+
 	$('#time').text(time)
 
 
@@ -157,7 +157,7 @@
 
 		$("#chat-container").append(
 			'<div style="display:none" class="text-right m-2 autoQuestions">'+
-				'<button class="btn btn-primary btn-sm mt-2 btn-faq requestAssistance">Request hman assistance</button>'+
+				'<button class="btn btn-primary btn-sm mt-2 btn-faq requestAssistance">Request human assistance</button>'+
 
 				'<br>'+
 			'</div>'

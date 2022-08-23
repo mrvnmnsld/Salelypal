@@ -871,7 +871,7 @@
 			<div class="p-2">
 
 				<div class="main-color-text mb-2 font-weight-bold h5">Support</div>
-				<button class="btn custom-2nd-text  btn-block text-left" disabled style="font-size: 20px;margin-left:3px">
+				<button class="btn custom-2nd-text  btn-block text-left" style="font-size: 20px;margin-left:3px" onclick="faq_mdl()">
 					<i class="fa fa-question" aria-hidden="true"></i>
 					<span class="" style="font-size: 18px;margin-left:2px">&nbsp;FAQ/Help Center</span>
 				</button>
@@ -2771,6 +2771,15 @@
 	// 	console.log("resized");
 	// 	reinitKeen()
 	// });
+
+	function faq_mdl(){
+		bootbox.alert({
+	      message: ajaxLoadPage('quickLoadPage',{'pagename':'wallet/faq'}),
+	      size: 'large',
+	      centerVertical: true,
+	      closeButton: false
+	    });
+	}
 
 </script>
 </body>
