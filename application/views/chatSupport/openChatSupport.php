@@ -23,7 +23,13 @@
 		box-shadow: 10px 15px 25px rgba(0, 0, 0, .8);
 		padding: 30px;
 	}
-
+	#chat{
+		width: 100%; 
+	    height: 500px; 
+	    overflow-y: scroll;
+	    border-radius: 0;
+	    margin-bottom: 0;
+	}
 </style>
 
 <div id="pagetitle_background" class="pagetitle">
@@ -56,7 +62,7 @@
 </div>
 
 <div class="modal-container" id="accepted_ticket_modal" style="display: none;">
-	<div class="card p-2">
+	<div id="chat" class="card p-3">
 		<div class="text-center text-muted">
 			Chat Started hit send to start chatting...
 		</div>
@@ -64,17 +70,16 @@
 		<hr>
 
 		<div id="chat_msgs_container"></div>
-
-		<div class="input-group">
-		    <input id="msg_send_container" type="text" class="form-control custom-control" rows="2" style="resize:none" value="Hello, This is Anna from SafelyPal Customer Service. How may i help you?"> 
-
-		    <button id="send_msg_btn" class="input-group-addon btn btn-primary align-middle" style="font-size:; vertical-align: middle;">
-		    	<i class="fa fa-paper-plane" aria-hidden="true"></i>
-		    	Send
-		    </button>
-		</div>
 	</div>
 	
+	<div class="input-group">
+	    <input id="msg_send_container" type="text" class="form-control custom-control" rows="2" style="border-radius: 0;" value="Hello, This is Anna from SafelyPal Customer Service. How may i help you?"> 
+
+	    <button id="send_msg_btn" class="input-group-addon btn btn-primary align-middle" style="vertical-align: middle;border-radius: 0;">
+	    	<i class="fa fa-paper-plane" aria-hidden="true"></i>
+	    	Send
+	    </button>
+	</div>
 
 	<hr>
 
@@ -84,6 +89,7 @@
 </div>
 
 <script type="text/javascript">
+
 	$("#chat_id_container").text(selectedData.id);
 	$("#chat_userID_container").text(selectedData.userID);
 	$("#chat_email_container").text(selectedData.email);
@@ -285,7 +291,9 @@
 							'<br>'
 						);
 					}
-				}			
+				}	
+				var objDiv = $(".card.p-3")[0];
+				objDiv.scrollTop = objDiv.scrollHeight;		
 			}
 		}
 	}

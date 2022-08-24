@@ -23,7 +23,11 @@
 		box-shadow: 10px 15px 25px rgba(0, 0, 0, .8);
 		padding: 30px;
 	}
-
+	.card{
+		width: 100%; 
+	    height: 500px; 
+	    overflow-y: scroll;
+	}
 </style>
 
 <div id="pagetitle_background" class="pagetitle">

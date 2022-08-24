@@ -127,14 +127,13 @@
 	var chatDetailsChecker,createNewTicket,chatDetails,updateChatHistoryInterval;
 
 	loadQuestionsAndAppend()
-	// console.log(getAnsQues)
-	var $window = $(window),$document = $(document);
+	var $window = $(window);
 
 	$window.on('scroll', function () {
-	    if (($window.scrollTop() + $window.height()) == $document.height()) {
-   	        $("#top_btn").css("display","block")
+	    if ($window.scrollTop() != 0) {
+   	        $("#top_btn").fadeIn("slow")
 	    } else {
-	        $("#top_btn").css("display","none")
+	        $("#top_btn").fadeOut("slow")
 	    }
 	});
 
@@ -211,14 +210,14 @@
 				'id':createNewTicket
 			});
 
-			console.log(createNewTicket,chatDetails);
+			// console.log(createNewTicket,chatDetails);
 
 			chatDetailsChecker = setInterval(function(){
 				chatDetails = ajaxShortLink('admin/getChatDetails',{
 					'id':createNewTicket
 				});
 
-				console.log(chatDetails[0].adminID)
+				// console.log(chatDetails[0].adminID)
 
 				if (chatDetails[0].adminID != null) {
 					$("#msg_send_container").removeAttr("disabled");
