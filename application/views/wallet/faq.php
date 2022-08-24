@@ -71,7 +71,7 @@
 </style>
 
 <div class="text-center">
-  <label class="h3 mt-2 fw-bold">FAQ/Help Center</label>
+  <label class="h3 mt-2 fw-bold">FAQ</label>
 </div>
 
 <hr>
