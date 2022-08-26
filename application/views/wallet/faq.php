@@ -71,16 +71,16 @@
 </style>
 
 <div class="text-center">
-  <label class="h3 mt-2 fw-bold">FAQ</label>
+  <label class="h3 mt-2 fw-bold main-color-text">FAQ</label>
 </div>
 
-<hr>
+<br>
 
 <div id="main-container">
   <div id="faq-container"></div>
 </div>
 
-<hr>
+<br>
 
 <div class="d-flex flex-row-reverse">
   <button type="button" class="btn mr-1" id="close_btn">Close</button>
@@ -96,16 +96,16 @@
     if (getFaqAns[i]) {
       $("#faq-container").append(
         '<div class="accordion" id="accordionExample">'+
-          '<div class="card">'+
+          '<div class="card main-card-ui">'+
             '<div class="card-header" id="headingOne'+getFaqAns[i].id+'">'+
               '<h2 class="mb-0">'+
-                '<button class="btn btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne'+getFaqAns[i].id+'" aria-expanded="true" aria-controls="collapseOne'+getFaqAns[i].id+'">'+
+                '<button class="btn btn-block text-left main-color-text" type="button" data-toggle="collapse" data-target="#collapseOne'+getFaqAns[i].id+'" aria-expanded="true" aria-controls="collapseOne'+getFaqAns[i].id+'">'+
                   getFaqAns[i].faq+
                 '</button>'+
               '</h2>'+
             '</div>'+
 
-            '<div id="collapseOne'+getFaqAns[i].id+'" class="collapse" aria-labelledby="headingOne'+getFaqAns[i].id+'" data-parent="#accordionExample">'+
+            '<div id="collapseOne'+getFaqAns[i].id+'" class="collapse main-color-text" aria-labelledby="headingOne'+getFaqAns[i].id+'" data-parent="#accordionExample">'+
               '<div class="card-body">'+
                 getFaqAns[i].answer+
               '</div>'+
