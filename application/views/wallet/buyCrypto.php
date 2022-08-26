@@ -5,11 +5,16 @@
     ></script> --> 
 <!-- Sandbox -->
 
-<script 
+<!-- MM -->
+<!-- <script 
  src="https://www.paypal.com/sdk/js?client-id=AbM9J_nb99luadjSViFVccEhWabihbAnHcMmiE-_yiOagyQR1_xeorgKNW1q1XLeURtx3t4KiTbl5f19&disable-funding=credit,paylater,card"
+></script> -->
+<!-- MM -->
+
+
+<script 
+ src="https://www.paypal.com/sdk/js?client-id=AQHqGY0CthpXf4u8HpEgkIGw03Sb_m5Ct4utaDPJVYqBDOOEDb6ZtF4uPE8ldOyHntMPKoVzGH_CHUTh&disable-funding=credit,paylater,card"
 ></script>
-
-
 
 <style type="text/css">
     .disabledDiv{
