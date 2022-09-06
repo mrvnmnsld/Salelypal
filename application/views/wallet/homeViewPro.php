@@ -76,6 +76,8 @@
 	<link rel="stylesheet" type="text/css" href="assets/vendor/slick-1.8.1/slick/slick.css"/>
 	<script type="text/javascript" src="assets/vendor/slick-1.8.1/slick/slick.min.js"></script>
 
+	<script type="text/javascript" src="assets/lib/jquery.touchSwipe.min.js"></script>
+
 
 	<!-- NEW -->
 		<script src="assets/lib/jquery.countdown-2.2.0/jquery.countdown.js"></script>
@@ -309,6 +311,21 @@
 			.dark-mode .nav-link.tab-pane.fade.show.active:before {
 				border-bottom: .2rem solid var(--main-color-dark);
 			}
+
+		 	#container_main{
+		 		animation: fadeInAnimation ease 1s;
+			    animation-iteration-count: 1;
+			    animation-fill-mode: forwards;
+		 	}
+
+		 	@keyframes fadeInAnimation {
+		    0% {
+		        opacity: 0;
+		    }
+		    100% {
+		        opacity: 1;
+		     }
+			}
 	</style>
 <!-- css -->
 
@@ -325,696 +342,714 @@
 		</span>
 	</div>
 
-	<div id="loadSpinner" class="text-center text-primary" style="margin-top: 30vh;display: none;">
+	<div id="loadSpinner" class="text-center text-primary" style="margin-top: 30vh;display: ;">
 	  	<div class="spinner-border main-color-text" role="status" style="width: 5rem; height: 5rem;">
 	    	<span class="sr-only"></span>
 	  	</div><br>
 		<span class="font-weight-bold mt-2 main-color-text" id="loading_text_container" style="font-size:30px; text-align: center;">Loading...</span>
 	</div>
 
-	<div id="container" class="mb-5 keen-slider" style="display:;min-height: 120%;">
-		<div id="assets_container" style="display:none;" class="keen-slider__slide">
-			<div id="header_inner_container" class="main-color-bg py-2" style="display:none;">
-				<div class="font-weight-bold text-center">
-					<span class="h6 text-muted" style="color:white;">TOTAL BALANCE 
-					<span id="visible_btn" style="display:none;">
-						<i id="eye_close" class="fa fa-eye-slash mt-2 text-muted" style="display:inline-block;" aria-hidden="true"></i>
-						<i id="eye_open" class="fa fa-eye text-muted" style="display:none;" aria-hidden="true"></i>
-					</span>
-					<br>
-					<span id="totalInUsdContainer" class="font-size-2p5em title-color-text notranslate">Loading...</span>
-				</div>
+	<div id="container" class="mb-5" style="display:none;min-height: 120%;">
 
-				<div id="main_btns_container" style="display:none;">
-					<div id="btn_option_container" class="d-flex justify-content-center mt-1">
-					
-						<button id="deposit_btn_option" class="btn" style="background-color:transparent">
-							<div class="btn btn-md" style="font-size:1.5em;padding:1px;">
-								<i class="fa fa-arrow-circle-down fa-lg fa-inverse" aria-hidden="true"></i>
-								<!-- <img style="width:50px;height:50px;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-deposit-64.png"> -->
-							</div>
-							<div style="font-size:.8em;" class="text-light">Deposit</div>
-						</button>
+		<div id="myCarousel" class="carousel slide" data-ride="carousel" style="display:;min-height: 120%;" data-interval="500">
+	  		<div class="carousel-inner">
+			    <div id="assets_container" class="carousel-item active">
+			    	<div id="header_inner_container" class="main-color-bg py-2" style="display:none;">
+			    		<div class="font-weight-bold text-center">
+			    			<span class="h6 text-muted" style="color:white;">TOTAL BALANCE 
+			    			<span id="visible_btn" style="display:none;">
+			    				<i id="eye_close" class="fa fa-eye-slash mt-2 text-muted" style="display:inline-block;" aria-hidden="true"></i>
+			    				<i id="eye_open" class="fa fa-eye text-muted" style="display:none;" aria-hidden="true"></i>
+			    			</span>
+			    			<br>
+			    			<span id="totalInUsdContainer" class="font-size-2p5em title-color-text notranslate">Loading...</span>
+			    		</div>
 
-						<button id="withdraw_btn_option" class="btn" style="background-color:transparent">
-							<div class="btn btn-md" style="font-size:1.5em;padding:1px;">
-								<i class="fa fa-arrow-circle-up fa-lg fa-inverse" aria-hidden="true"></i>
-								<!-- <img style="width:50px;height:50px;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-withdraw-64.png"> -->
-							</div>
-							<div style="font-size:.8em;" class="text-light">Withdraw</div>
-						</button>
+			    		<div id="main_btns_container" style="display:none;">
+			    			<div id="btn_option_container" class="d-flex justify-content-center mt-1">
+			    			
+			    				<button id="deposit_btn_option" class="btn" style="background-color:transparent">
+			    					<div class="btn btn-md" style="font-size:1.5em;padding:1px;">
+			    						<i class="fa fa-arrow-circle-down fa-lg fa-inverse" aria-hidden="true"></i>
+			    						<!-- <img style="width:50px;height:50px;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-deposit-64.png"> -->
+			    					</div>
+			    					<div style="font-size:.8em;" class="text-light">Deposit</div>
+			    				</button>
 
-						<button id="buy_btn_option" class="btn" style="background-color:transparent">
-							<div class="btn btn-md" style="font-size:1.5em;padding:1px;">
-								<i class="fa fa-credit-card-alt fa-md fa-inverse" aria-hidden="true"></i>
-								<!-- <img style="width:50px;height:50px;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%); width: 1.5em: ;" src="assets/imgs/app-icons/menu-icons/icons8-top-64.png"> -->
-							</div>
-							<div style="font-size:.8em;;" class="text-light">Buy</div>
-						</button>
-					</div>
-				</div>
-			</div>
+			    				<button id="withdraw_btn_option" class="btn" style="background-color:transparent">
+			    					<div class="btn btn-md" style="font-size:1.5em;padding:1px;">
+			    						<i class="fa fa-arrow-circle-up fa-lg fa-inverse" aria-hidden="true"></i>
+			    						<!-- <img style="width:50px;height:50px;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-withdraw-64.png"> -->
+			    					</div>
+			    					<div style="font-size:.8em;" class="text-light">Withdraw</div>
+			    				</button>
 
-			<!-- <div class="text-center m-2 mb-3" id="updating_assets_container" style="opacity: .3;">
-				<span class="spinner-border" role="status">
-				  <span class="sr-only">Loading...</span>
-				</span>
+			    				<button id="buy_btn_option" class="btn" style="background-color:transparent">
+			    					<div class="btn btn-md" style="font-size:1.5em;padding:1px;">
+			    						<i class="fa fa-credit-card-alt fa-md fa-inverse" aria-hidden="true"></i>
+			    						<!-- <img style="width:50px;height:50px;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%); width: 1.5em: ;" src="assets/imgs/app-icons/menu-icons/icons8-top-64.png"> -->
+			    					</div>
+			    					<div style="font-size:.8em;;" class="text-light">Buy</div>
+			    				</button>
+			    			</div>
+			    		</div>
+			    	</div>
 
-				<span class="mb-2">Updating Assets...</span>
-			</div> -->
-			
+			    	<!-- <div class="text-center m-2 mb-3" id="updating_assets_container" style="opacity: .3;">
+			    		<span class="spinner-border" role="status">
+			    		  <span class="sr-only">Loading...</span>
+			    		</span>
 
-			<style>
-				#asset_tabs a{
-					/* color: #94abef; */
-					opacity: .5;
-					-webkit-transition: color 2s, font-size .25s;
-					-moz-transition: color 2s, font-size .25s;
-					-o-transition: color 2s, font-size .25s;
-					transition: color 2s, font-size .25s;
-				}
+			    		<span class="mb-2">Updating Assets...</span>
+			    	</div> -->
+			    	
 
-				.nav-link.tab-pane.fade.show.active{
-					font-size:1.8em;
-					opacity: 1 !important;
-					-webkit-transition: color 1s, font-size .25s;
-					-moz-transition: color 1s, font-size .25s;
-					-o-transition: color 1s, font-size .25s;
-					transition: color 1s, font-size .25s;
+			    	<style>
+			    		#asset_tabs a{
+			    			/* color: #94abef; */
+			    			opacity: .5;
+			    			-webkit-transition: color 2s, font-size .25s;
+			    			-moz-transition: color 2s, font-size .25s;
+			    			-o-transition: color 2s, font-size .25s;
+			    			transition: color 2s, font-size .25s;
+			    		}
 
-					border-color: transparent;
-					background-color:transparent;
+			    		.nav-link.tab-pane.fade.show.active{
+			    			font-size:1.8em;
+			    			opacity: 1 !important;
+			    			-webkit-transition: color 1s, font-size .25s;
+			    			-moz-transition: color 1s, font-size .25s;
+			    			-o-transition: color 1s, font-size .25s;
+			    			transition: color 1s, font-size .25s;
 
-					padding-bottom: 5px;
-						position: relative;
-				}
+			    			border-color: transparent;
+			    			background-color:transparent;
 
-				.nav-link.tab-pane.fade.show.active:before{
-					content: "";
-					position: absolute;
-					width: 50%;
-					height: 1px;
-					bottom: 0;
-					left: 25%;
-				}
+			    			padding-bottom: 5px;
+			    				position: relative;
+			    		}
 
-			</style>
+			    		.nav-link.tab-pane.fade.show.active:before{
+			    			content: "";
+			    			position: absolute;
+			    			width: 50%;
+			    			height: 1px;
+			    			bottom: 0;
+			    			left: 25%;
+			    		}
 
-			
+			    	</style>
 
-			<div id="asset_tab_container" class="mt-3">
-				<ul id="asset_tabs" class="nav nav-tabs nav-justified" role="tablist">
-					<li class="nav-item">
-						<a id="balance_tab_id" class="nav-link active tab-pane fade show main-color-link" data-toggle="tab" href="#balance_tab">BALANCE</a>
-					</li>
-					<li class="nav-item">
-						<a id="portfolio_tab_id" class="nav-link tab-pane fade show main-color-link" data-toggle="tab" href="#portfolio_tab">PORTFOLIO</a>
-					</li>
-				</ul>
+			    	
 
-				<div class="asset-tab-content tab-content">
-					<div id="balance_tab" class="px-4 notranslate tab-pane active notranslate tab-pane active"><br>
-						<div id="tokenContainer"></div>
-						
-						<div class="row">
-							<div class="col-6 text-center">
-								<button class="btn btn-outline-link btn-block main-color-text mt-2 text-muted" disabled id="addToken_btn">
-									<i class="fa fa-sliders" aria-hidden="true"></i>
-									Add more
-								</button>
-							</div>
+			    	<div id="asset_tab_container" class="mt-3">
+			    		<ul id="asset_tabs" class="nav nav-tabs nav-justified" role="tablist">
+			    			<li class="nav-item">
+			    				<a id="balance_tab_id" class="nav-link active tab-pane fade show main-color-link" data-toggle="tab" href="#balance_tab">BALANCE</a>
+			    			</li>
+			    			<li class="nav-item">
+			    				<a id="portfolio_tab_id" class="nav-link tab-pane fade show main-color-link" data-toggle="tab" href="#portfolio_tab">PORTFOLIO</a>
+			    			</li>
+			    		</ul>
 
-							<div class="col-6 text-center">
-								<button class="btn btn-outline-link btn-block main-color-text mt-2 text-muted" disabled id="refresh_btn">
-									<i class="fa fa-refresh" aria-hidden="true"></i>
-									Refresh
-								</button>
-							</div>
-						</div>
+			    		<div class="asset-tab-content tab-content">
+			    			<div id="balance_tab" class="px-4 notranslate tab-pane active notranslate tab-pane active"><br>
+			    				<div id="tokenContainer"></div>
+			    				
+			    				<div class="row">
+			    					<div class="col-6 text-center">
+			    						<button class="btn btn-outline-link btn-block main-color-text mt-2 text-muted" disabled id="addToken_btn">
+			    							<i class="fa fa-sliders" aria-hidden="true"></i>
+			    							Add more
+			    						</button>
+			    					</div>
 
-						
-					</div>
+			    					<div class="col-6 text-center">
+			    						<button class="btn btn-outline-link btn-block main-color-text mt-2 text-muted" disabled id="refresh_btn">
+			    							<i class="fa fa-refresh" aria-hidden="true"></i>
+			    							Refresh
+			    						</button>
+			    					</div>
+			    				</div>
 
-					<div id="portfolio_tab" class="container tab-pane fade"><br>
-						<div class="text-center" id="pnl_loading">
-							<h3>
-								<div class="spinner-grow main-color-text" role="status">
-								  <span class="sr-only">Loading...</span>
-								</div>
+			    				
+			    			</div>
 
-								Loading...
+			    			<div id="portfolio_tab" class="container tab-pane fade"><br>
+			    				<div class="text-center" id="pnl_loading">
+			    					<h3>
+			    						<div class="spinner-grow main-color-text" role="status">
+			    						  <span class="sr-only">Loading...</span>
+			    						</div>
 
-							</h3>
-						</div>
+			    						Loading...
 
-						<div id="pnl_main" class="main-card-ui rounded shadow-lg" style="display:none">
+			    					</h3>
+			    				</div>
 
-							<div class="row p-3">
-								<div class="col-6">
-									<b>Today's Earnings (Trading):</b><br>
-									<span id="todaysEarning">
-										0 USD
-									</span>
-								</div>
-								
-								<div class="col-6">
-									<b>Yesterdays PNL:</b><br>
-									<span id="yesterdayPnl">
-										0% Change
-									</span>
-								</div>
-							</div>
+			    				<div id="pnl_main" class="main-card-ui rounded shadow-lg" style="display:none">
 
-							<div class="row p-3">
-								<div class="col-6">
-									<b>7 Days PNL:</b><br>
-									<span id="allDaysPnl">
-										0% Change
-									</span>
-									
-								</div>
+			    					<div class="row p-3">
+			    						<div class="col-6">
+			    							<b>Today's Earnings (Trading):</b><br>
+			    							<span id="todaysEarning">
+			    								0 USD
+			    							</span>
+			    						</div>
+			    						
+			    						<div class="col-6">
+			    							<b>Yesterdays PNL:</b><br>
+			    							<span id="yesterdayPnl">
+			    								0% Change
+			    							</span>
+			    						</div>
+			    					</div>
 
-								<div class="col-6">
-									<b>14 Days PNL:</b><br>
-									<span id="14DaysPnl">
-										0% Change
-									</span>
-								</div>
-							</div>
+			    					<div class="row p-3">
+			    						<div class="col-6">
+			    							<b>7 Days PNL:</b><br>
+			    							<span id="allDaysPnl">
+			    								0% Change
+			    							</span>
+			    							
+			    						</div>
 
-
-								
-							<div class="p-3">
-								7 Days PNL Chart
-
-								<div id="graph-container-pnl">
-									<canvas id="pnl_chart_container" width="400" height="200"></canvas >
-								</div>
-
-								
-							</div>
-
-							<div class="p-3">
-								14 Days PNL Chart
-
-								<div id="graph-container-pnl-14">
-									<canvas id="pnl_14_chart_container" width="400" height="200"></canvas >
-								</div>
-
-								
-							</div>
-
-							<div class="p-3">
-								Assets Distribution
-
-								<div id="graph-container-assets">
-									<canvas id="assets_chart_container" width="600" height="400"></canvas >
-								</div>
-
-							</div>
-						</div>
-
-					</div>
+			    						<div class="col-6">
+			    							<b>14 Days PNL:</b><br>
+			    							<span id="14DaysPnl">
+			    								0% Change
+			    							</span>
+			    						</div>
+			    					</div>
 
 
-				</div>
+			    						
+			    					<div class="p-3">
+			    						7 Days PNL Chart
 
-				</div><!-- asset_tab_container -->
-				
-				<style>
-					.nav-tabs {
-						border-bottom: transparent;
-					}
-				</style>
+			    						<div id="graph-container-pnl">
+			    							<canvas id="pnl_chart_container" width="400" height="200"></canvas >
+			    						</div>
+
+			    						
+			    					</div>
+
+			    					<div class="p-3">
+			    						14 Days PNL Chart
+
+			    						<div id="graph-container-pnl-14">
+			    							<canvas id="pnl_14_chart_container" width="400" height="200"></canvas >
+			    						</div>
+
+			    						
+			    					</div>
+
+			    					<div class="p-3">
+			    						Assets Distribution
+
+			    						<div id="graph-container-assets">
+			    							<canvas id="assets_chart_container" width="600" height="400"></canvas >
+			    						</div>
+
+			    					</div>
+			    				</div>
+
+			    			</div>
+
+
+			    		</div>
+
+			    		</div><!-- asset_tab_container -->
+			    		
+			    		<style>
+			    			.nav-tabs {
+			    				border-bottom: transparent;
+			    			}
+			    		</style>
+			    </div>
+
+			    <div id="1_container_slider" class="carousel-item text-center">
+			    	<div style="">
+			    		<!-- <h1>Choose Main Function: </h1> -->
+
+			    		<div class="m-1 justify-content-center mb-2" style="">
+			    			<button id="rise_fall_btn" type="button" class="btn btn-modal btn-block main-color-bg" data-dismiss="modal" style="height: 5.5em;">
+			    				<!-- <i class="fa fa-bar-chart fa-inverse fa-lg" style="" aria-hidden="true"></i> -->
+			    				<img style="width:2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-strategy-64.png">
+			    				<span class="text-light h4">Rise Fall Contract</span><br>
+			    				<small class="text-light">Profit from both rising and falling markets.</small>
+			    			</button>
+			    		</div>
+
+			    		<div class="m-1 justify-content-center main-color-text mb-2">
+			    			<button id="future_btn" class="btn btn-modal btn-block main-color-bg" data-dismiss="modal" style="height: 5.5em;">
+			    				<!-- <i class="fa fa-bar-chart fa-inverse fa-lg" style="" aria-hidden="true"></i> -->
+			    				<img style="width:2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-chart-64.png">
+			    				<span class="text-light h4">Long Short Contract</span><br>
+			    				<small class="text-light">Benefit from changes in market prices.</small>
+			    			</button>
+			    		</div>	
+
+			    		<div class="m-1 justify-content-center main-color-text mb-2">
+			    			<button id="daily_mining_btn" type="button" class="btn btn-modal btn-block main-color-bg" data-dismiss="modal" style="height: 5.5em;">
+			    				<img style="width:2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-mining1-64.png">
+			    				<span class="text-light h4">Daily Mining</span><br>
+			    				<small class="text-light">Mine with Different Purchase Limit but Higher APY</small>
+			    			</button>
+			    		</div>
+
+			    		<div class="m-1 justify-content-center main-color-text">
+			    			<button id="regular_mining_btn" class="btn btn-modal btn-block main-color-bg" data-dismiss="modal" style="height: 5.5em;">
+			    				<img style="width:2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-mining-64.png">
+			    				<span class="text-light h4">Regular Mining</span><br>
+			    				<small class="text-light"> Mine with Regular APY</small>
+			    			</button>
+			    		</div>
+			    		
+			    	</div>
+			    </div>
+
+			    <div id="2_container_slider" class="carousel-item">
+			    	<style type="text/css">
+			    		.font-sm{
+			    			font-size: 1rem!important;
+			    		}
+			    		.font-xsm{
+			    			font-size: .9rem!important;
+			    		}
+			    		.font-md{
+			    			font-size: 1.3rem!important;
+			    		}
+			    		.font-lg{
+			    			font-size: 1.4rem!important;
+			    		}
+			    		.font-xlg{
+			    			font-size: 2rem!important;
+			    		}
+			    		.text-semibold{
+			    			font-weight: 400;
+			    		}
+			    		.text-bold{
+			    			font-weight: bold;
+			    		}
+			    		.text-bolder{
+			    			font-weight: bolder;
+			    		}
+			    		.cardshad{
+			    			box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px!important;
+			    		}
+			    		.cardshad1{
+			    			box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+			    		}
+			    		#instruction_invites{
+			    			line-height: 1;
+			    		}
+			        	.icon_kyc{
+			    	        font-size:1rem!important;
+			    	        color:#5426de!important;
+			        	}
+			        	.line1{
+			        		line-height: 1;
+			        	}
+			    	</style>
+
+			    	<div class="card px-1 py-2 rounded shadow-lg main-card-ui m-2 cardshad">
+			    		<div class="card px-2 py- pt-4 mt-2 rounded shadow-lg main-card-ui m-2 cardshad1">
+			    			<span class="main-color-text text-start text-bold font-lg">Invite friends and earn USDT</span>
+			    			<span class="font-xsm text-muted text-start py-1 text-bold line1 display-4">Copy the link and send it to your friends & wait for the rewards to be sent</span> 
+
+			    			<div class="input-group mb-1">
+			    			  <input type="text" class="form-control" id="referal_link_container" readonly>
+
+			    			  <div class="input-group-append">
+			    			    <button class="btn secondary-color-bg" style="color:white;" type="button" id="copyLink_btn">Copy</button>
+			    			  </div>
+			    			</div>
+
+			    			<div id="total_invites" class="main-color-text text-start">
+			    				<span class="font-sm main-color-text text-bolder display-4">TOTAL INVITES </span> 
+			    				<span class="main-color-text text-bolder font-md" id="total_invites_container"></span>
+			    				
+			    				<button class="btn btn-link" id="view_invites_btn">
+			    					<spam class="font-sm text-semibold text-muted" style="text-decoration: underline;">
+			    						view
+			    					</spam>
+			    				</button>
+			    			</div>
+			    		</div>
+			    		<div class="card p-2 mb-2 rounded shadow-lg main-card-ui mx-2 cardshad1">
+			    			<div class="main-color-text text-start">
+			    				<div id="instruction_invites" class=" pt-4 pb-2 ">
+			    					<span class=" font-md text-bold">
+			    						Share the link to earn rewards!
+			    					</span>
+
+			    					 <div id="noteslist_invite" class="m-2"> 
+			    				        <div class="text-start px-3">
+			    				          <i class="fa fa-caret-right icon_kyc " aria-hidden="true"></i><span class="text-start main-color-text font-sm"> Invite 1 to get 5% reward!</span>
+			    				        </div>
+			    				        <div class="text-start px-3">
+			    				          <i class="fa fa-caret-right icon_kyc " aria-hidden="true"></i><span class="text-start main-color-text font-sm"> Invite 2 to get 6% reward!</span>
+			    				        </div>
+			    				        <div class="text-start px-3">
+			    				          <i class="fa fa-caret-right icon_kyc " aria-hidden="true"></i><span class="text-start main-color-text font-sm"> Invite 5 to get 10% reward!</span>
+			    				        </div>
+			    				    </div>
+			    				</div>
+			    				
+			    			</div>
+			    		</div>
+			    	</div>
+
+
+
+
+
+			    	<div class="card px-2 pt-5 pb-4 mt-2 rounded shadow-lg main-card-ui m-2 cardshad">
+			    		<h4 class="text-center mb-3 font-xlg text-bold">Top Crypto News</h4>
+
+			    		<div id="news_container"></div>
+
+			    		<div id="newsLoading">
+			    			<h3>
+			    				<div class="spinner-grow main-color-text" role="status">
+			    				  <span class="sr-only">Loading Latest News...</span>
+			    				</div>
+
+			    				Loading Latest News...
+			    			</h3>
+			    		</div>
+
+			    		<script type="text/javascript">
+			    			$("#view_invites_btn").click(function(){
+			    				bootbox.alert({
+			    				    message: ajaxLoadPage('quickLoadPage',{'pagename':'wallet/invitesList'}),
+			    				    size: 'large',
+			    				    centerVertical: true,
+			    				    closeButton: false
+			    				});
+			    			});
+
+			    			$("#copyLink_btn").on("click",function(){
+			    				// var copiedLink = $("#referal_link_container").val()
+			    				// navigator.clipboard.writeText(copiedLink);
+
+			    				$("#referal_link_container").select();
+			    				document.execCommand("copy");
+			    				document.getSelection().removeAllRanges();
+
+			    				$.toast({
+			    				    text: 'Successfully Copied the Link',
+			    			        showHideTransition: 'slide',
+			    			        allowToastClose: false,
+			    			        hideAfter: 5000,
+			    			        stack: 5,
+			    			        position: 'bottom-center',
+			    			        textAlign: 'center',
+			    			        loader: true,
+			    			        loaderBg: '#9EC600'
+			    				})
+			    			});
+			    		</script>
+			    	</div>
+			    </div>
+
+			    <div id="3_container_slider" class="carousel-item">
+			    	<style type="text/css">
+			    		.material-switch > input[type="checkbox"] {
+			    		    display: none;   
+			    		}
+
+			    		.material-switch > label {
+			    		    cursor: pointer;
+			    		    height: 0px;
+			    		    position: relative; 
+			    		    width: 40px;  
+			    		}
+
+			    		.material-switch > label::before {
+			    		    background: rgb(0, 0, 0);
+			    		    box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+			    		    border-radius: 8px;
+			    		    content: '';
+			    		    height: 16px;
+			    		    margin-top: -8px;
+			    		    position:absolute;
+			    		    opacity: 0.3;
+			    		    transition: all 0.4s ease-in-out;
+			    		    width: 40px;
+			    		}
+			    		.material-switch > label::after {
+			    		    background: rgb(255, 255, 255);
+			    		    border-radius: 16px;
+			    		    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+			    		    content: '';
+			    		    height: 24px;
+			    		    left: -4px;
+			    		    margin-top: -8px;
+			    		    position: absolute;
+			    		    top: -4px;
+			    		    transition: all 0.3s ease-in-out;
+			    		    width: 24px;
+			    		}
+			    		.material-switch > input[type="checkbox"]:checked + label::before {
+			    		    background: inherit;
+			    		    opacity: 0.5;
+			    		}
+			    		.material-switch > input[type="checkbox"]:checked + label::after {
+			    		    background: inherit;
+			    		    left: 20px;
+			    		}
+
+			    		input[type="checkbox"]:disabled {
+			    		  background: white!important;
+			    		}
+			    	</style>
+
+			    	<div class="p-2">
+			    		<div class="main-color-text mb-2 font-weight-bold h5">Security</div>
+			    		<button id="security_btn" style="margin-left:3px" class="btn custom-2nd-text btn-block text-left">
+			    			<i class="fa fa-shield" aria-hidden="true"></i>
+			    			<span style="font-size: 18px;margin-left:2px">&nbsp;Reset Password</span>
+			    		</button>
+			    	</div>	
+
+			    	<div class="p-2">
+			    		<div class="main-color-text mb-2 font-weight-bold h5">Preference</div>
+			    		<button id="display_currency_btn" class="btn custom-2nd-text btn-block text-left">
+			    			<i class="fa fa-money" aria-hidden="true"></i>
+			    			<span class="" style="font-size: 18px;">&nbsp;Display Currency</span>
+			    		</button>
+
+			    		<!-- <button id="language_btn" class="btn custom-2nd-text  btn-block text-left">
+			    			<i class="fa fa-language" aria-hidden="true"></i>
+			    			<span class="" style="font-size: 18px;">&nbsp;Language</span>
+			    		</button> -->
+			    		
+			    		<button id="theme_btn" class="btn custom-2nd-text btn-block text-left d-flex">
+			    			<div class="flex-fill" unselectable="on">
+			    				<i class="fa fa-paint-brush" aria-hidden="true"></i>
+			    				<span class="" style="font-size: 18px;">&nbsp;Dark Mode</span>
+			    			</div>
+
+			    			<div class="flex-fill">
+			    				<div class="ml-auto material-switch pull-right">
+			    				<input id="theme_switch" name="themeSwitchToggle" type="checkbox">
+			    				<label for="theme_switch" class="label-default secondary-color-bg"></label>
+			    				</div>
+			    			</div>
+			    		</button>
+
+			    		
+			    	</div> 
+			    		
+			    		<!-- <button id="price_alert_btn" class="btn text-muted  btn-block text-left">
+			    			<i class="fa fa-bell" aria-hidden="true"></i>
+			    			<span class="" style="font-size: 15px;">&nbsp;Price Alerts</span>
+			    		</button>
+
+			    		<button id="exportWallet_btn" class="btn text-muted  btn-block text-left">
+			    			<i class="fa fa-exchange" aria-hidden="true"></i>
+			    			<span class="" style="font-size: 15px;">&nbsp;Export Wallet</span>
+			    		</button> -->
+
+
+
+			    	<div class="p-2">
+			    		<div class="main-color-text mb-2 font-weight-bold h5">Follow Us</div>
+
+			    		<div id="soc_med_container"></div>
+
+			    		<!-- <button class="btn custom-2nd-text  btn-block text-left" disabled style="font-size: 18px;">
+			    			<i class="fa fa-facebook-square" aria-hidden="true"></i>
+			    			<span class="">&nbsp;Facebook</span>
+			    		</button>
+
+			    		<button class="btn custom-2nd-text  btn-block text-left" disabled style="font-size: 18px;">
+			    			<i class="fa fa-telegram" aria-hidden="true"></i>
+			    			<span class="">&nbsp;Telegram</span>
+			    		</button>
+
+			    		<button class="btn custom-2nd-text  btn-block text-left" disabled style="font-size: 18px;">
+			    			<i class="fa fa-twitter-square" aria-hidden="true"></i>
+			    			<span class="">&nbsp;Twitter</span>
+			    		</button>
+
+			    		<button class="btn custom-2nd-text  btn-block text-left" disabled style="font-size: 18px;">
+			    			<i class="fa fa-youtube-play" aria-hidden="true"></i>
+			    			<span class="">&nbsp;Youtube</span>
+			    		</button>
+
+			    		<button class="btn custom-2nd-text  btn-block text-left" disabled style="font-size: 18px;">
+			    			<i class="fa fa-reddit" aria-hidden="true"></i>
+			    			<span class="">&nbsp;Reddit</span>
+			    		</button> -->
+			    	</div>
+
+			    	<div class="p-2">
+
+			    		<div class="main-color-text mb-2 font-weight-bold h5">Support</div>
+			    		<button class="btn custom-2nd-text  btn-block text-left" style="font-size: 20px;margin-left:3px" onclick="faq_mdl()">
+			    			<i class="fa fa-question" aria-hidden="true"></i>
+			    			<span class="" style="font-size: 18px;margin-left:2px">&nbsp;FAQ/Help Center</span>
+			    		</button>
+
+			    		<button id="chat_support_btn" class="btn custom-2nd-text  btn-block text-left" style="font-size: 20px;margin-left:3px">
+			    			<i class="fa fa-comments" aria-hidden="true"></i>
+			    			<span class="" style="font-size: 18px;margin-left:2px">&nbsp;Chat Support</span>
+			    		</button>
+
+			    		<hr>
+			    		
+			    		<button id="logOut_btn" type="button" class="btn btn-block btn-danger" style="font-size: 20px;">LOGOUT</button>
+			    		
+			    	</div>
+
+			    	<script type="text/javascript">
+			    		$('#display_currency_btn').on('click',function(){
+			    			addBreadCrumbs("wallet/settings/currency");
+
+			    			window.scrollTo(0, 0);
+
+			    			$("#container").toggle();
+			    			
+			    			$("#profile_btn").css('display',"none");
+			    			$("#top_back_btn").css('display',"block");
+
+			    			$("#container_main").empty();
+			    			$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings/currency'}));
+			    			$("#container_main").toggle();
+			    		});
+
+			    		$('#security_btn').on('click',function(){
+			    			addBreadCrumbs("wallet/settings/security");
+
+			    			window.scrollTo(0, 0);
+
+			    			$("#container").toggle();
+			    			
+			    			$("#profile_btn").css('display',"none");
+			    			$("#top_back_btn").css('display',"block");
+
+			    			$("#container_main").empty();
+			    			$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings/security'}));
+			    			$("#container_main").toggle();
+			    		});
+
+			    		$('#theme_switch').on('change',function(){
+			    			var $this = $(this);
+			    			// console.log($this.is(":checked"));
+
+			    			if($this.is(":checked")){
+			    				isDarkMode = 1;
+			    				chartTheme = 'dark';
+			    				setLocalStorageByKey("isDarkMode",1);
+			    				$("body").removeClass( "light-mode" ).addClass( "dark-mode" );
+			    				
+			    			}else{
+			    				isDarkMode = 0;
+			    				chartTheme = 'light';
+			    				setLocalStorageByKey("isDarkMode",0);
+			    				$("body").removeClass( "dark-mode" ).addClass( "light-mode" );
+			    			}
+			    		});
+
+			    		$('#theme_btn').on('click',function(){
+			    			var $this = $('#theme_switch');
+
+			    			if($this.is(":checked")){
+			    				$('#theme_switch').prop("checked", false);
+			    			}else{
+			    				$('#theme_switch').prop("checked", true);
+			    			}
+
+			    			$('#theme_switch').trigger("change");
+
+			    		});
+
+			    		$('#price_alert_btn').on('click',function(){
+			    			addBreadCrumbs("wallet/settings/priceAlert");
+			    			
+			    			window.scrollTo(0, 0);
+
+			    			$("#container").toggle();
+			    			
+			    			$("#profile_btn").css('display',"none");
+			    			$("#top_back_btn").css('display',"block");
+
+			    			$("#container_main").empty();
+			    			$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings/priceAlert'}));
+			    			$("#container_main").toggle();
+			    		});
+
+			    		$('#language_btn').on('click',function(){
+			    			addBreadCrumbs("wallet/settings/language");
+
+			    			window.scrollTo(0, 0);
+
+			    			$("#container").toggle();
+			    			
+			    			$("#profile_btn").css('display',"none");
+			    			$("#top_back_btn").css('display',"block");
+
+			    			$("#container_main").empty();
+			    			$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings/language'}));
+			    			$("#container_main").toggle();
+			    		});
+
+			    		$('#chat_support_btn').on('click',function(){
+			    			addBreadCrumbs("wallet/settings/chat");
+
+			    			window.scrollTo(0, 0);
+
+			    			$("#container").toggle();
+			    			
+			    			$("#profile_btn").css('display',"none");
+			    			$("#top_back_btn").css('display',"block");
+
+			    			$("#container_main").empty();
+			    			$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings/chat'}));
+			    			$("#container_main").toggle();
+			    		});
+
+			    		$('#logOut_btn').on('click',function(){
+			    			$.confirm({
+			    				theme:'dark',
+			    				icon: 'fa fa-sign-out',
+			    				title: 'Logging out?',
+			    				columnClass: 'col-md-6 col-md-offset-6',
+			    				content: 'Are you sure you want to <b>logout</b>?',
+			    				buttons: {
+			    					confirm: function () {
+			    						// deleteLocalStorageByKey('currentUser');
+			    						localStorage.clear();
+			    						window.location.href = 'index';//local
+			    					},
+			    					cancel: function () {
+
+			    					},
+			    				}
+			    			});
+			    		});
+			    	</script>
+			    </div>
+	  		</div>
+
+	  		<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
 		</div>
 
-		<div id="1_container_slider" style="display:none;" class="keen-slider__slide text-center">
-			<div style="">
-				<!-- <h1>Choose Main Function: </h1> -->
-
-				<div class="m-1 justify-content-center mb-2" style="">
-					<button id="rise_fall_btn" type="button" class="btn btn-modal btn-block main-color-bg" data-dismiss="modal" style="height: 5.5em;">
-						<!-- <i class="fa fa-bar-chart fa-inverse fa-lg" style="" aria-hidden="true"></i> -->
-						<img style="width:2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-strategy-64.png">
-						<span class="text-light h4">Rise Fall Contract</span><br>
-						<small class="text-light">Profit from both rising and falling markets.</small>
-					</button>
-				</div>
-
-				<div class="m-1 justify-content-center main-color-text mb-2">
-					<button id="future_btn" class="btn btn-modal btn-block main-color-bg" data-dismiss="modal" style="height: 5.5em;">
-						<!-- <i class="fa fa-bar-chart fa-inverse fa-lg" style="" aria-hidden="true"></i> -->
-						<img style="width:2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-chart-64.png">
-						<span class="text-light h4">Long Short Contract</span><br>
-						<small class="text-light">Benefit from changes in market prices.</small>
-					</button>
-				</div>	
-
-				<div class="m-1 justify-content-center main-color-text mb-2">
-					<button id="daily_mining_btn" type="button" class="btn btn-modal btn-block main-color-bg" data-dismiss="modal" style="height: 5.5em;">
-						<img style="width:2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-mining1-64.png">
-						<span class="text-light h4">Daily Mining</span><br>
-						<small class="text-light">Mine with Different Purchase Limit but Higher APY</small>
-					</button>
-				</div>
-
-				<div class="m-1 justify-content-center main-color-text">
-					<button id="regular_mining_btn" class="btn btn-modal btn-block main-color-bg" data-dismiss="modal" style="height: 5.5em;">
-						<img style="width:2em;filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(297deg) brightness(102%) contrast(101%);" src="assets/imgs/app-icons/menu-icons/icons8-mining-64.png">
-						<span class="text-light h4">Regular Mining</span><br>
-						<small class="text-light"> Mine with Regular APY</small>
-					</button>
-				</div>
-				
-			</div>
-
-			
-		</div>
-
-		<div id="2_container_slider" style="display:none;" class="keen-slider__slide">
-			<style type="text/css">
-				.font-sm{
-					font-size: 1rem!important;
-				}
-				.font-xsm{
-					font-size: .9rem!important;
-				}
-				.font-md{
-					font-size: 1.3rem!important;
-				}
-				.font-lg{
-					font-size: 1.4rem!important;
-				}
-				.font-xlg{
-					font-size: 2rem!important;
-				}
-				.text-semibold{
-					font-weight: 400;
-				}
-				.text-bold{
-					font-weight: bold;
-				}
-				.text-bolder{
-					font-weight: bolder;
-				}
-				.cardshad{
-					box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px!important;
-				}
-				.cardshad1{
-					box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-				}
-				#instruction_invites{
-					line-height: 1;
-				}
-		    	.icon_kyc{
-			        font-size:1rem!important;
-			        color:#5426de!important;
-		    	}
-		    	.line1{
-		    		line-height: 1;
-		    	}
-			</style>
-
-			<div class="card px-1 py-2 rounded shadow-lg main-card-ui m-2 cardshad">
-				<div class="card px-2 py- pt-4 mt-2 rounded shadow-lg main-card-ui m-2 cardshad1">
-					<span class="main-color-text text-start text-bold font-lg">Invite friends and earn USDT</span>
-					<span class="font-xsm text-muted text-start py-1 text-bold line1 display-4">Copy the link and send it to your friends & wait for the rewards to be sent</span> 
-
-					<div class="input-group mb-1">
-					  <input type="text" class="form-control" id="referal_link_container" readonly>
-
-					  <div class="input-group-append">
-					    <button class="btn secondary-color-bg" style="color:white;" type="button" id="copyLink_btn">Copy</button>
-					  </div>
-					</div>
-
-					<div id="total_invites" class="main-color-text text-start">
-						<span class="font-sm main-color-text text-bolder display-4">TOTAL INVITES </span> 
-						<span class="main-color-text text-bolder font-md" id="total_invites_container"></span>
-						
-						<button class="btn btn-link" id="view_invites_btn">
-							<spam class="font-sm text-semibold text-muted" style="text-decoration: underline;">
-								view
-							</spam>
-						</button>
-					</div>
-				</div>
-				<div class="card p-2 mb-2 rounded shadow-lg main-card-ui mx-2 cardshad1">
-					<div class="main-color-text text-start">
-						<div id="instruction_invites" class=" pt-4 pb-2 ">
-							<span class=" font-md text-bold">
-								Share the link to earn rewards!
-							</span>
-
-							 <div id="noteslist_invite" class="m-2"> 
-						        <div class="text-start px-3">
-						          <i class="fa fa-caret-right icon_kyc " aria-hidden="true"></i><span class="text-start main-color-text font-sm"> Invite 1 to get 5% reward!</span>
-						        </div>
-						        <div class="text-start px-3">
-						          <i class="fa fa-caret-right icon_kyc " aria-hidden="true"></i><span class="text-start main-color-text font-sm"> Invite 2 to get 6% reward!</span>
-						        </div>
-						        <div class="text-start px-3">
-						          <i class="fa fa-caret-right icon_kyc " aria-hidden="true"></i><span class="text-start main-color-text font-sm"> Invite 5 to get 10% reward!</span>
-						        </div>
-						    </div>
-						</div>
-						
-					</div>
-				</div>
-			</div>
-
-
-
-
-
-			<div class="card px-2 pt-5 pb-4 mt-2 rounded shadow-lg main-card-ui m-2 cardshad">
-				<h4 class="text-center mb-3 font-xlg text-bold">Top Crypto News</h4>
-
-				<div id="news_container"></div>
-
-				<div id="newsLoading">
-					<h3>
-						<div class="spinner-grow main-color-text" role="status">
-						  <span class="sr-only">Loading Latest News...</span>
-						</div>
-
-						Loading Latest News...
-					</h3>
-				</div>
-
-				<script type="text/javascript">
-					$("#view_invites_btn").click(function(){
-						bootbox.alert({
-						    message: ajaxLoadPage('quickLoadPage',{'pagename':'wallet/invitesList'}),
-						    size: 'large',
-						    centerVertical: true,
-						    closeButton: false
-						});
-					});
-
-					$("#copyLink_btn").on("click",function(){
-						// var copiedLink = $("#referal_link_container").val()
-						// navigator.clipboard.writeText(copiedLink);
-
-						$("#referal_link_container").select();
-						document.execCommand("copy");
-						document.getSelection().removeAllRanges();
-
-						$.toast({
-						    text: 'Successfully Copied the Link',
-					        showHideTransition: 'slide',
-					        allowToastClose: false,
-					        hideAfter: 5000,
-					        stack: 5,
-					        position: 'bottom-center',
-					        textAlign: 'center',
-					        loader: true,
-					        loaderBg: '#9EC600'
-						})
-					});
-				</script>
-			</div>
-		</div>
-
-		<div id="3_container_slider" style="display:none;" class="keen-slider__slide">
-			<style type="text/css">
-				.material-switch > input[type="checkbox"] {
-				    display: none;   
-				}
-
-				.material-switch > label {
-				    cursor: pointer;
-				    height: 0px;
-				    position: relative; 
-				    width: 40px;  
-				}
-
-				.material-switch > label::before {
-				    background: rgb(0, 0, 0);
-				    box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
-				    border-radius: 8px;
-				    content: '';
-				    height: 16px;
-				    margin-top: -8px;
-				    position:absolute;
-				    opacity: 0.3;
-				    transition: all 0.4s ease-in-out;
-				    width: 40px;
-				}
-				.material-switch > label::after {
-				    background: rgb(255, 255, 255);
-				    border-radius: 16px;
-				    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
-				    content: '';
-				    height: 24px;
-				    left: -4px;
-				    margin-top: -8px;
-				    position: absolute;
-				    top: -4px;
-				    transition: all 0.3s ease-in-out;
-				    width: 24px;
-				}
-				.material-switch > input[type="checkbox"]:checked + label::before {
-				    background: inherit;
-				    opacity: 0.5;
-				}
-				.material-switch > input[type="checkbox"]:checked + label::after {
-				    background: inherit;
-				    left: 20px;
-				}
-
-				input[type="checkbox"]:disabled {
-				  background: white!important;
-				}
-			</style>
-
-			<div class="p-2">
-				<div class="main-color-text mb-2 font-weight-bold h5">Security</div>
-				<button id="security_btn" style="margin-left:3px" class="btn custom-2nd-text btn-block text-left">
-					<i class="fa fa-shield" aria-hidden="true"></i>
-					<span style="font-size: 18px;margin-left:2px">&nbsp;Reset Password</span>
-				</button>
-			</div>	
-
-			<div class="p-2">
-				<div class="main-color-text mb-2 font-weight-bold h5">Preference</div>
-				<button id="display_currency_btn" class="btn custom-2nd-text btn-block text-left">
-					<i class="fa fa-money" aria-hidden="true"></i>
-					<span class="" style="font-size: 18px;">&nbsp;Display Currency</span>
-				</button>
-
-				<!-- <button id="language_btn" class="btn custom-2nd-text  btn-block text-left">
-					<i class="fa fa-language" aria-hidden="true"></i>
-					<span class="" style="font-size: 18px;">&nbsp;Language</span>
-				</button> -->
-				
-				<button id="theme_btn" class="btn custom-2nd-text btn-block text-left d-flex">
-					<div class="flex-fill" unselectable="on">
-						<i class="fa fa-paint-brush" aria-hidden="true"></i>
-						<span class="" style="font-size: 18px;">&nbsp;Dark Mode</span>
-					</div>
-
-					<div class="flex-fill">
-						<div class="ml-auto material-switch pull-right">
-						<input id="theme_switch" name="themeSwitchToggle" type="checkbox">
-						<label for="theme_switch" class="label-default secondary-color-bg"></label>
-						</div>
-					</div>
-				</button>
-
-				
-			</div> 
-				
-				<!-- <button id="price_alert_btn" class="btn text-muted  btn-block text-left">
-					<i class="fa fa-bell" aria-hidden="true"></i>
-					<span class="" style="font-size: 15px;">&nbsp;Price Alerts</span>
-				</button>
-
-				<button id="exportWallet_btn" class="btn text-muted  btn-block text-left">
-					<i class="fa fa-exchange" aria-hidden="true"></i>
-					<span class="" style="font-size: 15px;">&nbsp;Export Wallet</span>
-				</button> -->
-
-
-
-			<div class="p-2">
-				<div class="main-color-text mb-2 font-weight-bold h5">Follow Us</div>
-
-				<div id="soc_med_container"></div>
-
-				<!-- <button class="btn custom-2nd-text  btn-block text-left" disabled style="font-size: 18px;">
-					<i class="fa fa-facebook-square" aria-hidden="true"></i>
-					<span class="">&nbsp;Facebook</span>
-				</button>
-
-				<button class="btn custom-2nd-text  btn-block text-left" disabled style="font-size: 18px;">
-					<i class="fa fa-telegram" aria-hidden="true"></i>
-					<span class="">&nbsp;Telegram</span>
-				</button>
-
-				<button class="btn custom-2nd-text  btn-block text-left" disabled style="font-size: 18px;">
-					<i class="fa fa-twitter-square" aria-hidden="true"></i>
-					<span class="">&nbsp;Twitter</span>
-				</button>
-
-				<button class="btn custom-2nd-text  btn-block text-left" disabled style="font-size: 18px;">
-					<i class="fa fa-youtube-play" aria-hidden="true"></i>
-					<span class="">&nbsp;Youtube</span>
-				</button>
-
-				<button class="btn custom-2nd-text  btn-block text-left" disabled style="font-size: 18px;">
-					<i class="fa fa-reddit" aria-hidden="true"></i>
-					<span class="">&nbsp;Reddit</span>
-				</button> -->
-			</div>
-
-			<div class="p-2">
-
-				<div class="main-color-text mb-2 font-weight-bold h5">Support</div>
-				<button class="btn custom-2nd-text  btn-block text-left" style="font-size: 20px;margin-left:3px" onclick="faq_mdl()">
-					<i class="fa fa-question" aria-hidden="true"></i>
-					<span class="" style="font-size: 18px;margin-left:2px">&nbsp;FAQ/Help Center</span>
-				</button>
-
-				<button id="chat_support_btn" class="btn custom-2nd-text  btn-block text-left" style="font-size: 20px;margin-left:3px">
-					<i class="fa fa-comments" aria-hidden="true"></i>
-					<span class="" style="font-size: 18px;margin-left:2px">&nbsp;Chat Support</span>
-				</button>
-
-				<hr>
-				
-				<button id="logOut_btn" type="button" class="btn btn-block btn-danger" style="font-size: 20px;">LOGOUT</button>
-				
-			</div>
-
-			<script type="text/javascript">
-				$('#display_currency_btn').on('click',function(){
-					addBreadCrumbs("wallet/settings/currency");
-
-					window.scrollTo(0, 0);
-
-					$("#container").toggle();
-					
-					$("#profile_btn").css('display',"none");
-					$("#top_back_btn").css('display',"block");
-
-					$("#container_main").empty();
-					$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings/currency'}));
-					$("#container_main").toggle();
-				});
-
-				$('#security_btn').on('click',function(){
-					addBreadCrumbs("wallet/settings/security");
-
-					window.scrollTo(0, 0);
-
-					$("#container").toggle();
-					
-					$("#profile_btn").css('display',"none");
-					$("#top_back_btn").css('display',"block");
-
-					$("#container_main").empty();
-					$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings/security'}));
-					$("#container_main").toggle();
-				});
-
-				$('#theme_switch').on('change',function(){
-					var $this = $(this);
-					// console.log($this.is(":checked"));
-
-					if($this.is(":checked")){
-						isDarkMode = 1;
-						chartTheme = 'dark';
-						setLocalStorageByKey("isDarkMode",1);
-						$("body").removeClass( "light-mode" ).addClass( "dark-mode" );
-						
-					}else{
-						isDarkMode = 0;
-						chartTheme = 'light';
-						setLocalStorageByKey("isDarkMode",0);
-						$("body").removeClass( "dark-mode" ).addClass( "light-mode" );
-					}
-				});
-
-				$('#theme_btn').on('click',function(){
-					var $this = $('#theme_switch');
-
-					if($this.is(":checked")){
-						$('#theme_switch').prop("checked", false);
-					}else{
-						$('#theme_switch').prop("checked", true);
-					}
-
-					$('#theme_switch').trigger("change");
-
-				});
-
-				$('#price_alert_btn').on('click',function(){
-					addBreadCrumbs("wallet/settings/priceAlert");
-					
-					window.scrollTo(0, 0);
-
-					$("#container").toggle();
-					
-					$("#profile_btn").css('display',"none");
-					$("#top_back_btn").css('display',"block");
-
-					$("#container_main").empty();
-					$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings/priceAlert'}));
-					$("#container_main").toggle();
-				});
-
-				$('#language_btn').on('click',function(){
-					addBreadCrumbs("wallet/settings/language");
-
-					window.scrollTo(0, 0);
-
-					$("#container").toggle();
-					
-					$("#profile_btn").css('display',"none");
-					$("#top_back_btn").css('display',"block");
-
-					$("#container_main").empty();
-					$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings/language'}));
-					$("#container_main").toggle();
-				});
-
-				$('#chat_support_btn').on('click',function(){
-					addBreadCrumbs("wallet/settings/chat");
-
-					window.scrollTo(0, 0);
-
-					$("#container").toggle();
-					
-					$("#profile_btn").css('display',"none");
-					$("#top_back_btn").css('display',"block");
-
-					$("#container_main").empty();
-					$("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/settings/chat'}));
-					$("#container_main").toggle();
-				});
-
-				$('#logOut_btn').on('click',function(){
-					$.confirm({
-						theme:'dark',
-						icon: 'fa fa-sign-out',
-						title: 'Logging out?',
-						columnClass: 'col-md-6 col-md-offset-6',
-						content: 'Are you sure you want to <b>logout</b>?',
-						buttons: {
-							confirm: function () {
-								// deleteLocalStorageByKey('currentUser');
-								localStorage.clear();
-								window.location.href = 'index';//local
-							},
-							cancel: function () {
-
-							},
-						}
-					});
-				});
-			</script>
-		</div>
+		
 	</div>
 
 	<div id="container_main" style="display:none">
@@ -1026,73 +1061,45 @@
 	<br>
 	<br>
 
+
 	<script type="text/javascript">
-		var slider1 = new KeenSlider("#container",{
-		    // auto set the slider to the height of the tallest slide
-		    autoHeight: false,
-		    // auto center the current slide
-		    centered: false,
-		    // pass options for different screen size
-		    // e.g.
-		    //   breakpoints: {
-		    //    '(min-width: 720px) and (max-width: 1000px)': {
-		    //       options here
-		    //     },
-		    //   }
-		    breakpoints: null,
-		    // enable mouse drag and touch swipe events
-		    controls: true,
-		    // adjust the speed that is translated to the slider when dragging
-		    dragSpeed: 1,
-		    // friction factor
-		    friction: 0.050,
-		    // enable infinite loop
-		    loop: false,
-		    // initial slide
-		    initial: 0,
-		    // duration of the animation
-		    duration: 100,
-		    // slide selector
-		    slides: '.keen-slider__slide',
-		    // enable vertical mode
-		    vertical: false,
-		    // reset the slider on window resize
-		    resetSlide: false,
-		    // how many slides per view
-		    slidesPerView: 1,
-		    // space between slides
-		    spacing: 0,
-		    // "snap": auto snap to the next/prev slide
-		    // "free-snap": free mode + auto snap
-		    // "free": free mode
-		    mode: 'snap',
-		    // simulate rubberband if moving or dragging above the slider edge
-		    rubberband: true,
-		    // cancel on leave
-		    cancelOnLeave: true,
-			slideChanged: slider => {
-				$(".bottom-nav-item").removeClass("bottom-nav-item-active");
-				window.scrollTo(0, 0);
+		$(".carousel").carousel({
+	      interval: false,
+	      pause: true
+	    });
 
-				var sliderPosition = slider.track.details.position.toFixed(0)
+	    $( ".carousel" ).swipe( {
+	      swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
+	        if (direction == 'left') $(this).carousel('next');
+	        if (direction == 'right') $(this).carousel('prev');
+	      },
+	      allowPageScroll:"vertical"
 
-				if(sliderPosition == 0){
-					$("#assets_btn").addClass("bottom-nav-item-active");
-				}
+	    });
 
-				if(sliderPosition == 1){
-					$("#modal_mining_btn").addClass("bottom-nav-item-active");
-				}
+	    $(".carousel").on('slide.bs.carousel', function (event) {
+	    	console.log(event.to);
+	        var sliderPosition = $('.carousel-item.active').attr("index");
+        	// console.log(sliderPosition);
 
-				if(sliderPosition == 2){
-					$("#discover_btn").addClass("bottom-nav-item-active");			
-				}
+        	$(".bottom-nav-item").removeClass("bottom-nav-item-active");
 
-				if(sliderPosition == 3){
-					$("#settings_btn").addClass("bottom-nav-item-active");
-				}
-			},
-		});
+        	if(event.to == 0){
+        		$("#assets_btn").addClass("bottom-nav-item-active");
+        	}
+
+        	if(event.to == 1){
+        		$("#modal_mining_btn").addClass("bottom-nav-item-active");
+        	}
+
+        	if(event.to == 2){
+        		$("#discover_btn").addClass("bottom-nav-item-active");			
+        	}
+
+        	if(event.to == 3){
+        		$("#settings_btn").addClass("bottom-nav-item-active");
+        	}
+	    });
 	</script>
 
 	<style>
@@ -1327,13 +1334,13 @@
 
 		setTimeout(function(){
 			$.when(loadSystem()).then(function(){
-				// $('#container').toggle();
-				$('#assets_container').css("display","block");
-				$('#1_container_slider').toggle();
-				$('#2_container_slider').toggle();
-				$('#3_container_slider').toggle();
+				$('#container').toggle();
+				// $('#assets_container').css("display","block");
+				// $('#1_container_slider').toggle();
+				// $('#2_container_slider').toggle();
+				// $('#3_container_slider').toggle();
 
-				// $('#loadSpinner').toggle();
+				$('#loadSpinner').toggle();
 				$('#topNavBar').toggle();
 				$('#bottomNavBar').toggle();
 				$('#header_inner_container').toggle();
@@ -1791,10 +1798,9 @@
 				}
 
 				breadCrumbs = ["assets"]
-				reinitKeen();
-				slider1.moveToIdx(0)
 
 				$("#assets_btn").addClass("bottom-nav-item-active");
+				$('.carousel').carousel(0)
 			});
 
 			$('#modal_mining_btn').on('click',function(){
@@ -1835,9 +1841,7 @@
 
 				breadCrumbs = ["assets"]
 
-				reinitKeen();
-				slider1.moveToIdx(1)
-
+				$('.carousel').carousel(1)
 				$("#modal_mining_btn").addClass("bottom-nav-item-active");
 			});
 
@@ -1880,8 +1884,7 @@
 				breadCrumbs = ["assets"]
 
 				reinitKeen();
-				slider1.moveToIdx(2)
-
+				$('.carousel').carousel(2)
 				$("#discover_btn").addClass("bottom-nav-item-active");
 			});
 
@@ -1924,8 +1927,7 @@
 				breadCrumbs = ["assets"]
 
 				reinitKeen();
-				slider1.moveToIdx(3)
-
+				$('.carousel').carousel(3)
 				$("#settings_btn").addClass("bottom-nav-item-active");
 			});
 		// bottom buttons
@@ -2506,46 +2508,26 @@
 		}
 	}
 
-	$("#top_back_btn").on("click",function(){		
-		var sliderPosition = slider1.track.details.position.toFixed(0)
+	$("#top_back_btn").on("click",function(){	
+		// if(breadCrumbs[breadCrumbs.length-2].includes("assets")){
+		// 	$("#assets_btn").addClass("bottom-nav-item-active");
+		// }
 
-		if(breadCrumbs[breadCrumbs.length-2].includes("assets")){
-			$("#assets_btn").addClass("bottom-nav-item-active");
-		}
+		// if(breadCrumbs[breadCrumbs.length-2].includes("discover")){
+		// 	console.log("here");
+		// 	$("#discover_btn").addClass("bottom-nav-item-active");
+		// }
 
-		if(breadCrumbs[breadCrumbs.length-2].includes("discover")){
-			console.log("here");
-			$("#discover_btn").addClass("bottom-nav-item-active");
-		}
-
-		if(breadCrumbs[breadCrumbs.length-2].includes("settings")){
-			console.log("there");
-			$("#settings_btn").addClass("bottom-nav-item-active");
-		}
+		// if(breadCrumbs[breadCrumbs.length-2].includes("settings")){
+		// 	console.log("there");
+		// 	$("#settings_btn").addClass("bottom-nav-item-active");
+		// }
 
 		if(breadCrumbs[breadCrumbs.length-2].includes("riseFall") || breadCrumbs[breadCrumbs.length-2].includes("future") || breadCrumbs[breadCrumbs.length-2].includes("regular_mining") || breadCrumbs[breadCrumbs.length-2].includes("dailyMining")){
 			console.log("there");
 			$("#modal_mining_btn").addClass("bottom-nav-item-active");
 		}
 
-		$(".bottom-nav-item").removeClass("bottom-nav-item-active");
-
-		if(sliderPosition == 0){
-			$("#assets_btn").addClass("bottom-nav-item-active");
-		}
-
-		if(sliderPosition == 1){
-			$("#modal_mining_btn").addClass("bottom-nav-item-active");
-		}
-
-		if(sliderPosition == 2){
-			$("#discover_btn").addClass("bottom-nav-item-active");			
-		}
-
-		if(sliderPosition == 3){
-			$("#settings_btn").addClass("bottom-nav-item-active");
-		}
-		
 		if (typeof tokenPriceInterval  != 'undefined') {
 			clearInterval(tokenPriceInterval);
 		}
@@ -2637,16 +2619,15 @@
 		// 	slider1.moveToIdx(slider1.track.details.position.toFixed(0));
 		// }
 
-		reinitKeen()
+		// reinitKeen()
 
-		setTimeout(function(){
-			slider1.moveToIdx(sliderPosition);
-		},500)
+		// setTimeout(function(){
+		// 	slider1.moveToIdx(sliderPosition);
+		// },500)
 
 	});
 
 	function swipedetect(el, callback){
-
 		var touchsurface = el,
 		swipedir,
 		startX,
@@ -2696,74 +2677,58 @@
 		// var sliderPosition = slider1.track.details.position.toFixed(0);
 		// console.log(sliderPosition);
 
-		slider1.destroy();
+		// slider1.destroy();
 
-		slider1 = KeenSlider("#container",{
-		    // auto set the slider to the height of the tallest slide
-		    autoHeight: false,
-		    // auto center the current slide
-		    centered: false,
-		    // pass options for different screen size
-		    // e.g.
-		    //   breakpoints: {
-		    //    '(min-width: 720px) and (max-width: 1000px)': {
-		    //       options here
-		    //     },
-		    //   }
-		    breakpoints: null,
-		    // enable mouse drag and touch swipe events
-		    controls: true,
-		    // adjust the speed that is translated to the slider when dragging
-		    dragSpeed: 1,
-		    // friction factor
-		    friction: 0.050,
-		    // enable infinite loop
-		    loop: false,
-		    // initial slide
-		    initial: 0,
-		    // duration of the animation
-		    duration: 100,
-		    // slide selector
-		    slides: '.keen-slider__slide',
-		    // enable vertical mode
-		    vertical: false,
-		    // reset the slider on window resize
-		    resetSlide: false,
-		    // how many slides per view
-		    slidesPerView: 1,
-		    // space between slides
-		    spacing: 0,
-		    // "snap": auto snap to the next/prev slide
-		    // "free-snap": free mode + auto snap
-		    // "free": free mode
-		    mode: 'snap',
-		    // simulate rubberband if moving or dragging above the slider edge
-		    rubberband: true,
-		    // cancel on leave
-		    cancelOnLeave: true,
-			slideChanged: slider => {
-				$(".bottom-nav-item").removeClass("bottom-nav-item-active");
-				window.scrollTo(0, 0);
+		// slider1 = KeenSlider("#container",{
+		//     // auto set the slider to the height of the tallest slide
+		//     autoHeight: false,
+		//     // auto center the current slide
+		//     centered: false,
+		//     // pass options for different screen size
+		//     // e.g.
+		//     //   breakpoints: {
+		//     //    '(min-width: 720px) and (max-width: 1000px)': {
+		//     //       options here
+		//     //     },
+		//     //   }
+		//     breakpoints: null,
+		//     // enable mouse drag and touch swipe events
+		//     controls: true,
+		//     // adjust the speed that is translated to the slider when dragging
+		//     dragSpeed: 1,
+		//     // friction factor
+		//     friction: 0.050,
+		//     // enable infinite loop
+		//     loop: false,
+		//     // initial slide
+		//     initial: 0,
+		//     // duration of the animation
+		//     duration: 100,
+		//     // slide selector
+		//     slides: '.keen-slider__slide',
+		//     // enable vertical mode
+		//     vertical: false,
+		//     // reset the slider on window resize
+		//     resetSlide: false,
+		//     // how many slides per view
+		//     slidesPerView: 1,
+		//     // space between slides
+		//     spacing: 0,
+		//     // "snap": auto snap to the next/prev slide
+		//     // "free-snap": free mode + auto snap
+		//     // "free": free mode
+		//     mode: 'snap',
+		//     // simulate rubberband if moving or dragging above the slider edge
+		//     rubberband: true,
+		//     // cancel on leave
+		//     cancelOnLeave: true,
+		// 	slideChanged: slider => {
+		// 		$(".bottom-nav-item").removeClass("bottom-nav-item-active");
+		// 		window.scrollTo(0, 0);
 
-				var sliderPosition = slider.track.details.position.toFixed(0)
-
-				if(sliderPosition == 0){
-					$("#assets_btn").addClass("bottom-nav-item-active");
-				}
-
-				if(sliderPosition == 1){
-					$("#modal_mining_btn").addClass("bottom-nav-item-active");
-				}
-
-				if(sliderPosition == 2){
-					$("#discover_btn").addClass("bottom-nav-item-active");			
-				}
-
-				if(sliderPosition == 3){
-					$("#settings_btn").addClass("bottom-nav-item-active");
-				}
-			},
-		});
+				
+		// 	},
+		// });
 
 	}
 
