@@ -30,7 +30,7 @@
     .disabledDiv h3{
         font-weight: bold;
         text-align: center;
-        margin-top: 2px;
+        margin-top: 50px;
         color: white;
     }
 
@@ -41,7 +41,20 @@
     table.dataTable td, table.dataTable th{
       font-size: 0.8em;
     }
+
+    .myButton {
+        background-color:#0070ba;
+        border-radius:23px;
+        display:inline-block;
+        cursor:pointer;
+        color:#ffffff;
+        font-family:Arial;
+        font-size:15px;
+        text-decoration:none;
+    }
 </style>
+
+
 
 <div id="innerContainer" class="p-3">
     <div class="text-center mb-3 main-color-text display-4">Buy Crypto</div>
@@ -112,8 +125,14 @@
             </div>
         </div>
 
-        <div id="paypal-button-container" class="p-1 pt-4">
-            <!-- <div class="disabledDiv"><h2>Confirm price again</h2></div> -->
+        <div id="payment_methods" style="position: relative;">
+            <div id="paypal-button-container" class="p-1 pt-4">
+                <!-- <div class="disabledDiv"><h2>Confirm price again</h2></div> -->
+            </div>
+
+            <div id="wise-button-container" class="p-1" style="display: none;">
+                <button class="myButton btn btn-block">Pay with <b>Wise</b> <img src="assets/imgs/wise_fast_flag_white_RGB.png" style="width: 20px;"></button>
+            </div>
         </div>
     </form>
 
@@ -151,25 +170,6 @@
         });
     });
 
-    // $('#purchaseAppeals_inner_btn').on('click',function(){
-    //     clearTimeout(tokenLoadTimer);
-    //     $("#tittle_container").text('Purchase Appeals');
-    //     $.when(closeNav()).then(function() {
-    //         $('#topNavBar').toggle();
-    //         $("#container").fadeOut(animtionSpeed, function() {
-    //             $("#loadSpinner").fadeIn(animtionSpeed,function(){
-    //                 $("#container").empty();
-    //                 $("#container").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/purchaseAppeals'}));
-
-    //                 $("#loadSpinner").fadeOut(animtionSpeed,function(){
-    //                     $('#topNavBar').toggle();
-    //                     $("#container").fadeIn(animtionSpeed);
-    //                 });
-    //             });
-    //         });
-    //     });
-    // });     
-
     $("#backButton").on("click", function(){
         $("#container").fadeOut(animtionSpeed, function() {
             $("#loadSpinner").fadeIn(animtionSpeed,function(){
@@ -185,6 +185,16 @@
             });
         });
     })
+
+    $("#wise-button-container").on("click", function(){
+        bootbox.alert({
+            message: ajaxLoadPage('quickLoadPage',{'pagename':'wallet/buyCryptoWise'}),
+            size: 'large',
+            centerVertical: true,
+            closeButton: false
+        });
+    })
+
 
     function loadDatatable(url,data){
         var callDataViaURLVal = ajaxShortLink(url,data);
@@ -222,6 +232,7 @@
 
     var availBalance;
     var minAmount = 0.02;
+
     // var allTokens = ajaxShortLink('userWallet/getAllTokensV2');
 
     // for (var i = 0; i < allTokens.length; i++) {
@@ -294,16 +305,8 @@
 
     $("#closeBtn_buyCrypto").on('click',function(){
         window.scrollTo(0, 0);
-        $("#success_container").toggle();
-        $("#mainForm").toggle();
-        $(".bootbox-close-button").toggle()
-
-        $("#amount_bought_container").text('');
-        $("#amount_paid_container").text('');
-        $("#token_container").text('');
-        $("#token_amount_container").text('');
-        $("#timestamp_container").text('');
-        $("#reference_id_container").text('');
+        $("#container_main").empty();
+        $("#container_main").append(ajaxLoadPage('quickLoadPage',{'pagename':'wallet/buyCrypto'}));
     });
 
     $("#mainForm").validate({
@@ -364,7 +367,9 @@
                 $("#errorReporter_buyCrypto").text("")
                 $("#errorReporter_buyCrypto").css("display",'none');
                 $("#paypal-button-container").css("display",'block');
+                $("#wise-button-container").css("display",'block');
                 $("#update_price_container").css("display",'block');
+                $(".disabledDiv").remove();
                 
                 paypal.Buttons({
                     env: 'production', //  production | sb-43kbkl18527714@personal.example.com
@@ -439,16 +444,18 @@
 
                         console.log(data, actions)
                         var confirmPriceTimer = setTimeout(function() {
-                            $("#paypal-button-container").append('<div class="disabledDiv"><h3>Confirm price again</h3></div>');
+                            $("#payment_methods").append('<div class="disabledDiv"><h3>Confirm price again</h3></div>');
                             $('#confirmBtn').attr('disabled',false);
-
+                            clearInterval(confirmPriceTimer);
                         }, 5000);
                     }
                 }).render('#paypal-button-container');
 
                 var confirmPriceTimer = setTimeout(function() {
-                    $("#paypal-button-container").append('<div class="disabledDiv"><h3>Confirm price again</h3></div>');
+                    $("#payment_methods").append('<div class="disabledDiv"><h3>Confirm price again</h3></div>');
                     $('#confirmBtn').attr('disabled',false);
+                    clearInterval(confirmPriceTimer);
+
                 }, 5000);
             }else{
                 $("#errorReporter_buyCrypto").css('display','block');

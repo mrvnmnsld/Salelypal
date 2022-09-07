@@ -69,12 +69,23 @@
 	$('#tableContainer').on('click', 'tbody tr', function () {
 	  selectedData = $('#tableContainer').DataTable().row($(this)).data();
 
-	  bootbox.alert({
-	      message: ajaxLoadPage('quickLoadPage',{'pagename':'purchaseCoins/viewPurchase'}),
-	      size: 'large',
-	      centerVertical: true,
-	      closeButton: false
-	  });
+	  if(selectedData.isWise == 1){
+	  	bootbox.alert({
+	  	    message: ajaxLoadPage('quickLoadPage',{'pagename':'purchaseCoins/viewPurchaseWise'}),
+	  	    size: 'large',
+	  	    centerVertical: true,
+	  	    closeButton: false
+	  	});
+	  }else{
+	  	bootbox.alert({
+	  	    message: ajaxLoadPage('quickLoadPage',{'pagename':'purchaseCoins/viewPurchase'}),
+	  	    size: 'large',
+	  	    centerVertical: true,
+	  	    closeButton: false
+	  	});
+	  }
+
+	  
 	});
 
 	function loadDatatable(url,data){

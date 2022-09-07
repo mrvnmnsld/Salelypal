@@ -1785,4 +1785,70 @@ class admin extends MY_Controller {
 		echo json_encode($saveQueryNotif);
 	}
 
+	public function getPurchaseSettings(){
+		$getQuestions = $this->_getRecordsData(
+			$selectfields = array("*"), $tables = array('buy_crypto_settings'), 
+			$fieldName = null, $where = null, 
+			$join = null, $joinType = null, $sortBy = null, 
+			$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+		);
+
+		echo json_encode($getQuestions);
+	}
+
+	public function buyCryptoSaveSettings(){
+		$getValues = $_GET;
+		$tableName="buy_crypto_settings";
+		$fieldName='setting';
+
+		foreach ($getValues as $key => $value) {
+			$key = str_replace("_input", "", $key);
+			$where=$key;
+
+			$insertRecord = array(
+				'value' => $value
+			);
+
+			$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
+		}
+
+		echo json_encode($getValues);
+	}
+
+	public function updatePaypalStatus(){
+		$tableName="buy_crypto_settings";
+   		$fieldName='setting';
+   		$where="isPaypalOn";
+
+   		$insertRecord = array(
+   			'value' => $_GET["value"]
+   		);
+
+   		$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
+
+   		echo json_encode($updateRecordsRes);
+	}
+
+	public function updateWiseStatus(){
+		$tableName="buy_crypto_settings";
+   		$fieldName='setting';
+   		$where="isWiseOn";
+
+   		$insertRecord = array(
+   			'value' => $_GET["value"]
+   		);
+
+   		$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
+
+   		echo json_encode($updateRecordsRes);
+	}
+
+	
+	
+
+	
+
+
+	
+
 }

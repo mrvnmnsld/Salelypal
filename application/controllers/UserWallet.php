@@ -2270,6 +2270,47 @@ class userWallet extends MY_Controller {
 		echo json_encode($res);
 	}
 
+	public function buyCryptoUsingWise(){
+		$response = array();
+
+		foreach ($_FILES as $key => $value) {
+			$config['upload_path'] = 'assets/imgs/wise_receipts';
+			$config['allowed_types'] = '*';
+			$config['file_name'] = $_FILES[$key]['name'].'.'.strval(explode("/",$_FILES[$key]['type'])[1]);
+
+   			$this->load->library('upload', $config);
+   			$this->load->helper("file");
+
+			if(!$this->upload->do_upload($_FILES[$key]['name'])){
+				array_push($response, array('error'=>'1','reason'=>'Cant upload to server, please contact admin','more'=>$this->upload->display_errors()));
+            }else{  
+				$data = $this->upload->data();
+
+				array_push($response, array('error'=>'0','reason'=>'','more'=>''));
+			}
+
+			$insertRecord = array(
+				'receiptPath'=>$config['file_name'],
+				'isWise'=>1,
+				'amountPaid' => $_POST['amountPaid'],
+				// 'referenceID' => $_POST['referenceID'],
+				'token' => $_POST['token'],
+				'tokenValue' => $_POST['tokenValue'],
+				'userID' => $_POST['userID'],
+				'amountBought' => $_POST['amountBought'],
+				'network' => $_POST['network'],
+				'contractAddress' => $_POST['contractAddress'],
+				'dateCreated' => $this->_getTimeStamp(),
+			);
+
+			$saveQueryNotif = $this->_insertRecords($tableName = 'buy_crypto_history_tbl', $insertRecord);
+
+			echo json_encode($response);
+		}  
+	}
+
+	
+
 	
 
 	

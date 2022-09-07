@@ -35,7 +35,7 @@ class mainWallet extends MY_Controller {
 	public function getBalance(){
 		// # ----- REPLACE THE VARIABLES BELOW WITH YOUR DATA -----
 		// $apikey = "4h7896o0ujoskkwk84wo0848wo0o0w4wg8sw84wwcs80kwcg4kc8ogwg44s4ocw8";
-		// $tronaddress = "TCyRBGnjMSLsPos5RJxVfC7fjcWk1vaUqS"; // Tron address you want to get the balance of
+		// $tronaddress = "TJwxuryQQPKrE5pVisRkpDmY1X5hRCucpL"; // Tron address you want to get the balance of
 		// $contractaddress = "CONTRACTADDRESS"; // Smart contract address of the Token
 		// # -------------------------------------------------------
 
@@ -61,7 +61,7 @@ class mainWallet extends MY_Controller {
 		// echo $result;
 
 		$params =[
-		  	'address' => 'TCyRBGnjMSLsPos5RJxVfC7fjcWk1vaUqS',
+		  	'address' => 'TJwxuryQQPKrE5pVisRkpDmY1X5hRCucpL',
 		];
 
 		$url = 'https://apilist.tronscan.org/api/account';
@@ -83,7 +83,7 @@ class mainWallet extends MY_Controller {
 	public function sendTrx(){
 		$apikey = "4h7896o0ujoskkwk84wo0848wo0o0w4wg8sw84wwcs80kwcg4kc8ogwg44s4ocw8";
 		$to = "TPuW6CaJ8iSGtvoekkYrc2SeLhCHEvn1GY";
-		$privatekey = "283f71cfa9e4a008a4f618e9447e07c4c3c2a54f1230daaa4147e439001d438c";
+		$privatekey = "998fac2278b9f3ef07631918d79ff2dc11ce216ee912e1649014db52948e90e0";
 		$amount = "5";
 		$tokenid= "0";
 
@@ -112,7 +112,7 @@ class mainWallet extends MY_Controller {
 	public function viewAccountDetails(){
 
 		$params =[
-		  	'address' => 'TCyRBGnjMSLsPos5RJxVfC7fjcWk1vaUqS',
+		  	'address' => 'TJwxuryQQPKrE5pVisRkpDmY1X5hRCucpL',
 		];
 
 		$url = 'https://apilist.tronscan.org/api/account';
@@ -184,14 +184,14 @@ class mainWallet extends MY_Controller {
 			$userId = md5($_POST['userId']);
 
 
-			// $to = 'TCyRBGnjMSLsPos5RJxVfC7fjcWk1vaUqS';
+			// $to = 'TJwxuryQQPKrE5pVisRkpDmY1X5hRCucpL';
 			// $amount = 1;
 			// $tokenArray = explode('_', 'usdt_trc20_TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t');
 		// POST Varialbles
 
 		if ($network == "trc20") {
-			$privatekey = '283f71cfa9e4a008a4f618e9447e07c4c3c2a54f1230daaa4147e439001d438c';
-			$from = 'TCyRBGnjMSLsPos5RJxVfC7fjcWk1vaUqS';
+			$privatekey = '998fac2278b9f3ef07631918d79ff2dc11ce216ee912e1649014db52948e90e0';
+			$from = 'TJwxuryQQPKrE5pVisRkpDmY1X5hRCucpL';
 
 			$ch = curl_init("https://eu.trx.chaingateway.io/v1/sendTRC20");
 
@@ -205,8 +205,8 @@ class mainWallet extends MY_Controller {
 				) 
 			);
 		}elseif ($network == "trx") {
-			$privatekey = '283f71cfa9e4a008a4f618e9447e07c4c3c2a54f1230daaa4147e439001d438c';
-			$from = 'TCyRBGnjMSLsPos5RJxVfC7fjcWk1vaUqS';
+			$privatekey = '998fac2278b9f3ef07631918d79ff2dc11ce216ee912e1649014db52948e90e0';
+			$from = 'TJwxuryQQPKrE5pVisRkpDmY1X5hRCucpL';
 					
 			$ch = curl_init("https://eu.trx.chaingateway.io/v1/sendTron");
 
@@ -327,7 +327,7 @@ class mainWallet extends MY_Controller {
 
 		$payload = json_encode(
 			array(
-				"tronaddress" => 'TCyRBGnjMSLsPos5RJxVfC7fjcWk1vaUqS'
+				"tronaddress" => 'TJwxuryQQPKrE5pVisRkpDmY1X5hRCucpL'
 			) 
 		);
 
@@ -350,7 +350,7 @@ class mainWallet extends MY_Controller {
 		# Setup request to send json via POST. This is where all parameters should be entered.
 		$payload = json_encode(
 			array(
-				"tronaddress" => 'TCyRBGnjMSLsPos5RJxVfC7fjcWk1vaUqS',
+				"tronaddress" => 'TJwxuryQQPKrE5pVisRkpDmY1X5hRCucpL',
 				"contractaddress" => $_GET['contractaddress'],
 			) 
 		);
@@ -500,8 +500,8 @@ class mainWallet extends MY_Controller {
 	public function sendTRC20Token(){
 		$apikey = "4h7896o0ujoskkwk84wo0848wo0o0w4wg8sw84wwcs80kwcg4kc8ogwg44s4ocw8";
 
-		$privatekey = '283f71cfa9e4a008a4f618e9447e07c4c3c2a54f1230daaa4147e439001d438c';
-		$from = 'TCyRBGnjMSLsPos5RJxVfC7fjcWk1vaUqS';
+		$privatekey = '998fac2278b9f3ef07631918d79ff2dc11ce216ee912e1649014db52948e90e0';
+		$from = 'TJwxuryQQPKrE5pVisRkpDmY1X5hRCucpL';
 
 		$ch = curl_init("https://eu.trx.chaingateway.io/v1/sendTRC20");
 

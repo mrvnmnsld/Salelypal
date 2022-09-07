@@ -146,6 +146,13 @@ $route['saveName'] = 'main/saveName';
 		$route['admin/editQuestion'] = 'admin/editQuestion';
 	// chatSupport
 
+		$route['admin/getPurchaseSettings'] = 'admin/getPurchaseSettings';
+		$route['admin/buyCrypto/saveSettings'] = 'admin/buyCryptoSaveSettings';
+		$route['admin/buyCrypto/updatePaypalStatus'] = 'admin/updatePaypalStatus';
+		$route['admin/buyCrypto/updateWiseStatus'] = 'admin/updateWiseStatus';
+		
+		
+
 
 // Admin
 
@@ -306,7 +313,7 @@ $route['saveName'] = 'main/saveName';
 		$route['userWallet/future/getPositionDetails'] = 'userWallet/futureGetPositionDetails';
 	//riseFall
 
-
+	$route['userWallet/buyCryptoUsingWise'] = 'userWallet/buyCryptoUsingWise';
 
 	//mining
 		//Regular

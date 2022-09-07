@@ -731,9 +731,6 @@
 			    			});
 
 			    			$("#copyLink_btn").on("click",function(){
-			    				// var copiedLink = $("#referal_link_container").val()
-			    				// navigator.clipboard.writeText(copiedLink);
-
 			    				$("#referal_link_container").select();
 			    				document.execCommand("copy");
 			    				document.getSelection().removeAllRanges();
