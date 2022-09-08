@@ -30,7 +30,7 @@
     .disabledDiv h3{
         font-weight: bold;
         text-align: center;
-        margin-top: 50px;
+        /*margin-top: 50px;*/
         color: white;
     }
 
@@ -160,6 +160,20 @@
 
 
 <script>
+    var settings = ajaxShortLink("admin/getPurchaseSettings");
+    // console.log(settings[0].value);paypal
+    // console.log(settings[1].value);wise
+
+    if(settings[0].value == 0){
+        $("#paypal-button-container").remove();
+    }
+
+    if(settings[1].value == 0){
+        $("#wise-button-container").remove();
+    }
+
+    
+
     $(document).ready(function() {
         loadDatatable('wallet/getUserPurchase',{'userID':currentUser['userID']});
 
@@ -370,7 +384,8 @@
                 $("#wise-button-container").css("display",'block');
                 $("#update_price_container").css("display",'block');
                 $(".disabledDiv").remove();
-                
+
+            
                 paypal.Buttons({
                     env: 'production', //  production | sb-43kbkl18527714@personal.example.com
                     // Specify the style of the button
@@ -450,9 +465,11 @@
                         }, 5000);
                     }
                 }).render('#paypal-button-container');
+                
+                
 
                 var confirmPriceTimer = setTimeout(function() {
-                    $("#payment_methods").append('<div class="disabledDiv"><h3>Confirm price again</h3></div>');
+                    $("#payment_methods").append('<div class="disabledDiv align-items-center" style="display:flex"><h3 class="mx-auto">Confirm price again</h3></div>');
                     $('#confirmBtn').attr('disabled',false);
                     clearInterval(confirmPriceTimer);
 
