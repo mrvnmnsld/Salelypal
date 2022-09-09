@@ -42,11 +42,27 @@
   <label class="h3 mt-2 fw-bold main-color-text">Buy using Wise</label>
 </div>
 
-<div></div>
-<div class="form-group">
+<div>
+	<b>Notes on usage:</b><br>
+	<ol style="margin-left: -24px">
+		<li>Login/Sign up with wise and get verified(If no wise account)</li>
+		<li>Click transfer</li>
+		<li>Fill up form using the details below (You can click copy and paste it in wise to avoid errors)</li>
+		<li>Continue transfer</li>
+		<li>Upload proof of transfer via "Upload receipt" button</li>
+		<li>Wait 1-3 Days for the confirmation of the transaction</li>
+		<li>Receive purchased tokens and earn!</li>
+	</ol>
+	
+</div>
+
+<div class="form-group mt-2">
     <label class="text-muted">Amount to be sent: </label>
     <label id="amountToBeSent">100 USD</label>
 </div>
+
+<div class="text-center m-2">Personal Details</div>
+
 
 <label class="text-muted">Email</label>
 
@@ -191,9 +207,9 @@
 		$.confirm({
 			theme: "dark",
 			icon: 'fa fa-plus-circle',
-		    title: 'Is this the right image?',
+		    title: 'Are you sure?',
 		    columnClass: 'col-md-6 col-md-offset-6',
-		    content: 'Are you sure you want to upload this receipt?',
+		    content: 'Please make sure that this photo contains amount sent proof of the transfer to avoid irregularities in your future transaction',
 		    buttons: {
 		        confirm: function () {
 		        	var formData = new FormData();

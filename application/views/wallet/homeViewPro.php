@@ -326,7 +326,19 @@
 		        opacity: 1;
 		     }
 			}
+
+			.carousel-inner .carousel-item {
+			  transition: -webkit-transform 0.2s ease;
+			  transition: transform 0.2s ease;
+			  transition: transform 0.2s ease, -webkit-transform 0.2s ease;
+			}
+
+
 	</style>
+
+	<script type="text/javascript">
+		jQuery.fn.carousel.Constructor.TRANSITION_DURATION = 200
+	</script>
 <!-- css -->
 
 <body style="min-height: 130%;" class="light-mode">
