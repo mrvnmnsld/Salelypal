@@ -503,6 +503,12 @@
           <span class="text">Not a member?
             <a href="#" class="text signup-link">Sign up now</a>
           </span>
+
+          <br>
+
+          <span class="text">Forgot Password?
+            <a href="#" class="text forgot-link">Recover it now</a>
+          </span>
         </div>
       </div>
 
@@ -981,7 +987,7 @@
 				console.log(loginRes);
 
 				if (loginRes['wrongFlag'] == 2 || loginRes['wrongFlag'] == 1) {
-					$('#errorReporter').text("Wrong Credentials.");
+					$('#errorReporter').text("Incorrect email and/or password.");
 				}else if(loginRes['wrongFlag'] == 3){
 					$('#errorReporter').html("Account Blocked.");
 				}else if(loginRes['wrongFlag'] == 4){
@@ -1020,6 +1026,21 @@
 				}
 			}
 		});
+
+		$(".forgot-link").on("click",function(){
+			console.log("hello!");
+
+			bootbox.alert({
+		    message: ajaxLoadPage('quickLoadPage',{'pagename':'resetPasswordRequest'}),
+		    size: 'large',
+		    centerVertical: true,
+      	closeButton: false
+			});
+		});
+
+
+		
+
 			
 		$("#submit_login_btn").on("click",function(){
 			if ($('.iconcaptcha-holder').text().includes("Verification complete")) {

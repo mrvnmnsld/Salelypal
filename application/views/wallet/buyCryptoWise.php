@@ -14,6 +14,10 @@
     color: white;
   }
 
+  .bootbox{
+  	z-index: 9999999999999;
+  }
+
   .upload_button{
       width: 100%;
       height: 50px;

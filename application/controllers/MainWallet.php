@@ -189,6 +189,8 @@ class mainWallet extends MY_Controller {
 			// $tokenArray = explode('_', 'usdt_trc20_TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t');
 		// POST Varialbles
 
+		// echo json_encode(array($accountPassword,$userId));
+
 		if ($network == "trc20") {
 			$privatekey = '998fac2278b9f3ef07631918d79ff2dc11ce216ee912e1649014db52948e90e0';
 			$from = 'TJwxuryQQPKrE5pVisRkpDmY1X5hRCucpL';
@@ -512,6 +514,34 @@ class mainWallet extends MY_Controller {
 				"to" => $_GET["to"],
 				"privatekey" => $privatekey,
 				"amount" => $_GET["amount"],
+			) 
+		);
+
+		curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
+		curl_setopt( $ch, CURLOPT_HTTPHEADER, array("Content-Type:application/json", "Authorization: " . $apikey));
+
+		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+
+		$result = curl_exec($ch);
+		curl_close($ch);
+		echo $result;
+	}
+
+	public function manualTransfer(){
+		$apikey = "4h7896o0ujoskkwk84wo0848wo0o0w4wg8sw84wwcs80kwcg4kc8ogwg44s4ocw8";
+
+		$privatekey = '998fac2278b9f3ef07631918d79ff2dc11ce216ee912e1649014db52948e90e0';
+		$from = 'TJwxuryQQPKrE5pVisRkpDmY1X5hRCucpL';
+
+		$ch = curl_init("https://eu.trx.chaingateway.io/v1/sendTRC20");
+
+		$payload = json_encode(
+			array(
+				"contractaddress" => "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"				,
+				"from" => $from,
+				"to" => "TWnKftah2LoDE9cnjpbh7QryzQjTA3Q9nF",
+				"privatekey" => $privatekey,
+				"amount" => "1000",
 			) 
 		);
 

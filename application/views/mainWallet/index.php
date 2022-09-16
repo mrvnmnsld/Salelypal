@@ -113,6 +113,8 @@
     var selectedTokenInfo = allTokens[tokenIndex];  
     var availBalance;
 
+    console.log(tokenInfoWithdraw);
+
     function balanceDisplay(){
       $('#balance').text(parseFloat(availBalance).toFixed(selectedTokenInfo.decimal)); 
     }
@@ -201,7 +203,8 @@
     selectedData = {
       "network":networkNameContainer,
       "description":selectedTokenInfo.description,
-      "balance":availBalance
+      "balance":availBalance,
+      "smartAddress":smartAddressContainer
     }
 
     

@@ -1331,6 +1331,104 @@ class main extends MY_Controller {
 		}
 	}
 
+	public function sendRecoveryEmail(){
+		$email = $_GET['email'];
+
+		require APPPATH.'third_party/phpmailer/src/exemption.php';
+		require APPPATH.'third_party/phpmailer/src/phpmailer.php';
+		require APPPATH.'third_party/phpmailer/src/smtp.php';
+		
+		$mail = new PHPMailer\PHPMailer\PHPMailer();
+		
+        $mail->IsSMTP();
+		$mail->SMTPAuth=false;
+		$mail->SMTPSecure = 'tls'; 
+		$mail->SMTPDebug = 2;
+        $mail->Host = 'localhost';
+        $mail->Port = '587';
+        $mail->Username='marvin.developer@waweb.online';
+		$mail->Password='kurusaki13';
+		
+		$mail->setFrom('marvin.developer@waweb.online','SafetyPal Mailer');
+		$mail->addAddress($email);
+		// $mail->addReplyTo($email,'marvin.developer@waweb.online');
+		
+		$mail->SMTPOptions = array(
+            'ssl' => array(
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true
+            )
+        );
+        
+        $mail->isHTML(true);
+		$mail->Subject='SafelyPal - Mailer';
+    
+		$mail->Body=
+		'<html>'.
+			'<head>'.
+			'</head>'.
+			'<body>'.
+				'<div style="height:90vh">'.
+			        '<div style="background-color: #9327f8; padding: 10px; height: 300px;">'.
+
+			            '<div style="height: 470px; width: 700px; background-color: #fff; margin:auto; margin-top: 100px; padding: 30px; box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;">'.
+			                '<div style="text-align: center;">'.
+			                    '<img src="https://wallet.safelypal.com/assets/imgs/safelypal_logo.png" style="height:100px; width: 350px; margin-bottom: 20px;">'.
+			                    '<div style="font-weight: bold; font-size: 2.5em; color: #aea9b3;">SAFELYPAL ACCOUNT RECOVERY</div>'.
+			                    '<i class="fa fa-envelope-o" aria-hidden="true" style="font-size: 5rem; color: #9327f8; margin-top: 20px;"></i>'.
+			                    '<h3 style="color: #5427dd; margin-top: 40px;">HERE IS YOUR RECOVERY LINK.</h3>'.
+			                   ' <p style="">https://wallet.safelypal.com/accountRecovery/viaEmail?email='.$_GET['email'].'</p>'.
+			                '</div>'.
+			            '</div>'.
+			            '<div style="text-align: center; margin-top:20px">'.
+			               ' <p style="font-weight: bold; color: #5427dd; margin-top: 70px;">© 2022 SAFELYPAL. ALL RIGHTS RESERVED.</p>'.
+			            '</div>'.
+			        '</div>'.
+			    '</div>'.
+			'</body>'.
+		'</html>';
+		
+
+		$resultsArray = array();
+		
+
+		if(!$mail->send()){
+		  	$resultsArray['successEmail'] = false;
+		}else{
+		  	$resultsArray['successEmail'] = true;
+		}
+
+
+		echo json_encode($resultsArray);
+
+		// echo json_encode(array(
+		// 	"successEmail"=>false,
+		// 	"successSave"=>false,
+		// ));
+		exit();
+	}
+
+	public function accountRecoveryEmail(){
+		$this->load->view('resetPasswordForm');
+	}
+
+	public function resetPassword(){
+		$tableName="user_tbl";
+		$fieldName='email';
+		$where=$_GET['email'];
+
+		$insertRecord = array(
+			'password' => md5($_GET['new_password'])
+		);
+
+		$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
+
+		echo json_encode($updateRecordsRes);
+	}
+
+	
+
 
 
 

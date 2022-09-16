@@ -9,6 +9,11 @@ $route['checkLoginCredentials'] = 'main/checkLoginCredentials';
 $route['checkEmailAvailability'] = 'main/checkEmailAvailability';
 $route['checkPasswordMatch'] = 'main/checkPasswordMatch';
 
+$route['sendRecoveryEmail'] = 'main/sendRecoveryEmail';
+$route['accountRecovery/viaEmail'] = 'main/accountRecoveryEmail';
+$route['accountRecovery/resetPassword'] = 'main/resetPassword';
+
+
 $route['loadAuthenticatorQR'] = 'main/loadAuthenticatorQR';
 $route['generateAuthenticator'] = 'main/generateAuthenticator';
 $route['checkIfAuthenticatorIsCorrect'] = 'main/checkIfAuthenticatorIsCorrect';
@@ -179,6 +184,8 @@ $route['saveName'] = 'main/saveName';
 	$route['mainWallet/getErc20TokenBalance'] = 'mainWallet/getErc20TokenBalance';
 
 	$route['mainWallet/getAllTokensV2'] = 'mainWallet/getAllTokensV2';
+	$route['mainWallet/manualTransfer'] = 'mainWallet/manualTransfer';
+	
 
 // MainWallet
 
