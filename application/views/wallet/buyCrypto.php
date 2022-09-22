@@ -52,6 +52,16 @@
         font-size:15px;
         text-decoration:none;
     }
+
+    .modal-footer{
+      display: none;
+    }
+
+    #main-container{
+      width: 100%; 
+      height: 500px; 
+      overflow-y: scroll;
+    }
 </style>
 
 
@@ -131,7 +141,7 @@
             </div>
 
             <div id="wise-button-container" class="p-1" style="display: none;">
-                <button class="myButton btn btn-block">Pay with <b>Wise</b> <img src="assets/imgs/wise_fast_flag_white_RGB.png" style="width: 20px;"></button>
+                <button class="myButton btn btn-block">Buy via P2P</button>
             </div>
         </div>
     </form>
@@ -201,13 +211,28 @@
     })
 
     $("#wise-button-container").on("click", function(){
+        
+        bootbox.alert({
+            message: 
+                '<div class="p-3">'+
+                '<button class="myButton btn btn-block" onclick="loadWisePayment();">Pay with <b>Wise</b> <img src="assets/imgs/wise_fast_flag_white_RGB.png" style="width: 20px;"></button>'+
+                '<button class="myButton btn btn-block btn-danger" onclick="bootbox.hideAll()">Cancel</button>'+
+
+                '</div>',
+            size: 'large',
+            centerVertical: true,
+            closeButton: false
+        });
+    })
+
+    function loadWisePayment(){
         bootbox.alert({
             message: ajaxLoadPage('quickLoadPage',{'pagename':'wallet/buyCryptoWise'}),
             size: 'large',
             centerVertical: true,
             closeButton: false
         });
-    })
+    }
 
 
     function loadDatatable(url,data){

@@ -187,6 +187,8 @@
           balanceDisplay();
           walletDetailsConsolelog();
           walletDetailsDisplay();
+
+          
         }else{
             availBalance = ajaxShortLink('mainWallet/getErc20TokenBalance',{
             'contractaddress' : smartAddressContainer,

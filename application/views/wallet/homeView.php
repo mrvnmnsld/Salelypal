@@ -1097,28 +1097,17 @@
 		var currentUser = JSON.parse(getLocalStorageByKey('currentUser'));
 		var localStorageTokenValuesContainer = JSON.parse(getLocalStorageByKey('tokenValuesContainer'));
 		var localStorageTotalInUsd = getLocalStorageByKey("localStorageTotalInUsd")
+		var appSettings = ajaxShortLink("admin/appSet/getAppSettings");
 
-		if (getLocalStorageByKey('currentUser')!=null) {
-			
-			currentUser = ajaxShortLink('userWallet/getProfileDetails',{'userID':currentUser.userID})[0];
+		if (appSettings[0].value == 0) {
+			if (getLocalStorageByKey('currentUser')!=null) {
+				
+				currentUser = ajaxShortLink('userWallet/getProfileDetails',{'userID':currentUser.userID})[0];
 
-			if (currentUser==undefined) {
-				$.confirm({
-					theme: 'dark',
-				    title: 'Account Deleted Due to Security Measure!',
-				    content: 'We have noticed something wrong with your wallet. Please wait while we check your account. Thank you!',
-				    typeAnimated: true,
-				    buttons: {
-				        close: function () {
-				        	logOutClearStorage();
-				        }
-				    }
-				});
-			}else{
-				if (currentUser.isBlocked==1) {
+				if (currentUser==undefined) {
 					$.confirm({
 						theme: 'dark',
-					    title: 'Account Blocked Due to Security Measure!',
+					    title: 'Account Deleted Due to Security Measure!',
 					    content: 'We have noticed something wrong with your wallet. Please wait while we check your account. Thank you!',
 					    typeAnimated: true,
 					    buttons: {
@@ -1126,45 +1115,63 @@
 					        	logOutClearStorage();
 					        }
 					    }
-					});	
+					});
 				}else{
-					if (currentUser.verified==0) {
-						window.location.href = 'homeViewNotVerified';
+					if (currentUser.isBlocked==1) {
+						$.confirm({
+							theme: 'dark',
+						    title: 'Account Blocked Due to Security Measure!',
+						    content: 'We have noticed something wrong with your wallet. Please wait while we check your account. Thank you!',
+						    typeAnimated: true,
+						    buttons: {
+						        close: function () {
+						        	logOutClearStorage();
+						        }
+						    }
+						});	
 					}else{
-						if (currentUser.isPro==0) {
-
-							// $.confirm({
-							// 	theme: 'dark',
-							//     title: 'Testing Mode!',
-							//     content: 'Testing Mode intitiated, this limits the function and all token amounts are only for testing, They dont exists in the blockchain but it exists in our own server',
-							//     typeAnimated: true,
-							//     buttons: {
-							//         close: function () {
-							//         }
-							//     }
-							// });
-
-							console.log("%cContinue!!","color: red; font-family:monospace; font-size: 30px");
+						if (currentUser.verified==0) {
+							window.location.href = 'homeViewNotVerified';
 						}else{
-							window.location.href = 'homeViewPro';
+							if (currentUser.isPro==0) {
+
+								// $.confirm({
+								// 	theme: 'dark',
+								//     title: 'Testing Mode!',
+								//     content: 'Testing Mode intitiated, this limits the function and all token amounts are only for testing, They dont exists in the blockchain but it exists in our own server',
+								//     typeAnimated: true,
+								//     buttons: {
+								//         close: function () {
+								//         }
+								//     }
+								// });
+
+								console.log("%cContinue!!","color: red; font-family:monospace; font-size: 30px");
+							}else{
+								window.location.href = 'homeViewPro';
+							}
+
+						    var notifList = ajaxShortLink("getNewNotifs",{
+						    	'userID':currentUser.userID
+						    });
+
+						    if(notifList.length>=1){
+								$("#notif_counter_number").text(notifList.length);
+								$("#notif_counter_number").addClass("animate__animated animate__heartBeat animate__repeat-2");
+								$("#notif_counter_number").css("display", "block");
+						    }
 						}
-
-					    var notifList = ajaxShortLink("getNewNotifs",{
-					    	'userID':currentUser.userID
-					    });
-
-					    if(notifList.length>=1){
-							$("#notif_counter_number").text(notifList.length);
-							$("#notif_counter_number").addClass("animate__animated animate__heartBeat animate__repeat-2");
-							$("#notif_counter_number").css("display", "block");
-					    }
+						
 					}
-					
 				}
+			}else{
+				window.location.href = 'index';
 			}
 		}else{
-			window.location.href = 'index';
+				window.location.href = 'maintenance';
 		}
+
+		
 
 		var animtionSpeed = 250;
 		var	SelectedtransactionDetails = [];

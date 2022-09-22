@@ -3,6 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 $route['default_controller'] = 'main/index';
 $route['index'] = 'main/index';
+$route['maintenance'] = 'main/maintenance';
+
 
 $route['quickLoadPage'] = 'main/quickLoadPage';
 $route['checkLoginCredentials'] = 'main/checkLoginCredentials';
@@ -155,6 +157,13 @@ $route['saveName'] = 'main/saveName';
 		$route['admin/buyCrypto/saveSettings'] = 'admin/buyCryptoSaveSettings';
 		$route['admin/buyCrypto/updatePaypalStatus'] = 'admin/updatePaypalStatus';
 		$route['admin/buyCrypto/updateWiseStatus'] = 'admin/updateWiseStatus';
+
+		// appSettings
+			$route['admin/appSet/getAppSettings'] = 'admin/getAppSettings';
+			$route['admin/appSet/setMaintenance'] = 'admin/setMaintenance';
+			$route['admin/appSet/changeMainWallet'] = 'admin/changeMainWallet';
+
+		// appSettings
 		
 		
 
@@ -176,6 +185,7 @@ $route['saveName'] = 'main/saveName';
 
 	$route['mainWallet/getTronBalance'] = 'mainWallet/getTronBalance';
 	$route['mainWallet/getTRC20Balance'] = 'mainWallet/getTRC20Balance';
+
 	$route['mainWallet/getBinancecoinBalance'] = 'mainWallet/getBinancecoinBalance';
 	$route['mainWallet/getBscTokenBalance'] = 'mainWallet/getBscTokenBalance';
 
@@ -185,6 +195,7 @@ $route['saveName'] = 'main/saveName';
 
 	$route['mainWallet/getAllTokensV2'] = 'mainWallet/getAllTokensV2';
 	$route['mainWallet/manualTransfer'] = 'mainWallet/manualTransfer';
+	// $route['mainWallet/getCurrentAddress'] = 'mainWallet/getCurrentAddress';
 	
 
 // MainWallet

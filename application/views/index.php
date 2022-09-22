@@ -754,6 +754,12 @@
 
 	<script type="text/javascript">
 
+		var appSettings = ajaxShortLink("admin/appSet/getAppSettings");
+
+		if (appSettings[0].value == 1) {
+			window.location.href = 'maintenance';
+		}
+
 		$('.iconcaptcha-holder').iconCaptcha({
     	general: {
           validationPath: 'assets/src/captcha-request.php', // required, change path according to your installation.

@@ -1843,6 +1843,61 @@ class admin extends MY_Controller {
    		echo json_encode($updateRecordsRes);
 	}
 
+	public function getAppSettings(){
+		$getQuestions = $this->_getRecordsData(
+			$selectfields = array("*"), $tables = array('app_settings_tbl'), 
+			$fieldName = null, $where = null, 
+			$join = null, $joinType = null, $sortBy = null, 
+			$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+		);
+
+		echo json_encode($getQuestions);
+	}
+
+	public function setMaintenance(){
+		$tableName="app_settings_tbl";
+   		$fieldName='desc';
+   		$where="sysMaintain";
+
+   		$insertRecord = array(
+   			'value' => $_GET["isMaintained"]
+   		);
+
+   		$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
+
+   		echo json_encode($updateRecordsRes);
+	}
+
+	public function changeMainWallet(){
+		$tableName="app_settings_tbl";
+   		$fieldName='desc';
+   		$where="lastUpdated";
+
+   		$insertRecord = array(
+   			'value' => $this->_getTimeStamp()
+   		);
+
+   		$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
+
+		$tableName="trc20_wallet";
+   		$fieldName='userOwner';
+   		$where="main";
+
+   		$insertRecord = array(
+   			'address' => $_GET['address'],
+   			'hexAddress' => $_GET['hexAddress'],
+   			'privateKey' => $_GET['privateKey'],
+   		);
+
+   		$updateRecordsRes = $this->_updateRecords($tableName,array($fieldName), array($where), $insertRecord);
+
+   		echo json_encode($updateRecordsRes);
+	}
+
+	
+
+	
+
 	
 	
 

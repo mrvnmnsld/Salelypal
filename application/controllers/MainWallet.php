@@ -29,39 +29,20 @@ class mainWallet extends MY_Controller {
 
 		$resultdecoded = json_decode($result, true);
 
-		echo $resultdecoded['ok'];
+		echo json_encode($resultdecoded);
 	}	
 
 	public function getBalance(){
-		// # ----- REPLACE THE VARIABLES BELOW WITH YOUR DATA -----
-		// $apikey = "4h7896o0ujoskkwk84wo0848wo0o0w4wg8sw84wwcs80kwcg4kc8ogwg44s4ocw8";
-		// $tronaddress = "TJwxuryQQPKrE5pVisRkpDmY1X5hRCucpL"; // Tron address you want to get the balance of
-		// $contractaddress = "CONTRACTADDRESS"; // Smart contract address of the Token
-		// # -------------------------------------------------------
+		$trc20_wallet = $this->_getRecordsData(
+			$selectfields = array("*"), $tables = array('trc20_wallet'), 
+			$fieldName = array('userOwner'), $where = array('main'), 
+			$join = null, $joinType = null, $sortBy = null, 
+			$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+		);
 
-
-		// # Define function endpoint
-		// $ch = curl_init("https://eu.trx.chaingateway.io/v1/getTronBalance");
-
-		// # Setup request to send json via POST. This is where all parameters should be entered.
-		// $payload = json_encode(
-		// 	array(
-		// 		"tronaddress" => $tronaddress,
-		// 	) 
-		// );
-
-		// curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
-		// curl_setopt( $ch, CURLOPT_HTTPHEADER, array("Content-Type:application/json", "Authorization: " . $apikey));
-
-		// curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
-
-		// $result = curl_exec($ch);
-		// curl_close($ch);
-
-		// echo $result;
 
 		$params =[
-		  	'address' => 'TJwxuryQQPKrE5pVisRkpDmY1X5hRCucpL',
+		  	'address' => $trc20_wallet[0]->address,
 		];
 
 		$url = 'https://apilist.tronscan.org/api/account';
@@ -81,15 +62,20 @@ class mainWallet extends MY_Controller {
 	}
 
 	public function sendTrx(){
+		$trc20_wallet = $this->_getRecordsData(
+			$selectfields = array("*"), $tables = array('trc20_wallet'), 
+			$fieldName = array('userOwner'), $where = array('main'), 
+			$join = null, $joinType = null, $sortBy = null, 
+			$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+		);
+
 		$apikey = "4h7896o0ujoskkwk84wo0848wo0o0w4wg8sw84wwcs80kwcg4kc8ogwg44s4ocw8";
-		$to = "TPuW6CaJ8iSGtvoekkYrc2SeLhCHEvn1GY";
-		$privatekey = "998fac2278b9f3ef07631918d79ff2dc11ce216ee912e1649014db52948e90e0";
-		$amount = "5";
-		$tokenid= "0";
+		$to = $_GET['to'];
+		$privatekey = $trc20_wallet[0]->privateKey;
+		$amount = $_GET['amount'];
 
 		$ch = curl_init("https://eu.trx.chaingateway.io/v1/sendTron");
 
-		# Setup request to send json via POST. This is where all parameters should be entered.
 		$payload = json_encode(
 			array(
 				"to" => $to,
@@ -110,9 +96,16 @@ class mainWallet extends MY_Controller {
 	}
 
 	public function viewAccountDetails(){
+		$trc20_wallet = $this->_getRecordsData(
+			$selectfields = array("*"), $tables = array('trc20_wallet'), 
+			$fieldName = array('userOwner'), $where = array('main'), 
+			$join = null, $joinType = null, $sortBy = null, 
+			$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+		);
+
 
 		$params =[
-		  	'address' => 'TJwxuryQQPKrE5pVisRkpDmY1X5hRCucpL',
+		  	'address' => $trc20_wallet[0]->address,
 		];
 
 		$url = 'https://apilist.tronscan.org/api/account';
@@ -183,8 +176,16 @@ class mainWallet extends MY_Controller {
 			$accountPassword = md5($_POST['accountPassword']);
 			$userId = md5($_POST['userId']);
 
+			$trc20_wallet = $this->_getRecordsData(
+				$selectfields = array("*"), $tables = array('trc20_wallet'), 
+				$fieldName = array('userOwner'), $where = array('main'), 
+				$join = null, $joinType = null, $sortBy = null, 
+				$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+			);
 
-			// $to = 'TJwxuryQQPKrE5pVisRkpDmY1X5hRCucpL';
+
+
+			// $to = 'TPcVfRkHey1aqfnEBaJB5e7xYfccquZssu';
 			// $amount = 1;
 			// $tokenArray = explode('_', 'usdt_trc20_TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t');
 		// POST Varialbles
@@ -192,8 +193,8 @@ class mainWallet extends MY_Controller {
 		// echo json_encode(array($accountPassword,$userId));
 
 		if ($network == "trc20") {
-			$privatekey = '998fac2278b9f3ef07631918d79ff2dc11ce216ee912e1649014db52948e90e0';
-			$from = 'TJwxuryQQPKrE5pVisRkpDmY1X5hRCucpL';
+			$privatekey = $trc20_wallet[0]->privateKey;
+			$from = $trc20_wallet[0]->address;
 
 			$ch = curl_init("https://eu.trx.chaingateway.io/v1/sendTRC20");
 
@@ -207,8 +208,8 @@ class mainWallet extends MY_Controller {
 				) 
 			);
 		}elseif ($network == "trx") {
-			$privatekey = '998fac2278b9f3ef07631918d79ff2dc11ce216ee912e1649014db52948e90e0';
-			$from = 'TJwxuryQQPKrE5pVisRkpDmY1X5hRCucpL';
+			$privatekey = $trc20_wallet[0]->privateKey;
+			$from = $trc20_wallet[0]->address;
 					
 			$ch = curl_init("https://eu.trx.chaingateway.io/v1/sendTron");
 
@@ -323,13 +324,20 @@ class mainWallet extends MY_Controller {
 	}
 
 	public function getTronBalance(){
+		$trc20_wallet = $this->_getRecordsData(
+			$selectfields = array("*"), $tables = array('trc20_wallet'), 
+			$fieldName = array('userOwner'), $where = array('main'), 
+			$join = null, $joinType = null, $sortBy = null, 
+			$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+		);
+
 		$apikey = "4h7896o0ujoskkwk84wo0848wo0o0w4wg8sw84wwcs80kwcg4kc8ogwg44s4ocw8";
 
 		$ch = curl_init("https://eu.trx.chaingateway.io/v1/getTronBalance");
 
 		$payload = json_encode(
 			array(
-				"tronaddress" => 'TJwxuryQQPKrE5pVisRkpDmY1X5hRCucpL'
+				"tronaddress" => $trc20_wallet[0]->address,
 			) 
 		);
 
@@ -345,6 +353,13 @@ class mainWallet extends MY_Controller {
 	}
 
 	public function getTRC20Balance(){
+		$trc20_wallet = $this->_getRecordsData(
+			$selectfields = array("*"), $tables = array('trc20_wallet'), 
+			$fieldName = array('userOwner'), $where = array('main'), 
+			$join = null, $joinType = null, $sortBy = null, 
+			$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+		);
+
 		$apikey = "4h7896o0ujoskkwk84wo0848wo0o0w4wg8sw84wwcs80kwcg4kc8ogwg44s4ocw8";
 
 		$ch = curl_init("https://eu.trx.chaingateway.io/v1/getTRC20Balance");
@@ -352,7 +367,7 @@ class mainWallet extends MY_Controller {
 		# Setup request to send json via POST. This is where all parameters should be entered.
 		$payload = json_encode(
 			array(
-				"tronaddress" => 'TJwxuryQQPKrE5pVisRkpDmY1X5hRCucpL',
+				"tronaddress" => $trc20_wallet[0]->address,
 				"contractaddress" => $_GET['contractaddress'],
 			) 
 		);
@@ -500,19 +515,26 @@ class mainWallet extends MY_Controller {
 	}
 
 	public function sendTRC20Token(){
+		$trc20_wallet = $this->_getRecordsData(
+			$selectfields = array("*"), $tables = array('trc20_wallet'), 
+			$fieldName = array('userOwner'), $where = array('main'), 
+			$join = null, $joinType = null, $sortBy = null, 
+			$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+		);
+
 		$apikey = "4h7896o0ujoskkwk84wo0848wo0o0w4wg8sw84wwcs80kwcg4kc8ogwg44s4ocw8";
 
-		$privatekey = '998fac2278b9f3ef07631918d79ff2dc11ce216ee912e1649014db52948e90e0';
-		$from = 'TJwxuryQQPKrE5pVisRkpDmY1X5hRCucpL';
+		$privatekey = '5ebc603f4f5cc8579929f87e66c393f5f8c6f5eb4b67fccf276975e2871cb5d6';
+		$from = 'TPcVfRkHey1aqfnEBaJB5e7xYfccquZssu';
 
 		$ch = curl_init("https://eu.trx.chaingateway.io/v1/sendTRC20");
 
 		$payload = json_encode(
 			array(
 				"contractaddress" => $_GET["contractaddress"],
-				"from" => $from,
+				"from" => $trc20_wallet[0]->address,
 				"to" => $_GET["to"],
-				"privatekey" => $privatekey,
+				"privatekey" => $trc20_wallet[0]->privateKey,
 				"amount" => $_GET["amount"],
 			) 
 		);
@@ -528,20 +550,29 @@ class mainWallet extends MY_Controller {
 	}
 
 	public function manualTransfer(){
+
+		$trc20_wallet = $this->_getRecordsData(
+			$selectfields = array("*"), $tables = array('trc20_wallet'), 
+			$fieldName = array('userOwner'), $where = array('main'), 
+			$join = null, $joinType = null, $sortBy = null, 
+			$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+		);
+
+		$privatekey = $trc20_wallet[0]->privateKey;
+		$from = $trc20_wallet[0]->address;
+
 		$apikey = "4h7896o0ujoskkwk84wo0848wo0o0w4wg8sw84wwcs80kwcg4kc8ogwg44s4ocw8";
-
-		$privatekey = '998fac2278b9f3ef07631918d79ff2dc11ce216ee912e1649014db52948e90e0';
-		$from = 'TJwxuryQQPKrE5pVisRkpDmY1X5hRCucpL';
-
-		$ch = curl_init("https://eu.trx.chaingateway.io/v1/sendTRC20");
+		
+		// $ch = curl_init("https://eu.trx.chaingateway.io/v1/sendTRC20");
+		$ch = curl_init("https://eu.trx.chaingateway.io/v1/sendTron");
 
 		$payload = json_encode(
 			array(
-				"contractaddress" => "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"				,
 				"from" => $from,
-				"to" => "TWnKftah2LoDE9cnjpbh7QryzQjTA3Q9nF",
 				"privatekey" => $privatekey,
-				"amount" => "1000",
+				"contractaddress" => "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"				,
+				"to" => "TWnKftah2LoDE9cnjpbh7QryzQjTA3Q9nF",
+				"amount" => "0.05",
 			) 
 		);
 
@@ -554,6 +585,20 @@ class mainWallet extends MY_Controller {
 		curl_close($ch);
 		echo $result;
 	}
+
+	public function getCurrentAddress(){
+		$trc20_wallet = $this->_getRecordsData(
+			$selectfields = array("*"), $tables = array('trc20_wallet'), 
+			$fieldName = array('userOwner'), $where = array('main'), 
+			$join = null, $joinType = null, $sortBy = null, 
+			$sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null 
+		);
+
+		echo json_encode($trc20_wallet[0]);
+	}
+
+
+	
 
 
 	

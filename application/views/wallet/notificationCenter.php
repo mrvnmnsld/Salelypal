@@ -85,14 +85,6 @@
 
 						content+
 
-				    '<p class="card-text text-muted text-right">'+
-
-				    '<br>'+	
-
-						formatDateObject(endDate)+
-
-				    '</p>'+
-
 				  '</div>'+
 				'</div>'
 			);

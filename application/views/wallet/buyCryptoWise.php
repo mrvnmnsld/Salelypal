@@ -1,5 +1,5 @@
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap%27');
+  /*@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap%27');*/
 
   .modal-footer{
     display: none;
@@ -9,6 +9,7 @@
     height: 500px; 
     overflow-y: scroll;
   }
+  
   #close_btn{
     background-color: #5426de;
     color: white;
